@@ -349,3 +349,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+*.vcxproj
+godot_game_STUDIO_project/godot_game_STUDIO_project/godot_game_STUDIO_project.vcxproj
