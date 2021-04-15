@@ -79,8 +79,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\godot_project</OutDir>
-    <IncludePath>C:\Users\pasha\Desktop\wait...hunters\GodotBindings\godot-headers;C:\Users\pasha\Desktop\wait...hunters\GodotBindings\include\gen;C:\Users\pasha\Desktop\wait...hunters\GodotBindings\include\core;C:\Users\pasha\Desktop\wait...hunters\GodotBindings\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\pasha\Desktop\wait...hunters\GodotBindings\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Projects\Games\wait...hunters\GodotBindings\godot-headers;D:\Projects\Games\wait...hunters\GodotBindings\include\gen;D:\Projects\Games\wait...hunters\GodotBindings\include\core;D:\Projects\Games\wait...hunters\GodotBindings\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Projects\Games\wait...hunters\GodotBindings\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -125,7 +125,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\pasha\Desktop\wait...hunters\GodotBindings\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\Projects\Games\wait...hunters\GodotBindings\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libgodot-cpp.windows.debug.64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
