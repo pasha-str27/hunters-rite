@@ -4,5 +4,5 @@
 
 [resource]
 resource_name = "texture"
-class_name = "texture"
+class_name = "Generation"
 library = ExtResource( 1 )

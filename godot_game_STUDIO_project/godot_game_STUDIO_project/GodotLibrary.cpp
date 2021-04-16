@@ -1,4 +1,5 @@
 #include "texture.h"
+#include "Generation.h"
 
 using namespace godot;
 
@@ -17,4 +18,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	Godot::nativescript_init(handle);
 	//	register class
 	register_class<texture>();
+	register_class<Generation>();
 }

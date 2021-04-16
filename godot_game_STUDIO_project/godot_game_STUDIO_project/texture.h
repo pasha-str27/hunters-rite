@@ -14,8 +14,6 @@ namespace godot
 	public:
 		static void _register_methods();
 		void _ready();
-		//	decleared property
-		Ref<PackedScene> spritePrefab;
 
 		void _init();
 
