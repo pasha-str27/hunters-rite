@@ -3,6 +3,8 @@
 void godot::texture::_register_methods() 
 {
 	register_method((char*)"_ready", &texture::_ready);
+	//	register property
+	register_property<texture, Ref<PackedScene>>("prefab", &texture::spritePrefab, nullptr);
 }
 
 void godot::texture::_init() {}
@@ -36,4 +38,5 @@ godot::texture::~texture()
 
 godot::texture::texture()
 {
+	spritePrefab = nullptr;
 }
