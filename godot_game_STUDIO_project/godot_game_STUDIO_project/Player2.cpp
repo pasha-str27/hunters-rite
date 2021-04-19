@@ -2,12 +2,8 @@
 
 godot::Player2* godot::Player2::singleton = nullptr;
 
-godot::Player2::Player2(Node2D* obj)
+godot::Player2::Player2(Node2D* obj) : PlayerData(obj)
 {
-	object = obj;
-	dir = Vector2(0, 0);
-	speed = 500;
-	input_controller = Input::get_singleton();
 }
 
 godot::Player2::~Player2()
@@ -16,37 +12,43 @@ godot::Player2::~Player2()
 
 void godot::Player2::move()
 {
-	//if(object->get_tra)
-	cast_to<KinematicBody2D>(object)->move_and_slide(dir);
+	PlayerData::move();
 }
 
 void godot::Player2::process_input()
 {
-	dir = Vector2(0, 0);
+	Vector2 dir = Vector2(0, 0);
 
 	//move up
-	if (input_controller->is_key_pressed(87))
+	if (input_controller->is_action_pressed("Player2_up"))
 	{
-		dir.y -= speed;
+		dir.y -= get_speed();
 	}
 
 	//move down
-	if (input_controller->is_key_pressed(83))
+	if (input_controller->is_action_pressed("Player2_down"))
 	{
-		dir.y += speed;
+		dir.y += get_speed();
 	}
 
 	//move left
-	if (input_controller->is_key_pressed(65))
+	if (input_controller->is_action_pressed("Player2_left"))
 	{
-		cast_to<Sprite>(object->get_child(0)->get_child(0))->set_flip_h(false);
-		dir.x -= speed;
+		cast_to<Sprite>(get_object()->get_child(0)->get_child(0))->set_flip_h(false);
+		dir.x -= get_speed();
 	}
 
 	//move right	
-	if (input_controller->is_key_pressed(68))
+	if (input_controller->is_action_pressed("Player2_right"))
 	{
-		cast_to<Sprite>(object->get_child(0)->get_child(0))->set_flip_h(true);
-		dir.x += speed;
+		cast_to<Sprite>(get_object()->get_child(0)->get_child(0))->set_flip_h(true);
+		dir.x += get_speed();
 	}
+
+	PlayerData::set_dir(dir);
+}
+
+void godot::Player2::set_speed(float speed)
+{
+	PlayerData::set_speed(speed);
 }

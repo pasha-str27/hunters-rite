@@ -1,24 +1,18 @@
 #ifndef HEADERFILE_H
 #define HEADERFILE_H
-#include "IPlayer.h"
+#include "PlayerData.h"
 #endif
-
 #include <Vector2.hpp>
-#include <Input.hpp>
 #include <Sprite.hpp>
+#include <KinematicBody2D.hpp>
 
 namespace godot
 {
-	class Player2 : public godot::IPlayer, public KinematicBody2D
+	class Player2 : public PlayerData, public KinematicBody2D
 	{
 		static Player2* singleton;
-		Node2D* object;
-		int speed;
-		Vector2 dir;
-		Input* input_controller;
 
 	private:
-		//GODOT_CLASS(Player1, KinematicBody2D);
 		Player2(Node2D* obj);
 
 	public:
@@ -31,5 +25,6 @@ namespace godot
 				singleton = new Player2(obj);
 			return singleton;
 		}
+		void set_speed(float speed);
 	};
 }
