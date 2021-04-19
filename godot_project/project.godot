@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="godot_project"
+config/name="hunters"
 run/main_scene="res://main_scene.tscn"
 config/icon="res://icon.png"
 
