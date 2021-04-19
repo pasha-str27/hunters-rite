@@ -1,4 +1,5 @@
 #include "texture.h"
+#include "PlayerController.h"
 
 using namespace godot;
 
@@ -17,4 +18,7 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	Godot::nativescript_init(handle);
 	//	register class
 	register_class<texture>();
+	//register_class<godot::IPlayer>();
+	//register_class<Player1>();
+	register_class<PlayerController>();
 }
