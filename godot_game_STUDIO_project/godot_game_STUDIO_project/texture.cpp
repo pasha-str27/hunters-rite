@@ -1,4 +1,6 @@
 #include "texture.h"
+#include <Input.hpp>
+#include <Tree.hpp>
 
 void godot::texture::_register_methods() 
 {
@@ -11,6 +13,7 @@ void godot::texture::_init() {}
 
 void godot::texture::_ready()
 {
+	
 	//	console log
 	Godot::print("jdjdf");
 	
@@ -35,6 +38,7 @@ void godot::texture::_ready()
 		}
 
 	}
+	//_exit_tree();
 	//	setting sorting layer
 	//sp->set_z_index(-5);
 }
