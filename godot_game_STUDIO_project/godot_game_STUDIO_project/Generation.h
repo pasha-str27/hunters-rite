@@ -3,6 +3,7 @@
 #include <PackedScene.hpp>
 #include <Sprite.hpp>
 #include <Input.hpp>
+#include <InputEvent.hpp>
 #include <Tree.hpp>
 #include <Array.hpp>
 #include <OS.hpp>
@@ -22,6 +23,8 @@ namespace godot
 		void _init();
 
 		void _process(float delta);
+
+		void _input(Variant ev);
 
 		Generation();
 		~Generation();

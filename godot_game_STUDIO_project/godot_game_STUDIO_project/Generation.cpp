@@ -4,6 +4,7 @@ void godot::Generation::_register_methods()
 {
 	register_method((char*)"_ready", &Generation::_ready);
 	register_method((char*)"_process", &Generation::_process);
+	register_method((char*)"_input", &Generation::_input);
 	//	register property
 	register_property<Generation, Array>("prefab", &Generation::spritePrefab, {});
 }
@@ -15,7 +16,7 @@ void godot::Generation::_ready()
 	//	console log
 	Godot::print("Generation _ready");
 
-	OS::get_singleton()->set_window_fullscreen(true);
+	//OS::get_singleton()->set_window_fullscreen(true);
 
 	int min = 32;
 
@@ -36,8 +37,12 @@ void godot::Generation::_ready()
 void godot::Generation::_process(float delta)
 {
 
-	if (Input::get_singleton()->is_action_just_pressed("ui_cancel")) {
-		Godot::print("exit");
+}
+
+void godot::Generation::_input(Variant ev) 
+{
+	Ref<InputEvent> _event = ev;
+	if (_event->is_action_pressed("ui_cancel")) {
 		_exit_tree();
 	}
 }
