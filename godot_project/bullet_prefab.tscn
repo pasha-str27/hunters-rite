@@ -4,13 +4,12 @@
 [ext_resource path="res://icon.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 6.26659
+radius = 3.23369
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 7.92605
+radius = 3.57088
 
 [node name="bullet" type="KinematicBody2D"]
-visible = false
 scale = Vector2( 5, 5 )
 collision_mask = 2
 script = ExtResource( 1 )
