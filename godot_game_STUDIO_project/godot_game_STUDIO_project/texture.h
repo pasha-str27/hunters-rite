@@ -1,11 +1,9 @@
 #pragma once
 #include <Godot.hpp>
-#include <Sprite.hpp>
-#include <Texture.hpp>
-#include <PackedScene.hpp>
-#include <ResourceLoader.hpp>
 #include <Particles2D.hpp>
+#include <Timer.hpp>
 #include <InputEvent.hpp>
+#include <ItemList.hpp>
 
 namespace godot 
 {
@@ -18,12 +16,16 @@ namespace godot
 		void _ready();
 		//	decleared property
 		Particles2D* particles = nullptr;
+		Timer* timer = nullptr;
 
 		void _init();
 
 		void _process(float delta);
 
 		void _input(Variant event);
+
+		void on_timeout();
+		void some_function();
 
 		texture();
 		~texture();

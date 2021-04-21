@@ -1,51 +1,56 @@
 #include "texture.h"
-#include <Input.hpp>
-#include <Tree.hpp>
 
 void godot::texture::_register_methods() 
 {
 	register_method((char*)"_ready", &texture::_ready);
+	register_method("on_timeout", &texture::on_timeout);
 	//	register property
-	register_property<texture, Ref<PackedScene>>("prefab", &texture::spritePrefab, nullptr);
+	register_property<texture, Particles2D*>("particles", &texture::particles, nullptr);
 }
 
 void godot::texture::_init() {}
 
 void godot::texture::_ready()
 {
-	
 	//	console log
 	Godot::print("jdjdf");
 	
-	//	loading ref texture from assets
-	auto tt = ResourceLoader::get_singleton()->load("res://skull.png");
-
-	//	setting texture
-	set_texture(tt);
-
-	//	flip vertical
-	//set_flip_v(true);
-
-	//	instantiating prefabs
-	for (int i = 0; i < 10; i++) {
-		for (int j = 0; j < 10; j++) {
-			//	instantiating sprite 
-			Sprite* sp = cast_to<Sprite>(spritePrefab->instance());
-			//	adding to scene 
-			add_child(sp);
-			//	transforming created prefab
-			sp->set_position(Vector2(j * 64, i * 64));
-		}
-
-	}
-	//_exit_tree();
-	//	setting sorting layer
-	//sp->set_z_index(-5);
+	//particles = cast_to<Particles2D>(get_child(0));
+	Godot::print("22");
+	some_function();
 }
+
+void godot::texture::some_function() {
+	timer->connect("timeout", this, "on_timeout");
+	timer->set_wait_time(0.5f);
+	add_child(timer);
+	Godot::print("Timer started");
+	timer->start();
+}
+
+void godot::texture::on_timeout() {
+	Godot::print("Timer ended");
+	timer->disconnect("timeout", this, "on_timeout");
+}
+
+
 
 void godot::texture::_process(float delta)
 {
 	
+}
+
+void godot::texture::_input(Variant ev) {
+	Ref<InputEvent> event = ev;
+	if (event->is_action_pressed("start_emitting")) {
+		particles->set_emitting(true);
+	}
+	else if (event->is_action_pressed("end_emitting")) {
+		particles->set_emitting(false);
+	}
+	else if (event->is_action_pressed("restart_emitting")) {
+		particles->restart();
+	}
 }
 
 godot::texture::~texture()
@@ -54,5 +59,6 @@ godot::texture::~texture()
 
 godot::texture::texture()
 {
-	spritePrefab = nullptr;
+	timer = Timer::_new();
+
 }
