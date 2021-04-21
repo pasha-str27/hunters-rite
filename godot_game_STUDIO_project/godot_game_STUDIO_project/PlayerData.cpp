@@ -44,6 +44,11 @@ void godot::PlayerData::set_dir(Vector2 dir)
 	this->dir = dir;
 }
 
+godot::Vector2 godot::PlayerData::get_dir()
+{
+	return dir.normalized();
+}
+
 godot::Node2D* godot::PlayerData::get_object()
 {
 	return object;

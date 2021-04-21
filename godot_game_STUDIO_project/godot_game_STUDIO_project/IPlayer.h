@@ -2,6 +2,7 @@
 #include <Godot.hpp>
 #include <Input.hpp>
 #include <PackedScene.hpp>
+#include <Vector2.hpp>
 
 namespace godot
 {

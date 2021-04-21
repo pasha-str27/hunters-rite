@@ -19,7 +19,7 @@ namespace godot
 		virtual void add_bullet(Node* node=nullptr) = 0;
 		float get_speed();
 		void set_dir(Vector2 dir);
-
+		Vector2 get_dir();
 		Node2D* get_object();
 
 		virtual void process_input() = 0;

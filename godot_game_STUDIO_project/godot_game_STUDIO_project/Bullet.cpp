@@ -35,7 +35,6 @@ void godot::Bullet::_process(float delta)
 
 void godot::Bullet::set_dir(Vector2 dir)
 {
-	Godot::print("setting");
 	this->dir = dir;
 }
 

@@ -22,8 +22,6 @@ godot::Player1::~Player1()
 
 void godot::Player1::move()
 {
-	//cast_to<KinematicBody2D>(get_object())->move_and_collide(Vector2::UP);
-	//Godot::print(cast_to<RigidBody2D>(get_object())->set_ve());
 	PlayerData::move();
 }
 
@@ -92,8 +90,11 @@ void godot::Player1::fight()
 {
 	available_bullets[available_bullets.size() - 1]->set_position(get_object()->get_global_position());
 	available_bullets[available_bullets.size() - 1]->set_visible(true);
-	Godot::print(cast_to<KinematicBody2D>(get_object())->get_floor_velocity());
-	available_bullets[available_bullets.size() - 1]->call("set_dir", bullet_dir+cast_to<KinematicBody2D>(get_object())->get_floor_velocity());
+
+	if ((bullet_dir + get_dir()).normalized() == godot::Vector2::ZERO)
+		available_bullets[available_bullets.size() - 1]->call("set_dir", (bullet_dir).normalized());
+	else
+		available_bullets[available_bullets.size() - 1]->call("set_dir", (bullet_dir + get_dir()).normalized());
 
 	if (available_bullets.size() == 1)
 	{
