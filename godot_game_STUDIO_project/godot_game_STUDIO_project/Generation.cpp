@@ -1,12 +1,22 @@
 #include "Generation.h"
 #include "CustomExtensions.h"
 
+godot::Array godot::Generation::_get_rooms()
+{
+	return this->all_rooms_spawned;
+}
+
 void godot::Generation::InstanceAllRooms()
 {
 	for (int i = 0; i < all_rooms.size(); i++) {
 		auto spawned = cast_to<PackedScene>(all_rooms[i])->instance();
 		this->all_rooms_spawned.push_back(spawned);
 	}
+
+	closed_rooms = CustomExtensions::FindAll(all_rooms_spawned, [](Node* n) {
+		Array arr = n->call("_get_directions");
+		return arr.size() == 1;
+	});
 }
 
 void godot::Generation::_register_methods()
@@ -14,6 +24,8 @@ void godot::Generation::_register_methods()
 	register_method((char*)"_ready", &Generation::_ready);
 	register_method((char*)"_process", &Generation::_process);
 	register_method((char*)"_input", &Generation::_input);
+	register_method("_get_instance", &Generation::_get_instance);
+	
 	//	register property
 	register_property<Generation, CrossedRoom*>("Crossed Room", &Generation::crossed_room, nullptr);
 	register_property<Generation, Array>("All Rooms", &Generation::all_rooms, {});
@@ -77,23 +89,11 @@ void godot::Generation::_ready()
 	//->call("_get_left_rooms");
 	//Godot::print(r.back().get_type());
 	//cast_to<Node2D>(get_node("/root/Node2D"));
-	////	instantiating prefabs
-	//for (int i = 0; i < 10; i++) {
-	//	for (int j = 0; j < 10; j++) {
-	//		//	instantiating sprite 
-	//		Sprite* sp = cast_to<Sprite>(cast_to<PackedScene>(spritePrefab[0])->instance());
-	//		//	adding to scene 
-	//		add_child(sp);
-	//		//	transforming created prefab
-	//		sp->set_position(Vector2(min + j * 64, min + i * 64));
-	//	}
-	//}
 
 }
 
 void godot::Generation::_process(float delta)
 {
-
 }
 
 void godot::Generation::_input(Variant ev) 
@@ -117,6 +117,16 @@ godot::Array godot::Generation::GetListByDirections(godot::Array dirs)
 		}
 		return true;
 	});
+}
+
+godot::Generation* godot::Generation::_get_instance()
+{
+	return this;
+}
+
+void godot::Generation::AddSpawnedRoom(Node *room)
+{
+	spawned_rooms.push_back(room);
 }
 
 godot::Generation::~Generation()

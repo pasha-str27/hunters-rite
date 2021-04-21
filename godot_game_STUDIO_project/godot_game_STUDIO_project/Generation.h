@@ -32,10 +32,13 @@ namespace godot
 	{
 	private:
 		GODOT_CLASS(Generation, Node2D);
+		Array all_rooms_spawned = {};
+		Array closed_rooms = {};
+
+		Array _get_rooms();
 		void InstanceAllRooms();
 	public:
 		Array all_rooms = {};
-		Array all_rooms_spawned = {};
 		Ref<PackedScene> closed_room = nullptr;
 
 		Array spawned_rooms = {};
@@ -49,6 +52,8 @@ namespace godot
 		void _process(float delta);
 		void _input(Variant ev);
 		Array GetListByDirections(Array l);
+		Generation* _get_instance();
+		void AddSpawnedRoom(Node *r);
 		Generation();
 		~Generation();
 	};
