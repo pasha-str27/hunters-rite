@@ -1,4 +1,7 @@
-#include "Player2.h"
+#ifndef HEADERFILE_H
+#define HEADERFILE_H
+#include "headers.h"
+#endif
 
 godot::Player2* godot::Player2::singleton = nullptr;
 

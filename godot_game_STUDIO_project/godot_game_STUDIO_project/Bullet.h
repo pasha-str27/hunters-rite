@@ -1,6 +1,7 @@
-#pragma once
-#include <KinematicBody2D.hpp>
-#include <Godot.hpp>
+#ifndef HEADERFILE_H
+#define HEADERFILE_H
+#include "headers.h"
+#endif
 
 namespace godot
 {
@@ -12,6 +13,7 @@ namespace godot
 		Vector2 dir;
 		float speed;
 		bool is_active;
+		float damage;
 
 	public:
 		static void _register_methods();

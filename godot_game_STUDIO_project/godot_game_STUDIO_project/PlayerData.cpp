@@ -1,11 +1,15 @@
-#include "PlayerData.h"
+#ifndef HEADERFILE_H
+#define HEADERFILE_H
+#include "headers.h"
+#endif
 
 godot::Input* godot::PlayerData::input_controller = nullptr;
 
-godot::PlayerData::PlayerData(Node2D* object, Ref<PackedScene>bullet)
+godot::PlayerData::PlayerData(Node2D* object, Ref<PackedScene> bullet)
 {
 	this->object = object;
 	dir = Vector2(0, 0);
+
 	if(input_controller==nullptr)
 		input_controller = Input::get_singleton();
 }
@@ -24,8 +28,6 @@ godot::PlayerData::~PlayerData()
 
 void godot::PlayerData::move()
 {
-	//auto a=cast_to<KinematicBody2D>(object)->move_and_collide(Vector2::UP);
-	//cast_to<KinematicBody2D>(object)->move_and_slide_with_snap(Vector2::UP);
 	cast_to<KinematicBody2D>(object)->move_and_slide(dir);
 }
 

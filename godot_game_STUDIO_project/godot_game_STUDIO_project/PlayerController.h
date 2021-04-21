@@ -1,13 +1,7 @@
-#pragma once
-
-#include <Godot.hpp>
-#include <KinematicBody2D.hpp>
-#include <Node.hpp>
-#include <OS.hpp>
-#include <PackedScene.hpp>
-
-#include "Player1.h"
-#include "Player2.h"
+#ifndef HEADERFILE_H
+#define HEADERFILE_H
+#include "headers.h"
+#endif
 
 namespace godot
 {

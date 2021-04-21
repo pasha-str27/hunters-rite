@@ -1,8 +1,7 @@
-#include <KinematicBody2D.hpp>
-#include <Godot.hpp>
-#include <Input.hpp>
-#include <PackedScene.hpp>
-#include <Vector2.hpp>
+#ifndef HEADERFILE_H
+#define HEADERFILE_H
+#include "headers.h"
+#endif
 
 namespace godot
 {

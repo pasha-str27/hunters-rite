@@ -1,4 +1,7 @@
-#include "Player1.h"
+#ifndef HEADERFILE_H
+#define HEADERFILE_H
+#include "headers.h"
+#endif
 
 godot::Player1* godot::Player1::singleton = nullptr;
 
@@ -7,6 +10,7 @@ godot::Player1::Player1(Node2D* object, Ref<PackedScene>bullet) : PlayerData(obj
 	max_bullet_count = 30;
 
 	auto node = get_object()->get_node("/root/Node2D/BulletConteiner");
+
 	for (int i = 0; i < max_bullet_count; ++i)
 	{
 		auto new_obj = bullet->instance();
@@ -103,6 +107,7 @@ void godot::Player1::fight()
 		node->add_child(new_obj);
 		available_bullets.push_back(cast_to<Node2D>(new_obj));
 	}
+
 	available_bullets.pop_back();
 }
 

@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://skull.png" type="Texture" id=1]
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=2]
 [ext_resource path="res://level1_tileset.tres" type="TileSet" id=3]
 [ext_resource path="res://bullet_prefab.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Player2.gdns" type="Script" id=5]
+[ext_resource path="res://Attack-0.png" type="Texture" id=6]
+[ext_resource path="res://Enemy.gdns" type="Script" id=7]
+[ext_resource path="res://Enemy3.gdns" type="Script" id=8]
 
 [sub_resource type="NativeScript" id=1]
 resource_name = "Player1"
@@ -14,13 +17,20 @@ library = ExtResource( 2 )
 [sub_resource type="CircleShape2D" id=2]
 radius = 33.385
 
+[sub_resource type="CapsuleShape2D" id=3]
+
+[sub_resource type="NativeScript" id=4]
+resource_name = "Enemy"
+class_name = "Enemy"
+library = ExtResource( 2 )
+
 [node name="Node2D" type="Node2D"]
 
 [node name="Player1" type="KinematicBody2D" parent="."]
 position = Vector2( 250, 250 )
 collision_mask = 2
 script = SubResource( 1 )
-speed = 100.0
+speed = 300.0
 bullet_prefab = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
@@ -62,3 +72,33 @@ format = 1
 tile_data = PoolIntArray( 10, 2, 0 )
 
 [node name="BulletConteiner" type="Node" parent="."]
+
+[node name="Enemy" type="KinematicBody2D" parent="."]
+position = Vector2( 500, 500 )
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+shape = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="Enemy/CollisionShape2D"]
+texture = ExtResource( 6 )
+
+[node name="Enemy2" type="KinematicBody2D" parent="."]
+position = Vector2( 700, 500 )
+script = SubResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy2"]
+shape = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="Enemy2/CollisionShape2D"]
+texture = ExtResource( 6 )
+
+[node name="Enemy3" type="KinematicBody2D" parent="."]
+position = Vector2( 600, 500 )
+script = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy3"]
+shape = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="Enemy3/CollisionShape2D"]
+texture = ExtResource( 6 )

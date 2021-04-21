@@ -1,4 +1,7 @@
-#include "Bullet.h"
+#ifndef HEADERFILE_H
+#define HEADERFILE_H
+#include "headers.h"
+#endif
 
 using namespace godot;
 
@@ -12,6 +15,7 @@ void godot::Bullet::_register_methods()
 
 	register_property<Bullet, Vector2>("direction", &Bullet::dir, Vector2(5, 5));
 	register_property<Bullet, float>("speed", &Bullet::speed, 10);
+	register_property<Bullet, float>("damage", &Bullet::damage, 10);
 }
 
 void godot::Bullet::_ready()
@@ -24,6 +28,9 @@ void godot::Bullet::_init()
 
 void godot::Bullet::_on_Area2D_body_entered(Node* node)
 {
+	if (node->get_name().find("Enemy") != -1)
+		node->call("take_damage", 10);
+
 	get_node("/root/Node2D/Player1")->call("add_bullet", this);
 }
 
@@ -42,6 +49,7 @@ godot::Bullet::Bullet()
 {
 	is_active = false;
 	dir = Vector2(0, 0);
+	damage = 10;
 }
 
 godot::Bullet::~Bullet()
