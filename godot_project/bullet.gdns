@@ -3,6 +3,6 @@
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 
 [resource]
-resource_name = "Player1"
-class_name = "Player2"
+resource_name = "Bullet"
+class_name = "Bullet"
 library = ExtResource( 1 )

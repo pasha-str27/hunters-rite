@@ -1,5 +1,6 @@
 #include "texture.h"
 #include "PlayerController.h"
+#include "Bullet.h"
 
 using namespace godot;
 
@@ -19,4 +20,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	//	register class
 
 	register_class<PlayerController>();
+	register_class<Bullet>();
 }

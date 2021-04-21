@@ -2,7 +2,7 @@
 
 godot::Player2* godot::Player2::singleton = nullptr;
 
-godot::Player2::Player2(Node2D* obj) : PlayerData(obj)
+godot::Player2::Player2(Node2D* obj, Ref<PackedScene> bullet) : PlayerData(obj)
 {
 }
 
@@ -46,6 +46,14 @@ void godot::Player2::process_input()
 	}
 
 	PlayerData::set_dir(dir);
+}
+
+void godot::Player2::fight()
+{
+}
+
+void godot::Player2::add_bullet(Node* node)
+{
 }
 
 void godot::Player2::set_speed(float speed)

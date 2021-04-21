@@ -1,21 +1,30 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://skull.png" type="Texture" id=1]
-[ext_resource path="res://Player1.gdns" type="Script" id=2]
+[ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=2]
 [ext_resource path="res://level1_tileset.tres" type="TileSet" id=3]
+[ext_resource path="res://bullet_prefab.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Player2.gdns" type="Script" id=5]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="NativeScript" id=1]
+resource_name = "Player1"
+class_name = "PlayerController"
+library = ExtResource( 2 )
+
+[sub_resource type="CircleShape2D" id=2]
 radius = 33.385
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Player1" type="KinematicBody2D" parent="."]
 position = Vector2( 250, 250 )
-script = ExtResource( 2 )
-speed = 401.0
+collision_layer = 2
+script = SubResource( 1 )
+speed = 350.0
+bullet_prefab = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="Player1/CollisionShape2D"]
 scale = Vector2( 0.5, 0.5 )
@@ -24,11 +33,12 @@ texture = ExtResource( 1 )
 
 [node name="Player2" type="KinematicBody2D" parent="."]
 position = Vector2( 400, 250 )
-script = ExtResource( 2 )
-speed = 555.0
+collision_layer = 2
+script = ExtResource( 5 )
+speed = 600.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="Player2/CollisionShape2D"]
 scale = Vector2( 0.5, 0.5 )
@@ -50,3 +60,5 @@ visible = false
 tile_set = ExtResource( 3 )
 format = 1
 tile_data = PoolIntArray( 10, 2, 0 )
+
+[node name="BulletConteiner" type="Node" parent="."]

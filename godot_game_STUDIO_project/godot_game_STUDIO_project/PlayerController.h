@@ -4,17 +4,19 @@
 #include <KinematicBody2D.hpp>
 #include <Node.hpp>
 #include <OS.hpp>
+#include <PackedScene.hpp>
 
 #include "Player1.h"
 #include "Player2.h"
 
 namespace godot
 {
-	class PlayerController:public KinematicBody2D
+	class PlayerController : public KinematicBody2D
 	{
 	private:
 		GODOT_CLASS(PlayerController, KinematicBody2D);
 		IPlayer* current_player;
+		Ref<PackedScene> bullet_prefab;
 
 		float speed;
 
@@ -25,6 +27,7 @@ namespace godot
 		void _init();
 		void _input(Input* event);
 		void _ready();
+		void add_bullet(Node* node);
 		void _process(float delta);
 	};
 }

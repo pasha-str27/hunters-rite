@@ -2,7 +2,7 @@
 
 godot::Input* godot::PlayerData::input_controller = nullptr;
 
-godot::PlayerData::PlayerData(Node2D* object)
+godot::PlayerData::PlayerData(Node2D* object, Ref<PackedScene>bullet)
 {
 	this->object = object;
 	dir = Vector2(0, 0);
@@ -19,10 +19,13 @@ godot::PlayerData::PlayerData()
 
 godot::PlayerData::~PlayerData()
 {
+	delete object;
 }
 
 void godot::PlayerData::move()
 {
+	//auto a=cast_to<KinematicBody2D>(object)->move_and_collide(Vector2::UP);
+	//cast_to<KinematicBody2D>(object)->move_and_slide_with_snap(Vector2::UP);
 	cast_to<KinematicBody2D>(object)->move_and_slide(dir);
 }
 

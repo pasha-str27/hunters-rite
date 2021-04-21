@@ -9,12 +9,14 @@ namespace godot
 		Node2D* object;
 
 	public:
-		PlayerData(Node2D* object);
+		PlayerData(Node2D* object, Ref<PackedScene>bullet = 0);
 		PlayerData();
 		~PlayerData();
 		
 		virtual void move();
 		virtual void set_speed(float speed);
+		virtual void fight() = 0;
+		virtual void add_bullet(Node* node=nullptr) = 0;
 		float get_speed();
 		void set_dir(Vector2 dir);
 
