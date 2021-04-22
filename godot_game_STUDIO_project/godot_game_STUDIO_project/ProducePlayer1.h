@@ -8,7 +8,7 @@ namespace godot
 	class ProducePlayer1 :	public PlayerProduce
 	{
 	public:
-		IPlayer* get_player(Node2D* object, Ref<PackedScene>bullet = 0);
+		IPlayer* _get_player(Node2D* object, Ref<PackedScene>bullet = 0);
 ;	};
 }
 

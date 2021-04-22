@@ -8,16 +8,18 @@ namespace godot
 	class Player2 : public PlayerData
 	{
 		static Player2* singleton;
+		Node* current_enemy;
 
 	private:
 		Player2(Node2D* obj, Ref<PackedScene> bullet=0);
 
 	public:
 		~Player2();
-		void move();
-		void process_input();
-		void fight();
-		void add_bullet(Node* node=nullptr);
+		void _move();
+		void _process_input();
+		void _fight(Node* node = nullptr);
+		void _add_bullet(Node* node = nullptr);
+		void _set_enemy(Node* enemy=nullptr);
 
 		static Player2* get_singleton(Node2D* object, Ref<PackedScene>bullet = 0)
 		{
@@ -27,6 +29,6 @@ namespace godot
 			return singleton;
 		}
 
-		void set_speed(float speed);
+		void _set_speed(float speed);
 	};
 }

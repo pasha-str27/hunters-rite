@@ -7,59 +7,86 @@ godot::Player2* godot::Player2::singleton = nullptr;
 
 godot::Player2::Player2(Node2D* obj, Ref<PackedScene> bullet) : PlayerData(obj)
 {
+	_change_can_fight(true);
+	current_enemy = nullptr;
 }
 
 godot::Player2::~Player2()
 {
 }
 
-void godot::Player2::move()
+void godot::Player2::_move()
 {
-	PlayerData::move();
+	PlayerData::_move();
 }
 
-void godot::Player2::process_input()
+void godot::Player2::_process_input()
 {
 	Vector2 dir = Vector2(0, 0);
 
 	//move up
+	if (input_controller->is_action_just_pressed("Player2_fight"))
+	{
+		_fight();
+	}
+
+	//move up
 	if (input_controller->is_action_pressed("Player2_up"))
 	{
-		dir.y -= get_speed();
+		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(90);
+		dir.y -= _get_speed();
 	}
 
 	//move down
 	if (input_controller->is_action_pressed("Player2_down"))
 	{
-		dir.y += get_speed();
+		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(270);
+		dir.y += _get_speed();
 	}
 
 	//move left
 	if (input_controller->is_action_pressed("Player2_left"))
 	{
-		cast_to<Sprite>(get_object()->get_child(0)->get_child(0))->set_flip_h(false);
-		dir.x -= get_speed();
+		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(0);
+		cast_to<Sprite>(_get_object()->get_child(0)->get_child(0))->set_flip_h(false);
+		dir.x -= _get_speed();
 	}
 
 	//move right	
 	if (input_controller->is_action_pressed("Player2_right"))
 	{
-		cast_to<Sprite>(get_object()->get_child(0)->get_child(0))->set_flip_h(true);
-		dir.x += get_speed();
+		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(180);
+		cast_to<Sprite>(_get_object()->get_child(0)->get_child(0))->set_flip_h(true);
+		dir.x += _get_speed();
 	}
 
-	PlayerData::set_dir(dir);
+	PlayerData::_set_dir(dir);
 }
 
-void godot::Player2::fight()
+void godot::Player2::_fight(Node* node)
+{
+	if (!_can_fight())
+		return;
+
+	_change_can_fight(false);
+
+	if (current_enemy)
+		current_enemy->call("_take_damage", 10);
+
+	cast_to<Node2D>(_get_object()->get_child(1))->set_visible(true);
+	_get_object()->call("_start_timer");
+}
+
+void godot::Player2::_add_bullet(Node* node)
 {
 }
 
-void godot::Player2::add_bullet(Node* node)
+void godot::Player2::_set_enemy(Node* enemy)
 {
+	current_enemy = enemy;
 }
 
-void godot::Player2::set_speed(float speed)
+void godot::Player2::_set_speed(float speed)
 {
-	PlayerData::set_speed(speed);
+	PlayerData::_set_speed(speed);
 }

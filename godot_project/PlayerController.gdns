@@ -1,11 +1,8 @@
 [gd_resource type="NativeScript" load_steps=2 format=2]
 
-[sub_resource type="GDNativeLibrary" id=1]
-load_once = false
-entry/Windows.64 = "res://godot_game_STUDIO_project.dll"
-dependency/Windows.64 = [  ]
+[ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 
 [resource]
-resource_name = "Player1"
+resource_name = "PlayerController"
 class_name = "PlayerController"
-library = SubResource( 1 )
+library = ExtResource( 1 )

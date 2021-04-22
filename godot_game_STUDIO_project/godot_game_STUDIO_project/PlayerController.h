@@ -13,6 +13,7 @@ namespace godot
 		Ref<PackedScene> bullet_prefab;
 
 		float speed;
+		Timer* timer;
 
 	public:
 		static void _register_methods();
@@ -21,7 +22,11 @@ namespace godot
 		void _init();
 		void _input(Input* event);
 		void _ready();
-		void add_bullet(Node* node);
+		void _start_timer();
+		void _on_timeout();
+		bool _can_fight();
+		void _set_enemy(Node* enemy = nullptr);
+		void _add_bullet(Node* node);
 		void _process(float delta);
 	};
 }

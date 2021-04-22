@@ -18,6 +18,6 @@ namespace godot
 			void _init();
 			void _ready();
 			void _process();
-			void take_damage(float damage);
+			void _take_damage(float damage);
 	};
 }

@@ -10,7 +10,7 @@ void godot::Enemy::_register_methods()
 	register_method("_ready", &Enemy::_ready);
 	register_method("_init", &Enemy::_init);
 	register_method("_process", &Enemy::_process);
-	register_method("take_damage", &Enemy::take_damage);
+	register_method("_take_damage", &Enemy::_take_damage);
 
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
 }
@@ -36,7 +36,7 @@ void godot::Enemy::_process()
 {
 }
 
-void godot::Enemy::take_damage(float damage)
+void godot::Enemy::_take_damage(float damage)
 {
 	HP -= damage;
 

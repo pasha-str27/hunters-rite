@@ -18,10 +18,11 @@ namespace godot
 
 	public:
 		~Player1();
-		void move();
-		void process_input();
-		void fight();
-		void add_bullet(Node* node=nullptr);
+		void _move();
+		void _process_input();
+		void _fight(Node* node = nullptr);
+		void _add_bullet(Node* node = nullptr);
+		void _set_enemy(Node* enemy = nullptr);
 
 		static Player1* get_singleton(Node2D* object, Ref<PackedScene>bullet = 0)
 		{
@@ -31,6 +32,6 @@ namespace godot
 			return singleton;
 		}
 
-		void set_speed(float speed);
+		void _set_speed(float speed);
 	};
 }
