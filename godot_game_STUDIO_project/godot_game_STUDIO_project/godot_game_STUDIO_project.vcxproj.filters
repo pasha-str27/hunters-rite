@@ -51,9 +51,6 @@
     <ClCompile Include="Generation.cpp">
       <Filter>Source Files\Generation</Filter>
     </ClCompile>
-    <ClCompile Include="RoomSpawner.cpp">
-      <Filter>Source Files\Generation</Filter>
-    </ClCompile>
     <ClCompile Include="SpawnPointChecker.cpp">
       <Filter>Source Files\Generation</Filter>
     </ClCompile>
@@ -87,9 +84,6 @@
       <Filter>Header Files\Generation</Filter>
     </ClInclude>
     <ClInclude Include="SpawnPointChecker.h">
-      <Filter>Header Files\Generation</Filter>
-    </ClInclude>
-    <ClInclude Include="RoomSpawner.h">
       <Filter>Header Files\Generation</Filter>
     </ClInclude>
     <ClInclude Include="Door.h">

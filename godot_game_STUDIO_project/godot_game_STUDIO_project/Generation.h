@@ -24,6 +24,8 @@ namespace godot
 
 		CrossedRoom* _get_instance();
 
+		Array GetListByDirection(String dir);
+
 		CrossedRoom();
 		~CrossedRoom();
 	};
@@ -33,13 +35,13 @@ namespace godot
 	private:
 		GODOT_CLASS(Generation, Node2D);
 		Array all_rooms_spawned = {};
-		Array closed_rooms = {};
 
 		Array _get_rooms();
 		void InstanceAllRooms();
 	public:
 		Array all_rooms = {};
 		Ref<PackedScene> closed_room = nullptr;
+		Array closed_rooms = {};
 
 		Array spawned_rooms = {};
 		int doorsCount = 5;

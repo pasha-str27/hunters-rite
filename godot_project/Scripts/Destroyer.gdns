@@ -3,6 +3,6 @@
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 
 [resource]
-resource_name = "texture"
-class_name = "texture"
+resource_name = "Destroyer"
+class_name = "Destroyer"
 library = ExtResource( 1 )

@@ -3,6 +3,6 @@
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 
 [resource]
-resource_name = "crossed"
+resource_name = "CrossedRooms"
 class_name = "CrossedRoom"
 library = ExtResource( 1 )

@@ -1,7 +1,11 @@
 #include "texture.h"
 #include "Generation.h"
 #include "PlayerController.h"
+#include "SpawnPointChecker.h"
 #include "Room.h"
+#include "Destroyer.h"
+#include "ClosedRoom.h"
+#include "Door.h"
 
 using namespace godot;
 
@@ -19,10 +23,15 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 {
 	Godot::nativescript_init(handle);
 	//	register class
-	register_class<texture>();
+	//register_class<texture>();
 	register_class<Generation>();
 	register_class<CrossedRoom>();
+	register_class<ClosedRoom>();
 	register_class<Room>();
+	register_class<Destroyer>();
+	register_class<SpawnPointChecker>();
+	register_class<Door>();
+	register_class<RoomSpawner>();
 	//register_class<godot::IPlayer>();
 	//register_class<Player1>();
 	register_class<PlayerController>();
