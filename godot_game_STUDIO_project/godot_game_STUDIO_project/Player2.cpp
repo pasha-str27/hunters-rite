@@ -1,52 +1,92 @@
-#include "Player2.h"
+#ifndef HEADERFILE_H
+#define HEADERFILE_H
+#include "headers.h"
+#endif
 
 godot::Player2* godot::Player2::singleton = nullptr;
 
-godot::Player2::Player2(Node2D* obj)
+godot::Player2::Player2(Node2D* obj, Ref<PackedScene> bullet) : PlayerData(obj)
 {
-	object = obj;
-	dir = Vector2(0, 0);
-	speed = 500;
-	input_controller = Input::get_singleton();
+	_change_can_fight(true);
+	current_enemy = nullptr;
 }
 
 godot::Player2::~Player2()
 {
 }
 
-void godot::Player2::move()
+void godot::Player2::_move()
 {
-	//if(object->get_tra)
-	cast_to<KinematicBody2D>(object)->move_and_slide(dir);
+	PlayerData::_move();
 }
 
-void godot::Player2::process_input()
+void godot::Player2::_process_input()
 {
-	dir = Vector2(0, 0);
+	Vector2 dir = Vector2(0, 0);
 
 	//move up
-	if (input_controller->is_key_pressed(87))
+	if (input_controller->is_action_just_pressed("Player2_fight"))
 	{
-		dir.y -= speed;
+		_fight();
+	}
+
+	//move up
+	if (input_controller->is_action_pressed("Player2_up"))
+	{
+		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(90);
+		dir.y -= _get_speed();
 	}
 
 	//move down
-	if (input_controller->is_key_pressed(83))
+	if (input_controller->is_action_pressed("Player2_down"))
 	{
-		dir.y += speed;
+		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(270);
+		dir.y += _get_speed();
 	}
 
 	//move left
-	if (input_controller->is_key_pressed(65))
+	if (input_controller->is_action_pressed("Player2_left"))
 	{
-		cast_to<Sprite>(object->get_child(0)->get_child(0))->set_flip_h(false);
-		dir.x -= speed;
+		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(0);
+		cast_to<Sprite>(_get_object()->get_child(0)->get_child(0))->set_flip_h(false);
+		dir.x -= _get_speed();
 	}
 
 	//move right	
-	if (input_controller->is_key_pressed(68))
+	if (input_controller->is_action_pressed("Player2_right"))
 	{
-		cast_to<Sprite>(object->get_child(0)->get_child(0))->set_flip_h(true);
-		dir.x += speed;
+		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(180);
+		cast_to<Sprite>(_get_object()->get_child(0)->get_child(0))->set_flip_h(true);
+		dir.x += _get_speed();
 	}
+
+	PlayerData::_set_dir(dir);
+}
+
+void godot::Player2::_fight(Node* node)
+{
+	if (!_can_fight())
+		return;
+
+	_change_can_fight(false);
+
+	if (current_enemy)
+		current_enemy->call("_take_damage", 10);
+
+	cast_to<Node2D>(_get_object()->get_child(1))->set_visible(true);
+	_get_object()->call("_start_timer");
+}
+
+void godot::Player2::_add_bullet(Node* node)
+{
+}
+
+void godot::Player2::_set_enemy(Node* enemy)
+{
+	current_enemy = enemy;
+}
+
+void godot::Player2::_set_speed(float speed)
+{
+	PlayerData::_set_speed(speed);
 }
