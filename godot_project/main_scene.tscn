@@ -84,7 +84,6 @@ rotation = -1.5708
 scale = Vector2( 0.209137, 0.268498 )
 z_index = 1
 texture = ExtResource( 9 )
-
 [node name="GroundTileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 32, 32 )
