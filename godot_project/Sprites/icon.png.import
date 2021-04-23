@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/lvl.png-0dcc3b71a274691c79d2d8a230667a74.stex"
+path="res://.import/icon.png-f9ba9008f31679cd240e2c5f33a9a4fb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://lvl.png"
-dest_files=[ "res://.import/lvl.png-0dcc3b71a274691c79d2d8a230667a74.stex" ]
+source_file="res://Sprites/icon.png"
+dest_files=[ "res://.import/icon.png-f9ba9008f31679cd240e2c5f33a9a4fb.stex" ]
 
 [params]
 
