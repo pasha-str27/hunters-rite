@@ -14,8 +14,11 @@
 #include <OS.hpp>
 #include <Timer.hpp>
 #include <RandomNumberGenerator.hpp>
+<<<<<<< HEAD
 #include <Camera2D.hpp>
 #include <InputEvent.hpp>
+=======
+>>>>>>> origin/vit
 
 #include "IPlayer.h"
 #include "PlayerData.h"
@@ -27,5 +30,9 @@
 #include "PlayerProduce.h"
 #include "ProducePlayer1.h"
 #include "ProducePlayer2.h"
+<<<<<<< HEAD
 #include "Sword.h"
 #include "CameraController.h"
+=======
+#include "Sword.h"
+>>>>>>> origin/vit
