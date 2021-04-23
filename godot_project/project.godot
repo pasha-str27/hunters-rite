@@ -24,6 +24,7 @@ window/size/width=1240
 window/size/height=720
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
+
 [input]
 
 ui_left={
@@ -119,6 +120,7 @@ Player2_fight={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777238,"unicode":0,"echo":false,"script":null)
  ]
 }
+
 [locale]
 
 locale_filter=[ 0, [  ] ]
