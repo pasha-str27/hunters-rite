@@ -1,13 +1,15 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://Sprites/skull.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/skull.png" type="Texture" id=1]
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=2]
 [ext_resource path="res://level1_tileset.tres" type="TileSet" id=3]
-[ext_resource path="res://bullet_prefab.tscn" type="PackedScene" id=4]
-[ext_resource path="res://PlayerController.gdns" type="Script" id=5]
+[ext_resource path="res://Assets/Sprites/icon.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/PlayerController.gdns" type="Script" id=5]
 [ext_resource path="res://Attack-0.png" type="Texture" id=6]
-[ext_resource path="res://Enemy.gdns" type="Script" id=7]
+[ext_resource path="res://Scripts/Enemy.gdns" type="Script" id=7]
+[ext_resource path="res://Assets/Prefabs/bullet_prefab.tscn" type="PackedScene" id=8]
 [ext_resource path="res://unnamed.png" type="Texture" id=9]
+[ext_resource path="res://Scripts/bullet.gdns" type="Script" id=10]
 
 [sub_resource type="NativeScript" id=1]
 resource_name = "CameraController"
@@ -15,17 +17,36 @@ class_name = "CameraController"
 library = ExtResource( 2 )
 
 [sub_resource type="CircleShape2D" id=2]
+radius = 3.23369
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 3.57088
+
+[sub_resource type="PackedScene" id=4]
+_bundled = {
+"conn_count": 1,
+"conns": PoolIntArray( 3, 0, 16, 15, 2, 0 ),
+"editable_instances": [  ],
+"names": PoolStringArray( "bullet", "scale", "collision_mask", "script", "direction", "speed", "KinematicBody2D", "CollisionShape2D", "shape", "disabled", "Sprite", "position", "z_index", "texture", "Area2D", "_on_Area2D_body_entered", "body_entered" ),
+"node_count": 5,
+"node_paths": [  ],
+"nodes": PoolIntArray( -1, -1, 6, 0, -1, 5, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 0, 0, 0, 7, 7, -1, 2, 8, 5, 9, 6, 0, 1, 0, 10, 10, -1, 4, 11, 7, 1, 8, 12, 9, 13, 10, 0, 0, 0, 14, 14, -1, 1, 2, 1, 0, 3, 0, 7, 7, -1, 1, 8, 11, 0 ),
+"variants": [ Vector2( 5, 5 ), 2, ExtResource( 10 ), Vector2( 8, 8 ), 500.0, SubResource( 2 ), true, Vector2( -0.0834332, 0.0834293 ), Vector2( 0.105761, 0.105762 ), 55, ExtResource( 4 ), SubResource( 3 ) ],
+"version": 2
+}
+
+[sub_resource type="CircleShape2D" id=5]
 radius = 33.385
 
-[sub_resource type="NativeScript" id=3]
+[sub_resource type="NativeScript" id=6]
 class_name = "Sword"
 library = ExtResource( 2 )
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=7]
 radius = 21.1008
 height = 53.4026
 
-[sub_resource type="CapsuleShape2D" id=5]
+[sub_resource type="CapsuleShape2D" id=8]
 
 [node name="Node2D" type="Node2D"]
 
@@ -40,10 +61,10 @@ z_index = 26
 collision_mask = 2
 script = ExtResource( 5 )
 speed = 500.0
-bullet_prefab = ExtResource( 4 )
+bullet_prefab = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
-shape = SubResource( 2 )
+shape = SubResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="Player1/CollisionShape2D"]
 scale = Vector2( 0.5, 0.5 )
@@ -56,9 +77,10 @@ z_index = 26
 collision_mask = 2
 script = ExtResource( 5 )
 speed = 401.0
+bullet_prefab = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
-shape = SubResource( 2 )
+shape = SubResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="Player2/CollisionShape2D"]
 scale = Vector2( 0.5, 0.5 )
@@ -69,13 +91,13 @@ texture = ExtResource( 1 )
 visible = false
 z_index = -26
 collision_mask = 16
-script = SubResource( 3 )
+script = SubResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2/Area2D"]
 position = Vector2( -43.4182, -0.943878 )
 rotation = -1.5708
 z_index = 4
-shape = SubResource( 4 )
+shape = SubResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="Player2/Area2D/CollisionShape2D"]
 position = Vector2( -0.0621338, 7.01221 )
@@ -102,7 +124,7 @@ collision_layer = 16
 script = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
-shape = SubResource( 5 )
+shape = SubResource( 8 )
 
 [node name="Sprite" type="Sprite" parent="Enemy/CollisionShape2D"]
 texture = ExtResource( 6 )
@@ -114,7 +136,7 @@ collision_layer = 16
 script = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy2"]
-shape = SubResource( 5 )
+shape = SubResource( 8 )
 
 [node name="Sprite" type="Sprite" parent="Enemy2/CollisionShape2D"]
 texture = ExtResource( 6 )
@@ -126,7 +148,7 @@ collision_layer = 16
 script = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy3"]
-shape = SubResource( 5 )
+shape = SubResource( 8 )
 
 [node name="Sprite" type="Sprite" parent="Enemy3/CollisionShape2D"]
 texture = ExtResource( 6 )
