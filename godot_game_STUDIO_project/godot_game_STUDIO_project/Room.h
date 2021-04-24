@@ -19,13 +19,15 @@ namespace godot {
 		Generation* generation = nullptr;
 		Timer* timer = nullptr;
 
+		bool need_to_spawn = false;
+		RoomSpawner* current = nullptr;
+		
 		void Respawn();
 		Array SetUpPossibleRooms();
 		void SpawnNeighborRooms();
 		void CheckClosedRoom();
-		
-		bool need_to_spawn = false;
-		RoomSpawner* current = nullptr;
+		void IsCorrectPlaced();
+
 	public:
 		Array doors = {};				//	strings 
 		bool closed_room = false;		//	is room has 1 door
@@ -43,7 +45,6 @@ namespace godot {
 		Array _get_directions();
 		void _add_door_collision(String dir);
 		void _set_possible_rooms(Array a);
-		void _wait_to_spawn();
 		Room();
 		~Room();
 	};
@@ -55,8 +56,8 @@ namespace godot {
 		Room* room_ref = nullptr;
 		bool spawned = false;
 		Generation* generation_ref = nullptr;
-		PackedScene* GetRandomRoomFromArray(Array& list);
 		Timer* timer = nullptr;
+		PackedScene* GetRandomRoomFromArray(Array& list);
 	public:
 		String spawn_direction;
 		static void _register_methods();
@@ -65,6 +66,7 @@ namespace godot {
 		void _on_Area2D_area_entered(Node* node);
 		void _spawn();
 		bool _get_spawned();
+		String _get_spawn_direction();
 		void SpawnRoom();
 		RoomSpawner* _get_instance();
 		RoomSpawner();

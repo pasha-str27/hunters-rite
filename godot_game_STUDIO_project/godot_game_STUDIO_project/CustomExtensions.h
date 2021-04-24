@@ -20,6 +20,16 @@ namespace godot {
 			return returned;
 		}
 
+		static Array FindAll(Array arr, const std::function<bool(String)>& isCorrect) {
+			Array returned = {};
+			for (int i = 0; i < arr.size(); i++) {
+				auto a = arr[i];
+				if (isCorrect(a))
+					returned.push_back(a);
+			}
+			return returned;
+		}
+
 		static PackedScene* Find(Array arr, const std::function<bool(Node*)>& isCorrect) {
 			Array returned = {};
 			for (int i = 0; i < arr.size(); i++) {
@@ -27,8 +37,7 @@ namespace godot {
 				if (isCorrect(a))
 					return Object::cast_to<PackedScene>(a);
 			}
-			PackedScene* scene = PackedScene::_new();
-			return scene;
+			return nullptr;
 		}
 
 		static void AddRange(Array &addTo, Array &whatToAdd) {

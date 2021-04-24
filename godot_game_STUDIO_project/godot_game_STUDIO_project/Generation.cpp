@@ -11,15 +11,15 @@ void godot::Generation::InstanceAllRooms()
 	//if (all_rooms.size() == 0)
 	//	return;
 
-	for (int i = 0; i < all_rooms.size(); i++) {
-		auto spawned = cast_to<PackedScene>(all_rooms[i])->instance();
-		this->all_rooms_spawned.push_back(spawned);
-	}
+	//for (int i = 0; i < all_rooms.size(); i++) {
+	//	auto spawned = cast_to<PackedScene>(all_rooms[i])->instance();
+	//	this->all_rooms_spawned.push_back(spawned);
+	//}
 
-	closed_rooms = CustomExtensions::FindAll(all_rooms_spawned, [](Node* n) {
-		Array arr = n->call("_get_directions");
-		return arr.size() == 1;
-	});
+	//closed_rooms = CustomExtensions::FindAll(all_rooms_spawned, [](Node* n) {
+	//	Array arr = n->call("_get_directions");
+	//	return arr.size() == 1;
+	//});
 }
 
 void godot::Generation::_register_methods()
@@ -30,6 +30,10 @@ void godot::Generation::_register_methods()
 	register_method("_get_instance", &Generation::_get_instance);
 	
 	register_property<Generation, Array>("All Rooms", &Generation::all_rooms, {});
+	register_property<Generation, Ref<PackedScene>>("Left Closed Room", &Generation::left_closed_room, nullptr);
+	register_property<Generation, Ref<PackedScene>>("Right Closed Room", &Generation::right_closed_room, nullptr);
+	register_property<Generation, Ref<PackedScene>>("Top Closed Room", &Generation::top_closed_room, nullptr);
+	register_property<Generation, Ref<PackedScene>>("Bottom Closed Room", &Generation::bottom_closed_room, nullptr);
 	register_property<Generation, Ref<PackedScene>>("Closed Room", &Generation::closed_room, nullptr);
 	register_property<Generation, int>("Doors", &Generation::doorsCount, 0);
 }
@@ -37,6 +41,7 @@ void godot::Generation::_register_methods()
 void godot::Generation::_init() {
 	doorsCount = 5;
 	Godot::print("init");
+	all_rooms_spawned = all_rooms;
 }
 
 void godot::Generation::_ready()
@@ -45,8 +50,6 @@ void godot::Generation::_ready()
 	Godot::print("Generation _ready");
 	//OS::get_singleton()->set_window_fullscreen(true);
 	this->crossed_room = get_node("CrossedRooms")->call("_get_instance");
-
-	Godot::print(String::num(crossed_room == nullptr));
 	InstanceAllRooms();
 }
 
@@ -64,8 +67,10 @@ void godot::Generation::_input(Variant ev)
 
 godot::Array godot::Generation::GetListByDirections(godot::Array dirs)
 {
-	return CustomExtensions::FindAll(all_rooms_spawned, [dirs](Node* n) {
-		Array directions = n->call("_get_directions");
+	return CustomExtensions::FindAll(all_rooms, [dirs](Node* n) {
+		auto node = cast_to<PackedScene>(n)->instance();
+		Array directions = node->call("_get_directions");
+		node = nullptr;
 		for(int i = 0; i < dirs.size(); i++)
 		{
 			if (directions.has(dirs[i]))
@@ -85,6 +90,19 @@ godot::Generation* godot::Generation::_get_instance()
 void godot::Generation::AddSpawnedRoom(Node *room)
 {
 	spawned_rooms.push_back(room);
+}
+
+godot::Ref<godot::PackedScene> godot::Generation::GetClosedRoomByDirection(String r)
+{
+	if (r == "right")
+		return right_closed_room;
+	if (r == "left")
+		return left_closed_room;
+	if (r == "top")
+		return top_closed_room;
+	if (r == "bottom")
+		return bottom_closed_room;
+	return nullptr;
 }
 
 godot::Generation::~Generation()
@@ -118,13 +136,13 @@ godot::CrossedRoom* godot::CrossedRoom::_get_instance()
 godot::Array godot::CrossedRoom::GetListByDirection(String dir)
 {
 	if (dir == "left")
-		return right_rooms;
+		return left_rooms ;
 	else if (dir == "right")
-		return left_rooms;
+		return right_rooms;
 	else if (dir == "top")
-		return bottom_rooms;
-	else if(dir == "bottom")
 		return top_rooms;
+	else if(dir == "bottom")
+		return bottom_rooms;
 
 	return Array();
 }

@@ -28,10 +28,11 @@ void godot::Door::_on_Area2D_area_entered(Node* other)
 {
 	if (other->get_name().find("Wall") != -1)
 	{
-		other->get_parent()->get_parent()->call("_add_door_direction", direction);
+		Godot::print("Collision door with wall: " + direction);
+		get_parent()->get_parent()->call_deferred("_add_door_collision", direction, 1);
 	}
 
-	if (other->get_name().find("Door") != -1)
+	if (other->get_parent()->get_name().find("Door") != -1)
 	{
 		if (room_ref->closed_room)
 		{

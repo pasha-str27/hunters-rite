@@ -41,7 +41,10 @@ namespace godot
 	public:
 		Array all_rooms = {};
 		Ref<PackedScene> closed_room = nullptr;
-		Array closed_rooms = {};
+		Ref<PackedScene> left_closed_room = nullptr;
+		Ref<PackedScene> right_closed_room = nullptr;
+		Ref<PackedScene> top_closed_room = nullptr;
+		Ref<PackedScene> bottom_closed_room = nullptr;
 
 		Array spawned_rooms = {};
 		int doorsCount = 5;
@@ -55,7 +58,8 @@ namespace godot
 		void _input(Variant ev);
 		Array GetListByDirections(Array l);
 		Generation* _get_instance();
-		void AddSpawnedRoom(Node *r);
+		void AddSpawnedRoom(Node* r);
+		Ref<PackedScene> GetClosedRoomByDirection(String r);
 		Generation();
 		~Generation();
 	};
