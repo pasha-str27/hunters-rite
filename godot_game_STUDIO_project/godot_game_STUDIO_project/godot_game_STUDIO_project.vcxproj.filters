@@ -13,6 +13,8 @@
     <ClCompile Include="ProducePlayer2.cpp" />
     <ClCompile Include="Sword.cpp" />
     <ClCompile Include="Spike.cpp" />
+    <ClCompile Include="SimpleEnemyAI.cpp" />
+    <ClCompile Include="EnemyAIContext.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
@@ -29,5 +31,6 @@
     <ClInclude Include="ProducePlayer2.h" />
     <ClInclude Include="Sword.h" />
     <ClInclude Include="Spike.h" />
+    <ClInclude Include="SimpleEnemyAI.h" />
   </ItemGroup>
 </Project>

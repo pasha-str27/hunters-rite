@@ -7,7 +7,7 @@ namespace godot
 {
 	class PlayerData : public IPlayer, public KinematicBody2D
 	{
-		int speed;
+		float speed;
 		Vector2 dir;
 		Node2D* object;
 		bool can_fight_value;

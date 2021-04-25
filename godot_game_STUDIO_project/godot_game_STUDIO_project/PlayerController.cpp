@@ -57,7 +57,7 @@ void godot::PlayerController::_start_timer()
 	if(!has_node(NodePath(timer->get_name())))
 		add_child(timer);
 
-	timer->set_wait_time(0.4);
+	timer->set_wait_time(0.4f);
 	timer->start();
 }
 

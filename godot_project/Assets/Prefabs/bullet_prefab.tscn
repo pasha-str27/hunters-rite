@@ -7,7 +7,7 @@
 radius = 3.23369
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 3.57088
+radius = 1.23328
 
 [node name="bullet" type="KinematicBody2D"]
 scale = Vector2( 5, 5 )
