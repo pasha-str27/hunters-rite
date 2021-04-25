@@ -16,6 +16,8 @@
 #include <RandomNumberGenerator.hpp>
 #include <Camera2D.hpp>
 #include <InputEvent.hpp>
+#include <TileMap.hpp>
+#include <Tree.hpp>
 
 #include "IPlayer.h"
 #include "PlayerData.h"
@@ -29,3 +31,4 @@
 #include "ProducePlayer2.h"
 #include "Sword.h"
 #include "CameraController.h"
+#include "Spike.h"

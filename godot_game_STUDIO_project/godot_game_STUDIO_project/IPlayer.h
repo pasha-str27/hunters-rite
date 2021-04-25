@@ -16,5 +16,6 @@ namespace godot
 		virtual void _change_can_fight(bool value) = 0;
 		virtual bool _can_fight() = 0;
 		virtual void _set_enemy(Node* enemy = nullptr) = 0;
+		virtual void _take_damage(float damage) = 0;
 	};
 }

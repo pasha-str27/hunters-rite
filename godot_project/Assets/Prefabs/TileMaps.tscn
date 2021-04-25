@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Sprites/Tilesets/level1_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/Sprites/Tilesets/UI_tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=3]
+
+[sub_resource type="NativeScript" id=1]
+resource_name = "Spike"
+class_name = "Spike"
+library = ExtResource( 3 )
 
 [node name="TileMaps" type="Node"]
 
@@ -14,14 +20,18 @@ tile_data = PoolIntArray( -131081, 0, 0, -131080, 0, 0, -131079, 0, 0, -131078, 
 [node name="WallTileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
+collision_layer = 2
 format = 1
 tile_data = PoolIntArray( -327690, 9, 0, -327689, 9, 0, -327688, 9, 0, -327687, 9, 0, -327686, 9, 0, -327685, 9, 0, -327684, 9, 0, -327683, 9, 0, -327682, 9, 0, -327681, 9, 0, -393216, 9, 0, -393215, 9, 0, -393214, 9, 0, -393213, 9, 0, -393212, 9, 0, -393211, 9, 0, -393210, 9, 0, -393209, 9, 0, -393208, 9, 0, -262154, 9, 0, -262153, 14, 0, -262152, 14, 0, -262151, 14, 0, -262150, 14, 0, -262149, 14, 0, -262148, 14, 0, -262147, 14, 0, -262146, 14, 0, -262145, 14, 0, -327680, 14, 0, -327679, 14, 0, -327678, 14, 0, -327677, 14, 0, -327676, 14, 0, -327675, 14, 0, -327674, 14, 0, -327673, 14, 0, -327672, 9, 0, -196618, 9, 0, -196617, 14, 0, -196616, 14, 0, -196615, 14, 0, -196614, 14, 0, -196613, 14, 0, -196612, 14, 0, -196611, 14, 0, -196610, 14, 0, -196609, 14, 0, -262144, 14, 0, -262143, 14, 0, -262142, 14, 0, -262141, 14, 0, -262140, 14, 0, -262139, 14, 0, -262138, 14, 0, -262137, 14, 0, -262136, 9, 0, -131082, 9, 0, -196600, 9, 0, -65546, 9, 0, -131064, 9, 0, -10, 9, 0, -65528, 9, 0, 65526, 9, 0, 8, 9, 0, 131062, 9, 0, 65544, 9, 0, 196598, 9, 0, 131080, 9, 0, 262134, 9, 0, 196616, 9, 0, 327670, 9, 0, 262152, 9, 0, 393206, 9, 0, 327688, 9, 0, 458742, 9, 0, 458743, 9, 0, 458744, 9, 0, 458745, 9, 0, 458746, 9, 0, 458747, 9, 0, 458748, 9, 0, 458749, 9, 0, 458750, 9, 0, 458751, 9, 0, 393216, 9, 0, 393217, 9, 0, 393218, 9, 0, 393219, 9, 0, 393220, 9, 0, 393221, 9, 0, 393222, 9, 0, 393223, 9, 0, 393224, 9, 0 )
 
-[node name="SpikeTileMap" type="TileMap" parent="."]
+[node name="SpikeTileMap" type="TileMap" parent="." groups=[
+"spike",
+]]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( -65541, 16, 0, 131072, 19, 0, 131073, 19, 0, 327672, 17, 0, 327673, 17, 0 )
+script = SubResource( 1 )
 
 [node name="UiTileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )

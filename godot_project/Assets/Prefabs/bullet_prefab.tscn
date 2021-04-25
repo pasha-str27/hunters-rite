@@ -11,7 +11,8 @@ radius = 3.57088
 
 [node name="bullet" type="KinematicBody2D"]
 scale = Vector2( 5, 5 )
-collision_mask = 2
+collision_layer = 0
+collision_mask = 0
 script = ExtResource( 1 )
 direction = Vector2( 8, 8 )
 speed = 500.0
@@ -27,7 +28,8 @@ z_index = 55
 texture = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_mask = 2
+collision_layer = 0
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 2 )

@@ -1,99 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="CameraController.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="GodotLibrary.cpp" />
+    <ClCompile Include="Player1.cpp" />
+    <ClCompile Include="Player2.cpp" />
+    <ClCompile Include="PlayerController.cpp" />
+    <ClCompile Include="PlayerData.cpp" />
+    <ClCompile Include="ProducePlayer1.cpp" />
+    <ClCompile Include="ProducePlayer2.cpp" />
+    <ClCompile Include="Sword.cpp" />
+    <ClCompile Include="Spike.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GodotLibrary.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ProducePlayer1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ProducePlayer2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Sword.cpp">
-<<<<<<< HEAD
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraController.cpp">
-=======
->>>>>>> origin/vit
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="IPlayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Player1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Player2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="headers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerProduce.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ProducePlayer1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ProducePlayer2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Sword.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="CameraController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-=======
->>>>>>> origin/vit
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="CameraController.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="headers.h" />
+    <ClInclude Include="IPlayer.h" />
+    <ClInclude Include="Player1.h" />
+    <ClInclude Include="Player2.h" />
+    <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="PlayerData.h" />
+    <ClInclude Include="PlayerProduce.h" />
+    <ClInclude Include="ProducePlayer1.h" />
+    <ClInclude Include="ProducePlayer2.h" />
+    <ClInclude Include="Sword.h" />
+    <ClInclude Include="Spike.h" />
   </ItemGroup>
 </Project>
