@@ -31,10 +31,14 @@ void godot::Enemy::_init()
 
 void godot::Enemy::_ready()
 {
-	ai->_set_strategy(new SimpleEnemyAI);
+	if(is_in_group("flower"))
+		ai->_set_strategy(new FlowerAI);
+	else
+		ai->_set_strategy(new SimpleEnemyAI);
+
 	ai->set_enemy(this);
-	ai->set_player1(cast_to<Node2D>(get_node("/root/Node2D/Player1")));
-	ai->set_player2(cast_to<Node2D>(get_node("/root/Node2D/Player2")));
+	ai->set_player1(cast_to<Node2D>(get_node("/root/Node2D/Node/Player1")));
+	ai->set_player2(cast_to<Node2D>(get_node("/root/Node2D/Node/Player2")));
 }
 
 void godot::Enemy::_process(float delta)

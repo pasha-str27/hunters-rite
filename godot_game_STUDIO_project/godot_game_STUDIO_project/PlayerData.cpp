@@ -76,3 +76,13 @@ bool godot::PlayerData::_can_fight()
 {
 	return can_fight_value;
 }
+
+float godot::PlayerData::_get_HP()
+{
+	return HP;
+}
+
+void godot::PlayerData::_set_HP(float HP)
+{
+	this->HP = HP;
+}

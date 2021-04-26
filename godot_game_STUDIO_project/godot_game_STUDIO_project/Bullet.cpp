@@ -31,7 +31,7 @@ void godot::Bullet::_on_Area2D_body_entered(Node* node)
 	if (node->get_name().find("Enemy") != -1)
 		node->call("_take_damage", 10);
 
-	get_node("/root/Node2D/Player1")->call("_add_bullet", this);
+	get_node("/root/Node2D/Node/Player1")->call("_add_bullet", this);
 }
 
 void godot::Bullet::_process(float delta)

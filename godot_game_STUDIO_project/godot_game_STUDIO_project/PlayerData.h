@@ -26,12 +26,14 @@ namespace godot
 		void _set_dir(Vector2 dir);
 		Vector2 _get_dir();
 		Node2D* _get_object();
-		void _take_damage(float damage);
+		virtual void _take_damage(float damage);
 		void _change_can_fight(bool value);
 		bool _can_fight();
 
 		virtual void _process_input() = 0;
 		virtual void _set_enemy(Node* enemy = nullptr)=0;
+		float _get_HP();
+		void _set_HP(float HP);
 
 		static Input* input_controller;
 	};
