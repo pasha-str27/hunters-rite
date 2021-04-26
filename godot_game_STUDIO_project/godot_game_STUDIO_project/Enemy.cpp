@@ -17,6 +17,7 @@ void godot::Enemy::_register_methods()
 
 godot::Enemy::Enemy()
 {
+	ai = new EnemyAIContext;
 	HP = 100;
 }
 
@@ -30,10 +31,19 @@ void godot::Enemy::_init()
 
 void godot::Enemy::_ready()
 {
+	if(is_in_group("flower"))
+		ai->_set_strategy(new FlowerAI);
+	else
+		ai->_set_strategy(new SimpleEnemyAI);
+
+	ai->set_enemy(this);
+	ai->set_player1(cast_to<Node2D>(get_node("/root/Node2D/Node/Player1")));
+	ai->set_player2(cast_to<Node2D>(get_node("/root/Node2D/Node/Player2")));
 }
 
-void godot::Enemy::_process()
+void godot::Enemy::_process(float delta)
 {
+	ai->_process(delta);
 }
 
 void godot::Enemy::_take_damage(float damage)

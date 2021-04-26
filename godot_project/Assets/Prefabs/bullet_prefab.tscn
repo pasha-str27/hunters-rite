@@ -1,17 +1,18 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://bullet.gdns" type="Script" id=1]
+[ext_resource path="res://Scripts/bullet.gdns" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/icon.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.23369
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 3.57088
+radius = 1.23328
 
 [node name="bullet" type="KinematicBody2D"]
 scale = Vector2( 5, 5 )
-collision_mask = 2
+collision_layer = 0
+collision_mask = 0
 script = ExtResource( 1 )
 direction = Vector2( 8, 8 )
 speed = 500.0
@@ -27,7 +28,8 @@ z_index = 55
 texture = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_mask = 2
+collision_layer = 0
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 2 )
