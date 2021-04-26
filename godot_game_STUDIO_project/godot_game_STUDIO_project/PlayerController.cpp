@@ -16,6 +16,7 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_can_fight", &PlayerController::_can_fight);
 	register_method((char*)"_set_enemy", &PlayerController::_set_enemy);
 	register_method((char*)"_on_Area2D_body_entered", &PlayerController::_on_Area2D_body_entered);
+	register_method((char*)"_take_damage", &PlayerController::_take_damage);
 
 	register_property<PlayerController, float>("speed", &PlayerController::speed, 400);
 	register_property<PlayerController, Ref<PackedScene>>("bullet_prefab", &PlayerController::bullet_prefab, nullptr);
@@ -94,6 +95,11 @@ void godot::PlayerController::_input(Input* event)
 void godot::PlayerController::_process(float delta)
 {
 	current_player->_move();
+}
+
+void godot::PlayerController::_take_damage(float damage)
+{
+	current_player->_take_damage(damage);
 }
 
 void godot::PlayerController::_on_Area2D_body_entered(Node* node)

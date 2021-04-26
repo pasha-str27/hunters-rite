@@ -29,6 +29,7 @@ tile_data = PoolIntArray( -327690, 9, 0, -327689, 9, 0, -327688, 9, 0, -327687, 
 ]]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
+collision_layer = 16
 format = 1
 tile_data = PoolIntArray( -65541, 16, 0, 131072, 19, 0, 131073, 19, 0, 327672, 17, 0, 327673, 17, 0 )
 script = SubResource( 1 )

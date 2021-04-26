@@ -9,5 +9,7 @@ namespace godot
 	{
 	public:
 		void _process(float delta, Node2D* enemy = nullptr, Node2D* player1 = nullptr, Node2D* player2 = nullptr);
+		void _add_bullet(Node* bullet);
+		void change_can_fight(bool value);
 	};
 }

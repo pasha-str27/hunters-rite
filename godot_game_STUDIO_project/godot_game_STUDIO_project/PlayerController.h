@@ -28,6 +28,7 @@ namespace godot
 		void _set_enemy(Node* enemy = nullptr);
 		void _add_bullet(Node* node);
 		void _process(float delta);
+		void _take_damage(float damage);
 		void _on_Area2D_body_entered(Node* node);
 	};
 }

@@ -14,6 +14,7 @@ namespace godot
 		float speed;
 		bool is_active;
 		float damage;
+		bool is_enemy_bullet;
 
 	public:
 		static void _register_methods();

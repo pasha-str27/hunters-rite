@@ -43,3 +43,13 @@ void godot::EnemyAIContext::set_player2(Node2D* player2)
 {
 	this->player2 = player2;
 }
+
+void godot::EnemyAIContext::_add_bullet(Node* bullet)
+{
+	strategy->_add_bullet(bullet);
+}
+
+void godot::EnemyAIContext::change_can_fight(bool value)
+{
+	strategy->change_can_fight(value);
+}

@@ -71,7 +71,9 @@ void godot::Player2::_fight(Node* node)
 	_change_can_fight(false);
 
 	if (current_enemy)
-		current_enemy->call("_take_damage", 10);
+	{
+		current_enemy->call("_take_damage", 25);
+	}
 
 	cast_to<Node2D>(_get_object()->get_child(1))->set_visible(true);
 	_get_object()->call("_start_timer");
