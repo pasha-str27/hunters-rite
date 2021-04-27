@@ -7,7 +7,7 @@ godot::Player1* godot::Player1::singleton = nullptr;
 
 godot::Player1::Player1(Node2D* object, Ref<PackedScene>bullet) : PlayerData(object)
 {
-	max_bullet_count = 30;
+	max_bullet_count = 10;
 	_change_can_fight(true);
 
 	auto node = _get_object()->get_node("/root/Node2D/Node/BulletConteiner");
@@ -111,6 +111,7 @@ void godot::Player1::_fight(Node* node)
 	available_bullets[available_bullets.size() - 1]->set_position(_get_object()->get_global_position());
 	available_bullets[available_bullets.size() - 1]->set_visible(true);
 
+
 	if ((bullet_dir + _get_dir()).normalized() == godot::Vector2::ZERO)
 		available_bullets[available_bullets.size() - 1]->call("_set_dir", (bullet_dir).normalized());
 	else
@@ -140,14 +141,13 @@ void godot::Player1::_set_enemy(Node* enemy)
 
 void godot::Player1::_add_bullet(Node* node)
 {
-	cast_to<Node2D>(node)->set_visible(false);
 	available_bullets.push_back(cast_to<Node2D>(node));
 }
 
 void  godot::Player1::_take_damage(float damage)
 {
 
-	float HP = _get_HP()- damage;
+	float HP = _get_HP() - damage;
 
 	_set_HP(HP);
 
