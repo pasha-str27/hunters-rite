@@ -43,38 +43,38 @@ void godot::FlowerAI::change_can_fight(bool value)
 
 void godot::FlowerAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2D* player2)
 {
-	enemy->rotate(delta / 5);
+	enemy->rotate(delta / 3);
 
 	for (int i = 0; i < 8; ++i)
 	{
-		directions[i].x = directions[i].x * cos(delta / 5) - directions[i].y * sin(delta / 5);
-		directions[i].y = directions[i].x * sin(delta / 5) + directions[i].y * cos(delta / 5);
+		directions[i].x = directions[i].x * cos(delta / 3) - directions[i].y * sin(delta / 3);
+		directions[i].y = directions[i].x * sin(delta / 3) + directions[i].y * cos(delta / 3);
 	}
 
-	//if (can_fight)
-	//{
-	//	can_fight = false;
-	//	for (int i = 0; i < 8; ++i)
-	//	{
-	//		if (bullets.size() > 0)
-	//		{
-	//			bullets[bullets.size() - 1]->set_position(enemy->get_global_position());
-	//			bullets[bullets.size() - 1]->set_visible(true);
+	if (can_fight)
+	{
+		can_fight = false;
+		for (int i = 0; i < 8; ++i)
+		{
+			if (bullets.size() > 0)
+			{
+				bullets[bullets.size() - 1]->set_position(enemy->get_global_position());
+				bullets[bullets.size() - 1]->set_visible(true);
 
-	//			bullets[bullets.size() - 1]->call("_set_dir", directions[i]);
+				bullets[bullets.size() - 1]->call("_set_dir", directions[i]);
 
-	//			if (bullets.size() == 1)
-	//			{
-	//				auto node = enemy->get_node("/root/Node2D/Node/BulletConteinerFlower");
-	//				auto new_obj = bullets[0]->duplicate(8);
-	//				node->add_child(new_obj);
-	//				bullets.push_back(cast_to<Node2D>(new_obj));
-	//			}
+				if (bullets.size() == 1)
+				{
+					auto node = enemy->get_node("/root/Node2D/Node/BulletConteinerFlower");
+					auto new_obj = bullets[0]->duplicate(8);
+					node->add_child(new_obj);
+					bullets.push_back(cast_to<Node2D>(new_obj));
+				}
 
-	//			bullets.pop_back();
-	//		}
-	//	}
+				bullets.pop_back();
+			}
+		}
 
-	//	enemy->call("_start_timer");
-	//}
+		enemy->call("_start_timer");
+	}
 }

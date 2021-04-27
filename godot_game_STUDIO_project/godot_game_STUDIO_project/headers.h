@@ -32,6 +32,5 @@
 #include "Sword.h"
 #include "CameraController.h"
 #include "Spike.h"
-//#include "Enemy.h"
 #include "SimpleEnemyAI.h"
 #include "FlowerAI.h"

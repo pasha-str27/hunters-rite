@@ -151,8 +151,6 @@ void  godot::Player1::_take_damage(float damage)
 
 	_set_HP(HP);
 
-	_get_object()->set_global_position(_get_object()->get_global_position() - _get_dir().normalized() * damage * 5);
-
 	if (HP <= 0)
 	{
 		_get_object()->get_node("/root/Node2D/Node/BulletConteiner")->queue_free();

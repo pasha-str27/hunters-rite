@@ -28,6 +28,9 @@ void godot::Bullet::_init()
 
 void godot::Bullet::_on_Area2D_body_entered(Node* node)
 {
+	if (!is_visible())
+		return;
+
 	cast_to<Node2D>(this)->set_visible(false);
 
 	if (node->is_in_group("enemy") || node->is_in_group("player"))

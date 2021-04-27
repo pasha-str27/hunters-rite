@@ -105,5 +105,9 @@ void godot::PlayerController::_take_damage(float damage)
 void godot::PlayerController::_on_Area2D_body_entered(Node* node)
 {
 	if (node->is_in_group("spike"))
+	{
+	//Godot::print("taking");
 		current_player->_take_damage(node->call("_get_damage"));
+	}
+		
 }
