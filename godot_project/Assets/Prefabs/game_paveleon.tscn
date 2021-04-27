@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 [ext_resource path="res://Assets/Prefabs/bullet_prefab.tscn" type="PackedScene" id=2]
@@ -10,6 +10,10 @@
 [ext_resource path="res://Scripts/PlayerController.gdns" type="Script" id=8]
 [ext_resource path="res://Scripts/Enemy.gdns" type="Script" id=9]
 [ext_resource path="res://CameraController.gdns" type="Script" id=10]
+[ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://Assets/Sprites/UI/health_bar_white.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Sprites/UI/health_bar.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Sprites/UI/health_bar_white_left.png" type="Texture" id=14]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.6514
@@ -31,6 +35,14 @@ radius = 17.3234
 [sub_resource type="CapsuleShape2D" id=6]
 radius = 7.16034
 height = 7.08337
+
+[sub_resource type="StreamTexture" id=7]
+resource_local_to_scene = true
+flags = 4
+
+[sub_resource type="DynamicFont" id=8]
+size = 33
+font_data = ExtResource( 11 )
 
 [node name="Node" type="Node"]
 
@@ -146,10 +158,160 @@ texture = ExtResource( 5 )
 position = Vector2( 0, 15.1453 )
 scale = Vector2( 0.439999, 0.439999 )
 current = true
-zoom = Vector2( 0.6, 0.6 )
 script = ExtResource( 10 )
 
-[node name="TileMaps" type="Node" parent="." instance=ExtResource( 3 )]
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="RightHealthBar" type="Control" parent="Camera2D/CanvasLayer"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -36.0
+margin_top = -256.0
+margin_bottom = 256.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="TextureRect" parent="Camera2D/CanvasLayer/RightHealthBar"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -36.0
+margin_top = -256.0
+margin_bottom = 256.0
+rect_rotation = -360.0
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fill" type="TextureRect" parent="Camera2D/CanvasLayer/RightHealthBar"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -36.0
+margin_top = -256.0
+margin_bottom = 256.0
+texture = ExtResource( 13 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="Camera2D/CanvasLayer/RightHealthBar/Fill"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -36.0
+margin_top = -256.0
+margin_bottom = 256.0
+value = 20.0
+texture_progress = ExtResource( 12 )
+fill_mode = 3
+tint_progress = Color( 0.84668, 0.0959129, 0.0959129, 0.521569 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="Camera2D/CanvasLayer/RightHealthBar/Fill/TextureProgress"]
+
+[node name="LeftHealthBar" type="Control" parent="Camera2D/CanvasLayer"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -256.0
+margin_right = 36.0
+margin_bottom = 256.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="TextureRect" parent="Camera2D/CanvasLayer/LeftHealthBar"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -36.0
+margin_top = -256.0
+margin_bottom = 256.0
+rect_rotation = -360.0
+texture = SubResource( 7 )
+flip_h = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fill" type="TextureRect" parent="Camera2D/CanvasLayer/LeftHealthBar"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -36.0
+margin_top = -256.0
+margin_bottom = 256.0
+texture = SubResource( 7 )
+expand = true
+flip_h = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="Camera2D/CanvasLayer/LeftHealthBar/Fill"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -36.0
+margin_top = -256.0
+margin_bottom = 256.0
+value = 75.0
+texture_progress = ExtResource( 14 )
+fill_mode = 3
+tint_progress = Color( 0.84668, 0.0959129, 0.0959129, 0.521569 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="Camera2D/CanvasLayer/LeftHealthBar/Fill/TextureProgress"]
+
+[node name="Label" type="Label" parent="Camera2D/CanvasLayer"]
+margin_left = -3.0
+margin_right = 330.0
+margin_bottom = 109.0
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/line_spacing = 5
+text = "Attack:100
+Speed: 3
+Luck: 94"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Camera2D/CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -297.0
+margin_bottom = 109.0
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/line_spacing = 5
+text = "Attack:34
+Speed: 6
+Luck: 46"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TileMaps" parent="." instance=ExtResource( 3 )]
 
 [connection signal="body_entered" from="Player1/Area2D" to="Player1" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Player2/Area2D" to="Player2/Area2D" method="_on_Area2D_body_entered"]
