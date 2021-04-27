@@ -41,7 +41,7 @@ void godot::Sword::_process()
 
 void godot::Sword::_on_Area2D_body_entered(Node* node)
 {
-	if (node->get_name().find("Enemy") != -1)
+	if (node->is_in_group("enemy"))
 	{
 		get_parent()->call("_set_enemy", node);
 	}
@@ -49,7 +49,7 @@ void godot::Sword::_on_Area2D_body_entered(Node* node)
 
 void godot::Sword::_on_Area2D_body_exited(Node* node)
 {
-	if (node->get_name().find("Enemy") != -1)
+	if (node->is_in_group("enemy"))
 	{
 		get_parent()->call("_set_enemy");
 	}

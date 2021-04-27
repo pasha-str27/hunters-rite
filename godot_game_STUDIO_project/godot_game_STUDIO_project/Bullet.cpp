@@ -28,16 +28,31 @@ void godot::Bullet::_init()
 
 void godot::Bullet::_on_Area2D_body_entered(Node* node)
 {
-	if (node->get_name().find("Enemy") != -1)
-		node->call("_take_damage", 10);
+	cast_to<Node2D>(this)->set_visible(false);
 
-	get_node("/root/Node2D/Player1")->call("_add_bullet", this);
+	if (node->is_in_group("enemy") || node->is_in_group("player"))
+	{
+		node->call("_take_damage", damage);
+	}
+
+	if (is_in_group("flower_bullet"))
+	{
+		get_node("/root/Node2D/Node/flower")->call("_add_bullet", this);
+	}
+
+	if (is_in_group("player_bullet"))
+	{
+		get_node("/root/Node2D/Node/Player1")->call("_add_bullet", this);
+	}
 }
 
 void godot::Bullet::_process(float delta)
 {
-	if(is_visible())
-		move_and_slide(dir*speed);
+	if (is_visible())
+	{
+		move_and_slide(dir * speed);
+	}
+		
 }
 
 void godot::Bullet::_set_dir(Vector2 dir)
@@ -48,8 +63,9 @@ void godot::Bullet::_set_dir(Vector2 dir)
 godot::Bullet::Bullet()
 {
 	is_active = false;
+	is_enemy_bullet = false;
 	dir = Vector2(0, 0);
-	damage = 10;
+	damage = 25;
 }
 
 godot::Bullet::~Bullet()
