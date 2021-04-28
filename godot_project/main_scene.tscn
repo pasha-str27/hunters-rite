@@ -1,39 +1,14 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://skull.png" type="Texture" id=1]
-[ext_resource path="res://Scripts/Generation.gdns" type="Script" id=2]
 [ext_resource path="res://level1_tileset.tres" type="TileSet" id=3]
 [ext_resource path="res://Scripts/PlayerController.gdns" type="Script" id=4]
-[ext_resource path="res://Prefabs/CrossedRooms.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Prefabs/ClosedRoom.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Prefabs/Rooms/1Room/T.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Prefabs/Rooms/1Room/L.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Prefabs/Rooms/1Room/R.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Prefabs/Rooms/Entry.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Prefabs/Rooms/1Room/B.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Prefabs/Rooms/2Room/TL.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Prefabs/Rooms/2Room/TB.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Prefabs/Rooms/2Room/TR.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Prefabs/Rooms/3Room/TLR.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Prefabs/Rooms/3Room/TRB.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Prefabs/Rooms/3Room/TLB.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Prefabs/Rooms/3Room/BLR.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Prefabs/Rooms/2Room/RB.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Prefabs/Rooms/2Room/LR.tscn" type="PackedScene" id=20]
-[ext_resource path="res://Prefabs/Rooms/2Room/LB.tscn" type="PackedScene" id=21]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 33.385
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource( 2 )
-"All Rooms" = [ ExtResource( 11 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 21 ), ExtResource( 20 ), ExtResource( 19 ), ExtResource( 13 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 18 ), ExtResource( 17 ), ExtResource( 15 ), ExtResource( 16 ) ]
-"Left Closed Room" = ExtResource( 8 )
-"Right Closed Room" = ExtResource( 9 )
-"Top Closed Room" = ExtResource( 7 )
-"Bottom Closed Room" = ExtResource( 11 )
-"Closed Room" = ExtResource( 6 )
-Doors = 10
+position = Vector2( -1, 1 )
 
 [node name="Player1" type="KinematicBody2D" parent="."]
 position = Vector2( 250, 250 )
@@ -65,15 +40,7 @@ tile_set = ExtResource( 3 )
 format = 1
 tile_data = PoolIntArray( 10, 2, 0 )
 
-[node name="CrossedRooms" parent="." instance=ExtResource( 5 )]
-
-[node name="Rooms" type="Node2D" parent="."]
-
-[node name="Node2D" parent="." instance=ExtResource( 10 )]
-position = Vector2( 619.303, 380.623 )
-"Is Start Room" = true
-
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 814.587, 384.666 )
+position = Vector2( 620, 360 )
 current = true
-zoom = Vector2( 8, 8 )
+zoom = Vector2( 10, 10 )

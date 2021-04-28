@@ -7,12 +7,14 @@
 #include <Tree.hpp>
 #include <Array.hpp>
 #include <OS.hpp>
+#include <Timer.hpp>
 
 namespace godot
 {
 	class CrossedRoom: public Node2D {
 	private:
 		GODOT_CLASS(CrossedRoom, Node2D);
+		Timer* timer = nullptr;
 	public:
 		static void _register_methods();
 		void _init();
@@ -36,15 +38,28 @@ namespace godot
 		GODOT_CLASS(Generation, Node2D);
 		Array all_rooms_spawned = {};
 
-		Array _get_rooms();
 		void InstanceAllRooms();
 	public:
+
 		Array all_rooms = {};
 		Ref<PackedScene> closed_room = nullptr;
 		Ref<PackedScene> left_closed_room = nullptr;
 		Ref<PackedScene> right_closed_room = nullptr;
 		Ref<PackedScene> top_closed_room = nullptr;
 		Ref<PackedScene> bottom_closed_room = nullptr;
+
+		Ref<PackedScene> TLR_room = nullptr;
+		Ref<PackedScene> TLB_room = nullptr;
+		Ref<PackedScene> TRB_room = nullptr;
+		Ref<PackedScene> BLR_room = nullptr;
+
+		Ref<PackedScene> RB_room = nullptr;
+		Ref<PackedScene> TR_room = nullptr;
+		Ref<PackedScene> TB_room = nullptr;
+		Ref<PackedScene> TL_room = nullptr;
+		Ref<PackedScene> LB_room = nullptr;
+		Ref<PackedScene> LR_room = nullptr;
+
 
 		Array spawned_rooms = {};
 		int doorsCount = 5;

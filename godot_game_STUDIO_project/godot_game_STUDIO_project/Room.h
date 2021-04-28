@@ -16,19 +16,22 @@ namespace godot {
 	{
 	private:
 		GODOT_CLASS(Room, Node2D);
-		Generation* generation = nullptr;
 		Timer* timer = nullptr;
 
 		bool need_to_spawn = false;
 		RoomSpawner* current = nullptr;
+
+		Array _respawn_dirs = {};
 		
 		void Respawn();
 		Array SetUpPossibleRooms();
 		void SpawnNeighborRooms();
 		void CheckClosedRoom();
 		void IsCorrectPlaced();
+		void  _respawn();
 
 	public:
+		Generation* generation = nullptr;
 		Array doors = {};				//	strings 
 		bool closed_room = false;		//	is room has 1 door
 		bool start_room = false;		//	is it start room
@@ -45,6 +48,7 @@ namespace godot {
 		Array _get_directions();
 		void _add_door_collision(String dir);
 		void _set_possible_rooms(Array a);
+		void PrepareToRespawn(String dir);
 		Room();
 		~Room();
 	};

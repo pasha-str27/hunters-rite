@@ -10,6 +10,7 @@ namespace godot {
 		GODOT_CLASS(Door, Area2D);
 		bool correct_colliding = false;
 		Room* room_ref = nullptr;
+		Timer* timer = nullptr;
 	public:
 		String direction;
 
@@ -17,8 +18,11 @@ namespace godot {
 		void _init();
 		void _ready();
 		bool _get_correct_colliding();
+		void _check_correct_placing();
 		void _on_Area2D_area_entered(Node* other);
 		void _on_Area2D_area_exited(Node* other);
+		Door();
+		~Door();
 	};
 }
 

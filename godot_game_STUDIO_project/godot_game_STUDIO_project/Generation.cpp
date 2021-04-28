@@ -1,11 +1,6 @@
 #include "Generation.h"
 #include "CustomExtensions.h"
 
-godot::Array godot::Generation::_get_rooms()
-{
-	return this->all_rooms_spawned;
-}
-
 void godot::Generation::InstanceAllRooms()
 {
 	//if (all_rooms.size() == 0)
@@ -34,6 +29,21 @@ void godot::Generation::_register_methods()
 	register_property<Generation, Ref<PackedScene>>("Right Closed Room", &Generation::right_closed_room, nullptr);
 	register_property<Generation, Ref<PackedScene>>("Top Closed Room", &Generation::top_closed_room, nullptr);
 	register_property<Generation, Ref<PackedScene>>("Bottom Closed Room", &Generation::bottom_closed_room, nullptr);
+
+	register_property<Generation, Ref<PackedScene>>("TLR Room", &Generation::TLR_room, nullptr);
+	register_property<Generation, Ref<PackedScene>>("TRB Room", &Generation::TRB_room, nullptr);
+	register_property<Generation, Ref<PackedScene>>("TLB Room", &Generation::TLB_room, nullptr);
+	register_property<Generation, Ref<PackedScene>>("BLR Room", &Generation::BLR_room, nullptr);
+
+	register_property<Generation, Ref<PackedScene>>("TB Room", &Generation::TB_room, nullptr);
+	register_property<Generation, Ref<PackedScene>>("TL Room", &Generation::TL_room, nullptr);
+	register_property<Generation, Ref<PackedScene>>("TR Room", &Generation::TR_room, nullptr);
+	register_property<Generation, Ref<PackedScene>>("LR Room", &Generation::LR_room, nullptr);
+	register_property<Generation, Ref<PackedScene>>("RB Room", &Generation::RB_room, nullptr);
+	register_property<Generation, Ref<PackedScene>>("LB Room", &Generation::LB_room, nullptr);
+
+
+
 	register_property<Generation, Ref<PackedScene>>("Closed Room", &Generation::closed_room, nullptr);
 	register_property<Generation, int>("Doors", &Generation::doorsCount, 0);
 }
@@ -47,7 +57,6 @@ void godot::Generation::_init() {
 void godot::Generation::_ready()
 {
 	//	console log
-	Godot::print("Generation _ready");
 	//OS::get_singleton()->set_window_fullscreen(true);
 	this->crossed_room = get_node("CrossedRooms")->call("_get_instance");
 	InstanceAllRooms();
@@ -57,11 +66,16 @@ void godot::Generation::_process(float delta)
 {
 }
 
+
 void godot::Generation::_input(Variant ev) 
 {
 	Ref<InputEvent> _event = ev;
 	if (_event->is_action_pressed("ui_cancel")) {
-		_exit_tree();
+		for (int i = 0; i < spawned_rooms.size(); i++) {
+			if(spawned_rooms[i] != nullptr)
+				Godot::print(cast_to<Node2D>(spawned_rooms[i])->get_position());
+		}
+		//_exit_tree();
 	}
 }
 
@@ -117,7 +131,7 @@ godot::Generation::Generation()
 void godot::CrossedRoom::_register_methods()
 {
 	register_method("_get_instance", &CrossedRoom::_get_instance);
-
+	
 	register_property<CrossedRoom, Array>("Left rooms", &CrossedRoom::left_rooms, {});
 	register_property<CrossedRoom, Array>("Top rooms", &CrossedRoom::top_rooms, {});
 	register_property<CrossedRoom, Array>("Bottom rooms", &CrossedRoom::bottom_rooms, {});
@@ -147,6 +161,7 @@ godot::Array godot::CrossedRoom::GetListByDirection(String dir)
 	return Array();
 }
 
+
 godot::CrossedRoom::CrossedRoom()
 {
 
@@ -154,4 +169,6 @@ godot::CrossedRoom::CrossedRoom()
 
 godot::CrossedRoom::~CrossedRoom()
 {
+	timer->queue_free();
+	timer = nullptr;
 }
