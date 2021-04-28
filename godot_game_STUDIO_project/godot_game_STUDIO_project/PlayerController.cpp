@@ -11,14 +11,16 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_ready", &PlayerController::_ready);
 	register_method((char*)"_input", &PlayerController::_input);
 	register_method((char*)"_add_bullet", &PlayerController::_add_bullet);
-	register_method((char*)"_on_timeout", &PlayerController::_on_timeout);
-	register_method((char*)"_start_timer", &PlayerController::_start_timer);
+	register_method((char*)"_on_hit_timeout", &PlayerController::_on_hit_timeout);
+	register_method((char*)"_start_hit_timer", &PlayerController::_start_hit_timer);
+	register_method((char*)"_on_dash_timeout", &PlayerController::_on_dash_timeout);
+	register_method((char*)"_start_dash_timer", &PlayerController::_start_dash_timer);
 	register_method((char*)"_can_fight", &PlayerController::_can_fight);
 	register_method((char*)"_set_enemy", &PlayerController::_set_enemy);
 	register_method((char*)"_on_Area2D_body_entered", &PlayerController::_on_Area2D_body_entered);
 	register_method((char*)"_take_damage", &PlayerController::_take_damage);
 
-	register_property<PlayerController, float>("speed", &PlayerController::speed, 400);
+	register_property<PlayerController, float>("speed", &PlayerController::speed, 20);
 	register_property<PlayerController, Ref<PackedScene>>("bullet_prefab", &PlayerController::bullet_prefab, nullptr);
 }
 
@@ -49,27 +51,49 @@ void godot::PlayerController::_ready()
 	
 	current_player = player_producer->_get_player(this, bullet_prefab);
 	current_player->_set_speed(speed);
+
+	Godot::print(String::num(speed));
+
+	add_child(timer);
 }
 
-void godot::PlayerController::_start_timer()
+void godot::PlayerController::_start_dash_timer()
 {
-	timer->connect("timeout", this, "_on_timeout");
-
-	if(!has_node(NodePath(timer->get_name())))
-		add_child(timer);
-
-	timer->set_wait_time(0.4f);
-	timer->start();
+	if (!timer->is_connected("timeout", this, "_on_dash_timeout"))
+	{
+		Godot::print("dashing");
+		timer->connect("timeout", this, "_on_dash_timeout");
+		current_player->_set_speed(current_player->_get_speed() * 2);
+		timer->start(0.1f);
+	}
+	
 }
 
-void godot::PlayerController::_on_timeout()
+void godot::PlayerController::_on_dash_timeout()
 {
-	timer->disconnect("timeout", this, "_on_timeout");
+	current_player->_set_speed(current_player->_get_speed() / 2);
+	timer->disconnect("timeout", this, "_on_dash_timeout");
+	Godot::print("undashing");
+}
+
+void godot::PlayerController::_start_hit_timer()
+{
+	Godot::print("hit timer start");
+	timer->connect("timeout", this, "_on_hit_timeout");
+
+	timer->start(0.4f);
+}
+
+void godot::PlayerController::_on_hit_timeout()
+{
+	timer->disconnect("timeout", this, "_on_hit_timeout");
 
 	current_player->_change_can_fight(true);
 
 	if (get_name() == "Player2")
 		cast_to<Node2D>(get_child(1))->set_visible(false);
+
+	Godot::print("hit timer end");
 }
 
 bool godot::PlayerController::_can_fight()

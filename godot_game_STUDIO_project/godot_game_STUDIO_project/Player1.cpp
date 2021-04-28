@@ -44,6 +44,12 @@ void godot::Player1::_process_input()
 		cast_to<Sprite>(_get_object()->get_child(0)->get_child(0))->set_flip_h(true);
 	}
 
+	//dashing
+	if (input_controller->is_action_just_released("Player1_dash"))
+	{
+		_get_object()->call("_start_dash_timer");
+	}
+
 	//move up
 	if (input_controller->is_action_pressed("Player1_up"))
 	{
@@ -98,16 +104,6 @@ void godot::Player1::_process_input()
 		_fight();
 	}
 
-	//dashing
-	/*if (input_controller->is_action_just_pressed("Player1_dash"))
-	{
-		printf("ima dashing\n");
-		_dash();
-		_get_object()->call("_start_timer");
-		_get_object()->call("_on_timerout");
-		_dash();
-	}*/
-
 	PlayerData::_set_dir(dir);
 }
 
@@ -137,7 +133,7 @@ void godot::Player1::_fight(Node* node)
 
 	available_bullets.pop_back();
 
-	_get_object()->call("_start_timer");
+	_get_object()->call("_start_hit_timer");
 }
 
 void godot::Player1::_set_speed(float speed)

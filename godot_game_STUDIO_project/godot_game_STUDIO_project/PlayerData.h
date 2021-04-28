@@ -12,7 +12,6 @@ namespace godot
 		Node2D* object;
 		bool can_fight_value;
 		float HP;
-		bool is_dashing;
 
 	public:
 		PlayerData(Node2D* object, Ref<PackedScene>bullet = 0);
@@ -30,12 +29,9 @@ namespace godot
 		virtual void _take_damage(float damage);
 		void _change_can_fight(bool value);
 		bool _can_fight();
-		virtual void _dash();
-		void _set_dash_state(bool state);
-		bool _get_dash_state();
 
 		virtual void _process_input() = 0;
-		virtual void _set_enemy(Node* enemy = nullptr)=0;
+		virtual void _set_enemy(Node* enemy = nullptr) = 0;
 		float _get_HP();
 		void _set_HP(float HP);
 

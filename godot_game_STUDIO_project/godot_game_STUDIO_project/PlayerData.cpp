@@ -32,31 +32,6 @@ void godot::PlayerData::_move()
 	cast_to<KinematicBody2D>(object)->move_and_slide(dir);
 }
 
-void godot::PlayerData::_dash()
-{
-	if (is_dashing == true)
-	{
-		speed /= 2;
-		_set_dash_state(false);
-		
-	}
-	else
-	{
-		speed *= 2;
-		_set_dash_state(true);
-	}
-}
-
-void godot::PlayerData::_set_dash_state(bool state)
-{
-	this->is_dashing = state;
-}
-
-bool godot::PlayerData::_get_dash_state()
-{
-	return is_dashing;
-}
-
 void godot::PlayerData::_set_speed(float speed)
 {
 	this->speed = speed;
