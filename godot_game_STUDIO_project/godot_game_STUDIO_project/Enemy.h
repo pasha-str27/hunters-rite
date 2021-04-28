@@ -56,5 +56,6 @@ namespace godot
 			void _add_bullet(Node*bullet);
 			void _start_timer();
 			void _on_timeout();
+			void _update_health_bar();
 	};
 }

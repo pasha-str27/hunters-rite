@@ -14,9 +14,10 @@ void godot::Enemy::_register_methods()
 	register_method("_add_bullet", &Enemy::_add_bullet);
 	register_method("_on_timeout", &Enemy::_on_timeout);
 	register_method("_start_timer", &Enemy::_start_timer);
+	register_method("_update_health_bar", &Enemy::_update_health_bar);
 
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
-	register_property<Enemy, float>("HP", &Enemy::HP, 99);
+	register_property<Enemy, float>("HP", &Enemy::HP, 100);
 }
 
 godot::Enemy::Enemy()
@@ -46,6 +47,7 @@ void godot::Enemy::_ready()
 	ai->set_player2(cast_to<Node2D>(get_node("/root/Node2D/Node/Player2")));
 
 	add_child(timer);
+	_update_health_bar();
 }
 
 void godot::Enemy::_process(float delta)
@@ -58,6 +60,8 @@ void godot::Enemy::_take_damage(float damage)
 	HP -= damage;
 
 	Godot::print("taking");
+
+	_update_health_bar();
 
 	if (HP <= 0)
 		queue_free();
@@ -81,4 +85,11 @@ void godot::Enemy::_on_timeout()
 	timer->disconnect("timeout", this, "_on_timeout");
 
 	ai->change_can_fight(true);
+}
+
+void godot::Enemy::_update_health_bar()
+{
+	auto health_bar = cast_to<ProgressBar>(get_child(1));
+	if (health_bar != nullptr)
+		health_bar->set_value(HP);
 }
