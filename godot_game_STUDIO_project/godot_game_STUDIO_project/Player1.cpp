@@ -98,6 +98,16 @@ void godot::Player1::_process_input()
 		_fight();
 	}
 
+	//dashing
+	/*if (input_controller->is_action_just_pressed("Player1_dash"))
+	{
+		printf("ima dashing\n");
+		_dash();
+		_get_object()->call("_start_timer");
+		_get_object()->call("_on_timerout");
+		_dash();
+	}*/
+
 	PlayerData::_set_dir(dir);
 }
 

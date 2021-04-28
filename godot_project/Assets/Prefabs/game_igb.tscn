@@ -142,7 +142,7 @@ current = true
 zoom = Vector2( 0.75, 0.75 )
 script = ExtResource( 10 )
 
-[node name="TileMaps" parent="." instance=ExtResource( 3 )]
+[node name="Room" parent="." instance=ExtResource( 3 )]
 
 [connection signal="body_entered" from="Player1/Area2D" to="Player1" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Player2/Area2D" to="Player2/Area2D" method="_on_Area2D_body_entered"]

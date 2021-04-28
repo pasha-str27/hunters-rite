@@ -25,6 +25,7 @@
       <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="IPlayer.cpp">
+    <ClCompile Include="Player1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Player1.cpp">
@@ -131,16 +132,16 @@
     <ClInclude Include="Bullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CameraController.h">
+    <ClInclude Include="IPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
+    <ClInclude Include="Player1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FlowerAI.h">
+    <ClInclude Include="Player2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="headers.h">
+    <ClInclude Include="PlayerController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayerProduce.h">
