@@ -44,6 +44,8 @@ void godot::Enemy::_ready()
 	ai->set_enemy(this);
 	ai->set_player1(cast_to<Node2D>(get_node("/root/Node2D/Node/Player1")));
 	ai->set_player2(cast_to<Node2D>(get_node("/root/Node2D/Node/Player2")));
+
+	add_child(timer);
 }
 
 void godot::Enemy::_process(float delta)
@@ -69,9 +71,6 @@ void godot::Enemy::_add_bullet(Node *bullet)
 void godot::Enemy::_start_timer()
 {
 	timer->connect("timeout", this, "_on_timeout");
-
-	if (!has_node(NodePath(timer->get_name())))
-		add_child(timer);
 
 	timer->set_wait_time(0.4f);
 	timer->start();

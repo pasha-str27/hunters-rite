@@ -10,7 +10,7 @@ godot::PlayerData::PlayerData(Node2D* object, Ref<PackedScene> bullet)
 	this->object = object;
 	dir = Vector2(0, 0);
 	HP = 100;
-	if(input_controller==nullptr)
+	if(input_controller == nullptr)
 		input_controller = Input::get_singleton();
 }
 
@@ -30,6 +30,31 @@ godot::PlayerData::~PlayerData()
 void godot::PlayerData::_move()
 {
 	cast_to<KinematicBody2D>(object)->move_and_slide(dir);
+}
+
+void godot::PlayerData::_dash()
+{
+	if (is_dashing == true)
+	{
+		speed /= 2;
+		_set_dash_state(false);
+		
+	}
+	else
+	{
+		speed *= 2;
+		_set_dash_state(true);
+	}
+}
+
+void godot::PlayerData::_set_dash_state(bool state)
+{
+	this->is_dashing = state;
+}
+
+bool godot::PlayerData::_get_dash_state()
+{
+	return is_dashing;
 }
 
 void godot::PlayerData::_set_speed(float speed)
