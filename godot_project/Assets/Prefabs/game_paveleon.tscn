@@ -6,9 +6,9 @@
 [ext_resource path="res://Assets/Prefabs/flower.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Attack-0.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Sprites/skull.png" type="Texture" id=6]
+[ext_resource path="res://Prefabs/CameraPrefab.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scripts/PlayerController.gdns" type="Script" id=8]
 [ext_resource path="res://Scripts/Enemy.gdns" type="Script" id=9]
-[ext_resource path="res://CameraController.gdns" type="Script" id=10]
 [ext_resource path="res://Assets/Sprites/icon11.png" type="Texture" id=11]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -136,11 +136,7 @@ shape = SubResource( 6 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 5 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 0, 15.1453 )
-current = true
-zoom = Vector2( 0.75, 0.75 )
-script = ExtResource( 10 )
+[node name="Camera2D" parent="." instance=ExtResource( 7 )]
 
 [node name="TileMaps" parent="." instance=ExtResource( 3 )]
 
