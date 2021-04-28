@@ -16,6 +16,9 @@
     <ClCompile Include="SimpleEnemyAI.cpp" />
     <ClCompile Include="EnemyAIContext.cpp" />
     <ClCompile Include="FlowerAI.cpp" />
+    <ClCompile Include="SpiderAI.cpp" />
+    <ClCompile Include="SpiderSide.cpp" />
+    <ClCompile Include="Enemies.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
@@ -34,5 +37,8 @@
     <ClInclude Include="Spike.h" />
     <ClInclude Include="SimpleEnemyAI.h" />
     <ClInclude Include="FlowerAI.h" />
+    <ClInclude Include="SpiderAI.h" />
+    <ClInclude Include="SpiderSide.h" />
+    <ClInclude Include="Enemies.h" />
   </ItemGroup>
 </Project>

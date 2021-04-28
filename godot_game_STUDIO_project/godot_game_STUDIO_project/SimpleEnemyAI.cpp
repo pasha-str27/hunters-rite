@@ -18,3 +18,11 @@ void godot::SimpleEnemyAI::_add_bullet(Node* bullet)
 void godot::SimpleEnemyAI::change_can_fight(bool value)
 {
 }
+
+void godot::SimpleEnemyAI::_remove_side(int side)
+{
+}
+
+void godot::SimpleEnemyAI::_change_dir_after_time()
+{
+}

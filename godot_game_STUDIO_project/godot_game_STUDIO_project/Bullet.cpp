@@ -33,14 +33,26 @@ void godot::Bullet::_on_Area2D_body_entered(Node* node)
 
 	cast_to<Node2D>(this)->set_visible(false);
 
-	if (node->is_in_group("enemy") || node->is_in_group("player"))
+	if (node->is_in_group("player") && is_in_group("web_bullet"))
 	{
-		node->call("_take_damage", damage);
+		node->call("_change_can_moving", false);
+	}
+	else
+	{
+		if (node->is_in_group("enemy") || node->is_in_group("player"))
+		{
+			node->call("_take_damage", damage);
+		}
 	}
 
 	if (is_in_group("flower_bullet"))
 	{
 		get_node("/root/Node2D/Node/flower")->call("_add_bullet", this);
+	}
+
+	if (is_in_group("web_bullet"))
+	{
+		get_node("/root/Node2D/Node/Spider")->call("_add_bullet", this);
 	}
 
 	if (is_in_group("player_bullet"))

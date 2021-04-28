@@ -14,6 +14,7 @@ namespace godot
 
 		float speed;
 		Timer* timer;
+		bool can_move;
 
 	public:
 		static void _register_methods();
@@ -30,5 +31,7 @@ namespace godot
 		void _process(float delta);
 		void _take_damage(float damage);
 		void _on_Area2D_body_entered(Node* node);
+		void _change_can_moving(bool value);
+		void change_can_moving_timeout();
 	};
 }

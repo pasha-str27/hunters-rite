@@ -92,3 +92,14 @@ void godot::Player2::_set_speed(float speed)
 {
 	PlayerData::_set_speed(speed);
 }
+
+void godot::Player2::_take_damage(float damage)
+{
+	PlayerData::_take_damage(damage);
+
+	if (_get_HP() <= 0)
+	{
+		_get_object()->queue_free();
+		Enemies::get_singleton()->_remove_player2();
+	}
+}

@@ -34,3 +34,6 @@
 #include "Spike.h"
 #include "SimpleEnemyAI.h"
 #include "FlowerAI.h"
+#include "SpiderAI.h"
+#include "SpiderSide.h"
+#include "Enemies.h"

@@ -12,6 +12,8 @@ namespace godot
 		virtual void _process(float delta, Node2D* enemy = nullptr, Node2D* player1 = nullptr, Node2D* player2 = nullptr) = 0;
 		virtual void _add_bullet(Node* bullet=nullptr)=0;
 		virtual void change_can_fight(bool value)=0;
+		virtual void _remove_side(int side)=0;
+		virtual void _change_dir_after_time()=0;
 	};
 
 	class EnemyAIContext
@@ -32,6 +34,10 @@ namespace godot
 		void set_player2(Node2D* player2);
 		void _add_bullet(Node* bullet);
 		void change_can_fight(bool value);
+		void _delete_player1();
+		void _delete_player2();
+		void _remove_side(int side);
+		void _change_dir_after_time();
 	};
 
 
@@ -41,6 +47,7 @@ namespace godot
 
 		EnemyAIContext *ai;
 		Timer* timer;
+		Timer* timer_change_dir;
 
 		float HP;
 		Ref<PackedScene> bullet;
@@ -57,5 +64,10 @@ namespace godot
 			void _start_timer();
 			void _on_timeout();
 			void _destroy_enemy();
+			void _remove_player1();
+			void _remove_player2();
+			void _remove_side(int side);
+			void _change_dir_after_time();
+			void _start_timer_for_dir_change();
 	};
 }

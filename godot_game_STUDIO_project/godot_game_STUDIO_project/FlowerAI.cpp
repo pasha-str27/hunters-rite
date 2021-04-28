@@ -41,6 +41,14 @@ void godot::FlowerAI::change_can_fight(bool value)
 	can_fight = value;
 }
 
+void godot::FlowerAI::_remove_side(int side)
+{
+}
+
+void godot::FlowerAI::_change_dir_after_time()
+{
+}
+
 void godot::FlowerAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2D* player2)
 {
 	enemy->rotate(delta / 3);
