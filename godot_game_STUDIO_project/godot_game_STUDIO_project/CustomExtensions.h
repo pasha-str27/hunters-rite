@@ -1,10 +1,9 @@
 #pragma once
-#include <Array.hpp>
-#include <Node.hpp>
-#include <Node2D.hpp>
-#include <Godot.hpp>
-#include <RandomNumberGenerator.hpp>
-#include <functional>
+
+#ifndef HEADERFILE_H
+#define HEADERFILE_H
+#include "headers.h"
+#endif
 
 namespace godot {
 	static class CustomExtensions

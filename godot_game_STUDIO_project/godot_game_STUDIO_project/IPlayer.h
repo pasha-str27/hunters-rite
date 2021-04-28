@@ -1,7 +1,10 @@
-#ifndef HEADERFILE_H
-#define HEADERFILE_H
-#include "headers.h"
-#endif
+#pragma once
+//#ifndef HEADERFILE_H
+//#define HEADERFILE_H
+//#include "headers.h"
+//#endif
+#include <Godot.hpp>
+#include <Node.hpp>
 
 namespace godot
 {
