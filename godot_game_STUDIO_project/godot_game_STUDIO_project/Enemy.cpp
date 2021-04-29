@@ -51,7 +51,7 @@ void godot::Enemy::_ready()
 
 void godot::Enemy::_process(float delta)
 {
-	ai->_process(delta);
+	//ai->_process(delta);
 }
 
 void godot::Enemy::_take_damage(float damage)
@@ -100,7 +100,7 @@ void godot::Enemy::_on_timeout()
 
 void godot::Enemy::_update_health_bar()
 {
-	auto health_bar = cast_to<ProgressBar>(get_child(1));
+	auto health_bar = cast_to<ProgressBar>(get_child(0));
 	if (health_bar != nullptr)
 		health_bar->set_value(HP);
 }

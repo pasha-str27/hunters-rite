@@ -3,7 +3,7 @@
 [ext_resource path="res://skull.png" type="Texture" id=1]
 [ext_resource path="res://Prefabs/Generation/Generation.gdns" type="Script" id=2]
 [ext_resource path="res://level1_tileset.tres" type="TileSet" id=3]
-[ext_resource path="res://Scripts/PlayerController.gdns" type="Script" id=4]
+[ext_resource path="res://Assets/Scripts/PlayerController.gdns" type="Script" id=4]
 [ext_resource path="res://Prefabs/Generation/CrossedRooms.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Prefabs/Generation/ClosedRoom.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Prefabs/Generation/Rooms/1Room/T.tscn" type="PackedScene" id=7]
@@ -21,6 +21,7 @@
 [ext_resource path="res://Prefabs/Generation/Rooms/2Room/RB.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Prefabs/Generation/Rooms/2Room/LR.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Prefabs/Generation/Rooms/2Room/LB.tscn" type="PackedScene" id=21]
+
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 33.385

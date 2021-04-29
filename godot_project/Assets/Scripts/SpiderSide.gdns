@@ -3,11 +3,6 @@
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 
 [resource]
-<<<<<<< HEAD:godot_project/Assets/Prefabs/SpiderSide.gdns
 resource_name = "SpiderSide"
 class_name = "SpiderSide"
-=======
-resource_name = "ClosedRoom"
-class_name = "ClosedRoom"
->>>>>>> endl:godot_project/Prefabs/Generation/ClosedRoom.gdns
 library = ExtResource( 1 )

@@ -49,10 +49,10 @@ void godot::SpiderAI::reset_directions()
 void godot::SpiderAI::change_direction()
 {
 	reset_directions();
-	for (int i = 1; i < 5; ++i)
+	for (int i = 2; i < 6; ++i)
 	{
 		if (!enemy->get_child(i)->call("_get_on_body"))
-			directions.push_back(i);
+			directions.push_back(i - 1);
 	}
 	
 	Godot::print("size: " + String::num(directions.size()));
