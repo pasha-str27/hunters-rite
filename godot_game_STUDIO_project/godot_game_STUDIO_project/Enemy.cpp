@@ -85,7 +85,7 @@ void godot::Enemy::_take_damage(float damage)
 
 		timer->connect("timeout", this, "_destroy_enemy");
 
-		timer->set_wait_time(5);
+		timer->set_wait_time(10);
 		timer->start();
 	}		
 }
@@ -108,8 +108,6 @@ void godot::Enemy::_start_timer()
 void godot::Enemy::_on_timeout()
 {
 	timer->disconnect("timeout", this, "_on_timeout");
-
-	Godot::print("end");
 
 	if(is_visible())
 		ai->change_can_fight(true);
