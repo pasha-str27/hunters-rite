@@ -20,7 +20,7 @@
 #include <InputEvent.hpp>
 #include <TileMap.hpp>
 #include <Tree.hpp>
-#include <Array.hpp>
+#include <ProgressBar.hpp>
 
 #include "IPlayer.h"
 #include "PlayerData.h"

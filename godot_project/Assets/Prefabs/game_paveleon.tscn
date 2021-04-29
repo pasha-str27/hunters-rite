@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 [ext_resource path="res://Assets/Prefabs/bullet_prefab.tscn" type="PackedScene" id=2]
@@ -27,16 +27,27 @@ height = 53.4026
 [sub_resource type="CircleShape2D" id=5]
 radius = 17.3234
 
+[sub_resource type="CapsuleShape2D" id=6]
+radius = 7.16034
+height = 7.08337
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.894118, 0.298039, 0.298039, 1 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.447059, 0.447059, 0.447059, 1 )
+
 [node name="Node" type="Node"]
 
 [node name="Player1" type="KinematicBody2D" parent="." groups=[
 "player",
 ]]
-position = Vector2( -175.405, 23.5427 )
+position = Vector2( -175.431, 38.459 )
+scale = Vector2( 1.02023, 0.995667 )
 z_index = 26
 collision_mask = 2
 script = ExtResource( 8 )
-speed = 401.0
+speed = 120.0
 bullet_prefab = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
@@ -59,7 +70,7 @@ position = Vector2( -70.5948, 27.5255 )
 z_index = 26
 collision_mask = 2
 script = ExtResource( 8 )
-speed = 300.0
+speed = 150.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
 shape = SubResource( 1 )
@@ -92,6 +103,7 @@ texture = ExtResource( 11 )
 z_index = 27
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2/Area2D2"]
+position = Vector2( 0, -1.68179 )
 shape = SubResource( 5 )
 
 [node name="BulletConteiner" type="Node" parent="."]
@@ -100,9 +112,53 @@ shape = SubResource( 5 )
 
 [node name="BulletConteinerSpider" type="Node" parent="."]
 
-[node name="Spider" parent="." instance=ExtResource( 4 )]
-position = Vector2( 16, 48 )
-collision_mask = 0
+[node name="Sprite" type="Sprite" parent="Enemy/CollisionShape2D"]
+position = Vector2( 0, -0.749161 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 5 )
+
+[node name="HealthBar" type="ProgressBar" parent="Enemy"]
+margin_left = -15.0
+margin_top = -20.0
+margin_right = 15.0
+margin_bottom = -5.0
+rect_scale = Vector2( 1, 0.5 )
+custom_styles/fg = SubResource( 7 )
+custom_styles/bg = SubResource( 8 )
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="flower" parent="." instance=ExtResource( 4 )]
+
+[node name="Enemy2" type="KinematicBody2D" parent="." groups=[
+"enemy",
+]]
+position = Vector2( 113.557, 78.5777 )
+z_index = 25
+collision_layer = 4
+script = ExtResource( 9 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy2"]
+shape = SubResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="Enemy2/CollisionShape2D"]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 5 )
+
+[node name="HealthBar" type="ProgressBar" parent="Enemy2"]
+margin_left = -15.0
+margin_top = -20.0
+margin_right = 15.0
+margin_bottom = -5.0
+rect_scale = Vector2( 1, 0.5 )
+custom_styles/fg = SubResource( 7 )
+custom_styles/bg = SubResource( 8 )
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 0.0264893, 14.002 )

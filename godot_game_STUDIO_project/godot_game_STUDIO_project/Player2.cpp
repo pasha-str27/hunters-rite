@@ -24,6 +24,12 @@ void godot::Player2::_process_input()
 {
 	Vector2 dir = Vector2(0, 0);
 
+	//dashing
+	if (input_controller->is_action_just_released("Player2_dash"))
+	{
+		_get_object()->call("_start_dash_timer");
+	}
+
 	//move up
 	if (input_controller->is_action_just_pressed("Player2_fight"))
 	{
@@ -76,7 +82,7 @@ void godot::Player2::_fight(Node* node)
 	}
 
 	cast_to<Node2D>(_get_object()->get_child(1))->set_visible(true);
-	_get_object()->call("_start_timer");
+	_get_object()->call("_start_hit_timer");
 }
 
 void godot::Player2::_add_bullet(Node* node)

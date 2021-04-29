@@ -14,15 +14,10 @@ void godot::Enemy::_register_methods()
 	register_method("_add_bullet", &Enemy::_add_bullet);
 	register_method("_on_timeout", &Enemy::_on_timeout);
 	register_method("_start_timer", &Enemy::_start_timer);
-	register_method("_destroy_enemy", &Enemy::_destroy_enemy);
-	register_method("_remove_player1", &Enemy::_remove_player1);
-	register_method("_remove_player2", &Enemy::_remove_player2);
-	register_method("_remove_side", &Enemy::_remove_side);
-	register_method("_change_dir_after_time", &Enemy::_change_dir_after_time);
-	register_method("_start_timer_for_dir_change", &Enemy::_start_timer_for_dir_change);
+	register_method("_update_health_bar", &Enemy::_update_health_bar);
 
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
-	register_property<Enemy, float>("HP", &Enemy::HP, 99);
+	register_property<Enemy, float>("HP", &Enemy::HP, 100);
 }
 
 godot::Enemy::Enemy()
@@ -51,20 +46,7 @@ void godot::Enemy::_ready()
 
 	add_child(timer_change_dir);
 	add_child(timer);
-
-	if (is_in_group("flower"))
-	{
-		ai->_set_strategy(new FlowerAI(bullet, this));
-		return;
-	}
-		
-	if (is_in_group("spider"))
-	{
-		ai->_set_strategy(new SpiderAI(bullet, this));
-		return;
-	}
-
-	ai->_set_strategy(new SimpleEnemyAI);
+	_update_health_bar();
 }
 
 void godot::Enemy::_process(float delta)
@@ -75,6 +57,10 @@ void godot::Enemy::_process(float delta)
 void godot::Enemy::_take_damage(float damage)
 {
 	HP -= damage;
+
+	Godot::print("taking");
+
+	_update_health_bar();
 
 	if (HP <= 0)
 	{
@@ -109,50 +95,12 @@ void godot::Enemy::_on_timeout()
 {
 	timer->disconnect("timeout", this, "_on_timeout");
 
-	if(is_visible())
-		ai->change_can_fight(true);
+	ai->change_can_fight(true);
 }
 
-void godot::Enemy::_destroy_enemy()
+void godot::Enemy::_update_health_bar()
 {
-	timer->disconnect("timeout", this, "_destroy_enemy");
-	Enemies::get_singleton()->_remove_enemy(this);
-
-	if(is_in_group("flower"))
-		get_node("/root/Node2D/Node/BulletConteinerFlower")->queue_free();
-
-	if (is_in_group("spider"))
-		get_node("/root/Node2D/Node/BulletConteinerSpider")->queue_free();
-
-	queue_free();
-}
-
-void godot::Enemy::_remove_player1()
-{
-	ai->_delete_player1();
-}
-
-void godot::Enemy::_remove_player2()
-{
-	ai->_delete_player2();
-}
-
-void godot::Enemy::_remove_side(int side)
-{
-	ai->_remove_side(side);
-}
-
-void godot::Enemy::_start_timer_for_dir_change()
-{
-	if (!timer_change_dir->is_connected("timeout", this, "_change_dir_after_time"))
-	{
-		timer_change_dir->connect("timeout", this, "_change_dir_after_time");
-		timer_change_dir->start(0.01);
-	}
-}
-
-void godot::Enemy::_change_dir_after_time()
-{
-	timer_change_dir->disconnect("timeout", this, "_change_dir_after_time");
-	ai->_change_dir_after_time();
+	auto health_bar = cast_to<ProgressBar>(get_child(1));
+	if (health_bar != nullptr)
+		health_bar->set_value(HP);
 }

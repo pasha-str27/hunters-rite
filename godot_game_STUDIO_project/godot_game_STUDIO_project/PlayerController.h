@@ -23,8 +23,10 @@ namespace godot
 		void _init();
 		void _input(Input* event);
 		void _ready();
-		void _start_timer();
-		void _on_timeout();
+		void _start_hit_timer();
+		void _on_hit_timeout();
+		void _start_dash_timer();
+		void _on_dash_timeout();
 		bool _can_fight();
 		void _set_enemy(Node* enemy = nullptr);
 		void _add_bullet(Node* node);

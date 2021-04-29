@@ -63,11 +63,6 @@ namespace godot
 			void _add_bullet(Node*bullet);
 			void _start_timer();
 			void _on_timeout();
-			void _destroy_enemy();
-			void _remove_player1();
-			void _remove_player2();
-			void _remove_side(int side);
-			void _change_dir_after_time();
-			void _start_timer_for_dir_change();
+			void _update_health_bar();
 	};
 }
