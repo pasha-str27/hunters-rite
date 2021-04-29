@@ -1,35 +1,35 @@
 #ifndef HEADERFILE_H
 #define HEADERFILE_H
-#include "IPlayer.h"
+#include "headers.h"
 #endif
-
-#include <Vector2.hpp>
-#include <Input.hpp>
-#include <Sprite.hpp>
 
 namespace godot
 {
-	class Player2 : public godot::IPlayer, public KinematicBody2D
+	class Player2 : public PlayerData
 	{
 		static Player2* singleton;
-		Node2D* object;
-		int speed;
-		Vector2 dir;
-		Input* input_controller;
+		Node* current_enemy;
 
 	private:
-		//GODOT_CLASS(Player1, KinematicBody2D);
-		Player2(Node2D* obj);
+		Player2(Node2D* obj, Ref<PackedScene> bullet=0);
 
 	public:
 		~Player2();
-		void move();
-		void process_input();
-		static Player2* get_singleton(Node2D* obj)
+		void _move();
+		void _process_input();
+		void _fight(Node* node = nullptr);
+		void _add_bullet(Node* node = nullptr);
+		void _set_enemy(Node* enemy=nullptr);
+		void _take_damage(float damage);
+
+		static Player2* get_singleton(Node2D* object, Ref<PackedScene>bullet = 0)
 		{
 			if (singleton == nullptr)
-				singleton = new Player2(obj);
+				singleton = new Player2(object);
+
 			return singleton;
 		}
+
+		void _set_speed(float speed);
 	};
 }
