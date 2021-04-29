@@ -9,7 +9,6 @@ namespace godot
 		virtual void _process_input() = 0;
 		virtual void _move() = 0;
 		virtual void _set_speed(float speed) = 0;
-		virtual float _get_speed() = 0;
 		virtual void _fight(Node* node = nullptr) = 0;
 		virtual void _add_bullet(Node* node = nullptr) = 0;
 		virtual void _change_can_fight(bool value) = 0;
