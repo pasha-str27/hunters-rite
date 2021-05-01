@@ -22,6 +22,7 @@ extents = Vector2( 4.89366, 4.97602 )
 position = Vector2( 112, -16 )
 z_index = 25
 collision_layer = 4
+collision_mask = 513
 script = ExtResource( 3 )
 bullet = ExtResource( 2 )
 
@@ -45,6 +46,7 @@ region_rect = Rect2( 2, 0, 32, 31 )
 
 [node name="Area2D2" type="Area2D" parent="."]
 position = Vector2( 0.486, -32.703 )
+scale = Vector2( 1.5, 1.5 )
 collision_mask = 17
 script = ExtResource( 4 )
 side = 1
@@ -54,6 +56,7 @@ shape = SubResource( 3 )
 
 [node name="Area2D4" type="Area2D" parent="."]
 position = Vector2( -31.514, -0.703 )
+scale = Vector2( 1.5, 1.5 )
 collision_mask = 17
 script = ExtResource( 4 )
 side = 2
@@ -63,6 +66,7 @@ shape = SubResource( 3 )
 
 [node name="Area2D5" type="Area2D" parent="."]
 position = Vector2( 32.486, -0.703 )
+scale = Vector2( 1.5, 1.5 )
 collision_mask = 17
 script = ExtResource( 4 )
 side = 3
@@ -72,6 +76,7 @@ shape = SubResource( 3 )
 
 [node name="Area2D7" type="Area2D" parent="."]
 position = Vector2( 0.486, 31.297 )
+scale = Vector2( 1.5, 1.5 )
 collision_mask = 17
 script = ExtResource( 4 )
 side = 4

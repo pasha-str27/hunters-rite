@@ -44,6 +44,16 @@ void godot::EnemyAIContext::set_player2(Node2D* player2)
 	this->player2 = player2;
 }
 
+Node2D* godot::EnemyAIContext::get_player1()
+{
+	return player1;
+}
+
+Node2D* godot::EnemyAIContext::get_player2()
+{
+	return player2;
+}
+
 void godot::EnemyAIContext::_add_bullet(Node* bullet)
 {
 	strategy->_add_bullet(bullet);
@@ -56,11 +66,13 @@ void godot::EnemyAIContext::change_can_fight(bool value)
 
 void godot::EnemyAIContext::_delete_player1()
 {
+	strategy->_delete_player1(player1, player2);
 	player1 = nullptr;
 }
 
 void godot::EnemyAIContext::_delete_player2()
 {
+	strategy->_delete_player2(player1, player2);
 	player2 = nullptr;
 }
 

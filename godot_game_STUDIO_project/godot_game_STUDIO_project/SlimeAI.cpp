@@ -41,9 +41,16 @@ Vector2 godot::SlimeAI::directions_swich(int value)
 	return direction;
 }
 
-godot::SlimeAI::SlimeAI(Ref<PackedScene>& bullet, Node2D* node_tmp)
+void godot::SlimeAI::_delete_player1(Node2D* player1, Node2D* player2)
 {
-	max_bullet_count = 5;
+}
+
+void godot::SlimeAI::_delete_player2(Node2D* player1, Node2D* player2)
+{
+}
+
+godot::SlimeAI::SlimeAI(Ref<PackedScene>& bullet, Node2D* node_tmp, Node2D* player1, Node2D* player2)
+{
 	enemy = node_tmp;
 	can_move = true;
 	is_cheking = false;

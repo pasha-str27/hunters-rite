@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 [ext_resource path="res://Assets/Prefabs/bullet_prefab.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Prefabs/TileMaps.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Prefabs/Slime.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Prefabs/Bat.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Sprites/skull.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Scripts/PlayerController.gdns" type="Script" id=8]
 [ext_resource path="res://CameraController.gdns" type="Script" id=10]
@@ -71,6 +71,7 @@ texture = ExtResource( 6 )
 [node name="Area2D" type="Area2D" parent="Player2"]
 visible = false
 z_index = -26
+collision_layer = 512
 collision_mask = 48
 script = SubResource( 3 )
 
@@ -108,7 +109,7 @@ script = ExtResource( 10 )
 
 [node name="TileMaps" parent="." instance=ExtResource( 3 )]
 
-[node name="Slime" parent="." instance=ExtResource( 4 )]
+[node name="Bat" parent="." instance=ExtResource( 4 )]
 
 [connection signal="body_entered" from="Player1/Area2D" to="Player1" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Player2/Area2D" to="Player2/Area2D" method="_on_Area2D_body_entered"]

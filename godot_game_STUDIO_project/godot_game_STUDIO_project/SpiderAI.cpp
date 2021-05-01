@@ -5,7 +5,7 @@
 
 using namespace godot;
 
-godot::SpiderAI::SpiderAI(Ref<PackedScene>& bullet, Node2D* node_tmp)
+godot::SpiderAI::SpiderAI(Ref<PackedScene>& bullet, Node2D* node_tmp, Node2D* player1, Node2D* player2)
 {
 	max_bullet_count = 5;
 	enemy = node_tmp;
@@ -137,6 +137,14 @@ void godot::SpiderAI::_fight(Node2D* player1, Node2D* player2)
 
 		bullets.pop_back();
 	}
+}
+
+void godot::SpiderAI::_delete_player1(Node2D* player1, Node2D* player2)
+{
+}
+
+void godot::SpiderAI::_delete_player2(Node2D* player1, Node2D* player2)
+{
 }
 
 void godot::SpiderAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2D* player2)

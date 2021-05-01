@@ -71,7 +71,11 @@ void godot::Enemy::_ready()
 		return;
 	}
 
-	ai->_set_strategy(new SimpleEnemyAI);
+	if (is_in_group("bat"))
+	{
+		ai->_set_strategy(new BatAI(bullet, this, ai->get_player1(), ai->get_player2()));
+		return;
+	}
 }
 
 void godot::Enemy::_process(float delta)
@@ -81,6 +85,7 @@ void godot::Enemy::_process(float delta)
 
 void godot::Enemy::_take_damage(float damage)
 {
+	Godot::print("fff");
 	HP -= damage;
 
 	if (HP <= 0)
@@ -166,7 +171,7 @@ void godot::Enemy::_start_timer_for_dir_change()
 void godot::Enemy::_on_Area2D_body_entered(Node* node)
 {
 	if (node->is_in_group("player"))
-		node->call("_take_damage", 50,false);
+		node->call("_take_damage", 20, false);
 }
 
 void godot::Enemy::_change_dir_after_time()
