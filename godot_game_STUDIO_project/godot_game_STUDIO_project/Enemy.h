@@ -69,5 +69,6 @@ namespace godot
 			void _remove_side(int side);
 			void _change_dir_after_time();
 			void _start_timer_for_dir_change();
+			void _on_Area2D_body_entered(Node* node);
 	};
 }

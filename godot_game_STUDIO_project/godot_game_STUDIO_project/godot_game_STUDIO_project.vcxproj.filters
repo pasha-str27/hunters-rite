@@ -16,7 +16,7 @@
     <ClCompile Include="ProducePlayer2.cpp" />
     <ClCompile Include="SimpleEnemyAI.cpp" />
     <ClCompile Include="SpiderAI.cpp" />
-    <ClCompile Include="SpiderSide.cpp" />
+    <ClCompile Include="EnemySideChecker.cpp" />
     <ClCompile Include="Spike.cpp" />
     <ClCompile Include="Sword.cpp" />
     <ClCompile Include="SpawnEnemyController.cpp" />
@@ -39,7 +39,7 @@
     <ClInclude Include="ProducePlayer2.h" />
     <ClInclude Include="SimpleEnemyAI.h" />
     <ClInclude Include="SpiderAI.h" />
-    <ClInclude Include="SpiderSide.h" />
+    <ClInclude Include="EnemySideChecker.h" />
     <ClInclude Include="Spike.h" />
     <ClInclude Include="Sword.h" />
     <ClInclude Include="SpawnEnemyController.h" />

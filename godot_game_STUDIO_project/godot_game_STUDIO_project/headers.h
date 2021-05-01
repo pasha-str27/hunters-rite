@@ -38,7 +38,7 @@
 #include "Spike.h"
 
 #include "SpiderAI.h"
-#include "SpiderSide.h"
+#include "EnemySideChecker.h"
 #include "Enemies.h"
 //#include "Enemy.h"
 #include "SimpleEnemyAI.h"

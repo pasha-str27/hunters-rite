@@ -13,8 +13,6 @@ namespace godot
 		bool can_move;
 		std::vector<int> directions;
 
-		std::vector<int> tmp_vector;
-
 		Vector2 dir;
 		bool is_cheking;
 
@@ -28,5 +26,6 @@ namespace godot
 		void _remove_side(int side);
 		void _change_dir_after_time();
 		void _fight(Node2D* player1, Node2D* player2);
+		Vector2 directions_swich(int value);
 	};
 }

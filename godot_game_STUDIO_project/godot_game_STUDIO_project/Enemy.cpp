@@ -20,6 +20,7 @@ void godot::Enemy::_register_methods()
 	register_method("_remove_side", &Enemy::_remove_side);
 	register_method("_change_dir_after_time", &Enemy::_change_dir_after_time);
 	register_method("_start_timer_for_dir_change", &Enemy::_start_timer_for_dir_change);
+	register_method("_on_Area2D_body_entered", &Enemy::_on_Area2D_body_entered);
 
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
@@ -121,7 +122,6 @@ void godot::Enemy::_on_timeout()
 
 void godot::Enemy::_destroy_enemy()
 {
-
 	auto health_bar = cast_to<ProgressBar>(get_child(0));
 	if (health_bar != nullptr)
 		health_bar->set_value(HP);
@@ -163,9 +163,14 @@ void godot::Enemy::_start_timer_for_dir_change()
 	}
 }
 
+void godot::Enemy::_on_Area2D_body_entered(Node* node)
+{
+	if (node->is_in_group("player"))
+		node->call("_take_damage", 50,false);
+}
+
 void godot::Enemy::_change_dir_after_time()
 {
 	timer_change_dir->disconnect("timeout", this, "_change_dir_after_time");
 	ai->_change_dir_after_time();
 }
-

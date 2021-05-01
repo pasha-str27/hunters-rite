@@ -13,8 +13,6 @@ namespace godot
 		bool can_move;
 		std::vector<int> directions;
 
-		std::vector<int> tmp_vector;
-
 		Vector2 dir;
 		bool is_cheking;
 
