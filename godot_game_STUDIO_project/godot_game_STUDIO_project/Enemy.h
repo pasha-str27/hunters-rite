@@ -83,6 +83,7 @@ namespace godot
 			void _set_angry(Node* node);
 			void _set_angry_on_code(bool value);
 			bool _get_angry();
+			void _stop_timer();
 			void _change_angry_on_timeout();
 	};
 }

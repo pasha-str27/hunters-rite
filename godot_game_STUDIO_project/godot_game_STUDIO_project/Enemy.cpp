@@ -24,6 +24,7 @@ void godot::Enemy::_register_methods()
 	register_method("_set_angry", &Enemy::_set_angry);
 	register_method("_set_angry_on_code", &Enemy::_set_angry_on_code);
 	register_method("_get_angry", &Enemy::_get_angry);
+	register_method("_stop_timer", &Enemy::_stop_timer);
 	register_method("_change_angry_on_timeout", &Enemy::_change_angry_on_timeout);
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
@@ -191,7 +192,6 @@ void godot::Enemy::_set_angry(Node* node)
 		{
 			ai->_set_speed(0);
 			entered = true;
-			Godot::print("stoped");
 			if (!timer_change_dir->is_connected("timeout", this, "_change_angry_on_timeout"))
 			{
 				timer_change_dir->connect("timeout", this, "_change_angry_on_timeout");
@@ -200,16 +200,7 @@ void godot::Enemy::_set_angry(Node* node)
 			return;
 		}
 
-		Godot::print("exited");
-		ai->_set_speed(100);
-		is_angry = false;
-		entered = false;
-
-		timer_change_dir->stop();
-		timer_change_dir->disconnect("timeout", this, "_change_angry_on_timeout");
-
-			
-		Godot::print("unstoped");
+		_stop_timer();
 	}
 }
 
@@ -223,12 +214,24 @@ void godot::Enemy::_change_angry_on_timeout()
 	timer_change_dir->disconnect("timeout", this, "_change_angry_on_timeout");
 	ai->_set_speed(200);
 	is_angry = true;
-	Godot::print("atack");
 }
 
 bool godot::Enemy::_get_angry()
 {
 	return is_angry;
+}
+
+void godot::Enemy::_stop_timer()
+{
+	ai->_set_speed(100);
+	is_angry = false;
+	entered = false;
+
+	if (timer_change_dir->is_connected("timeout", this, "_change_angry_on_timeout"))
+	{
+		timer_change_dir->stop();
+		timer_change_dir->disconnect("timeout", this, "_change_angry_on_timeout");
+	}
 }
 
 void godot::Enemy::_change_dir_after_time()

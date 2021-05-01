@@ -60,8 +60,7 @@ void godot::BatAI::_delete_player1(Node2D* player1, Node2D* player2)
 {
 	if (current_player == String("player1") && player2 != nullptr)
 	{
-		speed = 100;
-		enemy->call("_set_angry_on_code", false);
+		enemy->call("_stop_timer");
 		current_goal = player2;
 		current_player = "player2";
 		dir = (current_goal->get_global_position() - enemy->get_global_position()).normalized();
@@ -72,8 +71,7 @@ void godot::BatAI::_delete_player2(Node2D* player1, Node2D* player2)
 {
 	if (current_player == String("player2") && player1 != nullptr)
 	{
-		speed = 100;
-		enemy->call("_set_angry_on_code", false);
+		enemy->call("_stop_timer");
 		current_goal = player1;
 		current_player = "player1";
 		dir = (current_goal->get_global_position() - enemy->get_global_position()).normalized();
