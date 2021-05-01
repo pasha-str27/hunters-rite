@@ -102,16 +102,16 @@ void godot::PlayerController::_process(float delta)
 		current_player->_move();
 }
 
-void godot::PlayerController::_take_damage(float damage)
+void godot::PlayerController::_take_damage(float damage, bool is_spike)
 {
-	current_player->_take_damage(damage);
+	current_player->_take_damage(damage, is_spike);
 }
 
 void godot::PlayerController::_on_Area2D_body_entered(Node* node)
 {
 	if (node->is_in_group("spike"))
 	{
-		current_player->_take_damage(node->call("_get_damage"));
+		current_player->_take_damage(node->call("_get_damage"), true);
 	}		
 }
 

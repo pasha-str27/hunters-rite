@@ -144,9 +144,9 @@ void godot::Player1::_add_bullet(Node* node)
 	available_bullets.push_back(cast_to<Node2D>(node));
 }
 
-void  godot::Player1::_take_damage(float damage)
+void  godot::Player1::_take_damage(float damage, bool is_spike)
 {
-	PlayerData::_take_damage(damage);
+	PlayerData::_take_damage(damage, is_spike);
 
 	if (_get_HP() <= 0)
 	{

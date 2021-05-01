@@ -64,6 +64,12 @@ void godot::Enemy::_ready()
 		return;
 	}
 
+	if (is_in_group("slime"))
+	{
+		ai->_set_strategy(new SlimeAI(bullet, this));
+		return;
+	}
+
 	ai->_set_strategy(new SimpleEnemyAI);
 }
 

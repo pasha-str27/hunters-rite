@@ -51,3 +51,4 @@
 #include "ClosedRoom.h"
 #include "Door.h"
 #include "SpawnEnemyController.h"
+#include "SlimeAI.h"

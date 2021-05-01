@@ -57,11 +57,12 @@ godot::Node2D* godot::PlayerData::_get_object()
 	return object;
 }
 
-void godot::PlayerData::_take_damage(float damage)
+void godot::PlayerData::_take_damage(float damage, bool is_spike)
 {
 	HP -= damage;
 
-	object->set_global_position(object->get_global_position() - dir.normalized() * damage*5);
+	if(is_spike)
+		object->set_global_position(object->get_global_position() - dir.normalized() * damage*5);
 }
 
 void godot::PlayerData::_change_can_fight(bool value)
