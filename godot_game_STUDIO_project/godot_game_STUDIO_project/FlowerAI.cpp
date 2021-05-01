@@ -57,6 +57,15 @@ void godot::FlowerAI::_delete_player2(Node2D* player1, Node2D* player2)
 {
 }
 
+String godot::FlowerAI::_get_current_player()
+{
+	return String();
+}
+
+void godot::FlowerAI::_set_speed(float value)
+{
+}
+
 void godot::FlowerAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2D* player2)
 {
 	enemy->rotate(delta / 3);

@@ -85,3 +85,13 @@ void godot::EnemyAIContext::_change_dir_after_time()
 {
 	strategy->_change_dir_after_time();
 }
+
+String godot::EnemyAIContext::_get_current_player()
+{
+	return strategy->_get_current_player();
+}
+
+void godot::EnemyAIContext::_set_speed(float value)
+{
+	strategy->_set_speed(value);
+}

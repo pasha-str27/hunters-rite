@@ -11,6 +11,7 @@ godot::SpiderAI::SpiderAI(Ref<PackedScene>& bullet, Node2D* node_tmp, Node2D* pl
 	enemy = node_tmp;
 	can_move = true;
 	is_cheking = false;
+	speed = 400;
 
 	auto node = node_tmp->get_node("/root/Node2D/Node/BulletConteinerSpider");
 
@@ -147,12 +148,22 @@ void godot::SpiderAI::_delete_player2(Node2D* player1, Node2D* player2)
 {
 }
 
+String godot::SpiderAI::_get_current_player()
+{
+	return String();
+}
+
+void godot::SpiderAI::_set_speed(float value)
+{
+	speed = value;
+}
+
 void godot::SpiderAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2D* player2)
 {
 	if (!can_move)
 		return;
 
-	cast_to<KinematicBody2D>(enemy)->move_and_slide(dir * 400);
+	cast_to<KinematicBody2D>(enemy)->move_and_slide(dir * speed);
 
 	if (is_cheking)
 		return;

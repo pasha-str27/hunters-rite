@@ -22,5 +22,7 @@ namespace godot
 		void _change_dir_after_time();
 		void _delete_player1(Node2D* player1 = nullptr, Node2D* player2 = nullptr);
 		void _delete_player2(Node2D* player1 = nullptr, Node2D* player2 = nullptr);
+		String _get_current_player();
+		void _set_speed(float value);
 	};
 }

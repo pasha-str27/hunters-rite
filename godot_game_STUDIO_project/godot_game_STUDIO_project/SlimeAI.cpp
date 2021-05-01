@@ -49,11 +49,22 @@ void godot::SlimeAI::_delete_player2(Node2D* player1, Node2D* player2)
 {
 }
 
+String godot::SlimeAI::_get_current_player()
+{
+	return String();
+}
+
+void godot::SlimeAI::_set_speed(float value)
+{
+	speed = value;
+}
+
 godot::SlimeAI::SlimeAI(Ref<PackedScene>& bullet, Node2D* node_tmp, Node2D* player1, Node2D* player2)
 {
 	enemy = node_tmp;
 	can_move = true;
 	is_cheking = false;
+	speed = 400;
 
 	change_direction();
 }
@@ -121,7 +132,7 @@ void godot::SlimeAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2
 	if (!can_move)
 		return;
 
-	cast_to<KinematicBody2D>(enemy)->move_and_slide(dir * 400);
+	cast_to<KinematicBody2D>(enemy)->move_and_slide(dir * speed);
 
 	if (is_cheking)
 		return;

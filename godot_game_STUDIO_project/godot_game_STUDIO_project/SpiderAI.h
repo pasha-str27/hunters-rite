@@ -15,6 +15,7 @@ namespace godot
 
 		Vector2 dir;
 		bool is_cheking;
+		float speed;
 
 	public:
 		SpiderAI(Ref<PackedScene>& bullet, Node2D* node, Node2D* player1 = nullptr, Node2D* player2 = nullptr);
@@ -28,5 +29,7 @@ namespace godot
 		void _fight(Node2D *player1, Node2D* player2);
 		void _delete_player1(Node2D* player1 = nullptr, Node2D* player2 = nullptr);
 		void _delete_player2(Node2D* player1 = nullptr, Node2D* player2 = nullptr);
+		String _get_current_player();
+		void _set_speed(float value);
 	};
 }

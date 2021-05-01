@@ -7,6 +7,7 @@ godot::BatAI::BatAI(Ref<PackedScene>& bullet, Node2D* node_tmp, Node2D* player1,
 {
 	enemy = node_tmp;
 	can_move = true;
+	speed = 100;
 
 	RandomNumberGenerator* rng = RandomNumberGenerator::_new();
 
@@ -59,6 +60,8 @@ void godot::BatAI::_delete_player1(Node2D* player1, Node2D* player2)
 {
 	if (current_player == String("player1") && player2 != nullptr)
 	{
+		speed = 100;
+		enemy->call("_set_angry_on_code", false);
 		current_goal = player2;
 		current_player = "player2";
 		dir = (current_goal->get_global_position() - enemy->get_global_position()).normalized();
@@ -69,22 +72,28 @@ void godot::BatAI::_delete_player2(Node2D* player1, Node2D* player2)
 {
 	if (current_player == String("player2") && player1 != nullptr)
 	{
+		speed = 100;
+		enemy->call("_set_angry_on_code", false);
 		current_goal = player1;
 		current_player = "player1";
 		dir = (current_goal->get_global_position() - enemy->get_global_position()).normalized();
 	}
 }
 
+godot::String godot::BatAI::_get_current_player()
+{
+	return current_player;
+}
+
+void godot::BatAI::_set_speed(float value)
+{
+	speed = value;
+}
+
 void godot::BatAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2D* player2)
 {
-	if (!can_move)
-		return;
+	if(!enemy->call("_get_angry"))
+		dir = (current_goal->get_global_position() - enemy->get_global_position()).normalized();
 
-	if (current_goal == nullptr)
-		Godot::print("error");
-
-
-	dir = (current_goal->get_global_position() - enemy->get_global_position()).normalized();
-
-	cast_to<KinematicBody2D>(enemy)->move_and_slide(dir * 100);
+	cast_to<KinematicBody2D>(enemy)->move_and_slide(dir * speed);
 }
