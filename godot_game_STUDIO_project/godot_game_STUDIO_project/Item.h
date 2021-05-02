@@ -3,11 +3,15 @@
 #include "headers.h"
 #endif
 
+#include <AnimationPlayer.hpp>
+
 namespace godot
 {
 	class Item : public Node2D
 	{
 		GODOT_CLASS(Item, Node2D);
+
+		AnimationPlayer* animator = nullptr;
 
 		float speed;
 		float HP;

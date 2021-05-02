@@ -18,6 +18,8 @@ namespace godot {
 		void _init();
 		void _ready();
 
+		void _prepare_spawn();
+
 		
 		SpawnEnemyController();
 		~SpawnEnemyController();
