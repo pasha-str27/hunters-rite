@@ -5,7 +5,7 @@
 
 using namespace godot;
 
-godot::FlowerAI::FlowerAI(Ref<PackedScene>& bullet, Node2D *node_tmp)
+godot::FlowerAI::FlowerAI(Ref<PackedScene>& bullet, Node2D *node_tmp, Node2D* player1, Node2D* player2)
 {
 	max_bullet_count = 5 * 8;
 	enemy = node_tmp;
@@ -46,6 +46,23 @@ void godot::FlowerAI::_remove_side(int side)
 }
 
 void godot::FlowerAI::_change_dir_after_time()
+{
+}
+
+void godot::FlowerAI::_delete_player1(Node2D* player1, Node2D* player2)
+{
+}
+
+void godot::FlowerAI::_delete_player2(Node2D* player1, Node2D* player2)
+{
+}
+
+String godot::FlowerAI::_get_current_player()
+{
+	return String();
+}
+
+void godot::FlowerAI::_set_speed(float value)
 {
 }
 

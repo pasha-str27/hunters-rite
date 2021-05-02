@@ -93,9 +93,9 @@ void godot::Player2::_set_speed(float speed)
 	PlayerData::_set_speed(speed);
 }
 
-void godot::Player2::_take_damage(float damage)
+void godot::Player2::_take_damage(float damage, bool is_spike)
 {
-	PlayerData::_take_damage(damage);
+	PlayerData::_take_damage(damage, is_spike);
 
 	if (_get_HP() <= 0)
 	{

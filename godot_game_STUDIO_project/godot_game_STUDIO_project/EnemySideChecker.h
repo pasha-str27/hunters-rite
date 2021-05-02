@@ -5,11 +5,12 @@
 
 namespace godot
 {
-	class SpiderSide : public Area2D
+	class EnemySideChecker : public Area2D
 	{
-		GODOT_CLASS(SpiderSide, Area2D);
+		GODOT_CLASS(EnemySideChecker, Area2D);
 		int side;
 		bool is_in_boby;
+		Node2D* current_node;
 
 	public:
 		static void _register_methods();
@@ -18,5 +19,7 @@ namespace godot
 		void _init();
 		bool _get_on_body();
 		void _ready();
+		Node2D* _get_current_node();
+		Vector2 directions_swich(int value);
 	};
 }

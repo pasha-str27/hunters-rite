@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Prefabs/Enemies/TestGhost.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Scripts/SpawnEnemyController.gdns" type="Script" id=2]
+[ext_resource path="res://Assets/Scripts/CameraController.gdns" type="Script" id=3]
+
+
+
+[node name="Camera2D" type="Camera2D"]
+position = Vector2( 0, 15.1453 )
+current = true
+zoom = Vector2( 0.75, 0.75 )
+script = ExtResource( 3 )
+
+[node name="EnemySpawner" type="Node2D" parent="."]
+script = ExtResource( 2 )
+Enemies = [ ExtResource( 1 ) ]
+"Enemies Count" = 3
+
+[node name="SpawnPoints" type="Node2D" parent="EnemySpawner"]
+
+[node name="EnemySpawner" type="Node2D" parent="EnemySpawner/SpawnPoints"]
+position = Vector2( -379.977, -139.627 )
+
+[node name="EnemySpawner2" type="Node2D" parent="EnemySpawner/SpawnPoints"]
+position = Vector2( 364.684, -91.4033 )
+
+[node name="EnemySpawner3" type="Node2D" parent="EnemySpawner/SpawnPoints"]
+position = Vector2( -1.2525, -116.645 )
+
+[node name="EnemySpawner4" type="Node2D" parent="EnemySpawner/SpawnPoints"]
+position = Vector2( 203.475, 194.645 )
+
+[node name="EnemySpawner5" type="Node2D" parent="EnemySpawner/SpawnPoints"]
+position = Vector2( -173.155, 193.089 )
