@@ -3,7 +3,6 @@
 [ext_resource path="res://Assets/Prefabs/game_paveleon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Prefabs/Items/BadTusk.tscn" type="PackedScene" id=2]
 
-
 [node name="Node2D" type="Node2D"]
 
 [node name="Node" parent="." instance=ExtResource( 1 )]

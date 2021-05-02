@@ -44,8 +44,6 @@ tracks/1/keys = {
 script = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -3.70322 )
-scale = Vector2( 1.07406, 1.07406 )
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" parent="Sprite" instance=ExtResource( 1 )]

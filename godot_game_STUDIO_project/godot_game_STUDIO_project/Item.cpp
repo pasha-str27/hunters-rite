@@ -3,6 +3,7 @@
 #include "headers.h"
 #endif
 
+
 using namespace godot;
 
 void godot::Item::_register_methods()
@@ -24,6 +25,12 @@ godot::Item::~Item()
 void godot::Item::_ready()
 {
 	Godot::print("vvvv");
+	//	get animator
+	animator = cast_to<AnimationPlayer>(get_child(0)->get_child(0));
+	//	start animation
+	animator->play("idle");
+	//	stop animation
+	//animator->stop();
 }
 
 void godot::Item::_on_Area2D_body_entered(Node* node)
