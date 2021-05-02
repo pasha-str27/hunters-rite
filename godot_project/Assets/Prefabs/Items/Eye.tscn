@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ItemAnimator.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Sprites/Items/eye.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Scripts/Item.gdns" type="Script" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -36,6 +37,13 @@ tracks/1/keys = {
 
 [node name="Eye" type="Node2D"]
 position = Vector2( -144.85, -51.1937 )
+script = ExtResource( 3 )
+speed = 0.0
+HP = 0.0
+damage = 20.0
+attack_speed_delta = 0.0
+number_to_next_item = 0
+decrease_attack_radius = true
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -1.89171 )
@@ -50,3 +58,5 @@ anims/idle = SubResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2( 1.8, 1.8 )
 shape = SubResource( 2 )
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

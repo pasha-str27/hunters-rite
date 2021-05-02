@@ -16,6 +16,8 @@ namespace godot
 		Timer* timer;
 		bool can_move;
 
+		int number_to_next_item;
+		float attack_speed_delta;
 	public:
 		static void _register_methods();
 		PlayerController();
@@ -33,5 +35,17 @@ namespace godot
 		void _on_Area2D_body_entered(Node* node);
 		void _change_can_moving(bool value);
 		void change_can_moving_timeout();
+		void _decrease_attack_radius();
+		void _encrease_attack_radius();
+		void _set_number_to_next_item(int value);
+		int _get_number_to_next_item();
+		void _set_speed(float value);
+		float _get_speed();
+		void _set_HP(float value);
+		float _get_HP();
+		void _set_damage(float value);
+		float _get_damage();
+		void _set_attack_speed_delta(float value);
+		float _get_attack_speed_delta();
 	};
 }

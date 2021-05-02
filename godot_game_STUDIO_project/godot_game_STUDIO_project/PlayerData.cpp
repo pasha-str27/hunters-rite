@@ -10,6 +10,7 @@ godot::PlayerData::PlayerData(Node2D* object, Ref<PackedScene> bullet)
 	this->object = object;
 	dir = Vector2(0, 0);
 	HP = 100;
+	damage = 25;
 	if(input_controller==nullptr)
 		input_controller = Input::get_singleton();
 }
@@ -34,7 +35,7 @@ void godot::PlayerData::_move()
 
 void godot::PlayerData::_set_speed(float speed)
 {
-	this->speed = speed;
+	this->speed = speed > 0 ? speed : 0;
 }
 
 float godot::PlayerData::_get_speed()
@@ -82,5 +83,15 @@ float godot::PlayerData::_get_HP()
 
 void godot::PlayerData::_set_HP(float HP)
 {
-	this->HP = HP;
+	this->HP = HP > 0 ? HP : 0;
+}
+
+float godot::PlayerData::_get_damage()
+{
+	return damage;
+}
+
+void godot::PlayerData::_set_damage(float value)
+{
+	damage = value > 0 ? value : 0;
 }

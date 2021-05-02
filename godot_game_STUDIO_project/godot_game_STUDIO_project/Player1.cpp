@@ -25,6 +25,18 @@ godot::Player1::~Player1()
 	available_bullets.clear();
 }
 
+void godot::Player1::_set_HP(float value)
+{
+	PlayerData::_set_HP(value);
+
+	if (_get_HP() <= 0)
+	{
+		_get_object()->get_node("/root/Node2D/Node/BulletConteiner")->queue_free();
+		Enemies::get_singleton()->_remove_player1();
+		_get_object()->queue_free();
+	}
+}
+
 void godot::Player1::_move()
 {
 	PlayerData::_move();
@@ -124,6 +136,8 @@ void godot::Player1::_fight(Node* node)
 		node->add_child(new_obj);
 		available_bullets.push_back(cast_to<Node2D>(new_obj));
 	}
+
+	available_bullets[available_bullets.size() - 1]->call("_set_damage", _get_damage());
 
 	available_bullets.pop_back();
 
