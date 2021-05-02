@@ -3,45 +3,32 @@
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CameraController.cpp" />
-    <ClCompile Include="ClosedRoom.cpp" />
-    <ClCompile Include="CustomExtensions.cpp" />
-    <ClCompile Include="Destroyer.cpp" />
-    <ClCompile Include="Door.cpp" />
     <ClCompile Include="Enemies.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyAIContext.cpp" />
     <ClCompile Include="FlowerAI.cpp" />
-    <ClCompile Include="Generation.cpp" />
     <ClCompile Include="GodotLibrary.cpp" />
-    <ClCompile Include="IPlayer.cpp" />
     <ClCompile Include="Player1.cpp" />
     <ClCompile Include="Player2.cpp" />
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="PlayerData.cpp" />
     <ClCompile Include="ProducePlayer1.cpp" />
     <ClCompile Include="ProducePlayer2.cpp" />
-    <ClCompile Include="Room.cpp" />
-    <ClCompile Include="SpawnEnemyController.cpp" />
-    <ClCompile Include="SpawnPointChecker.cpp" />
     <ClCompile Include="SpiderAI.cpp" />
+    <ClCompile Include="EnemySideChecker.cpp" />
     <ClCompile Include="Spike.cpp" />
     <ClCompile Include="Sword.cpp" />
-    <ClCompile Include="BatAI.cpp" />
-    <ClCompile Include="EnemySideChecker.cpp" />
-    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="SpawnEnemyController.cpp" />
     <ClCompile Include="SlimeAI.cpp" />
+    <ClCompile Include="BatAI.cpp" />
+    <ClCompile Include="Item.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="CameraController.h" />
-    <ClInclude Include="ClosedRoom.h" />
-    <ClInclude Include="CustomExtensions.h" />
-    <ClInclude Include="Destroyer.h" />
-    <ClInclude Include="Door.h" />
     <ClInclude Include="Enemies.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="FlowerAI.h" />
-    <ClInclude Include="Generation.h" />
     <ClInclude Include="headers.h" />
     <ClInclude Include="IPlayer.h" />
     <ClInclude Include="Player1.h" />
@@ -51,16 +38,13 @@
     <ClInclude Include="PlayerProduce.h" />
     <ClInclude Include="ProducePlayer1.h" />
     <ClInclude Include="ProducePlayer2.h" />
-    <ClInclude Include="Room.h" />
-    <ClInclude Include="SimpleEnemyAI.h" />
-    <ClInclude Include="SpawnEnemyController.h" />
-    <ClInclude Include="SpawnPointChecker.h" />
     <ClInclude Include="SpiderAI.h" />
+    <ClInclude Include="EnemySideChecker.h" />
     <ClInclude Include="Spike.h" />
     <ClInclude Include="Sword.h" />
-    <ClInclude Include="BatAI.h" />
-    <ClInclude Include="EnemySideChecker.h" />
-    <ClInclude Include="Item.h" />
+    <ClInclude Include="SpawnEnemyController.h" />
     <ClInclude Include="SlimeAI.h" />
+    <ClInclude Include="BatAI.h" />
+    <ClInclude Include="Item.h" />
   </ItemGroup>
 </Project>

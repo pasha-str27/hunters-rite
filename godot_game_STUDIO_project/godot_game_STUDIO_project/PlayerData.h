@@ -12,6 +12,7 @@ namespace godot
 		Node2D* object;
 		bool can_fight_value;
 		float HP;
+		float damage;
 
 	public:
 		PlayerData(Node2D* object, Ref<PackedScene>bullet = 0);
@@ -34,6 +35,8 @@ namespace godot
 		virtual void _set_enemy(Node* enemy = nullptr)=0;
 		float _get_HP();
 		void _set_HP(float HP);
+		float _get_damage();
+		void _set_damage(float value);
 
 		static Input* input_controller;
 	};

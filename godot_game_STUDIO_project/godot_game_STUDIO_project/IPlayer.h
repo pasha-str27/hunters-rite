@@ -17,5 +17,7 @@ namespace godot
 		virtual void _take_damage(float damage, bool is_spike = false) = 0;
 		virtual float _get_HP() = 0;
 		virtual void _set_HP(float HP) = 0;
+		virtual float _get_damage() = 0;
+		virtual void _set_damage(float value) = 0;
 	};
 }

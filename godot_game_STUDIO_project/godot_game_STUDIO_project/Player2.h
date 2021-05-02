@@ -31,5 +31,6 @@ namespace godot
 		}
 
 		void _set_speed(float speed);
+		void _set_HP(float value);
 	};
 }

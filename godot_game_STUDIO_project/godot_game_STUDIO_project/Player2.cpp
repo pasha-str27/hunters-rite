@@ -72,7 +72,7 @@ void godot::Player2::_fight(Node* node)
 
 	if (current_enemy)
 	{
-		current_enemy->call("_take_damage", 25);
+		current_enemy->call("_take_damage", _get_damage());
 	}
 
 	cast_to<Node2D>(_get_object()->get_child(1))->set_visible(true);
@@ -96,6 +96,17 @@ void godot::Player2::_set_speed(float speed)
 void godot::Player2::_take_damage(float damage, bool is_spike)
 {
 	PlayerData::_take_damage(damage, is_spike);
+
+	if (_get_HP() <= 0)
+	{
+		_get_object()->queue_free();
+		Enemies::get_singleton()->_remove_player2();
+	}
+}
+
+void godot::Player2::_set_HP(float value)
+{
+	PlayerData::_set_HP(value);
 
 	if (_get_HP() <= 0)
 	{

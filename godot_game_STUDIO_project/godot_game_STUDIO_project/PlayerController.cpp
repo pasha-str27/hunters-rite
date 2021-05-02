@@ -19,7 +19,20 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_take_damage", &PlayerController::_take_damage);
 	register_method((char*)"_change_can_moving", &PlayerController::_change_can_moving);
 	register_method((char*)"change_can_moving_timeout", &PlayerController::change_can_moving_timeout);
+	register_method((char*)"_decrease_attack_radius", &PlayerController::_decrease_attack_radius);
+	register_method((char*)"_encrease_attack_radius", &PlayerController::_encrease_attack_radius);
+	register_method((char*)"_set_number_to_next_item", &PlayerController::_set_number_to_next_item);
+	register_method((char*)"_get_number_to_next_item", &PlayerController::_get_number_to_next_item);
+	register_method((char*)"_set_speed", &PlayerController::_set_speed);
+	register_method((char*)"_get_speed", &PlayerController::_get_speed);
+	register_method((char*)"_set_HP", &PlayerController::_set_HP);
+	register_method((char*)"_get_HP", &PlayerController::_get_HP);
+	register_method((char*)"_set_damage", &PlayerController::_set_damage);
+	register_method((char*)"_get_damage", &PlayerController::_get_damage);
+	register_method((char*)"_set_attack_speed_delta", &PlayerController::_set_attack_speed_delta);
+	register_method((char*)"_get_attack_speed_delta", &PlayerController::_get_attack_speed_delta);
 
+	
 	register_property<PlayerController, float>("speed", &PlayerController::speed, 400);
 	register_property<PlayerController, Ref<PackedScene>>("bullet_prefab", &PlayerController::bullet_prefab, nullptr);
 }
@@ -27,6 +40,7 @@ void godot::PlayerController::_register_methods()
 godot::PlayerController::PlayerController()
 {	
 	timer = Timer::_new();
+	attack_speed_delta = 0.5;
 	can_move = true;
 }
 
@@ -61,7 +75,7 @@ void godot::PlayerController::_start_timer()
 	if(!has_node(NodePath(timer->get_name())))
 		add_child(timer);
 
-	timer->set_wait_time(0.4f);
+	timer->set_wait_time(attack_speed_delta);
 	timer->start();
 }
 
@@ -135,4 +149,71 @@ void godot::PlayerController::change_can_moving_timeout()
 	timer->disconnect("timeout", this, "change_can_moving_timeout");
 
 	can_move = true;
+}
+
+void godot::PlayerController::_decrease_attack_radius()
+{
+	auto node = cast_to<Node2D>(get_child(1));
+	Godot::print(node->get_scale());
+	node->set_scale(Vector2(node->get_scale().x * 1.1111, 1));
+	Godot::print(node->get_scale());
+}
+
+void godot::PlayerController::_encrease_attack_radius()
+{
+	auto node = cast_to<Node2D>(get_child(1));
+	Godot::print(node->get_scale());
+	node->set_scale(Vector2(node->get_scale().x * 0.9, 1));
+	Godot::print(node->get_scale());
+}
+
+void godot::PlayerController::_set_number_to_next_item(int value)
+{
+	number_to_next_item = value;
+}
+
+int godot::PlayerController::_get_number_to_next_item()
+{
+	return number_to_next_item;
+}
+
+void godot::PlayerController::_set_speed(float value)
+{
+	speed = value;
+	current_player->_set_speed(speed);
+}
+
+float godot::PlayerController::_get_speed()
+{
+	return speed;
+}
+
+void godot::PlayerController::_set_HP(float value)
+{
+	current_player->_set_HP(value);
+}
+
+float godot::PlayerController::_get_HP()
+{
+	return current_player->_get_HP();
+}
+
+void godot::PlayerController::_set_damage(float value)
+{
+	current_player->_set_damage(value);
+}
+
+float godot::PlayerController::_get_damage()
+{
+	return current_player->_get_damage();
+}
+
+void godot::PlayerController::_set_attack_speed_delta(float value)
+{
+	attack_speed_delta = value > 0 ? value : 0;
+}
+
+float godot::PlayerController::_get_attack_speed_delta()
+{
+	return attack_speed_delta;
 }
