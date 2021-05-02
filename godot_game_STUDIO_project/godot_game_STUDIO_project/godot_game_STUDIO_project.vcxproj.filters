@@ -21,6 +21,7 @@
     <ClCompile Include="SpawnEnemyController.cpp" />
     <ClCompile Include="SlimeAI.cpp" />
     <ClCompile Include="BatAI.cpp" />
+    <ClCompile Include="Item.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
@@ -44,5 +45,6 @@
     <ClInclude Include="SpawnEnemyController.h" />
     <ClInclude Include="SlimeAI.h" />
     <ClInclude Include="BatAI.h" />
+    <ClInclude Include="Item.h" />
   </ItemGroup>
 </Project>
