@@ -42,6 +42,7 @@ void godot::Item::_ready()
 
 void godot::Item::_on_Area2D_body_entered(Node* node)
 {
+	Godot::print("zzzz");
 	if (!node->is_in_group("player"))
 		return;
 
