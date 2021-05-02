@@ -20,6 +20,7 @@ void godot::SpawnEnemyController::SpawnEnemies()
 void godot::SpawnEnemyController::_register_methods()
 {
 	register_method("_ready", &SpawnEnemyController::_ready);
+	register_method("_prepare_spawn", &SpawnEnemyController::_prepare_spawn);
 
 	register_property<SpawnEnemyController, Array>("Enemies", &SpawnEnemyController::enemies, {});
 	register_property<SpawnEnemyController, int>("Enemies Count", &SpawnEnemyController::enemies_count, 0);
@@ -32,6 +33,11 @@ void godot::SpawnEnemyController::_init()
 
 void godot::SpawnEnemyController::_ready()
 {
+	_prepare_spawn();
+}
+
+void godot::SpawnEnemyController::_prepare_spawn()
+{
 	spawn_points = get_node("SpawnPoints")->get_children();
 	SpawnEnemies();
 }
@@ -43,4 +49,5 @@ godot::SpawnEnemyController::SpawnEnemyController()
 godot::SpawnEnemyController::~SpawnEnemyController()
 {
 	enemies = {};
+	spawn_points = {};
 }
