@@ -10,10 +10,14 @@ namespace godot
 	{
 	public:
 		virtual void _process(float delta, Node2D* enemy = nullptr, Node2D* player1 = nullptr, Node2D* player2 = nullptr) = 0;
-		virtual void _add_bullet(Node* bullet=nullptr)=0;
-		virtual void change_can_fight(bool value)=0;
-		virtual void _remove_side(int side)=0;
-		virtual void _change_dir_after_time()=0;
+		virtual void _add_bullet(Node* bullet=nullptr) = 0;
+		virtual void change_can_fight(bool value) = 0;
+		virtual void _remove_side(int side) = 0;
+		virtual void _change_dir_after_time() = 0;
+		virtual void _delete_player1(Node2D* player1 = nullptr, Node2D* player2 = nullptr) = 0;
+		virtual void _delete_player2(Node2D* player1 = nullptr, Node2D* player2 = nullptr) = 0;
+		virtual String _get_current_player() = 0;
+		virtual void _set_speed(float value) = 0;
 	};
 
 	class EnemyAIContext
@@ -32,12 +36,16 @@ namespace godot
 		void set_enemy(Node2D* enemy);
 		void set_player1(Node2D* player1);
 		void set_player2(Node2D* player2);
+		Node2D* get_player1();
+		Node2D* get_player2();
 		void _add_bullet(Node* bullet);
 		void change_can_fight(bool value);
 		void _delete_player1();
 		void _delete_player2();
 		void _remove_side(int side);
 		void _change_dir_after_time();
+		String _get_current_player();
+		void _set_speed(float value);
 	};
 
 
@@ -51,6 +59,8 @@ namespace godot
 
 		float HP;
 		Ref<PackedScene> bullet;
+		bool is_angry;
+		bool entered;
 
 		public:
 			static void _register_methods();
@@ -69,5 +79,11 @@ namespace godot
 			void _remove_side(int side);
 			void _change_dir_after_time();
 			void _start_timer_for_dir_change();
+			void _on_Area2D_body_entered(Node* node);
+			void _set_angry(Node* node);
+			void _set_angry_on_code(bool value);
+			bool _get_angry();
+			void _stop_timer();
+			void _change_angry_on_timeout();
 	};
 }

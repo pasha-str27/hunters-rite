@@ -37,6 +37,6 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<Sword>();
 	register_class<CameraController>();
 	register_class<Spike>();
-	register_class<SpiderSide>();
-
+	register_class<EnemySideChecker>();
+	register_class<Item>();
 }

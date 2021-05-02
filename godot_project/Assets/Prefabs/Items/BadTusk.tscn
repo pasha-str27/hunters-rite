@@ -1,9 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ItemAnimator.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Sprites/Items/slow_attack.png" type="Texture" id=2]
+[ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=3]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="NativeScript" id=8]
+resource_name = "Item"
+class_name = "Item"
+library = ExtResource( 3 )
+
+[sub_resource type="Animation" id=6]
 resource_name = "idle"
 length = 1.5
 loop = true
@@ -32,21 +38,22 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=7]
 
 [node name="BadTusk" type="Node2D"]
 position = Vector2( -144.85, -51.1937 )
+script = SubResource( 8 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -1.89171 )
-scale = Vector2( 1.03783, 1.03783 )
+position = Vector2( 0, -3.70322 )
+scale = Vector2( 1.07406, 1.07406 )
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" parent="Sprite" instance=ExtResource( 1 )]
-anims/idle = SubResource( 1 )
+anims/idle = SubResource( 6 )
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2( 1.8, 1.8 )
-shape = SubResource( 2 )
+shape = SubResource( 7 )

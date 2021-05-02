@@ -3,8 +3,8 @@
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 [ext_resource path="res://Assets/Prefabs/bullet_prefab.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Prefabs/TileMaps.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Prefabs/Spider.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Prefabs/flower.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Prefabs/Bat.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Prefabs/Items/BadTusk.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Sprites/skull.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Scripts/PlayerController.gdns" type="Script" id=8]
 [ext_resource path="res://CameraController.gdns" type="Script" id=10]
@@ -31,6 +31,7 @@ radius = 17.3234
 
 [node name="Player1" type="KinematicBody2D" parent="." groups=[
 "player",
+"player1",
 ]]
 position = Vector2( -175.405, 23.5427 )
 z_index = 26
@@ -54,6 +55,7 @@ shape = SubResource( 2 )
 
 [node name="Player2" type="KinematicBody2D" parent="." groups=[
 "player",
+"player2",
 ]]
 position = Vector2( -70.5948, 27.5255 )
 z_index = 26
@@ -72,6 +74,7 @@ texture = ExtResource( 6 )
 [node name="Area2D" type="Area2D" parent="Player2"]
 visible = false
 z_index = -26
+collision_layer = 512
 collision_mask = 48
 script = SubResource( 3 )
 
@@ -100,10 +103,6 @@ shape = SubResource( 5 )
 
 [node name="BulletConteinerSpider" type="Node" parent="."]
 
-[node name="Spider" parent="." instance=ExtResource( 4 )]
-position = Vector2( 16, 48 )
-collision_mask = 0
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 0.0264893, 14.002 )
 scale = Vector2( 0.439999, 0.439999 )
@@ -113,8 +112,9 @@ script = ExtResource( 10 )
 
 [node name="TileMaps" parent="." instance=ExtResource( 3 )]
 
-[node name="flower" parent="." instance=ExtResource( 5 )]
-position = Vector2( -81.1586, 130.24 )
+[node name="Bat" parent="." instance=ExtResource( 4 )]
+
+[node name="BadTusk" parent="." instance=ExtResource( 5 )]
 
 [connection signal="body_entered" from="Player1/Area2D" to="Player1" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Player2/Area2D" to="Player2/Area2D" method="_on_Area2D_body_entered"]

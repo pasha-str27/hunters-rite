@@ -26,7 +26,7 @@ namespace godot
 		void _set_dir(Vector2 dir);
 		Vector2 _get_dir();
 		Node2D* _get_object();
-		virtual void _take_damage(float damage);
+		virtual void _take_damage(float damage, bool is_spike);
 		void _change_can_fight(bool value);
 		bool _can_fight();
 

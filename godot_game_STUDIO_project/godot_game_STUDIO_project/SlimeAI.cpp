@@ -5,59 +5,106 @@
 
 using namespace godot;
 
-godot::SpiderAI::SpiderAI(Ref<PackedScene>& bullet, Node2D* node_tmp, Node2D* player1, Node2D* player2)
+Vector2 godot::SlimeAI::directions_swich(int value)
 {
-	max_bullet_count = 5;
+	Vector2 direction;
+	switch (value)
+	{
+	case 1:
+		direction = Vector2(-0.5, -0.5);
+		break;
+	case 2:
+		direction = Vector2(0, -0.5);
+		break;
+	case 3:
+		direction = Vector2(0.5, -0.5);
+		break;
+	case 4:
+		direction = Vector2(-0.5, 0);
+		break;
+	case 5:
+		direction = Vector2(0.5, 0);
+		break;
+	case 6:
+		direction = Vector2(-0.5, 0.5);
+		break;
+	case 7:
+		direction = Vector2(0, 0.5);
+		break;
+	case 8:
+		direction = Vector2(0.5, 0.5);
+		break;
+	default:
+		break;
+	}
+
+	return direction;
+}
+
+void godot::SlimeAI::_delete_player1(Node2D* player1, Node2D* player2)
+{
+}
+
+void godot::SlimeAI::_delete_player2(Node2D* player1, Node2D* player2)
+{
+}
+
+String godot::SlimeAI::_get_current_player()
+{
+	return String();
+}
+
+void godot::SlimeAI::_set_speed(float value)
+{
+	speed = value;
+}
+
+godot::SlimeAI::SlimeAI(Ref<PackedScene>& bullet, Node2D* node_tmp, Node2D* player1, Node2D* player2)
+{
 	enemy = node_tmp;
 	can_move = true;
 	is_cheking = false;
 	speed = 400;
 
-	auto node = node_tmp->get_node("/root/Node2D/Node/BulletConteinerSpider");
-
-	for (int i = 0; i < max_bullet_count; ++i)
-	{
-		auto new_obj = bullet->instance();
-		node->add_child(new_obj);
-		bullets.push_back(cast_to<Node2D>(new_obj));
-	}
-
 	change_direction();
 }
 
-void godot::SpiderAI::_add_bullet(Node* node)
-{
-	bullets.push_back(cast_to<Node2D>(node));
-}
-
-void godot::SpiderAI::change_can_fight(bool value)
+void godot::SlimeAI::change_can_fight(bool value)
 {
 	can_move = value;
 }
 
-void godot::SpiderAI::reset_directions()
+void godot::SlimeAI::reset_directions()
 {
 	directions.clear();
 }
 
-void godot::SpiderAI::change_direction()
+void godot::SlimeAI::change_direction()
 {
 	reset_directions();
-	for (int i = 2; i < 6; ++i)
+	for (int i = 2; i < 9; ++i)
 	{
+		if (enemy->get_child(i)->call("_get_current_node") != nullptr
+			&& cast_to<Node2D>(enemy->get_child(i)->call("_get_current_node"))->is_in_group("player"))
+		{
+			dir = directions_swich(i - 1);
+			is_cheking = false;
+			return;
+		}
 		if (!enemy->get_child(i)->call("_get_on_body"))
 			directions.push_back(i - 1);
 	}
 
 	_change_dir_after_time();
+	//enemy->call("_start_timer_for_dir_change");
 }
 
-void godot::SpiderAI::_remove_side(int dir)
+void godot::SlimeAI::_remove_side(int dir)
 {
 	directions.push_back(dir);
 }
 
-void godot::SpiderAI::_change_dir_after_time()
+void godot::SlimeAI::_change_dir_after_time()
 {
 	if (directions.size() == 0)
 	{
@@ -70,95 +117,17 @@ void godot::SpiderAI::_change_dir_after_time()
 
 	is_cheking = false;
 
-	switch (directions[rand->randi_range(0, directions.size() - 1)])
-	{
-	case 1:
-		dir = Vector2(0, -0.5);
-		break;
-	case 2:
-		dir = Vector2(-0.5, 0);
-		break;
-	case 3:
-		dir = Vector2(0.5, 0);
-		break;
-	case 4:
-		dir = Vector2(0, 0.5);
-		break;
-	default:
-		break;
-	}
+	dir = directions_swich(directions[rand->randi_range(0, directions.size() - 1)]);
+
 }
 
-void godot::SpiderAI::_fight(Node2D* player1, Node2D* player2)
+void godot::SlimeAI::_fight(Node2D* player1, Node2D* player2)
 {
 	can_move = false;
 	enemy->call("_start_timer");
-
-	RandomNumberGenerator* rng = RandomNumberGenerator::_new();
-
-	rng->randomize();
-
-	Vector2 bullet_dir;
-
-	if (player1 != nullptr && player2 != nullptr)
-	{
-		if (rng->randi_range(0, 2))
-			bullet_dir = player2->get_global_position();
-		else
-			bullet_dir = player1->get_global_position();
-	}
-	else
-	{
-		if (player1 != nullptr && player2 == nullptr)
-			bullet_dir = player1->get_global_position();
-		else
-		{
-			if (player1 == nullptr && player2 != nullptr)
-				bullet_dir = player2->get_global_position();
-			else
-				bullet_dir = Vector2(rng->randf_range(-100, 100), rng->randf_range(-100, 100));
-		}
-	}
-
-	if (bullets.size() > 0)
-	{
-		bullets[bullets.size() - 1]->set_global_position(enemy->get_global_position());
-
-		bullets[bullets.size() - 1]->set_visible(true);
-
-		bullets[bullets.size() - 1]->call("_set_dir", (bullet_dir - bullets[bullets.size() - 1]->get_global_position()).normalized());
-
-		if (bullets.size() == 1)
-		{
-			auto node = enemy->get_node("/root/Node2D/Node/BulletConteinerSpider");
-			auto new_obj = bullets[0]->duplicate(8);
-			node->add_child(new_obj);
-			bullets.push_back(cast_to<Node2D>(new_obj));
-		}
-
-		bullets.pop_back();
-	}
 }
 
-void godot::SpiderAI::_delete_player1(Node2D* player1, Node2D* player2)
-{
-}
-
-void godot::SpiderAI::_delete_player2(Node2D* player1, Node2D* player2)
-{
-}
-
-String godot::SpiderAI::_get_current_player()
-{
-	return String();
-}
-
-void godot::SpiderAI::_set_speed(float value)
-{
-	speed = value;
-}
-
-void godot::SpiderAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2D* player2)
+void godot::SlimeAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2D* player2)
 {
 	if (!can_move)
 		return;
@@ -193,7 +162,7 @@ void godot::SpiderAI::_process(float delta, Node2D* enemy, Node2D* player1, Node
 			return;
 		}
 	}
-	
+
 	if (enemy->get_global_position().x < 0 && enemy->get_global_position().y > 0)
 	{
 		if (abs(enemy->get_global_position().x - ((int)(round(enemy->get_global_position().x)) / 32) * 32 + 16) <= 0.8
@@ -206,7 +175,7 @@ void godot::SpiderAI::_process(float delta, Node2D* enemy, Node2D* player1, Node
 			return;
 		}
 	}
-	
+
 	if (enemy->get_global_position().x > 0 && enemy->get_global_position().y < 0)
 	{
 		if (abs(enemy->get_global_position().x - ((int)(round(enemy->get_global_position().x)) / 32) * 32 - 16) <= 0.8
@@ -219,4 +188,8 @@ void godot::SpiderAI::_process(float delta, Node2D* enemy, Node2D* player1, Node
 			return;
 		}
 	}
+}
+
+void godot::SlimeAI::_add_bullet(Node* node)
+{
 }

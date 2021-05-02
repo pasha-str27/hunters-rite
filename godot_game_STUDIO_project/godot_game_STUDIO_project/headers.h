@@ -36,13 +36,14 @@
 #include "Sword.h"
 #include "CameraController.h"
 #include "Spike.h"
-
+#include "SlimeAI.h"
+#include "BatAI.h"
 #include "SpiderAI.h"
-#include "SpiderSide.h"
+#include "EnemySideChecker.h"
 #include "Enemies.h"
-//#include "Enemy.h"
-#include "SimpleEnemyAI.h"
 #include "FlowerAI.h"
+#include "Item.h"
+
 #include "Generation.h"
 //#include "PlayerController.h"
 #include "SpawnPointChecker.h"
