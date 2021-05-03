@@ -120,7 +120,6 @@ void godot::CameraController::_input(InputEvent* event)
 
 void godot::CameraController::_door_collision(String door_dir)
 {
-	Godot::print(door_dir);
 	int index = 0;
 	if (door_dir.find("left") != -1)
 		index = 0;
@@ -131,13 +130,12 @@ void godot::CameraController::_door_collision(String door_dir)
 	if (door_dir.find("bottom") != -1)
 		index = 3;
 
-	int num = (int)dirs[index];
 	if (door_dir[0] == '-')
 	{
-		dirs[index] = --num;
+		dirs[index] = (int)dirs[index] - 1;
 		return;
 	}
-	dirs[index] = ++num;
+	dirs[index] = (int)dirs[index] + 1;
 
 	if ((int)dirs[index] == 2) {
 		_move(door_dir);
