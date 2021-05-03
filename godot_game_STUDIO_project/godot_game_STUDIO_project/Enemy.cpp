@@ -243,7 +243,7 @@ void godot::Enemy::_change_dir_after_time()
 
 void godot::Enemy::_update_health_bar()
 {
-	auto health_bar = cast_to<ProgressBar>(get_child(0));
+	auto health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(this, "HealthBar"));
 	if (health_bar != nullptr)
 		health_bar->set_value(HP);
 }
