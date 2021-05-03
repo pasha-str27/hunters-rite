@@ -16,6 +16,8 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_can_fight", &PlayerController::_can_fight);
 	register_method((char*)"_set_enemy", &PlayerController::_set_enemy);
 	register_method((char*)"_on_Area2D_body_entered", &PlayerController::_on_Area2D_body_entered);
+	register_method((char*)"_on_Area2D_area_entered", &PlayerController::_on_Area2D_area_entered);
+	register_method((char*)"_on_Area2D_area_exited", &PlayerController::_on_Area2D_area_exited);	
 	register_method((char*)"_take_damage", &PlayerController::_take_damage);
 	register_method((char*)"_change_can_moving", &PlayerController::_change_can_moving);
 	register_method((char*)"change_can_moving_timeout", &PlayerController::change_can_moving_timeout);
@@ -126,7 +128,23 @@ void godot::PlayerController::_on_Area2D_body_entered(Node* node)
 	if (node->is_in_group("spike"))
 	{
 		current_player->_take_damage(node->call("_get_damage"), true);
-	}		
+	}	
+}
+
+void godot::PlayerController::_on_Area2D_area_entered(Node* node)
+{
+	auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
+	if (node->is_in_group("door_zone")) {
+		camera->call("_door_collision", node->get_name(), 1);
+	}
+}
+
+void godot::PlayerController::_on_Area2D_area_exited(Node* node)
+{
+	auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
+	if (node->is_in_group("door_zone")) {
+		camera->call("_door_collision", "-" + node->get_name(), 1);
+	}
 }
 
 void godot::PlayerController::_change_can_moving(bool value)

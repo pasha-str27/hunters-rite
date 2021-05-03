@@ -33,6 +33,8 @@ namespace godot
 		void _process(float delta);
 		void _take_damage(float damage, bool is_spike = false);
 		void _on_Area2D_body_entered(Node* node);
+		void _on_Area2D_area_entered(Node* node);
+		void _on_Area2D_area_exited(Node* node);
 		void _change_can_moving(bool value);
 		void change_can_moving_timeout();
 		void _decrease_attack_radius();
