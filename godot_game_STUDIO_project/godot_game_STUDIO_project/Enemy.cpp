@@ -26,6 +26,7 @@ void godot::Enemy::_register_methods()
 	register_method("_get_angry", &Enemy::_get_angry);
 	register_method("_stop_timer", &Enemy::_stop_timer);
 	register_method("_change_angry_on_timeout", &Enemy::_change_angry_on_timeout);
+	register_method("_update_health_bar", &Enemy::_update_health_bar);
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
@@ -57,6 +58,8 @@ void godot::Enemy::_ready()
 
 	Enemies::get_singleton()->_add_enemy(this);
 	
+	_update_health_bar();
+
 	add_child(timer_change_dir);
 	add_child(timer);
 
@@ -93,7 +96,7 @@ void godot::Enemy::_process(float delta)
 void godot::Enemy::_take_damage(float damage)
 {
 	HP -= damage;
-
+	_update_health_bar();
 	if (HP <= 0)
 	{
 		Enemies::get_singleton()->_remove_enemy(this);
@@ -133,9 +136,7 @@ void godot::Enemy::_on_timeout()
 
 void godot::Enemy::_destroy_enemy()
 {
-	auto health_bar = cast_to<ProgressBar>(get_child(0));
-	if (health_bar != nullptr)
-		health_bar->set_value(HP);
+	_update_health_bar();
 
 
 	timer->disconnect("timeout", this, "_destroy_enemy");
@@ -238,4 +239,11 @@ void godot::Enemy::_change_dir_after_time()
 {
 	timer_change_dir->disconnect("timeout", this, "_change_dir_after_time");
 	ai->_change_dir_after_time();
+}
+
+void godot::Enemy::_update_health_bar()
+{
+	auto health_bar = cast_to<ProgressBar>(get_child(0));
+	if (health_bar != nullptr)
+		health_bar->set_value(HP);
 }

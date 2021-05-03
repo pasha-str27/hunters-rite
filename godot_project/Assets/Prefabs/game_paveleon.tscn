@@ -106,9 +106,8 @@ shape = SubResource( 5 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 0.0264893, 14.002 )
-scale = Vector2( 0.439999, 0.439999 )
 current = true
-zoom = Vector2( 0.6, 0.6 )
+zoom = Vector2( 0.75, 0.75 )
 script = ExtResource( 10 )
 
 [node name="TileMaps" parent="." instance=ExtResource( 3 )]
