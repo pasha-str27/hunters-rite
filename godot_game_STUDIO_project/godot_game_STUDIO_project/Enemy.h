@@ -61,6 +61,7 @@ namespace godot
 		Ref<PackedScene> bullet;
 		bool is_angry;
 		bool entered;
+		bool died;
 
 		public:
 			static void _register_methods();

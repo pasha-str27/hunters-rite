@@ -120,6 +120,7 @@ void godot::PlayerController::_process(float delta)
 
 void godot::PlayerController::_take_damage(float damage, bool is_spike)
 {
+	Godot::print("taking");
 	current_player->_take_damage(damage, is_spike);
 }
 

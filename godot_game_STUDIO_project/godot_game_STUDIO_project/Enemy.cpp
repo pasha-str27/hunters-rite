@@ -40,6 +40,7 @@ godot::Enemy::Enemy()
 	timer_change_dir = Timer::_new();
 	HP = 100;
 	is_angry = false;
+	died = false;
 }
 
 godot::Enemy::~Enemy()
@@ -99,6 +100,7 @@ void godot::Enemy::_take_damage(float damage)
 	_update_health_bar();
 	if (HP <= 0)
 	{
+		died = true;
 		Enemies::get_singleton()->_remove_enemy(this);
 		get_child(0)->queue_free();
 		set_visible(false);
@@ -181,7 +183,7 @@ void godot::Enemy::_on_Area2D_body_entered(Node* node)
 	if (is_angry)
 		damage = 30;
 
-	if (node->is_in_group("player"))
+	if (node->is_in_group("player") && !died)
 		node->call("_take_damage", damage, false);
 }
 
