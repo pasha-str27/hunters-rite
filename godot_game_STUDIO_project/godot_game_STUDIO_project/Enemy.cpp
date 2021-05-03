@@ -26,6 +26,8 @@ void godot::Enemy::_register_methods()
 	register_method("_get_angry", &Enemy::_get_angry);
 	register_method("_stop_timer", &Enemy::_stop_timer);
 	register_method("_change_angry_on_timeout", &Enemy::_change_angry_on_timeout);
+	register_method("_set_player1", &Enemy::_set_player1);
+	register_method("_set_player2", &Enemy::_set_player2);
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
@@ -121,7 +123,7 @@ void godot::Enemy::_start_timer()
 	{
 		timer->connect("timeout", this, "_on_timeout");
 
-		timer->start(0.65);
+		timer->start(5);
 	}
 }
 
@@ -216,6 +218,16 @@ void godot::Enemy::_change_angry_on_timeout()
 	timer_change_dir->disconnect("timeout", this, "_change_angry_on_timeout");
 	ai->_set_speed(200);
 	is_angry = true;
+}
+
+void godot::Enemy::_set_player1(Node* player)
+{
+	ai->set_player1(cast_to<Node2D>(player));
+}
+
+void godot::Enemy::_set_player2(Node* player)
+{
+	ai->set_player2(cast_to<Node2D>(player));
 }
 
 bool godot::Enemy::_get_angry()

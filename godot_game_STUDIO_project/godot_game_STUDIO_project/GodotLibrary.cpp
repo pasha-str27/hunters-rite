@@ -39,4 +39,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<Spike>();
 	register_class<EnemySideChecker>();
 	register_class<Item>();
+	register_class<ReviveZone>();
 }

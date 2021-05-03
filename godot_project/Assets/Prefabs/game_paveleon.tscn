@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 [ext_resource path="res://Assets/Prefabs/bullet_prefab.tscn" type="PackedScene" id=2]
@@ -6,7 +6,9 @@
 [ext_resource path="res://Assets/Prefabs/Enemies/Bat.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Prefabs/Items/BadTusk.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Sprites/skull.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Prefabs/revive_zone.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Scripts/PlayerController.gdns" type="Script" id=8]
+[ext_resource path="res://Assets/Prefabs/Enemies/Spider.tscn" type="PackedScene" id=9]
 [ext_resource path="res://CameraController.gdns" type="Script" id=10]
 [ext_resource path="res://Assets/Sprites/icon11.png" type="Texture" id=11]
 
@@ -16,15 +18,15 @@ radius = 15.6514
 [sub_resource type="CircleShape2D" id=2]
 radius = 16.8866
 
-[sub_resource type="NativeScript" id=3]
+[sub_resource type="NativeScript" id=4]
 class_name = "Sword"
 library = ExtResource( 1 )
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=5]
 radius = 20.3781
 height = 71.1604
 
-[sub_resource type="CircleShape2D" id=5]
+[sub_resource type="CircleShape2D" id=6]
 radius = 17.3234
 
 [node name="Node" type="Node"]
@@ -39,6 +41,7 @@ collision_mask = 2
 script = ExtResource( 8 )
 speed = 401.0
 bullet_prefab = ExtResource( 2 )
+revive_zone = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
 shape = SubResource( 1 )
@@ -62,6 +65,7 @@ z_index = 26
 collision_mask = 2
 script = ExtResource( 8 )
 speed = 300.0
+revive_zone = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
 shape = SubResource( 1 )
@@ -76,14 +80,14 @@ visible = false
 z_index = -26
 collision_layer = 512
 collision_mask = 48
-script = SubResource( 3 )
+script = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2/Area2D"]
 position = Vector2( -38.5828, -0.342659 )
 rotation = -1.5708
 scale = Vector2( 0.8, 1 )
 z_index = 4
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="Player2/Area2D/CollisionShape2D"]
 position = Vector2( -0.0621338, 7.01221 )
@@ -96,7 +100,7 @@ texture = ExtResource( 11 )
 z_index = 27
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2/Area2D2"]
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="BulletConteiner" type="Node" parent="."]
 
@@ -120,6 +124,8 @@ speed = 300.0
 HP = 300.0
 damage = 150.0
 attack_speed_delta = -300.0
+
+[node name="Spider" parent="." instance=ExtResource( 9 )]
 
 [connection signal="body_entered" from="Player1/Area2D" to="Player1" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Player2/Area2D" to="Player2/Area2D" method="_on_Area2D_body_entered"]

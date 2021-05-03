@@ -13,6 +13,8 @@ namespace godot
 		bool can_fight_value;
 		float HP;
 		float damage;
+		float max_HP;
+		bool was_revived;
 
 	public:
 		PlayerData(Node2D* object, Ref<PackedScene>bullet = 0);
@@ -37,6 +39,9 @@ namespace godot
 		void _set_HP(float HP);
 		float _get_damage();
 		void _set_damage(float value);
+		void _revive();
+		bool _was_revived();
+		float _get_max_HP();
 
 		static Input* input_controller;
 	};

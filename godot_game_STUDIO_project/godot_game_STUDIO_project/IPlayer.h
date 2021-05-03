@@ -19,5 +19,8 @@ namespace godot
 		virtual void _set_HP(float HP) = 0;
 		virtual float _get_damage() = 0;
 		virtual void _set_damage(float value) = 0;
+		virtual void _revive() = 0;
+		virtual bool _was_revived() = 0;
+		virtual float _get_max_HP() = 0;
 	};
 }

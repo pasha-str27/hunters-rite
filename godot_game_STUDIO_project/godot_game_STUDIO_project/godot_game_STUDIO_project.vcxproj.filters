@@ -22,6 +22,7 @@
     <ClCompile Include="SlimeAI.cpp" />
     <ClCompile Include="BatAI.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ReviveZone.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
@@ -46,5 +47,6 @@
     <ClInclude Include="SlimeAI.h" />
     <ClInclude Include="BatAI.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="ReviveZone.h" />
   </ItemGroup>
 </Project>

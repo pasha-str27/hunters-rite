@@ -38,3 +38,15 @@ void godot::Enemies::_remove_player2()
 	for (auto node : enemies)
 		node->call("_remove_player2");
 }
+
+void godot::Enemies::_set_player1(Node* player)
+{
+	for (auto node : enemies)
+		node->call("_set_player1", player);
+}
+
+void godot::Enemies::_set_player2(Node* player)
+{
+	for (auto node : enemies)
+		node->call("_set_player2", player);
+}

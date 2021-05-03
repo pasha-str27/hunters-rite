@@ -22,6 +22,7 @@
 #include <Tree.hpp>
 #include <Array.hpp>
 #include <ProgressBar.hpp>
+#include <InputEventKey.hpp>
 
 #include "IPlayer.h"
 #include "PlayerData.h"
@@ -43,6 +44,7 @@
 #include "Enemies.h"
 #include "FlowerAI.h"
 #include "Item.h"
+#include "ReviveZone.h"
 
 #include "Generation.h"
 //#include "PlayerController.h"

@@ -31,10 +31,14 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_get_damage", &PlayerController::_get_damage);
 	register_method((char*)"_set_attack_speed_delta", &PlayerController::_set_attack_speed_delta);
 	register_method((char*)"_get_attack_speed_delta", &PlayerController::_get_attack_speed_delta);
-
+	register_method((char*)"_change_can_fight", &PlayerController::_change_can_fight);
+	register_method((char*)"_die", &PlayerController::_die);
+	register_method((char*)"_revive", &PlayerController::_revive);
+	register_method((char*)"_get_max_HP", &PlayerController::_get_max_HP);
 	
 	register_property<PlayerController, float>("speed", &PlayerController::speed, 400);
 	register_property<PlayerController, Ref<PackedScene>>("bullet_prefab", &PlayerController::bullet_prefab, nullptr);
+	register_property<PlayerController, Ref<PackedScene>>("revive_zone", &PlayerController::revive_zone, nullptr);
 }
 
 godot::PlayerController::PlayerController()
@@ -42,6 +46,7 @@ godot::PlayerController::PlayerController()
 	timer = Timer::_new();
 	attack_speed_delta = 0.5;
 	can_move = true;
+	is_alive = true;
 }
 
 godot::PlayerController::~PlayerController()
@@ -94,6 +99,11 @@ bool godot::PlayerController::_can_fight()
 	return current_player->_can_fight();
 }
 
+void godot::PlayerController::_change_can_fight(bool value)
+{
+	return current_player->_change_can_fight(value);
+}
+
 void godot::PlayerController::_set_enemy(Node* enemy)
 {
 	current_player->_set_enemy(enemy);
@@ -106,43 +116,39 @@ void godot::PlayerController::_add_bullet(Node* node)
 
 void godot::PlayerController::_input(Input* event)
 {
-	if (can_move)
+	if (can_move && is_alive)
 		current_player->_process_input();
 }
 
 void godot::PlayerController::_process(float delta)
 {
-	if(can_move)
+	if(can_move && is_alive)
 		current_player->_move();
 }
 
 void godot::PlayerController::_take_damage(float damage, bool is_spike)
 {
-	Godot::print("taking");
 	current_player->_take_damage(damage, is_spike);
 }
 
 void godot::PlayerController::_on_Area2D_body_entered(Node* node)
 {
 	if (node->is_in_group("spike"))
-	{
-		current_player->_take_damage(node->call("_get_damage"), true);
-	}		
+		_take_damage(node->call("_get_damage"), true);	
 }
 
 void godot::PlayerController::_change_can_moving(bool value)
 {
 	can_move = false;
-	if (!timer->is_connected("timeout", this, "change_can_moving_timeout"))
+	if (timer->is_connected("timeout", this, "change_can_moving_timeout"))
 		return;
 
 	timer->connect("timeout", this, "change_can_moving_timeout");
 
 	if (!has_node(NodePath(timer->get_name())))
 		add_child(timer);
-
-	timer->set_wait_time(2);
-	timer->start();
+	
+	timer->start(1.5);
 }
 
 void godot::PlayerController::change_can_moving_timeout()
@@ -155,17 +161,13 @@ void godot::PlayerController::change_can_moving_timeout()
 void godot::PlayerController::_decrease_attack_radius()
 {
 	auto node = cast_to<Node2D>(get_child(1));
-	Godot::print(node->get_scale());
 	node->set_scale(Vector2(node->get_scale().x * 1.1111, 1));
-	Godot::print(node->get_scale());
 }
 
 void godot::PlayerController::_encrease_attack_radius()
 {
 	auto node = cast_to<Node2D>(get_child(1));
-	Godot::print(node->get_scale());
 	node->set_scale(Vector2(node->get_scale().x * 0.9, 1));
-	Godot::print(node->get_scale());
 }
 
 void godot::PlayerController::_set_number_to_next_item(int value)
@@ -217,4 +219,27 @@ void godot::PlayerController::_set_attack_speed_delta(float value)
 float godot::PlayerController::_get_attack_speed_delta()
 {
 	return attack_speed_delta;
+}
+
+void godot::PlayerController::_die()
+{
+	is_alive = false;
+	current_player->_revive();
+	add_child(revive_zone->instance());
+}
+
+void godot::PlayerController::_revive()
+{
+	if(is_in_group("player1"))
+		Enemies::get_singleton()->_set_player1(this);
+	if (is_in_group("player2"))
+		Enemies::get_singleton()->_set_player2(this);
+
+	is_alive = true;
+	_set_HP(_get_max_HP() * 0.15);
+}
+
+float godot::PlayerController::_get_max_HP()
+{
+	return current_player->_get_max_HP();
 }
