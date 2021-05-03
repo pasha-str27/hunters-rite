@@ -33,6 +33,7 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_get_damage", &PlayerController::_get_damage);
 	register_method((char*)"_set_attack_speed_delta", &PlayerController::_set_attack_speed_delta);
 	register_method((char*)"_get_attack_speed_delta", &PlayerController::_get_attack_speed_delta);
+	register_method((char*)"_on_enemy_die", &PlayerController::_on_enemy_die);
 
 	
 	register_property<PlayerController, float>("speed", &PlayerController::speed, 400);
@@ -68,6 +69,8 @@ void godot::PlayerController::_ready()
 	
 	current_player = player_producer->_get_player(this, bullet_prefab);
 	current_player->_set_speed(speed);
+
+	item_generator = CustomExtensions::GetChildByName(this, "ItemGenerator")->call("_get_instance");
 }
 
 void godot::PlayerController::_start_timer()
@@ -235,4 +238,9 @@ void godot::PlayerController::_set_attack_speed_delta(float value)
 float godot::PlayerController::_get_attack_speed_delta()
 {
 	return attack_speed_delta;
+}
+
+void godot::PlayerController::_on_enemy_die(Vector2 enemy_position)
+{
+	item_generator->_dead_enemy(enemy_position);
 }

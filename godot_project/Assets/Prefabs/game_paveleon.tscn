@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 [ext_resource path="res://Assets/Prefabs/bullet_prefab.tscn" type="PackedScene" id=2]
@@ -6,9 +6,22 @@
 [ext_resource path="res://Assets/Prefabs/Enemies/Bat.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Prefabs/Items/BadTusk.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Sprites/skull.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Scripts/ItemsContainer.gdns" type="Script" id=7]
 [ext_resource path="res://Assets/Scripts/PlayerController.gdns" type="Script" id=8]
+[ext_resource path="res://Assets/Scripts/ItemGenerator.gdns" type="Script" id=9]
 [ext_resource path="res://CameraController.gdns" type="Script" id=10]
 [ext_resource path="res://Assets/Sprites/icon11.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Prefabs/Items/Glass.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Assets/Prefabs/Items/Tusk.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Assets/Prefabs/Items/Luck.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/Prefabs/Items/MetalSphere.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Assets/Prefabs/Items/Shield.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Assets/Prefabs/Items/BottleVine.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Assets/Prefabs/Items/Eye.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Assets/Prefabs/Items/DarkNumber.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Assets/Prefabs/Items/FireSword.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Assets/Prefabs/Items/Boot.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Assets/Prefabs/Items/Chicken.tscn" type="PackedScene" id=22]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.6514
@@ -52,6 +65,10 @@ texture = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1/Area2D"]
 shape = SubResource( 2 )
+
+[node name="ItemGenerator" type="Node" parent="Player1"]
+script = ExtResource( 9 )
+"Count Enemies to Spawn" = 2
 
 [node name="Player2" type="KinematicBody2D" parent="." groups=[
 "player",
@@ -98,6 +115,10 @@ z_index = 27
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2/Area2D"]
 shape = SubResource( 5 )
 
+[node name="ItemGenerator" type="Node" parent="Player2"]
+script = ExtResource( 9 )
+"Count Enemies to Spawn" = 1
+
 [node name="BulletConteiner" type="Node" parent="."]
 
 [node name="BulletConteinerFlower" type="Node" parent="."]
@@ -114,11 +135,18 @@ script = ExtResource( 10 )
 
 [node name="Bat" parent="." instance=ExtResource( 4 )]
 
+[node name="Bat2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 349.842, 221.842 )
+
 [node name="BadTusk" parent="." instance=ExtResource( 5 )]
 speed = 300.0
 HP = 300.0
 damage = 150.0
 attack_speed_delta = -300.0
+
+[node name="ItemsContainer" type="Node" parent="."]
+script = ExtResource( 7 )
+Items = [ ExtResource( 5 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 22 ), ExtResource( 19 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 13 ) ]
 
 [connection signal="area_entered" from="Player1/Area2D" to="Player1" method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Player1/Area2D" to="Player1" method="_on_Area2D_area_exited"]

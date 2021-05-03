@@ -51,3 +51,5 @@
 #include "ClosedRoom.h"
 #include "Door.h"
 #include "SpawnEnemyController.h"
+#include "ItemsContainer.h"
+#include "ItemGenerator.h"

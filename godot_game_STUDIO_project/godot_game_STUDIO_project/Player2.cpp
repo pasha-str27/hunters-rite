@@ -72,7 +72,10 @@ void godot::Player2::_fight(Node* node)
 
 	if (current_enemy)
 	{
-		current_enemy->call("_take_damage", _get_damage());
+		Array args = {};
+		args.push_back(_get_damage());
+		args.push_back(2);
+		current_enemy->call("_take_damage", args);
 	}
 
 	cast_to<Node2D>(_get_object()->get_child(1))->set_visible(true);

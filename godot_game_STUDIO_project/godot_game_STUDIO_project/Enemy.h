@@ -70,7 +70,7 @@ namespace godot
 			void _init();
 			void _ready();
 			void _process(float delta);
-			void _take_damage(float damage);
+			void _take_damage(float damage, int player_id = 0);
 			void _add_bullet(Node*bullet);
 			void _start_timer();
 			void _on_timeout();

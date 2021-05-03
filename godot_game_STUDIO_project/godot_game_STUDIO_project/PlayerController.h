@@ -1,3 +1,4 @@
+#pragma once
 #ifndef HEADERFILE_H
 #define HEADERFILE_H
 #include "headers.h"
@@ -5,12 +6,15 @@
 
 namespace godot
 {
+	class ItemGenerator;
 	class PlayerController : public KinematicBody2D
 	{
 	private:
 		GODOT_CLASS(PlayerController, KinematicBody2D);
 		IPlayer* current_player;
 		Ref<PackedScene> bullet_prefab;
+
+		ItemGenerator* item_generator = nullptr;
 
 		float speed;
 		Timer* timer;
@@ -49,5 +53,6 @@ namespace godot
 		float _get_damage();
 		void _set_attack_speed_delta(float value);
 		float _get_attack_speed_delta();
+		void _on_enemy_die(Vector2 enemy_position);
 	};
 }

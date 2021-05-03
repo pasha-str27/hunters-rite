@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Prefabs/ItemAnimator.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Sprites/Items/luck.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Scripts/Item.gdns" type="Script" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -35,6 +36,7 @@ tracks/1/keys = {
 [sub_resource type="CircleShape2D" id=2]
 
 [node name="Luck" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -1.89171 )
@@ -49,3 +51,5 @@ anims/idle = SubResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2( 1.8, 1.8 )
 shape = SubResource( 2 )
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

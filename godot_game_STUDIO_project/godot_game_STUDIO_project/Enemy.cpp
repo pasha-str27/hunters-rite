@@ -94,12 +94,21 @@ void godot::Enemy::_process(float delta)
 	ai->_process(delta);
 }
 
-void godot::Enemy::_take_damage(float damage)
+void godot::Enemy::_take_damage(float damage, int player_id)
 {
+	Godot::print("player_id: " + String::num(player_id));
 	HP -= damage;
 	_update_health_bar();
 	if (HP <= 0)
 	{
+		Node *player = nullptr;
+		if (player_id == 1)
+			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player1");
+		else if(player_id == 2)
+			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player2");
+		if(!died)
+			player->call("_on_enemy_die", this->get_global_position());
+
 		died = true;
 		Enemies::get_singleton()->_remove_enemy(this);
 		get_child(0)->queue_free();

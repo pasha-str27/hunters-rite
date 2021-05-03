@@ -30,6 +30,8 @@
     <ClCompile Include="EnemySideChecker.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="SlimeAI.cpp" />
+    <ClCompile Include="ItemsContainer.cpp" />
+    <ClCompile Include="ItemGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
@@ -61,5 +63,7 @@
     <ClInclude Include="EnemySideChecker.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="SlimeAI.h" />
+    <ClInclude Include="ItemsContainer.h" />
+    <ClInclude Include="ItemGenerator.h" />
   </ItemGroup>
 </Project>
