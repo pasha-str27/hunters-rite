@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/monster_spider_run.png-4cf5d4f58e3518f3ea03b5f3f99024a2.stex"
+path="res://.import/monster_spider_run.png-8532d85fbc1a1f443090f801a4e297d4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Tilesets/Monsters/monster_spider_run.png"
-dest_files=[ "res://.import/monster_spider_run.png-4cf5d4f58e3518f3ea03b5f3f99024a2.stex" ]
+source_file="res://Assets/Sprites/Monsters/monster_spider_run.png"
+dest_files=[ "res://.import/monster_spider_run.png-8532d85fbc1a1f443090f801a4e297d4.stex" ]
 
 [params]
 

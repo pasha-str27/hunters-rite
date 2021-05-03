@@ -25,25 +25,6 @@ godot::Player1::~Player1()
 	available_bullets.clear();
 }
 
-void godot::Player1::_set_HP(float value)
-{
-	PlayerData::_set_HP(value);
-
-	if (_get_HP() <= 0)
-	{
-		Enemies::get_singleton()->_remove_player1();
-
-		if (_was_revived())
-		{
-			_get_object()->get_node("/root/Node2D/Node/BulletConteiner")->queue_free();
-			_get_object()->queue_free();
-			return;
-		}
-
-		_get_object()->call("_die");
-	}
-}
-
 void godot::Player1::_move()
 {
 	PlayerData::_move();
@@ -144,8 +125,6 @@ void godot::Player1::_fight(Node* node)
 		available_bullets.push_back(cast_to<Node2D>(new_obj));
 	}
 
-	available_bullets[available_bullets.size() - 1]->call("_set_damage", _get_damage());
-
 	available_bullets.pop_back();
 
 	_get_object()->call("_start_timer");
@@ -165,24 +144,14 @@ void godot::Player1::_add_bullet(Node* node)
 	available_bullets.push_back(cast_to<Node2D>(node));
 }
 
-void  godot::Player1::_take_damage(float damage, bool is_spike)
+void  godot::Player1::_take_damage(float damage)
 {
-	if (_get_HP() <= 0)
-		return;
-
-	PlayerData::_take_damage(damage, is_spike);
+	PlayerData::_take_damage(damage);
 
 	if (_get_HP() <= 0)
 	{
+		_get_object()->get_node("/root/Node2D/Node/BulletConteiner")->queue_free();
 		Enemies::get_singleton()->_remove_player1();
-
-		if (_was_revived())
-		{
-			_get_object()->get_node("/root/Node2D/Node/BulletConteiner")->queue_free();
-			_get_object()->queue_free();
-			return;
-		}
-
-		_get_object()->call("_die");
+		_get_object()->queue_free();	
 	}
 }

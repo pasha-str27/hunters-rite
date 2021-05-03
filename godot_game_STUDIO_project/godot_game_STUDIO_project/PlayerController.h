@@ -11,12 +11,10 @@ namespace godot
 		GODOT_CLASS(PlayerController, KinematicBody2D);
 		IPlayer* current_player;
 		Ref<PackedScene> bullet_prefab;
-		Ref<PackedScene> revive_zone;
 
 		float speed;
 		Timer* timer;
 		bool can_move;
-		bool is_alive;
 
 		int number_to_next_item;
 		float attack_speed_delta;
@@ -30,28 +28,12 @@ namespace godot
 		void _start_timer();
 		void _on_timeout();
 		bool _can_fight();
-		void _change_can_fight(bool value);
 		void _set_enemy(Node* enemy = nullptr);
 		void _add_bullet(Node* node);
 		void _process(float delta);
-		void _take_damage(float damage, bool is_spike = false);
+		void _take_damage(float damage);
 		void _on_Area2D_body_entered(Node* node);
 		void _change_can_moving(bool value);
 		void change_can_moving_timeout();
-		void _decrease_attack_radius();
-		void _encrease_attack_radius();
-		void _set_number_to_next_item(int value);
-		int _get_number_to_next_item();
-		void _set_speed(float value);
-		float _get_speed();
-		void _set_HP(float value);
-		float _get_HP();
-		void _set_damage(float value);
-		float _get_damage();
-		void _set_attack_speed_delta(float value);
-		float _get_attack_speed_delta();
-		void _die();
-		void _revive();
-		float _get_max_HP();
 	};
 }

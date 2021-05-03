@@ -22,7 +22,6 @@
 #include <Tree.hpp>
 #include <Array.hpp>
 #include <ProgressBar.hpp>
-#include <InputEventKey.hpp>
 
 #include "IPlayer.h"
 #include "PlayerData.h"
@@ -37,15 +36,13 @@
 #include "Sword.h"
 #include "CameraController.h"
 #include "Spike.h"
-#include "SlimeAI.h"
-#include "BatAI.h"
-#include "SpiderAI.h"
-#include "EnemySideChecker.h"
-#include "Enemies.h"
-#include "FlowerAI.h"
-#include "Item.h"
-#include "ReviveZone.h"
 
+#include "SpiderAI.h"
+#include "SpiderSide.h"
+#include "Enemies.h"
+//#include "Enemy.h"
+#include "SimpleEnemyAI.h"
+#include "FlowerAI.h"
 #include "Generation.h"
 //#include "PlayerController.h"
 #include "SpawnPointChecker.h"

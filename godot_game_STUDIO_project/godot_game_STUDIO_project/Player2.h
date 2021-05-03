@@ -20,7 +20,7 @@ namespace godot
 		void _fight(Node* node = nullptr);
 		void _add_bullet(Node* node = nullptr);
 		void _set_enemy(Node* enemy=nullptr);
-		void _take_damage(float damage, bool is_spike = false);
+		void _take_damage(float damage);
 
 		static Player2* get_singleton(Node2D* object, Ref<PackedScene>bullet = 0)
 		{
@@ -31,6 +31,5 @@ namespace godot
 		}
 
 		void _set_speed(float speed);
-		void _set_HP(float value);
 	};
 }

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/monster_finger_flower.png-d66488514095109ca837c06e7c7567cd.stex"
+path="res://.import/monster_finger_flower.png-89f0b0e281118df819a2086810afeda8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Tilesets/Monsters/monster_finger_flower.png"
-dest_files=[ "res://.import/monster_finger_flower.png-d66488514095109ca837c06e7c7567cd.stex" ]
+source_file="res://Assets/Sprites/Monsters/monster_finger_flower.png"
+dest_files=[ "res://.import/monster_finger_flower.png-89f0b0e281118df819a2086810afeda8.stex" ]
 
 [params]
 

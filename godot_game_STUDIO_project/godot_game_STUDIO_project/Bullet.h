@@ -23,7 +23,6 @@ namespace godot
 		void _on_Area2D_body_entered(Node* node);
 		void _process(float delta);
 		void _set_dir(Vector2 dir);
-		void _set_damage(float value);
 		Bullet();
 		~Bullet();
 	};
