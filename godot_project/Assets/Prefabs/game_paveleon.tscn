@@ -1,13 +1,12 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 [ext_resource path="res://Assets/Prefabs/bullet_prefab.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Prefabs/TileMaps.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Prefabs/flower.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Attack-0.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Prefabs/Spider.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Prefabs/flower.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Sprites/skull.png" type="Texture" id=6]
-[ext_resource path="res://Scripts/PlayerController.gdns" type="Script" id=8]
-[ext_resource path="res://Scripts/Enemy.gdns" type="Script" id=9]
+[ext_resource path="res://Assets/Scripts/PlayerController.gdns" type="Script" id=8]
 [ext_resource path="res://CameraController.gdns" type="Script" id=10]
 [ext_resource path="res://Assets/Sprites/icon11.png" type="Texture" id=11]
 
@@ -28,16 +27,12 @@ height = 53.4026
 [sub_resource type="CircleShape2D" id=5]
 radius = 17.3234
 
-[sub_resource type="CapsuleShape2D" id=6]
-radius = 7.16034
-height = 7.08337
-
 [node name="Node" type="Node"]
 
 [node name="Player1" type="KinematicBody2D" parent="." groups=[
 "player",
 ]]
-position = Vector2( -175.431, 38.459 )
+position = Vector2( -175.405, 23.5427 )
 z_index = 26
 collision_mask = 2
 script = ExtResource( 8 )
@@ -60,7 +55,7 @@ shape = SubResource( 2 )
 [node name="Player2" type="KinematicBody2D" parent="." groups=[
 "player",
 ]]
-position = Vector2( -70.6213, 42.4418 )
+position = Vector2( -70.5948, 27.5255 )
 z_index = 26
 collision_mask = 2
 script = ExtResource( 8 )
@@ -103,47 +98,23 @@ shape = SubResource( 5 )
 
 [node name="BulletConteinerFlower" type="Node" parent="."]
 
-[node name="Enemy" type="KinematicBody2D" parent="." groups=[
-"enemy",
-]]
-position = Vector2( -111.943, 96.8002 )
-z_index = 25
-collision_layer = 4
-script = ExtResource( 9 )
+[node name="BulletConteinerSpider" type="Node" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
-shape = SubResource( 6 )
-
-[node name="Sprite" type="Sprite" parent="Enemy/CollisionShape2D"]
-position = Vector2( 0, -0.749161 )
-scale = Vector2( 0.3, 0.3 )
-texture = ExtResource( 5 )
-
-[node name="flower" parent="." instance=ExtResource( 4 )]
-
-[node name="Enemy2" type="KinematicBody2D" parent="." groups=[
-"enemy",
-]]
-position = Vector2( 113.557, 78.5777 )
-z_index = 25
-collision_layer = 4
-script = ExtResource( 9 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy2"]
-shape = SubResource( 6 )
-
-[node name="Sprite" type="Sprite" parent="Enemy2/CollisionShape2D"]
-scale = Vector2( 0.3, 0.3 )
-texture = ExtResource( 5 )
+[node name="Spider" parent="." instance=ExtResource( 4 )]
+position = Vector2( 16, 48 )
+collision_mask = 0
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 0, 15.1453 )
+position = Vector2( 0.0264893, 14.002 )
 scale = Vector2( 0.439999, 0.439999 )
 current = true
 zoom = Vector2( 0.6, 0.6 )
 script = ExtResource( 10 )
 
 [node name="TileMaps" parent="." instance=ExtResource( 3 )]
+
+[node name="flower" parent="." instance=ExtResource( 5 )]
+position = Vector2( -81.1586, 130.24 )
 
 [connection signal="body_entered" from="Player1/Area2D" to="Player1" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Player2/Area2D" to="Player2/Area2D" method="_on_Area2D_body_entered"]

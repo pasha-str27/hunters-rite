@@ -17,6 +17,8 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_set_enemy", &PlayerController::_set_enemy);
 	register_method((char*)"_on_Area2D_body_entered", &PlayerController::_on_Area2D_body_entered);
 	register_method((char*)"_take_damage", &PlayerController::_take_damage);
+	register_method((char*)"_change_can_moving", &PlayerController::_change_can_moving);
+	register_method((char*)"change_can_moving_timeout", &PlayerController::change_can_moving_timeout);
 
 	register_property<PlayerController, float>("speed", &PlayerController::speed, 400);
 	register_property<PlayerController, Ref<PackedScene>>("bullet_prefab", &PlayerController::bullet_prefab, nullptr);
@@ -25,12 +27,13 @@ void godot::PlayerController::_register_methods()
 godot::PlayerController::PlayerController()
 {	
 	timer = Timer::_new();
+	can_move = true;
 }
 
 godot::PlayerController::~PlayerController()
 {
-	if(current_player)
-		delete current_player;
+	//if(current_player)
+	//	delete current_player;
 }
 
 void godot::PlayerController::_init()
@@ -89,12 +92,14 @@ void godot::PlayerController::_add_bullet(Node* node)
 
 void godot::PlayerController::_input(Input* event)
 {
-	current_player->_process_input();
+	if (can_move)
+		current_player->_process_input();
 }
 
 void godot::PlayerController::_process(float delta)
 {
-	current_player->_move();
+	if(can_move)
+		current_player->_move();
 }
 
 void godot::PlayerController::_take_damage(float damage)
@@ -105,5 +110,29 @@ void godot::PlayerController::_take_damage(float damage)
 void godot::PlayerController::_on_Area2D_body_entered(Node* node)
 {
 	if (node->is_in_group("spike"))
+	{
 		current_player->_take_damage(node->call("_get_damage"));
+	}		
+}
+
+void godot::PlayerController::_change_can_moving(bool value)
+{
+	can_move = false;
+	if (!timer->is_connected("timeout", this, "change_can_moving_timeout"))
+		return;
+
+	timer->connect("timeout", this, "change_can_moving_timeout");
+
+	if (!has_node(NodePath(timer->get_name())))
+		add_child(timer);
+
+	timer->set_wait_time(2);
+	timer->start();
+}
+
+void godot::PlayerController::change_can_moving_timeout()
+{
+	timer->disconnect("timeout", this, "change_can_moving_timeout");
+
+	can_move = true;
 }

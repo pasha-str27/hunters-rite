@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Prefabs/flower_bullet_prefab.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/Sprites/flowers.png" type="Texture" id=2]
-[ext_resource path="res://Scripts/Enemy.gdns" type="Script" id=3]
+[ext_resource path="res://Assets/Sprites/monster_finger_flower.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Scripts/Enemy.gdns" type="Script" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 27.8998
@@ -22,8 +22,6 @@ bullet = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="CollisionShape2D"]
-scale = Vector2( 3, 3 )
 z_index = -5
 texture = ExtResource( 2 )
-region_enabled = true
 region_rect = Rect2( 132, 4, 23, 23 )

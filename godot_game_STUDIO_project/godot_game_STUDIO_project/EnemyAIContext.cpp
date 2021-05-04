@@ -12,10 +12,10 @@ EnemyAIContext::EnemyAIContext()
 
 EnemyAIContext::~EnemyAIContext()
 {
-	delete strategy;
-	delete enemy;
-	delete player1;
-	delete player2;
+	//delete strategy;
+	//delete enemy;
+	//delete player1;
+	//delete player2;
 }
 
 
@@ -52,4 +52,24 @@ void godot::EnemyAIContext::_add_bullet(Node* bullet)
 void godot::EnemyAIContext::change_can_fight(bool value)
 {
 	strategy->change_can_fight(value);
+}
+
+void godot::EnemyAIContext::_delete_player1()
+{
+	player1 = nullptr;
+}
+
+void godot::EnemyAIContext::_delete_player2()
+{
+	player2 = nullptr;
+}
+
+void godot::EnemyAIContext::_remove_side(int side)
+{
+	strategy->_remove_side(side);
+}
+
+void godot::EnemyAIContext::_change_dir_after_time()
+{
+	strategy->_change_dir_after_time();
 }

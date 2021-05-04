@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Prefabs/TileMapRoom.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Prefabs/Generation/Room.gdns" type="Script" id=2]
+[ext_resource path="res://Prefabs/Generation/Destroyer.gdns" type="Script" id=3]
+[ext_resource path="res://Prefabs/Generation/Door.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prefabs/Generation/Wall.tscn" type="PackedScene" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 2 )
+doors = [ "left" ]
+"Is Closed Room" = true
+
+[node name="GroundTileMap" parent="." instance=ExtResource( 1 )]
+position = Vector2( -622, -380 )
+
+[node name="Destroyer" type="Area2D" parent="."]
+gravity_point = true
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Destroyer"]
+shape = SubResource( 1 )
+
+[node name="Spawners" type="Node2D" parent="."]
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="Door" parent="Doors" instance=ExtResource( 4 )]
+position = Vector2( -574.454, 0 )
+Direction = "left"
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Wall" parent="Walls" instance=ExtResource( 5 )]
+position = Vector2( -574.548, -184.533 )
+
+[node name="Wall2" parent="Walls" instance=ExtResource( 5 )]
+position = Vector2( -574.548, 187.047 )
+
+[node name="Wall3" parent="Walls" instance=ExtResource( 5 )]
+position = Vector2( 581.08, -8.95099 )
+scale = Vector2( 1, 30.49 )
+
+[node name="Wall4" parent="Walls" instance=ExtResource( 5 )]
+position = Vector2( 3.39001, -333.238 )
+rotation = 1.5708
+scale = Vector2( 1, 55.69 )
+
+[node name="Wall5" parent="Walls" instance=ExtResource( 5 )]
+position = Vector2( 3.39001, 308.597 )
+rotation = 1.5708
+scale = Vector2( 1, 55.69 )
+
+[connection signal="area_entered" from="Destroyer" to="Destroyer" method="_on_Destroyer_area_entered"]

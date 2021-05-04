@@ -1,5 +1,7 @@
+#pragma once
 #include <vector>
 #include <string>
+#include <functional>
 
 #include <Godot.hpp>
 #include <KinematicBody2D.hpp>
@@ -18,6 +20,8 @@
 #include <InputEvent.hpp>
 #include <TileMap.hpp>
 #include <Tree.hpp>
+#include <Array.hpp>
+#include <ProgressBar.hpp>
 
 #include "IPlayer.h"
 #include "PlayerData.h"
@@ -32,6 +36,18 @@
 #include "Sword.h"
 #include "CameraController.h"
 #include "Spike.h"
+
+#include "SpiderAI.h"
+#include "SpiderSide.h"
+#include "Enemies.h"
 //#include "Enemy.h"
 #include "SimpleEnemyAI.h"
 #include "FlowerAI.h"
+#include "Generation.h"
+//#include "PlayerController.h"
+#include "SpawnPointChecker.h"
+#include "Room.h"
+#include "Destroyer.h"
+#include "ClosedRoom.h"
+#include "Door.h"
+#include "SpawnEnemyController.h"

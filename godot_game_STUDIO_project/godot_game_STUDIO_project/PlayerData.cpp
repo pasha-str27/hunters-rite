@@ -24,7 +24,7 @@ godot::PlayerData::PlayerData()
 
 godot::PlayerData::~PlayerData()
 {
-	delete object;
+	//delete object;
 }
 
 void godot::PlayerData::_move()
@@ -62,9 +62,6 @@ void godot::PlayerData::_take_damage(float damage)
 	HP -= damage;
 
 	object->set_global_position(object->get_global_position() - dir.normalized() * damage*5);
-
-	if (HP <= 0)
-		object->queue_free();
 }
 
 void godot::PlayerData::_change_can_fight(bool value)

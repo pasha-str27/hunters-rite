@@ -351,3 +351,4 @@ MigrationBackup/
 .ionide/
 *.vcxproj
 godot_game_STUDIO_project/godot_game_STUDIO_project/godot_game_STUDIO_project.vcxproj
+godot_project/godot_game_STUDIO_project.dll

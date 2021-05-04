@@ -2,15 +2,24 @@
 
 importer="texture"
 type="StreamTexture"
+<<<<<<< HEAD:godot_project/lvl.png.import
+path="res://.import/lvl.png-0dcc3b71a274691c79d2d8a230667a74.stex"
+=======
 path="res://.import/boot.png-0853cbca0c90c11787730c34e1b0063a.stex"
+>>>>>>> endl:godot_project/boot.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
+<<<<<<< HEAD:godot_project/lvl.png.import
+source_file="res://lvl.png"
+dest_files=[ "res://.import/lvl.png-0dcc3b71a274691c79d2d8a230667a74.stex" ]
+=======
 source_file="res://boot.png"
 dest_files=[ "res://.import/boot.png-0853cbca0c90c11787730c34e1b0063a.stex" ]
+>>>>>>> endl:godot_project/boot.png.import
 
 [params]
 
