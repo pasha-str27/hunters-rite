@@ -18,15 +18,15 @@ radius = 15.6514
 [sub_resource type="CircleShape2D" id=2]
 radius = 16.8866
 
-[sub_resource type="NativeScript" id=4]
+[sub_resource type="NativeScript" id=3]
 class_name = "Sword"
 library = ExtResource( 1 )
 
-[sub_resource type="CapsuleShape2D" id=5]
+[sub_resource type="CapsuleShape2D" id=4]
 radius = 20.3781
 height = 71.1604
 
-[sub_resource type="CircleShape2D" id=6]
+[sub_resource type="CircleShape2D" id=5]
 radius = 17.3234
 
 [node name="Node" type="Node"]
@@ -80,14 +80,14 @@ visible = false
 z_index = -26
 collision_layer = 512
 collision_mask = 48
-script = SubResource( 4 )
+script = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2/Area2D"]
 position = Vector2( -38.5828, -0.342659 )
 rotation = -1.5708
 scale = Vector2( 0.8, 1 )
 z_index = 4
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="Player2/Area2D/CollisionShape2D"]
 position = Vector2( -0.0621338, 7.01221 )
@@ -100,7 +100,7 @@ texture = ExtResource( 11 )
 z_index = 27
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2/Area2D2"]
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="BulletConteiner" type="Node" parent="."]
 
