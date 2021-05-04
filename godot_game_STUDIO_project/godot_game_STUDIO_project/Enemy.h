@@ -86,6 +86,8 @@ namespace godot
 			bool _get_angry();
 			void _stop_timer();
 			void _change_angry_on_timeout();
+			void _set_player1(Node* player);
+			void _set_player2(Node* player);
 			void _update_health_bar();
 	};
 }

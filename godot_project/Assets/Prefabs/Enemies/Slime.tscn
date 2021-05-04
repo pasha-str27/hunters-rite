@@ -47,7 +47,7 @@ region_enabled = true
 region_rect = Rect2( 2, 0, 27, 31 )
 
 [node name="Area2D2" type="Area2D" parent="."]
-position = Vector2( -31.514, -32.703 )
+position = Vector2( -32, -32 )
 scale = Vector2( 1.5, 1.5 )
 collision_mask = 17
 script = ExtResource( 4 )

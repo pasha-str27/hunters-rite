@@ -98,12 +98,22 @@ void godot::Player2::_set_speed(float speed)
 
 void godot::Player2::_take_damage(float damage, bool is_spike)
 {
+	if (_get_HP() <= 0)
+		return;
+
 	PlayerData::_take_damage(damage, is_spike);
 
 	if (_get_HP() <= 0)
 	{
-		_get_object()->queue_free();
 		Enemies::get_singleton()->_remove_player2();
+
+		if (_was_revived())
+		{
+			_get_object()->queue_free();
+			return;
+		}
+
+		_get_object()->call("_die");
 	}
 }
 
@@ -113,7 +123,14 @@ void godot::Player2::_set_HP(float value)
 
 	if (_get_HP() <= 0)
 	{
-		_get_object()->queue_free();
 		Enemies::get_singleton()->_remove_player2();
+
+		if (_was_revived())
+		{
+			_get_object()->queue_free();
+			return;
+		}
+		
+		_get_object()->call("_die");
 	}
 }

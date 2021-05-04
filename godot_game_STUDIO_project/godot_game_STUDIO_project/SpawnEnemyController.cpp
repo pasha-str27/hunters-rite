@@ -5,7 +5,8 @@ void godot::SpawnEnemyController::SpawnEnemies()
 	RandomNumberGenerator* rng = RandomNumberGenerator::_new();
 	rng->randomize();
 	
-	for (int i = 0; i < enemies_count; i++) {
+	for (int i = 0; i < enemies_count; i++) 
+	{
 		int rand_point = rng->randi_range(0, spawn_points.size() - 1);
 		int rand_enemy = rng->randi_range(0, enemies.size() - 1);
 		auto spawned_enemy = cast_to<Node2D>(cast_to<PackedScene>(enemies[rand_enemy])->instance());

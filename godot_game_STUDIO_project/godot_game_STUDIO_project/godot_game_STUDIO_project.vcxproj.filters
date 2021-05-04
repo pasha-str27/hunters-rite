@@ -18,20 +18,13 @@
     <ClCompile Include="Spike.cpp" />
     <ClCompile Include="Sword.cpp" />
     <ClCompile Include="SpawnEnemyController.cpp" />
-    <ClCompile Include="ClosedRoom.cpp" />
-    <ClCompile Include="CustomExtensions.cpp" />
-    <ClCompile Include="Destroyer.cpp" />
-    <ClCompile Include="Door.cpp" />
-    <ClCompile Include="Generation.cpp" />
-    <ClCompile Include="IPlayer.cpp" />
-    <ClCompile Include="Room.cpp" />
-    <ClCompile Include="SpawnPointChecker.cpp" />
     <ClCompile Include="BatAI.cpp" />
     <ClCompile Include="EnemySideChecker.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="SlimeAI.cpp" />
-    <ClCompile Include="ItemsContainer.cpp" />
+    <ClCompile Include="ReviveZone.cpp" />
     <ClCompile Include="ItemGenerator.cpp" />
+    <ClCompile Include="ItemsContainer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
@@ -52,18 +45,12 @@
     <ClInclude Include="Spike.h" />
     <ClInclude Include="Sword.h" />
     <ClInclude Include="SpawnEnemyController.h" />
-    <ClInclude Include="ClosedRoom.h" />
-    <ClInclude Include="CustomExtensions.h" />
-    <ClInclude Include="Destroyer.h" />
-    <ClInclude Include="Door.h" />
-    <ClInclude Include="Generation.h" />
-    <ClInclude Include="Room.h" />
-    <ClInclude Include="SpawnPointChecker.h" />
     <ClInclude Include="BatAI.h" />
     <ClInclude Include="EnemySideChecker.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="SlimeAI.h" />
-    <ClInclude Include="ItemsContainer.h" />
+    <ClInclude Include="ReviveZone.h" />
     <ClInclude Include="ItemGenerator.h" />
+    <ClInclude Include="ItemsContainer.h" />
   </ItemGroup>
 </Project>

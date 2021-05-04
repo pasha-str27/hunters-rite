@@ -26,6 +26,8 @@ void godot::Enemy::_register_methods()
 	register_method("_get_angry", &Enemy::_get_angry);
 	register_method("_stop_timer", &Enemy::_stop_timer);
 	register_method("_change_angry_on_timeout", &Enemy::_change_angry_on_timeout);
+	register_method("_set_player1", &Enemy::_set_player1);
+	register_method("_set_player2", &Enemy::_set_player2);
 	register_method("_update_health_bar", &Enemy::_update_health_bar);
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
@@ -107,8 +109,10 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		Node *player = nullptr;
 		if (player_id == 1)
 			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player1");
-		else if(player_id == 2)
-			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player2");
+		else 
+			if(player_id == 2)
+				player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player2");
+
 		if(!died)
 			player->call("_on_enemy_die", this->get_global_position());
 
@@ -123,8 +127,7 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 
 		timer->connect("timeout", this, "_destroy_enemy");
 
-		timer->set_wait_time(10);
-		timer->start();
+		timer->start(1);
 	}		
 }
 
@@ -139,7 +142,7 @@ void godot::Enemy::_start_timer()
 	{
 		timer->connect("timeout", this, "_on_timeout");
 
-		timer->start(0.65);
+		timer->start(1);
 	}
 }
 
@@ -155,15 +158,14 @@ void godot::Enemy::_destroy_enemy()
 {
 	_update_health_bar();
 
-
 	timer->disconnect("timeout", this, "_destroy_enemy");
 	Enemies::get_singleton()->_remove_enemy(this);
 
-	if(is_in_group("flower"))
-		get_node("/root/Node2D/Node/BulletConteinerFlower")->queue_free();
+	//if(is_in_group("flower"))
+	//	get_node("/root/Node2D/Node/BulletConteinerFlower")->queue_free();
 
-	if (is_in_group("spider"))
-		get_node("/root/Node2D/Node/BulletConteinerSpider")->queue_free();
+	//if (is_in_group("spider"))
+	//	get_node("/root/Node2D/Node/BulletConteinerSpider")->queue_free();
 
 	queue_free();
 }
@@ -232,6 +234,16 @@ void godot::Enemy::_change_angry_on_timeout()
 	timer_change_dir->disconnect("timeout", this, "_change_angry_on_timeout");
 	ai->_set_speed(200);
 	is_angry = true;
+}
+
+void godot::Enemy::_set_player1(Node* player)
+{
+	ai->set_player1(cast_to<Node2D>(player));
+}
+
+void godot::Enemy::_set_player2(Node* player)
+{
+	ai->set_player2(cast_to<Node2D>(player));
 }
 
 bool godot::Enemy::_get_angry()
