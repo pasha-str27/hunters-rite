@@ -64,7 +64,14 @@ void godot::BatAI::_delete_player1(Node2D* player1, Node2D* player2)
 		current_goal = player2;
 		current_player = "player2";
 		dir = (current_goal->get_global_position() - enemy->get_global_position()).normalized();
+		return;
 	}
+
+	RandomNumberGenerator* random = RandomNumberGenerator::_new();
+	random->randomize();
+
+	current_player = "";
+	dir = (Vector2(random->randf_range(-100,100), random->randf_range(-100, 100))).normalized();
 }
 
 void godot::BatAI::_delete_player2(Node2D* player1, Node2D* player2)
@@ -75,7 +82,14 @@ void godot::BatAI::_delete_player2(Node2D* player1, Node2D* player2)
 		current_goal = player1;
 		current_player = "player1";
 		dir = (current_goal->get_global_position() - enemy->get_global_position()).normalized();
+		return;
 	}
+
+	RandomNumberGenerator* random = RandomNumberGenerator::_new();
+	random->randomize();
+
+	current_player = "";
+	dir = (Vector2(random->randf_range(-100, 100), random->randf_range(-100, 100))).normalized();
 }
 
 godot::String godot::BatAI::_get_current_player()
@@ -92,6 +106,13 @@ void godot::BatAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2D*
 {
 	if(!enemy->call("_get_angry"))
 		dir = (current_goal->get_global_position() - enemy->get_global_position()).normalized();
+
+	if (current_player == "")
+	{
+		RandomNumberGenerator* random = RandomNumberGenerator::_new();
+		random->randomize();
+		dir = (Vector2(random->randf_range(-100, 100), random->randf_range(-100, 100))).normalized();
+	}
 
 	cast_to<KinematicBody2D>(enemy)->move_and_slide(dir * speed);
 }

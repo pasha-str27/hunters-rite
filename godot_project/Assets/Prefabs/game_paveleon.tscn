@@ -1,8 +1,9 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 [ext_resource path="res://Assets/Prefabs/bullet_prefab.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Prefabs/TileMaps.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Prefabs/revive_zone.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Prefabs/Items/BadTusk.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Sprites/skull.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Scripts/ItemsContainer.gdns" type="Script" id=7]
@@ -45,12 +46,13 @@ radius = 17.3234
 "player",
 "player1",
 ]]
-position = Vector2( -175.405, 23.5427 )
+position = Vector2( -172.568, 65.9239 )
 z_index = 26
 collision_mask = 2
 script = ExtResource( 8 )
 speed = 401.0
 bullet_prefab = ExtResource( 2 )
+revive_zone = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
 shape = SubResource( 1 )
@@ -78,6 +80,7 @@ z_index = 26
 collision_mask = 2
 script = ExtResource( 8 )
 speed = 300.0
+revive_zone = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
 shape = SubResource( 1 )

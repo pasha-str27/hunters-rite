@@ -38,6 +38,7 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_revive", &PlayerController::_revive);
 	register_method((char*)"_get_max_HP", &PlayerController::_get_max_HP);
 	register_method((char*)"_on_enemy_die", &PlayerController::_on_enemy_die);
+	register_method((char*)"_is_alive", &PlayerController::_is_alive);
 
 	register_property<PlayerController, float>("speed", &PlayerController::speed, 400);
 	register_property<PlayerController, Ref<PackedScene>>("bullet_prefab", &PlayerController::bullet_prefab, nullptr);
@@ -140,9 +141,6 @@ void godot::PlayerController::_on_Area2D_body_entered(Node* node)
 {
 	if (node->is_in_group("spike"))
 		_take_damage(node->call("_get_damage"), true);	
-	{
-		current_player->_take_damage(node->call("_get_damage"), true);
-	}	
 }
 
 void godot::PlayerController::_on_Area2D_area_entered(Node* node)
@@ -266,8 +264,14 @@ void godot::PlayerController::_revive()
 float godot::PlayerController::_get_max_HP()
 {
 	return current_player->_get_max_HP();
+}
 
 void godot::PlayerController::_on_enemy_die(Vector2 enemy_position)
 {
 	item_generator->_dead_enemy(enemy_position);
+}
+
+bool godot::PlayerController::_is_alive()
+{
+	return is_alive;
 }

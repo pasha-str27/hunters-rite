@@ -109,8 +109,10 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		Node *player = nullptr;
 		if (player_id == 1)
 			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player1");
-		else if(player_id == 2)
-			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player2");
+		else 
+			if(player_id == 2)
+				player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player2");
+
 		if(!died)
 			player->call("_on_enemy_die", this->get_global_position());
 
@@ -125,8 +127,7 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 
 		timer->connect("timeout", this, "_destroy_enemy");
 
-		timer->set_wait_time(10);
-		timer->start();
+		timer->start(1);
 	}		
 }
 
@@ -141,7 +142,7 @@ void godot::Enemy::_start_timer()
 	{
 		timer->connect("timeout", this, "_on_timeout");
 
-		timer->start(5);
+		timer->start(1);
 	}
 }
 
@@ -157,15 +158,14 @@ void godot::Enemy::_destroy_enemy()
 {
 	_update_health_bar();
 
-
 	timer->disconnect("timeout", this, "_destroy_enemy");
 	Enemies::get_singleton()->_remove_enemy(this);
 
-	if(is_in_group("flower"))
-		get_node("/root/Node2D/Node/BulletConteinerFlower")->queue_free();
+	//if(is_in_group("flower"))
+	//	get_node("/root/Node2D/Node/BulletConteinerFlower")->queue_free();
 
-	if (is_in_group("spider"))
-		get_node("/root/Node2D/Node/BulletConteinerSpider")->queue_free();
+	//if (is_in_group("spider"))
+	//	get_node("/root/Node2D/Node/BulletConteinerSpider")->queue_free();
 
 	queue_free();
 }

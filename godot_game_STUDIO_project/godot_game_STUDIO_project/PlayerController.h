@@ -60,5 +60,6 @@ namespace godot
 		void _revive();
 		float _get_max_HP();
 		void _on_enemy_die(Vector2 enemy_position);
+		bool _is_alive();
 	};
 }
