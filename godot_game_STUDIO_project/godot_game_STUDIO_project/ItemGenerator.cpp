@@ -6,7 +6,6 @@ void godot::ItemGenerator::_register_methods()
 {
 	register_method("_ready", &ItemGenerator::_ready);
 	register_method("_get_instance", &ItemGenerator::_get_instance);
-	//register_method("_dead_enemy", &ItemGenerator::_dead_enemy);
 
 	register_property<ItemGenerator, int>("Count Enemies to Spawn", &ItemGenerator::count_to_spawn, 15);
 }
@@ -19,7 +18,6 @@ void godot::ItemGenerator::_init()
 void godot::ItemGenerator::_ready()
 {
 	current_count = count_to_spawn;
-	Godot::print("current: " + String::num(current_count));
 	items_container = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "ItemsContainer")->call("_get_instance");
 }
 

@@ -96,6 +96,9 @@ void godot::Enemy::_process(float delta)
 
 void godot::Enemy::_take_damage(float damage, int player_id)
 {
+	if (HP <= 0)
+		return;
+
 	Godot::print("player_id: " + String::num(player_id));
 	HP -= damage;
 	_update_health_bar();
@@ -111,6 +114,9 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 
 		died = true;
 		Enemies::get_singleton()->_remove_enemy(this);
+		if(Enemies::get_singleton()->_get_enemies_count() == 0)
+			CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->call("_open_doors");
+
 		get_child(0)->queue_free();
 		set_visible(false);
 		ai->change_can_fight(false);

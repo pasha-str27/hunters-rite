@@ -55,7 +55,8 @@ void godot::CameraController::_register_methods()
 	register_method("_ready", &CameraController::_ready);
 	register_method("_input", &CameraController::_input);
 	register_method("_door_collision", &CameraController::_door_collision);
-	
+	register_method("_close_doors", &CameraController::_close_doors);
+	register_method("_open_doors", &CameraController::_open_doors);	
 }
 
 void godot::CameraController::_init()
@@ -137,12 +138,22 @@ void godot::CameraController::_door_collision(String door_dir)
 	}
 	dirs[index] = (int)dirs[index] + 1;
 
-	if ((int)dirs[index] == 2) {
+	if ((int)dirs[index] == 2 && is_open_door) {
 		_move(door_dir);
 	}
 }
 
+void godot::CameraController::_open_doors()
+{
+	Godot::print("open doors");
+	is_open_door = true;
+}
 
+void godot::CameraController::_close_doors()
+{
+	Godot::print("close doors");
+	is_open_door = false;
+}
 
 godot::CameraController::CameraController()
 {

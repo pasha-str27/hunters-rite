@@ -11,6 +11,11 @@ godot::Enemies::Enemies()
 {
 }
 
+int godot::Enemies::_get_enemies_count()
+{
+	return enemies.size();
+}
+
 void godot::Enemies::_add_enemy(Node2D* enemy)
 {
 	enemies.push_back(enemy);
