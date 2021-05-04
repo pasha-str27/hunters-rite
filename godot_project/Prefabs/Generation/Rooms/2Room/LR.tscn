@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Prefabs/TileMapRoom.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Prefabs/Generation/Room.gdns" type="Script" id=2]
+[ext_resource path="res://Prefabs/Generation/Destroyer.gdns" type="Script" id=3]
+[ext_resource path="res://Prefabs/Generation/Door.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prefabs/Generation/Wall.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Prefabs/Generation/Spawner.tscn" type="PackedScene" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 2 )
+doors = [ "left", "right" ]
+
+[node name="GroundTileMap" parent="." instance=ExtResource( 1 )]
+position = Vector2( -622, -380 )
+
+[node name="Destroyer" type="Area2D" parent="."]
+gravity_point = true
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Destroyer"]
+shape = SubResource( 1 )
+
+[node name="Spawners" type="Node2D" parent="."]
+
+[node name="Spawner" parent="Spawners" instance=ExtResource( 6 )]
+position = Vector2( 1152, 0 )
+Direction = "left"
+
+[node name="Spawner2" parent="Spawners" instance=ExtResource( 6 )]
+position = Vector2( -1152, 0 )
+Direction = "right"
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="Door" parent="Doors" instance=ExtResource( 4 )]
+position = Vector2( 576.661, 0 )
+Direction = "right"
+
+[node name="Door2" parent="Doors" instance=ExtResource( 4 )]
+position = Vector2( -576, 0 )
+Direction = "left"
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Wall" parent="Walls" instance=ExtResource( 5 )]
+position = Vector2( 578.361, 177.455 )
+scale = Vector2( 1, 10 )
+
+[node name="Wall2" parent="Walls" instance=ExtResource( 5 )]
+position = Vector2( -576.707, 177.454 )
+scale = Vector2( 1, 10 )
+
+[node name="Wall3" parent="Walls" instance=ExtResource( 5 )]
+position = Vector2( 578.361, -200.119 )
+scale = Vector2( 1, 10 )
+
+[node name="Wall6" parent="Walls" instance=ExtResource( 5 )]
+position = Vector2( -576.707, -200.119 )
+scale = Vector2( 1, 10 )
+
+[node name="Wall4" parent="Walls" instance=ExtResource( 5 )]
+position = Vector2( 3.39001, -333.238 )
+rotation = 1.5708
+scale = Vector2( 1, 55.69 )
+
+[node name="Wall5" parent="Walls" instance=ExtResource( 5 )]
+position = Vector2( 3.39001, 311.596 )
+rotation = 1.5708
+scale = Vector2( 1, 55.69 )
+
+[connection signal="area_entered" from="Destroyer" to="Destroyer" method="_on_Destroyer_area_entered"]
