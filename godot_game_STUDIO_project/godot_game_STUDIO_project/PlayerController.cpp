@@ -16,6 +16,8 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_can_fight", &PlayerController::_can_fight);
 	register_method((char*)"_set_enemy", &PlayerController::_set_enemy);
 	register_method((char*)"_on_Area2D_body_entered", &PlayerController::_on_Area2D_body_entered);
+	register_method((char*)"_on_Area2D_area_entered", &PlayerController::_on_Area2D_area_entered);
+	register_method((char*)"_on_Area2D_area_exited", &PlayerController::_on_Area2D_area_exited);	
 	register_method((char*)"_take_damage", &PlayerController::_take_damage);
 	register_method((char*)"_change_can_moving", &PlayerController::_change_can_moving);
 	register_method((char*)"change_can_moving_timeout", &PlayerController::change_can_moving_timeout);
@@ -35,7 +37,8 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_die", &PlayerController::_die);
 	register_method((char*)"_revive", &PlayerController::_revive);
 	register_method((char*)"_get_max_HP", &PlayerController::_get_max_HP);
-	
+	register_method((char*)"_on_enemy_die", &PlayerController::_on_enemy_die);
+
 	register_property<PlayerController, float>("speed", &PlayerController::speed, 400);
 	register_property<PlayerController, Ref<PackedScene>>("bullet_prefab", &PlayerController::bullet_prefab, nullptr);
 	register_property<PlayerController, Ref<PackedScene>>("revive_zone", &PlayerController::revive_zone, nullptr);
@@ -71,6 +74,8 @@ void godot::PlayerController::_ready()
 	
 	current_player = player_producer->_get_player(this, bullet_prefab);
 	current_player->_set_speed(speed);
+
+	item_generator = CustomExtensions::GetChildByName(this, "ItemGenerator")->call("_get_instance");
 }
 
 void godot::PlayerController::_start_timer()
@@ -135,6 +140,25 @@ void godot::PlayerController::_on_Area2D_body_entered(Node* node)
 {
 	if (node->is_in_group("spike"))
 		_take_damage(node->call("_get_damage"), true);	
+	{
+		current_player->_take_damage(node->call("_get_damage"), true);
+	}	
+}
+
+void godot::PlayerController::_on_Area2D_area_entered(Node* node)
+{
+	auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
+	if (node->is_in_group("door_zone")) {
+		camera->call("_door_collision", node->get_name(), 1);
+	}
+}
+
+void godot::PlayerController::_on_Area2D_area_exited(Node* node)
+{
+	auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
+	if (node->is_in_group("door_zone")) {
+		camera->call("_door_collision", "-" + node->get_name(), 1);
+	}
 }
 
 void godot::PlayerController::_change_can_moving(bool value)
@@ -242,4 +266,8 @@ void godot::PlayerController::_revive()
 float godot::PlayerController::_get_max_HP()
 {
 	return current_player->_get_max_HP();
+
+void godot::PlayerController::_on_enemy_die(Vector2 enemy_position)
+{
+	item_generator->_dead_enemy(enemy_position);
 }

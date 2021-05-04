@@ -42,7 +42,10 @@ void godot::Bullet::_on_Area2D_body_entered(Node* node)
 	{
 		if (node->is_in_group("enemy") || node->is_in_group("player"))
 		{
-			node->call("_take_damage", damage,false);
+			Array args = {};
+			args.push_back(damage);
+			args.push_back(1);
+			node->call("_take_damage", args);
 		}
 	}
 

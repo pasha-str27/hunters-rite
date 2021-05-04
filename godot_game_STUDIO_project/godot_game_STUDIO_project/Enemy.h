@@ -70,7 +70,7 @@ namespace godot
 			void _init();
 			void _ready();
 			void _process(float delta);
-			void _take_damage(float damage);
+			void _take_damage(float damage, int player_id = 0);
 			void _add_bullet(Node*bullet);
 			void _start_timer();
 			void _on_timeout();
@@ -88,5 +88,6 @@ namespace godot
 			void _change_angry_on_timeout();
 			void _set_player1(Node* player);
 			void _set_player2(Node* player);
+			void _update_health_bar();
 	};
 }

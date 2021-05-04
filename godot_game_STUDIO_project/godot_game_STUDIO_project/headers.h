@@ -47,10 +47,11 @@
 #include "ReviveZone.h"
 
 #include "Generation.h"
-//#include "PlayerController.h"
 #include "SpawnPointChecker.h"
 #include "Room.h"
 #include "Destroyer.h"
 #include "ClosedRoom.h"
 #include "Door.h"
 #include "SpawnEnemyController.h"
+#include "ItemsContainer.h"
+#include "ItemGenerator.h"

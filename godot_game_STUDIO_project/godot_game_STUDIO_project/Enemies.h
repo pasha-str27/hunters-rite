@@ -22,6 +22,8 @@ namespace godot
 			return list;
 		}
 
+		int _get_enemies_count();
+
 		void _add_enemy(Node2D* enemy);
 
 		void _remove_enemy(Node2D* enemy);

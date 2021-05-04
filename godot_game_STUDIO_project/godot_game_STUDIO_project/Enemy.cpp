@@ -28,6 +28,7 @@ void godot::Enemy::_register_methods()
 	register_method("_change_angry_on_timeout", &Enemy::_change_angry_on_timeout);
 	register_method("_set_player1", &Enemy::_set_player1);
 	register_method("_set_player2", &Enemy::_set_player2);
+	register_method("_update_health_bar", &Enemy::_update_health_bar);
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
@@ -60,6 +61,8 @@ void godot::Enemy::_ready()
 
 	Enemies::get_singleton()->_add_enemy(this);
 	
+	_update_health_bar();
+
 	add_child(timer_change_dir);
 	add_child(timer);
 
@@ -93,14 +96,29 @@ void godot::Enemy::_process(float delta)
 	ai->_process(delta);
 }
 
-void godot::Enemy::_take_damage(float damage)
+void godot::Enemy::_take_damage(float damage, int player_id)
 {
-	HP -= damage;
+	if (HP <= 0)
+		return;
 
+	Godot::print("player_id: " + String::num(player_id));
+	HP -= damage;
+	_update_health_bar();
 	if (HP <= 0)
 	{
+		Node *player = nullptr;
+		if (player_id == 1)
+			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player1");
+		else if(player_id == 2)
+			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player2");
+		if(!died)
+			player->call("_on_enemy_die", this->get_global_position());
+
 		died = true;
 		Enemies::get_singleton()->_remove_enemy(this);
+		if(Enemies::get_singleton()->_get_enemies_count() == 0)
+			CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->call("_open_doors");
+
 		get_child(0)->queue_free();
 		set_visible(false);
 		ai->change_can_fight(false);
@@ -137,9 +155,7 @@ void godot::Enemy::_on_timeout()
 
 void godot::Enemy::_destroy_enemy()
 {
-	auto health_bar = cast_to<ProgressBar>(get_child(0));
-	if (health_bar != nullptr)
-		health_bar->set_value(HP);
+	_update_health_bar();
 
 
 	timer->disconnect("timeout", this, "_destroy_enemy");
@@ -252,4 +268,11 @@ void godot::Enemy::_change_dir_after_time()
 {
 	timer_change_dir->disconnect("timeout", this, "_change_dir_after_time");
 	ai->_change_dir_after_time();
+}
+
+void godot::Enemy::_update_health_bar()
+{
+	auto health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(this, "HealthBar"));
+	if (health_bar != nullptr)
+		health_bar->set_value(HP);
 }
