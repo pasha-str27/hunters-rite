@@ -21,19 +21,19 @@ Enemies = [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ) ]
 [node name="SpawnPoints" type="Node2D" parent="EnemySpawner"]
 
 [node name="EnemySpawner" type="Node2D" parent="EnemySpawner/SpawnPoints"]
-position = Vector2( -16, 128 )
+position = Vector2( -16, 144 )
 
 [node name="EnemySpawner2" type="Node2D" parent="EnemySpawner/SpawnPoints"]
-position = Vector2( 272, -32 )
+position = Vector2( 272, -16 )
 
 [node name="EnemySpawner3" type="Node2D" parent="EnemySpawner/SpawnPoints"]
-position = Vector2( -16, -64 )
+position = Vector2( -16, -80 )
 
 [node name="EnemySpawner4" type="Node2D" parent="EnemySpawner/SpawnPoints"]
-position = Vector2( 256, 128 )
+position = Vector2( 240, 112 )
 
 [node name="EnemySpawner5" type="Node2D" parent="EnemySpawner/SpawnPoints"]
-position = Vector2( -256, 128 )
+position = Vector2( -240, 112 )
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2( 2, 2 )
