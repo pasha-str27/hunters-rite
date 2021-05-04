@@ -5,13 +5,13 @@
 
 using namespace godot;
 
-godot::SpiderAI::SpiderAI(Ref<PackedScene>& bullet, Node2D* node_tmp)
+godot::SpiderAI::SpiderAI(Ref<PackedScene>& bullet, Node2D* node_tmp, Node2D* player1, Node2D* player2)
 {
 	max_bullet_count = 5;
 	enemy = node_tmp;
 	can_move = true;
-	//dir = Vector2(0, 0.5);
 	is_cheking = false;
+	speed = 400;
 
 	auto node = node_tmp->get_node("/root/Node2D/Node/BulletConteinerSpider");
 
@@ -38,12 +38,6 @@ void godot::SpiderAI::change_can_fight(bool value)
 void godot::SpiderAI::reset_directions()
 {
 	directions.clear();
-	tmp_vector.clear();
-	//for (int i = 0; i < 4; ++i)
-	//	directions.push_back(i + 1);
-
-	//for (int i = 1; i < 5; ++i)
-	//	cast_to<Area2D>(enemy->get_child(i))->set_monitoring(false);
 }
 
 void godot::SpiderAI::change_direction()
@@ -54,27 +48,22 @@ void godot::SpiderAI::change_direction()
 		if (!enemy->get_child(i)->call("_get_on_body"))
 			directions.push_back(i - 1);
 	}
-	
-	Godot::print("size: " + String::num(directions.size()));
 
 	_change_dir_after_time();
-	//enemy->call("_start_timer_for_dir_change");
 }
 
 void godot::SpiderAI::_remove_side(int dir)
 {
-	tmp_vector.push_back(dir);
-/*	for (int i = 0; i < directions.size(); ++i)
-		if (directions[i] == dir)
-		{
-			directions.erase(directions.begin() + i, directions.begin() + i + 1);
-			break;
-		}	*/	
+	directions.push_back(dir);
 }
 
 void godot::SpiderAI::_change_dir_after_time()
 {
-	//Godot::print("size "+String::num(directions.size()));
+	if (directions.size() == 0)
+	{
+		dir = Vector2::ZERO;
+		return;
+	}	
 
 	RandomNumberGenerator* rand = RandomNumberGenerator::_new();
 	rand->randomize();
@@ -98,8 +87,6 @@ void godot::SpiderAI::_change_dir_after_time()
 	default:
 		break;
 	}
-
-	//Godot::print("size :"+String::num(tmp_vector.size()));
 }
 
 void godot::SpiderAI::_fight(Node2D* player1, Node2D* player2)
@@ -153,12 +140,30 @@ void godot::SpiderAI::_fight(Node2D* player1, Node2D* player2)
 	}
 }
 
+void godot::SpiderAI::_delete_player1(Node2D* player1, Node2D* player2)
+{
+}
+
+void godot::SpiderAI::_delete_player2(Node2D* player1, Node2D* player2)
+{
+}
+
+String godot::SpiderAI::_get_current_player()
+{
+	return String();
+}
+
+void godot::SpiderAI::_set_speed(float value)
+{
+	speed = value;
+}
+
 void godot::SpiderAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2D* player2)
 {
 	if (!can_move)
 		return;
 
-	cast_to<KinematicBody2D>(enemy)->move_and_slide(dir * 400);
+	cast_to<KinematicBody2D>(enemy)->move_and_slide(dir * speed);
 
 	if (is_cheking)
 		return;
@@ -166,9 +171,9 @@ void godot::SpiderAI::_process(float delta, Node2D* enemy, Node2D* player1, Node
 	if (enemy->get_global_position().x >= 0 && enemy->get_global_position().y >= 0)
 	{
 		if (abs(enemy->get_global_position().x - ((int)(round(enemy->get_global_position().x)) / 32) * 32 - 16) <= 0.8
-			&& abs(enemy->get_global_position().y - ((int)(round(enemy->get_global_position().y)) / 32) * 32 - 16) <= 0.8 && !is_cheking)
+			&& abs(enemy->get_global_position().y - ((int)(round(enemy->get_global_position().y)) / 32) * 32) <= 0.8 && !is_cheking)
 		{
-			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 + 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32 + 16));
+			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 + 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32));
 			is_cheking = true;
 			_fight(player1, player2);
 			change_direction();
@@ -179,9 +184,9 @@ void godot::SpiderAI::_process(float delta, Node2D* enemy, Node2D* player1, Node
 	if (enemy->get_global_position().x < 0 && enemy->get_global_position().y < 0)
 	{
 		if (abs(enemy->get_global_position().x - ((int)(round(enemy->get_global_position().x)) / 32) * 32 + 16) <= 0.8
-			&& abs(enemy->get_global_position().y - ((int)(round(enemy->get_global_position().y)) / 32) * 32 + 16) <= 0.8 && !is_cheking)
+			&& abs(enemy->get_global_position().y - ((int)(round(enemy->get_global_position().y)) / 32) * 32) <= 0.8 && !is_cheking)
 		{
-			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 - 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32 - 16));
+			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 - 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32));
 			is_cheking = true;
 			_fight(player1, player2);
 			change_direction();
@@ -192,9 +197,9 @@ void godot::SpiderAI::_process(float delta, Node2D* enemy, Node2D* player1, Node
 	if (enemy->get_global_position().x < 0 && enemy->get_global_position().y > 0)
 	{
 		if (abs(enemy->get_global_position().x - ((int)(round(enemy->get_global_position().x)) / 32) * 32 + 16) <= 0.8
-			&& abs(enemy->get_global_position().y - ((int)(round(enemy->get_global_position().y)) / 32) * 32 - 16) <= 0.8 && !is_cheking)
+			&& abs(enemy->get_global_position().y - ((int)(round(enemy->get_global_position().y)) / 32) * 32) <= 0.8 && !is_cheking)
 		{
-			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 - 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32 + 16));
+			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 - 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32));
 			is_cheking = true;
 			_fight(player1, player2);
 			change_direction();
@@ -205,9 +210,9 @@ void godot::SpiderAI::_process(float delta, Node2D* enemy, Node2D* player1, Node
 	if (enemy->get_global_position().x > 0 && enemy->get_global_position().y < 0)
 	{
 		if (abs(enemy->get_global_position().x - ((int)(round(enemy->get_global_position().x)) / 32) * 32 - 16) <= 0.8
-			&& abs(enemy->get_global_position().y - ((int)(round(enemy->get_global_position().y)) / 32) * 32 + 16) <= 0.8 && !is_cheking)
+			&& abs(enemy->get_global_position().y - ((int)(round(enemy->get_global_position().y)) / 32) * 32) <= 0.8 && !is_cheking)
 		{
-			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 + 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32 - 16));
+			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 + 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32 ));
 			is_cheking = true;
 			_fight(player1, player2);
 			change_direction();

@@ -12,6 +12,9 @@ namespace godot
 		Node2D* object;
 		bool can_fight_value;
 		float HP;
+		float damage;
+		float max_HP;
+		bool was_revived;
 
 	public:
 		PlayerData(Node2D* object, Ref<PackedScene>bullet = 0);
@@ -26,7 +29,7 @@ namespace godot
 		void _set_dir(Vector2 dir);
 		Vector2 _get_dir();
 		Node2D* _get_object();
-		virtual void _take_damage(float damage);
+		virtual void _take_damage(float damage, bool is_spike);
 		void _change_can_fight(bool value);
 		bool _can_fight();
 
@@ -34,6 +37,11 @@ namespace godot
 		virtual void _set_enemy(Node* enemy = nullptr)=0;
 		float _get_HP();
 		void _set_HP(float HP);
+		float _get_damage();
+		void _set_damage(float value);
+		void _revive();
+		bool _was_revived();
+		float _get_max_HP();
 
 		static Input* input_controller;
 	};
