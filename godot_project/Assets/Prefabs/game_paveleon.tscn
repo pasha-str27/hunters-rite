@@ -1,14 +1,29 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 [ext_resource path="res://Assets/Prefabs/bullet_prefab.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Prefabs/TileMaps.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Prefabs/Spider.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Prefabs/flower.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Prefabs/revive_zone.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Prefabs/Items/BadTusk.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Sprites/skull.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Scripts/ItemsContainer.gdns" type="Script" id=7]
 [ext_resource path="res://Assets/Scripts/PlayerController.gdns" type="Script" id=8]
-[ext_resource path="res://CameraController.gdns" type="Script" id=10]
+[ext_resource path="res://Assets/Scripts/ItemGenerator.gdns" type="Script" id=9]
+[ext_resource path="res://Assets/Prefabs/CameraPrefab.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Sprites/icon11.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Prefabs/Items/Glass.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Assets/Prefabs/Items/Tusk.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Assets/Prefabs/Items/Luck.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/Prefabs/Items/MetalSphere.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Assets/Prefabs/Items/Shield.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Assets/Prefabs/Items/BottleVine.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Assets/Prefabs/Items/Eye.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Assets/Prefabs/Items/DarkNumber.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Assets/Prefabs/Items/FireSword.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Assets/Prefabs/Items/Boot.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Assets/Prefabs/Items/Chicken.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Assets/Prefabs/Particles/HurtParticles.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Assets/Prefabs/Particles/BuffDebuffParticles.tscn" type="PackedScene" id=24]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.6514
@@ -21,8 +36,8 @@ class_name = "Sword"
 library = ExtResource( 1 )
 
 [sub_resource type="CapsuleShape2D" id=4]
-radius = 21.1008
-height = 53.4026
+radius = 20.3781
+height = 71.1604
 
 [sub_resource type="CircleShape2D" id=5]
 radius = 17.3234
@@ -31,13 +46,15 @@ radius = 17.3234
 
 [node name="Player1" type="KinematicBody2D" parent="." groups=[
 "player",
+"player1",
 ]]
-position = Vector2( -175.405, 23.5427 )
+position = Vector2( 128, 16 )
 z_index = 26
 collision_mask = 2
 script = ExtResource( 8 )
 speed = 401.0
 bullet_prefab = ExtResource( 2 )
+revive_zone = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
 shape = SubResource( 1 )
@@ -52,14 +69,25 @@ texture = ExtResource( 6 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1/Area2D"]
 shape = SubResource( 2 )
 
+[node name="ItemGenerator" type="Node" parent="Player1"]
+script = ExtResource( 9 )
+"Count Enemies to Spawn" = 1
+
+[node name="HurtParticles" parent="Player1" instance=ExtResource( 23 )]
+z_index = 7
+
+[node name="BuffDebuffParticles" parent="Player1" instance=ExtResource( 24 )]
+
 [node name="Player2" type="KinematicBody2D" parent="." groups=[
 "player",
+"player2",
 ]]
 position = Vector2( -70.5948, 27.5255 )
 z_index = 26
 collision_mask = 2
 script = ExtResource( 8 )
 speed = 300.0
+revive_zone = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
 shape = SubResource( 1 )
@@ -69,30 +97,41 @@ scale = Vector2( 0.2, 0.2 )
 z_index = 6
 texture = ExtResource( 6 )
 
-[node name="Area2D" type="Area2D" parent="Player2"]
+[node name="Area2D3" type="Area2D" parent="Player2"]
 visible = false
 z_index = -26
+collision_layer = 512
 collision_mask = 48
 script = SubResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2/Area2D"]
-position = Vector2( -43.4182, -0.943878 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2/Area2D3"]
+position = Vector2( -38.5828, -0.342659 )
 rotation = -1.5708
+scale = Vector2( 0.8, 1 )
 z_index = 4
 shape = SubResource( 4 )
 
-[node name="Sprite" type="Sprite" parent="Player2/Area2D/CollisionShape2D"]
+[node name="Sprite" type="Sprite" parent="Player2/Area2D3/CollisionShape2D"]
 position = Vector2( -0.0621338, 7.01221 )
 rotation = -1.5708
 scale = Vector2( 0.209137, 0.268498 )
 z_index = 1
 texture = ExtResource( 11 )
 
-[node name="Area2D2" type="Area2D" parent="Player2"]
+[node name="Area2D" type="Area2D" parent="Player2"]
 z_index = 27
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2/Area2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2/Area2D"]
 shape = SubResource( 5 )
+
+[node name="ItemGenerator" type="Node" parent="Player2"]
+script = ExtResource( 9 )
+"Count Enemies to Spawn" = 1
+
+[node name="HurtParticles" parent="Player2" instance=ExtResource( 23 )]
+z_index = 7
+
+[node name="BuffDebuffParticles" parent="Player2" instance=ExtResource( 24 )]
 
 [node name="BulletConteiner" type="Node" parent="."]
 
@@ -100,23 +139,19 @@ shape = SubResource( 5 )
 
 [node name="BulletConteinerSpider" type="Node" parent="."]
 
-[node name="Spider" parent="." instance=ExtResource( 4 )]
-position = Vector2( 16, 48 )
-collision_mask = 0
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 0.0264893, 14.002 )
-scale = Vector2( 0.439999, 0.439999 )
-current = true
-zoom = Vector2( 0.6, 0.6 )
-script = ExtResource( 10 )
-
 [node name="TileMaps" parent="." instance=ExtResource( 3 )]
 
-[node name="flower" parent="." instance=ExtResource( 5 )]
-position = Vector2( -81.1586, 130.24 )
+[node name="ItemsContainer" type="Node" parent="."]
+script = ExtResource( 7 )
+Items = [ ExtResource( 5 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 22 ), ExtResource( 19 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 13 ) ]
 
+[node name="Camera2D" parent="." instance=ExtResource( 10 )]
+
+[connection signal="area_entered" from="Player1/Area2D" to="Player1" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="Player1/Area2D" to="Player1" method="_on_Area2D_area_exited"]
 [connection signal="body_entered" from="Player1/Area2D" to="Player1" method="_on_Area2D_body_entered"]
-[connection signal="body_entered" from="Player2/Area2D" to="Player2/Area2D" method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="Player2/Area2D" to="Player2/Area2D" method="_on_Area2D_body_exited"]
-[connection signal="body_entered" from="Player2/Area2D2" to="Player2" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Player2/Area2D3" to="Player2/Area2D3" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Player2/Area2D3" to="Player2/Area2D3" method="_on_Area2D_body_exited"]
+[connection signal="area_entered" from="Player2/Area2D" to="Player2" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="Player2/Area2D" to="Player2" method="_on_Area2D_area_exited"]
+[connection signal="body_entered" from="Player2/Area2D" to="Player2" method="_on_Area2D_body_entered"]

@@ -12,7 +12,8 @@ void godot::Bullet::_register_methods()
 	register_method("_init", &Bullet::_init);
 	register_method("_on_Area2D_body_entered", &Bullet::_on_Area2D_body_entered);
 	register_method("_set_dir", &Bullet::_set_dir);
-
+	register_method("_set_damage", &Bullet::_set_damage);
+	
 	register_property<Bullet, Vector2>("direction", &Bullet::dir, Vector2(5, 5));
 	register_property<Bullet, float>("speed", &Bullet::speed, 10);
 	register_property<Bullet, float>("damage", &Bullet::damage, 10);
@@ -28,6 +29,9 @@ void godot::Bullet::_init()
 
 void godot::Bullet::_on_Area2D_body_entered(Node* node)
 {
+	if (node->is_in_group("player") && !node->call("_is_alive"))
+		return;
+
 	if (!is_visible())
 		return;
 
@@ -41,7 +45,10 @@ void godot::Bullet::_on_Area2D_body_entered(Node* node)
 	{
 		if (node->is_in_group("enemy") || node->is_in_group("player"))
 		{
-			node->call("_take_damage", damage);
+			Array args = {};
+			args.push_back(damage);
+			args.push_back(1);
+			node->call("_take_damage", args);
 		}
 	}
 
@@ -73,6 +80,11 @@ void godot::Bullet::_process(float delta)
 void godot::Bullet::_set_dir(Vector2 dir)
 {
 	this->dir = dir;
+}
+
+void godot::Bullet::_set_damage(float value)
+{
+	damage = value;
 }
 
 godot::Bullet::Bullet()

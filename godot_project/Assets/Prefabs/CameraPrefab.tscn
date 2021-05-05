@@ -1,35 +1,44 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Assets/Prefabs/Enemies/TestGhost.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Prefabs/Enemies/Slime.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Scripts/SpawnEnemyController.gdns" type="Script" id=2]
-[ext_resource path="res://Assets/Scripts/CameraController.gdns" type="Script" id=3]
+[ext_resource path="res://Assets/Prefabs/Enemies/Bat.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Prefabs/Enemies/Spider.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Scripts/CameraController.gdns" type="Script" id=6]
 
-
+[sub_resource type="RectangleShape2D" id=1]
 
 [node name="Camera2D" type="Camera2D"]
-position = Vector2( 0, 15.1453 )
 current = true
 zoom = Vector2( 0.75, 0.75 )
-script = ExtResource( 3 )
+script = ExtResource( 6 )
 
 [node name="EnemySpawner" type="Node2D" parent="."]
 script = ExtResource( 2 )
-Enemies = [ ExtResource( 1 ) ]
-"Enemies Count" = 3
+Enemies = [ ExtResource( 3 ), ExtResource( 1 ), ExtResource( 4 ) ]
+"Enemies Count" = 2
 
 [node name="SpawnPoints" type="Node2D" parent="EnemySpawner"]
 
 [node name="EnemySpawner" type="Node2D" parent="EnemySpawner/SpawnPoints"]
-position = Vector2( -379.977, -139.627 )
+position = Vector2( -16, 128 )
 
 [node name="EnemySpawner2" type="Node2D" parent="EnemySpawner/SpawnPoints"]
-position = Vector2( 364.684, -91.4033 )
+position = Vector2( 272, -32 )
 
 [node name="EnemySpawner3" type="Node2D" parent="EnemySpawner/SpawnPoints"]
-position = Vector2( -1.2525, -116.645 )
+position = Vector2( -16, -64 )
 
 [node name="EnemySpawner4" type="Node2D" parent="EnemySpawner/SpawnPoints"]
-position = Vector2( 203.475, 194.645 )
+position = Vector2( 240, 128 )
 
 [node name="EnemySpawner5" type="Node2D" parent="EnemySpawner/SpawnPoints"]
-position = Vector2( -173.155, 193.089 )
+position = Vector2( -240, 96 )
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
+
+[connection signal="area_entered" from="Area2D" to="EnemySpawner" method="_on_Area2D_area_entered"]

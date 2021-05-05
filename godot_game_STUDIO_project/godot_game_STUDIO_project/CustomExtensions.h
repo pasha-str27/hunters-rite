@@ -6,7 +6,7 @@
 #endif
 
 namespace godot {
-	static class CustomExtensions
+	class CustomExtensions
 	{
 	public:
 		static Array FindAll(Array arr, const std::function<bool(Node*)>& isCorrect) {
@@ -54,6 +54,17 @@ namespace godot {
 					children_instances.push_back(instance);
 			}
 			return children_instances;
+		}
+
+		//	return nullptr if no found
+		static Node* GetChildByName(Node *parent, String child_name) {
+			Array children = parent->get_children();
+			for (int i = 0; i < children.size(); i++) {
+				if (Object::cast_to<Node>(children[i])->get_name() == child_name) 
+					return Object::cast_to<Node>(children[i]);
+				
+			}
+			return nullptr;
 		}
 
 	};

@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://Assets/Sprites/monster_spider_run.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/Tilesets/Monsters/monster_spider_run.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Prefabs/web_bullet_prefab.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Scripts/Enemy.gdns" type="Script" id=3]
 [ext_resource path="res://Assets/Scripts/SpiderSide.gdns" type="Script" id=4]
@@ -12,6 +12,49 @@ bg_color = Color( 1, 0, 0, 1 )
 radius = 7.71742
 height = 0.0
 
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 36, 31 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 36, 0, 36, 31 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 72, 0, 36, 31 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 108, 0, 36, 31 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 144, 0, 36, 31 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 180, 0, 36, 31 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 216, 0, 36, 31 )
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "default",
+"speed": 15.0
+} ]
+
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 4.89366, 4.97602 )
 
@@ -19,7 +62,6 @@ extents = Vector2( 4.89366, 4.97602 )
 "enemy",
 "spider",
 ]]
-position = Vector2( 112, -16 )
 z_index = 25
 collision_layer = 4
 collision_mask = 513
@@ -39,10 +81,9 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="CollisionShape2D"]
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 2, 0, 32, 31 )
+[node name="AnimatedSprite" type="AnimatedSprite" parent="CollisionShape2D"]
+frames = SubResource( 11 )
+playing = true
 
 [node name="Area2D2" type="Area2D" parent="."]
 position = Vector2( 0.486, -32.703 )
