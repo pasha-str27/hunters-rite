@@ -11,6 +11,7 @@ void godot::Item::_register_methods()
 	register_method("_init", &Item::_init);
 	register_method("_process", &Item::_process);
 	register_method("_on_Area2D_body_entered", &Item::_on_Area2D_body_entered);
+	register_method("_get_is_buff", &Item::_get_is_buff);
 
 	register_property<Item, float>("speed", &Item::speed, 1000);
 	register_property<Item, float>("HP", &Item::HP, 1000);
@@ -19,6 +20,7 @@ void godot::Item::_register_methods()
 	register_property<Item, int>("number_to_next_item", &Item::number_to_next_item, 1000);
 	register_property<Item, bool>("decrease_attack_radius", &Item::decrease_attack_radius, false);
 	register_property<Item, bool>("encrease_attack_radius", &Item::encrease_attack_radius, false);
+	register_property<Item, bool>("Is Buff", &Item::is_buff, true);
 }
 
 godot::Item::Item()
@@ -61,7 +63,13 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 			node->call("_encrease_attack_radius");
 	}
 
+	node->call("_start_item_particles", is_buff);
 	queue_free();
+}
+
+bool godot::Item::_get_is_buff()
+{
+	return is_buff;
 }
 
 void godot::Item::_init()

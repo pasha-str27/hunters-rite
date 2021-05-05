@@ -23,6 +23,8 @@
 #include <Array.hpp>
 #include <ProgressBar.hpp>
 #include <InputEventKey.hpp>
+#include <Particles2D.hpp>
+#include <ParticlesMaterial.hpp>
 
 #include "IPlayer.h"
 #include "PlayerData.h"

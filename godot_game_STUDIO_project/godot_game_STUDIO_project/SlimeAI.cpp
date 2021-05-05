@@ -134,6 +134,7 @@ void godot::SlimeAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2
 	if (!can_move)
 		return;
 	double epsilone = .8;
+	//cast_to<KinematicBody2D>(enemy)->set_global_position(cast_to<KinematicBody2D>(enemy)->get_global_position() + dir * delta * speed);
 	cast_to<KinematicBody2D>(enemy)->move_and_slide(dir * speed);
 
 	if (is_cheking)
