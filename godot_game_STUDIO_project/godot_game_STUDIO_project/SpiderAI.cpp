@@ -35,6 +35,10 @@ void godot::SpiderAI::_add_bullet(Node* node)
 void godot::SpiderAI::change_can_fight(bool value)
 {
 	can_move = value;
+	if (can_move) {
+		cast_to<AnimatedSprite>(enemy->get_node("CollisionShape2D/AnimatedSprite"))->play("run");
+		cast_to<AnimatedSprite>(enemy->get_node("CollisionShape2D/AnimatedSprite"))->set_speed_scale(2);
+	}
 }
 
 void godot::SpiderAI::reset_directions()
@@ -93,6 +97,9 @@ void godot::SpiderAI::_change_dir_after_time()
 
 void godot::SpiderAI::_fight(Node2D* player1, Node2D* player2)
 {
+	cast_to<AnimatedSprite>(enemy->get_node("CollisionShape2D/AnimatedSprite"))->set_speed_scale(1);
+	cast_to<AnimatedSprite>(enemy->get_node("CollisionShape2D/AnimatedSprite"))->play("idle");
+
 	can_move = false;
 	enemy->call("_start_timer");
 

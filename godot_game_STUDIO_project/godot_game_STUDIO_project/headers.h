@@ -26,6 +26,7 @@
 #include <InputEventKey.hpp>
 #include <Particles2D.hpp>
 #include <ParticlesMaterial.hpp>
+#include <AnimatedSprite.hpp>
 
 #include "IPlayer.h"
 #include "PlayerData.h"

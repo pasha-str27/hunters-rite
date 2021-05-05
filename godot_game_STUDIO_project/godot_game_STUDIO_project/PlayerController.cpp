@@ -151,7 +151,7 @@ void godot::PlayerController::_on_Area2D_area_entered(Node* node)
 {
 	auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
 	if (node->is_in_group("door_zone")) {
-		camera->call("_door_collision", node->get_name(), 1);
+		camera->call("_door_collision", node->get_name());
 	}
 }
 
@@ -159,7 +159,7 @@ void godot::PlayerController::_on_Area2D_area_exited(Node* node)
 {
 	auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
 	if (node->is_in_group("door_zone")) {
-		camera->call("_door_collision", "-" + node->get_name(), 1);
+		camera->call("_door_collision", "-" + node->get_name());
 	}
 }
 
@@ -282,13 +282,10 @@ bool godot::PlayerController::_is_alive()
 
 void godot::PlayerController::_start_item_particles(bool is_buff)
 {
-	Godot::print(String::num(buff_debuff_particles->get_process_material()->get("variation")));
-
 	if (is_buff)
-		buff_debuff_particles->get_process_material()->set("variation", 0);
+		buff_debuff_particles->get_process_material()->set("hue_variation", .85);
 	else
-		buff_debuff_particles->get_process_material()->set("variation", 1);
+		buff_debuff_particles->get_process_material()->set("hue_variation", -.85);
 
-	Godot::print(String::num(buff_debuff_particles->get_process_material()->get("variation")));
-		buff_debuff_particles->set_emitting(true);
+	buff_debuff_particles->set_emitting(true);
 }

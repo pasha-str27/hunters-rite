@@ -32,7 +32,7 @@ void godot::Room::Respawn()
 	//  delete from list spawned
 	possible_rooms.remove(rand);
 
-	new_room->call("_set_possible_rooms", possible_rooms, 1);
+	new_room->call("_set_possible_rooms", possible_rooms);
 	new_room->set_global_position(this->get_global_position());
 	get_node("/root/Node2D")->get_node("Rooms")->add_child(new_room, true);
 
@@ -494,8 +494,8 @@ void godot::RoomSpawner::_on_Area2D_area_entered(Node* node)
 
 	//		auto spawned_room = cast_to<Node2D>(generation_ref->closed_room->instance());
 	//		spawned_room->set_global_position(this->get_global_position());
-	//		spawned_room->call_deferred("_add_door_direction", spawn_direction, 1);
-	//		spawned_room->call_deferred("_add_door_direction", node->call("_get_spawn_direction"), 1);
+	//		spawned_room->call_deferred("_add_door_direction", spawn_direction);
+	//		spawned_room->call_deferred("_add_door_direction", node->call("_get_spawn_direction"));
 	//		get_node("/root/Node2D/Rooms")->add_child(spawned_room, true);
 	//		node->queue_free();
 	//		this->queue_free();
@@ -539,7 +539,7 @@ void godot::RoomSpawner::_spawn()
 
                 auto spawned_closed_room = cast_to<Node2D>(generation_ref->closed_room->instance());
                 spawned_closed_room->set_global_position(this->get_global_position());
-                spawned_closed_room->call_deferred("_add_door_direction", spawn_direction, 1);
+                spawned_closed_room->call_deferred("_add_door_direction", spawn_direction);
 				get_node("/root/Node2D")->get_node("Rooms")->add_child(spawned_closed_room, true);
 
             }

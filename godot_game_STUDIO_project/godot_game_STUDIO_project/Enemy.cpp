@@ -212,6 +212,7 @@ void godot::Enemy::_set_angry(Node* node)
 		{
 			ai->_set_speed(0);
 			entered = true;
+
 			if (!timer_change_dir->is_connected("timeout", this, "_change_angry_on_timeout"))
 			{
 				timer_change_dir->connect("timeout", this, "_change_angry_on_timeout");
@@ -231,7 +232,10 @@ void godot::Enemy::_set_angry_on_code(bool value)
 
 void godot::Enemy::_change_angry_on_timeout()
 {
+	cast_to<AnimatedSprite>(get_node("CollisionShape2D/AnimatedSprite"))->play("attack");
+	cast_to<AnimatedSprite>(get_node("CollisionShape2D/AnimatedSprite"))->set_speed_scale(1.5);
 	timer_change_dir->disconnect("timeout", this, "_change_angry_on_timeout");
+
 	ai->_set_speed(200);
 	is_angry = true;
 }
@@ -253,6 +257,9 @@ bool godot::Enemy::_get_angry()
 
 void godot::Enemy::_stop_timer()
 {
+	cast_to<AnimatedSprite>(get_node("CollisionShape2D/AnimatedSprite"))->play("idle");
+	cast_to<AnimatedSprite>(get_node("CollisionShape2D/AnimatedSprite"))->set_speed_scale(1);
+
 	ai->_set_speed(100);
 	is_angry = false;
 	entered = false;

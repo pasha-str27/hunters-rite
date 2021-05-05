@@ -19,7 +19,7 @@ void godot::SpawnPointChecker::_on_SpawnPointChecker_area_entered(Node* other)
 
 	if (other->get_name().find("Spawner") != -1) {
 		String direction = other->call("_get_spawner_direction");
-		get_parent()->call("_add_door_direction", direction, 1);
+		get_parent()->call("_add_door_direction", direction);
 	}
 		
 }
