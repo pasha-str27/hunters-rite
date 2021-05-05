@@ -137,7 +137,7 @@ void godot::SlimeAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2
 		return;
 
 	Godot::print(String::num(old_pos.distance_to(enemy->get_global_position())));
-	cast_to<KinematicBody2D>(enemy)->set_global_position(cast_to<KinematicBody2D>(enemy)->get_global_position() + dir * delta * speed/3);
+	cast_to<KinematicBody2D>(enemy)->set_global_position(cast_to<KinematicBody2D>(enemy)->get_global_position() + dir * delta * 235);
 
 	if (is_cheking)
 		return;
@@ -145,9 +145,9 @@ void godot::SlimeAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2
 	
 	//cast_to<KinematicBody2D>(enemy)->move_and_slide(dir * speed);
 
-	if ((abs(old_pos.distance_to(enemy->get_global_position())-32) <= 0.8
+	if ((abs(old_pos.distance_to(enemy->get_global_position())-32) <= 3
 		&&(dir==Vector2(0.5,0)|| dir == Vector2(-0.5, 0)|| dir == Vector2(0, 0.5)|| dir == Vector2(0, -0.5))
-			|| (abs(old_pos.distance_to(enemy->get_global_position()) - sqrt(32*32+32*32)) <= 1
+			|| (abs(old_pos.distance_to(enemy->get_global_position()) - sqrt(32*32+32*32)) <= 4.5
 			&& (dir == Vector2(0.5, 0.5) || dir == Vector2(-0.5, 0.5) || dir == Vector2(0.5, -0.5) || dir == Vector2(-0.5, -0.5)))))
 	{
 		/*if (enemy->get_global_position().x >= 0 && enemy->get_global_position().y >= 0)
