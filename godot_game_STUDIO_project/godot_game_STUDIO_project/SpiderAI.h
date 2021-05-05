@@ -16,6 +16,7 @@ namespace godot
 		Vector2 dir;
 		bool is_cheking;
 		float speed;
+		Vector2 old_pos;
 
 	public:
 		SpiderAI(Ref<PackedScene>& bullet, Node2D* node, Node2D* player1 = nullptr, Node2D* player2 = nullptr);

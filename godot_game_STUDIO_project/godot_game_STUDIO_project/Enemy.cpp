@@ -28,8 +28,8 @@ void godot::Enemy::_register_methods()
 	register_method("_change_angry_on_timeout", &Enemy::_change_angry_on_timeout);
 	register_method("_set_player1", &Enemy::_set_player1);
 	register_method("_set_player2", &Enemy::_set_player2);
-	register_method("_update_health_bar", &Enemy::_update_health_bar);
-	
+	register_method("_update_health_bar", &Enemy::_update_health_bar);	
+
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
 }

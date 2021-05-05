@@ -48,7 +48,7 @@ radius = 17.3234
 "player",
 "player1",
 ]]
-position = Vector2( -172.568, 65.9239 )
+position = Vector2( 128, 16 )
 z_index = 26
 collision_mask = 2
 script = ExtResource( 8 )
