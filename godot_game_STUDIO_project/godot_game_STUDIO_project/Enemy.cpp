@@ -28,9 +28,7 @@ void godot::Enemy::_register_methods()
 	register_method("_change_angry_on_timeout", &Enemy::_change_angry_on_timeout);
 	register_method("_set_player1", &Enemy::_set_player1);
 	register_method("_set_player2", &Enemy::_set_player2);
-	register_method("_update_health_bar", &Enemy::_update_health_bar);
-	register_method("_on_kostil_cheker_area_entered", &Enemy::_on_kostil_cheker_area_entered);
-	
+	register_method("_update_health_bar", &Enemy::_update_health_bar);	
 
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
@@ -277,10 +275,4 @@ void godot::Enemy::_update_health_bar()
 	auto health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(this, "HealthBar"));
 	if (health_bar != nullptr)
 		health_bar->set_value(HP);
-}
-
-void godot::Enemy::_on_kostil_cheker_area_entered(Area2D* node)
-{
-	if (node->is_in_group("kostil"))
-		Godot::print("99999");
 }
