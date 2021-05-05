@@ -8,6 +8,7 @@
 #include <CollisionObject2D.hpp>
 #include <Node.hpp>
 #include <Node2D.hpp>
+#include <Node.hpp>
 #include <Input.hpp>
 #include <PackedScene.hpp>
 #include <Vector2.hpp>

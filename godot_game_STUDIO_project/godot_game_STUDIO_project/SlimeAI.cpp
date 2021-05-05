@@ -66,6 +66,8 @@ godot::SlimeAI::SlimeAI(Ref<PackedScene>& bullet, Node2D* node_tmp, Node2D* play
 	is_cheking = false;
 	speed = 400;
 
+	old_pos = enemy->get_global_position();
+
 	change_direction();
 }
 
@@ -133,12 +135,41 @@ void godot::SlimeAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2
 	if (!can_move)
 		return;
 
-	cast_to<KinematicBody2D>(enemy)->move_and_slide(dir * speed);
+	Godot::print(String::num(old_pos.distance_to(enemy->get_global_position())));
+	cast_to<KinematicBody2D>(enemy)->set_global_position(cast_to<KinematicBody2D>(enemy)->get_global_position() + dir * delta * speed/3);
 
 	if (is_cheking)
 		return;
 
-	if (enemy->get_global_position().x >= 0 && enemy->get_global_position().y >= 0)
+	
+	//cast_to<KinematicBody2D>(enemy)->move_and_slide(dir * speed);
+
+	if ((abs(old_pos.distance_to(enemy->get_global_position())-32) <= 0.8
+		&&(dir==Vector2(0.5,0)|| dir == Vector2(-0.5, 0)|| dir == Vector2(0, 0.5)|| dir == Vector2(0, -0.5))
+			|| (abs(old_pos.distance_to(enemy->get_global_position()) - sqrt(32*32+32*32)) <= 1
+			&& (dir == Vector2(0.5, 0.5) || dir == Vector2(-0.5, 0.5) || dir == Vector2(0.5, -0.5) || dir == Vector2(-0.5, -0.5)))))
+	{
+		/*if (enemy->get_global_position().x >= 0 && enemy->get_global_position().y >= 0)
+			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 + 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32));
+		
+		if (enemy->get_global_position().x < 0 && enemy->get_global_position().y < 0)
+			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 - 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32));
+
+		if (enemy->get_global_position().x < 0 && enemy->get_global_position().y > 0)
+			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 - 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32));
+
+		if (enemy->get_global_position().x > 0 && enemy->get_global_position().y < 0)
+			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 + 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32));*/
+
+		is_cheking = true;
+		_fight(player1, player2);
+		change_direction();
+		old_pos = enemy->get_global_position();
+		return;
+	}
+
+
+	/*if (enemy->get_global_position().x >= 0 && enemy->get_global_position().y >= 0)
 	{
 		if (abs(enemy->get_global_position().x - ((int)(round(enemy->get_global_position().x)) / 32) * 32 - 16) <= 0.8
 			&& abs(enemy->get_global_position().y - ((int)(round(enemy->get_global_position().y)) / 32) * 32) <= 0.8 && !is_cheking)
@@ -188,7 +219,7 @@ void godot::SlimeAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2
 			change_direction();
 			return;
 		}
-	}
+	}*/
 }
 
 void godot::SlimeAI::_add_bullet(Node* node)

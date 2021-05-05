@@ -15,6 +15,8 @@ namespace godot
 		bool is_cheking;
 		float speed;
 
+		Vector2 old_pos;
+
 	public:
 		SlimeAI(Ref<PackedScene>& bullet, Node2D* node, Node2D* player1 = nullptr, Node2D* player2 = nullptr);
 		void _process(float delta, Node2D* enemy = nullptr, Node2D* player1 = nullptr, Node2D* player2 = nullptr);

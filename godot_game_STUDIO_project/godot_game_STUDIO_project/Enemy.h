@@ -89,5 +89,6 @@ namespace godot
 			void _set_player1(Node* player);
 			void _set_player2(Node* player);
 			void _update_health_bar();
+			void _on_kostil_cheker_area_entered(Area2D* node);
 	};
 }

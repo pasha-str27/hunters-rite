@@ -5,17 +5,17 @@
 [ext_resource path="res://Assets/Scripts/Enemy.gdns" type="Script" id=3]
 [ext_resource path="res://Assets/Scripts/SpiderSide.gdns" type="Script" id=4]
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 1, 0, 0, 1 )
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=7]
 radius = 9.90974
 height = 0.0
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 4.89366, 4.97602 )
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=9]
 radius = 6.93173
 
 [node name="Slime" type="KinematicBody2D" groups=[
@@ -33,13 +33,13 @@ margin_left = -30.1947
 margin_top = -32.0488
 margin_right = 26.8053
 margin_bottom = -18.0488
-custom_styles/fg = SubResource( 1 )
+custom_styles/fg = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="CollisionShape2D"]
 texture = ExtResource( 1 )
@@ -51,78 +51,86 @@ position = Vector2( -32, -32 )
 scale = Vector2( 1.5, 1.5 )
 collision_mask = 17
 script = ExtResource( 4 )
+side = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
-shape = SubResource( 3 )
+shape = SubResource( 8 )
 
 [node name="Area2D4" type="Area2D" parent="."]
 position = Vector2( 0.486, -32.703 )
 scale = Vector2( 1.5, 1.5 )
 collision_mask = 17
 script = ExtResource( 4 )
+side = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D4"]
-shape = SubResource( 3 )
+shape = SubResource( 8 )
 
 [node name="Area2D5" type="Area2D" parent="."]
 position = Vector2( 32.486, -32.703 )
 scale = Vector2( 1.5, 1.5 )
 collision_mask = 17
 script = ExtResource( 4 )
+side = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D5"]
-shape = SubResource( 3 )
+shape = SubResource( 8 )
 
 [node name="Area2D7" type="Area2D" parent="."]
 position = Vector2( -31.514, -0.703 )
 scale = Vector2( 1.5, 1.5 )
 collision_mask = 17
 script = ExtResource( 4 )
+side = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D7"]
-shape = SubResource( 3 )
+shape = SubResource( 8 )
 
 [node name="Area2D8" type="Area2D" parent="."]
 position = Vector2( 32.486, -0.703 )
 scale = Vector2( 1.5, 1.5 )
 collision_mask = 17
 script = ExtResource( 4 )
+side = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D8"]
-shape = SubResource( 3 )
+shape = SubResource( 8 )
 
 [node name="Area2D9" type="Area2D" parent="."]
 position = Vector2( -31.514, 31.297 )
 scale = Vector2( 1.5, 1.5 )
 collision_mask = 17
 script = ExtResource( 4 )
+side = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D9"]
-shape = SubResource( 3 )
+shape = SubResource( 8 )
 
 [node name="Area2D10" type="Area2D" parent="."]
 position = Vector2( 0.486, 31.297 )
 scale = Vector2( 1.5, 1.5 )
 collision_mask = 17
 script = ExtResource( 4 )
+side = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D10"]
-shape = SubResource( 3 )
+shape = SubResource( 8 )
 
 [node name="Area2D11" type="Area2D" parent="."]
 position = Vector2( 32.486, 31.297 )
 scale = Vector2( 1.5, 1.5 )
 collision_mask = 17
 script = ExtResource( 4 )
+side = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D11"]
-shape = SubResource( 3 )
+shape = SubResource( 8 )
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -1.10243, -2.20486 )
-shape = SubResource( 4 )
+shape = SubResource( 9 )
 
 [connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D2" to="Area2D2" method="_on_Area2D_body_exited"]
