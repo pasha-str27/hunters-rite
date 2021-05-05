@@ -4,5 +4,5 @@
 
 [resource]
 resource_name = "SpiderSide"
-class_name = "SpiderSide"
+class_name = "EnemySideChecker"
 library = ExtResource( 1 )

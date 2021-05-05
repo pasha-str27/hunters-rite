@@ -72,7 +72,10 @@ void godot::Player2::_fight(Node* node)
 
 	if (current_enemy)
 	{
-		current_enemy->call("_take_damage", 25);
+		Array args = {};
+		args.push_back(_get_damage());
+		args.push_back(2);
+		current_enemy->call("_take_damage", args);
 	}
 
 	cast_to<Node2D>(_get_object()->get_child(1))->set_visible(true);
@@ -93,13 +96,41 @@ void godot::Player2::_set_speed(float speed)
 	PlayerData::_set_speed(speed);
 }
 
-void godot::Player2::_take_damage(float damage)
+void godot::Player2::_take_damage(float damage, bool is_spike)
 {
-	PlayerData::_take_damage(damage);
+	if (_get_HP() <= 0)
+		return;
+
+	PlayerData::_take_damage(damage, is_spike);
 
 	if (_get_HP() <= 0)
 	{
-		_get_object()->queue_free();
 		Enemies::get_singleton()->_remove_player2();
+
+		if (_was_revived())
+		{
+			_get_object()->queue_free();
+			return;
+		}
+
+		_get_object()->call("_die");
+	}
+}
+
+void godot::Player2::_set_HP(float value)
+{
+	PlayerData::_set_HP(value);
+
+	if (_get_HP() <= 0)
+	{
+		Enemies::get_singleton()->_remove_player2();
+
+		if (_was_revived())
+		{
+			_get_object()->queue_free();
+			return;
+		}
+		
+		_get_object()->call("_die");
 	}
 }
