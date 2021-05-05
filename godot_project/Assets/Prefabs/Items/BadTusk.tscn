@@ -42,7 +42,12 @@ tracks/1/keys = {
 
 [node name="BadTusk" type="Node2D"]
 script = SubResource( 1 )
+speed = 0.0
+HP = 0.0
+damage = 0.0
+attack_speed_delta = 25.0
 number_to_next_item = 0
+encrease_attack_radius = true
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
