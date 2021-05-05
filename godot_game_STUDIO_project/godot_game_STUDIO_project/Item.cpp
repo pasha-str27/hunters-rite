@@ -46,19 +46,17 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 	if (!node->is_in_group("player"))
 		return;
 
-	node->call("_set_speed", (float)node->call("_get_speed") + speed);//++
-	node->call("_set_HP", (float)node->call("_get_HP") + HP);//++
-	node->call("_set_damage", (float)node->call("_get_damage") + damage);//++
-	node->call("_set_number_to_next_item", (int)node->call("_get_number_to_next_item") + number_to_next_item);//+++
+	node->call("_set_speed", (float)node->call("_get_speed") + speed);
+	node->call("_set_HP", (float)node->call("_get_HP") + HP);
+	node->call("_set_damage", (float)node->call("_get_damage") + damage);
+	node->call("_set_number_to_next_item", (int)node->call("_get_number_to_next_item") + number_to_next_item);
 	node->call("_set_attack_speed_delta", (float)node->call("_get_attack_speed_delta") + attack_speed_delta);
 
-	//++
 	if (node->is_in_group("player2"))
 	{
 		if (decrease_attack_radius)
 			node->call("_decrease_attack_radius");
 
-		//+++++
 		if (encrease_attack_radius)
 			node->call("_encrease_attack_radius");
 	}

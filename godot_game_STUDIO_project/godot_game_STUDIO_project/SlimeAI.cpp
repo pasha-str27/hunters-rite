@@ -7,32 +7,33 @@ using namespace godot;
 
 Vector2 godot::SlimeAI::directions_swich(int value)
 {
+	float d = .5f;
 	Vector2 direction;
 	switch (value)
 	{
 	case 1:
-		direction = Vector2(-0.5, -0.5);
+		direction = Vector2(-d, -d);
 		break;
 	case 2:
-		direction = Vector2(0, -0.5);
+		direction = Vector2(0, -d);
 		break;
 	case 3:
-		direction = Vector2(0.5, -0.5);
+		direction = Vector2(d, -d);
 		break;
 	case 4:
-		direction = Vector2(-0.5, 0);
+		direction = Vector2(-d, 0);
 		break;
 	case 5:
-		direction = Vector2(0.5, 0);
+		direction = Vector2(d, 0);
 		break;
 	case 6:
-		direction = Vector2(-0.5, 0.5);
+		direction = Vector2(-d, d);
 		break;
 	case 7:
-		direction = Vector2(0, 0.5);
+		direction = Vector2(0, d);
 		break;
 	case 8:
-		direction = Vector2(0.5, 0.5);
+		direction = Vector2(d, d);
 		break;
 	default:
 		break;
@@ -132,7 +133,7 @@ void godot::SlimeAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2
 {
 	if (!can_move)
 		return;
-
+	double epsilone = .8;
 	cast_to<KinematicBody2D>(enemy)->move_and_slide(dir * speed);
 
 	if (is_cheking)
@@ -140,8 +141,8 @@ void godot::SlimeAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2
 
 	if (enemy->get_global_position().x >= 0 && enemy->get_global_position().y >= 0)
 	{
-		if (abs(enemy->get_global_position().x - ((int)(round(enemy->get_global_position().x)) / 32) * 32 - 16) <= 0.8
-			&& abs(enemy->get_global_position().y - ((int)(round(enemy->get_global_position().y)) / 32) * 32) <= 0.8 && !is_cheking)
+		if (abs(enemy->get_global_position().x - ((int)(round(enemy->get_global_position().x)) / 32) * 32 - 16) <= epsilone
+			&& abs(enemy->get_global_position().y - ((int)(round(enemy->get_global_position().y)) / 32) * 32) <= epsilone && !is_cheking)
 		{
 			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 + 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32));
 			is_cheking = true;
@@ -153,8 +154,8 @@ void godot::SlimeAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2
 
 	if (enemy->get_global_position().x < 0 && enemy->get_global_position().y < 0)
 	{
-		if (abs(enemy->get_global_position().x - ((int)(round(enemy->get_global_position().x)) / 32) * 32 + 16) <= 0.8
-			&& abs(enemy->get_global_position().y - ((int)(round(enemy->get_global_position().y)) / 32) * 32) <= 0.8 && !is_cheking)
+		if (abs(enemy->get_global_position().x - ((int)(round(enemy->get_global_position().x)) / 32) * 32 + 16) <= epsilone
+			&& abs(enemy->get_global_position().y - ((int)(round(enemy->get_global_position().y)) / 32) * 32) <= epsilone && !is_cheking)
 		{
 			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 - 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32));
 			is_cheking = true;
@@ -166,8 +167,8 @@ void godot::SlimeAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2
 
 	if (enemy->get_global_position().x < 0 && enemy->get_global_position().y > 0)
 	{
-		if (abs(enemy->get_global_position().x - ((int)(round(enemy->get_global_position().x)) / 32) * 32 + 16) <= 0.8
-			&& abs(enemy->get_global_position().y - ((int)(round(enemy->get_global_position().y)) / 32) * 32) <= 0.8 && !is_cheking)
+		if (abs(enemy->get_global_position().x - ((int)(round(enemy->get_global_position().x)) / 32) * 32 + 16) <= epsilone
+			&& abs(enemy->get_global_position().y - ((int)(round(enemy->get_global_position().y)) / 32) * 32) <= epsilone && !is_cheking)
 		{
 			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 - 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32));
 			is_cheking = true;
@@ -179,8 +180,8 @@ void godot::SlimeAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2
 
 	if (enemy->get_global_position().x > 0 && enemy->get_global_position().y < 0)
 	{
-		if (abs(enemy->get_global_position().x - ((int)(round(enemy->get_global_position().x)) / 32) * 32 - 16) <= 0.8
-			&& abs(enemy->get_global_position().y - ((int)(round(enemy->get_global_position().y)) / 32) * 32) <= 0.8 && !is_cheking)
+		if (abs(enemy->get_global_position().x - ((int)(round(enemy->get_global_position().x)) / 32) * 32 - 16) <= epsilone
+			&& abs(enemy->get_global_position().y - ((int)(round(enemy->get_global_position().y)) / 32) * 32) <= epsilone && !is_cheking)
 		{
 			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 + 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32));
 			is_cheking = true;

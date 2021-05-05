@@ -37,6 +37,11 @@ tracks/1/keys = {
 
 [node name="MetalSphere" type="Node2D"]
 script = ExtResource( 3 )
+speed = -50.0
+HP = 0.0
+damage = 10.0
+attack_speed_delta = 0.0
+number_to_next_item = 0
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -1.89171 )
