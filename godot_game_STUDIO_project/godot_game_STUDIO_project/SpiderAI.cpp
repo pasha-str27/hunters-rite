@@ -118,7 +118,7 @@ void godot::SpiderAI::_fight(Node2D* player1, Node2D* player2)
 			if (player1 == nullptr && player2 != nullptr)
 				bullet_dir = player2->get_global_position();
 			else
-				bullet_dir = Vector2(rng->randf_range(-100, 100), rng->randf_range(-100, 100));
+				bullet_dir = Vector2(rng->randf_range(-1, 1), rng->randf_range(-1, 1));
 		}
 	}
 
