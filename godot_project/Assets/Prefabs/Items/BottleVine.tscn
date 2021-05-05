@@ -37,6 +37,12 @@ tracks/1/keys = {
 
 [node name="BottleVine" type="Node2D"]
 script = ExtResource( 3 )
+speed = 0.0
+HP = -50.0
+damage = 30.0
+attack_speed_delta = 0.0
+number_to_next_item = 0
+"Is Buff" = false
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -1.89171 )

@@ -6,7 +6,7 @@
 #endif
 
 namespace godot {
-	static class CustomExtensions
+	class CustomExtensions
 	{
 	public:
 		static Array FindAll(Array arr, const std::function<bool(Node*)>& isCorrect) {

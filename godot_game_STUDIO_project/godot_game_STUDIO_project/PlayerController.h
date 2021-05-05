@@ -24,6 +24,9 @@ namespace godot
 
 		int number_to_next_item;
 		float attack_speed_delta;
+
+		Particles2D* hurt_particles = nullptr;
+		Particles2D* buff_debuff_particles = nullptr;
 	public:
 		static void _register_methods();
 		PlayerController();
@@ -61,5 +64,6 @@ namespace godot
 		float _get_max_HP();
 		void _on_enemy_die(Vector2 enemy_position);
 		bool _is_alive();
+		void _start_item_particles(bool is_buff);
 	};
 }

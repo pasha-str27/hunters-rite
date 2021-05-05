@@ -30,8 +30,10 @@ hue_variation = 0.85
 
 [node name="BuffDebuffParticles" type="Particles2D"]
 z_index = 3
+emitting = false
 amount = 50
 lifetime = 1.5
+one_shot = true
 speed_scale = 4.0
 explosiveness = 0.6
 visibility_rect = Rect2( 0, 0, 0, 0 )

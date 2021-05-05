@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 [ext_resource path="res://Assets/Prefabs/bullet_prefab.tscn" type="PackedScene" id=2]
@@ -22,6 +22,8 @@
 [ext_resource path="res://Assets/Prefabs/Items/FireSword.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Assets/Prefabs/Items/Boot.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Assets/Prefabs/Items/Chicken.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Assets/Prefabs/Particles/HurtParticles.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Assets/Prefabs/Particles/BuffDebuffParticles.tscn" type="PackedScene" id=24]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.6514
@@ -46,7 +48,7 @@ radius = 17.3234
 "player",
 "player1",
 ]]
-position = Vector2( -172.568, 65.9239 )
+position = Vector2( 128, 16 )
 z_index = 26
 collision_mask = 2
 script = ExtResource( 8 )
@@ -70,6 +72,11 @@ shape = SubResource( 2 )
 [node name="ItemGenerator" type="Node" parent="Player1"]
 script = ExtResource( 9 )
 "Count Enemies to Spawn" = 1
+
+[node name="HurtParticles" parent="Player1" instance=ExtResource( 23 )]
+z_index = 7
+
+[node name="BuffDebuffParticles" parent="Player1" instance=ExtResource( 24 )]
 
 [node name="Player2" type="KinematicBody2D" parent="." groups=[
 "player",
@@ -120,6 +127,11 @@ shape = SubResource( 5 )
 [node name="ItemGenerator" type="Node" parent="Player2"]
 script = ExtResource( 9 )
 "Count Enemies to Spawn" = 1
+
+[node name="HurtParticles" parent="Player2" instance=ExtResource( 23 )]
+z_index = 7
+
+[node name="BuffDebuffParticles" parent="Player2" instance=ExtResource( 24 )]
 
 [node name="BulletConteiner" type="Node" parent="."]
 

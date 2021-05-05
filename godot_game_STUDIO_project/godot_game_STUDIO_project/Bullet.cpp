@@ -29,6 +29,9 @@ void godot::Bullet::_init()
 
 void godot::Bullet::_on_Area2D_body_entered(Node* node)
 {
+	if (node->is_in_group("player") && !node->call("_is_alive"))
+		return;
+
 	if (!is_visible())
 		return;
 

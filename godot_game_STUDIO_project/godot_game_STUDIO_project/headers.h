@@ -8,6 +8,7 @@
 #include <CollisionObject2D.hpp>
 #include <Node.hpp>
 #include <Node2D.hpp>
+#include <Node.hpp>
 #include <Input.hpp>
 #include <PackedScene.hpp>
 #include <Vector2.hpp>
@@ -23,6 +24,8 @@
 #include <Array.hpp>
 #include <ProgressBar.hpp>
 #include <InputEventKey.hpp>
+#include <Particles2D.hpp>
+#include <ParticlesMaterial.hpp>
 
 #include "IPlayer.h"
 #include "PlayerData.h"
