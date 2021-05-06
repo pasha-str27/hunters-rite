@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-#include <AnimationPlayer.hpp>
-
 namespace godot
 {
 	class Item : public Node2D

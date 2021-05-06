@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-using namespace godot;
-
 void godot::Enemy::_register_methods()
 {
 	register_method("_ready", &Enemy::_ready);
@@ -190,7 +188,7 @@ void godot::Enemy::_start_timer_for_dir_change()
 	if (!timer_change_dir->is_connected("timeout", this, "_change_dir_after_time"))
 	{
 		timer_change_dir->connect("timeout", this, "_change_dir_after_time");
-		timer_change_dir->start(0.01);
+		timer_change_dir->start((real_t)0.01);
 	}
 }
 
@@ -273,6 +271,7 @@ void godot::Enemy::_change_dir_after_time()
 void godot::Enemy::_update_health_bar()
 {
 	auto health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(this, "HealthBar"));
+
 	if (health_bar != nullptr)
 		health_bar->set_value(HP);
 }

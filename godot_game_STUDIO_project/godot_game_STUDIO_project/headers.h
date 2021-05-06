@@ -24,6 +24,7 @@
 #include <Array.hpp>
 #include <ProgressBar.hpp>
 #include <InputEventKey.hpp>
+#include <AnimationPlayer.hpp>
 
 #include "IPlayer.h"
 #include "PlayerData.h"
@@ -56,3 +57,5 @@
 #include "SpawnEnemyController.h"
 #include "ItemsContainer.h"
 #include "ItemGenerator.h"
+
+using namespace godot;

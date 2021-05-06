@@ -7,6 +7,8 @@ godot::ReviveZone::ReviveZone()
 {
 	player_is_in_area = false;
 
+	random = nullptr;
+
 	//adding numbers
 	for(int i=48;i<=57;++i)
 		keys.push_back(i);
