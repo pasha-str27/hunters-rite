@@ -99,7 +99,6 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 	if (HP <= 0)
 		return;
 
-	Godot::print("player_id: " + String::num(player_id));
 	HP -= damage;
 	_update_health_bar();
 	if (HP <= 0)

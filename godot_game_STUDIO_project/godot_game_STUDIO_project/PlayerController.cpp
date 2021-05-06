@@ -124,7 +124,7 @@ void godot::PlayerController::_add_bullet(Node* node)
 	current_player->_add_bullet(node);
 }
 
-void godot::PlayerController::_input(Input* event)
+void godot::PlayerController::_input(InputEventKey* event)
 {
 	if (can_move && is_alive)
 		current_player->_process_input();
@@ -150,7 +150,8 @@ void godot::PlayerController::_on_Area2D_body_entered(Node* node)
 void godot::PlayerController::_on_Area2D_area_entered(Node* node)
 {
 	auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
-	if (node->is_in_group("door_zone")) {
+	if (node->is_in_group("door_zone")) 
+	{
 		camera->call("_door_collision", node->get_name(), 1);
 	}
 }
@@ -158,7 +159,8 @@ void godot::PlayerController::_on_Area2D_area_entered(Node* node)
 void godot::PlayerController::_on_Area2D_area_exited(Node* node)
 {
 	auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
-	if (node->is_in_group("door_zone")) {
+	if (node->is_in_group("door_zone")) 
+	{
 		camera->call("_door_collision", "-" + node->get_name(), 1);
 	}
 }

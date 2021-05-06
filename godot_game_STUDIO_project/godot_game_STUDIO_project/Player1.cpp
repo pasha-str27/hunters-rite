@@ -186,3 +186,8 @@ void  godot::Player1::_take_damage(float damage, bool is_spike)
 		_get_object()->call("_die");
 	}
 }
+
+void godot::Player1::_revive()
+{
+	PlayerData::_revive();
+}

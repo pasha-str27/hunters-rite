@@ -5,16 +5,19 @@
 
 namespace godot
 {
+	class InputReviveManager;
+
 	class ReviveZone :	public Area2D
 	{
 		GODOT_CLASS(ReviveZone, Area2D);
 
-		std::vector<int> keys;
 		RandomNumberGenerator *random;
 		
 		int current_key;
 
 		Timer* timer;
+
+		InputReviveManager *keys;
 
 		bool player_is_in_area;
 
@@ -25,7 +28,7 @@ namespace godot
 		void _init();
 		void _ready();
 		void _process();
-		void _input(Input* event);
+		void _input(Input* _event);
 		void _on_revive_zone_body_entered(Node* node);
 		void _on_revive_zone_body_exited(Node* node);
 		int _generate_key();

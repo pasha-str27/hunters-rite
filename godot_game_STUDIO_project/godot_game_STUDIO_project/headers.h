@@ -47,6 +47,7 @@
 #include "FlowerAI.h"
 #include "Item.h"
 #include "ReviveZone.h"
+#include "InputReviveManager.h"
 
 #include "Generation.h"
 #include "SpawnPointChecker.h"
