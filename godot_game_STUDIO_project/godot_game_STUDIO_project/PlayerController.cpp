@@ -38,7 +38,8 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_is_alive", &PlayerController::_is_alive);
 	register_method((char*)"_on_enemy_die", &PlayerController::_on_enemy_die);
 	register_method((char*)"_is_alive", &PlayerController::_is_alive);
-
+	register_method((char*)"_start_item_particles", &PlayerController::_start_item_particles);
+	
 	register_property<PlayerController, float>("speed", &PlayerController::speed, 400);
 	register_property<PlayerController, Ref<PackedScene>>("bullet_prefab", &PlayerController::bullet_prefab, nullptr);
 	register_property<PlayerController, Ref<PackedScene>>("revive_zone", &PlayerController::revive_zone, nullptr);
@@ -81,6 +82,8 @@ void godot::PlayerController::_ready()
 	current_player->_set_speed(speed);
 
 	item_generator = CustomExtensions::GetChildByName(this, "ItemGenerator")->call("_get_instance");
+
+	buff_debuff_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "BuffDebuffParticles"));
 }
 
 void godot::PlayerController::_start_timer()
@@ -139,6 +142,7 @@ void godot::PlayerController::_process(float delta)
 void godot::PlayerController::_take_damage(float damage, bool is_spike)
 {
 	current_player->_take_damage(damage, is_spike);
+	cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"))->set_emitting(true);
 }
 
 void godot::PlayerController::_on_Area2D_body_entered(Node* node)
@@ -293,4 +297,17 @@ void godot::PlayerController::_on_joy_connection_changed(int_fast64_t device_id,
 		Godot::print(Input::get_singleton()->get_joy_name(device_id));
 	else
 		Godot::print("Keyboard");
+}
+
+void godot::PlayerController::_start_item_particles(bool is_buff)
+{
+	Godot::print(String::num(buff_debuff_particles->get_process_material()->get("variation")));
+
+	if (is_buff)
+		buff_debuff_particles->get_process_material()->set("variation", 0);
+	else
+		buff_debuff_particles->get_process_material()->set("variation", 1);
+
+	Godot::print(String::num(buff_debuff_particles->get_process_material()->get("variation")));
+		buff_debuff_particles->set_emitting(true);
 }

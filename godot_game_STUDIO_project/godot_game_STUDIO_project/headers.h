@@ -25,6 +25,7 @@
 #include <ProgressBar.hpp>
 #include <InputEventKey.hpp>
 #include <AnimationPlayer.hpp>
+#include <Particles2D.hpp>
 
 #include "IPlayer.h"
 #include "PlayerData.h"

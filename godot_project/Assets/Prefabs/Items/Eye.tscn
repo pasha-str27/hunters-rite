@@ -43,6 +43,7 @@ damage = 20.0
 attack_speed_delta = 0.0
 number_to_next_item = 0
 decrease_attack_radius = true
+"Is Buff" = false
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -1.89171 )
