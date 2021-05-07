@@ -300,7 +300,8 @@ void godot::Enemy::_update_health_bar()
 
 void godot::Enemy::_change_animation(String _name = "", float speed_scale = 1)
 {
-	if (_name == "")
+	
+	if (_name == "" || sp == nullptr)
 		return;
 
 	if (_name == "stop")
