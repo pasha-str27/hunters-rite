@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-using namespace godot;
-
 godot::SpiderAI::SpiderAI(Ref<PackedScene>& bullet, Node2D* node_tmp, Node2D* player1, Node2D* player2)
 {
 	max_bullet_count = 5;
@@ -80,9 +78,11 @@ void godot::SpiderAI::_change_dir_after_time()
 		dir = Vector2(0, -0.5);
 		break;
 	case 2:
+		cast_to<AnimatedSprite>(enemy->get_child(1)->get_child(0))->set_flip_h(true);
 		dir = Vector2(-0.5, 0);
 		break;
 	case 3:
+		cast_to<AnimatedSprite>(enemy->get_child(1)->get_child(0))->set_flip_h(false);
 		dir = Vector2(0.5, 0);
 		break;
 	case 4:

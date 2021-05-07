@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-using namespace godot;
-
 void godot::CameraController::_move(String dir)
 {
 	if (dir == "top")

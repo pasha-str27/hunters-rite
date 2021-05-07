@@ -134,3 +134,8 @@ void godot::Player2::_set_HP(float value)
 		_get_object()->call("_die");
 	}
 }
+
+void godot::Player2::_revive()
+{
+	PlayerData::_revive();
+}

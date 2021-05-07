@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-using namespace godot;
-
 godot::Enemies* godot::Enemies::list = nullptr;
 
 godot::Enemies::Enemies()

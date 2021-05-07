@@ -1,7 +1,10 @@
 #pragma once
+#define _USE_MATH_DEFINES
+
 #include <vector>
 #include <string>
 #include <functional>
+#include <math.h>
 
 #include <Godot.hpp>
 #include <KinematicBody2D.hpp>
@@ -24,6 +27,7 @@
 #include <Array.hpp>
 #include <ProgressBar.hpp>
 #include <InputEventKey.hpp>
+#include <AnimationPlayer.hpp>
 #include <Particles2D.hpp>
 #include <ParticlesMaterial.hpp>
 #include <AnimatedSprite.hpp>
@@ -49,6 +53,9 @@
 #include "FlowerAI.h"
 #include "Item.h"
 #include "ReviveZone.h"
+#include "InputReviveManager.h"
+#include "StatueMeleeAI.h"
+#include "StatueShootAI.h"
 
 #include "Generation.h"
 #include "SpawnPointChecker.h"
@@ -59,3 +66,5 @@
 #include "SpawnEnemyController.h"
 #include "ItemsContainer.h"
 #include "ItemGenerator.h"
+
+using namespace godot;

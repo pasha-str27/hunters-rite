@@ -42,6 +42,7 @@ namespace godot
 		void _revive();
 		bool _was_revived();
 		float _get_max_HP();
+		void _set_max_HP(float value);
 
 		static Input* input_controller;
 	};

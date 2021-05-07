@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-using namespace godot;
-
 void godot::PlayerController::_register_methods()
 {
 	register_method((char*)"_process", &PlayerController::_process);
@@ -36,7 +34,8 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_change_can_fight", &PlayerController::_change_can_fight);
 	register_method((char*)"_die", &PlayerController::_die);
 	register_method((char*)"_revive", &PlayerController::_revive);
-	register_method((char*)"_get_max_HP", &PlayerController::_get_max_HP);
+	register_method((char*)"_set_max_HP", &PlayerController::_set_max_HP);
+	register_method((char*)"_is_alive", &PlayerController::_is_alive);
 	register_method((char*)"_on_enemy_die", &PlayerController::_on_enemy_die);
 	register_method((char*)"_is_alive", &PlayerController::_is_alive);
 	register_method((char*)"_start_item_particles", &PlayerController::_start_item_particles);
@@ -48,10 +47,13 @@ void godot::PlayerController::_register_methods()
 
 godot::PlayerController::PlayerController()
 {	
+	current_player = nullptr;
 	timer = Timer::_new();
 	attack_speed_delta = 0.5;
+	number_to_next_item = 15;
 	can_move = true;
 	is_alive = true;
+	speed = 250;
 }
 
 godot::PlayerController::~PlayerController()
@@ -67,6 +69,8 @@ void godot::PlayerController::_init()
 void godot::PlayerController::_ready()
 {
 	PlayerProduce* player_producer=nullptr;
+
+	Input::get_singleton()->connect("joy_connection_changed", this, "_on_joy_connection_changed");
 
 	if (get_name() == "Player1")
 		player_producer = new ProducePlayer1;
@@ -123,7 +127,7 @@ void godot::PlayerController::_add_bullet(Node* node)
 	current_player->_add_bullet(node);
 }
 
-void godot::PlayerController::_input(Input* event)
+void godot::PlayerController::_input(InputEventKey* event)
 {
 	if (can_move && is_alive)
 		current_player->_process_input();
@@ -150,16 +154,18 @@ void godot::PlayerController::_on_Area2D_body_entered(Node* node)
 void godot::PlayerController::_on_Area2D_area_entered(Node* node)
 {
 	auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
-	if (node->is_in_group("door_zone")) {
-		camera->call("_door_collision", node->get_name());
+	if (node->is_in_group("door_zone")) 
+	{
+		camera->call("_door_collision", node->get_name(), 1);
 	}
 }
 
 void godot::PlayerController::_on_Area2D_area_exited(Node* node)
 {
 	auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
-	if (node->is_in_group("door_zone")) {
-		camera->call("_door_collision", "-" + node->get_name());
+	if (node->is_in_group("door_zone")) 
+	{
+		camera->call("_door_collision", "-" + node->get_name(), 1);
 	}
 }
 
@@ -187,13 +193,13 @@ void godot::PlayerController::change_can_moving_timeout()
 void godot::PlayerController::_decrease_attack_radius()
 {
 	auto node = cast_to<Node2D>(get_child(1));
-	node->set_scale(Vector2(node->get_scale().x * 1.1111, 1));
+	node->set_scale(Vector2(node->get_scale().x * (real_t)1.1111, 1));
 }
 
 void godot::PlayerController::_encrease_attack_radius()
 {
 	auto node = cast_to<Node2D>(get_child(1));
-	node->set_scale(Vector2(node->get_scale().x * 0.9, 1));
+	node->set_scale(Vector2(node->get_scale().x * (real_t)0.9, 1));
 }
 
 void godot::PlayerController::_set_number_to_next_item(int value)
@@ -262,12 +268,17 @@ void godot::PlayerController::_revive()
 		Enemies::get_singleton()->_set_player2(this);
 
 	is_alive = true;
-	_set_HP(_get_max_HP() * 0.15);
+	_set_HP(_get_max_HP() *(float)0.15);
 }
 
 float godot::PlayerController::_get_max_HP()
 {
 	return current_player->_get_max_HP();
+}
+
+void godot::PlayerController::_set_max_HP(float value)
+{
+	current_player->_set_max_HP(value);
 }
 
 void godot::PlayerController::_on_enemy_die(Vector2 enemy_position)

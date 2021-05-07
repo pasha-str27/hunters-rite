@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/unnamed.png-bb1b93ae4e138561c1b371b914ec6d3f.stex"
+path="res://.import/large-red-circle_1f534.png-c6086b944c4ca928a644dcdd3a00d5d4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://unnamed.png"
-dest_files=[ "res://.import/unnamed.png-bb1b93ae4e138561c1b371b914ec6d3f.stex" ]
+source_file="res://Assets/Sprites/large-red-circle_1f534.png"
+dest_files=[ "res://.import/large-red-circle_1f534.png-c6086b944c4ca928a644dcdd3a00d5d4.stex" ]
 
 [params]
 
