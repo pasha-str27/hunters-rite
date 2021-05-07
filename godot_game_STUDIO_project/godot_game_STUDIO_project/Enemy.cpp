@@ -26,10 +26,12 @@ void godot::Enemy::_register_methods()
 	register_method("_change_angry_on_timeout", &Enemy::_change_angry_on_timeout);
 	register_method("_set_player1", &Enemy::_set_player1);
 	register_method("_set_player2", &Enemy::_set_player2);
-	register_method("_update_health_bar", &Enemy::_update_health_bar);	
-
+	register_method("_update_health_bar", &Enemy::_update_health_bar);
+	register_method("_change_animation", &Enemy::_change_animation);
+	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
+
 }
 
 godot::Enemy::Enemy()
@@ -63,6 +65,8 @@ void godot::Enemy::_ready()
 
 	add_child(timer_change_dir);
 	add_child(timer);
+
+	sp = cast_to<AnimatedSprite>(get_node("CollisionShape2D/AnimatedSprite"));
 
 	if (is_in_group("flower"))
 	{
@@ -128,6 +132,7 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 
 		died = true;
 		Enemies::get_singleton()->_remove_enemy(this);
+
 		if(Enemies::get_singleton()->_get_enemies_count() == 0)
 			CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->call("_open_doors");
 
@@ -160,7 +165,7 @@ void godot::Enemy::_on_timeout()
 {
 	timer->disconnect("timeout", this, "_on_timeout");
 
-	if(is_visible())
+	if (is_visible())
 		ai->change_can_fight(true);
 }
 
@@ -222,6 +227,7 @@ void godot::Enemy::_set_angry(Node* node)
 		{
 			ai->_set_speed(0);
 			entered = true;
+
 			if (!timer_change_dir->is_connected("timeout", this, "_change_angry_on_timeout"))
 			{
 				timer_change_dir->connect("timeout", this, "_change_angry_on_timeout");
@@ -241,7 +247,9 @@ void godot::Enemy::_set_angry_on_code(bool value)
 
 void godot::Enemy::_change_angry_on_timeout()
 {
+	_change_animation("attack", 1.5f);
 	timer_change_dir->disconnect("timeout", this, "_change_angry_on_timeout");
+
 	ai->_set_speed(200);
 	is_angry = true;
 }
@@ -263,6 +271,8 @@ bool godot::Enemy::_get_angry()
 
 void godot::Enemy::_stop_timer()
 {
+	_change_animation("idle", 1);
+
 	ai->_set_speed(100);
 	is_angry = false;
 	entered = false;
@@ -286,4 +296,20 @@ void godot::Enemy::_update_health_bar()
 
 	if (health_bar != nullptr)
 		health_bar->set_value(HP);
+}
+
+void godot::Enemy::_change_animation(String _name = "", float speed_scale = 1)
+{
+	
+	if (_name == "" || sp == nullptr)
+		return;
+
+	if (_name == "stop")
+	{
+		sp->stop();
+		return;
+	}
+
+	sp->play(_name);
+	sp->set_speed_scale(speed_scale);
 }

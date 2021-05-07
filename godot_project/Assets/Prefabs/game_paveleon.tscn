@@ -1,15 +1,15 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 [ext_resource path="res://Assets/Prefabs/bullet_prefab.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Prefabs/TileMaps.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Prefabs/Rooms/LRTB.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Prefabs/revive_zone.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Prefabs/Items/BadTusk.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Sprites/skull.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Scripts/ItemsContainer.gdns" type="Script" id=7]
 [ext_resource path="res://Assets/Scripts/PlayerController.gdns" type="Script" id=8]
 [ext_resource path="res://Assets/Scripts/ItemGenerator.gdns" type="Script" id=9]
-[ext_resource path="res://Assets/Prefabs/Enemies/Bat.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Prefabs/CameraPrefab.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Sprites/icon11.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Prefabs/Items/Glass.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/Prefabs/Items/Tusk.tscn" type="PackedScene" id=13]
@@ -25,10 +25,6 @@
 [ext_resource path="res://Assets/Prefabs/Particles/HurtParticles.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Assets/Prefabs/Particles/BuffDebuffParticles.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Assets/Prefabs/Enemies/statue_shoot.tscn" type="PackedScene" id=25]
-[ext_resource path="res://Assets/Prefabs/Enemies/Spider.tscn" type="PackedScene" id=26]
-[ext_resource path="res://Assets/Prefabs/Enemies/Slime.tscn" type="PackedScene" id=27]
-[ext_resource path="res://Assets/Scripts/SpawnEnemyController.gdns" type="Script" id=28]
-[ext_resource path="res://Assets/Scripts/CameraController.gdns" type="Script" id=29]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.6514
@@ -46,8 +42,6 @@ height = 71.1604
 
 [sub_resource type="CircleShape2D" id=5]
 radius = 17.3234
-
-[sub_resource type="RectangleShape2D" id=6]
 
 [node name="Node" type="Node"]
 
@@ -156,42 +150,7 @@ z_index = 7
 script = ExtResource( 7 )
 Items = [ ExtResource( 5 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 22 ), ExtResource( 19 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 13 ) ]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-zoom = Vector2( 0.75, 0.75 )
-script = ExtResource( 29 )
-
-[node name="EnemySpawner" type="Node2D" parent="Camera2D"]
-script = ExtResource( 28 )
-Enemies = [ ExtResource( 10 ), ExtResource( 27 ), ExtResource( 26 ) ]
-"Enemies Count" = 2
-
-[node name="SpawnPoints" type="Node2D" parent="Camera2D/EnemySpawner"]
-
-[node name="EnemySpawner" type="Node2D" parent="Camera2D/EnemySpawner/SpawnPoints"]
-position = Vector2( -16, 128 )
-
-[node name="EnemySpawner2" type="Node2D" parent="Camera2D/EnemySpawner/SpawnPoints"]
-position = Vector2( 272, -32 )
-
-[node name="EnemySpawner3" type="Node2D" parent="Camera2D/EnemySpawner/SpawnPoints"]
-position = Vector2( -16, -64 )
-
-[node name="EnemySpawner4" type="Node2D" parent="Camera2D/EnemySpawner/SpawnPoints"]
-position = Vector2( 240, 128 )
-
-[node name="EnemySpawner5" type="Node2D" parent="Camera2D/EnemySpawner/SpawnPoints"]
-position = Vector2( -240, 96 )
-
-[node name="Area2D" type="Area2D" parent="Camera2D"]
-scale = Vector2( 2, 2 )
-monitoring = false
-monitorable = false
-collision_layer = 0
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Area2D"]
-shape = SubResource( 6 )
+[node name="Camera2D" parent="." instance=ExtResource( 10 )]
 
 [connection signal="area_entered" from="Player1/Area2D" to="Player1" method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Player1/Area2D" to="Player1" method="_on_Area2D_area_exited"]
@@ -201,4 +160,3 @@ shape = SubResource( 6 )
 [connection signal="area_entered" from="Player2/Area2D" to="Player2" method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Player2/Area2D" to="Player2" method="_on_Area2D_area_exited"]
 [connection signal="body_entered" from="Player2/Area2D" to="Player2" method="_on_Area2D_body_entered"]
-[connection signal="area_entered" from="Camera2D/Area2D" to="Camera2D/EnemySpawner" method="_on_Area2D_area_entered"]
