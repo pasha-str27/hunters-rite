@@ -3,7 +3,6 @@
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CameraController.cpp" />
-    <ClCompile Include="Enemies.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyAIContext.cpp" />
     <ClCompile Include="FlowerAI.cpp" />
@@ -21,7 +20,6 @@
     <ClCompile Include="BatAI.cpp" />
     <ClCompile Include="EnemySideChecker.cpp" />
     <ClCompile Include="Item.cpp" />
-    <ClCompile Include="SlimeAI.cpp" />
     <ClCompile Include="ReviveZone.cpp" />
     <ClCompile Include="ItemGenerator.cpp" />
     <ClCompile Include="ItemsContainer.cpp" />
@@ -33,14 +31,15 @@
     <ClCompile Include="IPlayer.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="SpawnPointChecker.cpp" />
-    <ClCompile Include="InputReviveManager.cpp" />
     <ClCompile Include="StatueMeleeAI.cpp" />
     <ClCompile Include="StatueShootAI.cpp" />
+    <ClCompile Include="Enemies.cpp" />
+    <ClCompile Include="InputReviveManager.cpp" />
+    <ClCompile Include="SlimeAI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="CameraController.h" />
-    <ClInclude Include="Enemies.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="FlowerAI.h" />
     <ClInclude Include="headers.h" />
@@ -59,7 +58,6 @@
     <ClInclude Include="BatAI.h" />
     <ClInclude Include="EnemySideChecker.h" />
     <ClInclude Include="Item.h" />
-    <ClInclude Include="SlimeAI.h" />
     <ClInclude Include="ReviveZone.h" />
     <ClInclude Include="ItemGenerator.h" />
     <ClInclude Include="ItemsContainer.h" />
@@ -70,8 +68,10 @@
     <ClInclude Include="Generation.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="SpawnPointChecker.h" />
-    <ClInclude Include="InputReviveManager.h" />
     <ClInclude Include="StatueMeleeAI.h" />
     <ClInclude Include="StatueShootAI.h" />
+    <ClInclude Include="Enemies.h" />
+    <ClInclude Include="InputReviveManager.h" />
+    <ClInclude Include="SlimeAI.h" />
   </ItemGroup>
 </Project>

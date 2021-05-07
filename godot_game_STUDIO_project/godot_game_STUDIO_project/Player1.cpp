@@ -63,6 +63,12 @@ void godot::Player1::_process_input()
 		cast_to<Sprite>(_get_object()->get_child(0)->get_child(0))->set_flip_h(true);
 	}
 
+	//dash
+	if (input_controller->is_action_just_pressed("Player1_dash"))
+	{
+		_get_object()->call("_start_dash_timer");
+	}
+
 	//move up
 	if (input_controller->is_action_pressed("Player1_up"))
 	{

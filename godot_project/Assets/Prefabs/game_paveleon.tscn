@@ -55,7 +55,7 @@ position = Vector2( 128, 16 )
 z_index = 26
 collision_mask = 2
 script = ExtResource( 8 )
-speed = 401.0
+speed = 250.0
 bullet_prefab = ExtResource( 2 )
 revive_zone = ExtResource( 4 )
 
@@ -89,7 +89,7 @@ position = Vector2( -70.5948, 27.5255 )
 z_index = 26
 collision_mask = 2
 script = ExtResource( 8 )
-speed = 300.0
+speed = 200.0
 revive_zone = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
