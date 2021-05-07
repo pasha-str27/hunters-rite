@@ -10,7 +10,7 @@ godot::SpiderAI::SpiderAI(Ref<PackedScene>& bullet, Node2D* node_tmp, Node2D* pl
 	can_move = true;
 	is_cheking = false;
 	speed = 400;
-
+	
 	auto node = node_tmp->get_node("/root/Node2D/Node/BulletConteinerSpider");
 
 	for (int i = 0; i < max_bullet_count; ++i)
@@ -33,6 +33,8 @@ void godot::SpiderAI::_add_bullet(Node* node)
 void godot::SpiderAI::change_can_fight(bool value)
 {
 	can_move = value;
+	if(value)
+		enemy->call("_change_animation", "run", 2);
 }
 
 void godot::SpiderAI::reset_directions()
@@ -93,6 +95,8 @@ void godot::SpiderAI::_change_dir_after_time()
 
 void godot::SpiderAI::_fight(Node2D* player1, Node2D* player2)
 {
+	enemy->call("_change_animation", "idle", 1);
+
 	can_move = false;
 	enemy->call("_start_timer");
 
@@ -165,7 +169,6 @@ void godot::SpiderAI::_process(float delta, Node2D* enemy, Node2D* player1, Node
 	if (!can_move)
 		return;
 
-	//Godot::print(String::num(old_pos.distance_to(enemy->get_global_position())));
 	cast_to<KinematicBody2D>(enemy)->set_global_position(cast_to<KinematicBody2D>(enemy)->get_global_position() + dir * delta * 235);
 
 	if (is_cheking)
@@ -176,74 +179,10 @@ void godot::SpiderAI::_process(float delta, Node2D* enemy, Node2D* player1, Node
 		|| (abs(old_pos.distance_to(enemy->get_global_position()) - sqrt(32 * 32 + 32 * 32)) <= 4.5
 			&& (dir == Vector2(0.5, 0.5) || dir == Vector2(-0.5, 0.5) || dir == Vector2(0.5, -0.5) || dir == Vector2(-0.5, -0.5)))))
 	{
-		/*if (enemy->get_global_position().x >= 0 && enemy->get_global_position().y >= 0)
-			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 + 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32));
-
-		if (enemy->get_global_position().x < 0 && enemy->get_global_position().y < 0)
-			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 - 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32));
-
-		if (enemy->get_global_position().x < 0 && enemy->get_global_position().y > 0)
-			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 - 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32));
-
-		if (enemy->get_global_position().x > 0 && enemy->get_global_position().y < 0)
-			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 + 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32));*/
-
 		is_cheking = true;
 		_fight(player1, player2);
 		change_direction();
 		old_pos = enemy->get_global_position();
 		return;
 	}
-
-	/*if (enemy->get_global_position().x >= 0 && enemy->get_global_position().y >= 0)
-	{
-		if (abs(enemy->get_global_position().x - ((int)(round(enemy->get_global_position().x)) / 32) * 32 - 16) <= 0.8
-			&& abs(enemy->get_global_position().y - ((int)(round(enemy->get_global_position().y)) / 32) * 32) <= 0.8 && !is_cheking)
-		{
-			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 + 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32));
-			is_cheking = true;
-			_fight(player1, player2);
-			change_direction();
-			return;
-		}
-	}
-
-	if (enemy->get_global_position().x < 0 && enemy->get_global_position().y < 0)
-	{
-		if (abs(enemy->get_global_position().x - ((int)(round(enemy->get_global_position().x)) / 32) * 32 + 16) <= 0.8
-			&& abs(enemy->get_global_position().y - ((int)(round(enemy->get_global_position().y)) / 32) * 32) <= 0.8 && !is_cheking)
-		{
-			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 - 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32));
-			is_cheking = true;
-			_fight(player1, player2);
-			change_direction();
-			return;
-		}
-	}
-	
-	if (enemy->get_global_position().x < 0 && enemy->get_global_position().y > 0)
-	{
-		if (abs(enemy->get_global_position().x - ((int)(round(enemy->get_global_position().x)) / 32) * 32 + 16) <= 0.8
-			&& abs(enemy->get_global_position().y - ((int)(round(enemy->get_global_position().y)) / 32) * 32) <= 0.8 && !is_cheking)
-		{
-			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 - 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32));
-			is_cheking = true;
-			_fight(player1, player2);
-			change_direction();
-			return;
-		}
-	}
-	
-	if (enemy->get_global_position().x > 0 && enemy->get_global_position().y < 0)
-	{
-		if (abs(enemy->get_global_position().x - ((int)(round(enemy->get_global_position().x)) / 32) * 32 - 16) <= 0.8
-			&& abs(enemy->get_global_position().y - ((int)(round(enemy->get_global_position().y)) / 32) * 32) <= 0.8 && !is_cheking)
-		{
-			enemy->set_global_position(Vector2(((int)(round(enemy->get_global_position().x)) / 32) * 32 + 16, ((int)(round(enemy->get_global_position().y)) / 32) * 32 ));
-			is_cheking = true;
-			_fight(player1, player2);
-			change_direction();
-			return;
-		}
-	}*/
 }
