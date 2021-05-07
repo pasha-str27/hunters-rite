@@ -291,23 +291,12 @@ bool godot::PlayerController::_is_alive()
 	return is_alive;
 }
 
-void godot::PlayerController::_on_joy_connection_changed(int_fast64_t device_id, bool connected)
-{
-	if (connected)
-		Godot::print(Input::get_singleton()->get_joy_name(device_id));
-	else
-		Godot::print("Keyboard");
-}
-
 void godot::PlayerController::_start_item_particles(bool is_buff)
 {
-	Godot::print(String::num(buff_debuff_particles->get_process_material()->get("variation")));
-
 	if (is_buff)
-		buff_debuff_particles->get_process_material()->set("variation", 0);
+		buff_debuff_particles->get_process_material()->set("hue_variation", .85);
 	else
-		buff_debuff_particles->get_process_material()->set("variation", 1);
+		buff_debuff_particles->get_process_material()->set("hue_variation", -.85);
 
-	Godot::print(String::num(buff_debuff_particles->get_process_material()->get("variation")));
-		buff_debuff_particles->set_emitting(true);
+	buff_debuff_particles->set_emitting(true);
 }

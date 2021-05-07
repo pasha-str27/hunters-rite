@@ -65,7 +65,6 @@ namespace godot
 		void _set_max_HP(float value);
 		void _on_enemy_die(Vector2 enemy_position);
 		bool _is_alive();
-		void _on_joy_connection_changed(int_fast64_t device_id, bool connected);
 		void _start_item_particles(bool is_buff);
 	};
 }

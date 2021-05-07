@@ -76,9 +76,11 @@ void godot::SpiderAI::_change_dir_after_time()
 		dir = Vector2(0, -0.5);
 		break;
 	case 2:
+		cast_to<AnimatedSprite>(enemy->get_child(1)->get_child(0))->set_flip_h(true);
 		dir = Vector2(-0.5, 0);
 		break;
 	case 3:
+		cast_to<AnimatedSprite>(enemy->get_child(1)->get_child(0))->set_flip_h(false);
 		dir = Vector2(0.5, 0);
 		break;
 	case 4:

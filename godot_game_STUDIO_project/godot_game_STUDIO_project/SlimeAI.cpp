@@ -10,27 +10,33 @@ Vector2 godot::SlimeAI::directions_swich(int value)
 	switch (value)
 	{
 	case 1:
+		cast_to<AnimatedSprite>(enemy->get_child(1)->get_child(0))->set_flip_h(false);
 		direction = Vector2(-d, -d);
 		break;
 	case 2:
 		direction = Vector2(0, -d);
 		break;
 	case 3:
+		cast_to<AnimatedSprite>(enemy->get_child(1)->get_child(0))->set_flip_h(true);
 		direction = Vector2(d, -d);
 		break;
 	case 4:
+		cast_to<AnimatedSprite>(enemy->get_child(1)->get_child(0))->set_flip_h(false);
 		direction = Vector2(-d, 0);
 		break;
 	case 5:
+		cast_to<AnimatedSprite>(enemy->get_child(1)->get_child(0))->set_flip_h(true);
 		direction = Vector2(d, 0);
 		break;
 	case 6:
+		cast_to<AnimatedSprite>(enemy->get_child(1)->get_child(0))->set_flip_h(false);
 		direction = Vector2(-d, d);
 		break;
 	case 7:
 		direction = Vector2(0, d);
 		break;
 	case 8:
+		cast_to<AnimatedSprite>(enemy->get_child(1)->get_child(0))->set_flip_h(true);
 		direction = Vector2(d, d);
 		break;
 	default:

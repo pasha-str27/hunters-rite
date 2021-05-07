@@ -12,50 +12,50 @@ bg_color = Color( 1, 0, 0, 1 )
 radius = 7.71742
 height = 0.0
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 36, 31 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 36, 0, 36, 31 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=5]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 72, 0, 36, 31 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=6]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 108, 0, 36, 31 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=7]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 144, 0, 36, 31 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=8]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 180, 0, 36, 31 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=9]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 216, 0, 36, 31 )
 
-[sub_resource type="SpriteFrames" id=11]
+[sub_resource type="SpriteFrames" id=10]
 animations = [ {
-"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
 "loop": true,
 "name": "default",
 "speed": 15.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 4.89366, 4.97602 )
 
 [node name="Spider" type="KinematicBody2D" groups=[
@@ -82,7 +82,8 @@ __meta__ = {
 shape = SubResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="CollisionShape2D"]
-frames = SubResource( 11 )
+frames = SubResource( 10 )
+frame = 1
 playing = true
 
 [node name="Area2D2" type="Area2D" parent="."]
@@ -93,7 +94,7 @@ script = ExtResource( 4 )
 side = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
-shape = SubResource( 3 )
+shape = SubResource( 11 )
 
 [node name="Area2D4" type="Area2D" parent="."]
 position = Vector2( -31.514, -0.703 )
@@ -103,7 +104,7 @@ script = ExtResource( 4 )
 side = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D4"]
-shape = SubResource( 3 )
+shape = SubResource( 11 )
 
 [node name="Area2D5" type="Area2D" parent="."]
 position = Vector2( 32.486, -0.703 )
@@ -113,7 +114,7 @@ script = ExtResource( 4 )
 side = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D5"]
-shape = SubResource( 3 )
+shape = SubResource( 11 )
 
 [node name="Area2D7" type="Area2D" parent="."]
 position = Vector2( 0.486, 31.297 )
@@ -123,7 +124,7 @@ script = ExtResource( 4 )
 side = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D7"]
-shape = SubResource( 3 )
+shape = SubResource( 11 )
 
 [connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D2" to="Area2D2" method="_on_Area2D_body_exited"]
