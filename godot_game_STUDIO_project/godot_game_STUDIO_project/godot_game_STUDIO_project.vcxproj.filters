@@ -3,7 +3,6 @@
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CameraController.cpp" />
-    <ClCompile Include="Enemies.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyAIContext.cpp" />
     <ClCompile Include="FlowerAI.cpp" />
@@ -14,25 +13,32 @@
     <ClCompile Include="PlayerData.cpp" />
     <ClCompile Include="ProducePlayer1.cpp" />
     <ClCompile Include="ProducePlayer2.cpp" />
-    <ClCompile Include="SpiderAI.cpp" />
     <ClCompile Include="Spike.cpp" />
     <ClCompile Include="Sword.cpp" />
-    <ClCompile Include="SpawnEnemyController.cpp" />
+    <ClCompile Include="IPlayer.cpp" />
+    <ClCompile Include="SimpleEnemyAI.cpp" />
     <ClCompile Include="BatAI.cpp" />
+    <ClCompile Include="ClosedRoom.cpp" />
+    <ClCompile Include="CustomExtensions.cpp" />
+    <ClCompile Include="Destroyer.cpp" />
+    <ClCompile Include="Door.cpp" />
     <ClCompile Include="EnemySideChecker.cpp" />
+    <ClCompile Include="Generation.cpp" />
     <ClCompile Include="Item.cpp" />
-    <ClCompile Include="SlimeAI.cpp" />
-    <ClCompile Include="ReviveZone.cpp" />
     <ClCompile Include="ItemGenerator.cpp" />
     <ClCompile Include="ItemsContainer.cpp" />
-    <ClCompile Include="InputReviveManager.cpp" />
+    <ClCompile Include="ReviveZone.cpp" />
+    <ClCompile Include="Room.cpp" />
+    <ClCompile Include="SpawnEnemyController.cpp" />
+    <ClCompile Include="SpawnPointChecker.cpp" />
+    <ClCompile Include="SpiderAI.cpp" />
+    <ClCompile Include="SpiderSide.cpp" />
     <ClCompile Include="StatueMeleeAI.cpp" />
     <ClCompile Include="StatueShootAI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="CameraController.h" />
-    <ClInclude Include="Enemies.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="FlowerAI.h" />
     <ClInclude Include="headers.h" />
@@ -44,18 +50,25 @@
     <ClInclude Include="PlayerProduce.h" />
     <ClInclude Include="ProducePlayer1.h" />
     <ClInclude Include="ProducePlayer2.h" />
-    <ClInclude Include="SpiderAI.h" />
     <ClInclude Include="Spike.h" />
     <ClInclude Include="Sword.h" />
-    <ClInclude Include="SpawnEnemyController.h" />
+    <ClInclude Include="SimpleEnemyAI.h" />
     <ClInclude Include="BatAI.h" />
+    <ClInclude Include="ClosedRoom.h" />
+    <ClInclude Include="CustomExtensions.h" />
+    <ClInclude Include="Destroyer.h" />
+    <ClInclude Include="Door.h" />
     <ClInclude Include="EnemySideChecker.h" />
+    <ClInclude Include="Generation.h" />
     <ClInclude Include="Item.h" />
-    <ClInclude Include="SlimeAI.h" />
-    <ClInclude Include="ReviveZone.h" />
     <ClInclude Include="ItemGenerator.h" />
     <ClInclude Include="ItemsContainer.h" />
-    <ClInclude Include="InputReviveManager.h" />
+    <ClInclude Include="ReviveZone.h" />
+    <ClInclude Include="Room.h" />
+    <ClInclude Include="SpawnEnemyController.h" />
+    <ClInclude Include="SpawnPointChecker.h" />
+    <ClInclude Include="SpiderAI.h" />
+    <ClInclude Include="SpiderSide.h" />
     <ClInclude Include="StatueMeleeAI.h" />
     <ClInclude Include="StatueShootAI.h" />
   </ItemGroup>
