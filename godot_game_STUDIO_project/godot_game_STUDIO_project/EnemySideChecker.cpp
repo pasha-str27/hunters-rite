@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-using namespace godot;
-
 void godot::EnemySideChecker::_register_methods()
 {
 	register_method("_init", &EnemySideChecker::_init);
@@ -19,6 +17,7 @@ void godot::EnemySideChecker::_register_methods()
 
 void godot::EnemySideChecker::_on_Area2D_body_entered(Node2D* node)
 {
+	Godot::print(node->get_name());
 	is_in_boby = true;
 	current_node = node;
 }

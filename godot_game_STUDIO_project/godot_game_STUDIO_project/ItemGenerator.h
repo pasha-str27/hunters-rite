@@ -4,9 +4,12 @@
 #include "headers.h"
 #endif
 
-namespace godot {
+namespace godot
+{
 	class ItemsContainer;
-	class ItemGenerator : public Node {
+
+	class ItemGenerator : public Node 
+	{
 	private:
 		GODOT_CLASS(ItemGenerator, Node);
 	public:

@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-using namespace godot;
-
 void godot::Enemy::_register_methods()
 {
 	register_method("_ready", &Enemy::_ready);
@@ -29,9 +27,11 @@ void godot::Enemy::_register_methods()
 	register_method("_set_player1", &Enemy::_set_player1);
 	register_method("_set_player2", &Enemy::_set_player2);
 	register_method("_update_health_bar", &Enemy::_update_health_bar);
+	register_method("_change_animation", &Enemy::_change_animation);
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
+
 }
 
 godot::Enemy::Enemy()
@@ -66,6 +66,8 @@ void godot::Enemy::_ready()
 	add_child(timer_change_dir);
 	add_child(timer);
 
+	sp = cast_to<AnimatedSprite>(get_node("CollisionShape2D/AnimatedSprite"));
+
 	if (is_in_group("flower"))
 	{
 		ai->_set_strategy(new FlowerAI(bullet, this));
@@ -89,6 +91,18 @@ void godot::Enemy::_ready()
 		ai->_set_strategy(new BatAI(bullet, this, ai->get_player1(), ai->get_player2()));
 		return;
 	}
+
+	if (is_in_group("statue_melee"))
+	{
+		ai->_set_strategy(new StatueMeleeAI(bullet, this, ai->get_player1(), ai->get_player2()));
+		return;
+	}
+
+	if (is_in_group("statue_shoot"))
+	{
+		ai->_set_strategy(new StatueShootAI(bullet, this, ai->get_player1(), ai->get_player2()));
+		return;
+	}
 }
 
 void godot::Enemy::_process(float delta)
@@ -98,10 +112,10 @@ void godot::Enemy::_process(float delta)
 
 void godot::Enemy::_take_damage(float damage, int player_id)
 {
+	Godot::print(String::num(player_id));
 	if (HP <= 0)
 		return;
 
-	Godot::print("player_id: " + String::num(player_id));
 	HP -= damage;
 	_update_health_bar();
 	if (HP <= 0)
@@ -118,6 +132,7 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 
 		died = true;
 		Enemies::get_singleton()->_remove_enemy(this);
+
 		if(Enemies::get_singleton()->_get_enemies_count() == 0)
 			CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->call("_open_doors");
 
@@ -150,7 +165,7 @@ void godot::Enemy::_on_timeout()
 {
 	timer->disconnect("timeout", this, "_on_timeout");
 
-	if(is_visible())
+	if (is_visible())
 		ai->change_can_fight(true);
 }
 
@@ -190,7 +205,82 @@ void godot::Enemy::_start_timer_for_dir_change()
 	if (!timer_change_dir->is_connected("timeout", this, "_change_dir_after_time"))
 	{
 		timer_change_dir->connect("timeout", this, "_change_dir_after_time");
-		timer_change_dir->start(0.01);
+		timer_change_dir->start((real_t)0.01);
+	}
+}
+
+void godot::Enemy::_on_Area2D_body_entered(Node* node)
+{
+	float damage = 20;
+	if (is_angry)
+		damage = 30;
+
+	if (node->is_in_group("player") && !died)
+		node->call("_take_damage", damage, false);
+}
+
+void godot::Enemy::_set_angry(Node* node)
+{
+	if (node->is_in_group(ai->_get_current_player()))
+	{
+		if (!entered && !is_angry)
+		{
+			ai->_set_speed(0);
+			entered = true;
+
+			if (!timer_change_dir->is_connected("timeout", this, "_change_angry_on_timeout"))
+			{
+				timer_change_dir->connect("timeout", this, "_change_angry_on_timeout");
+				timer_change_dir->start(1);
+			}
+			return;
+		}
+
+		_stop_timer();
+	}
+}
+
+void godot::Enemy::_set_angry_on_code(bool value)
+{
+	is_angry = value;
+}
+
+void godot::Enemy::_change_angry_on_timeout()
+{
+	_change_animation("attack", 1.5f);
+	timer_change_dir->disconnect("timeout", this, "_change_angry_on_timeout");
+
+	ai->_set_speed(200);
+	is_angry = true;
+}
+
+void godot::Enemy::_set_player1(Node* player)
+{
+	ai->set_player1(cast_to<Node2D>(player));
+}
+
+void godot::Enemy::_set_player2(Node* player)
+{
+	ai->set_player2(cast_to<Node2D>(player));
+}
+
+bool godot::Enemy::_get_angry()
+{
+	return is_angry;
+}
+
+void godot::Enemy::_stop_timer()
+{
+	_change_animation("idle", 1);
+
+	ai->_set_speed(100);
+	is_angry = false;
+	entered = false;
+
+	if (timer_change_dir->is_connected("timeout", this, "_change_angry_on_timeout"))
+	{
+		timer_change_dir->stop();
+		timer_change_dir->disconnect("timeout", this, "_change_angry_on_timeout");
 	}
 }
 
@@ -273,6 +363,23 @@ void godot::Enemy::_change_dir_after_time()
 void godot::Enemy::_update_health_bar()
 {
 	auto health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(this, "HealthBar"));
+
 	if (health_bar != nullptr)
 		health_bar->set_value(HP);
+}
+
+void godot::Enemy::_change_animation(String _name = "", float speed_scale = 1)
+{
+	
+	if (_name == "" || sp == nullptr)
+		return;
+
+	if (_name == "stop")
+	{
+		sp->stop();
+		return;
+	}
+
+	sp->play(_name);
+	sp->set_speed_scale(speed_scale);
 }

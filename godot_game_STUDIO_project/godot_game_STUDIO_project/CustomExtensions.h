@@ -5,13 +5,16 @@
 #include "headers.h"
 #endif
 
-namespace godot {
-	static class CustomExtensions
+namespace godot
+{
+	class CustomExtensions
 	{
 	public:
-		static Array FindAll(Array arr, const std::function<bool(Node*)>& isCorrect) {
+		static Array FindAll(Array arr, const std::function<bool(Node*)>& isCorrect)
+		{
 			Array returned = {};
-			for (int i = 0; i < arr.size(); i++) {
+			for (int i = 0; i < arr.size(); i++) 
+			{
 				auto a = arr[i];
 				if (isCorrect(a))
 					returned.push_back(a);
@@ -19,9 +22,12 @@ namespace godot {
 			return returned;
 		}
 
-		static Array FindAll(Array arr, const std::function<bool(String)>& isCorrect) {
+		static Array FindAll(Array arr, const std::function<bool(String)>& isCorrect)
+		{
 			Array returned = {};
-			for (int i = 0; i < arr.size(); i++) {
+
+			for (int i = 0; i < arr.size(); i++)
+			{
 				auto a = arr[i];
 				if (isCorrect(a))
 					returned.push_back(a);
@@ -29,9 +35,11 @@ namespace godot {
 			return returned;
 		}
 
-		static PackedScene* Find(Array arr, const std::function<bool(Node*)>& isCorrect) {
+		static PackedScene* Find(Array arr, const std::function<bool(Node*)>& isCorrect)
+		{
 			Array returned = {};
-			for (int i = 0; i < arr.size(); i++) {
+			for (int i = 0; i < arr.size(); i++) 
+			{
 				auto a = arr[i];
 				if (isCorrect(a))
 					return Object::cast_to<PackedScene>(a);
@@ -39,16 +47,18 @@ namespace godot {
 			return nullptr;
 		}
 
-		static void AddRange(Array &addTo, Array &whatToAdd) {
-			for (int i = 0; i < whatToAdd.size(); i++) {
+		static void AddRange(Array &addTo, Array &whatToAdd) 
+		{
+			for (int i = 0; i < whatToAdd.size(); i++) 
 				addTo.push_back(whatToAdd[i]);
-			}
 		}
 
-		static Array GetComponentsInChildren(Node2D *_this, NodePath parent_node_name) {
+		static Array GetComponentsInChildren(Node2D *_this, NodePath parent_node_name)
+		{
 			Array arr = _this->get_node(parent_node_name)->get_children();
 			Array children_instances = {};
-			for (int i = 0; i < arr.size(); i++) {
+			for (int i = 0; i < arr.size(); i++) 
+			{
 				auto instance = Object::cast_to<Node2D>(arr[i])->call("_get_instance");
 				if(instance != nullptr)
 					children_instances.push_back(instance);
@@ -57,18 +67,14 @@ namespace godot {
 		}
 
 		//	return nullptr if no found
-		static Node* GetChildByName(Node *parent, String child_name) {
+		static Node* GetChildByName(Node *parent, String child_name) 
+		{
 			Array children = parent->get_children();
-			for (int i = 0; i < children.size(); i++) {
+			for (int i = 0; i < children.size(); i++)
 				if (Object::cast_to<Node>(children[i])->get_name() == child_name) 
 					return Object::cast_to<Node>(children[i]);
-				
-			}
+
 			return nullptr;
 		}
-
 	};
 }
-
-
-

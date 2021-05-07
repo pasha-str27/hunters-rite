@@ -1,13 +1,10 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
-[ext_resource path="res://Assets/Prefabs/bullet_prefab.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Prefabs/TileMaps.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Prefabs/Rooms/LRTB.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Prefabs/flower.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Attack-0.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Sprites/skull.png" type="Texture" id=6]
-[ext_resource path="res://Scripts/PlayerController.gdns" type="Script" id=8]
-[ext_resource path="res://Scripts/Enemy.gdns" type="Script" id=9]
 [ext_resource path="res://CameraController.gdns" type="Script" id=10]
 [ext_resource path="res://Assets/Sprites/icon11.png" type="Texture" id=11]
 
@@ -40,9 +37,6 @@ height = 7.08337
 position = Vector2( -175.431, 38.459 )
 z_index = 26
 collision_mask = 2
-script = ExtResource( 8 )
-speed = 250.0
-bullet_prefab = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
 shape = SubResource( 1 )
@@ -63,8 +57,6 @@ shape = SubResource( 2 )
 position = Vector2( -70.6213, 42.4418 )
 z_index = 26
 collision_mask = 2
-script = ExtResource( 8 )
-speed = 300.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
 shape = SubResource( 1 )
@@ -109,7 +101,6 @@ shape = SubResource( 5 )
 position = Vector2( -111.943, 96.8002 )
 z_index = 25
 collision_layer = 4
-script = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
 shape = SubResource( 6 )
@@ -127,7 +118,6 @@ texture = ExtResource( 5 )
 position = Vector2( 113.557, 78.5777 )
 z_index = 25
 collision_layer = 4
-script = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy2"]
 shape = SubResource( 6 )

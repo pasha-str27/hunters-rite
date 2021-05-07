@@ -7,13 +7,9 @@ godot::ReviveZone::ReviveZone()
 {
 	player_is_in_area = false;
 
-	//adding numbers
-	for(int i=48;i<=57;++i)
-		keys.push_back(i);
+	keys = new InputReviveManager;
 
-	//adding symbols
-	for (int i = 65; i <= 90; ++i)
-		keys.push_back(i);
+	random = nullptr;
 
 	current_key = -1;
 	timer = Timer::_new();
@@ -21,7 +17,7 @@ godot::ReviveZone::ReviveZone()
 
 godot::ReviveZone::~ReviveZone()
 {
-	keys.clear();
+	//keys.clear();
 }
 
 void godot::ReviveZone::_register_methods()
@@ -41,27 +37,35 @@ void godot::ReviveZone::_init()
 
 void godot::ReviveZone::_ready()
 {
-	random = RandomNumberGenerator::_new();
-	random->randomize();
 	add_child(timer);
 	timer->connect("timeout", this, "_kill_revive_progress");
 	timer->start(0.1);
+
+	Godot::print(get_parent()->get_name());
+
+	if (get_parent()->is_in_group("player1"))
+	{
+		keys->_set_player1_buttons();
+		Godot::print(keys->_get_current_key());
+		return;
+	}
+	keys->_set_player2_buttons();
 }
 
 void godot::ReviveZone::_process()
 {
 }
 
-void godot::ReviveZone::_input(Input* event)
+void godot::ReviveZone::_input(Input* _event)
 {
 	if (!player_is_in_area)
 		return;
 
-	if (cast_to<InputEventKey>(event)->get_scancode() == current_key)
+	if (Input::get_singleton()->is_action_just_released(keys->_get_current_key()))
 	{
-		current_key = _generate_key();
+		keys->_generate_new_key();
 
-		Godot::print("Enter " + OS::get_singleton()->get_scancode_string(current_key));
+		Godot::print("Enter " + keys->_get_current_key()/*keys->_get_current_key().split("_")[1]*/);
 
 		cast_to<ProgressBar>(get_child(1))->set_value(cast_to<ProgressBar>(get_child(1))->get_value() + 30);
 
@@ -87,10 +91,8 @@ void godot::ReviveZone::_on_revive_zone_body_entered(Node* node)
 
 	set_visible(true);
 
-	if (current_key == -1)
-		current_key = _generate_key();
 
-	Godot::print("Enter " + OS::get_singleton()->get_scancode_string(current_key));
+	Godot::print("Enter " + keys->_get_current_key()/*keys->_get_current_key().split("_")[1]*/);
 }
 
 void godot::ReviveZone::_on_revive_zone_body_exited(Node* node)
@@ -106,7 +108,7 @@ void godot::ReviveZone::_on_revive_zone_body_exited(Node* node)
 
 int godot::ReviveZone::_generate_key()
 {
-	return keys[random->randi_range(0,keys.size()-1)];
+	return /*keys[random->randi_range(0,keys.size()-1)]*/0;
 }
 
 void godot::ReviveZone::_kill_revive_progress()

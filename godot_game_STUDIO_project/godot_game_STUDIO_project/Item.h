@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-#include <AnimationPlayer.hpp>
-
 namespace godot
 {
 	class Item : public Node2D
@@ -20,6 +18,7 @@ namespace godot
 		bool encrease_attack_radius;
 		int number_to_next_item;
 		float attack_speed_delta;
+		bool is_buff = true;
 
 	public:
 		static void _register_methods();
@@ -29,5 +28,6 @@ namespace godot
 		void _init();
 		void _process();
 		void _on_Area2D_body_entered(Node* node);
+		bool _get_is_buff();
 	};
 }

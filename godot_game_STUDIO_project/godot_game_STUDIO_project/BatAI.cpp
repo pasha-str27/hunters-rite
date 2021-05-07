@@ -107,6 +107,11 @@ void godot::BatAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2D*
 	if(!enemy->call("_get_angry"))
 		dir = (current_goal->get_global_position() - enemy->get_global_position()).normalized();
 
+	if(dir.x < 0)
+		cast_to<AnimatedSprite>(enemy->get_child(1)->get_child(0))->set_flip_h(false);
+	else
+		cast_to<AnimatedSprite>(enemy->get_child(1)->get_child(0))->set_flip_h(true);
+
 	if (current_player == "")
 	{
 		RandomNumberGenerator* random = RandomNumberGenerator::_new();

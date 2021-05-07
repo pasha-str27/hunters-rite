@@ -35,5 +35,6 @@ namespace godot
 
 		void _set_speed(float speed);
 		void _take_damage(float damage, bool is_spike = false);
+		void _revive();
 	};
 }
