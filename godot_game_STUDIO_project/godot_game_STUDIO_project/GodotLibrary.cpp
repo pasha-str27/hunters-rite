@@ -3,9 +3,6 @@
 #include "headers.h"
 #endif
 
-
-using namespace godot;
-
 extern "C" void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options * o)
 {
 	Godot::gdnative_init(o);	
@@ -38,7 +35,11 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<Sword>();
 	register_class<CameraController>();
 	register_class<Spike>();
-	register_class<SpiderSide>();
 	register_class<MenuButtons>();
-
+	
+	register_class<EnemySideChecker>();
+	register_class<Item>();
+	register_class<ReviveZone>();
+	register_class<ItemsContainer>();
+	register_class<ItemGenerator>();
 }

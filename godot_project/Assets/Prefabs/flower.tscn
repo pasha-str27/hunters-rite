@@ -12,9 +12,9 @@ height = 7.08337
 "enemy",
 "flower",
 ]]
-position = Vector2( 88.7388, -13.2294 )
 z_index = 25
 collision_layer = 4
+collision_mask = 513
 script = ExtResource( 3 )
 bullet = ExtResource( 1 )
 

@@ -3,7 +3,9 @@
 #define HEADERFILE_H
 #include "headers.h"
 #endif
-namespace godot {
+
+namespace godot 
+{
 	class SpawnEnemyController: public Node2D
 	{
 	private:
@@ -18,6 +20,8 @@ namespace godot {
 		void _init();
 		void _ready();
 
+		void _prepare_spawn();
+		void _on_Area2D_area_entered(Node* other);
 		
 		SpawnEnemyController();
 		~SpawnEnemyController();

@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-using namespace godot;
-
 void Spike::_register_methods()
 {
 	register_method("_init", &Spike::_init);

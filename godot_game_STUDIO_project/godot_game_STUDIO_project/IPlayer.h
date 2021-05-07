@@ -14,8 +14,14 @@ namespace godot
 		virtual void _change_can_fight(bool value) = 0;
 		virtual bool _can_fight() = 0;
 		virtual void _set_enemy(Node* enemy = nullptr) = 0;
-		virtual void _take_damage(float damage) = 0;
+		virtual void _take_damage(float damage, bool is_spike = false) = 0;
 		virtual float _get_HP() = 0;
 		virtual void _set_HP(float HP) = 0;
+		virtual float _get_damage() = 0;
+		virtual void _set_damage(float value) = 0;
+		virtual void _revive() = 0;
+		virtual bool _was_revived() = 0;
+		virtual float _get_max_HP() = 0;
+		virtual void _set_max_HP(float value) = 0;
 	};
 }

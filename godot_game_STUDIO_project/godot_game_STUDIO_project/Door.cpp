@@ -64,7 +64,7 @@
 //	if (other->get_name().find("Wall") != -1)
 //	{
 //		Godot::print("Collision door with wall: " + direction);
-//		get_parent()->get_parent()->call_deferred("_add_door_collision", direction, 1);
+//		get_parent()->get_parent()->call_deferred("_add_door_collision", direction);
 //	}
 //
 //	if (other->get_parent()->get_name().find("Door") != -1)

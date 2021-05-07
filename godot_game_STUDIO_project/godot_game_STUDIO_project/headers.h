@@ -1,7 +1,10 @@
 #pragma once
+#define _USE_MATH_DEFINES
+
 #include <vector>
 #include <string>
 #include <functional>
+#include <math.h>
 
 //Godot includes
 #include <TextureRect.hpp>
@@ -11,6 +14,7 @@
 #include <CollisionObject2D.hpp>
 #include <Node.hpp>
 #include <Node2D.hpp>
+#include <Node.hpp>
 #include <Input.hpp>
 #include <PackedScene.hpp>
 #include <Vector2.hpp>
@@ -30,6 +34,11 @@
 #include <GlobalConstants.hpp>
 #include <Array.hpp>
 #include <ProgressBar.hpp>
+#include <InputEventKey.hpp>
+#include <AnimationPlayer.hpp>
+#include <Particles2D.hpp>
+#include <ParticlesMaterial.hpp>
+#include <AnimatedSprite.hpp>
 
 //project includes
 #include "MenuButtons.h"
@@ -46,18 +55,26 @@
 #include "Sword.h"
 #include "CameraController.h"
 #include "Spike.h"
-
+#include "SlimeAI.h"
+#include "BatAI.h"
 #include "SpiderAI.h"
-#include "SpiderSide.h"
+#include "EnemySideChecker.h"
 #include "Enemies.h"
-//#include "Enemy.h"
-#include "SimpleEnemyAI.h"
 #include "FlowerAI.h"
+#include "Item.h"
+#include "ReviveZone.h"
+#include "InputReviveManager.h"
+#include "StatueMeleeAI.h"
+#include "StatueShootAI.h"
+
 #include "Generation.h"
-//#include "PlayerController.h"
 #include "SpawnPointChecker.h"
 #include "Room.h"
 #include "Destroyer.h"
 #include "ClosedRoom.h"
 #include "Door.h"
 #include "SpawnEnemyController.h"
+#include "ItemsContainer.h"
+#include "ItemGenerator.h"
+
+using namespace godot;
