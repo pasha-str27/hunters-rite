@@ -55,6 +55,11 @@ void godot::Bullet::_on_Area2D_body_entered(Node* node)
 		get_node("/root/Node2D/Node/flower")->call("_add_bullet", this);
 	}
 
+	if (is_in_group("statue_bullet"))
+	{
+		get_node("/root/Node2D/Node/statue_shoot")->call("_add_bullet", this);
+	}
+
 	if (is_in_group("web_bullet"))
 	{
 		get_node("/root/Node2D/Node/Spider")->call("_add_bullet", this);
