@@ -1,8 +1,8 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 [ext_resource path="res://Assets/Prefabs/bullet_prefab.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Prefabs/TileMaps.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Prefabs/Rooms/LRTB.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Prefabs/revive_zone.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Prefabs/Items/BadTusk.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Sprites/skull.png" type="Texture" id=6]
@@ -24,6 +24,7 @@
 [ext_resource path="res://Assets/Prefabs/Items/Chicken.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Assets/Prefabs/Particles/HurtParticles.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Assets/Prefabs/Particles/BuffDebuffParticles.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Assets/Prefabs/Enemies/statue_shoot.tscn" type="PackedScene" id=25]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.6514
@@ -43,6 +44,8 @@ height = 71.1604
 radius = 17.3234
 
 [node name="Node" type="Node"]
+
+[node name="statue_shoot" parent="." instance=ExtResource( 25 )]
 
 [node name="Player1" type="KinematicBody2D" parent="." groups=[
 "player",
@@ -138,6 +141,8 @@ z_index = 7
 [node name="BulletConteinerFlower" type="Node" parent="."]
 
 [node name="BulletConteinerSpider" type="Node" parent="."]
+
+[node name="BulletConteinerStatue" type="Node" parent="."]
 
 [node name="TileMaps" parent="." instance=ExtResource( 3 )]
 

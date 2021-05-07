@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-using namespace godot;
-
 bool Sword::is_enemy_on_sword = false;
 
 void godot::Sword::_register_methods()

@@ -3,11 +3,12 @@
 #include "headers.h"
 #endif
 
-using namespace godot;
-
 EnemyAIContext::EnemyAIContext()
 {
 	strategy = nullptr;
+	enemy = nullptr;
+	player1 = nullptr;
+	player2 = nullptr;
 }
 
 EnemyAIContext::~EnemyAIContext()

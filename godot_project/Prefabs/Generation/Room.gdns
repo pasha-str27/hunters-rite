@@ -1,0 +1,13 @@
+[gd_resource type="NativeScript" load_steps=2 format=2]
+
+[ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
+
+[resource]
+<<<<<<< HEAD:godot_project/Prefabs/Generation/Room.gdns
+resource_name = "Room"
+class_name = "Room"
+=======
+resource_name = "Spike"
+class_name = "Spike"
+>>>>>>> origin/vit:godot_project/Assets/Prefabs/SpikeTileMap.gdns
+library = ExtResource( 1 )

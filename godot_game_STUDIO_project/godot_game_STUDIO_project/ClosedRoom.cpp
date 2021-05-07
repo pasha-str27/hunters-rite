@@ -30,7 +30,7 @@ void godot::ClosedRoom::SpawnPossibleRoom()
     //  delete spawned room from possible list
     possible_rooms.remove(rand);
     //  set possible list
-    new_room->call("_set_possible_rooms", possible_rooms, 1);
+    new_room->call("_set_possible_rooms", possible_rooms);
     get_node("/root/Node2D")->get_node("Rooms")->add_child(new_room, true);
     //  destroy closed room
     this->queue_free();

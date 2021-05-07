@@ -63,6 +63,8 @@ namespace godot
 		bool entered;
 		bool died;
 
+		AnimatedSprite* sp = nullptr;
+
 		public:
 			static void _register_methods();
 			Enemy();
@@ -89,5 +91,6 @@ namespace godot
 			void _set_player1(Node* player);
 			void _set_player2(Node* player);
 			void _update_health_bar();
+			void _change_animation(String, float);
 	};
 }

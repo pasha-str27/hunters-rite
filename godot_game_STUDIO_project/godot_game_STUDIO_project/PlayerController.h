@@ -32,7 +32,7 @@ namespace godot
 		PlayerController();
 		~PlayerController();
 		void _init();
-		void _input(Input* event);
+		void _input(InputEventKey* event);
 		void _ready();
 		void _start_timer();
 		void _on_timeout();
@@ -62,6 +62,7 @@ namespace godot
 		void _die();
 		void _revive();
 		float _get_max_HP();
+		void _set_max_HP(float value);
 		void _on_enemy_die(Vector2 enemy_position);
 		bool _is_alive();
 		void _start_item_particles(bool is_buff);
