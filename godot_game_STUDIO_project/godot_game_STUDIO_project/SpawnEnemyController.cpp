@@ -38,7 +38,7 @@ void godot::SpawnEnemyController::_init()
 
 void godot::SpawnEnemyController::_ready()
 {
-	_prepare_spawn();
+	//_prepare_spawn();
 }
 
 void godot::SpawnEnemyController::_prepare_spawn()

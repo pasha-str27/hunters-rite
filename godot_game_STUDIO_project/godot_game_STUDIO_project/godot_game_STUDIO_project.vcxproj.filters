@@ -26,6 +26,8 @@
     <ClCompile Include="ItemGenerator.cpp" />
     <ClCompile Include="ItemsContainer.cpp" />
     <ClCompile Include="InputReviveManager.cpp" />
+    <ClCompile Include="StatueMeleeAI.cpp" />
+    <ClCompile Include="StatueShootAI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
@@ -54,5 +56,7 @@
     <ClInclude Include="ItemGenerator.h" />
     <ClInclude Include="ItemsContainer.h" />
     <ClInclude Include="InputReviveManager.h" />
+    <ClInclude Include="StatueMeleeAI.h" />
+    <ClInclude Include="StatueShootAI.h" />
   </ItemGroup>
 </Project>

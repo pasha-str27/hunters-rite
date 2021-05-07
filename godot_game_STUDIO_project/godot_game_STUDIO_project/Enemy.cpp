@@ -87,6 +87,18 @@ void godot::Enemy::_ready()
 		ai->_set_strategy(new BatAI(bullet, this, ai->get_player1(), ai->get_player2()));
 		return;
 	}
+
+	if (is_in_group("statue_melee"))
+	{
+		ai->_set_strategy(new StatueMeleeAI(bullet, this, ai->get_player1(), ai->get_player2()));
+		return;
+	}
+
+	if (is_in_group("statue_shoot"))
+	{
+		ai->_set_strategy(new StatueShootAI(bullet, this, ai->get_player1(), ai->get_player2()));
+		return;
+	}
 }
 
 void godot::Enemy::_process(float delta)
@@ -96,6 +108,7 @@ void godot::Enemy::_process(float delta)
 
 void godot::Enemy::_take_damage(float damage, int player_id)
 {
+	Godot::print(String::num(player_id));
 	if (HP <= 0)
 		return;
 
