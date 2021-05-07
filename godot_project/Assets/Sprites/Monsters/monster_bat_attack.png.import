@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/lvl.png-0dcc3b71a274691c79d2d8a230667a74.stex"
+path="res://.import/monster_bat_attack.png-c4e3cdb76382f6ad5f087c7dd6607612.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://lvl.png"
-dest_files=[ "res://.import/lvl.png-0dcc3b71a274691c79d2d8a230667a74.stex" ]
+source_file="res://Assets/Sprites/Monsters/monster_bat_attack.png"
+dest_files=[ "res://.import/monster_bat_attack.png-c4e3cdb76382f6ad5f087c7dd6607612.stex" ]
 
 [params]
 
