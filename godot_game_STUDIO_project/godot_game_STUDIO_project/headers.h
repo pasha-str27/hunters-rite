@@ -24,8 +24,10 @@
 #include <Array.hpp>
 #include <ProgressBar.hpp>
 #include <InputEventKey.hpp>
+#include <AnimationPlayer.hpp>
 #include <Particles2D.hpp>
 #include <ParticlesMaterial.hpp>
+#include <AnimatedSprite.hpp>
 
 #include "IPlayer.h"
 #include "PlayerData.h"
@@ -48,6 +50,7 @@
 #include "FlowerAI.h"
 #include "Item.h"
 #include "ReviveZone.h"
+#include "InputReviveManager.h"
 
 #include "Generation.h"
 #include "SpawnPointChecker.h"
@@ -58,3 +61,5 @@
 #include "SpawnEnemyController.h"
 #include "ItemsContainer.h"
 #include "ItemGenerator.h"
+
+using namespace godot;

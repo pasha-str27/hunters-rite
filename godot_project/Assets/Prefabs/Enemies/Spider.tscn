@@ -5,57 +5,57 @@
 [ext_resource path="res://Assets/Scripts/Enemy.gdns" type="Script" id=3]
 [ext_resource path="res://Assets/Scripts/SpiderSide.gdns" type="Script" id=4]
 
-[sub_resource type="StyleBoxFlat" id=21]
-bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 0, 0, 1 )
 
-[sub_resource type="CapsuleShape2D" id=22]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 7.71742
 height = 0.0
 
-[sub_resource type="AtlasTexture" id=23]
+[sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 36, 31 )
 
-[sub_resource type="AtlasTexture" id=24]
+[sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 36, 0, 36, 31 )
 
-[sub_resource type="AtlasTexture" id=25]
+[sub_resource type="AtlasTexture" id=5]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 72, 0, 36, 31 )
 
-[sub_resource type="AtlasTexture" id=26]
+[sub_resource type="AtlasTexture" id=6]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 108, 0, 36, 31 )
 
-[sub_resource type="AtlasTexture" id=27]
+[sub_resource type="AtlasTexture" id=7]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 144, 0, 36, 31 )
 
-[sub_resource type="AtlasTexture" id=28]
+[sub_resource type="AtlasTexture" id=8]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 180, 0, 36, 31 )
 
-[sub_resource type="AtlasTexture" id=29]
+[sub_resource type="AtlasTexture" id=9]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 216, 0, 36, 31 )
 
-[sub_resource type="SpriteFrames" id=30]
+[sub_resource type="SpriteFrames" id=10]
 animations = [ {
-"frames": [ SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
 "loop": true,
 "name": "default",
 "speed": 15.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=31]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 4.89366, 4.97602 )
 
 [node name="Spider" type="KinematicBody2D" groups=[
@@ -66,30 +66,24 @@ z_index = 25
 collision_layer = 4
 collision_mask = 513
 script = ExtResource( 3 )
-__meta__ = {
-"_editor_description_": ""
-}
 bullet = ExtResource( 2 )
 
 [node name="HealthBar" type="ProgressBar" parent="."]
-margin_left = -30.0
-margin_top = -40.1487
-margin_right = 30.0
-margin_bottom = -26.1487
-rect_scale = Vector2( 1, 0.5 )
-custom_styles/fg = SubResource( 21 )
-percent_visible = false
+margin_left = -30.1947
+margin_top = -32.0488
+margin_right = 26.8053
+margin_bottom = -18.0488
+custom_styles/fg = SubResource( 1 )
 __meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
+"_edit_use_anchors_": false
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 22 )
+shape = SubResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="CollisionShape2D"]
-frames = SubResource( 30 )
-frame = 6
+frames = SubResource( 10 )
+frame = 1
 playing = true
 
 [node name="Area2D2" type="Area2D" parent="."]
@@ -100,7 +94,7 @@ script = ExtResource( 4 )
 side = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
-shape = SubResource( 31 )
+shape = SubResource( 11 )
 
 [node name="Area2D4" type="Area2D" parent="."]
 position = Vector2( -31.514, -0.703 )
@@ -110,7 +104,7 @@ script = ExtResource( 4 )
 side = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D4"]
-shape = SubResource( 31 )
+shape = SubResource( 11 )
 
 [node name="Area2D5" type="Area2D" parent="."]
 position = Vector2( 32.486, -0.703 )
@@ -120,7 +114,7 @@ script = ExtResource( 4 )
 side = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D5"]
-shape = SubResource( 31 )
+shape = SubResource( 11 )
 
 [node name="Area2D7" type="Area2D" parent="."]
 position = Vector2( 0.486, 31.297 )
@@ -130,7 +124,7 @@ script = ExtResource( 4 )
 side = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D7"]
-shape = SubResource( 31 )
+shape = SubResource( 11 )
 
 [connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D2" to="Area2D2" method="_on_Area2D_body_exited"]

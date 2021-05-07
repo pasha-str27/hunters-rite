@@ -22,5 +22,6 @@ namespace godot
 		virtual void _revive() = 0;
 		virtual bool _was_revived() = 0;
 		virtual float _get_max_HP() = 0;
+		virtual void _set_max_HP(float value) = 0;
 	};
 }

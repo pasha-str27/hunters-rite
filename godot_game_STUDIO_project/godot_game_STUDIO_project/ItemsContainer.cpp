@@ -1,6 +1,7 @@
-#include "ItemsContainer.h"
-
-using namespace godot;
+#ifndef HEADERFILE_H
+#define HEADERFILE_H
+#include "headers.h"
+#endif
 
 void godot::ItemsContainer::_register_methods()
 {

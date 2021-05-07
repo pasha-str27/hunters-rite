@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Assets/Sprites/Particles/blood.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/icon11.png" type="Texture" id=1]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.423237, 1 )
@@ -17,13 +17,12 @@ _data = [ Vector2( 0, 0.109091 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0681818 ), 0.0, 
 curve = SubResource( 3 )
 
 [sub_resource type="ParticlesMaterial" id=5]
-flag_rotate_y = true
 flag_disable_z = true
 direction = Vector3( 500, 500, 0 )
 spread = 180.0
 flatness = 1.0
-gravity = Vector3( 0, 50, 0 )
-initial_velocity = 35.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 50.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = 100.0
@@ -31,20 +30,18 @@ linear_accel_random = 1.0
 radial_accel_random = 1.0
 tangential_accel_random = 1.0
 damping_random = 1.0
-scale = 5.0
+scale = 0.1
 scale_random = 1.0
 scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
 
 [node name="HurtParticles" type="Particles2D"]
+scale = Vector2( 0.5, 0.5 )
 z_index = 1
 emitting = false
-amount = 50
-lifetime = 0.8
+amount = 35
 one_shot = true
-speed_scale = 2.0
-explosiveness = 0.6
-randomness = 0.25
+speed_scale = 5.0
 visibility_rect = Rect2( 0, 0, 0, 0 )
 local_coords = false
 process_material = SubResource( 5 )

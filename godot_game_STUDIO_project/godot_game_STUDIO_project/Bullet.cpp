@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-using namespace godot;
-
 void godot::Bullet::_register_methods()
 {
 	register_method("_process", &Bullet::_process);
@@ -93,6 +91,7 @@ godot::Bullet::Bullet()
 	is_enemy_bullet = false;
 	dir = Vector2(0, 0);
 	damage = 25;
+	speed = 250;
 }
 
 godot::Bullet::~Bullet()

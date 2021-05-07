@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-using namespace godot;
-
 void godot::Item::_register_methods()
 {
 	register_method("_ready", &Item::_ready);
@@ -25,6 +23,13 @@ void godot::Item::_register_methods()
 
 godot::Item::Item()
 {
+	HP = 0;
+	attack_speed_delta = 0;
+	damage = 0;
+	decrease_attack_radius = false;
+	encrease_attack_radius = false;
+	number_to_next_item = 0;
+	speed = 0;
 }
 
 godot::Item::~Item()
@@ -44,12 +49,11 @@ void godot::Item::_ready()
 
 void godot::Item::_on_Area2D_body_entered(Node* node)
 {
-	Godot::print("zzzz");
 	if (!node->is_in_group("player"))
 		return;
 
 	node->call("_set_speed", (float)node->call("_get_speed") + speed);
-	node->call("_set_HP", (float)node->call("_get_HP") + HP);
+	node->call("_set_max_HP", (float)node->call("_get_max_HP") + HP);
 	node->call("_set_damage", (float)node->call("_get_damage") + damage);
 	node->call("_set_number_to_next_item", (int)node->call("_get_number_to_next_item") + number_to_next_item);
 	node->call("_set_attack_speed_delta", (float)node->call("_get_attack_speed_delta") + attack_speed_delta);

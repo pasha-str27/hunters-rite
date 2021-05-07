@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-using namespace godot;
-
 void godot::EnemySideChecker::_register_methods()
 {
 	register_method("_init", &EnemySideChecker::_init);

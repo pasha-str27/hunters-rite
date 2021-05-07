@@ -1,6 +1,7 @@
-#include "ItemGenerator.h"
-
-using namespace godot;
+#ifndef HEADERFILE_H
+#define HEADERFILE_H
+#include "headers.h"
+#endif
 
 void godot::ItemGenerator::_register_methods()
 {
@@ -24,14 +25,15 @@ void godot::ItemGenerator::_ready()
 void godot::ItemGenerator::_dead_enemy(Vector2 enemy_position)
 {
 	current_count -= 1;
-	if (current_count <= 0) {
+	if (current_count <= 0) 
+	{
 		RandomNumberGenerator* rng = RandomNumberGenerator::_new();
 		rng->randomize();
 
-		int index = rng->randi_range(0, items_container->items.size() - 1);
+		int64_t index = rng->randi_range(0, (int64_t)items_container->items.size() - 1);
 		rng = nullptr;
 
-		auto item = cast_to<Node2D>(cast_to<PackedScene>(items_container->items[index])->instance());
+		auto item = cast_to<Node2D>(cast_to<PackedScene>(items_container->items[(int)index])->instance());
 		item->set_global_position(enemy_position);
 		item->set_z_index(1);
 		Godot::print("spawned");

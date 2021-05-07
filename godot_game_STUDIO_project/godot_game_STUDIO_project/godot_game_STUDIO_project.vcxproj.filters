@@ -25,6 +25,7 @@
     <ClCompile Include="ReviveZone.cpp" />
     <ClCompile Include="ItemGenerator.cpp" />
     <ClCompile Include="ItemsContainer.cpp" />
+    <ClCompile Include="InputReviveManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
@@ -52,5 +53,6 @@
     <ClInclude Include="ReviveZone.h" />
     <ClInclude Include="ItemGenerator.h" />
     <ClInclude Include="ItemsContainer.h" />
+    <ClInclude Include="InputReviveManager.h" />
   </ItemGroup>
 </Project>
