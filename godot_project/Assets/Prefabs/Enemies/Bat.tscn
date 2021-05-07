@@ -137,7 +137,7 @@ region_rect = Rect2( 0, 0, 40, 39 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="CollisionShape2D"]
 frames = SubResource( 17 )
 animation = "idle"
-frame = 4
+frame = 3
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
