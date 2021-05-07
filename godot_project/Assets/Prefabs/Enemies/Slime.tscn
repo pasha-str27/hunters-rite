@@ -5,78 +5,78 @@
 [ext_resource path="res://Assets/Scripts/Enemy.gdns" type="Script" id=3]
 [ext_resource path="res://Assets/Scripts/SpiderSide.gdns" type="Script" id=4]
 
-[sub_resource type="StyleBoxFlat" id=16]
-bg_color = Color( 1, 0, 0, 1 )
+[sub_resource type="StyleBoxFlat" id=21]
+bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=22]
 
-[sub_resource type="AtlasTexture" id=29]
+[sub_resource type="AtlasTexture" id=23]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=30]
+[sub_resource type="AtlasTexture" id=24]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=31]
+[sub_resource type="AtlasTexture" id=25]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 64, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=32]
+[sub_resource type="AtlasTexture" id=26]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 96, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=33]
+[sub_resource type="AtlasTexture" id=27]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 128, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=34]
+[sub_resource type="AtlasTexture" id=28]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 160, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=35]
+[sub_resource type="AtlasTexture" id=29]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 192, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=36]
+[sub_resource type="AtlasTexture" id=30]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 224, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=37]
+[sub_resource type="AtlasTexture" id=31]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 256, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=38]
+[sub_resource type="AtlasTexture" id=32]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 288, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=39]
+[sub_resource type="AtlasTexture" id=33]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 320, 0, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=28]
+[sub_resource type="SpriteFrames" id=34]
 animations = [ {
-"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ) ],
+"frames": [ SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=14]
+[sub_resource type="RectangleShape2D" id=35]
 extents = Vector2( 4.89366, 4.97602 )
 
-[sub_resource type="CircleShape2D" id=15]
+[sub_resource type="CircleShape2D" id=36]
 radius = 6.93173
 
 [node name="Slime" type="KinematicBody2D" groups=[
@@ -90,21 +90,24 @@ script = ExtResource( 3 )
 bullet = ExtResource( 2 )
 
 [node name="HealthBar" type="ProgressBar" parent="."]
-margin_left = -30.1947
-margin_top = -32.0488
-margin_right = 26.8053
-margin_bottom = -18.0488
-custom_styles/fg = SubResource( 16 )
+margin_left = -30.0
+margin_top = -40.1487
+margin_right = 30.0
+margin_bottom = -26.1487
+rect_scale = Vector2( 1, 0.5 )
+custom_styles/fg = SubResource( 21 )
+percent_visible = false
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": false,
+"_editor_description_": ""
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 22 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="CollisionShape2D"]
-frames = SubResource( 28 )
-frame = 4
+frames = SubResource( 34 )
+frame = 10
 playing = true
 
 [node name="Area2D2" type="Area2D" parent="."]
@@ -115,7 +118,7 @@ script = ExtResource( 4 )
 side = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
-shape = SubResource( 14 )
+shape = SubResource( 35 )
 
 [node name="Area2D4" type="Area2D" parent="."]
 position = Vector2( 0.486, -32.703 )
@@ -125,7 +128,7 @@ script = ExtResource( 4 )
 side = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D4"]
-shape = SubResource( 14 )
+shape = SubResource( 35 )
 
 [node name="Area2D5" type="Area2D" parent="."]
 position = Vector2( 32.486, -32.703 )
@@ -135,7 +138,7 @@ script = ExtResource( 4 )
 side = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D5"]
-shape = SubResource( 14 )
+shape = SubResource( 35 )
 
 [node name="Area2D7" type="Area2D" parent="."]
 position = Vector2( -31.514, -0.703 )
@@ -145,7 +148,7 @@ script = ExtResource( 4 )
 side = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D7"]
-shape = SubResource( 14 )
+shape = SubResource( 35 )
 
 [node name="Area2D8" type="Area2D" parent="."]
 position = Vector2( 32.486, -0.703 )
@@ -155,7 +158,7 @@ script = ExtResource( 4 )
 side = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D8"]
-shape = SubResource( 14 )
+shape = SubResource( 35 )
 
 [node name="Area2D9" type="Area2D" parent="."]
 position = Vector2( -31.514, 31.297 )
@@ -165,7 +168,7 @@ script = ExtResource( 4 )
 side = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D9"]
-shape = SubResource( 14 )
+shape = SubResource( 35 )
 
 [node name="Area2D10" type="Area2D" parent="."]
 position = Vector2( 0.486, 31.297 )
@@ -175,7 +178,7 @@ script = ExtResource( 4 )
 side = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D10"]
-shape = SubResource( 14 )
+shape = SubResource( 35 )
 
 [node name="Area2D11" type="Area2D" parent="."]
 position = Vector2( 32.486, 31.297 )
@@ -185,13 +188,13 @@ script = ExtResource( 4 )
 side = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D11"]
-shape = SubResource( 14 )
+shape = SubResource( 35 )
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -1.10243, -2.20486 )
-shape = SubResource( 15 )
+shape = SubResource( 36 )
 
 [connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D2" to="Area2D2" method="_on_Area2D_body_exited"]

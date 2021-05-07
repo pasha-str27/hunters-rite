@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 [ext_resource path="res://Assets/Prefabs/bullet_prefab.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Prefabs/TileMaps.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Prefabs/Rooms/LRTB.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Prefabs/revive_zone.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Prefabs/Items/BadTusk.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Sprites/skull.png" type="Texture" id=6]

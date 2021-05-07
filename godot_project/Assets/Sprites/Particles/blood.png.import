@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/level1_tileset.png-88b33549c071958c3175ffba487404d2.stex"
+path="res://.import/blood.png-045d269d8c80e532ece388d143f53eef.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://level1_tileset.png"
-dest_files=[ "res://.import/level1_tileset.png-88b33549c071958c3175ffba487404d2.stex" ]
+source_file="res://Assets/Sprites/Particles/blood.png"
+dest_files=[ "res://.import/blood.png-045d269d8c80e532ece388d143f53eef.stex" ]
 
 [params]
 
