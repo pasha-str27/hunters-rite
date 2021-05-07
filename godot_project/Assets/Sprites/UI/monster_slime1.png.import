@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon11.png-f267e31b93f4c729cbda1d5f295e0680.stex"
+path="res://.import/monster_slime1.png-085a808f6c03bf6bf7253bba88116f67.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/icon11.png"
-dest_files=[ "res://.import/icon11.png-f267e31b93f4c729cbda1d5f295e0680.stex" ]
+source_file="res://Assets/Sprites/UI/monster_slime1.png"
+dest_files=[ "res://.import/monster_slime1.png-085a808f6c03bf6bf7253bba88116f67.stex" ]
 
 [params]
 

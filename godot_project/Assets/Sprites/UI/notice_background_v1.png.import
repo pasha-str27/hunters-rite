@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon11.png-f267e31b93f4c729cbda1d5f295e0680.stex"
+path="res://.import/notice_background_v1.png-db3030b4ff17866aa57b6bd9243181e6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/icon11.png"
-dest_files=[ "res://.import/icon11.png-f267e31b93f4c729cbda1d5f295e0680.stex" ]
+source_file="res://Assets/Sprites/UI/notice_background_v1.png"
+dest_files=[ "res://.import/notice_background_v1.png-db3030b4ff17866aa57b6bd9243181e6.stex" ]
 
 [params]
 

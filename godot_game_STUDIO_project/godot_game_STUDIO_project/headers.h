@@ -3,6 +3,9 @@
 #include <string>
 #include <functional>
 
+//Godot includes
+#include <TextureRect.hpp>
+#include <ResourceLoader.hpp>
 #include <Godot.hpp>
 #include <KinematicBody2D.hpp>
 #include <CollisionObject2D.hpp>
@@ -20,9 +23,16 @@
 #include <InputEvent.hpp>
 #include <TileMap.hpp>
 #include <Tree.hpp>
+#include <SceneTree.hpp>
+//#include <InputEvent.hpp>
+//#include <InputEventAction.hpp>
+//#include <InputEventMouseButton.hpp>
+#include <GlobalConstants.hpp>
 #include <Array.hpp>
 #include <ProgressBar.hpp>
 
+//project includes
+#include "MenuButtons.h"
 #include "IPlayer.h"
 #include "PlayerData.h"
 #include "Player1.h"
