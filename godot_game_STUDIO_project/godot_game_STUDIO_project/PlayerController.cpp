@@ -9,8 +9,12 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_ready", &PlayerController::_ready);
 	register_method((char*)"_input", &PlayerController::_input);
 	register_method((char*)"_add_bullet", &PlayerController::_add_bullet);
-	register_method((char*)"_on_timeout", &PlayerController::_on_timeout);
 	register_method((char*)"_start_timer", &PlayerController::_start_timer);
+	register_method((char*)"_on_timeout", &PlayerController::_on_timeout);
+	register_method((char*)"_start_dash_timer", &PlayerController::_start_dash_timer);
+	register_method((char*)"_on_dash_timeout", &PlayerController::_on_dash_timeout);
+	register_method((char*)"_start_dash_cooldow_timer", &PlayerController::_start_dash_cooldow_timer);
+	register_method((char*)"_on_dash_cooldown_timeout", &PlayerController::_on_dash_cooldown_timeout);
 	register_method((char*)"_can_fight", &PlayerController::_can_fight);
 	register_method((char*)"_set_enemy", &PlayerController::_set_enemy);
 	register_method((char*)"_on_Area2D_body_entered", &PlayerController::_on_Area2D_body_entered);
@@ -50,9 +54,13 @@ godot::PlayerController::PlayerController()
 	current_player = nullptr;
 	timer = Timer::_new();
 	attack_speed_delta = 0.5;
+	dash_time_delta = 0.4;
+	dash_speed_multiplier = 1.5;
+	dash_cooldown_delta = dash_time_delta * 3;
 	number_to_next_item = 15;
 	can_move = true;
 	is_alive = true;
+	is_dashing = false;
 	speed = 250;
 }
 
@@ -103,6 +111,65 @@ void godot::PlayerController::_on_timeout()
 
 	if (get_name() == "Player2")
 		cast_to<Node2D>(get_child(1))->set_visible(false);
+}
+
+void godot::PlayerController::_start_dash_timer()
+{
+	if (!timer->is_connected("timeout", this, "_on_dash_timeout") && !is_dashing)
+	{
+		timer->connect("timeout", this, "_on_dash_timeout");
+
+		if (!has_node(NodePath(timer->get_name())))
+			add_child(timer);
+
+		Godot::print("start dash");
+		_change_is_dashing_state();
+		current_player->_set_speed(speed * dash_speed_multiplier);
+
+		timer->start(dash_time_delta);
+	}
+	else
+	{
+		Godot::print("already dashing");
+	}
+}
+
+void godot::PlayerController::_on_dash_timeout()
+{
+	current_player->_set_speed(speed / dash_speed_multiplier);
+	current_player->_process_input();
+
+	timer->disconnect("timeout", this, "_on_dash_timeout");
+	_start_dash_cooldow_timer();
+}
+
+void godot::PlayerController::_start_dash_cooldow_timer()
+{
+	if (!timer->is_connected("timeout", this, "_on_dash_cooldown_timeout") && is_dashing)
+	{
+		timer->connect("timeout", this, "_on_dash_cooldown_timeout");
+
+		if (!has_node(NodePath(timer->get_name())))
+			add_child(timer);
+
+		timer->start(dash_cooldown_delta);
+	}
+}
+
+void godot::PlayerController::_on_dash_cooldown_timeout()
+{
+	if (is_dashing)
+		is_dashing = false;
+	Godot::print("end dash");
+	timer->disconnect("timeout", this, "_on_dash_cooldown_timeout");
+}
+
+void godot::PlayerController::_change_is_dashing_state()
+{
+	if (is_dashing)
+		is_dashing = false;
+	else
+		is_dashing = true;
 }
 
 bool godot::PlayerController::_can_fight()
