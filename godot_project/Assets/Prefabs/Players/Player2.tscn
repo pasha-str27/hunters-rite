@@ -1,0 +1,148 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
+[ext_resource path="res://Assets/Prefabs/Particles/BuffDebuffParticles.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Prefabs/Particles/HurtParticles.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Prefabs/revive_zone.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Sprites/skull.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/icon11.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Scripts/PlayerController.gdns" type="Script" id=9]
+[ext_resource path="res://Assets/Scripts/ItemGenerator.gdns" type="Script" id=10]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 15.6514
+
+[sub_resource type="NativeScript" id=2]
+class_name = "Sword"
+library = ExtResource( 1 )
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 20.3781
+height = 71.1604
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 17.3234
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0.423237, 1 )
+colors = PoolColorArray( 1, 0, 0, 1, 1, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=15]
+gradient = SubResource( 5 )
+
+[sub_resource type="Curve" id=16]
+max_value = 0.25
+_data = [ Vector2( 0, 0.109091 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0681818 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=17]
+curve = SubResource( 16 )
+
+[sub_resource type="ParticlesMaterial" id=18]
+flag_rotate_y = true
+flag_disable_z = true
+direction = Vector3( 500, 500, 0 )
+spread = 180.0
+flatness = 1.0
+gravity = Vector3( 0, 50, 0 )
+initial_velocity = 35.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 100.0
+linear_accel_random = 1.0
+radial_accel_random = 1.0
+tangential_accel_random = 1.0
+damping_random = 1.0
+scale = 5.0
+scale_random = 1.0
+scale_curve = SubResource( 17 )
+color_ramp = SubResource( 15 )
+
+[sub_resource type="Gradient" id=10]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=11]
+gradient = SubResource( 10 )
+
+[sub_resource type="Curve" id=12]
+min_value = -1.0
+_data = [ Vector2( 0.0964286, -0.252273 ), 0.0, 10.6061, 0, 0, Vector2( 0.921429, -0.543182 ), 4.48, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=13]
+curve = SubResource( 12 )
+
+[sub_resource type="ParticlesMaterial" id=14]
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 90.0
+gravity = Vector3( 0, -500, 0 )
+initial_velocity = 50.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 720.0
+angle_random = 1.0
+color_ramp = SubResource( 11 )
+hue_variation = 0.5
+hue_variation_random = 0.5
+hue_variation_curve = SubResource( 13 )
+
+[node name="Player2" type="KinematicBody2D" groups=[
+"player",
+"player2",
+]]
+z_index = 26
+collision_mask = 2
+script = ExtResource( 9 )
+speed = 300.0
+revive_zone = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="CollisionShape2D"]
+scale = Vector2( 0.2, 0.2 )
+z_index = 6
+texture = ExtResource( 7 )
+
+[node name="Area2D3" type="Area2D" parent="."]
+visible = false
+z_index = -26
+collision_layer = 512
+collision_mask = 48
+script = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3"]
+position = Vector2( -38.5828, -0.342659 )
+rotation = -1.5708
+scale = Vector2( 0.8, 1 )
+z_index = 4
+shape = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="Area2D3/CollisionShape2D"]
+position = Vector2( -0.0621338, 7.01221 )
+rotation = -1.5708
+scale = Vector2( 0.209137, 0.268498 )
+z_index = 1
+texture = ExtResource( 8 )
+
+[node name="Area2D" type="Area2D" parent="."]
+z_index = 27
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 4 )
+
+[node name="ItemGenerator" type="Node" parent="."]
+script = ExtResource( 10 )
+"Count Enemies to Spawn" = 1
+
+[node name="HurtParticles" parent="." instance=ExtResource( 5 )]
+z_index = 7
+process_material = SubResource( 18 )
+
+[node name="BuffDebuffParticles" parent="." instance=ExtResource( 4 )]
+process_material = SubResource( 14 )
+
+[connection signal="body_entered" from="Area2D3" to="Area2D3" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D3" to="Area2D3" method="_on_Area2D_body_exited"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

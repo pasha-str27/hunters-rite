@@ -6,7 +6,7 @@
 [ext_resource path="res://Assets/Scripts/SpiderSide.gdns" type="Script" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 1, 0, 0, 1 )
+bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 7.71742
@@ -68,7 +68,11 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 4.89366, 4.97602 )
 
-[node name="Spider" type="KinematicBody2D" groups=[
+[node name="Spider" type="Node2D"]
+
+[node name="BulletConteinerSpider" type="Node" parent="."]
+
+[node name="Spider" type="KinematicBody2D" parent="." groups=[
 "enemy",
 "spider",
 ]]
@@ -78,69 +82,71 @@ collision_mask = 513
 script = ExtResource( 3 )
 bullet = ExtResource( 2 )
 
-[node name="HealthBar" type="ProgressBar" parent="."]
-margin_left = -30.1947
-margin_top = -32.0488
-margin_right = 26.8053
-margin_bottom = -18.0488
+[node name="HealthBar" type="ProgressBar" parent="Spider"]
+margin_left = -30.0
+margin_top = -27.0079
+margin_right = 30.0
+margin_bottom = -17.0079
+rect_scale = Vector2( 1, 0.5 )
 custom_styles/fg = SubResource( 1 )
+percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spider"]
 shape = SubResource( 2 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="CollisionShape2D"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Spider/CollisionShape2D"]
 frames = SubResource( 11 )
 animation = "idle"
 playing = true
 
-[node name="Area2D2" type="Area2D" parent="."]
+[node name="Area2D2" type="Area2D" parent="Spider"]
 position = Vector2( 0.486, -32.703 )
 scale = Vector2( 1.5, 1.5 )
 collision_mask = 17
 script = ExtResource( 4 )
 side = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spider/Area2D2"]
 shape = SubResource( 12 )
 
-[node name="Area2D4" type="Area2D" parent="."]
+[node name="Area2D4" type="Area2D" parent="Spider"]
 position = Vector2( -31.514, -0.703 )
 scale = Vector2( 1.5, 1.5 )
 collision_mask = 17
 script = ExtResource( 4 )
 side = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spider/Area2D4"]
 shape = SubResource( 12 )
 
-[node name="Area2D5" type="Area2D" parent="."]
+[node name="Area2D5" type="Area2D" parent="Spider"]
 position = Vector2( 32.486, -0.703 )
 scale = Vector2( 1.5, 1.5 )
 collision_mask = 17
 script = ExtResource( 4 )
 side = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D5"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spider/Area2D5"]
 shape = SubResource( 12 )
 
-[node name="Area2D7" type="Area2D" parent="."]
+[node name="Area2D7" type="Area2D" parent="Spider"]
 position = Vector2( 0.486, 31.297 )
 scale = Vector2( 1.5, 1.5 )
 collision_mask = 17
 script = ExtResource( 4 )
 side = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D7"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spider/Area2D7"]
 shape = SubResource( 12 )
 
-[connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="Area2D2" to="Area2D2" method="_on_Area2D_body_exited"]
-[connection signal="body_entered" from="Area2D4" to="Area2D4" method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="Area2D4" to="Area2D4" method="_on_Area2D_body_exited"]
-[connection signal="body_entered" from="Area2D5" to="Area2D5" method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="Area2D5" to="Area2D5" method="_on_Area2D_body_exited"]
-[connection signal="body_entered" from="Area2D7" to="Area2D7" method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="Area2D7" to="Area2D7" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="Spider/Area2D2" to="Spider/Area2D2" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Spider/Area2D2" to="Spider/Area2D2" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="Spider/Area2D4" to="Spider/Area2D4" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Spider/Area2D4" to="Spider/Area2D4" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="Spider/Area2D5" to="Spider/Area2D5" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Spider/Area2D5" to="Spider/Area2D5" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="Spider/Area2D7" to="Spider/Area2D7" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Spider/Area2D7" to="Spider/Area2D7" method="_on_Area2D_body_exited"]

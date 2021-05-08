@@ -39,6 +39,7 @@
 #include "PlayerController.h"
 #include "Bullet.h"
 #include "Enemy.h"
+#include "EnemyData.h"
 #include "PlayerProduce.h"
 #include "ProducePlayer1.h"
 #include "ProducePlayer2.h"
