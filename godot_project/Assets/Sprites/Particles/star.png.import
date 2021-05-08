@@ -2,24 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-<<<<<<< HEAD:godot_project/Assets/Sprites/large-red-circle_1f534.png.import
-path="res://.import/large-red-circle_1f534.png-c6086b944c4ca928a644dcdd3a00d5d4.stex"
-=======
 path="res://.import/star.png-0f311247b1f54028e9d40c89a9845c9c.stex"
->>>>>>> dev:godot_project/Assets/Sprites/Particles/star.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<< HEAD:godot_project/Assets/Sprites/large-red-circle_1f534.png.import
-source_file="res://Assets/Sprites/large-red-circle_1f534.png"
-dest_files=[ "res://.import/large-red-circle_1f534.png-c6086b944c4ca928a644dcdd3a00d5d4.stex" ]
-=======
 source_file="res://Assets/Sprites/Particles/star.png"
 dest_files=[ "res://.import/star.png-0f311247b1f54028e9d40c89a9845c9c.stex" ]
->>>>>>> dev:godot_project/Assets/Sprites/Particles/star.png.import
 
 [params]
 

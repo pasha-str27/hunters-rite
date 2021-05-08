@@ -55,10 +55,6 @@ void godot::Enemy::_init()
 
 void godot::Enemy::_ready()
 {
-	ai->set_enemy(this);
-	ai->set_player1(cast_to<Node2D>(get_node("/root/Node2D/Node/Player1")));
-	ai->set_player2(cast_to<Node2D>(get_node("/root/Node2D/Node/Player2")));
-
 	Enemies::get_singleton()->_add_enemy(this);
 	
 	_update_health_bar();
@@ -68,61 +64,48 @@ void godot::Enemy::_ready()
 
 	sp = cast_to<AnimatedSprite>(get_node("CollisionShape2D/AnimatedSprite"));
 
+	auto player1 = cast_to<Node2D>(get_node("/root/Node2D/Node/Player1/Player1"));
+	auto player2 = cast_to<Node2D>(get_node("/root/Node2D/Node/Player2"));
+
 	if (is_in_group("flower"))
-	{
 		ai->_set_strategy(new FlowerAI(bullet, this));
-		return;
-	}
 		
 	if (is_in_group("spider"))
-	{
 		ai->_set_strategy(new SpiderAI(bullet, this));
-		return;
-	}
 
 	if (is_in_group("slime"))
-	{
 		ai->_set_strategy(new SlimeAI(bullet, this));
-		return;
-	}
 
 	if (is_in_group("bat"))
-	{
-		ai->_set_strategy(new BatAI(bullet, this, ai->get_player1(), ai->get_player2()));
-		return;
-	}
+		ai->_set_strategy(new BatAI(bullet, this, player1, player2));
 
 	if (is_in_group("statue_melee"))
-	{
-		ai->_set_strategy(new StatueMeleeAI(bullet, this, ai->get_player1(), ai->get_player2()));
-		return;
-	}
+		ai->_set_strategy(new StatueMeleeAI(bullet, this, player1, player2));
 
 	if (is_in_group("statue_shoot"))
-	{
-		ai->_set_strategy(new StatueShootAI(bullet, this, ai->get_player1(), ai->get_player2()));
-		return;
-	}
+		ai->_set_strategy(new StatueShootAI(bullet, this, player1, player2));
 }
 
 void godot::Enemy::_process(float delta)
 {
-	ai->_process(delta);
+	if(!died)
+		ai->_process(delta);
 }
 
 void godot::Enemy::_take_damage(float damage, int player_id)
 {
-	Godot::print(String::num(player_id));
 	if (HP <= 0)
 		return;
 
 	HP -= damage;
 	_update_health_bar();
+
 	if (HP <= 0)
 	{
 		Node *player = nullptr;
+
 		if (player_id == 1)
-			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player1");
+			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node/Player1"), "Player1");
 		else 
 			if(player_id == 2)
 				player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player2");
@@ -176,13 +159,7 @@ void godot::Enemy::_destroy_enemy()
 	timer->disconnect("timeout", this, "_destroy_enemy");
 	Enemies::get_singleton()->_remove_enemy(this);
 
-	//if(is_in_group("flower"))
-	//	get_node("/root/Node2D/Node/BulletConteinerFlower")->queue_free();
-
-	//if (is_in_group("spider"))
-	//	get_node("/root/Node2D/Node/BulletConteinerSpider")->queue_free();
-
-	queue_free();
+	get_parent()->queue_free();
 }
 
 void godot::Enemy::_remove_player1()
@@ -211,12 +188,14 @@ void godot::Enemy::_start_timer_for_dir_change()
 
 void godot::Enemy::_on_Area2D_body_entered(Node* node)
 {
-	float damage = 20;
-	if (is_angry)
-		damage = 30;
-
 	if (node->is_in_group("player") && !died)
+	{
+		float damage = 20;
+		if (is_angry)
+			damage = 30;
+
 		node->call("_take_damage", damage, false);
+	}
 }
 
 void godot::Enemy::_set_angry(Node* node)

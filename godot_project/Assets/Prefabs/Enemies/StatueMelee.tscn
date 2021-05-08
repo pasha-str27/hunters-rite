@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assets/Sprites/large-red-circle_1f534.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/stock-vector-buddha-statue-icon-pixel-art-style-travelling-asia-famous-historical-attractions-vector-summer-1066930448.jpg" type="Texture" id=2]
+[ext_resource path="res://Assets/Prefabs/web_bullet_prefab.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Scripts/Enemy.gdns" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 9.90974
+height = 0.0
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 9.80531
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 11.2518
+
+[node name="StatueMelee" type="Node2D"]
+
+[node name="StatueMelee" type="KinematicBody2D" parent="." groups=[
+"enemy",
+"statue_melee",
+]]
+z_index = 25
+collision_layer = 4
+collision_mask = 512
+script = ExtResource( 4 )
+bullet = ExtResource( 3 )
+
+[node name="HealthBar" type="ProgressBar" parent="StatueMelee"]
+margin_left = -30.0
+margin_top = -30.1374
+margin_right = 30.0
+margin_bottom = -20.1374
+rect_scale = Vector2( 1, 0.5 )
+custom_styles/fg = SubResource( 1 )
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StatueMelee"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="StatueMelee/CollisionShape2D"]
+scale = Vector2( 0.033, 0.03 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 303, 209, 947, 1063 )
+
+[node name="Area2D" type="Area2D" parent="StatueMelee"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StatueMelee/Area2D"]
+shape = SubResource( 3 )
+
+[node name="Area2D2" type="Area2D" parent="StatueMelee"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StatueMelee/Area2D2"]
+shape = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="StatueMelee/Area2D2"]
+modulate = Color( 1, 1, 1, 0.341176 )
+scale = Vector2( 0.1, 0.1 )
+z_index = -1
+texture = ExtResource( 1 )
+
+[connection signal="body_entered" from="StatueMelee/Area2D" to="StatueMelee" method="_on_Area2D_body_entered"]
