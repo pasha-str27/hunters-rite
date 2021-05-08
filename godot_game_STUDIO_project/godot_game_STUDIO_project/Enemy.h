@@ -93,5 +93,7 @@ namespace godot
 			void _set_player2(Node* player);
 			void _update_health_bar();
 			void _change_animation(String, float);
+			void _set_current_player(Node* node);
+			void _remove_current_player(Node* node);
 	};
 }

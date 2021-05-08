@@ -28,6 +28,8 @@ void godot::Enemy::_register_methods()
 	register_method("_set_player2", &Enemy::_set_player2);
 	register_method("_update_health_bar", &Enemy::_update_health_bar);
 	register_method("_change_animation", &Enemy::_change_animation);
+	register_method("_set_current_player", &Enemy::_set_current_player);
+	register_method("_remove_current_player", &Enemy::_remove_current_player);
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
@@ -291,4 +293,22 @@ void godot::Enemy::_change_animation(String _name = "", float speed_scale = 1)
 
 	sp->play(_name);
 	sp->set_speed_scale(speed_scale);
+}
+
+void godot::Enemy::_set_current_player(Node* node)
+{
+	if (node->is_in_group("player1"))
+		ai->set_player1(cast_to<Node2D>(node));
+
+	if (node->is_in_group("player2"))
+		ai->set_player2(cast_to<Node2D>(node));
+}
+
+void godot::Enemy::_remove_current_player(Node* node)
+{
+	if (node->is_in_group("player1"))
+		ai->_delete_player1();
+
+	if (node->is_in_group("player2"))
+		ai->_delete_player2();
 }

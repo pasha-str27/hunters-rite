@@ -18,7 +18,7 @@ script = ExtResource( 6 )
 [node name="EnemySpawner" type="Node2D" parent="."]
 script = ExtResource( 2 )
 Enemies = [ ExtResource( 3 ), ExtResource( 1 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 5 ) ]
-"Enemies Count" = 2
+"Enemies Count" = 1
 
 [node name="SpawnPoints" type="Node2D" parent="EnemySpawner"]
 

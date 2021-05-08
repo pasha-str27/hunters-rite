@@ -60,10 +60,12 @@ void godot::EnemyData::_change_dir_after_time()
 
 void godot::EnemyData::_delete_player1()
 {
+	player1 = nullptr;
 }
 
 void godot::EnemyData::_delete_player2()
 {
+	player2 = nullptr;
 }
 
 String godot::EnemyData::_get_current_player()

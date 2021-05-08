@@ -68,3 +68,5 @@ z_index = -1
 texture = ExtResource( 1 )
 
 [connection signal="body_entered" from="StatueMelee/Area2D" to="StatueMelee" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="StatueMelee/Area2D2" to="StatueMelee" method="_set_current_player"]
+[connection signal="body_exited" from="StatueMelee/Area2D2" to="StatueMelee" method="_remove_current_player"]
