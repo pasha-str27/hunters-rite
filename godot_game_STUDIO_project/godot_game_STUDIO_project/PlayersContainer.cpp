@@ -17,7 +17,9 @@ void PlayersContainer::_set_player1(Node2D* player1)
 
 	//game over
 	if (player1 == nullptr && player2 == nullptr)
+	{
 		Godot::print("Game over");
+	}
 }
 
 void PlayersContainer::_set_player2(Node2D* player2)
@@ -26,7 +28,9 @@ void PlayersContainer::_set_player2(Node2D* player2)
 
 	//game over
 	if (player1 == nullptr && player2 == nullptr)
+	{
 		Godot::print("Game over");
+	}
 }
 
 Node2D* godot::PlayersContainer::_get_player1()
