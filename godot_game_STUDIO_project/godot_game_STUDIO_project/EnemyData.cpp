@@ -15,12 +15,12 @@ void godot::EnemyData::_set_enemy(Node2D* enemy)
 
 void godot::EnemyData::_set_player1(Node2D* player1)
 {
-	PlayersContainer::_get_instance()->_set_player1(player1);
+	//PlayersContainer::_get_instance()->_set_player1(player1);
 }
 
 void godot::EnemyData::_set_player2(Node2D* player2)
 {
-	PlayersContainer::_get_instance()->_set_player2(player2);
+	//PlayersContainer::_get_instance()->_set_player2(player2);
 }
 
 Node2D* godot::EnemyData::_get_player1()
@@ -56,12 +56,12 @@ void godot::EnemyData::_change_dir_after_time()
 
 void godot::EnemyData::_delete_player1()
 {
-	PlayersContainer::_get_instance()->_set_player1(nullptr);
+	//PlayersContainer::_get_instance()->_set_player1(nullptr);
 }
 
 void godot::EnemyData::_delete_player2()
 {
-	PlayersContainer::_get_instance()->_set_player2(nullptr);
+	//PlayersContainer::_get_instance()->_set_player2(nullptr);
 }
 
 String godot::EnemyData::_get_current_player()

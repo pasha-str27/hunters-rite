@@ -17,7 +17,7 @@ namespace godot
 		static PlayersContainer* _get_instance()
 		{
 			if (object == nullptr)
-				object = new PlayersContainer();
+				object = new PlayersContainer;
 
 			return object;
 		}

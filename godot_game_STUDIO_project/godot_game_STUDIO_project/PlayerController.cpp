@@ -76,7 +76,7 @@ void godot::PlayerController::_init()
 
 void godot::PlayerController::_ready()
 {
-	PlayerProduce* player_producer=nullptr;
+	PlayerProduce* player_producer = nullptr;
 
 	if (is_in_group("player1"))
 	{
@@ -172,10 +172,11 @@ void godot::PlayerController::_on_dash_cooldown_timeout()
 
 void godot::PlayerController::_change_is_dashing_state()
 {
-	if (is_dashing)
-		is_dashing = false;
-	else
-		is_dashing = true;
+	is_dashing = !is_dashing;
+	//if (is_dashing)
+	//	is_dashing = false;
+	//else
+	//	is_dashing = true;
 }
 
 bool godot::PlayerController::_can_fight()
@@ -212,6 +213,7 @@ void godot::PlayerController::_process(float delta)
 
 void godot::PlayerController::_take_damage(float damage, bool is_spike)
 {
+	//Godot::print("take " + String::num(damage));
 	current_player->_take_damage(damage, is_spike);
 
 	if(is_alive)
@@ -330,17 +332,19 @@ float godot::PlayerController::_get_attack_speed_delta()
 void godot::PlayerController::_die()
 {
 	is_alive = false;
-	current_player->_revive();
 	add_child(revive_zone->instance());
 }
 
 void godot::PlayerController::_revive()
 {
-	if(is_in_group("player1"))
-		Enemies::get_singleton()->_set_player1(this);
+	current_player->_revive();
+	//if (is_in_group("player1"))
+	//	PlayersContainer::_get_instance()->_set_player1(this);
+	//	//Enemies::get_singleton()->_set_player1(this);
 
-	if (is_in_group("player2"))
-		Enemies::get_singleton()->_set_player2(this);
+	//if (is_in_group("player2"))
+	//	PlayersContainer::_get_instance()->_set_player2(this);
+	//	//Enemies::get_singleton()->_set_player2(this);
 
 	is_alive = true;
 	_set_HP(_get_max_HP() *(float)0.15);

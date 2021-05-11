@@ -7,8 +7,8 @@ godot::StatueMeleeAI::StatueMeleeAI(Ref<PackedScene>& bullet, Node2D* node_tmp) 
 {
 	player1 = nullptr;
 	player2 = nullptr;
-	min_scale = 1;
-	max_scale = 10;
+	min_scale = 0;
+	max_scale = 8;
 	current_scale = min_scale;
 	dir = 1;
 	speed = 5;

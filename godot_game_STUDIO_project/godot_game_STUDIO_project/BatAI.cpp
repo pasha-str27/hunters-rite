@@ -39,7 +39,7 @@ void godot::BatAI::_delete_player1()
 		current_goal = _get_player2();
 		current_player = "player2";
 		dir = (current_goal->get_global_position() - _get_enemy()->get_global_position()).normalized();
-		_set_player1(nullptr);
+		//_set_player1(nullptr);
 		return;
 	}
 
@@ -58,7 +58,7 @@ void godot::BatAI::_delete_player2()
 		current_goal = _get_player1();
 		current_player = "player1";
 		dir = (current_goal->get_global_position() - _get_enemy()->get_global_position()).normalized();
-		_set_player2(nullptr);
+		//_set_player2(nullptr);
 		return;
 	}
 

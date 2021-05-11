@@ -145,7 +145,6 @@ void godot::Player1::_fight(Node* node)
 	if (available_bullets.size() == 1)
 	{
 		auto node = _get_object()->get_parent()->get_child(0);
-		//auto node = _get_object()->get_node("/root/Node2D/Node/BulletConteiner");
 		auto new_obj = available_bullets[0]->duplicate(8);
 		node->add_child(new_obj);
 		available_bullets.push_back(cast_to<Node2D>(new_obj));
@@ -181,13 +180,14 @@ void  godot::Player1::_take_damage(float damage, bool is_spike)
 
 	if (_get_HP() <= 0)
 	{
+		PlayersContainer::_get_instance()->_set_player1(nullptr);
 		Enemies::get_singleton()->_remove_player1();
-
+		//Enemies::get_singleton()->_set_player1(nullptr);
+		//if (PlayersContainer::_get_instance()->_get_player1() == nullptr)
+		//	Godot::print("null");
 		if (_was_revived())
 		{
 			_get_object()->get_parent()->queue_free();
-			//_get_object()->get_node("/root/Node2D/Node/BulletConteiner")->queue_free();
-			//_get_object()->queue_free();
 			return;
 		}
 
@@ -198,4 +198,5 @@ void  godot::Player1::_take_damage(float damage, bool is_spike)
 void godot::Player1::_revive()
 {
 	PlayerData::_revive();
+	PlayersContainer::_get_instance()->_set_player1(_get_object());
 }
