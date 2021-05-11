@@ -50,7 +50,6 @@ void godot::SpawnEnemyController::_prepare_spawn()
 
 void godot::SpawnEnemyController::_on_Area2D_area_entered(Node* other)
 {
-	Godot::print(other->get_name());
 	if (other->is_in_group("room")) 
 	{
 

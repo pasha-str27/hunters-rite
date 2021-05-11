@@ -39,4 +39,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<ReviveZone>();
 	register_class<ItemsContainer>();
 	register_class<ItemGenerator>();
+	register_class<FadeAnimation>();
 }

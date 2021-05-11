@@ -107,9 +107,10 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		Node *player = nullptr;
 
 		if (player_id == 1)
-			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player1");
-		else if(player_id == 2)
-			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player2");
+			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node/Player1"), "Player1");
+		else 
+			if(player_id == 2)
+				player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player2");
 
 		if(!died)
 			player->call("_on_enemy_die", this->get_global_position());

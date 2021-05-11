@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Assets/Prefabs/Players/Player1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Prefabs/Players/Player2.tscn" type="PackedScene" id=2]
@@ -17,9 +17,6 @@
 [ext_resource path="res://Assets/Prefabs/Items/FireSword.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Assets/Prefabs/Items/Boot.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Assets/Prefabs/Items/Chicken.tscn" type="PackedScene" id=22]
-[ext_resource path="res://Assets/Prefabs/Rooms/4/LRTB.tscn" type="PackedScene" id=26]
-
-[sub_resource type="RectangleShape2D" id=1]
 
 [node name="Node" type="Node"]
 
@@ -31,22 +28,7 @@ Items = [ ExtResource( 5 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 2
 
 [node name="Camera2D" parent="." instance=ExtResource( 10 )]
 
-[node name="Room" parent="." instance=ExtResource( 26 )]
-position = Vector2( 0, -720 )
-
-[node name="Area2D2" type="Area2D" parent="Room" groups=[
-"room",
-]]
-position = Vector2( 0, 26.6968 )
-scale = Vector2( 5, 5 )
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Room/Area2D2"]
-shape = SubResource( 1 )
-
 [node name="Player1" parent="." instance=ExtResource( 1 )]
-position = Vector2( -70.7151, 5.61234 )
 
 [node name="Player2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 130.206, 4.48984 )
+position = Vector2( 120, 0 )

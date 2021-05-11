@@ -97,11 +97,6 @@ void godot::BatAI::_process(float delta)
 	else
 		cast_to<AnimatedSprite>(_get_enemy()->get_child(1)->get_child(0))->set_flip_h(true);
 
-	if(dir.x < 0)
-		cast_to<AnimatedSprite>(enemy->get_child(1)->get_child(0))->set_flip_h(false);
-	else
-		cast_to<AnimatedSprite>(enemy->get_child(1)->get_child(0))->set_flip_h(true);
-
 	if (current_player == "")
 	{
 		RandomNumberGenerator* random = RandomNumberGenerator::_new();

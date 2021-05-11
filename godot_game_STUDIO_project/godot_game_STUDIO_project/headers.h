@@ -57,6 +57,7 @@
 #include "InputReviveManager.h"
 #include "StatueMeleeAI.h"
 #include "StatueShootAI.h"
+#include "FadeAnimation.h"
 
 #include "Generation.h"
 #include "SpawnPointChecker.h"
