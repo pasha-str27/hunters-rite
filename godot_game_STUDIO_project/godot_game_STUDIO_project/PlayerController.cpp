@@ -43,7 +43,9 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_on_enemy_die", &PlayerController::_on_enemy_die);
 	register_method((char*)"_is_alive", &PlayerController::_is_alive);
 	register_method((char*)"_start_item_particles", &PlayerController::_start_item_particles);
-	
+	register_method((char*)"_update_health_bar", &PlayerController::_update_health_bar);
+	register_method((char*)"_update_max_health_bar_size", &PlayerController::_update_max_health_bar_size);
+
 	register_property<PlayerController, float>("speed", &PlayerController::speed, 400);
 	register_property<PlayerController, Ref<PackedScene>>("bullet_prefab", &PlayerController::bullet_prefab, nullptr);
 	register_property<PlayerController, Ref<PackedScene>>("revive_zone", &PlayerController::revive_zone, nullptr);
@@ -90,6 +92,8 @@ void godot::PlayerController::_ready()
 	item_generator = CustomExtensions::GetChildByName(this, "ItemGenerator")->call("_get_instance");
 
 	buff_debuff_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "BuffDebuffParticles"));
+
+	_update_health_bar();
 }
 
 void godot::PlayerController::_start_timer()
@@ -206,8 +210,9 @@ void godot::PlayerController::_process(float delta)
 
 void godot::PlayerController::_take_damage(float damage, bool is_spike)
 {
-	Godot::print(String::num(is_spike));
+	//Godot::print(String::num(is_spike));
 	current_player->_take_damage(damage, is_spike);
+	_update_health_bar();
 	cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"))->set_emitting(true);
 }
 
@@ -361,10 +366,24 @@ bool godot::PlayerController::_is_alive()
 
 void godot::PlayerController::_start_item_particles(bool is_buff)
 {
+	_update_max_health_bar_size();
+	Godot::print(String::num(current_player->_get_max_HP()));
+
 	if (is_buff)
 		buff_debuff_particles->get_process_material()->set("hue_variation", .85);
 	else
 		buff_debuff_particles->get_process_material()->set("hue_variation", -.85);
 
 	buff_debuff_particles->set_emitting(true);
+}
+
+void godot::PlayerController::_update_health_bar()
+{
+	current_player->_update_health_bar();
+}
+
+void godot::PlayerController::_update_max_health_bar_size()
+{
+	current_player->_get_health_bar()->set_max(current_player->_get_max_HP());
+	current_player->_update_health_bar();
 }

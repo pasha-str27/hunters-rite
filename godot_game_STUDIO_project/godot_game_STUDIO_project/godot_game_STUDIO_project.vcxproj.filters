@@ -36,6 +36,7 @@
     <ClCompile Include="Enemies.cpp" />
     <ClCompile Include="InputReviveManager.cpp" />
     <ClCompile Include="SlimeAI.cpp" />
+    <ClCompile Include="EnemyData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
@@ -73,5 +74,6 @@
     <ClInclude Include="Enemies.h" />
     <ClInclude Include="InputReviveManager.h" />
     <ClInclude Include="SlimeAI.h" />
+    <ClInclude Include="EnemyData.h" />
   </ItemGroup>
 </Project>

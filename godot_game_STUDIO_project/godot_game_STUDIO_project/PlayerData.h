@@ -34,7 +34,7 @@ namespace godot
 		bool _can_fight();
 
 		virtual void _process_input() = 0;
-		virtual void _set_enemy(Node* enemy = nullptr)=0;
+		virtual void _set_enemy(Node* enemy = nullptr) = 0;
 		float _get_HP();
 		void _set_HP(float HP);
 		float _get_damage();
@@ -43,6 +43,7 @@ namespace godot
 		bool _was_revived();
 		float _get_max_HP();
 		void _set_max_HP(float value);
+		virtual void _update_health_bar() = 0;
 
 		static Input* input_controller;
 	};
