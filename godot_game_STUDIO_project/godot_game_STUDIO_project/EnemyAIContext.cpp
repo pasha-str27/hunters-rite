@@ -14,9 +14,6 @@ EnemyAIContext::EnemyAIContext()
 EnemyAIContext::~EnemyAIContext()
 {
 	//delete strategy;
-	//delete enemy;
-	//delete player1;
-	//delete player2;
 }
 
 
@@ -27,32 +24,32 @@ void EnemyAIContext::_set_strategy(IEnemyAI* strategy)
 
 void EnemyAIContext::_process(float delta)
 {
-	strategy->_process(delta, enemy, player1, player2);
+	strategy->_process(delta);
 }
 
 void godot::EnemyAIContext::set_enemy(Node2D* enemy)
 {
-	this->enemy = enemy;
+	strategy->_set_enemy(enemy);
 }
 
 void godot::EnemyAIContext::set_player1(Node2D* player1)
 {
-	this->player1 = player1;
+	strategy->_set_player1(player1);
 }
 
 void godot::EnemyAIContext::set_player2(Node2D* player2)
 {
-	this->player2 = player2;
+	strategy->_set_player2(player2);
 }
 
 Node2D* godot::EnemyAIContext::get_player1()
 {
-	return player1;
+	return 	strategy->_get_player1();
 }
 
 Node2D* godot::EnemyAIContext::get_player2()
 {
-	return player2;
+	return 	strategy->_get_player2();
 }
 
 void godot::EnemyAIContext::_add_bullet(Node* bullet)
@@ -67,14 +64,12 @@ void godot::EnemyAIContext::change_can_fight(bool value)
 
 void godot::EnemyAIContext::_delete_player1()
 {
-	strategy->_delete_player1(player1, player2);
-	player1 = nullptr;
+	strategy->_delete_player1();
 }
 
 void godot::EnemyAIContext::_delete_player2()
 {
-	strategy->_delete_player2(player1, player2);
-	player2 = nullptr;
+	strategy->_delete_player2();
 }
 
 void godot::EnemyAIContext::_remove_side(int side)

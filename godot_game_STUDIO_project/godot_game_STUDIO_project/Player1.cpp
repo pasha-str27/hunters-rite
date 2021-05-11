@@ -10,7 +10,7 @@ godot::Player1::Player1(Node2D* object, Ref<PackedScene>bullet) : PlayerData(obj
 	max_bullet_count = 10;
 	_change_can_fight(true);
 
-	auto node = _get_object()->get_node("/root/Node2D/Node/BulletConteiner");
+	auto node = _get_object()->get_parent()->get_child(0);
 
 	for (int i = 0; i < max_bullet_count; ++i)
 	{
@@ -35,8 +35,8 @@ void godot::Player1::_set_HP(float value)
 
 		if (_was_revived())
 		{
-			_get_object()->get_node("/root/Node2D/Node/BulletConteiner")->queue_free();
-			_get_object()->queue_free();
+			_get_object()->get_parent()->queue_free();
+			//_get_object()->queue_free();
 			return;
 		}
 
@@ -61,6 +61,12 @@ void godot::Player1::_process_input()
 	if (input_controller->is_action_just_pressed("Player1_right"))
 	{
 		cast_to<Sprite>(_get_object()->get_child(0)->get_child(0))->set_flip_h(true);
+	}
+
+	//dash
+	if (input_controller->is_action_just_pressed("Player1_dash"))
+	{
+		_get_object()->call("_start_dash_timer");
 	}
 
 	//move up
@@ -138,7 +144,8 @@ void godot::Player1::_fight(Node* node)
 
 	if (available_bullets.size() == 1)
 	{
-		auto node = _get_object()->get_node("/root/Node2D/Node/BulletConteiner");
+		auto node = _get_object()->get_parent()->get_child(0);
+		//auto node = _get_object()->get_node("/root/Node2D/Node/BulletConteiner");
 		auto new_obj = available_bullets[0]->duplicate(8);
 		node->add_child(new_obj);
 		available_bullets.push_back(cast_to<Node2D>(new_obj));
@@ -178,8 +185,9 @@ void  godot::Player1::_take_damage(float damage, bool is_spike)
 
 		if (_was_revived())
 		{
-			_get_object()->get_node("/root/Node2D/Node/BulletConteiner")->queue_free();
-			_get_object()->queue_free();
+			_get_object()->get_parent()->queue_free();
+			//_get_object()->get_node("/root/Node2D/Node/BulletConteiner")->queue_free();
+			//_get_object()->queue_free();
 			return;
 		}
 
