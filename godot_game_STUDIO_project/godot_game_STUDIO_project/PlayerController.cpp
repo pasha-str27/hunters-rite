@@ -78,12 +78,10 @@ void godot::PlayerController::_ready()
 {
 	PlayerProduce* player_producer=nullptr;
 
-	Input::get_singleton()->connect("joy_connection_changed", this, "_on_joy_connection_changed");
-
-	if (get_name() == "Player1")
+	if (is_in_group("player1"))
 		player_producer = new ProducePlayer1;
 
-	if (get_name() == "Player2")
+	if (is_in_group("player2"))
 		player_producer = new ProducePlayer2;
 	
 	current_player = player_producer->_get_player(this, bullet_prefab);
@@ -208,6 +206,7 @@ void godot::PlayerController::_process(float delta)
 
 void godot::PlayerController::_take_damage(float damage, bool is_spike)
 {
+	Godot::print(String::num(is_spike));
 	current_player->_take_damage(damage, is_spike);
 	cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"))->set_emitting(true);
 }
@@ -257,6 +256,7 @@ void godot::PlayerController::change_can_moving_timeout()
 	can_move = true;
 }
 
+//винести в Player2
 void godot::PlayerController::_decrease_attack_radius()
 {
 	auto node = cast_to<Node2D>(get_child(1));
@@ -331,6 +331,7 @@ void godot::PlayerController::_revive()
 {
 	if(is_in_group("player1"))
 		Enemies::get_singleton()->_set_player1(this);
+
 	if (is_in_group("player2"))
 		Enemies::get_singleton()->_set_player2(this);
 
