@@ -3,11 +3,9 @@
 #include "headers.h"
 #endif
 
-godot::SpiderAI::SpiderAI(Ref<PackedScene>& bullet, Node2D* node_tmp, Node2D* player1, Node2D* player2):
-	EnemyData(node_tmp, player1, player2)
+godot::SpiderAI::SpiderAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
 {
 	max_bullet_count = 5;
-	//enemy = cast_to<KinematicBody2D>(node_tmp);
 	can_move = true;
 	is_cheking = false;
 	speed = 400;

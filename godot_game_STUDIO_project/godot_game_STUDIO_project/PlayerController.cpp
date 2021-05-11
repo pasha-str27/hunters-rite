@@ -79,10 +79,16 @@ void godot::PlayerController::_ready()
 	PlayerProduce* player_producer=nullptr;
 
 	if (is_in_group("player1"))
+	{
 		player_producer = new ProducePlayer1;
-
+		PlayersContainer::_get_instance()->_set_player1(this);
+	}
+		
 	if (is_in_group("player2"))
+	{
 		player_producer = new ProducePlayer2;
+		PlayersContainer::_get_instance()->_set_player2(this);
+	}
 	
 	current_player = player_producer->_get_player(this, bullet_prefab);
 	current_player->_set_speed(speed);
@@ -206,9 +212,10 @@ void godot::PlayerController::_process(float delta)
 
 void godot::PlayerController::_take_damage(float damage, bool is_spike)
 {
-	Godot::print(String::num(is_spike));
 	current_player->_take_damage(damage, is_spike);
-	cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"))->set_emitting(true);
+
+	if(is_alive)
+		cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"))->set_emitting(true);
 }
 
 void godot::PlayerController::_on_Area2D_body_entered(Node* node)

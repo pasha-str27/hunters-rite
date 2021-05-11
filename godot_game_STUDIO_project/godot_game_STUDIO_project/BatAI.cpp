@@ -3,8 +3,7 @@
 #include "headers.h"
 #endif
 
-godot::BatAI::BatAI(Ref<PackedScene>& bullet, Node2D* node_tmp, Node2D* player1, Node2D* player2):
-	EnemyData(node_tmp, player1, player2)
+godot::BatAI::BatAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
 {
 	can_move = true;
 	speed = 100;
@@ -15,12 +14,12 @@ godot::BatAI::BatAI(Ref<PackedScene>& bullet, Node2D* node_tmp, Node2D* player1,
 
 	if (rng->randi_range(0, 2))
 	{
-		current_goal = player2;
+		current_goal = PlayersContainer::_get_instance()->_get_player2();
 		current_player = "player2";
 	}	
 	else
 	{
-		current_goal = player1;
+		current_goal = PlayersContainer::_get_instance()->_get_player1();
 		current_player = "player1";
 	}
 
@@ -30,10 +29,6 @@ godot::BatAI::BatAI(Ref<PackedScene>& bullet, Node2D* node_tmp, Node2D* player1,
 void godot::BatAI::change_can_fight(bool value)
 {
 	can_move = value;
-}
-
-void godot::BatAI::_fight(Node2D* player1, Node2D* player2)
-{
 }
 
 void godot::BatAI::_delete_player1()
@@ -73,6 +68,7 @@ void godot::BatAI::_delete_player2()
 	current_player = "";
 	dir = (Vector2(random->randf_range(-100, 100), random->randf_range(-100, 100))).normalized();
 }
+
 
 godot::String godot::BatAI::_get_current_player()
 {

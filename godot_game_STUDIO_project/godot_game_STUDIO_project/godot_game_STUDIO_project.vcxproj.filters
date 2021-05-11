@@ -30,6 +30,7 @@
     <ClCompile Include="StatueShootAI.cpp" />
     <ClCompile Include="EnemyData.cpp" />
     <ClCompile Include="FadeAnimation.cpp" />
+    <ClCompile Include="PlayersContainer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
@@ -62,5 +63,6 @@
     <ClInclude Include="StatueShootAI.h" />
     <ClInclude Include="EnemyData.h" />
     <ClInclude Include="FadeAnimation.h" />
+    <ClInclude Include="PlayersContainer.h" />
   </ItemGroup>
 </Project>
