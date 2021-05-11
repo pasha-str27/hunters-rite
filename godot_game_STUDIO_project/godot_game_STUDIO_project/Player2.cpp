@@ -24,6 +24,12 @@ void godot::Player2::_process_input()
 {
 	Vector2 dir = Vector2(0, 0);
 
+	//dash
+	if (input_controller->is_action_just_pressed("Player2_dash"))
+	{
+		_get_object()->call("_start_dash_timer");
+	}
+
 	//move up
 	if (input_controller->is_action_just_pressed("Player2_fight"))
 	{

@@ -36,48 +36,24 @@ void godot::Bullet::_on_Area2D_body_entered(Node* node)
 	cast_to<Node2D>(this)->set_visible(false);
 
 	if (node->is_in_group("player") && is_in_group("web_bullet"))
-	{
 		node->call("_change_can_moving", false);
-	}
 	else
 	{
-		if (node->is_in_group("enemy") || node->is_in_group("player"))
-		{
-			Array args = {};
-			args.push_back(damage);
-			args.push_back(1);
-			node->call("_take_damage", args);
-		}
+		if (node->is_in_group("enemy"))
+			node->call("_take_damage", damage, 1);
+
+		if (node->is_in_group("player"))
+			node->call("_take_damage", damage, false);
 	}
 
-	if (is_in_group("flower_bullet"))
-	{
-		get_node("/root/Node2D/Node/flower")->call("_add_bullet", this);
-	}
-
-	if (is_in_group("statue_bullet"))
-	{
-		get_node("/root/Node2D/Node/statue_shoot")->call("_add_bullet", this);
-	}
-
-	if (is_in_group("web_bullet"))
-	{
-		get_node("/root/Node2D/Node/Spider")->call("_add_bullet", this);
-	}
-
-	if (is_in_group("player_bullet"))
-	{
-		get_node("/root/Node2D/Node/Player1")->call("_add_bullet", this);
-	}
+	if (is_in_group("statue_bullet") || is_in_group("web_bullet") || is_in_group("player_bullet") || is_in_group("flower_bullet"))
+		get_parent()->get_parent()->get_child(1)->call("_add_bullet", this);
 }
 
 void godot::Bullet::_process(float delta)
 {
 	if (is_visible())
-	{
-		move_and_slide(dir * speed);
-	}
-		
+		move_and_slide(dir * speed);	
 }
 
 void godot::Bullet::_set_dir(Vector2 dir)

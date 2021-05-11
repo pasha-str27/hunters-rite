@@ -46,49 +46,6 @@ void godot::CameraController::_move(String dir)
 	}
 }
 
-void godot::CameraController::_move(String dir)
-{
-	if (dir == "top")
-	{
-		float delta = OS::get_singleton()->get_window_size().y;
-
-		set_global_position(get_global_position() - Vector2(0, delta));
-
-		player1->set_global_position(player1->get_global_position() - Vector2(0, delta));
-		player2->set_global_position(player2->get_global_position() - Vector2(0, delta));
-	}
-
-	if (dir == "bottom")
-	{
-		float delta = OS::get_singleton()->get_window_size().y;
-
-		set_global_position(get_global_position() + Vector2(0, delta));
-
-		player1->set_global_position(player1->get_global_position() + Vector2(0, delta));
-		player2->set_global_position(player2->get_global_position() + Vector2(0, delta));
-	}
-
-	if (dir == "left")
-	{
-		float delta = OS::get_singleton()->get_window_size().x;
-
-		set_global_position(get_global_position() - Vector2(delta, 0));
-
-		player1->set_global_position(player1->get_global_position() - Vector2(delta, 0));
-		player2->set_global_position(player2->get_global_position() - Vector2(delta, 0));
-	}
-
-	if (dir == "right")
-	{
-		float delta = OS::get_singleton()->get_window_size().x;
-
-		set_global_position(get_global_position() + Vector2(delta, 0));
-
-		player1->set_global_position(player1->get_global_position() + Vector2(delta, 0));
-		player2->set_global_position(player2->get_global_position() + Vector2(delta, 0));
-	}
-}
-
 void godot::CameraController::_register_methods()
 {
 	register_method("_process", &CameraController::_process);
