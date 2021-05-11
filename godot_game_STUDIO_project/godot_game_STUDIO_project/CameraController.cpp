@@ -5,14 +5,15 @@
 
 void godot::CameraController::_move(String dir)
 {
+	float d = 30;
 	if (dir == "top")
 	{
 		float delta = OS::get_singleton()->get_window_size().y;
 
 		set_global_position(get_global_position() - Vector2(0, delta));
 
-		player1->set_global_position(player1->get_global_position() - Vector2(0, delta));
-		player2->set_global_position(player2->get_global_position() - Vector2(0, delta));
+		player1->set_global_position(player1->get_global_position() - Vector2(0, delta + d));
+		player2->set_global_position(player2->get_global_position() - Vector2(0, delta + d));
 	}
 
 	if (dir == "bottom")
@@ -21,8 +22,8 @@ void godot::CameraController::_move(String dir)
 
 		set_global_position(get_global_position() + Vector2(0, delta));
 
-		player1->set_global_position(player1->get_global_position() + Vector2(0, delta));
-		player2->set_global_position(player2->get_global_position() + Vector2(0, delta));
+		player1->set_global_position(player1->get_global_position() + Vector2(0, delta - d));
+		player2->set_global_position(player2->get_global_position() + Vector2(0, delta - d));
 	}
 
 	if (dir == "left")
@@ -31,8 +32,8 @@ void godot::CameraController::_move(String dir)
 
 		set_global_position(get_global_position() - Vector2(delta, 0));
 
-		player1->set_global_position(player1->get_global_position() - Vector2(delta, 0));
-		player2->set_global_position(player2->get_global_position() - Vector2(delta, 0));
+		player1->set_global_position(player1->get_global_position() - Vector2(delta + d, 0));
+		player2->set_global_position(player2->get_global_position() - Vector2(delta + d, 0));
 	}
 
 	if (dir == "right")
@@ -41,9 +42,10 @@ void godot::CameraController::_move(String dir)
 
 		set_global_position(get_global_position() + Vector2(delta, 0));
 
-		player1->set_global_position(player1->get_global_position() + Vector2(delta, 0));
-		player2->set_global_position(player2->get_global_position() + Vector2(delta, 0));
+		player1->set_global_position(player1->get_global_position() + Vector2(delta - d, 0));
+		player2->set_global_position(player2->get_global_position() + Vector2(delta - d, 0));
 	}
+	_close_doors();
 }
 
 void godot::CameraController::_register_methods()
