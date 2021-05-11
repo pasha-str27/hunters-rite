@@ -16,6 +16,8 @@ _data = [ Vector2( 0.0964286, -0.252273 ), 0.0, 10.6061, 0, 0, Vector2( 0.921429
 curve = SubResource( 3 )
 
 [sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 2
+emission_box_extents = Vector3( 16, 1, 1 )
 flag_disable_z = true
 direction = Vector3( 0, 1, 0 )
 spread = 90.0
@@ -36,6 +38,7 @@ emitting = false
 amount = 40
 lifetime = 0.5
 one_shot = true
+speed_scale = 0.8
 explosiveness = 0.6
 visibility_rect = Rect2( 0, 0, 0, 0 )
 local_coords = false

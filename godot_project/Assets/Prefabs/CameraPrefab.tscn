@@ -11,6 +11,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 [node name="Camera2D" type="Camera2D"]
+z_index = 100
 current = true
 zoom = Vector2( 0.75, 0.75 )
 script = ExtResource( 6 )
@@ -39,8 +40,8 @@ position = Vector2( -240, 96 )
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2( 2, 2 )
-collision_layer = 0
-collision_mask = 0
+collision_layer = 524288
+collision_mask = 524288
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )

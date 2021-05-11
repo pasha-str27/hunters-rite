@@ -5,6 +5,13 @@
 
 void godot::SpawnEnemyController::SpawnEnemies()
 {
+
+	if (spawn_points.size() == 0) 
+	{
+		CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->call("_open_doors");
+		return;
+	}
+
 	RandomNumberGenerator* rng = RandomNumberGenerator::_new();
 	rng->randomize();
 	
@@ -38,22 +45,24 @@ void godot::SpawnEnemyController::_init()
 
 void godot::SpawnEnemyController::_ready()
 {
-	_prepare_spawn();
+
 }
 
 void godot::SpawnEnemyController::_prepare_spawn()
 {
-	spawn_points = get_node("SpawnPoints")->get_children();
 	SpawnEnemies();
-	get_parent()->call("_close_doors");
+	if(Enemies::get_singleton()->_get_enemies_count() > 0)
+		get_parent()->call("_close_doors");
+
+	spawn_points.clear();
 }
 
 void godot::SpawnEnemyController::_on_Area2D_area_entered(Node* other)
 {
 	if (other->is_in_group("room")) 
 	{
-
-		_prepare_spawn();
+		spawn_points = other->get_parent()->get_node("SpawnPoints")->get_children();
+		//_prepare_spawn();
 		other->queue_free();
 	}
 

@@ -20,6 +20,8 @@ library = ExtResource( 3 )
 "room",
 ]]
 scale = Vector2( 2, 2 )
+collision_layer = 524288
+collision_mask = 524288
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )

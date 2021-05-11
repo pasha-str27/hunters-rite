@@ -3,6 +3,8 @@
 #include "headers.h"
 #endif
 
+using namespace godot;
+
 void godot::PlayerController::_register_methods()
 {
 	register_method((char*)"_process", &PlayerController::_process);
@@ -206,9 +208,12 @@ void godot::PlayerController::_process(float delta)
 
 void godot::PlayerController::_take_damage(float damage, bool is_spike)
 {
-	Godot::print(String::num(is_spike));
 	current_player->_take_damage(damage, is_spike);
-	cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"))->set_emitting(true);
+	if (_get_HP() > 0)
+	{
+		cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"))->set_emitting(false);
+		cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"))->set_emitting(true);
+	}
 }
 
 void godot::PlayerController::_on_Area2D_body_entered(Node* node)
@@ -312,7 +317,7 @@ float godot::PlayerController::_get_damage()
 
 void godot::PlayerController::_set_attack_speed_delta(float value)
 {
-	attack_speed_delta = value > 0 ? value : 0;
+	attack_speed_delta = value > 0 ? value : 0.0f;
 }
 
 float godot::PlayerController::_get_attack_speed_delta()
@@ -366,5 +371,6 @@ void godot::PlayerController::_start_item_particles(bool is_buff)
 	else
 		buff_debuff_particles->get_process_material()->set("hue_variation", -.85);
 
+	buff_debuff_particles->set_emitting(false);
 	buff_debuff_particles->set_emitting(true);
 }
