@@ -155,4 +155,16 @@ __meta__ = {
 "_editor_description_": ""
 }
 
+[node name="P1Items" type="VBoxContainer" parent="."]
+margin_left = -421.0
+margin_top = -202.0
+margin_right = -411.0
+margin_bottom = -111.0
+rect_min_size = Vector2( 10, 70 )
+rect_scale = Vector2( -3.63636, 5.17647 )
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="area_entered" from="Area2D" to="EnemySpawner" method="_on_Area2D_area_entered"]

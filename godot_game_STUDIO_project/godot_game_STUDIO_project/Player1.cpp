@@ -37,13 +37,10 @@ void godot::Player1::_set_HP(float value)
 		{
 			_get_object()->get_parent()->queue_free();
 			//_get_object()->queue_free();
-			return;
 		}
 
 		_get_object()->call("_die");
 	}
-
-	_update_health_bar();
 }
 
 void godot::Player1::_move()
