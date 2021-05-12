@@ -33,6 +33,7 @@
 #include <AnimatedSprite.hpp>
 #include <VBoxContainer.hpp>
 #include <SceneTree.hpp>
+#include <Texture.hpp>
 
 using namespace godot;
 

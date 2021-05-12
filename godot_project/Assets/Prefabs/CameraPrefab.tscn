@@ -98,8 +98,8 @@ __meta__ = {
 
 [node name="ProgressBar" type="ProgressBar" parent="P1HealthBarWrapper"]
 anchor_right = 1.0
-margin_left = 2.0
-margin_right = -67.0
+margin_left = 1.0
+margin_right = -69.0
 margin_bottom = 20.0
 custom_styles/fg = SubResource( 3 )
 custom_styles/bg = SubResource( 4 )
@@ -150,13 +150,28 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="P1Items" type="VBoxContainer" parent="."]
-margin_left = -421.0
-margin_top = -202.0
-margin_right = -411.0
-margin_bottom = -111.0
-rect_min_size = Vector2( 10, 70 )
-rect_scale = Vector2( -3.63636, 5.17647 )
+[node name="ItemHolder" type="Control" parent="."]
+margin_left = -432.0
+margin_top = -176.0
+margin_right = 432.0
+margin_bottom = 264.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="P1Items" type="VBoxContainer" parent="ItemHolder"]
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 70 )
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="P2Items" type="VBoxContainer" parent="ItemHolder"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 70 )
 custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false

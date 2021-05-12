@@ -345,14 +345,6 @@ void godot::PlayerController::_die()
 void godot::PlayerController::_revive()
 {
 	current_player->_revive();
-	//if (is_in_group("player1"))
-	//	PlayersContainer::_get_instance()->_set_player1(this);
-	//	//Enemies::get_singleton()->_set_player1(this);
-
-	//if (is_in_group("player2"))
-	//	PlayersContainer::_get_instance()->_set_player2(this);
-	//	//Enemies::get_singleton()->_set_player2(this);
-
 	is_alive = true;
 	_set_HP(_get_max_HP() *(float)0.15);
 	_update_health_bar();
