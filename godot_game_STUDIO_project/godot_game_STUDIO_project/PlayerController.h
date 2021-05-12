@@ -75,5 +75,7 @@ namespace godot
 		bool _is_alive();
 		void _start_item_particles(bool is_buff);
 		void _change_is_dashing_state();
+		void _update_health_bar();
+		void _update_max_health_bar_size();
 	};
 }

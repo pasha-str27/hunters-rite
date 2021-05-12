@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Assets/Prefabs/Enemies/Slime.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Scripts/SpawnEnemyController.gdns" type="Script" id=2]
@@ -9,6 +9,28 @@
 [ext_resource path="res://Assets/Prefabs/Enemies/StatueShoot.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 1, 0, 0, 0.137255 )
+corner_radius_top_left = 90
+corner_radius_bottom_right = 90
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.807843, 0.0705882, 0.0705882, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.6, 0.6, 0.6, 0.117647 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0, 1, 0.858824, 0.137255 )
+corner_radius_top_right = 90
+corner_radius_bottom_left = 90
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.180392, 0.8, 0.941176, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.6, 0.6, 0.6, 0.117647 )
 
 [node name="Camera2D" type="Camera2D"]
 z_index = 100
@@ -53,5 +75,84 @@ collision_mask = 524288
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
+
+[node name="P1HealthBarWrapper" type="Control" parent="."]
+margin_left = -478.0
+margin_top = 270.0
+margin_right = 61.0
+margin_bottom = 290.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="P1HealthBarWrapper"]
+anchor_left = 0.889
+anchor_right = 0.999
+anchor_bottom = 1.0
+margin_left = -0.171021
+margin_right = -0.46106
+custom_styles/normal = SubResource( 7 )
+custom_colors/font_color = Color( 1, 0.215686, 0.215686, 1 )
+text = "P1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="P1HealthBarWrapper"]
+anchor_right = 1.0
+margin_left = 2.0
+margin_right = -67.0
+margin_bottom = 20.0
+custom_styles/fg = SubResource( 2 )
+custom_styles/bg = SubResource( 5 )
+value = 50.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="P2HealthBarWrapper" type="Control" parent="."]
+margin_left = 458.0
+margin_top = 268.0
+margin_right = 994.0
+margin_bottom = 288.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="P2HealthBarWrapper"]
+anchor_left = 0.888
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.0319519
+custom_styles/normal = SubResource( 8 )
+custom_colors/font_color = Color( 0.133333, 0.960784, 1, 1 )
+text = "P2"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="P2HealthBarWrapper"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -20.0
+margin_right = -66.0
+rect_min_size = Vector2( 0, 5 )
+custom_styles/fg = SubResource( 4 )
+custom_styles/bg = SubResource( 6 )
+value = 50.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
 
 [connection signal="area_entered" from="Area2D" to="EnemySpawner" method="_on_Area2D_area_entered"]
