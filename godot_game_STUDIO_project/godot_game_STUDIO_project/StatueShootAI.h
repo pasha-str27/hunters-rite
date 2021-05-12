@@ -13,7 +13,7 @@ namespace godot
 		bool can_fight;
 
 	public:
-		StatueShootAI(Ref<PackedScene>& bullet, Node2D* node, Node2D* player1 = nullptr, Node2D* player2 = nullptr);
+		StatueShootAI(Ref<PackedScene>& bullet, Node2D* node);
 		void _process(float delta);
 		void _add_bullet(Node* node = nullptr);
 		void change_can_fight(bool value);

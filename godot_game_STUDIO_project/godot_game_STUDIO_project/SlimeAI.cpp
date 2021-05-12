@@ -41,10 +41,8 @@ void godot::SlimeAI::_set_speed(float value)
 	speed = value;
 }
 
-godot::SlimeAI::SlimeAI(Ref<PackedScene>& bullet, Node2D* node_tmp, Node2D* player1, Node2D* player2):
-	EnemyData(node_tmp, player1, player2)
+godot::SlimeAI::SlimeAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
 {
-	//enemy = cast_to<KinematicBody2D>(node_tmp);
 	can_move = true;
 	is_cheking = false;
 	speed = 400;

@@ -78,13 +78,19 @@ void godot::PlayerController::_init()
 
 void godot::PlayerController::_ready()
 {
-	PlayerProduce* player_producer=nullptr;
+	PlayerProduce* player_producer = nullptr;
 
 	if (is_in_group("player1"))
+	{
 		player_producer = new ProducePlayer1;
-
+		PlayersContainer::_get_instance()->_set_player1(this);
+	}
+		
 	if (is_in_group("player2"))
+	{
 		player_producer = new ProducePlayer2;
+		PlayersContainer::_get_instance()->_set_player2(this);
+	}
 	
 	current_player = player_producer->_get_player(this, bullet_prefab);
 	current_player->_set_speed(speed);
@@ -168,10 +174,11 @@ void godot::PlayerController::_on_dash_cooldown_timeout()
 
 void godot::PlayerController::_change_is_dashing_state()
 {
-	if (is_dashing)
-		is_dashing = false;
-	else
-		is_dashing = true;
+	is_dashing = !is_dashing;
+	//if (is_dashing)
+	//	is_dashing = false;
+	//else
+	//	is_dashing = true;
 }
 
 bool godot::PlayerController::_can_fight()
@@ -209,7 +216,8 @@ void godot::PlayerController::_process(float delta)
 void godot::PlayerController::_take_damage(float damage, bool is_spike)
 {
 	current_player->_take_damage(damage, is_spike);
-	if (_get_HP() > 0)
+
+	if(is_alive)
 	{
 		cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"))->set_emitting(false);
 		cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"))->set_emitting(true);
@@ -261,7 +269,7 @@ void godot::PlayerController::change_can_moving_timeout()
 	can_move = true;
 }
 
-//винести в Player2
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ Player2
 void godot::PlayerController::_decrease_attack_radius()
 {
 	auto node = cast_to<Node2D>(get_child(1));
@@ -328,17 +336,19 @@ float godot::PlayerController::_get_attack_speed_delta()
 void godot::PlayerController::_die()
 {
 	is_alive = false;
-	current_player->_revive();
 	add_child(revive_zone->instance());
 }
 
 void godot::PlayerController::_revive()
 {
-	if(is_in_group("player1"))
-		Enemies::get_singleton()->_set_player1(this);
+	current_player->_revive();
+	//if (is_in_group("player1"))
+	//	PlayersContainer::_get_instance()->_set_player1(this);
+	//	//Enemies::get_singleton()->_set_player1(this);
 
-	if (is_in_group("player2"))
-		Enemies::get_singleton()->_set_player2(this);
+	//if (is_in_group("player2"))
+	//	PlayersContainer::_get_instance()->_set_player2(this);
+	//	//Enemies::get_singleton()->_set_player2(this);
 
 	is_alive = true;
 	_set_HP(_get_max_HP() *(float)0.15);

@@ -24,7 +24,6 @@ void godot::Enemies::_remove_enemy(Node2D* enemy)
 	for (int i = 0; i < enemies.size(); ++i)
 		if (enemies[i] == enemy)
 		{
-			//enemies.erase(enemies.begin() + i, enemies.begin() + i + 1);
 			enemies.erase(enemies.begin() + i, enemies.end());
 			return;
 		}
@@ -40,6 +39,8 @@ void godot::Enemies::_remove_player2()
 {
 	for (auto node : enemies)
 		node->call("_remove_player2");
+
+	PlayersContainer::_get_instance()->_set_player2(nullptr);
 }
 
 void godot::Enemies::_set_player1(Node* player)
