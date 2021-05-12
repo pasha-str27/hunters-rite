@@ -32,6 +32,9 @@
 #include <ParticlesMaterial.hpp>
 #include <AnimatedSprite.hpp>
 #include <VBoxContainer.hpp>
+#include <Texture.hpp>
+
+using namespace godot;
 
 #include "IPlayer.h"
 #include "PlayerData.h"
@@ -68,5 +71,3 @@
 #include "SpawnEnemyController.h"
 #include "ItemsContainer.h"
 #include "ItemGenerator.h"
-
-using namespace godot;

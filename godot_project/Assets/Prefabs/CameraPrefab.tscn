@@ -10,26 +10,26 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 1, 0, 0, 0.137255 )
 corner_radius_top_left = 90
 corner_radius_bottom_right = 90
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.807843, 0.0705882, 0.0705882, 1 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.6, 0.6, 0.6, 0.117647 )
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0, 1, 0.858824, 0.137255 )
 corner_radius_top_right = 90
 corner_radius_bottom_left = 90
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.180392, 0.8, 0.941176, 1 )
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.6, 0.6, 0.6, 0.117647 )
 
 [node name="Camera2D" type="Camera2D"]
@@ -83,7 +83,7 @@ anchor_right = 0.999
 anchor_bottom = 1.0
 margin_left = -0.171021
 margin_right = -0.46106
-custom_styles/normal = SubResource( 7 )
+custom_styles/normal = SubResource( 2 )
 custom_colors/font_color = Color( 1, 0.215686, 0.215686, 1 )
 text = "P1"
 align = 1
@@ -94,11 +94,11 @@ __meta__ = {
 
 [node name="ProgressBar" type="ProgressBar" parent="P1HealthBarWrapper"]
 anchor_right = 1.0
-margin_left = 2.0
-margin_right = -67.0
+margin_left = 1.0
+margin_right = -69.0
 margin_bottom = 20.0
-custom_styles/fg = SubResource( 2 )
-custom_styles/bg = SubResource( 5 )
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )
 value = 50.0
 percent_visible = false
 __meta__ = {
@@ -121,7 +121,7 @@ anchor_left = 0.888
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 0.0319519
-custom_styles/normal = SubResource( 8 )
+custom_styles/normal = SubResource( 5 )
 custom_colors/font_color = Color( 0.133333, 0.960784, 1, 1 )
 text = "P2"
 align = 1
@@ -137,8 +137,8 @@ anchor_bottom = 1.0
 margin_top = -20.0
 margin_right = -66.0
 rect_min_size = Vector2( 0, 5 )
-custom_styles/fg = SubResource( 4 )
-custom_styles/bg = SubResource( 6 )
+custom_styles/fg = SubResource( 6 )
+custom_styles/bg = SubResource( 7 )
 value = 50.0
 percent_visible = false
 __meta__ = {
@@ -146,13 +146,28 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="P1Items" type="VBoxContainer" parent="."]
-margin_left = -421.0
-margin_top = -202.0
-margin_right = -411.0
-margin_bottom = -111.0
-rect_min_size = Vector2( 10, 70 )
-rect_scale = Vector2( -3.63636, 5.17647 )
+[node name="ItemHolder" type="Control" parent="."]
+margin_left = -432.0
+margin_top = -176.0
+margin_right = 432.0
+margin_bottom = 264.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="P1Items" type="VBoxContainer" parent="ItemHolder"]
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 70 )
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="P2Items" type="VBoxContainer" parent="ItemHolder"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 70 )
 custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false

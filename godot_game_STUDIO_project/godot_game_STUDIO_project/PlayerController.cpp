@@ -342,6 +342,8 @@ void godot::PlayerController::_revive()
 
 	is_alive = true;
 	_set_HP(_get_max_HP() *(float)0.15);
+
+	_update_health_bar();
 }
 
 float godot::PlayerController::_get_max_HP()
