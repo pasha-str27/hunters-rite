@@ -52,6 +52,7 @@ void godot::SpawnEnemyController::SpawnItems()
 		item->set_global_position(cast_to<Node2D>(item_points[i])->get_global_position());
 		get_node("/root/Node2D/Items")->add_child(item, true);
 	}
+	rng = nullptr;
 }
 
 void godot::SpawnEnemyController::_register_methods()

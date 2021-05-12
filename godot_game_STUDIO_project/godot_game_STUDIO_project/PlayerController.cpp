@@ -101,6 +101,7 @@ void godot::PlayerController::_ready()
 
 	buff_debuff_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "BuffDebuffParticles"));
 	hurt_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"));
+	dash_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "DashParticles"));
 
 	_update_health_bar();
 }
@@ -140,6 +141,8 @@ void godot::PlayerController::_start_dash_timer()
 		current_player->_set_speed(speed * dash_speed_multiplier);
 
 		timer->start(dash_time_delta);
+
+		dash_particles->set_emitting(true);
 	}
 	else
 	{

@@ -1,6 +1,7 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
+[ext_resource path="res://Assets/Prefabs/Particles/DashParticles.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Prefabs/Particles/BuffDebuffParticles.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Prefabs/Particles/HurtParticles.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Prefabs/revive_zone.tscn" type="PackedScene" id=6]
@@ -142,8 +143,9 @@ process_material = SubResource( 9 )
 
 [node name="BuffDebuffParticles" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0, 9.34387 )
-speed_scale = 0.8
 process_material = SubResource( 14 )
+
+[node name="DashParticles" parent="." instance=ExtResource( 2 )]
 
 [connection signal="body_entered" from="Area2D3" to="Area2D3" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D3" to="Area2D3" method="_on_Area2D_body_exited"]
