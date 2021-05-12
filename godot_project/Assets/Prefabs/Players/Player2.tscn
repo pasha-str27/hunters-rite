@@ -18,7 +18,7 @@ class_name = "Sword"
 library = ExtResource( 1 )
 
 [sub_resource type="CapsuleShape2D" id=3]
-radius = 20.3781
+radius = 33.0388
 height = 71.1604
 
 [sub_resource type="CircleShape2D" id=4]
