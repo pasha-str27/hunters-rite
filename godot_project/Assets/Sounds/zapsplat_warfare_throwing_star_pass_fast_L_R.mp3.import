@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/zapsplat_warfare_throwing_star_pass_fast_L_R.mp3-0a05c8d14127934b4e8527f68a27a99c.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/zapsplat_warfare_throwing_star_pass_fast_L_R.mp3"
+dest_files=[ "res://.import/zapsplat_warfare_throwing_star_pass_fast_L_R.mp3-0a05c8d14127934b4e8527f68a27a99c.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
