@@ -41,6 +41,11 @@ void godot::SpawnEnemyController::SpawnItems()
 	RandomNumberGenerator* rng = RandomNumberGenerator::_new();
 	rng->randomize();
 
+	auto spawned_altar = cast_to<Node2D>(altar->instance());
+	spawned_altar->set_global_position(this->get_global_position());
+
+	get_node("/root/Node2D/Node")->add_child(spawned_altar, true);
+
 	for (int i = 0; i < item_points.size(); i++) {
 		int index = rng->randi_range(0, i_container->items.size() - 1);
 		auto item = cast_to<Node2D>(cast_to<PackedScene>(i_container->items[index])->instance());
@@ -54,6 +59,8 @@ void godot::SpawnEnemyController::_register_methods()
 	register_method("_ready", &SpawnEnemyController::_ready);
 	register_method("_prepare_spawn", &SpawnEnemyController::_prepare_spawn);
 	register_method("_on_Area2D_area_entered", &SpawnEnemyController::_on_Area2D_area_entered);
+
+	register_property<SpawnEnemyController, Ref<PackedScene>>("Altar prefab", &SpawnEnemyController::altar, nullptr);
 }
 
 void godot::SpawnEnemyController::_init()

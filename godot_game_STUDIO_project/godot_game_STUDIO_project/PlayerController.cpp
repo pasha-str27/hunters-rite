@@ -100,6 +100,7 @@ void godot::PlayerController::_ready()
 	item_generator = CustomExtensions::GetChildByName(this, "ItemGenerator")->call("_get_instance");
 
 	buff_debuff_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "BuffDebuffParticles"));
+	hurt_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"));
 
 	_update_health_bar();
 }
@@ -179,10 +180,6 @@ void godot::PlayerController::_on_dash_cooldown_timeout()
 void godot::PlayerController::_change_is_dashing_state()
 {
 	is_dashing = !is_dashing;
-	//if (is_dashing)
-	//	is_dashing = false;
-	//else
-	//	is_dashing = true;
 }
 
 bool godot::PlayerController::_can_fight()
@@ -223,8 +220,8 @@ void godot::PlayerController::_take_damage(float damage, bool is_spike)
 	_update_health_bar();
 	if(is_alive)
 	{
-		cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"))->set_emitting(false);
-		cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"))->set_emitting(true);
+		hurt_particles->set_emitting(false);
+		hurt_particles->set_emitting(true);
 	}
 }
 
@@ -273,7 +270,6 @@ void godot::PlayerController::change_can_moving_timeout()
 	can_move = true;
 }
 
-//������� � Player2
 void godot::PlayerController::_decrease_attack_radius()
 {
 	auto node = cast_to<Node2D>(get_child(1));
@@ -356,6 +352,7 @@ void godot::PlayerController::_revive()
 
 	is_alive = true;
 	_set_HP(_get_max_HP() *(float)0.15);
+	_update_health_bar();
 }
 
 float godot::PlayerController::_get_max_HP()

@@ -26,5 +26,6 @@ namespace godot
 		void _set_player2(Node2D* player2);
 		Node2D* _get_player1();
 		Node2D* _get_player2();
+		int _players_count();
 	};
 }

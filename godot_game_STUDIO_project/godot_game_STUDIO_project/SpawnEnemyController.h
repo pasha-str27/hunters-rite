@@ -15,6 +15,7 @@ namespace godot
 		void SpawnBoss(Node* n);
 		void SpawnItems();
 		ItemsContainer* i_container = nullptr;
+		Ref<PackedScene> altar = nullptr;
 	public:
 		Array enemies = {};
 		Array spawn_points = {};

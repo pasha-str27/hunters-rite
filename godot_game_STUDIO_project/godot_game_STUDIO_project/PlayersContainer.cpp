@@ -46,3 +46,11 @@ Node2D* godot::PlayersContainer::_get_player2()
 	//	Godot::print("player2 is null");
 	return player2;
 }
+
+int godot::PlayersContainer::_players_count()
+{
+	int player_count = 0;
+	player_count += player1 != nullptr;
+	player_count += player2 != nullptr;
+	return player_count;
+}

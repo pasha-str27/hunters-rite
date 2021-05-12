@@ -120,6 +120,7 @@ void godot::CameraController::_door_collision(String door_dir)
 		fade->set_global_position(this->get_global_position());
 		add_child(fade);
 	}
+	Godot::print("Player count: " + String::num(PlayersContainer::_get_instance()->_players_count()));
 }
 
 void godot::CameraController::_open_doors()
