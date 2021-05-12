@@ -220,7 +220,7 @@ void godot::PlayerController::_process(float delta)
 void godot::PlayerController::_take_damage(float damage, bool is_spike)
 {
 	current_player->_take_damage(damage, is_spike);
-
+	_update_health_bar();
 	if(is_alive)
 	{
 		cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"))->set_emitting(false);
