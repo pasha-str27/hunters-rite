@@ -139,8 +139,6 @@ void godot::Player2::_set_HP(float value)
 		
 		_get_object()->call("_die");
 	}
-
-	_update_health_bar();
 }
 
 void godot::Player2::_revive()

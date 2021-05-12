@@ -67,6 +67,16 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 			node->call("_encrease_attack_radius");
 	}
 
+	auto item_sprite = cast_to<Sprite>(get_child(0));
+	auto p1_item_box = cast_to<VBoxContainer>(get_node("/root/Node2D/Node/Camera2D/P1Items"));
+
+	if (item_sprite != nullptr)
+		Godot::print("Got sprite");
+	if (p1_item_box != nullptr)
+		Godot::print("Got item box");
+
+	p1_item_box->add_child(item_sprite);
+
 	node->call("_start_item_particles", is_buff);
 	queue_free();
 }
