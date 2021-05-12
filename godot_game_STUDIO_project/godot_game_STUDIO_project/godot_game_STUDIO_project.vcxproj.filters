@@ -14,7 +14,6 @@
     <ClCompile Include="PlayerData.cpp" />
     <ClCompile Include="ProducePlayer1.cpp" />
     <ClCompile Include="ProducePlayer2.cpp" />
-    <ClCompile Include="SimpleEnemyAI.cpp" />
     <ClCompile Include="Spike.cpp" />
     <ClCompile Include="Sword.cpp" />
     <ClCompile Include="MenuButtons.cpp" />
@@ -28,7 +27,16 @@
     <ClCompile Include="SpawnEnemyController.cpp" />
     <ClCompile Include="SpawnPointChecker.cpp" />
     <ClCompile Include="SpiderAI.cpp" />
-    <ClCompile Include="SpiderSide.cpp" />
+    <ClCompile Include="BatAI.cpp" />
+    <ClCompile Include="EnemySideChecker.cpp" />
+    <ClCompile Include="InputReviveManager.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemGenerator.cpp" />
+    <ClCompile Include="ItemsContainer.cpp" />
+    <ClCompile Include="ReviveZone.cpp" />
+    <ClCompile Include="SlimeAI.cpp" />
+    <ClCompile Include="StatueMeleeAI.cpp" />
+    <ClCompile Include="StatueShootAI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
@@ -44,7 +52,6 @@
     <ClInclude Include="PlayerProduce.h" />
     <ClInclude Include="ProducePlayer1.h" />
     <ClInclude Include="ProducePlayer2.h" />
-    <ClInclude Include="SimpleEnemyAI.h" />
     <ClInclude Include="Spike.h" />
     <ClInclude Include="Sword.h" />
     <ClInclude Include="MenuButtons.h" />
@@ -58,6 +65,15 @@
     <ClInclude Include="SpawnEnemyController.h" />
     <ClInclude Include="SpawnPointChecker.h" />
     <ClInclude Include="SpiderAI.h" />
-    <ClInclude Include="SpiderSide.h" />
+    <ClInclude Include="BatAI.h" />
+    <ClInclude Include="EnemySideChecker.h" />
+    <ClInclude Include="InputReviveManager.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemGenerator.h" />
+    <ClInclude Include="ItemsContainer.h" />
+    <ClInclude Include="ReviveZone.h" />
+    <ClInclude Include="SlimeAI.h" />
+    <ClInclude Include="StatueMeleeAI.h" />
+    <ClInclude Include="StatueShootAI.h" />
   </ItemGroup>
 </Project>

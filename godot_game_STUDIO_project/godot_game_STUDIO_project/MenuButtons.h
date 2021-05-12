@@ -9,14 +9,13 @@ namespace godot
 		GODOT_CLASS(MenuButtons, TextureRect)
 	
 	private:
-		int curect_button;
-		Ref<PackedScene> game_scene;
 	public:
 		MenuButtons();
 		~MenuButtons();
 
 		static void _register_methods();
 		void _init();
+		void _ready();
 		
 		void _on_Play_pressed(Variant body);
 		void _on_Option_pressed(Variant body);

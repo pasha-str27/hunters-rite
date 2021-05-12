@@ -10,6 +10,8 @@
 #include <TextureRect.hpp>
 #include <ResourceLoader.hpp>
 #include <Godot.hpp>
+#include <Button.hpp>
+#include <TextureButton.hpp>
 #include <KinematicBody2D.hpp>
 #include <CollisionObject2D.hpp>
 #include <Node.hpp>
@@ -28,7 +30,7 @@
 #include <TileMap.hpp>
 #include <Tree.hpp>
 #include <SceneTree.hpp>
-//#include <InputEvent.hpp>
+#include <InputEvent.hpp>
 //#include <InputEventAction.hpp>
 //#include <InputEventMouseButton.hpp>
 #include <GlobalConstants.hpp>
