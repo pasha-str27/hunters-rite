@@ -24,7 +24,6 @@ namespace godot
 		void _init();
 		void _ready();
 		void _process();
-		void _input(InputEvent* event);
 		void _door_collision(String door_dir);
 		void _open_doors();
 		void _close_doors();

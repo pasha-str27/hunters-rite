@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Sprites/Tilesets/level1_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/Sprites/Tilesets/UI_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=3]
+[ext_resource path="res://Assets/Scripts/RoomStats.gdns" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -15,6 +16,7 @@ library = ExtResource( 3 )
 [node name="Room" type="Node2D" groups=[
 "room",
 ]]
+script = ExtResource( 4 )
 
 [node name="Area2D" type="Area2D" parent="." groups=[
 "room",

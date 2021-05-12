@@ -41,6 +41,7 @@ tracks/1/keys = {
 [sub_resource type="CircleShape2D" id=3]
 
 [node name="BadTusk" type="Node2D"]
+z_index = 5
 script = SubResource( 1 )
 speed = 0.0
 HP = 0.0

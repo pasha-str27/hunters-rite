@@ -38,6 +38,14 @@ position = Vector2( 240, 128 )
 [node name="EnemySpawner5" type="Node2D" parent="EnemySpawner/SpawnPoints"]
 position = Vector2( -240, 96 )
 
+[node name="ItemPoints" type="Node2D" parent="EnemySpawner"]
+
+[node name="Node2D" type="Node2D" parent="EnemySpawner/ItemPoints"]
+position = Vector2( -80.6102, 0 )
+
+[node name="Node2D2" type="Node2D" parent="EnemySpawner/ItemPoints"]
+position = Vector2( 80, 0 )
+
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2( 2, 2 )
 collision_layer = 524288
