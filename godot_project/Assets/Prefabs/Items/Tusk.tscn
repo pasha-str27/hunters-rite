@@ -36,6 +36,7 @@ tracks/1/keys = {
 [sub_resource type="CircleShape2D" id=2]
 
 [node name="Tusk" type="Node2D"]
+z_index = 5
 script = ExtResource( 3 )
 speed = 0.0
 HP = 0.0

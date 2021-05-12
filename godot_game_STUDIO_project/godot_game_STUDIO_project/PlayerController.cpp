@@ -3,6 +3,8 @@
 #include "headers.h"
 #endif
 
+using namespace godot;
+
 void godot::PlayerController::_register_methods()
 {
 	register_method((char*)"_process", &PlayerController::_process);
@@ -43,7 +45,9 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_on_enemy_die", &PlayerController::_on_enemy_die);
 	register_method((char*)"_is_alive", &PlayerController::_is_alive);
 	register_method((char*)"_start_item_particles", &PlayerController::_start_item_particles);
-	
+	register_method((char*)"_update_health_bar", &PlayerController::_update_health_bar);
+	register_method((char*)"_update_max_health_bar_size", &PlayerController::_update_max_health_bar_size);
+
 	register_property<PlayerController, float>("speed", &PlayerController::speed, 400);
 	register_property<PlayerController, Ref<PackedScene>>("bullet_prefab", &PlayerController::bullet_prefab, nullptr);
 	register_property<PlayerController, Ref<PackedScene>>("revive_zone", &PlayerController::revive_zone, nullptr);
@@ -96,6 +100,10 @@ void godot::PlayerController::_ready()
 	item_generator = CustomExtensions::GetChildByName(this, "ItemGenerator")->call("_get_instance");
 
 	buff_debuff_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "BuffDebuffParticles"));
+	hurt_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"));
+	dash_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "DashParticles"));
+
+	_update_health_bar();
 }
 
 void godot::PlayerController::_start_timer()
@@ -133,6 +141,8 @@ void godot::PlayerController::_start_dash_timer()
 		current_player->_set_speed(speed * dash_speed_multiplier);
 
 		timer->start(dash_time_delta);
+
+		dash_particles->set_emitting(true);
 	}
 	else
 	{
@@ -218,6 +228,13 @@ void godot::PlayerController::_take_damage(float damage, bool is_spike)
 
 	if(is_alive)
 		cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"))->set_emitting(true);
+	
+	_update_health_bar();
+	if(is_alive)
+	{
+		hurt_particles->set_emitting(false);
+		hurt_particles->set_emitting(true);
+	}
 }
 
 void godot::PlayerController::_on_Area2D_body_entered(Node* node)
@@ -321,7 +338,7 @@ float godot::PlayerController::_get_damage()
 
 void godot::PlayerController::_set_attack_speed_delta(float value)
 {
-	attack_speed_delta = value > 0 ? value : 0;
+	attack_speed_delta = value > 0 ? value : 0.0f;
 }
 
 float godot::PlayerController::_get_attack_speed_delta()
@@ -348,6 +365,7 @@ void godot::PlayerController::_revive()
 
 	is_alive = true;
 	_set_HP(_get_max_HP() *(float)0.15);
+	_update_health_bar();
 }
 
 float godot::PlayerController::_get_max_HP()
@@ -372,10 +390,25 @@ bool godot::PlayerController::_is_alive()
 
 void godot::PlayerController::_start_item_particles(bool is_buff)
 {
+	_update_max_health_bar_size();
+	Godot::print(String::num(current_player->_get_max_HP()));
+
 	if (is_buff)
 		buff_debuff_particles->get_process_material()->set("hue_variation", .85);
 	else
 		buff_debuff_particles->get_process_material()->set("hue_variation", -.85);
 
+	buff_debuff_particles->set_emitting(false);
 	buff_debuff_particles->set_emitting(true);
+}
+
+void godot::PlayerController::_update_health_bar()
+{
+	current_player->_update_health_bar();
+}
+
+void godot::PlayerController::_update_max_health_bar_size()
+{
+	current_player->_get_health_bar()->set_max(current_player->_get_max_HP());
+	current_player->_update_health_bar();
 }

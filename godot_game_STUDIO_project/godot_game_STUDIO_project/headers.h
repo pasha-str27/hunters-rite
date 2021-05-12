@@ -32,6 +32,9 @@
 #include <ParticlesMaterial.hpp>
 #include <AnimatedSprite.hpp>
 #include <SceneTree.hpp>
+#include <VBoxContainer.hpp>
+#include <SceneTree.hpp>
+#include <Texture.hpp>
 
 using namespace godot;
 
@@ -62,6 +65,7 @@ using namespace godot;
 #include "StatueShootAI.h"
 #include "FadeAnimation.h"
 #include "PlayersContainer.h"
+#include "RoomStats.h"
 
 #include "Generation.h"
 #include "SpawnPointChecker.h"

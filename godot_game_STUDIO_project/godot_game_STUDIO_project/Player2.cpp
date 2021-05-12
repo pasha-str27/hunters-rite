@@ -150,3 +150,16 @@ void godot::Player2::_revive()
 	PlayerData::_revive();
 	PlayersContainer::_get_instance()->_set_player2(_get_object());
 }
+
+void godot::Player2::_update_health_bar()
+{
+	printf("Player2' hp updating\n");
+	auto health_bar = _get_health_bar();
+	if (health_bar != nullptr)
+		health_bar->set_value(_get_HP());
+}
+
+ProgressBar* godot::Player2::_get_health_bar()
+{
+	return cast_to<ProgressBar>(_get_object()->get_node("/root/Node2D/Node/Camera2D/P2HealthBarWrapper/ProgressBar"));
+}

@@ -36,5 +36,7 @@ namespace godot
 		void _set_speed(float speed);
 		void _take_damage(float damage, bool is_spike = false);
 		void _revive();
+		void _update_health_bar();
+		ProgressBar* _get_health_bar();
 	};
 }
