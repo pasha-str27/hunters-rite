@@ -14,15 +14,17 @@ namespace godot
 		float dir;
 		float speed;
 		bool can_fight;
+		Node2D* player1;
+		Node2D* player2;
 	public:
-		StatueMeleeAI(Ref<PackedScene>& bullet, Node2D* node, Node2D* player1 = nullptr, Node2D* player2 = nullptr);
+		StatueMeleeAI(Ref<PackedScene>& bullet, Node2D* node);
 		void _process(float delta);
 		void change_can_fight(bool value);
 		void _fight(Node2D* player1, Node2D* player2);
 		void _set_speed(float value);
-		void _set_player1(Node2D* player1);
-		void _set_player2(Node2D* player2);
 		void _delete_player1();
 		void _delete_player2();
+		void _set_player1(Node2D* player1);
+		void _set_player2(Node2D* player2);
 	};
 }

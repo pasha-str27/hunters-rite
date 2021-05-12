@@ -29,6 +29,17 @@
     <ClCompile Include="StatueMeleeAI.cpp" />
     <ClCompile Include="StatueShootAI.cpp" />
     <ClCompile Include="EnemyData.cpp" />
+    <ClCompile Include="ClosedRoom.cpp" />
+    <ClCompile Include="CustomExtensions.cpp" />
+    <ClCompile Include="Destroyer.cpp" />
+    <ClCompile Include="Door.cpp" />
+    <ClCompile Include="Generation.cpp" />
+    <ClCompile Include="IPlayer.cpp" />
+    <ClCompile Include="Room.cpp" />
+    <ClCompile Include="SpawnPointChecker.cpp" />
+    <ClCompile Include="FadeAnimation.cpp" />
+    <ClCompile Include="PlayersContainer.cpp" />
+    <ClCompile Include="RoomStats.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
@@ -60,5 +71,15 @@
     <ClInclude Include="StatueMeleeAI.h" />
     <ClInclude Include="StatueShootAI.h" />
     <ClInclude Include="EnemyData.h" />
+    <ClInclude Include="ClosedRoom.h" />
+    <ClInclude Include="CustomExtensions.h" />
+    <ClInclude Include="Destroyer.h" />
+    <ClInclude Include="Door.h" />
+    <ClInclude Include="Generation.h" />
+    <ClInclude Include="Room.h" />
+    <ClInclude Include="SpawnPointChecker.h" />
+    <ClInclude Include="FadeAnimation.h" />
+    <ClInclude Include="PlayersContainer.h" />
+    <ClInclude Include="RoomStats.h" />
   </ItemGroup>
 </Project>

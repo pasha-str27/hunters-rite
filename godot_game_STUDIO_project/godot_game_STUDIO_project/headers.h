@@ -31,6 +31,11 @@
 #include <Particles2D.hpp>
 #include <ParticlesMaterial.hpp>
 #include <AnimatedSprite.hpp>
+#include <VBoxContainer.hpp>
+#include <SceneTree.hpp>
+#include <Texture.hpp>
+
+using namespace godot;
 
 #include "IPlayer.h"
 #include "PlayerData.h"
@@ -57,6 +62,9 @@
 #include "InputReviveManager.h"
 #include "StatueMeleeAI.h"
 #include "StatueShootAI.h"
+#include "FadeAnimation.h"
+#include "PlayersContainer.h"
+#include "RoomStats.h"
 
 #include "Generation.h"
 #include "SpawnPointChecker.h"
@@ -67,5 +75,3 @@
 #include "SpawnEnemyController.h"
 #include "ItemsContainer.h"
 #include "ItemGenerator.h"
-
-using namespace godot;

@@ -5,45 +5,63 @@
 
 void godot::CameraController::_move(String dir)
 {
+	auto fade = cast_to<Node2D>(fadeIn->instance());
+	fade->set_global_position(this->get_global_position());
+	add_child(fade);
+
+	float vertical_offset = 450;
+	float horizontal_offset = 320;
 	if (dir == "top")
 	{
-		float delta = OS::get_singleton()->get_window_size().y;
+		float delta = 720;
 
 		set_global_position(get_global_position() - Vector2(0, delta));
 
-		player1->set_global_position(player1->get_global_position() - Vector2(0, delta));
-		player2->set_global_position(player2->get_global_position() - Vector2(0, delta));
+		player1->set_global_position(player1->get_global_position() - Vector2(0, vertical_offset));
+		player2->set_global_position(player2->get_global_position() - Vector2(0, vertical_offset));
 	}
 
 	if (dir == "bottom")
 	{
-		float delta = OS::get_singleton()->get_window_size().y;
+		float delta = 720;
 
 		set_global_position(get_global_position() + Vector2(0, delta));
 
-		player1->set_global_position(player1->get_global_position() + Vector2(0, delta));
-		player2->set_global_position(player2->get_global_position() + Vector2(0, delta));
+		player1->set_global_position(player1->get_global_position() + Vector2(0, vertical_offset));
+		player2->set_global_position(player2->get_global_position() + Vector2(0, vertical_offset));
 	}
 
 	if (dir == "left")
 	{
-		float delta = OS::get_singleton()->get_window_size().x;
+		float delta = 1024;
 
 		set_global_position(get_global_position() - Vector2(delta, 0));
 
-		player1->set_global_position(player1->get_global_position() - Vector2(delta, 0));
-		player2->set_global_position(player2->get_global_position() - Vector2(delta, 0));
+		player1->set_global_position(player1->get_global_position() - Vector2(horizontal_offset, 0));
+		player2->set_global_position(player2->get_global_position() - Vector2(horizontal_offset, 0));
 	}
 
 	if (dir == "right")
 	{
-		float delta = OS::get_singleton()->get_window_size().x;
+		float delta = 1024;
 
 		set_global_position(get_global_position() + Vector2(delta, 0));
 
-		player1->set_global_position(player1->get_global_position() + Vector2(delta, 0));
-		player2->set_global_position(player2->get_global_position() + Vector2(delta, 0));
+		player1->set_global_position(player1->get_global_position() + Vector2(horizontal_offset, 0));
+		player2->set_global_position(player2->get_global_position() + Vector2(horizontal_offset, 0));
 	}
+}
+
+String godot::CameraController::_get_dir_on_index(int i)
+{
+	if (i == 0)
+		return "left";
+	if (i == 1)
+		return "right";
+	if (i == 2)
+		return "top";
+	if (i == 3)
+		return "bottom";
 }
 
 void godot::CameraController::_register_methods()
@@ -51,10 +69,13 @@ void godot::CameraController::_register_methods()
 	register_method("_process", &CameraController::_process);
 	register_method("_init", &CameraController::_init);
 	register_method("_ready", &CameraController::_ready);
-	register_method("_input", &CameraController::_input);
 	register_method("_door_collision", &CameraController::_door_collision);
 	register_method("_close_doors", &CameraController::_close_doors);
-	register_method("_open_doors", &CameraController::_open_doors);	
+	register_method("_open_doors", &CameraController::_open_doors);
+	register_method("_start_move", &CameraController::_start_move);
+
+	register_property<CameraController, Ref<PackedScene>>("Fade In Animation", &CameraController::fadeIn, nullptr);
+	register_property<CameraController, Ref<PackedScene>>("Fade Out Animation", &CameraController::fadeOut, nullptr);
 }
 
 void godot::CameraController::_init()
@@ -72,49 +93,6 @@ void godot::CameraController::_ready()
 
 void godot::CameraController::_process()
 {
-}
-
-void godot::CameraController::_input(InputEvent* event)
-{
-	if (event->is_action_released("Camera_up"))
-	{
-		float delta = OS::get_singleton()->get_window_size().y;
-
-		set_global_position(get_global_position() - Vector2(0, delta));		
-
-		player1->set_global_position(player1->get_global_position() - Vector2(0, delta));
-		player2->set_global_position(player2->get_global_position() - Vector2(0, delta));
-	}
-
-	if (event->is_action_released("Camera_down"))
-	{
-		float delta = OS::get_singleton()->get_window_size().y;
-
-		set_global_position(get_global_position() + Vector2(0, delta));
-
-		player1->set_global_position(player1->get_global_position() + Vector2(0, delta));
-		player2->set_global_position(player2->get_global_position() + Vector2(0, delta));
-	}
-
-	if (event->is_action_released("Camera_left"))
-	{
-		float delta = OS::get_singleton()->get_window_size().x;
-
-		set_global_position(get_global_position() - Vector2(delta, 0));
-
-		player1->set_global_position(player1->get_global_position() - Vector2(delta, 0));
-		player2->set_global_position(player2->get_global_position() - Vector2(delta, 0));
-	}
-
-	if (event->is_action_released("Camera_right"))
-	{
-		float delta = OS::get_singleton()->get_window_size().x;
-
-		set_global_position(get_global_position() + Vector2(delta, 0));
-
-		player1->set_global_position(player1->get_global_position() + Vector2(delta, 0));
-		player2->set_global_position(player2->get_global_position() + Vector2(delta, 0));
-	}
 }
 
 void godot::CameraController::_door_collision(String door_dir)
@@ -136,9 +114,13 @@ void godot::CameraController::_door_collision(String door_dir)
 	}
 	dirs[index] = (int)dirs[index] + 1;
 
-	if ((int)dirs[index] == 2 && is_open_door) {
-		_move(door_dir);
+	if ((int)dirs[index] == 2 && is_open_door) 
+	{
+		auto fade = cast_to<Node2D>(fadeOut->instance());
+		fade->set_global_position(this->get_global_position());
+		add_child(fade);
 	}
+	Godot::print("Player count: " + String::num(PlayersContainer::_get_instance()->_players_count()));
 }
 
 void godot::CameraController::_open_doors()
@@ -151,6 +133,15 @@ void godot::CameraController::_close_doors()
 {
 	Godot::print("close doors");
 	is_open_door = false;
+}
+
+void godot::CameraController::_start_move()
+{
+	for (int i = 0; i < 4; i++) 
+	{
+		if ((int)dirs[i] == 2)
+			_move(_get_dir_on_index(i));
+	}
 }
 
 godot::CameraController::CameraController()

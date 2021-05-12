@@ -33,5 +33,7 @@ namespace godot
 		void _set_speed(float speed);
 		void _set_HP(float value);
 		void _revive();
+		void _update_health_bar();
+		ProgressBar* _get_health_bar();
 	};
 }

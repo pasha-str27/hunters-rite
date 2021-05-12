@@ -3,11 +3,9 @@
 #include "headers.h"
 #endif
 
-godot::SpiderAI::SpiderAI(Ref<PackedScene>& bullet, Node2D* node_tmp, Node2D* player1, Node2D* player2):
-	EnemyData(node_tmp, player1, player2)
+godot::SpiderAI::SpiderAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
 {
 	max_bullet_count = 5;
-	//enemy = cast_to<KinematicBody2D>(node_tmp);
 	can_move = true;
 	is_cheking = false;
 	speed = 400;
@@ -107,6 +105,16 @@ void godot::SpiderAI::_fight(Node2D* player1, Node2D* player2)
 	rng->randomize();
 
 	Vector2 bullet_dir;
+	//Godot::print("mes from fight");
+	//if (player1 == nullptr)
+	//	Godot::print("player1 is null");
+	//else
+	//	Godot::print("player1 is not null");
+
+	//if (player2 == nullptr)
+	//	Godot::print("player2 is null");
+	//else
+	//	Godot::print("player2 is not null");
 
 	if (player1 != nullptr && player2 != nullptr)
 	{

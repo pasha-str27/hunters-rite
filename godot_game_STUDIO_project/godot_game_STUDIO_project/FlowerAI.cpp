@@ -3,8 +3,7 @@
 #include "headers.h"
 #endif
 
-godot::FlowerAI::FlowerAI(Ref<PackedScene>& bullet, Node2D *node_tmp, Node2D* player1, Node2D* player2):
-	EnemyData(node_tmp, player1, player2)
+godot::FlowerAI::FlowerAI(Ref<PackedScene>& bullet, Node2D *node_tmp) : EnemyData(node_tmp)
 {
 	max_bullet_count = 5 * 8;
 	can_fight = true;
