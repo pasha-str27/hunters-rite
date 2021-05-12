@@ -43,6 +43,7 @@ Items = [ ExtResource( 5 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 2
 "Fade Out Animation" = ExtResource( 8 )
 
 [node name="Player1" parent="." instance=ExtResource( 1 )]
+position = Vector2( -100, 0 )
 
 [node name="Player2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 128.487, -4.02585 )
@@ -81,3 +82,5 @@ Enemies = [ ExtResource( 29 ) ]
 
 [node name="Room8" parent="." instance=ExtResource( 3 )]
 "Enemies count" = 0
+
+[node name="StatueShoot" parent="." instance=ExtResource( 28 )]
