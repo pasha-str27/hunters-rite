@@ -10,6 +10,9 @@ namespace godot
 		static Player2* singleton;
 		Node* current_enemy;
 
+		AnimatedSprite* sprite = nullptr;
+		AnimatedSprite* vfx_sprite = nullptr;
+
 	private:
 		Player2(Node2D* obj, Ref<PackedScene> bullet=0);
 

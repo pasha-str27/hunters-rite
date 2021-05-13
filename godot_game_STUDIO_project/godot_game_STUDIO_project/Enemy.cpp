@@ -118,6 +118,8 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		if(Enemies::get_singleton()->_get_enemies_count() == 0)
 			CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->call("_open_doors");
 
+		Godot::print("enemies count: " + String::num(Enemies::get_singleton()->_get_enemies_count()));
+
 		set_collision_layer_bit(2, false);
 		set_collision_mask_bit(9, false);
 
@@ -278,9 +280,13 @@ void godot::Enemy::_update_health_bar()
 {
 	auto health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(this, "HealthBar"));
 
+	if (health_bar == nullptr)
+		health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(this->get_parent(), "BossHealthBar"));
+
 	if (health_bar != nullptr)
 		health_bar->set_value(HP);
-}
+
+}	
 
 void godot::Enemy::_change_animation(String _name = "", float speed_scale = 1)
 {

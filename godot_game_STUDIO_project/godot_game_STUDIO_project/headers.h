@@ -39,6 +39,10 @@
 #include <VBoxContainer.hpp>
 #include <SceneTree.hpp>
 #include <Texture.hpp>
+#include <SpriteFrames.hpp>
+#include <AudioServer.hpp>
+#include <AudioStreamPlayer2D.hpp>
+#include <Control.hpp>
 
 using namespace godot;
 
@@ -72,6 +76,7 @@ using namespace godot;
 #include "PlayersContainer.h"
 #include "RoomStats.h"
 #include "MenuButtons.h"
+#include "AudioEffect.h"
 
 #include "Generation.h"
 #include "SpawnPointChecker.h"
