@@ -3,11 +3,6 @@
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 
 [resource]
-<<<<<<< HEAD:godot_project/Assets/Scripts/AudioEffect.gdns
 resource_name = "AudioEffect"
 class_name = "AudioEffect"
-=======
-resource_name = "MenuButtons"
-class_name = "MenuButtons"
->>>>>>> vit:godot_project/Assets/Scripts/MenuButtons.gdns
 library = ExtResource( 1 )
