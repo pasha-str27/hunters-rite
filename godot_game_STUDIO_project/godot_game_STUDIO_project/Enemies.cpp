@@ -17,7 +17,6 @@ int godot::Enemies::_get_enemies_count()
 void godot::Enemies::_add_enemy(Node2D* enemy)
 {
 	enemies.push_back(enemy);
-	Godot::print("Enemies count on adding enemy: " + String::num(enemies.size()));
 }
 
 void godot::Enemies::_remove_enemy(Node2D* enemy)

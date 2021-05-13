@@ -1,13 +1,13 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Scripts/bullet.gdns" type="Script" id=1]
-[ext_resource path="res://Assets/Sprites/icon11.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/Players/ShootPlayer/power_ball.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 3.23369
+radius = 1.92289
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 1.23328
+radius = 0.469791
 
 [node name="bullet" type="KinematicBody2D" groups=[
 "player_bullet",
@@ -25,13 +25,13 @@ shape = SubResource( 1 )
 disabled = true
 
 [node name="Sprite" type="Sprite" parent="CollisionShape2D"]
-position = Vector2( -0.0834332, 0.0834293 )
-scale = Vector2( 0.105761, 0.105762 )
+scale = Vector2( 0.3, 0.3 )
 z_index = 55
 texture = ExtResource( 2 )
 region_rect = Rect2( 2, 66, 27, 27 )
 
 [node name="Area2D" type="Area2D" parent="."]
+scale = Vector2( 3, 3 )
 collision_layer = 4
 collision_mask = 38
 

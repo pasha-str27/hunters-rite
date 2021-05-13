@@ -39,6 +39,7 @@
 #include <VBoxContainer.hpp>
 #include <SceneTree.hpp>
 #include <Texture.hpp>
+#include <SpriteFrames.hpp>
 
 using namespace godot;
 

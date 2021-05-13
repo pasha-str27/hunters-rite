@@ -15,6 +15,7 @@ namespace godot
 		int max_bullet_count;
 
 		Vector2 bullet_dir;
+		AnimatedSprite* sprite = nullptr;
 
 	public:
 		~Player1();
@@ -38,5 +39,6 @@ namespace godot
 		void _revive();
 		void _update_health_bar();
 		ProgressBar* _get_health_bar();
+
 	};
 }
