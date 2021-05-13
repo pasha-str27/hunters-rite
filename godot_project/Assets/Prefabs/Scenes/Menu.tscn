@@ -1,0 +1,159 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/Scripts/MenuButtons.gdns" type="Script" id=3]
+[ext_resource path="res://Assets/Sprites/UI/button_focus_v2.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/UI/button_background_v2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/UI/notice_background_v2.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Prefabs/SoundsEffects/ButtonClick.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Prefabs/SoundsEffects/MenuBackMusic.tscn" type="PackedScene" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 2 )
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+click_effect = ExtResource( 7 )
+"menu back music" = ExtResource( 8 )
+
+[node name="Background" type="TextureRect" parent="."]
+light_mask = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 1280, 720 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Top_text" type="VBoxContainer" parent="VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 445.0
+rect_min_size = Vector2( 0, 445 )
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/Top_text"]
+margin_right = 1280.0
+margin_bottom = 440.0
+rect_min_size = Vector2( 0, 440 )
+
+[node name="Label" type="Label" parent="VBoxContainer/Top_text/CenterContainer"]
+margin_left = 256.0
+margin_top = 188.0
+margin_right = 1024.0
+margin_bottom = 252.0
+rect_min_size = Vector2( 0, 60 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 6
+custom_constants/shadow_offset_y = 6
+text = "Hunters rite"
+align = 1
+valign = 1
+
+[node name="Buttons" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 449.0
+margin_right = 1280.0
+margin_bottom = 709.0
+rect_min_size = Vector2( 0, 260 )
+
+[node name="Play" type="TextureButton" parent="VBoxContainer/Buttons"]
+margin_right = 1280.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
+focus_neighbour_top = NodePath("../Quit")
+focus_neighbour_bottom = NodePath("../Option")
+texture_normal = ExtResource( 5 )
+texture_focused = ExtResource( 4 )
+expand = true
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Buttons/Play"]
+modulate = Color( 0.831373, 0.831373, 0.831373, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Play"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Option" type="TextureButton" parent="VBoxContainer/Buttons"]
+margin_top = 64.0
+margin_right = 1280.0
+margin_bottom = 124.0
+rect_min_size = Vector2( 0, 60 )
+focus_neighbour_top = NodePath("../Play")
+focus_neighbour_bottom = NodePath("../Quit")
+texture_normal = ExtResource( 5 )
+texture_focused = ExtResource( 4 )
+expand = true
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Buttons/Option"]
+modulate = Color( 0.831373, 0.831373, 0.831373, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Option"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="TextureButton" parent="VBoxContainer/Buttons"]
+margin_top = 128.0
+margin_right = 1280.0
+margin_bottom = 188.0
+rect_min_size = Vector2( 0, 60 )
+focus_neighbour_top = NodePath("../Option")
+focus_neighbour_bottom = NodePath("../Play")
+texture_normal = ExtResource( 5 )
+texture_focused = ExtResource( 4 )
+expand = true
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Buttons/Quit"]
+modulate = Color( 0.831373, 0.831373, 0.831373, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Quit"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="focus_entered" from="VBoxContainer/Buttons/Play" to="." method="_play_change_cursor_effect"]
+[connection signal="pressed" from="VBoxContainer/Buttons/Play" to="." method="_on_Play_pressed"]
+[connection signal="focus_entered" from="VBoxContainer/Buttons/Option" to="." method="_play_change_cursor_effect"]
+[connection signal="pressed" from="VBoxContainer/Buttons/Option" to="." method="_on_Option_pressed"]
+[connection signal="focus_entered" from="VBoxContainer/Buttons/Quit" to="." method="_play_change_cursor_effect"]
+[connection signal="pressed" from="VBoxContainer/Buttons/Quit" to="." method="_on_Quit_pressed"]

@@ -40,6 +40,7 @@
     <ClCompile Include="StatueMeleeAI.cpp" />
     <ClCompile Include="StatueShootAI.cpp" />
     <ClCompile Include="Sword.cpp" />
+    <ClCompile Include="AudioEffect.cpp" />
     <ClCompile Include="MenuButtons.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +83,7 @@
     <ClInclude Include="StatueMeleeAI.h" />
     <ClInclude Include="StatueShootAI.h" />
     <ClInclude Include="Sword.h" />
+    <ClInclude Include="AudioEffect.h" />
     <ClInclude Include="MenuButtons.h" />
   </ItemGroup>
 </Project>
