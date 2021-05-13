@@ -213,17 +213,3 @@ ProgressBar* godot::Player1::_get_health_bar()
 {
 	return cast_to<ProgressBar>(_get_object()->get_node("/root/Node2D/Node/Camera2D/P1HealthBarWrapper/ProgressBar"));
 }
-
-void godot::Player1::_update_health_bar()
-{
-	printf("Player1' hp updating\n");
-	auto health_bar = _get_health_bar();
-	if (health_bar != nullptr)
-		health_bar->set_value(_get_HP());
-	//Godot::print(String::num(_get_HP()));
-}
-
-ProgressBar* godot::Player1::_get_health_bar()
-{
-	return cast_to<ProgressBar>(_get_object()->get_node("/root/Node2D/Node/Camera2D/P1HealthBarWrapper/ProgressBar"));
-}

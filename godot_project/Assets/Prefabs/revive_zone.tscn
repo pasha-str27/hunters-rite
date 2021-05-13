@@ -1,9 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Scripts/revive_zone.gdns" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/UI/revive_arrow.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 52.9687
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.686275, 0.968627, 0.27451, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.345098, 0.435294, 0.00392157, 0.235294 )
 
 [node name="revive_zone" type="Area2D"]
 visible = false
@@ -13,14 +20,20 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-margin_left = -22.0249
-margin_top = -31.7024
-margin_right = 26.9751
-margin_bottom = -17.7024
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = -24.0
+custom_styles/fg = SubResource( 2 )
+custom_styles/bg = SubResource( 3 )
 percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Arrow" type="Sprite" parent="ProgressBar"]
+position = Vector2( 32, -24 )
+texture = ExtResource( 2 )
 
 [connection signal="body_entered" from="." to="." method="_on_revive_zone_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_revive_zone_body_exited"]

@@ -79,13 +79,18 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 	auto item_sprite = Sprite::_new();
 	item_sprite->set_texture(cast_to<Sprite>(get_child(0))->get_texture());
 
+	//creating container fot item sprite
+	auto control = Control::_new();
+	control->set_custom_minimum_size(Vector2(32, 32));
+	control->add_child(item_sprite);
+
 	if (item_sprite != nullptr)
 		Godot::print("Got sprite");
 	if (item_box != nullptr)
 		Godot::print("Got item box");
 
 	//adding item to item box
-	item_box->add_child(item_sprite);
+	item_box->add_child(control);
 
 	node->call("_start_item_particles", is_buff);
 	queue_free();

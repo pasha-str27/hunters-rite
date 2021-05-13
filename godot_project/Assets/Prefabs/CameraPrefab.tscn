@@ -166,6 +166,7 @@ __meta__ = {
 [node name="P1Items" type="VBoxContainer" parent="ItemHolder"]
 anchor_bottom = 1.0
 rect_min_size = Vector2( 32, 70 )
+rect_pivot_offset = Vector2( 16, 0 )
 custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false

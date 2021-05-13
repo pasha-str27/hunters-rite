@@ -19,6 +19,8 @@ namespace godot
 
 		InputReviveManager *keys;
 
+		Sprite* arrow;
+
 		bool player_is_in_area;
 
 	public:
@@ -33,5 +35,6 @@ namespace godot
 		void _on_revive_zone_body_exited(Node* node);
 		int _generate_key();
 		void _kill_revive_progress();
+		void _update_arrow_direction();
 	};
 }
