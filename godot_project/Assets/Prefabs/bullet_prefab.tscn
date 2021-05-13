@@ -4,10 +4,10 @@
 [ext_resource path="res://Assets/Sprites/Players/ShootPlayer/power_ball.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 1.92289
+radius = 1.40538
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 0.469791
+radius = 0.330442
 
 [node name="bullet" type="KinematicBody2D" groups=[
 "player_bullet",
@@ -25,7 +25,7 @@ shape = SubResource( 1 )
 disabled = true
 
 [node name="Sprite" type="Sprite" parent="CollisionShape2D"]
-scale = Vector2( 0.3, 0.3 )
+scale = Vector2( 0.2, 0.2 )
 z_index = 55
 texture = ExtResource( 2 )
 region_rect = Rect2( 2, 66, 27, 27 )
