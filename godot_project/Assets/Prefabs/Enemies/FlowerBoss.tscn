@@ -8,10 +8,14 @@
 [sub_resource type="CircleShape2D" id=3]
 radius = 20.2615
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.835294, 0.12549, 0.243137, 1 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 1, 0, 0, 0.117647 )
 corner_radius_top_left = 30
 corner_radius_top_right = 30
@@ -47,8 +51,8 @@ margin_left = -232.0
 margin_top = -256.0
 margin_right = 232.0
 margin_bottom = -224.0
-custom_styles/fg = SubResource( 1 )
-custom_styles/bg = SubResource( 2 )
+custom_styles/fg = SubResource( 4 )
+custom_styles/bg = SubResource( 5 )
 custom_fonts/font = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false

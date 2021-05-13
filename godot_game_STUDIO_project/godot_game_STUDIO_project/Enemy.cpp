@@ -279,11 +279,7 @@ void godot::Enemy::_update_health_bar()
 	auto health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(this, "HealthBar"));
 
 	if (health_bar == nullptr)
-	{
 		health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(this->get_parent(), "BossHealthBar"));
-		health_bar->set_visible(true);
-		health_bar->set_rotation_degrees(0);
-	}
 
 	if (health_bar != nullptr)
 		health_bar->set_value(HP);
