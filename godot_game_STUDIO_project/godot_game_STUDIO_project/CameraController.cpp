@@ -80,9 +80,8 @@ void godot::CameraController::_register_methods()
 
 void godot::CameraController::_init()
 {
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 4; i++)
 		dirs.push_back(0);
-	}
 }
 
 void godot::CameraController::_ready()
@@ -140,10 +139,8 @@ void godot::CameraController::_close_doors()
 void godot::CameraController::_start_move()
 {
 	for (int i = 0; i < 4; i++) 
-	{
 		if ((int)dirs[i] == 2)
 			_move(_get_dir_on_index(i));
-	}
 }
 
 godot::CameraController::CameraController()

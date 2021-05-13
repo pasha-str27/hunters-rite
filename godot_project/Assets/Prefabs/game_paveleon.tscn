@@ -82,3 +82,5 @@ Enemies = [ ExtResource( 29 ) ]
 
 [node name="Room8" parent="." instance=ExtResource( 3 )]
 "Enemies count" = 0
+
+[node name="FlowerBoss" parent="." instance=ExtResource( 26 )]
