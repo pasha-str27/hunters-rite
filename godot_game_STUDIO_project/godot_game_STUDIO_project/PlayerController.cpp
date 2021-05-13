@@ -142,7 +142,7 @@ void godot::PlayerController::_start_dash_timer()
 
 		timer->start(dash_time_delta);
 
-		dash_particles->set_emitting(true);
+		dash_particles->restart();
 	}
 	else
 	{
@@ -223,8 +223,7 @@ void godot::PlayerController::_take_damage(float damage, bool is_spike)
 	_update_health_bar();
 	if(is_alive)
 	{
-		hurt_particles->set_emitting(false);
-		hurt_particles->set_emitting(true);
+		hurt_particles->restart();
 	}
 }
 
@@ -380,8 +379,7 @@ void godot::PlayerController::_start_item_particles(bool is_buff)
 	else
 		buff_debuff_particles->get_process_material()->set("hue_variation", -.85);
 
-	buff_debuff_particles->set_emitting(false);
-	buff_debuff_particles->set_emitting(true);
+	buff_debuff_particles->restart();
 }
 
 void godot::PlayerController::_update_health_bar()
