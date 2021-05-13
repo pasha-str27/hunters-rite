@@ -5,10 +5,12 @@
 
 namespace godot
 {
-	class MenuButtons : public TextureRect {
+	class MenuButtons : public TextureRect 
+	{
 		GODOT_CLASS(MenuButtons, TextureRect)
-	
-	private:
+
+		Ref<PackedScene> click_effect;
+
 	public:
 		MenuButtons();
 		~MenuButtons();
@@ -22,5 +24,6 @@ namespace godot
 		void _on_Quit_pressed(Variant body);
 		void _on_Back_pressed(Variant body);
 		void _on_Flower_pressed(Variant body);
+		void _play_effect();
 	};
 }
