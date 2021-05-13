@@ -1,17 +1,24 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Sprites/monster_finger_flower.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Prefabs/flower_bullet_prefab.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Scripts/Enemy.gdns" type="Script" id=3]
+[ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=4]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
-
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=3]
 radius = 20.2615
 
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.835294, 0.12549, 0.243137, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 0, 0, 0.117647 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
 [node name="FlowerBoss" type="Node2D"]
-position = Vector2( -29.6254, -34.9046 )
 
 [node name="BulletConteinerFlower" type="Node" parent="."]
 
@@ -19,30 +26,30 @@ position = Vector2( -29.6254, -34.9046 )
 "enemy",
 "flower",
 ]]
-position = Vector2( 29.6254, 69.8093 )
 z_index = 25
 collision_layer = 4
 collision_mask = 512
 script = ExtResource( 3 )
 bullet = ExtResource( 2 )
 
-[node name="HealthBar" type="ProgressBar" parent="Flower"]
-visible = false
-margin_left = -29.6254
-margin_top = -34.9046
-margin_right = 30.3746
-margin_bottom = -24.9046
-rect_scale = Vector2( 1, 0.5 )
-custom_styles/fg = SubResource( 1 )
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flower"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="Flower/CollisionShape2D"]
 z_index = -5
 texture = ExtResource( 1 )
 region_rect = Rect2( 132, 4, 23, 23 )
+
+[node name="BossHealthBar" type="ProgressBar" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -232.0
+margin_top = -256.0
+margin_right = 232.0
+margin_bottom = -224.0
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+custom_fonts/font = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
