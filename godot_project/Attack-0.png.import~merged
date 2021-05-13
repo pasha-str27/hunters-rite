@@ -1,0 +1,52 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+<<<<<<< HEAD
+<<<<<<< HEAD:godot_project/Attack-0.png.import
+path="res://.import/Attack-0.png-7482f60561fc200689c4a1bf566fdfb1.stex"
+=======
+path="res://.import/icon11.png-f267e31b93f4c729cbda1d5f295e0680.stex"
+>>>>>>> remotes/origin/dev:godot_project/Assets/Sprites/icon11.png.import
+=======
+path="res://.import/Attack-0.png-7482f60561fc200689c4a1bf566fdfb1.stex"
+>>>>>>> remotes/origin/dev
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+<<<<<<< HEAD
+<<<<<<< HEAD:godot_project/Attack-0.png.import
+source_file="res://Attack-0.png"
+dest_files=[ "res://.import/Attack-0.png-7482f60561fc200689c4a1bf566fdfb1.stex" ]
+=======
+source_file="res://Assets/Sprites/icon11.png"
+dest_files=[ "res://.import/icon11.png-f267e31b93f4c729cbda1d5f295e0680.stex" ]
+>>>>>>> remotes/origin/dev:godot_project/Assets/Sprites/icon11.png.import
+=======
+source_file="res://Attack-0.png"
+dest_files=[ "res://.import/Attack-0.png-7482f60561fc200689c4a1bf566fdfb1.stex" ]
+>>>>>>> remotes/origin/dev
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0
