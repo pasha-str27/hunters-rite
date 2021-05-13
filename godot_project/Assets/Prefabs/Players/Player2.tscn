@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 [ext_resource path="res://Assets/Prefabs/Particles/DashParticles.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Assets/Prefabs/Particles/HurtParticles.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Prefabs/revive_zone.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Sprites/Players/MeleePlayer/fx_attack.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Prefabs/Particles/ReviveParticles.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Scripts/PlayerController.gdns" type="Script" id=9]
 [ext_resource path="res://Assets/Scripts/ItemGenerator.gdns" type="Script" id=10]
 [ext_resource path="res://Assets/Sprites/Players/MeleePlayer/run.png" type="Texture" id=11]
@@ -359,6 +360,8 @@ position = Vector2( 0, 9.34387 )
 process_material = SubResource( 56 )
 
 [node name="DashParticles" parent="." instance=ExtResource( 2 )]
+
+[node name="ReviveParticles" parent="." instance=ExtResource( 8 )]
 
 [connection signal="body_entered" from="Area2D3" to="Area2D3" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D3" to="Area2D3" method="_on_Area2D_body_exited"]

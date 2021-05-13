@@ -102,6 +102,7 @@ void godot::PlayerController::_ready()
 	buff_debuff_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "BuffDebuffParticles"));
 	hurt_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"));
 	dash_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "DashParticles"));
+	revive_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "ReviveParticles"));
 
 	_update_health_bar();
 }
@@ -343,6 +344,7 @@ void godot::PlayerController::_die()
 
 void godot::PlayerController::_revive()
 {
+	revive_particles->set_emitting(true);
 	current_player->_revive();
 	is_alive = true;
 	_set_HP(_get_max_HP() *(float)0.15);
