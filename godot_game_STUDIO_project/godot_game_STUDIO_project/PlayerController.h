@@ -21,12 +21,17 @@ namespace godot
 		Timer* timer;
 		bool can_move;
 		bool is_alive;
+		bool is_dashing;
 
 		int number_to_next_item;
 		float attack_speed_delta;
+		float dash_time_delta;
+		float dash_cooldown_delta;
+		float dash_speed_multiplier;
 
 		Particles2D* hurt_particles = nullptr;
 		Particles2D* buff_debuff_particles = nullptr;
+		Particles2D* dash_particles = nullptr;
 	public:
 		static void _register_methods();
 		PlayerController();
@@ -36,6 +41,10 @@ namespace godot
 		void _ready();
 		void _start_timer();
 		void _on_timeout();
+		void _start_dash_timer();
+		void _on_dash_timeout();
+		void _start_dash_cooldow_timer();
+		void _on_dash_cooldown_timeout();
 		bool _can_fight();
 		void _change_can_fight(bool value);
 		void _set_enemy(Node* enemy = nullptr);
@@ -66,5 +75,8 @@ namespace godot
 		void _on_enemy_die(Vector2 enemy_position);
 		bool _is_alive();
 		void _start_item_particles(bool is_buff);
+		void _change_is_dashing_state();
+		void _update_health_bar();
+		void _update_max_health_bar_size();
 	};
 }

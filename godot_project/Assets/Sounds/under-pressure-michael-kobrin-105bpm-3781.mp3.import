@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/under-pressure-michael-kobrin-105bpm-3781.mp3-e0fc6c77a58c3254a0d88ee12f97c1f2.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/under-pressure-michael-kobrin-105bpm-3781.mp3"
+dest_files=[ "res://.import/under-pressure-michael-kobrin-105bpm-3781.mp3-e0fc6c77a58c3254a0d88ee12f97c1f2.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

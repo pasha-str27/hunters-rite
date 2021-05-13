@@ -1,0 +1,115 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Assets/Prefabs/Particles/DashParticles.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Prefabs/Particles/BuffDebuffParticles.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Prefabs/Particles/HurtParticles.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Prefabs/bullet_prefab.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Prefabs/revive_zone.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Sprites/skull.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Scripts/PlayerController.gdns" type="Script" id=8]
+[ext_resource path="res://Assets/Scripts/ItemGenerator.gdns" type="Script" id=9]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 15.6514
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 16.8866
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0.423237, 1 )
+colors = PoolColorArray( 1, 0, 0, 1, 1, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="Curve" id=5]
+max_value = 0.25
+_data = [ Vector2( 0, 0.109091 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0681818 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+flag_rotate_y = true
+flag_disable_z = true
+direction = Vector3( 500, 500, 0 )
+spread = 180.0
+flatness = 1.0
+gravity = Vector3( 0, 50, 0 )
+initial_velocity = 35.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 100.0
+linear_accel_random = 1.0
+radial_accel_random = 1.0
+tangential_accel_random = 1.0
+damping_random = 1.0
+scale = 5.0
+scale_random = 1.0
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 4 )
+
+[sub_resource type="Gradient" id=8]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=12]
+emission_shape = 2
+emission_box_extents = Vector3( 16, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 90.0
+gravity = Vector3( 0, -500, 0 )
+initial_velocity = 50.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 720.0
+angle_random = 1.0
+color_ramp = SubResource( 9 )
+
+[node name="Player1" type="Node2D"]
+
+[node name="BulletConteiner" type="Node" parent="."]
+
+[node name="Player1" type="KinematicBody2D" parent="." groups=[
+"player",
+"player1",
+]]
+z_index = 26
+collision_mask = 2
+script = ExtResource( 8 )
+speed = 401.0
+bullet_prefab = ExtResource( 5 )
+revive_zone = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Player1/CollisionShape2D"]
+scale = Vector2( 0.2, 0.2 )
+z_index = 1
+texture = ExtResource( 7 )
+
+[node name="Area2D" type="Area2D" parent="Player1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player1/Area2D"]
+shape = SubResource( 2 )
+
+[node name="ItemGenerator" type="Node" parent="Player1"]
+script = ExtResource( 9 )
+"Count Enemies to Spawn" = 1
+
+[node name="HurtParticles" parent="Player1" instance=ExtResource( 4 )]
+z_index = 7
+process_material = SubResource( 7 )
+
+[node name="BuffDebuffParticles" parent="Player1" instance=ExtResource( 3 )]
+process_material = SubResource( 12 )
+
+[node name="DashParticles" parent="Player1" instance=ExtResource( 1 )]
+
+[connection signal="area_entered" from="Player1/Area2D" to="Player1" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="Player1/Area2D" to="Player1" method="_on_Area2D_area_exited"]
+[connection signal="body_entered" from="Player1/Area2D" to="Player1" method="_on_Area2D_body_entered"]

@@ -24,6 +24,12 @@ void godot::Player2::_process_input()
 {
 	Vector2 dir = Vector2(0, 0);
 
+	//dash
+	if (input_controller->is_action_just_pressed("Player2_dash"))
+	{
+		_get_object()->call("_start_dash_timer");
+	}
+
 	//move up
 	if (input_controller->is_action_just_pressed("Player2_fight"))
 	{
@@ -105,6 +111,8 @@ void godot::Player2::_take_damage(float damage, bool is_spike)
 
 	if (_get_HP() <= 0)
 	{
+		//PlayersContainer::_get_instance()->_set_player2(nullptr);
+
 		Enemies::get_singleton()->_remove_player2();
 
 		if (_was_revived())
@@ -124,6 +132,7 @@ void godot::Player2::_set_HP(float value)
 	if (_get_HP() <= 0)
 	{
 		Enemies::get_singleton()->_remove_player2();
+		PlayersContainer::_get_instance()->_set_player2(nullptr);
 
 		if (_was_revived())
 		{
@@ -138,4 +147,18 @@ void godot::Player2::_set_HP(float value)
 void godot::Player2::_revive()
 {
 	PlayerData::_revive();
+	PlayersContainer::_get_instance()->_set_player2(_get_object());
+}
+
+void godot::Player2::_update_health_bar()
+{
+	printf("Player2' hp updating\n");
+	auto health_bar = _get_health_bar();
+	if (health_bar != nullptr)
+		health_bar->set_value(_get_HP());
+}
+
+ProgressBar* godot::Player2::_get_health_bar()
+{
+	return cast_to<ProgressBar>(_get_object()->get_node("/root/Node2D/Node/Camera2D/P2HealthBarWrapper/ProgressBar"));
 }

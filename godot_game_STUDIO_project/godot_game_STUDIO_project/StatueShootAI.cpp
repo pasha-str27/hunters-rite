@@ -3,14 +3,12 @@
 #include "headers.h"
 #endif
 
-
-godot::StatueShootAI::StatueShootAI(Ref<PackedScene>& bullet, Node2D* node_tmp, Node2D* player1, Node2D* player2)
+godot::StatueShootAI::StatueShootAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
 {
 	max_bullet_count = 20;
-	enemy = node_tmp;
 	can_fight = true;
 
-	auto node = node_tmp->get_node("/root/Node2D/Node/BulletConteinerStatue");
+	auto node = _get_enemy()->get_parent()->get_child(0);
 
 	for (int i = 0; i < max_bullet_count; ++i)
 	{
@@ -35,32 +33,11 @@ void godot::StatueShootAI::change_can_fight(bool value)
 	can_fight = value;
 }
 
-void godot::StatueShootAI::_remove_side(int side)
-{
-}
-
-void godot::StatueShootAI::_change_dir_after_time()
-{
-}
-
-void godot::StatueShootAI::_delete_player1(Node2D* player1, Node2D* player2)
-{
-}
-
-void godot::StatueShootAI::_delete_player2(Node2D* player1, Node2D* player2)
-{
-}
-
-String godot::StatueShootAI::_get_current_player()
-{
-	return String();
-}
-
 void godot::StatueShootAI::_set_speed(float value)
 {
 }
 
-void godot::StatueShootAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2D* player2)
+void godot::StatueShootAI::_process(float delta)
 {
 	if (can_fight)
 	{
@@ -77,14 +54,14 @@ void godot::StatueShootAI::_process(float delta, Node2D* enemy, Node2D* player1,
 		{
 			if (bullets.size() > 0)
 			{
-				bullets[bullets.size() - 1]->set_position(enemy->get_global_position());
+				bullets[bullets.size() - 1]->set_position(_get_enemy()->get_global_position());
 				bullets[bullets.size() - 1]->set_visible(true);
 
 				bullets[bullets.size() - 1]->call("_set_dir", directions[i]);
 
 				if (bullets.size() == 1)
 				{
-					auto node = enemy->get_node("/root/Node2D/Node/BulletConteinerStatue");
+					auto node = _get_enemy()->get_parent()->get_child(0);
 					auto new_obj = bullets[0]->duplicate(8);
 					node->add_child(new_obj);
 					bullets.push_back(cast_to<Node2D>(new_obj));
@@ -94,6 +71,6 @@ void godot::StatueShootAI::_process(float delta, Node2D* enemy, Node2D* player1,
 			}
 		}
 
-		enemy->call("_start_timer");
+		_get_enemy()->call("_start_timer");
 	}
 }

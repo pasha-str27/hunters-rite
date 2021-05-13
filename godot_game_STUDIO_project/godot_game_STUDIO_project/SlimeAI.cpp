@@ -10,53 +10,30 @@ Vector2 godot::SlimeAI::directions_swich(int value)
 	switch (value)
 	{
 	case 1:
-		cast_to<AnimatedSprite>(enemy->get_child(1)->get_child(0))->set_flip_h(false);
-		direction = Vector2(-d, -d);
-		break;
+		cast_to<AnimatedSprite>(_get_enemy()->get_child(1)->get_child(0))->set_flip_h(false);
+		return Vector2(-d, -d);
 	case 2:
-		direction = Vector2(0, -d);
-		break;
+		return Vector2(0, -d);
 	case 3:
-		cast_to<AnimatedSprite>(enemy->get_child(1)->get_child(0))->set_flip_h(true);
-		direction = Vector2(d, -d);
-		break;
+		cast_to<AnimatedSprite>(_get_enemy()->get_child(1)->get_child(0))->set_flip_h(true);
+		return Vector2(d, -d);
 	case 4:
-		cast_to<AnimatedSprite>(enemy->get_child(1)->get_child(0))->set_flip_h(false);
-		direction = Vector2(-d, 0);
-		break;
+		cast_to<AnimatedSprite>(_get_enemy()->get_child(1)->get_child(0))->set_flip_h(false);
+		return Vector2(-d, 0);
 	case 5:
-		cast_to<AnimatedSprite>(enemy->get_child(1)->get_child(0))->set_flip_h(true);
-		direction = Vector2(d, 0);
-		break;
+		cast_to<AnimatedSprite>(_get_enemy()->get_child(1)->get_child(0))->set_flip_h(true);
+		return Vector2(d, 0);
 	case 6:
-		cast_to<AnimatedSprite>(enemy->get_child(1)->get_child(0))->set_flip_h(false);
-		direction = Vector2(-d, d);
-		break;
+		cast_to<AnimatedSprite>(_get_enemy()->get_child(1)->get_child(0))->set_flip_h(false);
+		return Vector2(-d, d);
 	case 7:
-		direction = Vector2(0, d);
-		break;
+		return Vector2(0, d);
 	case 8:
-		cast_to<AnimatedSprite>(enemy->get_child(1)->get_child(0))->set_flip_h(true);
-		direction = Vector2(d, d);
-		break;
+		cast_to<AnimatedSprite>(_get_enemy()->get_child(1)->get_child(0))->set_flip_h(true);
+		return Vector2(d, d);
 	default:
-		break;
+		return Vector2();
 	}
-
-	return direction;
-}
-
-void godot::SlimeAI::_delete_player1(Node2D* player1, Node2D* player2)
-{
-}
-
-void godot::SlimeAI::_delete_player2(Node2D* player1, Node2D* player2)
-{
-}
-
-String godot::SlimeAI::_get_current_player()
-{
-	return String();
 }
 
 void godot::SlimeAI::_set_speed(float value)
@@ -64,14 +41,13 @@ void godot::SlimeAI::_set_speed(float value)
 	speed = value;
 }
 
-godot::SlimeAI::SlimeAI(Ref<PackedScene>& bullet, Node2D* node_tmp, Node2D* player1, Node2D* player2)
+godot::SlimeAI::SlimeAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
 {
-	enemy = node_tmp;
 	can_move = true;
 	is_cheking = false;
 	speed = 400;
 
-	old_pos = enemy->get_global_position();
+	old_pos = _get_enemy()->get_global_position();
 
 	change_direction();
 }
@@ -91,15 +67,15 @@ void godot::SlimeAI::change_direction()
 	reset_directions();
 	for (int i = 2; i < 9; ++i)
 	{
-		if (enemy->get_child(i)->call("_get_current_node") != nullptr
-			&& cast_to<Node2D>(enemy->get_child(i)->call("_get_current_node"))->is_in_group("player")
-			&& (bool)cast_to<Node2D>(enemy->get_child(i)->call("_get_current_node"))->call("_is_alive"))
+		if (_get_enemy()->get_child(i)->call("_get_current_node") != nullptr
+			&& cast_to<Node2D>(_get_enemy()->get_child(i)->call("_get_current_node"))->is_in_group("player")
+			&& (bool)cast_to<Node2D>(_get_enemy()->get_child(i)->call("_get_current_node"))->call("_is_alive"))
 		{
 			dir = directions_swich(i - 1);
 			is_cheking = false;
 			return;
 		}
-		if (!enemy->get_child(i)->call("_get_on_body"))
+		if (!_get_enemy()->get_child(i)->call("_get_on_body"))
 			directions.push_back(i - 1);
 	}
 
@@ -132,31 +108,28 @@ void godot::SlimeAI::_change_dir_after_time()
 void godot::SlimeAI::_fight(Node2D* player1, Node2D* player2)
 {
 	can_move = false;
-	enemy->call("_start_timer");
+	_get_enemy()->call("_start_timer");
 }
 
-void godot::SlimeAI::_process(float delta, Node2D* enemy, Node2D* player1, Node2D* player2)
+void godot::SlimeAI::_process(float delta)
 {
 	if (!can_move)
 		return;
-	cast_to<KinematicBody2D>(enemy)->set_global_position(cast_to<KinematicBody2D>(enemy)->get_global_position() + dir * delta * 235);
+
+	_get_enemy()->set_global_position(_get_enemy()->get_global_position() + dir * delta * 235);
 
 	if (is_cheking)
 		return;
 
-	if ((abs(old_pos.distance_to(enemy->get_global_position())-32) <= 3
+	if ((abs(old_pos.distance_to(_get_enemy()->get_global_position())-32) <= 3
 		&&(dir==Vector2(0.5,0)|| dir == Vector2(-0.5, 0)|| dir == Vector2(0, 0.5)|| dir == Vector2(0, -0.5))
-			|| (abs(old_pos.distance_to(enemy->get_global_position()) - sqrt(32*32+32*32)) <= 4.5
+			|| (abs(old_pos.distance_to(_get_enemy()->get_global_position()) - sqrt(32*32+32*32)) <= 4.5
 			&& (dir == Vector2(0.5, 0.5) || dir == Vector2(-0.5, 0.5) || dir == Vector2(0.5, -0.5) || dir == Vector2(-0.5, -0.5)))))
 	{
 		is_cheking = true;
-		_fight(player1, player2);
+		_fight(_get_player1(), _get_player2());
 		change_direction();
-		old_pos = enemy->get_global_position();
+		old_pos = _get_enemy()->get_global_position();
 		return;
 	}
-}
-
-void godot::SlimeAI::_add_bullet(Node* node)
-{
 }

@@ -29,11 +29,6 @@
 #include <InputEvent.hpp>
 #include <TileMap.hpp>
 #include <Tree.hpp>
-#include <SceneTree.hpp>
-#include <InputEvent.hpp>
-//#include <InputEventAction.hpp>
-//#include <InputEventMouseButton.hpp>
-#include <GlobalConstants.hpp>
 #include <Array.hpp>
 #include <ProgressBar.hpp>
 #include <InputEventKey.hpp>
@@ -41,9 +36,13 @@
 #include <Particles2D.hpp>
 #include <ParticlesMaterial.hpp>
 #include <AnimatedSprite.hpp>
+#include <VBoxContainer.hpp>
+#include <SceneTree.hpp>
+#include <Texture.hpp>
+
+using namespace godot;
 
 //project includes
-#include "MenuButtons.h"
 #include "IPlayer.h"
 #include "PlayerData.h"
 #include "Player1.h"
@@ -51,6 +50,7 @@
 #include "PlayerController.h"
 #include "Bullet.h"
 #include "Enemy.h"
+#include "EnemyData.h"
 #include "PlayerProduce.h"
 #include "ProducePlayer1.h"
 #include "ProducePlayer2.h"
@@ -68,6 +68,10 @@
 #include "InputReviveManager.h"
 #include "StatueMeleeAI.h"
 #include "StatueShootAI.h"
+#include "FadeAnimation.h"
+#include "PlayersContainer.h"
+#include "RoomStats.h"
+#include "MenuButtons.h"
 
 #include "Generation.h"
 #include "SpawnPointChecker.h"
@@ -78,5 +82,3 @@
 #include "SpawnEnemyController.h"
 #include "ItemsContainer.h"
 #include "ItemGenerator.h"
-
-using namespace godot;

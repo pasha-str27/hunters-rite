@@ -5,6 +5,9 @@
 
 void godot::SpawnEnemyController::SpawnEnemies()
 {
+	if (spawn_points.size() == 0)
+		return;
+
 	RandomNumberGenerator* rng = RandomNumberGenerator::_new();
 	rng->randomize();
 	
@@ -21,14 +24,44 @@ void godot::SpawnEnemyController::SpawnEnemies()
 	rng = nullptr;
 }
 
+void godot::SpawnEnemyController::SpawnBoss(Node* n)
+{
+	Array enemies = n->call("_get_enemies");
+	auto boss = cast_to<Node2D>(cast_to<PackedScene>(enemies[0])->instance());
+	boss->set_global_position(cast_to<Node2D>(get_parent())->get_global_position());
+	get_node("/root/Node2D/Node")->add_child(boss, true);
+}
+
+void godot::SpawnEnemyController::SpawnItems()
+{
+	i_container = get_node("/root/Node2D/Node/ItemsContainer")->call("_get_instance");
+
+	Array item_points = get_node("ItemPoints")->get_children();
+
+	RandomNumberGenerator* rng = RandomNumberGenerator::_new();
+	rng->randomize();
+
+	auto spawned_altar = cast_to<Node2D>(altar->instance());
+	spawned_altar->set_global_position(this->get_global_position());
+
+	get_node("/root/Node2D/Node")->add_child(spawned_altar, true);
+
+	for (int i = 0; i < item_points.size(); i++) {
+		int index = rng->randi_range(0, i_container->items.size() - 1);
+		auto item = cast_to<Node2D>(cast_to<PackedScene>(i_container->items[index])->instance());
+		item->set_global_position(cast_to<Node2D>(item_points[i])->get_global_position());
+		get_node("/root/Node2D/Items")->add_child(item, true);
+	}
+	rng = nullptr;
+}
+
 void godot::SpawnEnemyController::_register_methods()
 {
 	register_method("_ready", &SpawnEnemyController::_ready);
 	register_method("_prepare_spawn", &SpawnEnemyController::_prepare_spawn);
 	register_method("_on_Area2D_area_entered", &SpawnEnemyController::_on_Area2D_area_entered);
-	
-	register_property<SpawnEnemyController, Array>("Enemies", &SpawnEnemyController::enemies, {});
-	register_property<SpawnEnemyController, int>("Enemies Count", &SpawnEnemyController::enemies_count, 0);
+
+	register_property<SpawnEnemyController, Ref<PackedScene>>("Altar prefab", &SpawnEnemyController::altar, nullptr);
 }
 
 void godot::SpawnEnemyController::_init()
@@ -38,27 +71,39 @@ void godot::SpawnEnemyController::_init()
 
 void godot::SpawnEnemyController::_ready()
 {
-	//_prepare_spawn();
+
 }
 
 void godot::SpawnEnemyController::_prepare_spawn()
 {
-	spawn_points = get_node("SpawnPoints")->get_children();
 	SpawnEnemies();
-	get_parent()->call("_close_doors");
+	if(Enemies::get_singleton()->_get_enemies_count() > 0)
+		get_parent()->call("_close_doors");
+
+	spawn_points.clear();
 }
 
 void godot::SpawnEnemyController::_on_Area2D_area_entered(Node* other)
 {
-	if (other->is_in_group("room")) {
-
-		_prepare_spawn();
-		other->queue_free();
-	}
-
-	if (other->is_in_group("item_room")) 
+	if (other->is_in_group("room")) 
 	{
-		// spawn items
+		String room_type = other->get_parent()->call("_get_type");
+		Godot::print(room_type);
+		if (room_type == "room") 
+		{
+			spawn_points = other->get_parent()->get_node("SpawnPoints")->get_children();
+			enemies_count = other->get_parent()->call("_get_enemies_count");
+			enemies = other->get_parent()->call("_get_enemies");
+		}
+		else if (room_type == "boss") 
+		{
+			SpawnBoss(other->get_parent());
+		}
+		else if (room_type == "item_room")
+		{
+			SpawnItems();
+		}
+		other->queue_free();
 	}
 }
 

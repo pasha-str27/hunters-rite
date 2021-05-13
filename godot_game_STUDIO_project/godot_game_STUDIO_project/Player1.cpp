@@ -10,7 +10,7 @@ godot::Player1::Player1(Node2D* object, Ref<PackedScene>bullet) : PlayerData(obj
 	max_bullet_count = 10;
 	_change_can_fight(true);
 
-	auto node = _get_object()->get_node("/root/Node2D/Node/BulletConteiner");
+	auto node = _get_object()->get_parent()->get_child(0);
 
 	for (int i = 0; i < max_bullet_count; ++i)
 	{
@@ -35,9 +35,8 @@ void godot::Player1::_set_HP(float value)
 
 		if (_was_revived())
 		{
-			_get_object()->get_node("/root/Node2D/Node/BulletConteiner")->queue_free();
-			_get_object()->queue_free();
-			return;
+			_get_object()->get_parent()->queue_free();
+			//_get_object()->queue_free();
 		}
 
 		_get_object()->call("_die");
@@ -61,6 +60,12 @@ void godot::Player1::_process_input()
 	if (input_controller->is_action_just_pressed("Player1_right"))
 	{
 		cast_to<Sprite>(_get_object()->get_child(0)->get_child(0))->set_flip_h(true);
+	}
+
+	//dash
+	if (input_controller->is_action_just_pressed("Player1_dash"))
+	{
+		_get_object()->call("_start_dash_timer");
 	}
 
 	//move up
@@ -138,7 +143,7 @@ void godot::Player1::_fight(Node* node)
 
 	if (available_bullets.size() == 1)
 	{
-		auto node = _get_object()->get_node("/root/Node2D/Node/BulletConteiner");
+		auto node = _get_object()->get_parent()->get_child(0);
 		auto new_obj = available_bullets[0]->duplicate(8);
 		node->add_child(new_obj);
 		available_bullets.push_back(cast_to<Node2D>(new_obj));
@@ -174,12 +179,14 @@ void  godot::Player1::_take_damage(float damage, bool is_spike)
 
 	if (_get_HP() <= 0)
 	{
+		PlayersContainer::_get_instance()->_set_player1(nullptr);
 		Enemies::get_singleton()->_remove_player1();
-
+		//Enemies::get_singleton()->_set_player1(nullptr);
+		//if (PlayersContainer::_get_instance()->_get_player1() == nullptr)
+		//	Godot::print("null");
 		if (_was_revived())
 		{
-			_get_object()->get_node("/root/Node2D/Node/BulletConteiner")->queue_free();
-			_get_object()->queue_free();
+			_get_object()->get_parent()->queue_free();
 			return;
 		}
 
@@ -190,4 +197,19 @@ void  godot::Player1::_take_damage(float damage, bool is_spike)
 void godot::Player1::_revive()
 {
 	PlayerData::_revive();
+	PlayersContainer::_get_instance()->_set_player1(_get_object());
+}
+
+void godot::Player1::_update_health_bar()
+{
+	printf("Player1' hp updating\n");
+	auto health_bar = _get_health_bar();
+	if (health_bar != nullptr)
+		health_bar->set_value(_get_HP());
+	//Godot::print(String::num(_get_HP()));
+}
+
+ProgressBar* godot::Player1::_get_health_bar()
+{
+	return cast_to<ProgressBar>(_get_object()->get_node("/root/Node2D/Node/Camera2D/P1HealthBarWrapper/ProgressBar"));
 }

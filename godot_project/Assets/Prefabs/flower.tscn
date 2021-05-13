@@ -4,9 +4,8 @@
 [ext_resource path="res://Assets/Sprites/monster_finger_flower.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Scripts/Enemy.gdns" type="Script" id=3]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 27.8998
-height = 7.08337
+[sub_resource type="CircleShape2D" id=1]
+radius = 20.2615
 
 [node name="flower" type="KinematicBody2D" groups=[
 "enemy",
