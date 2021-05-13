@@ -11,6 +11,8 @@ godot::ReviveZone::ReviveZone()
 
 	random = nullptr;
 
+	arrow = nullptr;
+
 	current_key = -1;
 	timer = Timer::_new();
 }
@@ -29,6 +31,7 @@ void godot::ReviveZone::_register_methods()
 	register_method("_on_revive_zone_body_entered", &ReviveZone::_on_revive_zone_body_entered);
 	register_method("_on_revive_zone_body_exited", &ReviveZone::_on_revive_zone_body_exited);
 	register_method("_kill_revive_progress", &ReviveZone::_kill_revive_progress);
+	register_method("_update_arrow_direction", &ReviveZone::_update_arrow_direction);
 }
 
 void godot::ReviveZone::_init()
@@ -37,6 +40,8 @@ void godot::ReviveZone::_init()
 
 void godot::ReviveZone::_ready()
 {
+	arrow = cast_to<Sprite>(CustomExtensions::GetChildByName(get_node("ProgressBar"), "Arrow"));
+
 	add_child(timer);
 	timer->connect("timeout", this, "_kill_revive_progress");
 	timer->start(0.1);
@@ -46,10 +51,15 @@ void godot::ReviveZone::_ready()
 	if (get_parent()->is_in_group("player1"))
 	{
 		keys->_set_player1_buttons();
+		_update_arrow_direction();
+
 		Godot::print(keys->_get_current_key());
+		
 		return;
 	}
 	keys->_set_player2_buttons();
+
+	_update_arrow_direction();
 }
 
 void godot::ReviveZone::_process()
@@ -75,6 +85,8 @@ void godot::ReviveZone::_input(Input* _event)
 			queue_free();
 		}
 	}
+
+	_update_arrow_direction();
 }
 
 void godot::ReviveZone::_on_revive_zone_body_entered(Node* node)
@@ -118,4 +130,18 @@ void godot::ReviveZone::_kill_revive_progress()
 	timer->disconnect("timeout", this, "_kill_revive_progress");
 	timer->connect("timeout", this, "_kill_revive_progress");
 	timer->start(0.1);
+}
+
+void godot::ReviveZone::_update_arrow_direction()
+{
+	auto current_key = keys->_get_current_key();
+
+	if (current_key == "Player1_right" || current_key == "Player2_right")
+		arrow->set_rotation_degrees(90);
+	else if (current_key == "Player1_down" || current_key == "Player2_down")
+		arrow->set_rotation_degrees(180);
+	else if (current_key == "Player1_left" || current_key == "Player2_left")
+		arrow->set_rotation_degrees(270);
+	else
+		arrow->set_rotation_degrees(0);
 }

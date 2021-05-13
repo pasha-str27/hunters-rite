@@ -280,9 +280,13 @@ void godot::Enemy::_update_health_bar()
 {
 	auto health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(this, "HealthBar"));
 
+	if (health_bar == nullptr)
+		health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(this->get_parent(), "BossHealthBar"));
+
 	if (health_bar != nullptr)
 		health_bar->set_value(HP);
-}
+
+}	
 
 void godot::Enemy::_change_animation(String _name = "", float speed_scale = 1)
 {

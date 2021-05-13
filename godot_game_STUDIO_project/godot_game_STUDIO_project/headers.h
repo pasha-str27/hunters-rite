@@ -42,6 +42,7 @@
 #include <SpriteFrames.hpp>
 #include <AudioServer.hpp>
 #include <AudioStreamPlayer2D.hpp>
+#include <Control.hpp>
 
 using namespace godot;
 
