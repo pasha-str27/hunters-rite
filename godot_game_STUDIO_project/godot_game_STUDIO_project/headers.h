@@ -43,7 +43,6 @@
 using namespace godot;
 
 //project includes
-#include "MenuButtons.h"
 #include "IPlayer.h"
 #include "PlayerData.h"
 #include "Player1.h"
@@ -72,6 +71,7 @@ using namespace godot;
 #include "FadeAnimation.h"
 #include "PlayersContainer.h"
 #include "RoomStats.h"
+#include "MenuButtons.h"
 
 #include "Generation.h"
 #include "SpawnPointChecker.h"
