@@ -11,12 +11,13 @@ godot::Enemies::Enemies()
 
 int godot::Enemies::_get_enemies_count()
 {
-	return (int)enemies.size();
+	return enemies.size();
 }
 
 void godot::Enemies::_add_enemy(Node2D* enemy)
 {
 	enemies.push_back(enemy);
+	Godot::print("Enemies count on adding enemy: " + String::num(enemies.size()));
 }
 
 void godot::Enemies::_remove_enemy(Node2D* enemy)
@@ -24,7 +25,7 @@ void godot::Enemies::_remove_enemy(Node2D* enemy)
 	for (int i = 0; i < enemies.size(); ++i)
 		if (enemies[i] == enemy)
 		{
-			enemies.erase(enemies.begin() + i, enemies.end());
+			enemies.erase(enemies.begin() + i, enemies.begin() + i + 1);
 			return;
 		}
 }
