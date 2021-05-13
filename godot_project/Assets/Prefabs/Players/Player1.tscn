@@ -221,7 +221,6 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Player1/CollisionShape2D"]
 scale = Vector2( 2, 2 )
 frames = SubResource( 11 )
-animation = "attack"
 frame = 7
 playing = true
 offset = Vector2( 35, 0 )

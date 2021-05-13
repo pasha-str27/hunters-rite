@@ -38,6 +38,7 @@ void godot::Player1::_set_HP(float value)
 		if (_was_revived())
 		{
 			_get_object()->get_parent()->queue_free();
+			return;
 			//_get_object()->queue_free();
 		}
 
