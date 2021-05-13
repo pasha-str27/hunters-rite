@@ -2,24 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-<<<<<<< HEAD:godot_project/Assets/Sprites/UI/button_focus.png.import
-path="res://.import/button_focus.png-5ba0567f9df1354b1e613a346ce9693b.stex"
-=======
 path="res://.import/dash.png-12d9ddc15c5f052d0073e32ce741bcea.stex"
->>>>>>> dev:godot_project/Assets/Sprites/Particles/dash.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<< HEAD:godot_project/Assets/Sprites/UI/button_focus.png.import
-source_file="res://Assets/Sprites/UI/button_focus.png"
-dest_files=[ "res://.import/button_focus.png-5ba0567f9df1354b1e613a346ce9693b.stex" ]
-=======
 source_file="res://Assets/Sprites/Particles/dash.png"
 dest_files=[ "res://.import/dash.png-12d9ddc15c5f052d0073e32ce741bcea.stex" ]
->>>>>>> dev:godot_project/Assets/Sprites/Particles/dash.png.import
 
 [params]
 

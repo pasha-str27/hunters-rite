@@ -22,5 +22,6 @@ namespace godot
 		void _on_Quit_pressed(Variant body);
 		void _on_Back_pressed(Variant body);
 		void _on_Flower_pressed(Variant body);
+		void _on_FullScreen_pressed(Variant body);
 	};
 }
