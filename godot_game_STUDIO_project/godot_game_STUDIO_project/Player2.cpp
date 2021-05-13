@@ -111,7 +111,6 @@ void godot::Player2::_take_damage(float damage, bool is_spike)
 
 	if (_get_HP() <= 0)
 	{
-		Godot::print("pl2 died");
 		//PlayersContainer::_get_instance()->_set_player2(nullptr);
 
 		Enemies::get_singleton()->_remove_player2();

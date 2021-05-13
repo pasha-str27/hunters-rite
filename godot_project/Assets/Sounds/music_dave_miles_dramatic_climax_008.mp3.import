@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/music_dave_miles_dramatic_climax_008.mp3-45f06c0d2b12068bcadfdab443fe4357.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/music_dave_miles_dramatic_climax_008.mp3"
+dest_files=[ "res://.import/music_dave_miles_dramatic_climax_008.mp3-45f06c0d2b12068bcadfdab443fe4357.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

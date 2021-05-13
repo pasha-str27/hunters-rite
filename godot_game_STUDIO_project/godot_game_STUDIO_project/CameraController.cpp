@@ -6,7 +6,7 @@
 void godot::CameraController::_move(String dir)
 {
 	auto fade = cast_to<Node2D>(fadeIn->instance());
-	fade->set_global_position(this->get_global_position());
+	//fade->set_global_position(this->get_global_position());
 	add_child(fade);
 
 	float vertical_offset = 450;
@@ -80,9 +80,8 @@ void godot::CameraController::_register_methods()
 
 void godot::CameraController::_init()
 {
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 4; i++)
 		dirs.push_back(0);
-	}
 }
 
 void godot::CameraController::_ready()
@@ -117,8 +116,10 @@ void godot::CameraController::_door_collision(String door_dir)
 	if ((int)dirs[index] == 2 && is_open_door) 
 	{
 		auto fade = cast_to<Node2D>(fadeOut->instance());
-		fade->set_global_position(this->get_global_position());
+		//fade->set_global_position(this->get_global_position());
+		//get_node("root/Node2D")->add_child(fade);
 		add_child(fade);
+		//get_tree()->set_pause(true);
 	}
 	Godot::print("Player count: " + String::num(PlayersContainer::_get_instance()->_players_count()));
 }
@@ -138,10 +139,8 @@ void godot::CameraController::_close_doors()
 void godot::CameraController::_start_move()
 {
 	for (int i = 0; i < 4; i++) 
-	{
 		if ((int)dirs[i] == 2)
 			_move(_get_dir_on_index(i));
-	}
 }
 
 godot::CameraController::CameraController()

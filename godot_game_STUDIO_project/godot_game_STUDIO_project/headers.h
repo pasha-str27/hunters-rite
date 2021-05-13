@@ -6,7 +6,12 @@
 #include <functional>
 #include <math.h>
 
+//Godot includes
+#include <TextureRect.hpp>
+#include <ResourceLoader.hpp>
 #include <Godot.hpp>
+#include <Button.hpp>
+#include <TextureButton.hpp>
 #include <KinematicBody2D.hpp>
 #include <CollisionObject2D.hpp>
 #include <Node.hpp>
@@ -37,6 +42,7 @@
 
 using namespace godot;
 
+//project includes
 #include "IPlayer.h"
 #include "PlayerData.h"
 #include "Player1.h"
@@ -65,6 +71,7 @@ using namespace godot;
 #include "FadeAnimation.h"
 #include "PlayersContainer.h"
 #include "RoomStats.h"
+#include "MenuButtons.h"
 
 #include "Generation.h"
 #include "SpawnPointChecker.h"
