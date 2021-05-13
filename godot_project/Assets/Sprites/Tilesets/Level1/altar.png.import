@@ -2,15 +2,24 @@
 
 importer="texture"
 type="StreamTexture"
+<<<<<<< HEAD:godot_project/Assets/Sprites/Tilesets/Level1/altar.png.import
 path="res://.import/altar.png-3cedefa39e5ba06693bd6f207a1a2fd0.stex"
+=======
+path="res://.import/monster_slime1.png-085a808f6c03bf6bf7253bba88116f67.stex"
+>>>>>>> madisan:godot_project/Assets/Sprites/UI/monster_slime1.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
+<<<<<<< HEAD:godot_project/Assets/Sprites/Tilesets/Level1/altar.png.import
 source_file="res://Assets/Sprites/Tilesets/Level1/altar.png"
 dest_files=[ "res://.import/altar.png-3cedefa39e5ba06693bd6f207a1a2fd0.stex" ]
+=======
+source_file="res://Assets/Sprites/UI/monster_slime1.png"
+dest_files=[ "res://.import/monster_slime1.png-085a808f6c03bf6bf7253bba88116f67.stex" ]
+>>>>>>> madisan:godot_project/Assets/Sprites/UI/monster_slime1.png.import
 
 [params]
 

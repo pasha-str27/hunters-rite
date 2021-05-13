@@ -5,7 +5,7 @@
 
 extern "C" void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options * o)
 {
-	Godot::gdnative_init(o);
+	Godot::gdnative_init(o);	
 }
 
 extern "C" void GDN_EXPORT godot_gdnative_terminate(godot_gdnative_terminate_options * o)
@@ -27,6 +27,7 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	//register_class<RoomSpawner>();
 
 	register_class<SpawnEnemyController>();
+	
 
 	register_class<PlayerController>();
 	register_class<Bullet>();
