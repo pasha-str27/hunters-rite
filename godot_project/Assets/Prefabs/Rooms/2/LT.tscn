@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Sprites/Tilesets/level1_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/Sprites/Tilesets/UI_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=3]
+[ext_resource path="res://Assets/Scripts/RoomStats.gdns" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -15,11 +16,14 @@ library = ExtResource( 3 )
 [node name="Room" type="Node2D" groups=[
 "room",
 ]]
+script = ExtResource( 4 )
 
 [node name="Area2D" type="Area2D" parent="." groups=[
 "room",
 ]]
 scale = Vector2( 2, 2 )
+collision_layer = 524288
+collision_mask = 524288
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
@@ -61,7 +65,7 @@ position = Vector2( 0, -16 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( -327681, 23, 0, 65523, 24, 0, 12, 25, 0, 524287, 26, 0 )
+tile_data = PoolIntArray( -327681, 23, 0, 65523, 24, 0 )
 
 [node name="spike" type="TileMap" parent="." groups=[
 "spike",
@@ -87,7 +91,7 @@ cell_size = Vector2( 32, 32 )
 collision_layer = 0
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( -196609, 4, 0, -262144, 4, 0, 131059, 4, 0, 65548, 4, 0, 524287, 4, 0, 458752, 4, 0 )
+tile_data = PoolIntArray( -196609, 4, 0, -262144, 4, 0, 131059, 4, 0 )
 
 [node name="left" type="Area2D" parent="ui" groups=[
 "door_zone",
@@ -99,16 +103,6 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ui/left"]
 shape = SubResource( 3 )
 
-[node name="right" type="Area2D" parent="ui" groups=[
-"door_zone",
-]]
-position = Vector2( 400.47, 47.5892 )
-scale = Vector2( 1.6, 1.52 )
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ui/right"]
-shape = SubResource( 3 )
-
 [node name="top" type="Area2D" parent="ui" groups=[
 "door_zone",
 ]]
@@ -117,14 +111,4 @@ scale = Vector2( 3.12, 1.52 )
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ui/top"]
-shape = SubResource( 3 )
-
-[node name="bottom" type="Area2D" parent="ui" groups=[
-"door_zone",
-]]
-position = Vector2( -0.570603, 239.852 )
-scale = Vector2( 3.12, 1.52 )
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ui/bottom"]
 shape = SubResource( 3 )

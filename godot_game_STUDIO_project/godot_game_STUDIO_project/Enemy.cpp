@@ -66,9 +66,6 @@ void godot::Enemy::_ready()
 
 	sp = cast_to<AnimatedSprite>(get_node("CollisionShape2D/AnimatedSprite"));
 
-	auto player1 = cast_to<Node2D>(get_node("/root/Node2D/Node/Player1/Player1"));
-	auto player2 = cast_to<Node2D>(get_node("/root/Node2D/Node/Player2"));
-
 	if (is_in_group("flower"))
 		ai->_set_strategy(new FlowerAI(bullet, this));
 		
@@ -79,13 +76,13 @@ void godot::Enemy::_ready()
 		ai->_set_strategy(new SlimeAI(bullet, this));
 
 	if (is_in_group("bat"))
-		ai->_set_strategy(new BatAI(bullet, this, player1, player2));
+		ai->_set_strategy(new BatAI(bullet, this));
 
 	if (is_in_group("statue_melee"))
-		ai->_set_strategy(new StatueMeleeAI(bullet, this, player1, player2));
+		ai->_set_strategy(new StatueMeleeAI(bullet, this));
 
 	if (is_in_group("statue_shoot"))
-		ai->_set_strategy(new StatueShootAI(bullet, this, player1, player2));
+		ai->_set_strategy(new StatueShootAI(bullet, this));
 }
 
 void godot::Enemy::_process(float delta)
@@ -120,6 +117,12 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 
 		if(Enemies::get_singleton()->_get_enemies_count() == 0)
 			CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->call("_open_doors");
+
+		set_collision_layer_bit(2, false);
+		set_collision_mask_bit(9, false);
+
+		if (has_node("zone"))
+			get_node("zone")->queue_free();
 
 		get_child(0)->queue_free();
 		set_visible(false);

@@ -6,7 +6,12 @@
 #include <functional>
 #include <math.h>
 
+//Godot includes
+#include <TextureRect.hpp>
+#include <ResourceLoader.hpp>
 #include <Godot.hpp>
+#include <Button.hpp>
+#include <TextureButton.hpp>
 #include <KinematicBody2D.hpp>
 #include <CollisionObject2D.hpp>
 #include <Node.hpp>
@@ -32,10 +37,12 @@
 #include <ParticlesMaterial.hpp>
 #include <AnimatedSprite.hpp>
 #include <VBoxContainer.hpp>
+#include <SceneTree.hpp>
 #include <Texture.hpp>
 
 using namespace godot;
 
+//project includes
 #include "IPlayer.h"
 #include "PlayerData.h"
 #include "Player1.h"
@@ -61,6 +68,10 @@ using namespace godot;
 #include "InputReviveManager.h"
 #include "StatueMeleeAI.h"
 #include "StatueShootAI.h"
+#include "FadeAnimation.h"
+#include "PlayersContainer.h"
+#include "RoomStats.h"
+#include "MenuButtons.h"
 
 #include "Generation.h"
 #include "SpawnPointChecker.h"

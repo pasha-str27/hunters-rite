@@ -12,18 +12,22 @@ namespace godot
 		Node2D* player1;
 		Node2D* player2;
 		Array dirs = {};	//	0 - left, 1 - right, 2 - top, 3 - bottom
-		bool is_open_door = false;
+		bool is_open_door = true;
+
+		Ref<PackedScene> fadeIn = nullptr;
+		Ref<PackedScene> fadeOut = nullptr;
 
 		void _move(String dir);
+		String _get_dir_on_index(int i);
 	public:
 		static void _register_methods();
 		void _init();
 		void _ready();
 		void _process();
-		void _input(InputEvent* event);
 		void _door_collision(String door_dir);
 		void _open_doors();
 		void _close_doors();
+		void _start_move();
 		CameraController();
 		~CameraController();
 	};

@@ -3,6 +3,8 @@
 #include "headers.h"
 #endif
 
+using namespace godot;
+
 void godot::PlayerController::_register_methods()
 {
 	register_method((char*)"_process", &PlayerController::_process);
@@ -78,13 +80,19 @@ void godot::PlayerController::_init()
 
 void godot::PlayerController::_ready()
 {
-	PlayerProduce* player_producer=nullptr;
+	PlayerProduce* player_producer = nullptr;
 
 	if (is_in_group("player1"))
+	{
 		player_producer = new ProducePlayer1;
-
+		PlayersContainer::_get_instance()->_set_player1(this);
+	}
+		
 	if (is_in_group("player2"))
+	{
 		player_producer = new ProducePlayer2;
+		PlayersContainer::_get_instance()->_set_player2(this);
+	}
 	
 	current_player = player_producer->_get_player(this, bullet_prefab);
 	current_player->_set_speed(speed);
@@ -92,6 +100,8 @@ void godot::PlayerController::_ready()
 	item_generator = CustomExtensions::GetChildByName(this, "ItemGenerator")->call("_get_instance");
 
 	buff_debuff_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "BuffDebuffParticles"));
+	hurt_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"));
+	dash_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "DashParticles"));
 
 	_update_health_bar();
 }
@@ -131,6 +141,8 @@ void godot::PlayerController::_start_dash_timer()
 		current_player->_set_speed(speed * dash_speed_multiplier);
 
 		timer->start(dash_time_delta);
+
+		dash_particles->set_emitting(true);
 	}
 	else
 	{
@@ -170,10 +182,7 @@ void godot::PlayerController::_on_dash_cooldown_timeout()
 
 void godot::PlayerController::_change_is_dashing_state()
 {
-	if (is_dashing)
-		is_dashing = false;
-	else
-		is_dashing = true;
+	is_dashing = !is_dashing;
 }
 
 bool godot::PlayerController::_can_fight()
@@ -210,10 +219,13 @@ void godot::PlayerController::_process(float delta)
 
 void godot::PlayerController::_take_damage(float damage, bool is_spike)
 {
-	//Godot::print(String::num(is_spike));
 	current_player->_take_damage(damage, is_spike);
 	_update_health_bar();
-	cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"))->set_emitting(true);
+	if(is_alive)
+	{
+		hurt_particles->set_emitting(false);
+		hurt_particles->set_emitting(true);
+	}
 }
 
 void godot::PlayerController::_on_Area2D_body_entered(Node* node)
@@ -261,7 +273,6 @@ void godot::PlayerController::change_can_moving_timeout()
 	can_move = true;
 }
 
-//винести в Player2
 void godot::PlayerController::_decrease_attack_radius()
 {
 	auto node = cast_to<Node2D>(get_child(1));
@@ -317,7 +328,7 @@ float godot::PlayerController::_get_damage()
 
 void godot::PlayerController::_set_attack_speed_delta(float value)
 {
-	attack_speed_delta = value > 0 ? value : 0;
+	attack_speed_delta = value > 0 ? value : 0.0f;
 }
 
 float godot::PlayerController::_get_attack_speed_delta()
@@ -328,21 +339,14 @@ float godot::PlayerController::_get_attack_speed_delta()
 void godot::PlayerController::_die()
 {
 	is_alive = false;
-	current_player->_revive();
 	add_child(revive_zone->instance());
 }
 
 void godot::PlayerController::_revive()
 {
-	if(is_in_group("player1"))
-		Enemies::get_singleton()->_set_player1(this);
-
-	if (is_in_group("player2"))
-		Enemies::get_singleton()->_set_player2(this);
-
+	current_player->_revive();
 	is_alive = true;
 	_set_HP(_get_max_HP() *(float)0.15);
-
 	_update_health_bar();
 }
 
@@ -376,6 +380,7 @@ void godot::PlayerController::_start_item_particles(bool is_buff)
 	else
 		buff_debuff_particles->get_process_material()->set("hue_variation", -.85);
 
+	buff_debuff_particles->set_emitting(false);
 	buff_debuff_particles->set_emitting(true);
 }
 
