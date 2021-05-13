@@ -76,4 +76,5 @@ Enemies = [ ExtResource( 29 ) ]
 "Enemies count" = 3
 
 [node name="Room8" parent="." instance=ExtResource( 3 )]
+Type = ""
 "Enemies count" = 0
