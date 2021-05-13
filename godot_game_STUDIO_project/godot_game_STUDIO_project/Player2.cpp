@@ -11,6 +11,8 @@ godot::Player2::Player2(Node2D* obj, Ref<PackedScene> bullet) : PlayerData(obj)
 	current_enemy = nullptr;
 	sprite = cast_to<AnimatedSprite>(obj->get_child(0)->get_child(0));
 	sprite->play("idle");
+
+	vfx_sprite = cast_to<AnimatedSprite>(obj->get_child(1)->get_child(0)->get_child(0));
 }
 
 godot::Player2::~Player2()
@@ -20,15 +22,21 @@ godot::Player2::~Player2()
 void godot::Player2::_move()
 {
 	PlayerData::_move();
+
 	String animation_name = sprite->get_animation();
-	if (sprite->get_sprite_frames()->get_animation_loop(animation_name) == false && sprite->get_frame() == sprite->get_sprite_frames()->get_frame_count(animation_name) - 1)
+	if (sprite->get_sprite_frames()->get_animation_loop(animation_name) == false && sprite->get_frame() == sprite->get_sprite_frames()->get_frame_count(animation_name) - 1) {
+		sprite->set_offset(Vector2::ZERO);
 		sprite->play("idle");
+	}
 
 	if (PlayerData::_get_dir() == Vector2::ZERO && animation_name != "revive" && animation_name != "damaged" && animation_name != "attack")
 		sprite->play("idle");
 
 	if (PlayerData::_get_dir() != Vector2::ZERO && sprite->get_animation() == "idle")
 		sprite->play("run");
+
+	if (sprite->is_flipped_h() && sprite->get_animation() == "attack")
+		sprite->set_offset(Vector2(-10, -5));
 }
 
 void godot::Player2::_process_input()
@@ -86,6 +94,7 @@ void godot::Player2::_fight(Node* node)
 		return;
 
 	sprite->play("attack");
+	sprite->set_offset(Vector2(10, -5));
 
 	_change_can_fight(false);
 
@@ -98,7 +107,10 @@ void godot::Player2::_fight(Node* node)
 	}
 
 	cast_to<Node2D>(_get_object()->get_child(1))->set_visible(true);
-	cast_to<AnimatedSprite>(_get_object()->get_child(1)->get_child(0)->get_child(0))->play("idle");
+
+	vfx_sprite->set_frame(0);
+	vfx_sprite->play("idle");
+
 	_get_object()->call("_start_timer");
 }
 
