@@ -12,7 +12,6 @@ radius = 1.23328
 [node name="bullet" type="KinematicBody2D" groups=[
 "flower_bullet",
 ]]
-position = Vector2( -10000, -10000 )
 scale = Vector2( 5, 5 )
 collision_layer = 0
 collision_mask = 0

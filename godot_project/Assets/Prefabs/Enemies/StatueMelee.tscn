@@ -56,17 +56,17 @@ region_rect = Rect2( 303, 209, 947, 1063 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StatueMelee/Area2D"]
 shape = SubResource( 3 )
 
-[node name="Area2D2" type="Area2D" parent="StatueMelee"]
+[node name="zone" type="Area2D" parent="StatueMelee"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StatueMelee/Area2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StatueMelee/zone"]
 shape = SubResource( 4 )
 
-[node name="Sprite" type="Sprite" parent="StatueMelee/Area2D2"]
+[node name="Sprite" type="Sprite" parent="StatueMelee/zone"]
 modulate = Color( 1, 1, 1, 0.341176 )
 scale = Vector2( 0.1, 0.1 )
 z_index = -1
 texture = ExtResource( 1 )
 
 [connection signal="body_entered" from="StatueMelee/Area2D" to="StatueMelee" method="_on_Area2D_body_entered"]
-[connection signal="body_entered" from="StatueMelee/Area2D2" to="StatueMelee" method="_set_current_player"]
-[connection signal="body_exited" from="StatueMelee/Area2D2" to="StatueMelee" method="_remove_current_player"]
+[connection signal="body_entered" from="StatueMelee/zone" to="StatueMelee" method="_set_current_player"]
+[connection signal="body_exited" from="StatueMelee/zone" to="StatueMelee" method="_remove_current_player"]

@@ -118,6 +118,12 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		if(Enemies::get_singleton()->_get_enemies_count() == 0)
 			CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->call("_open_doors");
 
+		set_collision_layer_bit(2, false);
+		set_collision_mask_bit(9, false);
+
+		if (has_node("zone"))
+			get_node("zone")->queue_free();
+
 		get_child(0)->queue_free();
 		set_visible(false);
 		ai->change_can_fight(false);
