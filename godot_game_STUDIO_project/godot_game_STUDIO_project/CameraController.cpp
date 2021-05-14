@@ -76,8 +76,11 @@ void godot::CameraController::_move(String dir)
 			player2->set_global_position(player2->get_global_position() + Vector2(horizontal_offset, 0));
 	}
 
-	PlayersContainer::_get_instance()->_get_player1()->call("_change_can_moving", true);
-	PlayersContainer::_get_instance()->_get_player2()->call("_change_can_moving", true);
+	if (PlayersContainer::_get_instance()->_get_player1() != nullptr)
+		PlayersContainer::_get_instance()->_get_player1()->call("_change_can_moving", true);
+
+	if (PlayersContainer::_get_instance()->_get_player2() != nullptr)
+		PlayersContainer::_get_instance()->_get_player2()->call("_change_can_moving", true);
 }
 
 String godot::CameraController::_get_dir_on_index(int i)
@@ -135,8 +138,11 @@ void godot::CameraController::_door_collision(String door_dir)
 
 	if (((int)dirs[index] == 2 && is_open_door && !_is_one_player_alive()) || (_is_one_player_alive() && is_open_door && (int)dirs[index] == 1))
 	{
-		PlayersContainer::_get_instance()->_get_player1()->call("_change_can_moving", false);
-		PlayersContainer::_get_instance()->_get_player2()->call("_change_can_moving", false);
+		if(PlayersContainer::_get_instance()->_get_player1() != nullptr)
+			PlayersContainer::_get_instance()->_get_player1()->call("_change_can_moving", false);
+
+		if (PlayersContainer::_get_instance()->_get_player2() != nullptr)
+			PlayersContainer::_get_instance()->_get_player2()->call("_change_can_moving", false);
 
 		auto fade = cast_to<Node2D>(fadeOut->instance());
 		add_child(fade);
