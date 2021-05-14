@@ -11,7 +11,9 @@ namespace godot
 
 		Ref<PackedScene> click_effect;
 		Ref<PackedScene> menu_back;
+		Ref<PackedScene> fade;
 		static bool was_focused;
+		Timer* timer;
 
 	public:
 		MenuButtons();
@@ -36,5 +38,6 @@ namespace godot
 		void save_game();
 		String save();
 		void load_game();
+		void _timeout();
 	};
 }

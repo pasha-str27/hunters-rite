@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=2]
@@ -14,8 +14,9 @@
 [ext_resource path="res://Assets/Sprites/UI/wanted_focus.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Sprites/UI/wanted_coming_soon_v1.png" type="Texture" id=13]
 [ext_resource path="res://Assets/Prefabs/SoundsEffects/ButtonClick.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/Prefabs/Animations/FadeOut.tscn" type="PackedScene" id=16]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 size = 17
 font_data = ExtResource( 2 )
 
@@ -24,7 +25,9 @@ size = 22
 use_filter = true
 font_data = ExtResource( 2 )
 
-[node name="Notice" type="Control"]
+[node name="Notice" type="Camera2D"]
+
+[node name="Notice" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -640.0
@@ -37,8 +40,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 click_effect = ExtResource( 14 )
+fade = ExtResource( 16 )
 
-[node name="BackGroung" type="TextureRect" parent="."]
+[node name="BackGroung" type="TextureRect" parent="Notice"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -49,37 +53,37 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="Notice"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Free_space_top" type="CenterContainer" parent="VBoxContainer"]
-margin_right = 2560.0
+[node name="Free_space_top" type="CenterContainer" parent="Notice/VBoxContainer"]
+margin_right = 1280.0
 margin_bottom = 140.0
 rect_min_size = Vector2( 0, 140 )
 
-[node name="Tasks" type="CenterContainer" parent="VBoxContainer"]
+[node name="Tasks" type="CenterContainer" parent="Notice/VBoxContainer"]
 margin_top = 144.0
-margin_right = 2560.0
+margin_right = 1280.0
 margin_bottom = 464.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Tasks"]
-margin_left = 660.0
-margin_right = 1900.0
+[node name="HBoxContainer" type="HBoxContainer" parent="Notice/VBoxContainer/Tasks"]
+margin_left = 20.0
+margin_right = 1260.0
 margin_bottom = 320.0
 rect_min_size = Vector2( 1240, 256 )
 alignment = 1
 
-[node name="Flower" type="CenterContainer" parent="VBoxContainer/Tasks/HBoxContainer"]
+[node name="Flower" type="CenterContainer" parent="Notice/VBoxContainer/Tasks/HBoxContainer"]
 margin_left = 136.0
 margin_right = 456.0
 margin_bottom = 320.0
 rect_min_size = Vector2( 256, 256 )
 
-[node name="Flower_button" type="TextureButton" parent="VBoxContainer/Tasks/HBoxContainer/Flower"]
+[node name="Flower_button" type="TextureButton" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Flower"]
 margin_right = 320.0
 margin_bottom = 320.0
 rect_min_size = Vector2( 320, 320 )
@@ -92,13 +96,13 @@ texture_normal = ExtResource( 9 )
 texture_focused = ExtResource( 12 )
 expand = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tasks/HBoxContainer/Flower"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Flower"]
 margin_left = 96.0
 margin_top = 75.0
 margin_right = 224.0
 margin_bottom = 244.0
 
-[node name="Flower_sprite" type="TextureRect" parent="VBoxContainer/Tasks/HBoxContainer/Flower/VBoxContainer"]
+[node name="Flower_sprite" type="TextureRect" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/VBoxContainer"]
 margin_right = 128.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 128, 128 )
@@ -106,21 +110,21 @@ mouse_filter = 2
 texture = ExtResource( 4 )
 expand = true
 
-[node name="Wanted_text" type="Label" parent="VBoxContainer/Tasks/HBoxContainer/Flower/VBoxContainer"]
+[node name="Wanted_text" type="Label" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/VBoxContainer"]
 margin_top = 132.0
 margin_right = 128.0
 margin_bottom = 169.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "Wanted
 1000$"
 align = 1
 
-[node name="Slimes" type="CenterContainer" parent="VBoxContainer/Tasks/HBoxContainer"]
+[node name="Slimes" type="CenterContainer" parent="Notice/VBoxContainer/Tasks/HBoxContainer"]
 margin_left = 460.0
 margin_right = 780.0
 margin_bottom = 320.0
 
-[node name="Slime_button" type="TextureButton" parent="VBoxContainer/Tasks/HBoxContainer/Slimes"]
+[node name="Slime_button" type="TextureButton" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes"]
 margin_right = 320.0
 margin_bottom = 320.0
 rect_min_size = Vector2( 320, 320 )
@@ -133,13 +137,13 @@ texture_normal = ExtResource( 7 )
 texture_focused = ExtResource( 12 )
 expand = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tasks/HBoxContainer/Slimes"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes"]
 margin_left = 96.0
 margin_top = 75.0
 margin_right = 224.0
 margin_bottom = 244.0
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Tasks/HBoxContainer/Slimes/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes/VBoxContainer"]
 margin_right = 128.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 128, 128 )
@@ -148,21 +152,21 @@ texture = ExtResource( 8 )
 expand = true
 stretch_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/Tasks/HBoxContainer/Slimes/VBoxContainer"]
+[node name="Label" type="Label" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes/VBoxContainer"]
 margin_top = 132.0
 margin_right = 128.0
 margin_bottom = 169.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "Wanted
 3000$"
 align = 1
 
-[node name="Coming_soon_one" type="CenterContainer" parent="VBoxContainer/Tasks/HBoxContainer"]
+[node name="Coming_soon_one" type="CenterContainer" parent="Notice/VBoxContainer/Tasks/HBoxContainer"]
 margin_left = 784.0
 margin_right = 1104.0
 margin_bottom = 320.0
 
-[node name="Coming_soon_button" type="TextureButton" parent="VBoxContainer/Tasks/HBoxContainer/Coming_soon_one"]
+[node name="Coming_soon_button" type="TextureButton" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one"]
 margin_right = 320.0
 margin_bottom = 320.0
 rect_min_size = Vector2( 320, 320 )
@@ -175,7 +179,7 @@ texture_normal = ExtResource( 11 )
 texture_focused = ExtResource( 12 )
 expand = true
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Tasks/HBoxContainer/Coming_soon_one"]
+[node name="TextureRect" type="TextureRect" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one"]
 visible = false
 margin_left = 32.0
 margin_top = 32.0
@@ -185,7 +189,7 @@ rect_min_size = Vector2( 256, 256 )
 texture = ExtResource( 13 )
 expand = true
 
-[node name="Label" type="Label" parent="VBoxContainer/Tasks/HBoxContainer/Coming_soon_one"]
+[node name="Label" type="Label" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one"]
 margin_left = 94.0
 margin_top = 124.0
 margin_right = 226.0
@@ -196,21 +200,21 @@ text = "Coming
 Soon"
 align = 1
 
-[node name="Free_space_bottom" type="CenterContainer" parent="VBoxContainer"]
+[node name="Free_space_bottom" type="CenterContainer" parent="Notice/VBoxContainer"]
 margin_top = 468.0
-margin_right = 2560.0
+margin_right = 1280.0
 margin_bottom = 568.0
 rect_min_size = Vector2( 0, 100 )
 
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="Notice/VBoxContainer"]
 margin_top = 572.0
-margin_right = 2560.0
+margin_right = 1280.0
 margin_bottom = 642.0
 rect_min_size = Vector2( 0, 52 )
 
-[node name="Back" type="TextureButton" parent="VBoxContainer/CenterContainer"]
-margin_left = 1140.0
-margin_right = 1420.0
+[node name="Back" type="TextureButton" parent="Notice/VBoxContainer/CenterContainer"]
+margin_left = 500.0
+margin_right = 780.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 280, 70 )
 focus_neighbour_top = NodePath("../../Tasks/HBoxContainer/Flower/Flower_button")
@@ -221,7 +225,7 @@ texture_focused = ExtResource( 5 )
 expand = true
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/CenterContainer/Back"]
+[node name="Label" type="Label" parent="Notice/VBoxContainer/CenterContainer/Back"]
 modulate = Color( 0.831373, 0.831373, 0.831373, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -238,9 +242,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="focus_entered" from="VBoxContainer/Tasks/HBoxContainer/Flower/Flower_button" to="." method="_play_change_cursor_effect"]
-[connection signal="pressed" from="VBoxContainer/Tasks/HBoxContainer/Flower/Flower_button" to="." method="_on_Flower_pressed"]
-[connection signal="focus_entered" from="VBoxContainer/Tasks/HBoxContainer/Slimes" to="." method="_play_change_cursor_effect"]
-[connection signal="focus_entered" from="VBoxContainer/Tasks/HBoxContainer/Coming_soon_one" to="." method="_play_change_cursor_effect"]
-[connection signal="focus_entered" from="VBoxContainer/CenterContainer/Back" to="." method="_play_change_cursor_effect"]
-[connection signal="pressed" from="VBoxContainer/CenterContainer/Back" to="." method="_on_Back_pressed"]
+[connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/Flower_button" to="Notice" method="_play_change_cursor_effect"]
+[connection signal="pressed" from="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/Flower_button" to="Notice" method="_on_Flower_pressed"]
+[connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes" to="Notice" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one" to="Notice" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Notice/VBoxContainer/CenterContainer/Back" to="Notice" method="_play_change_cursor_effect"]
+[connection signal="pressed" from="Notice/VBoxContainer/CenterContainer/Back" to="Notice" method="_on_Back_pressed"]

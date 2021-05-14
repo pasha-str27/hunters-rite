@@ -14,6 +14,8 @@ void godot::MenuButtons::_init(){}
 
 void godot::MenuButtons::_ready()
 {	
+	cast_to<Camera2D>(get_parent())->_set_current(true);
+
 	// Set focus button in Menu and Notise scenes
 	set_focus_mode(true);
 	
@@ -55,10 +57,11 @@ void MenuButtons::_register_methods()
 	register_method((char*)"_on_effects_value_changed", &MenuButtons::_on_effects_value_changed);
 	register_method((char*)"_on_music_value_changed", &MenuButtons::_on_music_value_changed);
 	register_method((char*)"save", &MenuButtons::save);
+	register_method((char*)"_timeout", &MenuButtons::_timeout);
 
 	register_property<MenuButtons, Ref<PackedScene>>("click_effect", &MenuButtons::click_effect, nullptr);
 	register_property<MenuButtons, Ref<PackedScene>>("menu back music", &MenuButtons::menu_back, nullptr);
-
+	register_property<MenuButtons, Ref<PackedScene>>("fade", &MenuButtons::fade, nullptr);
 }
 
 void godot::MenuButtons::save_game()
@@ -96,21 +99,31 @@ void godot::MenuButtons::load_game()
 	save_game->close();
 }
 
+void godot::MenuButtons::_timeout()
+{
+	timer->disconnect("timeout", this, "_timeout");
+	Godot::print("end");
+	ResourceLoader* rld = ResourceLoader::get_singleton();
+	Ref<PackedScene> res = rld->load("res://main_scene.tscn");
+
+	find_parent("root")->add_child(res->instance());
+	get_parent()->queue_free();
+}
+
 String godot::MenuButtons::save()
 {
 	Dictionary save_dict;
-	save_dict=Dictionary::make("a",25);
+	save_dict = Dictionary::make("a", 25);
 	return save_dict.to_json();
 }
-
 
 void godot::MenuButtons::_on_Play_pressed(Variant)
 {
 	_play_effect();
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	Ref<PackedScene> res = rld->load("res://Assets/Prefabs/Scenes/Notice.tscn");
-	get_parent()->add_child(res->instance());
-	queue_free();
+	get_node("/root")->add_child(res->instance());
+	get_parent()->queue_free();
 }
 
 void godot::MenuButtons::_on_Back_pressed(Variant)
@@ -119,8 +132,8 @@ void godot::MenuButtons::_on_Back_pressed(Variant)
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	Ref<PackedScene> res = rld->load("res://Assets/Prefabs/Scenes/Menu.tscn");
 
-	get_parent()->add_child(res->instance());
-	queue_free();
+	get_node("/root")->add_child(res->instance());
+	get_parent()->queue_free();
 }
 
 void godot::MenuButtons::_on_Option_pressed(Variant)
@@ -128,8 +141,8 @@ void godot::MenuButtons::_on_Option_pressed(Variant)
 	_play_effect();
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	Ref<PackedScene> res = rld->load("res://Assets/Prefabs/Scenes/Option.tscn");
-	get_parent()->add_child(res->instance());
-	queue_free();
+	get_node("/root")->add_child(res->instance());
+	get_parent()->queue_free();
 }
 
 void godot::MenuButtons::_on_FullScreen_pressed(Variant)
@@ -141,7 +154,6 @@ void godot::MenuButtons::_on_FullScreen_pressed(Variant)
 	}
 	else OS::get_singleton()->set_window_fullscreen(false);
 }
-
 
 void godot::MenuButtons::_on_effects_value_changed(float value)
 {
@@ -156,11 +168,20 @@ void godot::MenuButtons::_on_music_value_changed(float value)
 void godot::MenuButtons::_on_Flower_pressed(Variant)
 {
 	_play_effect();
-	ResourceLoader* rld = ResourceLoader::get_singleton();
-	Ref<PackedScene> res = rld->load("res://main_scene.tscn");
+	//ResourceLoader* rld = ResourceLoader::get_singleton();
+	//Ref<PackedScene> res = rld->load("res://main_scene.tscn");
 
-	find_parent("root")->add_child(res->instance());
-	queue_free();
+	//get_parent()->get_parent()->add_child(res->instance());
+	//get_node("/root")->add_child(res->instance());
+	//get_parent()->queue_free();
+	auto node = fade->instance();
+	cast_to<Node2D>(node)->set_global_position(Vector2(640, 360));
+	add_child(node);
+
+	timer = Timer::_new();
+	add_child(timer);
+	timer->connect("timeout", this, "_timeout");
+	timer->start(1);
 
 	//SceneTree* tree = get_tree();
 	//tree->change_scene_to(res);
@@ -172,10 +193,9 @@ void godot::MenuButtons::_on_Menu_pressed(Variant)
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	Ref<PackedScene> res = rld->load("res://Assets/Prefabs/Scenes/Menu.tscn");
 
-	add_child(res->instance());
-	queue_free();
+	get_node("/root")->add_child(res->instance());
+	get_parent()->queue_free();
 }
-
 
 void godot::MenuButtons::_on_Resume_pressed(Variant)
 {
