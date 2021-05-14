@@ -12,9 +12,12 @@ void godot::CameraController::_register_methods()
 	register_method("_close_doors", &CameraController::_close_doors);
 	register_method("_open_doors", &CameraController::_open_doors);
 	register_method("_start_move", &CameraController::_start_move);
+	register_method("_change_audio_volume", &CameraController::_change_audio_volume);
 
 	register_property<CameraController, Ref<PackedScene>>("Fade In Animation", &CameraController::fadeIn, nullptr);
 	register_property<CameraController, Ref<PackedScene>>("Fade Out Animation", &CameraController::fadeOut, nullptr);
+	register_property<CameraController, Ref<PackedScene>>("game_back", &CameraController::game_back, nullptr);
+
 }
 
 void godot::CameraController::_move(String dir)
