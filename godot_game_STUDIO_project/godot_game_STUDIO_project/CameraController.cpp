@@ -117,10 +117,7 @@ void godot::CameraController::_door_collision(String door_dir)
 	if ((int)dirs[index] == 2 && is_open_door) 
 	{
 		auto fade = cast_to<Node2D>(fadeOut->instance());
-		//fade->set_global_position(this->get_global_position());
-		//get_node("root/Node2D")->add_child(fade);
 		add_child(fade);
-		//get_tree()->set_pause(true);
 	}
 	Godot::print("Player count: " + String::num(PlayersContainer::_get_instance()->_players_count()));
 }
