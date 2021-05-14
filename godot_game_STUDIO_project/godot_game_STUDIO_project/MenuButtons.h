@@ -31,6 +31,8 @@ namespace godot
 		void _on_Resume_pressed(Variant body);
 		void _play_effect();
 		void _play_change_cursor_effect();
+		void _on_effects_value_changed(float value);
+		void _on_music_value_changed(float value);
 		void save_game();
 		String save();
 		void load_game();
