@@ -16,6 +16,13 @@ namespace godot
 
 		Ref<PackedScene> fadeIn = nullptr;
 		Ref<PackedScene> fadeOut = nullptr;
+		Ref<PackedScene> game_back = nullptr;
+
+		AudioStreamPlayer2D* audio = nullptr;
+		Timer* timer_audio;
+
+		float time_delta = 1.0 / 50;
+		float delta_step = -80.0 / 50.0;
 
 		void _move(String dir);
 		String _get_dir_on_index(int i);
@@ -28,6 +35,7 @@ namespace godot
 		void _open_doors();
 		void _close_doors();
 		void _start_move();
+		void _change_audio_volume();
 		CameraController();
 		~CameraController();
 	};

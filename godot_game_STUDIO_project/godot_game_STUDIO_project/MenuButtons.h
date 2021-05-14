@@ -13,7 +13,11 @@ namespace godot
 		Ref<PackedScene> menu_back;
 		Ref<PackedScene> fade;
 		static bool was_focused;
+		Timer* timer_music;
 		Timer* timer;
+		float delta_time;
+		static AudioStreamPlayer2D* audio;
+		float delta_step;
 
 	public:
 		MenuButtons();
@@ -39,5 +43,6 @@ namespace godot
 		String save();
 		void load_game();
 		void _timeout();
+		void _change_audio_volume();
 	};
 }

@@ -5,4 +5,4 @@
 [node name="MenuBackMusic" type="AudioStreamPlayer2D"]
 stream = ExtResource( 1 )
 autoplay = true
-bus = "BackMenu"
+bus = "BackMusic"
