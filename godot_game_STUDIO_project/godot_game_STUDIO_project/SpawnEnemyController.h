@@ -12,7 +12,7 @@ namespace godot
 	private:
 		GODOT_CLASS(SpawnEnemyController, Node2D);
 		void SpawnEnemies();
-		void SpawnBoss(Node* n);
+		void SpawnBoss();
 		void SpawnItems();
 		ItemsContainer* i_container = nullptr;
 		Ref<PackedScene> altar = nullptr;

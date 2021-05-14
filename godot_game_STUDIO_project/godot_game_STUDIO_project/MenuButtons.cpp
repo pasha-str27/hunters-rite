@@ -6,7 +6,7 @@
 bool MenuButtons::was_focused = false;
 AudioStreamPlayer2D* MenuButtons::audio = nullptr;
 
-MenuButtons::MenuButtons() 
+MenuButtons::MenuButtons()
 {
 	was_focused = false;
 	delta_time = 1.0 / 50;
@@ -17,7 +17,7 @@ MenuButtons::~MenuButtons() {}
 void godot::MenuButtons::_init() {}
 
 void godot::MenuButtons::_ready()
-{	
+{
 	//load scenes
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	menu_scene = rld->load("res://Assets/Prefabs/Scenes/Menu.tscn");
@@ -30,10 +30,10 @@ void godot::MenuButtons::_ready()
 
 	// Set focus button in Menu and Notise scenes
 	set_focus_mode(true);
-	
-	std::vector<String> name_buttons{"Play", "Flower_button", "Back"};
 
-	if (find_parent("root")!=nullptr && !find_parent("root")->has_node("MenuBackMusic"))
+	std::vector<String> name_buttons{ "Play", "Flower_button", "Back" };
+
+	if (find_parent("root") != nullptr && !find_parent("root")->has_node("MenuBackMusic"))
 	{
 		audio = cast_to<AudioStreamPlayer2D>(menu_back->instance());
 		find_parent("root")->call_deferred("add_child", audio);
@@ -55,7 +55,7 @@ void godot::MenuButtons::_ready()
 
 }
 
-void MenuButtons::_register_methods() 
+void MenuButtons::_register_methods()
 {
 	register_method((char*)"_ready", &MenuButtons::_ready);
 	register_method((char*)"_on_Play_pressed", &MenuButtons::_on_Play_pressed);
@@ -104,7 +104,7 @@ void godot::MenuButtons::load_game()
 
 	while (save_game->get_position() < save_game->get_len())
 	{
-		
+
 		Dictionary node_data = JSON::get_singleton()->parse(save_game->get_line())->get_result();
 		Godot::print(node_data.values()[0]);
 	}
@@ -127,7 +127,7 @@ void godot::MenuButtons::_timeout()
 void godot::MenuButtons::_change_audio_volume()
 {
 	AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()),
-		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()))+delta_step*4);
+		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) + delta_step * 4);
 
 	timer_music->disconnect("timeout", this, "_change_audio_volume");
 	timer_music->connect("timeout", this, "_change_audio_volume");
@@ -161,7 +161,7 @@ void godot::MenuButtons::_on_Option_pressed(Variant)
 {
 	_play_effect();
 	get_node("/root")->add_child(option_scene->instance());
-	get_parent()->queue_free();	
+	get_parent()->queue_free();
 }
 
 

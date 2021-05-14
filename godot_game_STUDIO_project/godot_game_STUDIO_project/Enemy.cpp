@@ -89,6 +89,14 @@ void godot::Enemy::_process(float delta)
 {
 	if(!died)
 		ai->_process(delta);
+
+	if (sp != nullptr) 
+	{
+		String animation_name = sp->get_animation();
+		if (sp->get_sprite_frames()->get_animation_loop(animation_name) == false && sp->get_frame() == sp->get_sprite_frames()->get_frame_count(animation_name) - 1)
+			sp->play("idle");
+	}
+
 }
 
 void godot::Enemy::_take_damage(float damage, int player_id)
@@ -98,6 +106,9 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 
 	HP -= damage;
 	_update_health_bar();
+
+	if(sp != nullptr)
+		sp->play("damaged");
 
 	if (HP <= 0)
 	{
