@@ -3,10 +3,23 @@
 #include "headers.h"
 #endif
 
+void godot::CameraController::_register_methods()
+{
+	register_method("_process", &CameraController::_process);
+	register_method("_init", &CameraController::_init);
+	register_method("_ready", &CameraController::_ready);
+	register_method("_door_collision", &CameraController::_door_collision);
+	register_method("_close_doors", &CameraController::_close_doors);
+	register_method("_open_doors", &CameraController::_open_doors);
+	register_method("_start_move", &CameraController::_start_move);
+
+	register_property<CameraController, Ref<PackedScene>>("Fade In Animation", &CameraController::fadeIn, nullptr);
+	register_property<CameraController, Ref<PackedScene>>("Fade Out Animation", &CameraController::fadeOut, nullptr);
+}
+
 void godot::CameraController::_move(String dir)
 {
 	auto fade = cast_to<Node2D>(fadeIn->instance());
-	//fade->set_global_position(this->get_global_position());
 	add_child(fade);
 
 	float vertical_offset = 450;
@@ -17,8 +30,11 @@ void godot::CameraController::_move(String dir)
 
 		set_global_position(get_global_position() - Vector2(0, delta));
 
-		player1->set_global_position(player1->get_global_position() - Vector2(0, vertical_offset));
-		player2->set_global_position(player2->get_global_position() - Vector2(0, vertical_offset));
+		if (has_node("/root/Node2D/Node/Player1"))
+			player1->set_global_position(player1->get_global_position() - Vector2(0, vertical_offset));
+
+		if (has_node("/root/Node2D/Node/Player2"))
+			player2->set_global_position(player2->get_global_position() - Vector2(0, vertical_offset));
 	}
 
 	if (dir == "bottom")
@@ -27,8 +43,11 @@ void godot::CameraController::_move(String dir)
 
 		set_global_position(get_global_position() + Vector2(0, delta));
 
-		player1->set_global_position(player1->get_global_position() + Vector2(0, vertical_offset));
-		player2->set_global_position(player2->get_global_position() + Vector2(0, vertical_offset));
+		if (has_node("/root/Node2D/Node/Player1"))
+			player1->set_global_position(player1->get_global_position() + Vector2(0, vertical_offset));
+
+		if (has_node("/root/Node2D/Node/Player2"))
+			player2->set_global_position(player2->get_global_position() + Vector2(0, vertical_offset));
 	}
 
 	if (dir == "left")
@@ -37,8 +56,11 @@ void godot::CameraController::_move(String dir)
 
 		set_global_position(get_global_position() - Vector2(delta, 0));
 
-		player1->set_global_position(player1->get_global_position() - Vector2(horizontal_offset, 0));
-		player2->set_global_position(player2->get_global_position() - Vector2(horizontal_offset, 0));
+		if (has_node("/root/Node2D/Node/Player1"))
+			player1->set_global_position(player1->get_global_position() - Vector2(horizontal_offset, 0));
+
+		if (has_node("/root/Node2D/Node/Player2"))
+			player2->set_global_position(player2->get_global_position() - Vector2(horizontal_offset, 0));
 	}
 
 	if (dir == "right")
@@ -47,9 +69,15 @@ void godot::CameraController::_move(String dir)
 
 		set_global_position(get_global_position() + Vector2(delta, 0));
 
-		player1->set_global_position(player1->get_global_position() + Vector2(horizontal_offset, 0));
-		player2->set_global_position(player2->get_global_position() + Vector2(horizontal_offset, 0));
+		if (has_node("/root/Node2D/Node/Player1"))
+			player1->set_global_position(player1->get_global_position() + Vector2(horizontal_offset, 0));
+
+		if (has_node("/root/Node2D/Node/Player2"))
+			player2->set_global_position(player2->get_global_position() + Vector2(horizontal_offset, 0));
 	}
+
+	PlayersContainer::_get_instance()->_get_player1()->call("_change_can_moving", true);
+	PlayersContainer::_get_instance()->_get_player2()->call("_change_can_moving", true);
 }
 
 String godot::CameraController::_get_dir_on_index(int i)
@@ -64,19 +92,11 @@ String godot::CameraController::_get_dir_on_index(int i)
 		return "bottom";
 }
 
-void godot::CameraController::_register_methods()
+bool godot::CameraController::_is_one_player_alive()
 {
-	register_method("_process", &CameraController::_process);
-	register_method("_init", &CameraController::_init);
-	register_method("_ready", &CameraController::_ready);
-	register_method("_door_collision", &CameraController::_door_collision);
-	register_method("_close_doors", &CameraController::_close_doors);
-	register_method("_open_doors", &CameraController::_open_doors);
-	register_method("_start_move", &CameraController::_start_move);
-
-	register_property<CameraController, Ref<PackedScene>>("Fade In Animation", &CameraController::fadeIn, nullptr);
-	register_property<CameraController, Ref<PackedScene>>("Fade Out Animation", &CameraController::fadeOut, nullptr);
+	return !has_node("/root/Node2D/Node/Player1") || !has_node("/root/Node2D/Node/Player2");
 }
+
 
 void godot::CameraController::_init()
 {
@@ -113,12 +133,14 @@ void godot::CameraController::_door_collision(String door_dir)
 	}
 	dirs[index] = (int)dirs[index] + 1;
 
-	if ((int)dirs[index] == 2 && is_open_door) 
+	if (((int)dirs[index] == 2 && is_open_door && !_is_one_player_alive()) || (_is_one_player_alive() && is_open_door && (int)dirs[index] == 1))
 	{
+		PlayersContainer::_get_instance()->_get_player1()->call("_change_can_moving", false);
+		PlayersContainer::_get_instance()->_get_player2()->call("_change_can_moving", false);
+
 		auto fade = cast_to<Node2D>(fadeOut->instance());
 		add_child(fade);
 	}
-	Godot::print("Player count: " + String::num(PlayersContainer::_get_instance()->_players_count()));
 }
 
 void godot::CameraController::_open_doors()
@@ -136,7 +158,7 @@ void godot::CameraController::_close_doors()
 void godot::CameraController::_start_move()
 {
 	for (int i = 0; i < 4; i++) 
-		if ((int)dirs[i] == 2)
+		if ((int)dirs[i] == 2 || (_is_one_player_alive() && (int)dirs[i] == 1))
 			_move(_get_dir_on_index(i));
 }
 

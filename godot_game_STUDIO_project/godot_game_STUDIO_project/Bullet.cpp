@@ -20,6 +20,7 @@ void godot::Bullet::_register_methods()
 
 void godot::Bullet::_ready()
 {
+	cast_to<AnimationPlayer>(get_child(0)->get_child(0)->get_child(0))->set_current_animation("idle");
 }
 
 void godot::Bullet::_init()
