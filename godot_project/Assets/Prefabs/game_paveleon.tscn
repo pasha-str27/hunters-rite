@@ -48,14 +48,12 @@ position = Vector2( 128.487, -4.02585 )
 
 [node name="Room" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0, -720 )
-Enemies = [ ExtResource( 27 ), ExtResource( 29 ), ExtResource( 28 ) ]
-"Enemies count" = 1
+Enemies = [ ExtResource( 28 ) ]
 
 [node name="Room2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1024, 0 )
 Type = "boss"
-Enemies = [ ExtResource( 26 ) ]
-"Enemies count" = 1
+Enemies = [ ExtResource( 26 ), ExtResource( 27 ), ExtResource( 27 ), ExtResource( 27 ), ExtResource( 27 ), ExtResource( 27 ), ExtResource( 27 ), ExtResource( 27 ), ExtResource( 27 ), ExtResource( 27 ) ]
 
 [node name="Room3" parent="." instance=ExtResource( 23 )]
 position = Vector2( -1024, 0 )
@@ -64,7 +62,6 @@ Enemies = [ ExtResource( 31 ), ExtResource( 30 ), ExtResource( 29 ) ]
 [node name="Room4" parent="." instance=ExtResource( 4 )]
 position = Vector2( -1024, -720 )
 Type = "item_room"
-"Enemies count" = 0
 
 [node name="Room6" parent="." instance=ExtResource( 24 )]
 position = Vector2( -1024, 720 )
@@ -77,8 +74,6 @@ Enemies = [ ExtResource( 29 ), ExtResource( 27 ), ExtResource( 31 ) ]
 [node name="Room5" parent="." instance=ExtResource( 11 )]
 position = Vector2( 0, 720 )
 Enemies = [ ExtResource( 29 ) ]
-"Enemies count" = 3
 
 [node name="Room8" parent="." instance=ExtResource( 3 )]
 Type = ""
-"Enemies count" = 0

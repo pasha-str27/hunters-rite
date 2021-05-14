@@ -12,15 +12,31 @@ godot::BatAI::BatAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node
 
 	rng->randomize();
 
-	if (rng->randi_range(0, 2))
+	if (PlayersContainer::_get_instance()->_players_count() == 2)
 	{
-		current_goal = PlayersContainer::_get_instance()->_get_player2();
-		current_player = "player2";
-	}	
-	else
+
+		if (rng->randi_range(0, 2))
+		{
+			current_goal = PlayersContainer::_get_instance()->_get_player2();
+			current_player = "player2";
+		}
+		else
+		{
+			current_goal = PlayersContainer::_get_instance()->_get_player1();
+			current_player = "player1";
+		}
+	}
+	else 
 	{
-		current_goal = PlayersContainer::_get_instance()->_get_player1();
-		current_player = "player1";
+		if (PlayersContainer::_get_instance()->_get_player2() == nullptr) {
+			current_goal = PlayersContainer::_get_instance()->_get_player1();
+			current_player = "player1";
+		}
+		else
+		{
+			current_goal = PlayersContainer::_get_instance()->_get_player2();
+			current_player = "player2";
+		}
 	}
 
 	dir = (current_goal->get_global_position() - _get_enemy()->get_global_position()).normalized();
