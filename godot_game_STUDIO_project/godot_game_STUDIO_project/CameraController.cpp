@@ -86,6 +86,7 @@ void godot::CameraController::_init()
 
 void godot::CameraController::_ready()
 {
+	_set_current(true);
 	player1 = cast_to<Node2D>(get_node("/root/Node2D/Node/Player1"));
 	player2 = cast_to<Node2D>(get_node("/root/Node2D/Node/Player2"));
 }

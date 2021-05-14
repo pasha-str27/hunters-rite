@@ -42,6 +42,13 @@
 #include <Texture.hpp>
 #include <AudioServer.hpp>
 #include <AudioStreamPlayer2D.hpp>
+#include <File.hpp>
+#include <JSON.hpp>
+#include <JSONParseResult.hpp>
+
+#include <Dictionary.hpp>
+
+#include <ResourceSaver.hpp>
 
 using namespace godot;
 

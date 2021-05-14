@@ -7,16 +7,23 @@
 [ext_resource path="res://Assets/Sprites/UI/notice_background_v2.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Prefabs/SoundsEffects/ButtonClick.tscn" type="PackedScene" id=6]
 
-[node name="Option" type="Control"]
+[node name="Option" type="Camera2D"]
+current = true
+
+[node name="Option" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -640.0
+margin_top = -360.0
+margin_right = 640.0
+margin_bottom = 360.0
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 click_effect = ExtResource( 6 )
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="Option"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 1280, 720 )
@@ -25,32 +32,37 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="Option"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="Option/VBoxContainer"]
 margin_right = 1280.0
 margin_bottom = 568.0
 rect_min_size = Vector2( 1280, 568 )
 
-[node name="FullScreen" type="CheckBox" parent="VBoxContainer/CenterContainer2"]
+[node name="FullScreen" type="CheckBox" parent="Option/VBoxContainer/CenterContainer2"]
 margin_left = 593.0
 margin_top = 272.0
 margin_right = 687.0
 margin_bottom = 296.0
 text = "FullScreen"
 
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+[node name="effects" type="HSlider" parent="Option/VBoxContainer/CenterContainer2"]
+anchor_right = 0.284
+margin_right = 16.0
+margin_bottom = 16.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Option/VBoxContainer"]
 margin_top = 572.0
 margin_right = 1280.0
 margin_bottom = 642.0
 rect_min_size = Vector2( 0, 52 )
 
-[node name="Back" type="TextureButton" parent="VBoxContainer/CenterContainer"]
+[node name="Back" type="TextureButton" parent="Option/VBoxContainer/CenterContainer"]
 margin_left = 500.0
 margin_right = 780.0
 margin_bottom = 70.0
@@ -63,7 +75,7 @@ texture_focused = ExtResource( 3 )
 expand = true
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/CenterContainer/Back"]
+[node name="Label" type="Label" parent="Option/VBoxContainer/CenterContainer/Back"]
 modulate = Color( 0.831373, 0.831373, 0.831373, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -80,6 +92,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="VBoxContainer/CenterContainer2/FullScreen" to="." method="_on_FullScreen_pressed"]
-[connection signal="focus_entered" from="VBoxContainer/CenterContainer/Back" to="." method="_play_change_cursor_effect"]
-[connection signal="pressed" from="VBoxContainer/CenterContainer/Back" to="." method="_on_Back_pressed"]
+[connection signal="pressed" from="Option/VBoxContainer/CenterContainer2/FullScreen" to="Option" method="_on_FullScreen_pressed"]
+[connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer/Back" to="Option" method="_play_change_cursor_effect"]
+[connection signal="pressed" from="Option/VBoxContainer/CenterContainer/Back" to="Option" method="_on_Back_pressed"]

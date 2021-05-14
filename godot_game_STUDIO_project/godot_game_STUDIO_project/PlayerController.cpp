@@ -412,3 +412,4 @@ void godot::PlayerController::_update_max_health_bar_size()
 	current_player->_get_health_bar()->set_max(current_player->_get_max_HP());
 	current_player->_update_health_bar();
 }
+

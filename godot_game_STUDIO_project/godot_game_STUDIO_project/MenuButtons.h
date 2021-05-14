@@ -31,5 +31,8 @@ namespace godot
 		void _on_Resume_pressed(Variant body);
 		void _play_effect();
 		void _play_change_cursor_effect();
+		void save_game();
+		String save();
+		void load_game();
 	};
 }

@@ -32,7 +32,6 @@ bg_color = Color( 0.6, 0.6, 0.6, 0.117647 )
 
 [node name="Camera2D" type="Camera2D"]
 z_index = 100
-current = true
 zoom = Vector2( 0.75, 0.75 )
 script = ExtResource( 6 )
 "Fade In Animation" = ExtResource( 3 )

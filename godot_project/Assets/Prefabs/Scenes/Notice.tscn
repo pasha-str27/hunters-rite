@@ -15,7 +15,7 @@
 [ext_resource path="res://Assets/Sprites/UI/wanted_coming_soon_v1.png" type="Texture" id=13]
 [ext_resource path="res://Assets/Prefabs/SoundsEffects/ButtonClick.tscn" type="PackedScene" id=14]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=3]
 size = 17
 font_data = ExtResource( 2 )
 
@@ -27,6 +27,10 @@ font_data = ExtResource( 2 )
 [node name="Notice" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -640.0
+margin_top = -360.0
+margin_right = 640.0
+margin_bottom = 360.0
 size_flags_horizontal = 15
 script = ExtResource( 3 )
 __meta__ = {
@@ -53,18 +57,18 @@ __meta__ = {
 }
 
 [node name="Free_space_top" type="CenterContainer" parent="VBoxContainer"]
-margin_right = 1280.0
+margin_right = 2560.0
 margin_bottom = 140.0
 rect_min_size = Vector2( 0, 140 )
 
 [node name="Tasks" type="CenterContainer" parent="VBoxContainer"]
 margin_top = 144.0
-margin_right = 1280.0
+margin_right = 2560.0
 margin_bottom = 464.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Tasks"]
-margin_left = 20.0
-margin_right = 1260.0
+margin_left = 660.0
+margin_right = 1900.0
 margin_bottom = 320.0
 rect_min_size = Vector2( 1240, 256 )
 alignment = 1
@@ -106,7 +110,7 @@ expand = true
 margin_top = 132.0
 margin_right = 128.0
 margin_bottom = 169.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "Wanted
 1000$"
 align = 1
@@ -148,7 +152,7 @@ stretch_mode = 2
 margin_top = 132.0
 margin_right = 128.0
 margin_bottom = 169.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "Wanted
 3000$"
 align = 1
@@ -194,19 +198,19 @@ align = 1
 
 [node name="Free_space_bottom" type="CenterContainer" parent="VBoxContainer"]
 margin_top = 468.0
-margin_right = 1280.0
+margin_right = 2560.0
 margin_bottom = 568.0
 rect_min_size = Vector2( 0, 100 )
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 margin_top = 572.0
-margin_right = 1280.0
+margin_right = 2560.0
 margin_bottom = 642.0
 rect_min_size = Vector2( 0, 52 )
 
 [node name="Back" type="TextureButton" parent="VBoxContainer/CenterContainer"]
-margin_left = 500.0
-margin_right = 780.0
+margin_left = 1140.0
+margin_right = 1420.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 280, 70 )
 focus_neighbour_top = NodePath("../../Tasks/HBoxContainer/Flower/Flower_button")
