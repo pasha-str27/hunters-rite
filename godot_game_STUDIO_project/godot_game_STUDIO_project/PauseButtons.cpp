@@ -35,7 +35,7 @@ void godot::PauseButtons::_input(Variant event)
 		cast_to<Node2D>(get_parent())->set_global_position(cast_to<Node2D>(get_node("/root/Node2D/Node/Camera2D"))->get_global_position());
 		
 		if (!is_visible()) {
-			set_visible(true);
+			set_visible(true); //create pause 
 		}
 		else {
 			set_visible(false);
@@ -55,9 +55,9 @@ void godot::PauseButtons::_on_Resume_pressed(Variant)
 
 void godot::PauseButtons::_on_Menu_pressed(Variant)
 {
-	
-	auto tree = get_tree();
-	tree->change_scene_to(menu_scene);
+
+	//get_node("/root")->add_child(menu_scene->instance());
+	//get_node("/root/Node2D")->queue_free();
 	//add_child(res->instance());
 	//queue_free();
 }

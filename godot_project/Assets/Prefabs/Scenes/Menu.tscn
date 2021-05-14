@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Assets/Sprites/UI/notice_background_v2.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Prefabs/SoundsEffects/MenuBackMusic.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Prefabs/SoundsEffects/ButtonClick.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Prefabs/Animations/FadeOut.tscn" type="PackedScene" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -31,6 +32,7 @@ __meta__ = {
 }
 click_effect = ExtResource( 8 )
 "menu back music" = ExtResource( 7 )
+fade = ExtResource( 9 )
 
 [node name="Background" type="TextureRect" parent="Menu"]
 light_mask = 2

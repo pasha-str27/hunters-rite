@@ -170,8 +170,8 @@ void godot::MenuButtons::_on_Option_pressed(Variant)
 	//_play_effect();
 	//get_tree()->change_scene_to(game_scene);
 	//queue_free();
-	get_node("/root")->add_child(game_scene->instance());
-	get_parent()->queue_free();
+	//get_node("/root")->add_child(game_scene->instance());
+	//get_parent()->queue_free();
 
 //}
 
