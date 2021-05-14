@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Sounds/back_menu.mp3" type="AudioStream" id=1]
+
+[node name="MenuBackMusic" type="AudioStreamPlayer2D"]
+position = Vector2( -1, 0 )
+stream = ExtResource( 1 )
+autoplay = true
+bus = "BackMenu"

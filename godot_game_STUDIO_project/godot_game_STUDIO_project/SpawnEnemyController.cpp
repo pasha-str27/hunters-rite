@@ -76,6 +76,7 @@ void godot::SpawnEnemyController::_ready()
 
 void godot::SpawnEnemyController::_prepare_spawn()
 {
+	Godot::print("spawning enemies");
 	SpawnEnemies();
 	if(Enemies::get_singleton()->_get_enemies_count() > 0)
 		get_parent()->call("_close_doors");
@@ -91,13 +92,16 @@ void godot::SpawnEnemyController::_on_Area2D_area_entered(Node* other)
 		Godot::print(room_type);
 		if (room_type == "room") 
 		{
+			get_parent()->call("_close_doors");
 			spawn_points = other->get_parent()->get_node("SpawnPoints")->get_children();
 			enemies_count = other->get_parent()->call("_get_enemies_count");
 			enemies = other->get_parent()->call("_get_enemies");
 		}
 		else if (room_type == "boss") 
 		{
+			get_parent()->call("_close_doors");
 			SpawnBoss(other->get_parent());
+
 		}
 		else if (room_type == "item_room")
 		{
