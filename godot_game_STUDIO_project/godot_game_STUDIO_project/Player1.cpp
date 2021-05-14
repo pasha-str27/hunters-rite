@@ -52,6 +52,7 @@ void godot::Player1::_set_HP(float value)
 void godot::Player1::_move()
 {
 	PlayerData::_move();
+
 	String animation_name = sprite->get_animation();
 	if (sprite->get_sprite_frames()->get_animation_loop(animation_name) == false && sprite->get_frame() == sprite->get_sprite_frames()->get_frame_count(animation_name) - 1)
 		sprite->play("idle");
@@ -244,4 +245,11 @@ void godot::Player1::_update_health_bar()
 ProgressBar* godot::Player1::_get_health_bar()
 {
 	return cast_to<ProgressBar>(_get_object()->get_node("/root/Node2D/Node/Camera2D/P1HealthBarWrapper/ProgressBar"));
+}
+
+void godot::Player1::_stop_animations()
+{
+	sprite->play("idle");
+	_set_dir(Vector2::ZERO);
+
 }
