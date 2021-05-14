@@ -23,7 +23,6 @@
 #include <Area2D.hpp>
 #include <Sprite.hpp>
 #include <OS.hpp>
-#include <Control.hpp>
 #include <Timer.hpp>
 #include <RandomNumberGenerator.hpp>
 #include <Camera2D.hpp>
@@ -37,13 +36,19 @@
 #include <Particles2D.hpp>
 #include <ParticlesMaterial.hpp>
 #include <AnimatedSprite.hpp>
+#include <SceneTree.hpp>
 #include <VBoxContainer.hpp>
 #include <SceneTree.hpp>
 #include <Texture.hpp>
-#include <SpriteFrames.hpp>
 #include <AudioServer.hpp>
 #include <AudioStreamPlayer2D.hpp>
-#include <Control.hpp>
+#include <File.hpp>
+#include <JSON.hpp>
+#include <JSONParseResult.hpp>
+
+#include <Dictionary.hpp>
+
+#include <ResourceSaver.hpp>
 
 using namespace godot;
 

@@ -34,6 +34,8 @@ void godot::MenuButtons::_ready()
 	else {
 		cast_to<TextureButton>(get_child(1)->get_child(1)->get_child(0))->grab_focus();
 	}
+	save_game();
+	load_game();
 }
 
 
@@ -50,18 +52,62 @@ void MenuButtons::_register_methods()
 	register_method((char*)"_on_Menu_pressed", &MenuButtons::_on_Menu_pressed);
 	register_method((char*)"_on_Resume_pressed", &MenuButtons::_on_Resume_pressed);
 	register_method((char*)"_play_change_cursor_effect", &MenuButtons::_play_change_cursor_effect);
+	register_method((char*)"save", &MenuButtons::save);
 
 	register_property<MenuButtons, Ref<PackedScene>>("click_effect", &MenuButtons::click_effect, nullptr);
 	register_property<MenuButtons, Ref<PackedScene>>("menu back music", &MenuButtons::menu_back, nullptr);
 
 }
 
+void godot::MenuButtons::save_game()
+{
+	Godot::print("ssss");
+	auto save_game = File::_new();
+	save_game->open("user://savegame.save", File::WRITE);
+
+	auto save_nodes = get_tree()->get_nodes_in_group("a");
+
+	for (int i = 0; i < save_nodes.size(); ++i)
+	{
+		auto node_data = cast_to<Node>(save_nodes[i])->call("save");
+
+		save_game->store_line(node_data);
+	}
+	save_game->close();
+}
+
+void godot::MenuButtons::load_game()
+{
+	auto save_game = File::_new();
+	if (!save_game->file_exists("user://savegame.save"))
+		return; // Error!We don't have a save to load.
+
+	save_game->open("user://savegame.save", File::READ);
+
+	while (save_game->get_position() < save_game->get_len())
+	{
+		
+		Dictionary node_data = JSON::get_singleton()->parse(save_game->get_line())->get_result();
+		Godot::print(node_data.values()[0]);
+	}
+
+	save_game->close();
+}
+
+String godot::MenuButtons::save()
+{
+	Dictionary save_dict;
+	save_dict=Dictionary::make("a",25);
+	return save_dict.to_json();
+}
+
+
 void godot::MenuButtons::_on_Play_pressed(Variant)
 {
 	_play_effect();
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	Ref<PackedScene> res = rld->load("res://Assets/Prefabs/Scenes/Notice.tscn");
-	find_parent("root")->add_child(res->instance());
+	get_parent()->add_child(res->instance());
 	queue_free();
 }
 
@@ -71,7 +117,7 @@ void godot::MenuButtons::_on_Back_pressed(Variant)
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	Ref<PackedScene> res = rld->load("res://Assets/Prefabs/Scenes/Menu.tscn");
 
-	find_parent("root")->add_child(res->instance());
+	get_parent()->add_child(res->instance());
 	queue_free();
 }
 
@@ -80,7 +126,7 @@ void godot::MenuButtons::_on_Option_pressed(Variant)
 	_play_effect();
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	Ref<PackedScene> res = rld->load("res://Assets/Prefabs/Scenes/Option.tscn");
-	find_parent("root")->add_child(res->instance());
+	get_parent()->add_child(res->instance());
 	queue_free();
 }
 
@@ -113,7 +159,7 @@ void godot::MenuButtons::_on_Menu_pressed(Variant)
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	Ref<PackedScene> res = rld->load("res://Assets/Prefabs/Scenes/Menu.tscn");
 
-	find_parent("root")->add_child(res->instance());
+	add_child(res->instance());
 	queue_free();
 }
 
