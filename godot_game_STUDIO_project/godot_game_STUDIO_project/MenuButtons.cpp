@@ -52,6 +52,8 @@ void MenuButtons::_register_methods()
 	register_method((char*)"_on_Menu_pressed", &MenuButtons::_on_Menu_pressed);
 	register_method((char*)"_on_Resume_pressed", &MenuButtons::_on_Resume_pressed);
 	register_method((char*)"_play_change_cursor_effect", &MenuButtons::_play_change_cursor_effect);
+	register_method((char*)"_on_effects_value_changed", &MenuButtons::_on_effects_value_changed);
+	register_method((char*)"_on_music_value_changed", &MenuButtons::_on_music_value_changed);
 	register_method((char*)"save", &MenuButtons::save);
 
 	register_property<MenuButtons, Ref<PackedScene>>("click_effect", &MenuButtons::click_effect, nullptr);
@@ -138,6 +140,17 @@ void godot::MenuButtons::_on_FullScreen_pressed(Variant)
 		OS::get_singleton()->set_window_fullscreen(true);
 	}
 	else OS::get_singleton()->set_window_fullscreen(false);
+}
+
+
+void godot::MenuButtons::_on_effects_value_changed(float value)
+{
+	Godot::print(String::num(value));
+}
+
+void godot::MenuButtons::_on_music_value_changed(float value)
+{
+	Godot::print(String::num(value));
 }
 
 void godot::MenuButtons::_on_Flower_pressed(Variant)

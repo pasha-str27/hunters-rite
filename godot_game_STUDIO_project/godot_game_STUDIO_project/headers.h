@@ -36,6 +36,7 @@
 #include <Particles2D.hpp>
 #include <ParticlesMaterial.hpp>
 #include <AnimatedSprite.hpp>
+#include <SpriteFrames.hpp>
 #include <SceneTree.hpp>
 #include <VBoxContainer.hpp>
 #include <SceneTree.hpp>
