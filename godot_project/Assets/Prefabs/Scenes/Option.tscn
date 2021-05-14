@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/Scripts/MenuButtons.gdns" type="Script" id=2]
@@ -6,17 +6,30 @@
 [ext_resource path="res://Assets/Sprites/UI/button_background_v2.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Sprites/UI/notice_background_v2.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Prefabs/SoundsEffects/ButtonClick.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://Assets/Sprites/icon11.png" type="Texture" id=8]
 
-[node name="Option" type="Control"]
+[sub_resource type="DynamicFont" id=1]
+size = 28
+font_data = ExtResource( 7 )
+
+[node name="Option" type="Camera2D"]
+current = true
+
+[node name="Option" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -640.0
+margin_top = -360.0
+margin_right = 640.0
+margin_bottom = 360.0
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 click_effect = ExtResource( 6 )
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="Option"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 1280, 720 )
@@ -25,45 +38,93 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="Option"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="Option/VBoxContainer"]
 margin_right = 1280.0
 margin_bottom = 568.0
 rect_min_size = Vector2( 1280, 568 )
 
-[node name="FullScreen" type="CheckBox" parent="VBoxContainer/CenterContainer2"]
-margin_left = 593.0
-margin_top = 272.0
-margin_right = 687.0
-margin_bottom = 296.0
-text = "FullScreen"
+[node name="VBoxContainer" type="VBoxContainer" parent="Option/VBoxContainer/CenterContainer2"]
+margin_left = 542.0
+margin_top = 160.0
+margin_right = 738.0
+margin_bottom = 408.0
 
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+[node name="FullScreen" type="CheckBox" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer"]
+margin_right = 196.0
+margin_bottom = 24.0
+focus_neighbour_top = NodePath("../../../CenterContainer/Back")
+focus_neighbour_bottom = NodePath("../effects")
+custom_fonts/font = ExtResource( 1 )
+text = "FullScreen"
+align = 1
+
+[node name="Effect_text" type="Label" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer"]
+margin_top = 28.0
+margin_right = 196.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 0, 40 )
+custom_fonts/font = SubResource( 1 )
+text = "Effects"
+align = 1
+valign = 1
+
+[node name="effects" type="HSlider" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer"]
+margin_top = 72.0
+margin_right = 196.0
+margin_bottom = 136.0
+focus_neighbour_top = NodePath("../FullScreen")
+focus_neighbour_bottom = NodePath("../music")
+custom_icons/grabber = ExtResource( 8 )
+min_value = -25.0
+max_value = 6.0
+
+[node name="Music_text" type="Label" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer"]
+margin_top = 140.0
+margin_right = 196.0
+margin_bottom = 180.0
+rect_min_size = Vector2( 0, 40 )
+custom_fonts/font = SubResource( 1 )
+text = "Music"
+align = 1
+valign = 1
+
+[node name="music" type="HSlider" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer"]
+margin_top = 184.0
+margin_right = 196.0
+margin_bottom = 248.0
+focus_neighbour_top = NodePath("../effects")
+focus_neighbour_bottom = NodePath("../../../CenterContainer/Back")
+custom_icons/grabber = ExtResource( 8 )
+min_value = -25.0
+max_value = 6.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Option/VBoxContainer"]
 margin_top = 572.0
 margin_right = 1280.0
 margin_bottom = 642.0
 rect_min_size = Vector2( 0, 52 )
 
-[node name="Back" type="TextureButton" parent="VBoxContainer/CenterContainer"]
+[node name="Back" type="TextureButton" parent="Option/VBoxContainer/CenterContainer"]
 margin_left = 500.0
 margin_right = 780.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 280, 70 )
-focus_neighbour_top = NodePath("../../Tasks/HBoxContainer/Flower/Flower_button")
-focus_neighbour_bottom = NodePath("../../Tasks/HBoxContainer/Coming_soon_one/Coming_soon_button")
+focus_neighbour_top = NodePath("../../CenterContainer2/VBoxContainer/music")
+focus_neighbour_bottom = NodePath("../../CenterContainer2/VBoxContainer/FullScreen")
 mouse_filter = 2
 texture_normal = ExtResource( 4 )
 texture_focused = ExtResource( 3 )
 expand = true
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/CenterContainer/Back"]
+[node name="Label" type="Label" parent="Option/VBoxContainer/CenterContainer/Back"]
 modulate = Color( 0.831373, 0.831373, 0.831373, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -80,6 +141,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="VBoxContainer/CenterContainer2/FullScreen" to="." method="_on_FullScreen_pressed"]
-[connection signal="focus_entered" from="VBoxContainer/CenterContainer/Back" to="." method="_play_change_cursor_effect"]
-[connection signal="pressed" from="VBoxContainer/CenterContainer/Back" to="." method="_on_Back_pressed"]
+[connection signal="pressed" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/FullScreen" to="Option" method="_on_FullScreen_pressed"]
+[connection signal="value_changed" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/effects" to="Option" method="_on_effects_value_changed"]
+[connection signal="value_changed" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/music" to="Option" method="_on_music_value_changed"]
+[connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer/Back" to="Option" method="_play_change_cursor_effect"]
+[connection signal="pressed" from="Option/VBoxContainer/CenterContainer/Back" to="Option" method="_on_Back_pressed"]

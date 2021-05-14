@@ -12,9 +12,12 @@ void godot::CameraController::_register_methods()
 	register_method("_close_doors", &CameraController::_close_doors);
 	register_method("_open_doors", &CameraController::_open_doors);
 	register_method("_start_move", &CameraController::_start_move);
+	register_method("_change_audio_volume", &CameraController::_change_audio_volume);
 
 	register_property<CameraController, Ref<PackedScene>>("Fade In Animation", &CameraController::fadeIn, nullptr);
 	register_property<CameraController, Ref<PackedScene>>("Fade Out Animation", &CameraController::fadeOut, nullptr);
+	register_property<CameraController, Ref<PackedScene>>("game_back", &CameraController::game_back, nullptr);
+
 }
 
 void godot::CameraController::_move(String dir)
@@ -100,7 +103,6 @@ bool godot::CameraController::_is_one_player_alive()
 	return !has_node("/root/Node2D/Node/Player1") || !has_node("/root/Node2D/Node/Player2");
 }
 
-
 void godot::CameraController::_init()
 {
 	for (int i = 0; i < 4; i++)
@@ -109,8 +111,20 @@ void godot::CameraController::_init()
 
 void godot::CameraController::_ready()
 {
+	_set_current(true);
 	player1 = cast_to<Node2D>(get_node("/root/Node2D/Node/Player1"));
 	player2 = cast_to<Node2D>(get_node("/root/Node2D/Node/Player2"));
+
+	if (find_parent("root") != nullptr && !find_parent("root")->has_node("MenuGameMusic"))
+	{
+		audio = cast_to<AudioStreamPlayer2D>(game_back->instance());
+		find_parent("root")->call_deferred("add_child", audio);
+	}
+
+	timer_audio = Timer::_new();
+	add_child(timer_audio);
+	timer_audio->connect("timeout", this, "_change_audio_volume");
+	timer_audio->start(time_delta);
 }
 
 void godot::CameraController::_process()
@@ -151,13 +165,13 @@ void godot::CameraController::_door_collision(String door_dir)
 
 void godot::CameraController::_open_doors()
 {
-	Godot::print("open doors");
+	//Godot::print("open doors");
 	is_open_door = true;
 }
 
 void godot::CameraController::_close_doors()
 {
-	Godot::print("close doors");
+	//Godot::print("close doors");
 	is_open_door = false;
 }
 
@@ -166,6 +180,22 @@ void godot::CameraController::_start_move()
 	for (int i = 0; i < 4; i++) 
 		if ((int)dirs[i] == 2 || (_is_one_player_alive() && (int)dirs[i] == 1))
 			_move(_get_dir_on_index(i));
+}
+
+void godot::CameraController::_change_audio_volume()
+{
+	timer_audio->disconnect("timeout", this, "_change_audio_volume");
+
+	Godot::print(String::num(AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()))));
+
+	if (AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) >-15)
+		return;
+
+	AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()),
+		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) - delta_step/4);
+
+	timer_audio->connect("timeout", this, "_change_audio_volume");
+	timer_audio->start(time_delta);
 }
 
 godot::CameraController::CameraController()
