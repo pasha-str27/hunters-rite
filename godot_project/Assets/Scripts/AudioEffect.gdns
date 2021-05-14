@@ -3,6 +3,11 @@
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 
 [resource]
+<<<<<<< HEAD:godot_project/Assets/Scripts/AudioEffect.gdns
 resource_name = "AudioEffect"
 class_name = "AudioEffect"
+=======
+resource_name = "FadeAnimation"
+class_name = "FadeAnimation"
+>>>>>>> 907a483067fa431be7a730362c7bc3d731a26423:godot_project/Assets/Scripts/FadeAnimation.gdns
 library = ExtResource( 1 )

@@ -23,6 +23,7 @@
 #include <Area2D.hpp>
 #include <Sprite.hpp>
 #include <OS.hpp>
+#include <Control.hpp>
 #include <Timer.hpp>
 #include <RandomNumberGenerator.hpp>
 #include <Camera2D.hpp>
