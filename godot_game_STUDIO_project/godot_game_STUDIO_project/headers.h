@@ -83,6 +83,7 @@ using namespace godot;
 #include "PlayersContainer.h"
 #include "RoomStats.h"
 #include "MenuButtons.h"
+#include "PauseButtons.h"
 #include "AudioEffect.h"
 
 #include "Generation.h"

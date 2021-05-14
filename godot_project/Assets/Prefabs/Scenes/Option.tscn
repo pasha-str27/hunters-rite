@@ -28,6 +28,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 click_effect = ExtResource( 6 )
+"menu back music" = null
 
 [node name="Background" type="TextureRect" parent="Option"]
 anchor_right = 1.0
@@ -140,5 +141,4 @@ __meta__ = {
 [connection signal="pressed" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/FullScreen" to="Option" method="_on_FullScreen_pressed"]
 [connection signal="value_changed" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/effects" to="Option" method="_on_effects_value_changed"]
 [connection signal="value_changed" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/music" to="Option" method="_on_music_value_changed"]
-[connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer/Back" to="Option" method="_play_change_cursor_effect"]
 [connection signal="pressed" from="Option/VBoxContainer/CenterContainer/Back" to="Option" method="_on_Back_pressed"]

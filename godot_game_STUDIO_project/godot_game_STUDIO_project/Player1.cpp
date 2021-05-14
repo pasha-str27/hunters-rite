@@ -149,6 +149,7 @@ void godot::Player1::_process_input()
 		_fight();
 	}
 
+
 	PlayerData::_set_dir(dir);
 }
 

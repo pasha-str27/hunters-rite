@@ -1,19 +1,21 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Sprites/UI/button_focus_v2.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Sprites/UI/button_background_v2.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=3]
-[ext_resource path="res://Assets/Scripts/MenuButtons.gdns" type="Script" id=4]
-[ext_resource path="res://Assets/Prefabs/SoundsEffects/ButtonClick.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Scripts/PauseButtons.gdns" type="Script" id=4]
 
 [node name="Pause" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -640.0
+margin_top = -360.0
+margin_right = -640.0
+margin_bottom = -360.0
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-click_effect = ExtResource( 5 )
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_right = 1.0
@@ -48,6 +50,8 @@ margin_bottom = 472.0
 [node name="Resume" type="TextureButton" parent="CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer"]
 margin_right = 240.0
 margin_bottom = 72.0
+focus_neighbour_top = NodePath("../Quit")
+focus_neighbour_bottom = NodePath("../Menu")
 texture_normal = ExtResource( 2 )
 texture_focused = ExtResource( 1 )
 
@@ -66,6 +70,8 @@ __meta__ = {
 margin_top = 76.0
 margin_right = 240.0
 margin_bottom = 148.0
+focus_neighbour_top = NodePath("../Resume")
+focus_neighbour_bottom = NodePath("../Quit")
 texture_normal = ExtResource( 2 )
 texture_focused = ExtResource( 1 )
 
@@ -84,6 +90,8 @@ __meta__ = {
 margin_top = 152.0
 margin_right = 240.0
 margin_bottom = 224.0
+focus_neighbour_top = NodePath("../Menu")
+focus_neighbour_bottom = NodePath("../Resume")
 texture_normal = ExtResource( 2 )
 texture_focused = ExtResource( 1 )
 
@@ -104,9 +112,6 @@ margin_right = 1280.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 416, 720 )
 
-[connection signal="focus_entered" from="CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer/Resume" to="." method="_play_change_cursor_effect"]
 [connection signal="pressed" from="CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer/Resume" to="." method="_on_Resume_pressed"]
-[connection signal="focus_entered" from="CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer/Menu" to="." method="_play_change_cursor_effect"]
 [connection signal="pressed" from="CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer/Menu" to="." method="_on_Menu_pressed"]
-[connection signal="focus_entered" from="CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer/Quit" to="." method="_play_change_cursor_effect"]
 [connection signal="pressed" from="CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

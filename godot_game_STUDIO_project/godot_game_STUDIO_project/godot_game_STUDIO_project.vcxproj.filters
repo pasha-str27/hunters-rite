@@ -42,6 +42,7 @@
     <ClCompile Include="MenuButtons.cpp" />
     <ClCompile Include="RoomStats.cpp" />
     <ClCompile Include="AudioEffect.cpp" />
+    <ClCompile Include="PauseButtons.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BatAI.h" />
@@ -85,5 +86,6 @@
     <ClInclude Include="MenuButtons.h" />
     <ClInclude Include="RoomStats.h" />
     <ClInclude Include="AudioEffect.h" />
+    <ClInclude Include="PauseButtons.h" />
   </ItemGroup>
 </Project>
