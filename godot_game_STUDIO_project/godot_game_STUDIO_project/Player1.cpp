@@ -11,7 +11,10 @@ godot::Player1::Player1(Node2D* object, Ref<PackedScene>bullet) : PlayerData(obj
 	_change_can_fight(true);
 
 	auto node = _get_object()->get_parent()->get_child(0);
+	
 	sprite = cast_to<AnimatedSprite>(_get_object()->get_child(0)->get_child(0));
+
+	shoot_particles = cast_to<Particles2D>(_get_object()->get_child(0)->get_child(0)->get_child(0));
 	for (int i = 0; i < max_bullet_count; ++i)
 	{
 		auto new_obj = bullet->instance();
@@ -70,12 +73,16 @@ void godot::Player1::_process_input()
 	{
 		sprite->set_flip_h(true);
 		sprite->set_offset(Vector2(-35, 0));
+		shoot_particles->set_position(Vector2(-11, 0));
+
 	}
 
 	if (input_controller->is_action_just_pressed("Player1_right"))
 	{
 		sprite->set_flip_h(false);
 		sprite->set_offset(Vector2(35, 0));
+		shoot_particles->set_position(Vector2(11, 0));
+
 	}
 
 	//dash
@@ -111,6 +118,7 @@ void godot::Player1::_process_input()
 	//fight	up
 	if (input_controller->is_action_pressed("Player1_fight_up"))
 	{
+		shoot_particles->set_position(Vector2(0, -9));
 		bullet_dir = Vector2::UP;
 		_fight();
 	}
@@ -118,6 +126,7 @@ void godot::Player1::_process_input()
 	//fight	down
 	if (input_controller->is_action_pressed("Player1_fight_down"))
 	{
+		shoot_particles->set_position(Vector2(0, 9));
 		bullet_dir = Vector2::DOWN;
 		_fight();
 	}
@@ -128,6 +137,7 @@ void godot::Player1::_process_input()
 		bullet_dir = Vector2::LEFT;
 		sprite->set_flip_h(true);
 		sprite->set_offset(Vector2(-35, 0));
+		shoot_particles->set_position(Vector2(-11, 0));
 		_fight();
 	}
 
@@ -137,6 +147,7 @@ void godot::Player1::_process_input()
 		bullet_dir = Vector2::RIGHT;
 		sprite->set_flip_h(false);
 		sprite->set_offset(Vector2(35, 0));
+		shoot_particles->set_position(Vector2(11, 0));
 		_fight();
 	}
 
@@ -170,6 +181,8 @@ void godot::Player1::_fight(Node* node)
 	available_bullets[available_bullets.size() - 1]->call("_set_damage", _get_damage());
 
 	available_bullets.pop_back();
+
+	shoot_particles->restart();
 
 	_get_object()->call("_start_timer");
 }

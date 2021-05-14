@@ -17,6 +17,8 @@ namespace godot
 		Vector2 bullet_dir;
 		AnimatedSprite* sprite = nullptr;
 
+		Particles2D* shoot_particles = nullptr;
+
 	public:
 		~Player1();
 		void _move();
