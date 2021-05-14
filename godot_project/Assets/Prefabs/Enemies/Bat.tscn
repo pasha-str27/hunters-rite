@@ -135,7 +135,7 @@ shape = SubResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Bat/CollisionShape2D"]
 frames = SubResource( 17 )
 animation = "idle"
-frame = 3
+frame = 4
 playing = true
 
 [node name="Area2D" type="Area2D" parent="Bat"]

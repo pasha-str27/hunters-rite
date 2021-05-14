@@ -102,6 +102,7 @@ void godot::PlayerController::_ready()
 	buff_debuff_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "BuffDebuffParticles"));
 	hurt_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"));
 	dash_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "DashParticles"));
+	revive_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "ReviveParticles"));
 
 	_update_health_bar();
 }
@@ -142,7 +143,7 @@ void godot::PlayerController::_start_dash_timer()
 
 		timer->start(dash_time_delta);
 
-		dash_particles->set_emitting(true);
+		dash_particles->restart();
 	}
 	else
 	{
@@ -183,10 +184,6 @@ void godot::PlayerController::_on_dash_cooldown_timeout()
 void godot::PlayerController::_change_is_dashing_state()
 {
 	is_dashing = !is_dashing;
-	//if (is_dashing)
-	//	is_dashing = false;
-	//else
-	//	is_dashing = true;
 }
 
 bool godot::PlayerController::_can_fight()
@@ -223,17 +220,11 @@ void godot::PlayerController::_process(float delta)
 
 void godot::PlayerController::_take_damage(float damage, bool is_spike)
 {
-	//Godot::print("take " + String::num(damage));
 	current_player->_take_damage(damage, is_spike);
-
-	if(is_alive)
-		cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"))->set_emitting(true);
-	
 	_update_health_bar();
 	if(is_alive)
 	{
-		hurt_particles->set_emitting(false);
-		hurt_particles->set_emitting(true);
+		hurt_particles->restart();
 	}
 }
 
@@ -282,7 +273,6 @@ void godot::PlayerController::change_can_moving_timeout()
 	can_move = true;
 }
 
-//винести в Player2
 void godot::PlayerController::_decrease_attack_radius()
 {
 	auto node = cast_to<Node2D>(get_child(1));
@@ -354,15 +344,8 @@ void godot::PlayerController::_die()
 
 void godot::PlayerController::_revive()
 {
+	revive_particles->set_emitting(true);
 	current_player->_revive();
-	//if (is_in_group("player1"))
-	//	PlayersContainer::_get_instance()->_set_player1(this);
-	//	//Enemies::get_singleton()->_set_player1(this);
-
-	//if (is_in_group("player2"))
-	//	PlayersContainer::_get_instance()->_set_player2(this);
-	//	//Enemies::get_singleton()->_set_player2(this);
-
 	is_alive = true;
 	_set_HP(_get_max_HP() *(float)0.15);
 	_update_health_bar();
@@ -398,8 +381,7 @@ void godot::PlayerController::_start_item_particles(bool is_buff)
 	else
 		buff_debuff_particles->get_process_material()->set("hue_variation", -.85);
 
-	buff_debuff_particles->set_emitting(false);
-	buff_debuff_particles->set_emitting(true);
+	buff_debuff_particles->restart();
 }
 
 void godot::PlayerController::_update_health_bar()
