@@ -17,6 +17,8 @@ namespace godot
 		Vector2 bullet_dir;
 		AnimatedSprite* sprite = nullptr;
 
+		Particles2D* shoot_particles = nullptr;
+
 	public:
 		~Player1();
 		void _move();
@@ -39,6 +41,6 @@ namespace godot
 		void _revive();
 		void _update_health_bar();
 		ProgressBar* _get_health_bar();
-
+		void _stop_animations();
 	};
 }

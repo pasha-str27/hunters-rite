@@ -16,6 +16,8 @@ namespace godot
 		float damage;
 		bool is_enemy_bullet;
 
+		Ref<PackedScene> explosion_particles = nullptr;
+
 	public:
 		static void _register_methods();
 		void _ready();
