@@ -9,7 +9,7 @@ namespace godot
 	{
 		GODOT_CLASS(MenuButtons, TextureRect)
 
-			Ref<PackedScene> click_effect;
+		Ref<PackedScene> click_effect;
 		Ref<PackedScene> menu_back;
 		Ref<PackedScene> menu_scene;
 		Ref<PackedScene> option_scene;
@@ -18,6 +18,10 @@ namespace godot
 		Ref<PackedScene> fade;
 
 		static bool was_focused;
+		static bool is_full_screen;
+		static float music_audio_level;
+		static float effect_audio_level;
+
 		Timer* timer_music;
 		Timer* timer;
 		float delta_time;
@@ -43,7 +47,6 @@ namespace godot
 		void _on_effects_value_changed(float value);
 		void _on_music_value_changed(float value);
 		void save_game();
-		String save();
 		void load_game();
 		void _timeout();
 		void _change_audio_volume();

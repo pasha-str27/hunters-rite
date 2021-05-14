@@ -4,6 +4,10 @@
 #endif
 
 bool MenuButtons::was_focused = false;
+bool MenuButtons::is_full_screen = false;
+float MenuButtons::music_audio_level = -12.5;
+float MenuButtons::effect_audio_level = 6;
+
 AudioStreamPlayer2D* MenuButtons::audio = nullptr;
 
 MenuButtons::MenuButtons()
@@ -25,7 +29,6 @@ void godot::MenuButtons::_ready()
 	notice_scene = rld->load("res://Assets/Prefabs/Scenes/Notice.tscn");
 	game_scene = rld->load("res://main_scene.tscn");
 
-
 	cast_to<Camera2D>(get_parent())->_set_current(true);
 
 	// Set focus button in Menu and Notise scenes
@@ -37,22 +40,27 @@ void godot::MenuButtons::_ready()
 	{
 		audio = cast_to<AudioStreamPlayer2D>(menu_back->instance());
 		find_parent("root")->call_deferred("add_child", audio);
+		load_game();
 	}
 
 	// Set focus button 
 	set_focus_mode(true);
 	for (auto name : name_buttons)
 	{
-		if (find_node(name) != nullptr) {
+		if (find_node(name) != nullptr) 
+		{
 			cast_to<TextureButton>(find_node(name))->grab_focus();
 			break;
 		}
 	}
 
-
-	//save_game();
-	//load_game();
-
+	if (get_name() == "Option")
+	{
+		auto tmp_node = get_child(1)->get_child(0)->get_child(0);
+		cast_to<Button>(tmp_node->get_child(0))->set_pressed(is_full_screen);
+		cast_to<Slider>(tmp_node->get_child(2))->set_value(effect_audio_level);
+		cast_to<Slider>(tmp_node->get_child(4))->set_value(music_audio_level);
+	}
 }
 
 void MenuButtons::_register_methods()
@@ -67,7 +75,6 @@ void MenuButtons::_register_methods()
 	register_method((char*)"_play_change_cursor_effect", &MenuButtons::_play_change_cursor_effect);
 	register_method((char*)"_on_effects_value_changed", &MenuButtons::_on_effects_value_changed);
 	register_method((char*)"_on_music_value_changed", &MenuButtons::_on_music_value_changed);
-	register_method((char*)"save", &MenuButtons::save);
 	register_method((char*)"_timeout", &MenuButtons::_timeout);
 	register_method((char*)"_change_audio_volume", &MenuButtons::_change_audio_volume);
 
@@ -78,18 +85,15 @@ void MenuButtons::_register_methods()
 
 void godot::MenuButtons::save_game()
 {
-	Godot::print("ssss");
+	Godot::print("saving");
 	auto save_game = File::_new();
-	save_game->open("user://savegame.save", File::WRITE);
+	save_game->open("user://savegame_hunters.save", File::WRITE);
 
-	auto save_nodes = get_tree()->get_nodes_in_group("a");
+	Dictionary save_dict;
+	save_dict = Dictionary::make("effect_level", effect_audio_level, "music_level", music_audio_level , "full_screen", is_full_screen);
+	save_dict.to_json();
 
-	for (int i = 0; i < save_nodes.size(); ++i)
-	{
-		auto node_data = cast_to<Node>(save_nodes[i])->call("save");
-
-		save_game->store_line(node_data);
-	}
+	save_game->store_line(save_dict.to_json());
 	save_game->close();
 }
 
@@ -97,17 +101,19 @@ void godot::MenuButtons::save_game()
 void godot::MenuButtons::load_game()
 {
 	auto save_game = File::_new();
-	if (!save_game->file_exists("user://savegame.save"))
-		return; // Error!We don't have a save to load.
+	if (!save_game->file_exists("user://savegame_hunters.save"))
+		return; 
 
-	save_game->open("user://savegame.save", File::READ);
+	save_game->open("user://savegame_hunters.save", File::READ);
+	Dictionary node_data = JSON::get_singleton()->parse(save_game->get_line())->get_result();
 
-	while (save_game->get_position() < save_game->get_len())
-	{
+	is_full_screen = node_data.values()[1];
+	music_audio_level = node_data.values()[2];
+	effect_audio_level = node_data.values()[0];
 
-		Dictionary node_data = JSON::get_singleton()->parse(save_game->get_line())->get_result();
-		Godot::print(node_data.values()[0]);
-	}
+	OS::get_singleton()->set_window_fullscreen(is_full_screen);
+	AudioServer::get_singleton()->set_bus_volume_db(1, effect_audio_level);
+	AudioServer::get_singleton()->set_bus_volume_db(2, music_audio_level);
 
 	save_game->close();
 }
@@ -134,20 +140,12 @@ void godot::MenuButtons::_change_audio_volume()
 	timer_music->start(delta_time);
 }
 
-String godot::MenuButtons::save()
-{
-	Dictionary save_dict;
-	save_dict = Dictionary::make("a", 25);
-	return save_dict.to_json();
-}
-
 void godot::MenuButtons::_on_Play_pressed(Variant)
 {
 	_play_effect();
 	get_node("/root")->add_child(notice_scene->instance());
 	get_parent()->queue_free();
 }
-
 
 void godot::MenuButtons::_on_Back_pressed(Variant)
 {
@@ -156,7 +154,6 @@ void godot::MenuButtons::_on_Back_pressed(Variant)
 	get_parent()->queue_free();
 }
 
-
 void godot::MenuButtons::_on_Option_pressed(Variant)
 {
 	_play_effect();
@@ -164,42 +161,44 @@ void godot::MenuButtons::_on_Option_pressed(Variant)
 	get_parent()->queue_free();
 }
 
-
-//void godot::MenuButtons::_on_Flower_pressed(Variant)
-//{
-	//_play_effect();
-	//get_tree()->change_scene_to(game_scene);
-	//queue_free();
-	//get_node("/root")->add_child(game_scene->instance());
-	//get_parent()->queue_free();
-
-//}
-
-
 void godot::MenuButtons::_on_Quit_pressed(Variant)
 {
 	_play_effect();
 	_exit_tree();
 }
 
-
 void godot::MenuButtons::_on_FullScreen_pressed(Variant)
 {
 	_play_effect();
-	if (!OS::get_singleton()->is_window_fullscreen()) {
-		OS::get_singleton()->set_window_fullscreen(true);
-	}
-	else OS::get_singleton()->set_window_fullscreen(false);
+
+	is_full_screen = !is_full_screen ? true : false;
+	OS::get_singleton()->set_window_fullscreen(is_full_screen);
+
+	save_game();
 }
 
 void godot::MenuButtons::_on_effects_value_changed(float value)
 {
-	Godot::print(String::num(value));
+	if (value <= -20)
+		value = -80;
+
+	effect_audio_level = value;
+
+	AudioServer::get_singleton()->set_bus_volume_db(1, value);
+
+	save_game();
 }
 
 void godot::MenuButtons::_on_music_value_changed(float value)
 {
-	Godot::print(String::num(value));
+	if (value <= -20)
+		value = -80;
+
+	music_audio_level = value;
+
+	AudioServer::get_singleton()->set_bus_volume_db(2, value);
+
+	save_game();
 }
 
 void godot::MenuButtons::_on_Flower_pressed(Variant)
@@ -227,7 +226,6 @@ void godot::MenuButtons::_play_effect()
 {
 	get_parent()->add_child(click_effect->instance());
 }
-
 
 void godot::MenuButtons::_play_change_cursor_effect()
 {

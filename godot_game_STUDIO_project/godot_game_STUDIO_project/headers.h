@@ -47,6 +47,7 @@
 #include <JSON.hpp>
 #include <JSONParseResult.hpp>
 #include <SpriteFrames.hpp>
+#include <Slider.hpp>
 
 #include <Dictionary.hpp>
 
