@@ -10,9 +10,11 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 [sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 1, 0, 0, 0.137255 )
-corner_radius_top_left = 90
-corner_radius_bottom_right = 90
+bg_color = Color( 0.6, 0.6, 0.6, 0.117647 )
+corner_radius_top_left = 60
+corner_radius_top_right = 30
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 30
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.215686, 1, 0.415686, 1 )
@@ -21,12 +23,14 @@ bg_color = Color( 0.215686, 1, 0.415686, 1 )
 bg_color = Color( 0.6, 0.6, 0.6, 0.117647 )
 
 [sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0, 1, 0.858824, 0.137255 )
-corner_radius_top_right = 90
-corner_radius_bottom_left = 90
+bg_color = Color( 0.6, 0.6, 0.6, 0.117647 )
+corner_radius_top_left = 30
+corner_radius_top_right = 60
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 60
 
 [sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 0.180392, 0.8, 0.941176, 1 )
+bg_color = Color( 0, 0.811765, 0.85098, 1 )
 
 [sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.6, 0.6, 0.6, 0.117647 )
@@ -117,7 +121,7 @@ anchor_bottom = 1.0
 margin_left = 0.0319519
 custom_styles/normal = SubResource( 5 )
 custom_fonts/font = ExtResource( 5 )
-custom_colors/font_color = Color( 0.133333, 0.960784, 1, 1 )
+custom_colors/font_color = Color( 0, 0.811765, 0.85098, 1 )
 text = "P2"
 align = 1
 valign = 1
