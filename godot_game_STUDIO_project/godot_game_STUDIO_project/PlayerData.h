@@ -44,6 +44,7 @@ namespace godot
 		float _get_max_HP();
 		void _set_max_HP(float value);
 		virtual void _update_health_bar() = 0;
+		virtual void _stop_animations() = 0;
 
 		static Input* input_controller;
 	};

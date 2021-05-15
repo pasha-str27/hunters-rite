@@ -47,10 +47,11 @@
 #include <JSON.hpp>
 #include <JSONParseResult.hpp>
 #include <SpriteFrames.hpp>
-
+#include <Slider.hpp>
 #include <Dictionary.hpp>
-
 #include <ResourceSaver.hpp>
+#include <Control.hpp>
+
 
 using namespace godot;
 
@@ -84,7 +85,6 @@ using namespace godot;
 #include "PlayersContainer.h"
 #include "RoomStats.h"
 #include "MenuButtons.h"
-#include "PauseButtons.h"
 #include "AudioEffect.h"
 #include "ParticlesDestroyer.h"
 #include "PauseButtons.h"

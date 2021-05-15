@@ -103,6 +103,7 @@ bool godot::CameraController::_is_one_player_alive()
 	return !has_node("/root/Node2D/Node/Player1") || !has_node("/root/Node2D/Node/Player2");
 }
 
+
 void godot::CameraController::_init()
 {
 	for (int i = 0; i < 4; i++)
