@@ -37,7 +37,6 @@ script = ExtResource( 7 )
 Items = [ ExtResource( 5 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 22 ), ExtResource( 19 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 13 ) ]
 
 [node name="Camera2D" parent="." instance=ExtResource( 10 )]
-position = Vector2( 0, -3.1748 )
 
 [node name="Player1" parent="." instance=ExtResource( 1 )]
 
