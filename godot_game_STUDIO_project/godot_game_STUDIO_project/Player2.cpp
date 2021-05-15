@@ -150,7 +150,6 @@ void godot::Player2::_take_damage(float damage, bool is_spike)
 		sprite->play("death");
 		if (_was_revived())
 		{
-
 			_get_object()->queue_free();
 			return;
 		}
