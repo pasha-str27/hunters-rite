@@ -54,6 +54,9 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 	if (!node->is_in_group("player"))
 		return;
 
+	if (!(bool)node->call("_is_alive"))
+		return;
+
 	node->call("_set_speed", (float)node->call("_get_speed") + speed);
 	node->call("_set_max_HP", (float)node->call("_get_max_HP") + HP);
 	node->call("_set_damage", (float)node->call("_get_damage") + damage);

@@ -27,11 +27,13 @@ void godot::CameraController::_register_methods()
 
 void godot::CameraController::_move(String dir)
 {
+	_close_doors();
+
 	auto fade = cast_to<Node2D>(fadeIn->instance());
 	add_child(fade);
 
-	float vertical_offset = 450;
-	float horizontal_offset = 320;
+	float vertical_offset = 390;
+	float horizontal_offset = 250;
 	
 	timer_audio->connect("timeout", this, "_change_audio_volume");
 	timer_audio->start(time_delta);
@@ -181,11 +183,13 @@ void godot::CameraController::_door_collision(String door_dir)
 
 void godot::CameraController::_open_doors()
 {
+	Godot::print("open doors");
 	is_open_door = true;
 }
 
 void godot::CameraController::_close_doors()
 {
+	Godot::print("close doors");
 	is_open_door = false;
 }
 

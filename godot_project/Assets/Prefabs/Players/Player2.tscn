@@ -236,7 +236,7 @@ animations = [ {
 } ]
 
 [sub_resource type="CircleShape2D" id=89]
-radius = 17.3234
+radius = 9.5011
 
 [sub_resource type="Gradient" id=90]
 offsets = PoolRealArray( 0.423237, 1 )
@@ -318,8 +318,7 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="CollisionShape2D"]
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 85 )
-animation = "death"
-frame = 4
+animation = "idle"
 playing = true
 
 [node name="SpiderWeb" parent="CollisionShape2D" instance=ExtResource( 13 )]
@@ -345,6 +344,7 @@ animation = "idle"
 offset = Vector2( 0, -10 )
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 4.71939, 17.6632 )
 z_index = 27
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

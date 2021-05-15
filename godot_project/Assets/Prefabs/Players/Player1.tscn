@@ -16,7 +16,7 @@
 [ext_resource path="res://Assets/Prefabs/SpiderWeb.tscn" type="PackedScene" id=14]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 15.6514
+radius = 10.1296
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
@@ -39,72 +39,72 @@ atlas = ExtResource( 2 )
 region = Rect2( 424, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 12 )
+atlas = ExtResource( 13 )
 region = Rect2( 0, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 12 )
+atlas = ExtResource( 13 )
 region = Rect2( 106, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 10 )
-region = Rect2( 0, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 10 )
-region = Rect2( 106, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 10 )
+atlas = ExtResource( 13 )
 region = Rect2( 212, 0, 106, 22 )
 
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 10 )
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 13 )
 region = Rect2( 318, 0, 106, 22 )
 
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 10 )
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 13 )
 region = Rect2( 424, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 12 )
+region = Rect2( 106, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 10 )
-region = Rect2( 530, 0, 106, 22 )
+region = Rect2( 0, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 10 )
-region = Rect2( 636, 0, 106, 22 )
+region = Rect2( 106, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 10 )
-region = Rect2( 742, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 13 )
-region = Rect2( 424, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 13 )
-region = Rect2( 318, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 13 )
 region = Rect2( 212, 0, 106, 22 )
 
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 10 )
+region = Rect2( 318, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 10 )
+region = Rect2( 424, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 10 )
+region = Rect2( 530, 0, 106, 22 )
+
 [sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 13 )
-region = Rect2( 106, 0, 106, 22 )
+atlas = ExtResource( 10 )
+region = Rect2( 636, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 13 )
-region = Rect2( 0, 0, 106, 22 )
+atlas = ExtResource( 10 )
+region = Rect2( 742, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=22]
 atlas = ExtResource( 13 )
-region = Rect2( 0, 0, 106, 22 )
+region = Rect2( 424, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=23]
 atlas = ExtResource( 13 )
-region = Rect2( 106, 0, 106, 22 )
+region = Rect2( 318, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 13 )
@@ -112,11 +112,11 @@ region = Rect2( 212, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=25]
 atlas = ExtResource( 13 )
-region = Rect2( 318, 0, 106, 22 )
+region = Rect2( 106, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=26]
 atlas = ExtResource( 13 )
-region = Rect2( 424, 0, 106, 22 )
+region = Rect2( 0, 0, 106, 22 )
 
 [sub_resource type="SpriteFrames" id=27]
 animations = [ {
@@ -125,29 +125,29 @@ animations = [ {
 "name": "idle",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 7 ), SubResource( 8 ) ],
+"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"loop": false,
+"name": "death",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 12 ), SubResource( 13 ) ],
 "loop": false,
 "name": "damaged",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
 "loop": true,
 "name": "run",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
-"loop": false,
-"name": "revive",
-"speed": 10.0
-}, {
 "frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ) ],
 "loop": false,
-"name": "death",
+"name": "revive",
 "speed": 10.0
 } ]
 
 [sub_resource type="CircleShape2D" id=28]
-radius = 16.8866
+radius = 10.0102
 
 [sub_resource type="Gradient" id=29]
 offsets = PoolRealArray( 0.423237, 1 )
@@ -225,7 +225,7 @@ shape = SubResource( 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 27 )
 animation = "idle"
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( 35, 0 )
 
@@ -236,6 +236,7 @@ scale = Vector2( 0.5, 0.5 )
 [node name="SpiderWeb" parent="Player1/CollisionShape2D" instance=ExtResource( 14 )]
 
 [node name="Area2D" type="Area2D" parent="Player1"]
+position = Vector2( 0, 12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1/Area2D"]
 shape = SubResource( 28 )
