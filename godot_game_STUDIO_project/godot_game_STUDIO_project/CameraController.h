@@ -17,8 +17,10 @@ namespace godot
 		Ref<PackedScene> fadeIn = nullptr;
 		Ref<PackedScene> fadeOut = nullptr;
 		Ref<PackedScene> game_back = nullptr;
+		Ref<PackedScene> boss_back = nullptr;
 
 		AudioStreamPlayer2D* audio = nullptr;
+		AudioStreamPlayer2D* audio_boss = nullptr;
 		Timer* timer_audio;
 
 		float time_delta = 1.0 / 50;

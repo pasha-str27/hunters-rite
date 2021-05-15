@@ -19,7 +19,7 @@ void godot::CameraController::_register_methods()
 	register_property<CameraController, Ref<PackedScene>>("Fade In Animation", &CameraController::fadeIn, nullptr);
 	register_property<CameraController, Ref<PackedScene>>("Fade Out Animation", &CameraController::fadeOut, nullptr);
 	register_property<CameraController, Ref<PackedScene>>("game_back", &CameraController::game_back, nullptr);
-
+	register_property<CameraController, Ref<PackedScene>>("boss_back", &CameraController::boss_back, nullptr);
 }
 
 void godot::CameraController::_move(String dir)
@@ -124,7 +124,9 @@ void godot::CameraController::_ready()
 	if (find_parent("root") != nullptr && !find_parent("root")->has_node("MenuGameMusic"))
 	{
 		audio = cast_to<AudioStreamPlayer2D>(game_back->instance());
+		audio_boss = cast_to<AudioStreamPlayer2D>(boss_back->instance());
 		add_child(audio);
+		add_child(audio_boss);
 	}
 
 	timer_audio = Timer::_new();
@@ -149,8 +151,6 @@ void godot::CameraController::_door_collision(String door_dir)
 	if (door_dir.find("bottom") != -1)
 		index = 3;
 
-	_start_mute_volume();
-
 	if (door_dir[0] == '-')
 	{
 		dirs[index] = (int)dirs[index] - 1;
@@ -160,6 +160,8 @@ void godot::CameraController::_door_collision(String door_dir)
 
 	if (((int)dirs[index] == 2 && is_open_door && !_is_one_player_alive()) || (_is_one_player_alive() && is_open_door && (int)dirs[index] == 1))
 	{
+		//_start_mute_volume();
+
 		if(PlayersContainer::_get_instance()->_get_player1() != nullptr)
 			PlayersContainer::_get_instance()->_get_player1()->call("_change_can_moving", false);
 
@@ -192,11 +194,22 @@ void godot::CameraController::_change_audio_volume()
 {
 	timer_audio->disconnect("timeout", this, "_change_audio_volume");
 
-	if (AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) > MenuButtons::music_audio_level)
+	//if (AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) > MenuButtons::music_audio_level)
+	//	return;
+
+	//AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()),
+	//	AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) - delta_step*2);
+
+	if (AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) >= MenuButtons::music_audio_level
+		&& AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) <= -75)
 		return;
 
 	AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()),
-		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) - delta_step*2);
+		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) - delta_step);
+
+	AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1,
+		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) + delta_step);
+
 
 	timer_audio->connect("timeout", this, "_change_audio_volume");
 	timer_audio->start(time_delta);
@@ -206,11 +219,15 @@ void godot::CameraController::_mute_audio_volume()
 {
 	timer_audio->disconnect("timeout", this, "_mute_audio_volume");
 
-	if (AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) <= -75)
-		return;
+	if (AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) <= -75
+		&& AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())+1) >= MenuButtons::music_audio_level)
+			return;
 
 	AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()),
-		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) + delta_step * 5);
+		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) + delta_step);
+
+	AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1,
+		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) - delta_step);
 
 	timer_audio->connect("timeout", this, "_mute_audio_volume");
 	timer_audio->start(time_delta);

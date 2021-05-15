@@ -26,9 +26,10 @@ void godot::SpawnEnemyController::SpawnEnemies()
 
 void godot::SpawnEnemyController::SpawnBoss()
 {
-	auto boss = cast_to<Node2D>(cast_to<PackedScene>(enemies[0])->instance());
-	boss->set_global_position(cast_to<Node2D>(get_parent())->get_global_position());
-	get_node("/root/Node2D/Node")->add_child(boss, true);
+	get_parent()->call("_start_mute_volume");
+	//auto boss = cast_to<Node2D>(cast_to<PackedScene>(enemies[0])->instance());
+	//boss->set_global_position(cast_to<Node2D>(get_parent())->get_global_position());
+	//get_node("/root/Node2D/Node")->add_child(boss, true);
 	enemies.pop_front();
 }
 
