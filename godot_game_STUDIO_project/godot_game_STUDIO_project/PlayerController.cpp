@@ -284,7 +284,7 @@ void godot::PlayerController::_change_can_moving(bool value)
 
 	timer->start(1.5);
 	
-	if(value == false)
+	if(value == false && is_alive)
 		current_player->_stop_animations();
 }
 
