@@ -9,11 +9,9 @@ void godot::RoomStats::_register_methods()
 {
 	register_method("_get_type", &RoomStats::_get_type);
 	register_method("_get_enemies", &RoomStats::_get_enemies);
-	register_method("_get_enemies_count", &RoomStats::_get_enemies_count);
 
 	register_property<RoomStats, String>("Type", &RoomStats::type, "room");
 	register_property<RoomStats, Array>("Enemies", &RoomStats::enemies, {});
-	register_property<RoomStats, int>("Enemies count", &RoomStats::enemies_count, 5);
 }
 
 void godot::RoomStats::_init()
@@ -32,11 +30,6 @@ String godot::RoomStats::_get_type()
 Array godot::RoomStats::_get_enemies()
 {
 	return this->enemies;
-}
-
-int godot::RoomStats::_get_enemies_count()
-{
-	return this->enemies_count;
 }
 
 godot::RoomStats::RoomStats()

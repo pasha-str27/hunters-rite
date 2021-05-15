@@ -21,10 +21,10 @@ tracks/0/keys = {
 z_index = 100
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -518.0
-margin_top = -324.0
-margin_right = 503.0
-margin_bottom = 332.0
+margin_left = -2426.0
+margin_top = -1114.0
+margin_right = 2445.0
+margin_bottom = 1520.0
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -34,5 +34,5 @@ __meta__ = {
 method_call_mode = 1
 anims/fade_in = SubResource( 1 )
 script = ExtResource( 1 )
-animation_time = 0.5
+animation_time = 1.0
 animation_name = "fade_in"

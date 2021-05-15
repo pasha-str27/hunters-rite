@@ -41,6 +41,6 @@ namespace godot
 		void _revive();
 		void _update_health_bar();
 		ProgressBar* _get_health_bar();
-
+		void _stop_animations();
 	};
 }

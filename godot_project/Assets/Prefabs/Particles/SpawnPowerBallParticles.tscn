@@ -11,7 +11,7 @@ gradient = SubResource( 1 )
 
 [sub_resource type="Curve" id=3]
 max_value = 0.25
-_data = [ Vector2( 0, 0.109091 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0681818 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.0673295 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0332386 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=4]
 curve = SubResource( 3 )
@@ -40,7 +40,7 @@ color_ramp = SubResource( 2 )
 z_index = 1
 emitting = false
 amount = 30
-lifetime = 0.8
+lifetime = 0.35
 one_shot = true
 speed_scale = 2.0
 explosiveness = 0.6
