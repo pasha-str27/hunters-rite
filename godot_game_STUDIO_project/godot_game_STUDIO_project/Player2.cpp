@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-godot::Player2* godot::Player2::singleton = nullptr;
-
 godot::Player2::Player2(Node2D* obj, Ref<PackedScene> bullet) : PlayerData(obj)
 {
 	_change_can_fight(true);

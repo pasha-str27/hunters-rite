@@ -2,15 +2,24 @@
 
 importer="texture"
 type="StreamTexture"
+<<<<<<< HEAD:godot_project/Assets/Sprites/Monsters/monster_flower.png.import
 path="res://.import/monster_flower.png-f7e3849bbab8be70eb5fc63e93ab42ef.stex"
+=======
+path="res://.import/monster_statue_pin.png-c52a0d08333ef2341dc72b5680eaa8c0.stex"
+>>>>>>> paveleon:godot_project/Assets/Sprites/Monsters/monster_statue_pin.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
+<<<<<<< HEAD:godot_project/Assets/Sprites/Monsters/monster_flower.png.import
 source_file="res://Assets/Sprites/Monsters/monster_flower.png"
 dest_files=[ "res://.import/monster_flower.png-f7e3849bbab8be70eb5fc63e93ab42ef.stex" ]
+=======
+source_file="res://Assets/Sprites/Monsters/monster_statue_pin.png"
+dest_files=[ "res://.import/monster_statue_pin.png-c52a0d08333ef2341dc72b5680eaa8c0.stex" ]
+>>>>>>> paveleon:godot_project/Assets/Sprites/Monsters/monster_statue_pin.png.import
 
 [params]
 

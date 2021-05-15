@@ -48,6 +48,7 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_update_health_bar", &PlayerController::_update_health_bar);
 	register_method((char*)"_update_max_health_bar_size", &PlayerController::_update_max_health_bar_size);
 	register_method((char*)"_animate_spider_web", &PlayerController::_animate_spider_web);
+	register_method((char*)"_stop_animations", &PlayerController::_stop_animations);
 	
 
 	register_property<PlayerController, float>("speed", &PlayerController::speed, 400);
@@ -105,6 +106,9 @@ void godot::PlayerController::_ready()
 	hurt_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"));
 	dash_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "DashParticles"));
 	revive_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "ReviveParticles"));
+
+	//if (current_player == nullptr)
+	//	printf("error");
 
 	_update_health_bar();
 }
@@ -279,8 +283,9 @@ void godot::PlayerController::_change_can_moving(bool value)
 		add_child(timer);
 
 	timer->start(1.5);
+	
 	if(value == false)
-	current_player->_stop_animations();
+		current_player->_stop_animations();
 }
 
 void godot::PlayerController::change_can_moving_timeout()
@@ -425,4 +430,9 @@ void godot::PlayerController::_show_tutorial_message(Node* node)
 void godot::PlayerController::_hide_tutorial_message(Node* node)
 {
 	cast_to<TileMap>(CustomExtensions::GetChildByName(node, "Stuff"))->set_visible(false);
+}
+
+void godot::PlayerController::_stop_animations()
+{
+	current_player->_stop_animations();
 }

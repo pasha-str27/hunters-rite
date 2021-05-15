@@ -17,8 +17,11 @@ namespace godot
 		Ref<PackedScene> fadeIn = nullptr;
 		Ref<PackedScene> fadeOut = nullptr;
 		Ref<PackedScene> game_back = nullptr;
+		Ref<PackedScene> boss_back = nullptr;
+		Ref<PackedScene> pause_menu = nullptr;
 
 		AudioStreamPlayer2D* audio = nullptr;
+		AudioStreamPlayer2D* audio_boss = nullptr;
 		Timer* timer_audio;
 
 		float time_delta = 1.0 / 50;
@@ -37,6 +40,10 @@ namespace godot
 		void _close_doors();
 		void _start_move();
 		void _change_audio_volume();
+		void _mute_audio_volume();
+		void _start_mute_volume();
+		void _input(Variant event);
+		void _audio_fade_to_main_menu();
 		CameraController();
 		~CameraController();
 	};

@@ -82,5 +82,6 @@ namespace godot
 		void _animate_spider_web();
 		void _show_tutorial_message(Node* node);
 		void _hide_tutorial_message(Node* node);
+		void _stop_animations();
 	};
 }
