@@ -47,6 +47,8 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_start_item_particles", &PlayerController::_start_item_particles);
 	register_method((char*)"_update_health_bar", &PlayerController::_update_health_bar);
 	register_method((char*)"_update_max_health_bar_size", &PlayerController::_update_max_health_bar_size);
+	register_method((char*)"_stop_animations", &PlayerController::_stop_animations);
+	
 
 	register_property<PlayerController, float>("speed", &PlayerController::speed, 400);
 	register_property<PlayerController, Ref<PackedScene>>("bullet_prefab", &PlayerController::bullet_prefab, nullptr);
@@ -398,4 +400,9 @@ void godot::PlayerController::_update_max_health_bar_size()
 {
 	current_player->_get_health_bar()->set_max(current_player->_get_max_HP());
 	current_player->_update_health_bar();
+}
+
+void godot::PlayerController::_stop_animations()
+{
+	current_player->_stop_animations();
 }
