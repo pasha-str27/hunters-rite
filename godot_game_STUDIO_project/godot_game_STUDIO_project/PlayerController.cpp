@@ -47,6 +47,8 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_start_item_particles", &PlayerController::_start_item_particles);
 	register_method((char*)"_update_health_bar", &PlayerController::_update_health_bar);
 	register_method((char*)"_update_max_health_bar_size", &PlayerController::_update_max_health_bar_size);
+	register_method((char*)"_animate_spider_web", &PlayerController::_animate_spider_web);
+	
 
 	register_property<PlayerController, float>("speed", &PlayerController::speed, 400);
 	register_property<PlayerController, Ref<PackedScene>>("bullet_prefab", &PlayerController::bullet_prefab, nullptr);
@@ -257,7 +259,9 @@ void godot::PlayerController::_change_can_moving(bool value)
 {
 	can_move = false;
 	if (timer->is_connected("timeout", this, "change_can_moving_timeout"))
-		return;
+	{
+		timer->disconnect("timeout", this, "change_can_moving_timeout");
+	}
 
 	timer->connect("timeout", this, "change_can_moving_timeout");
 
@@ -396,4 +400,10 @@ void godot::PlayerController::_update_max_health_bar_size()
 {
 	current_player->_get_health_bar()->set_max(current_player->_get_max_HP());
 	current_player->_update_health_bar();
+}
+
+void godot::PlayerController::_animate_spider_web()
+{
+	cast_to<AnimatedSprite>(get_child(0)->get_node("SpiderWeb"))->set_frame(0);
+	cast_to<AnimatedSprite>(get_child(0)->get_node("SpiderWeb"))->play("idle");
 }
