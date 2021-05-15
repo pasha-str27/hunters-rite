@@ -201,4 +201,5 @@ void godot::Player2::_stop_animations()
 {
 	sprite->play("idle");
 	_set_dir(Vector2::ZERO);
+	vfx_sprite->set_frame(0);
 }
