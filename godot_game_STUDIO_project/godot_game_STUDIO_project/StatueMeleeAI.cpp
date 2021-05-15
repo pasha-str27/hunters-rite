@@ -14,6 +14,8 @@ godot::StatueMeleeAI::StatueMeleeAI(Ref<PackedScene>& bullet, Node2D* node_tmp) 
 	speed = 5;
 	damage = 20;
 	can_fight = true;
+
+	cast_to<AnimationPlayer>(node_tmp->get_node("zone")->get_child(1)->get_child(0))->set_current_animation("idle");
 }
 
 void godot::StatueMeleeAI::change_can_fight(bool value)

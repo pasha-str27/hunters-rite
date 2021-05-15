@@ -13,9 +13,18 @@
 size = 64
 font_data = ExtResource( 2 )
 
-[node name="Menu" type="Control"]
+[node name="Menu" type="Camera2D"]
+current = true
+
+[node name="Menu" type="Control" parent="." groups=[
+"a",
+]]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -640.0
+margin_top = -360.0
+margin_right = 640.0
+margin_bottom = 360.0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -23,7 +32,7 @@ __meta__ = {
 click_effect = ExtResource( 7 )
 "menu back music" = ExtResource( 8 )
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="Menu"]
 light_mask = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -33,7 +42,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 1280, 720 )
@@ -41,17 +50,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Top_text" type="VBoxContainer" parent="VBoxContainer"]
+[node name="Top_text" type="VBoxContainer" parent="Menu/VBoxContainer"]
 margin_right = 1280.0
 margin_bottom = 445.0
 rect_min_size = Vector2( 0, 445 )
 
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/Top_text"]
+[node name="CenterContainer" type="CenterContainer" parent="Menu/VBoxContainer/Top_text"]
 margin_right = 1280.0
 margin_bottom = 440.0
 rect_min_size = Vector2( 0, 440 )
 
-[node name="Label" type="Label" parent="VBoxContainer/Top_text/CenterContainer"]
+[node name="Label" type="Label" parent="Menu/VBoxContainer/Top_text/CenterContainer"]
 margin_left = 256.0
 margin_top = 188.0
 margin_right = 1024.0
@@ -65,13 +74,13 @@ text = "Hunters rite"
 align = 1
 valign = 1
 
-[node name="Buttons" type="VBoxContainer" parent="VBoxContainer"]
+[node name="Buttons" type="VBoxContainer" parent="Menu/VBoxContainer"]
 margin_top = 449.0
 margin_right = 1280.0
 margin_bottom = 709.0
 rect_min_size = Vector2( 0, 260 )
 
-[node name="Play" type="TextureButton" parent="VBoxContainer/Buttons"]
+[node name="Play" type="TextureButton" parent="Menu/VBoxContainer/Buttons"]
 margin_right = 1280.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 0, 60 )
@@ -82,7 +91,7 @@ texture_focused = ExtResource( 4 )
 expand = true
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/Buttons/Play"]
+[node name="Label" type="Label" parent="Menu/VBoxContainer/Buttons/Play"]
 modulate = Color( 0.831373, 0.831373, 0.831373, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -97,7 +106,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Option" type="TextureButton" parent="VBoxContainer/Buttons"]
+[node name="Option" type="TextureButton" parent="Menu/VBoxContainer/Buttons"]
 margin_top = 64.0
 margin_right = 1280.0
 margin_bottom = 124.0
@@ -109,7 +118,7 @@ texture_focused = ExtResource( 4 )
 expand = true
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/Buttons/Option"]
+[node name="Label" type="Label" parent="Menu/VBoxContainer/Buttons/Option"]
 modulate = Color( 0.831373, 0.831373, 0.831373, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -124,7 +133,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Quit" type="TextureButton" parent="VBoxContainer/Buttons"]
+[node name="Quit" type="TextureButton" parent="Menu/VBoxContainer/Buttons"]
 margin_top = 128.0
 margin_right = 1280.0
 margin_bottom = 188.0
@@ -136,7 +145,7 @@ texture_focused = ExtResource( 4 )
 expand = true
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/Buttons/Quit"]
+[node name="Label" type="Label" parent="Menu/VBoxContainer/Buttons/Quit"]
 modulate = Color( 0.831373, 0.831373, 0.831373, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -151,9 +160,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="focus_entered" from="VBoxContainer/Buttons/Play" to="." method="_play_change_cursor_effect"]
-[connection signal="pressed" from="VBoxContainer/Buttons/Play" to="." method="_on_Play_pressed"]
-[connection signal="focus_entered" from="VBoxContainer/Buttons/Option" to="." method="_play_change_cursor_effect"]
-[connection signal="pressed" from="VBoxContainer/Buttons/Option" to="." method="_on_Option_pressed"]
-[connection signal="focus_entered" from="VBoxContainer/Buttons/Quit" to="." method="_play_change_cursor_effect"]
-[connection signal="pressed" from="VBoxContainer/Buttons/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/Play" to="Menu" method="_play_change_cursor_effect"]
+[connection signal="pressed" from="Menu/VBoxContainer/Buttons/Play" to="Menu" method="_on_Play_pressed"]
+[connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/Option" to="Menu" method="_play_change_cursor_effect"]
+[connection signal="pressed" from="Menu/VBoxContainer/Buttons/Option" to="Menu" method="_on_Option_pressed"]
+[connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/Quit" to="Menu" method="_play_change_cursor_effect"]
+[connection signal="pressed" from="Menu/VBoxContainer/Buttons/Quit" to="Menu" method="_on_Quit_pressed"]
