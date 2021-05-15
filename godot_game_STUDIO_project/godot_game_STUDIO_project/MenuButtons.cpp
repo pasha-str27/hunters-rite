@@ -27,6 +27,7 @@ void godot::MenuButtons::_ready()
 	menu_scene = rld->load("res://Assets/Prefabs/Scenes/Menu.tscn");
 	option_scene = rld->load("res://Assets/Prefabs/Scenes/Option.tscn");
 	notice_scene = rld->load("res://Assets/Prefabs/Scenes/Notice.tscn");
+	items_scene = rld->load("res://Assets/Prefabs/Scenes/Items.tscn");
 	game_scene = rld->load("res://main_scene.tscn");
 
 	cast_to<Camera2D>(get_parent())->_set_current(true);
@@ -71,6 +72,7 @@ void MenuButtons::_register_methods()
 	register_method((char*)"_on_Quit_pressed", &MenuButtons::_on_Quit_pressed);
 	register_method((char*)"_on_Back_pressed", &MenuButtons::_on_Back_pressed);
 	register_method((char*)"_on_Flower_pressed", &MenuButtons::_on_Flower_pressed);
+	register_method((char*)"_on_Bonuses_pressed", &MenuButtons::_on_Bonuses_pressed);
 	register_method((char*)"_on_FullScreen_pressed", &MenuButtons::_on_FullScreen_pressed);
 	register_method((char*)"_play_change_cursor_effect", &MenuButtons::_play_change_cursor_effect);
 	register_method((char*)"_on_effects_value_changed", &MenuButtons::_on_effects_value_changed);
@@ -161,6 +163,13 @@ void godot::MenuButtons::_on_Option_pressed(Variant)
 	get_parent()->queue_free();
 }
 
+void godot::MenuButtons::_on_Bonuses_pressed(Variant)
+{
+	_play_effect();
+	get_node("/root")->add_child(items_scene->instance());
+	get_parent()->queue_free();
+}
+
 void godot::MenuButtons::_on_Quit_pressed(Variant)
 {
 	_play_effect();
@@ -176,6 +185,7 @@ void godot::MenuButtons::_on_FullScreen_pressed(Variant)
 
 	save_game();
 }
+
 
 void godot::MenuButtons::_on_effects_value_changed(float value)
 {

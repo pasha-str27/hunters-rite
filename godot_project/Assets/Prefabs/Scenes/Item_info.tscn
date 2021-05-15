@@ -1,0 +1,1026 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Assets/Sprites/UI/item_menu_background.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/Items/chicken.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Assets/Sprites/UI/notice_background_v2.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/UI/button_background_v2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/UI/button_focus_v2.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 11
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 8
+font_data = ExtResource( 3 )
+
+[node name="Items" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 1280, 720 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 36.0
+margin_bottom = -100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer"]
+margin_left = 252.0
+margin_top = 34.0
+margin_right = 1028.0
+margin_bottom = 550.0
+rect_min_size = Vector2( 776, 516 )
+scroll_deadzone = 256
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/ScrollContainer"]
+margin_right = 776.0
+margin_bottom = 1296.0
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer"]
+margin_right = 256.0
+margin_bottom = 256.0
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer"]
+margin_right = 256.0
+margin_bottom = 256.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer"]
+margin_left = 40.0
+margin_top = 44.0
+margin_right = 216.0
+margin_bottom = 211.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer/VBoxContainer"]
+margin_right = 176.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 0, 96 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer/VBoxContainer/CenterContainer"]
+margin_left = 40.0
+margin_right = 136.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer/VBoxContainer"]
+margin_top = 100.0
+margin_right = 176.0
+margin_bottom = 111.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 0.835294, 0.341176, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+custom_constants/shadow_as_outline = 0
+text = "Legendary Chiken"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer/VBoxContainer"]
+margin_top = 115.0
+margin_right = 176.0
+margin_bottom = 167.0
+custom_fonts/font = SubResource( 2 )
+text = "Super mega YUM YUM
+chiken
+very good
+
++20HP"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer"]
+margin_left = 260.0
+margin_right = 516.0
+margin_bottom = 256.0
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer2"]
+margin_right = 256.0
+margin_bottom = 256.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer2"]
+margin_left = 57.0
+margin_top = 28.0
+margin_right = 198.0
+margin_bottom = 228.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer2/VBoxContainer"]
+margin_right = 141.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 0, 96 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer2/VBoxContainer/CenterContainer"]
+margin_left = 22.0
+margin_right = 118.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer2/VBoxContainer"]
+margin_top = 100.0
+margin_right = 141.0
+margin_bottom = 114.0
+text = "Legendary Chiken"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer2/VBoxContainer"]
+margin_top = 118.0
+margin_right = 141.0
+margin_bottom = 200.0
+text = "Super mega YUM YUM
+chiken
+very good
+
++20HP"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer3" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer"]
+margin_left = 520.0
+margin_right = 776.0
+margin_bottom = 256.0
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer3"]
+margin_right = 256.0
+margin_bottom = 256.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer3"]
+margin_left = 57.0
+margin_top = 28.0
+margin_right = 198.0
+margin_bottom = 228.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer3/VBoxContainer"]
+margin_right = 141.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 0, 96 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer3/VBoxContainer/CenterContainer"]
+margin_left = 22.0
+margin_right = 118.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer3/VBoxContainer"]
+margin_top = 100.0
+margin_right = 141.0
+margin_bottom = 114.0
+text = "Legendary Chiken"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer3/VBoxContainer"]
+margin_top = 118.0
+margin_right = 141.0
+margin_bottom = 200.0
+text = "Super mega YUM YUM
+chiken
+very good
+
++20HP"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer4" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer"]
+margin_top = 260.0
+margin_right = 256.0
+margin_bottom = 516.0
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer4"]
+margin_right = 256.0
+margin_bottom = 256.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer4"]
+margin_left = 57.0
+margin_top = 28.0
+margin_right = 198.0
+margin_bottom = 228.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer4/VBoxContainer"]
+margin_right = 141.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 0, 96 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer4/VBoxContainer/CenterContainer"]
+margin_left = 22.0
+margin_right = 118.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer4/VBoxContainer"]
+margin_top = 100.0
+margin_right = 141.0
+margin_bottom = 114.0
+text = "Legendary Chiken"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer4/VBoxContainer"]
+margin_top = 118.0
+margin_right = 141.0
+margin_bottom = 200.0
+text = "Super mega YUM YUM
+chiken
+very good
+
++20HP"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer5" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer"]
+margin_left = 260.0
+margin_top = 260.0
+margin_right = 516.0
+margin_bottom = 516.0
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer5"]
+margin_right = 256.0
+margin_bottom = 256.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer5"]
+margin_left = 57.0
+margin_top = 28.0
+margin_right = 198.0
+margin_bottom = 228.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer5/VBoxContainer"]
+margin_right = 141.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 0, 96 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer5/VBoxContainer/CenterContainer"]
+margin_left = 22.0
+margin_right = 118.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer5/VBoxContainer"]
+margin_top = 100.0
+margin_right = 141.0
+margin_bottom = 114.0
+text = "Legendary Chiken"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer5/VBoxContainer"]
+margin_top = 118.0
+margin_right = 141.0
+margin_bottom = 200.0
+text = "Super mega YUM YUM
+chiken
+very good
+
++20HP"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer6" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer"]
+margin_left = 520.0
+margin_top = 260.0
+margin_right = 776.0
+margin_bottom = 516.0
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer6"]
+margin_right = 256.0
+margin_bottom = 256.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer6"]
+margin_left = 57.0
+margin_top = 28.0
+margin_right = 198.0
+margin_bottom = 228.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer6/VBoxContainer"]
+margin_right = 141.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 0, 96 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer6/VBoxContainer/CenterContainer"]
+margin_left = 22.0
+margin_right = 118.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer6/VBoxContainer"]
+margin_top = 100.0
+margin_right = 141.0
+margin_bottom = 114.0
+text = "Legendary Chiken"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer6/VBoxContainer"]
+margin_top = 118.0
+margin_right = 141.0
+margin_bottom = 200.0
+text = "Super mega YUM YUM
+chiken
+very good
+
++20HP"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer7" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer"]
+margin_top = 520.0
+margin_right = 256.0
+margin_bottom = 776.0
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer7"]
+margin_right = 256.0
+margin_bottom = 256.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer7"]
+margin_left = 57.0
+margin_top = 28.0
+margin_right = 198.0
+margin_bottom = 228.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer7/VBoxContainer"]
+margin_right = 141.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 0, 96 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer7/VBoxContainer/CenterContainer"]
+margin_left = 22.0
+margin_right = 118.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer7/VBoxContainer"]
+margin_top = 100.0
+margin_right = 141.0
+margin_bottom = 114.0
+text = "Legendary Chiken"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer7/VBoxContainer"]
+margin_top = 118.0
+margin_right = 141.0
+margin_bottom = 200.0
+text = "Super mega YUM YUM
+chiken
+very good
+
++20HP"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer8" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer"]
+margin_left = 260.0
+margin_top = 520.0
+margin_right = 516.0
+margin_bottom = 776.0
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer8"]
+margin_right = 256.0
+margin_bottom = 256.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer8"]
+margin_left = 57.0
+margin_top = 28.0
+margin_right = 198.0
+margin_bottom = 228.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer8/VBoxContainer"]
+margin_right = 141.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 0, 96 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer8/VBoxContainer/CenterContainer"]
+margin_left = 22.0
+margin_right = 118.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer8/VBoxContainer"]
+margin_top = 100.0
+margin_right = 141.0
+margin_bottom = 114.0
+text = "Legendary Chiken"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer8/VBoxContainer"]
+margin_top = 118.0
+margin_right = 141.0
+margin_bottom = 200.0
+text = "Super mega YUM YUM
+chiken
+very good
+
++20HP"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer9" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer"]
+margin_left = 520.0
+margin_top = 520.0
+margin_right = 776.0
+margin_bottom = 776.0
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer9"]
+margin_right = 256.0
+margin_bottom = 256.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer9"]
+margin_left = 57.0
+margin_top = 28.0
+margin_right = 198.0
+margin_bottom = 228.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer9/VBoxContainer"]
+margin_right = 141.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 0, 96 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer9/VBoxContainer/CenterContainer"]
+margin_left = 22.0
+margin_right = 118.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer9/VBoxContainer"]
+margin_top = 100.0
+margin_right = 141.0
+margin_bottom = 114.0
+text = "Legendary Chiken"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer9/VBoxContainer"]
+margin_top = 118.0
+margin_right = 141.0
+margin_bottom = 200.0
+text = "Super mega YUM YUM
+chiken
+very good
+
++20HP"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer10" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer"]
+margin_top = 780.0
+margin_right = 256.0
+margin_bottom = 1036.0
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer10"]
+margin_right = 256.0
+margin_bottom = 256.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer10"]
+margin_left = 57.0
+margin_top = 28.0
+margin_right = 198.0
+margin_bottom = 228.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer10/VBoxContainer"]
+margin_right = 141.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 0, 96 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer10/VBoxContainer/CenterContainer"]
+margin_left = 22.0
+margin_right = 118.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer10/VBoxContainer"]
+margin_top = 100.0
+margin_right = 141.0
+margin_bottom = 114.0
+text = "Legendary Chiken"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer10/VBoxContainer"]
+margin_top = 118.0
+margin_right = 141.0
+margin_bottom = 200.0
+text = "Super mega YUM YUM
+chiken
+very good
+
++20HP"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer11" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer"]
+margin_left = 260.0
+margin_top = 780.0
+margin_right = 516.0
+margin_bottom = 1036.0
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer11"]
+margin_right = 256.0
+margin_bottom = 256.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer11"]
+margin_left = 57.0
+margin_top = 28.0
+margin_right = 198.0
+margin_bottom = 228.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer11/VBoxContainer"]
+margin_right = 141.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 0, 96 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer11/VBoxContainer/CenterContainer"]
+margin_left = 22.0
+margin_right = 118.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer11/VBoxContainer"]
+margin_top = 100.0
+margin_right = 141.0
+margin_bottom = 114.0
+text = "Legendary Chiken"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer11/VBoxContainer"]
+margin_top = 118.0
+margin_right = 141.0
+margin_bottom = 200.0
+text = "Super mega YUM YUM
+chiken
+very good
+
++20HP"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer12" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer"]
+margin_left = 520.0
+margin_top = 780.0
+margin_right = 776.0
+margin_bottom = 1036.0
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer12"]
+margin_right = 256.0
+margin_bottom = 256.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer12"]
+margin_left = 57.0
+margin_top = 28.0
+margin_right = 198.0
+margin_bottom = 228.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer12/VBoxContainer"]
+margin_right = 141.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 0, 96 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer12/VBoxContainer/CenterContainer"]
+margin_left = 22.0
+margin_right = 118.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer12/VBoxContainer"]
+margin_top = 100.0
+margin_right = 141.0
+margin_bottom = 114.0
+text = "Legendary Chiken"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer12/VBoxContainer"]
+margin_top = 118.0
+margin_right = 141.0
+margin_bottom = 200.0
+text = "Super mega YUM YUM
+chiken
+very good
+
++20HP"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer13" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer"]
+margin_top = 1040.0
+margin_right = 256.0
+margin_bottom = 1296.0
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer13"]
+margin_right = 256.0
+margin_bottom = 256.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer13"]
+margin_left = 57.0
+margin_top = 28.0
+margin_right = 198.0
+margin_bottom = 228.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer13/VBoxContainer"]
+margin_right = 141.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 0, 96 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer13/VBoxContainer/CenterContainer"]
+margin_left = 22.0
+margin_right = 118.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer13/VBoxContainer"]
+margin_top = 100.0
+margin_right = 141.0
+margin_bottom = 114.0
+text = "Legendary Chiken"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer13/VBoxContainer"]
+margin_top = 118.0
+margin_right = 141.0
+margin_bottom = 200.0
+text = "Super mega YUM YUM
+chiken
+very good
+
++20HP"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer14" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer"]
+margin_left = 260.0
+margin_top = 1040.0
+margin_right = 516.0
+margin_bottom = 1296.0
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer14"]
+margin_right = 256.0
+margin_bottom = 256.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer14"]
+margin_left = 57.0
+margin_top = 28.0
+margin_right = 198.0
+margin_bottom = 228.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer14/VBoxContainer"]
+margin_right = 141.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 0, 96 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer14/VBoxContainer/CenterContainer"]
+margin_left = 22.0
+margin_right = 118.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer14/VBoxContainer"]
+margin_top = 100.0
+margin_right = 141.0
+margin_bottom = 114.0
+text = "Legendary Chiken"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer14/VBoxContainer"]
+margin_top = 118.0
+margin_right = 141.0
+margin_bottom = 200.0
+text = "Super mega YUM YUM
+chiken
+very good
+
++20HP"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer15" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer"]
+margin_left = 520.0
+margin_top = 1040.0
+margin_right = 776.0
+margin_bottom = 1296.0
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer15"]
+margin_right = 256.0
+margin_bottom = 256.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer15"]
+margin_left = 57.0
+margin_top = 28.0
+margin_right = 198.0
+margin_bottom = 228.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer15/VBoxContainer"]
+margin_right = 141.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 0, 96 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer15/VBoxContainer/CenterContainer"]
+margin_left = 22.0
+margin_right = 118.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer15/VBoxContainer"]
+margin_top = 100.0
+margin_right = 141.0
+margin_bottom = 114.0
+text = "Legendary Chiken"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/ScrollContainer/GridContainer/CenterContainer15/VBoxContainer"]
+margin_top = 118.0
+margin_right = 141.0
+margin_bottom = 200.0
+text = "Super mega YUM YUM
+chiken
+very good
+
++20HP"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+margin_top = 572.0
+margin_right = 1280.0
+margin_bottom = 642.0
+rect_min_size = Vector2( 0, 52 )
+
+[node name="Back" type="TextureButton" parent="CenterContainer2"]
+margin_left = 500.0
+margin_right = 780.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 280, 70 )
+focus_neighbour_top = NodePath("../../CenterContainer2/VBoxContainer/music")
+focus_neighbour_bottom = NodePath("../../CenterContainer2/VBoxContainer/FullScreen")
+mouse_filter = 2
+texture_normal = ExtResource( 5 )
+texture_focused = ExtResource( 6 )
+expand = true
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="CenterContainer2/Back"]
+modulate = Color( 0.831373, 0.831373, 0.831373, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/line_spacing = 0
+custom_constants/shadow_offset_y = 3
+custom_constants/shadow_as_outline = 0
+text = "Back"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,9 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Assets/Sprites/Tilesets/level1_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/Sprites/Tilesets/UI_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=3]
 [ext_resource path="res://Assets/Scripts/RoomStats.gdns" type="Script" id=4]
+[ext_resource path="res://Assets/Sprites/UI/tutorial_next.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/UI/tutorial_dash.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/UI/tutorial_move.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/UI/tutorial_atack_p1.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/UI/tutorial_atack_p2.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -132,3 +137,58 @@ tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( -327681, 23, 0, 65523, 24, 0, 12, 25, 0, 524287, 26, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -441.258
+margin_top = -217.762
+margin_right = 838.742
+margin_bottom = 502.238
+rect_scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+margin_left = -93.6511
+margin_top = -274.697
+margin_right = 1186.35
+margin_bottom = 445.303
+rect_scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+margin_left = -421.986
+margin_top = 85.7424
+margin_right = 858.014
+margin_bottom = 805.742
+rect_scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+margin_left = 87.0225
+margin_top = 34.0857
+margin_right = 1367.02
+margin_bottom = 754.086
+rect_scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect5" type="TextureRect" parent="."]
+margin_left = -141.52
+margin_top = -198.032
+margin_right = 1138.48
+margin_bottom = 521.968
+rect_scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
