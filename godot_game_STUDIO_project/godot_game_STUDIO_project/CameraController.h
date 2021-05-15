@@ -19,6 +19,7 @@ namespace godot
 		Ref<PackedScene> game_back = nullptr;
 		Ref<PackedScene> boss_back = nullptr;
 		Ref<PackedScene> pause_menu = nullptr;
+		Ref<PackedScene> exit = nullptr;
 
 		AudioStreamPlayer2D* audio = nullptr;
 		AudioStreamPlayer2D* audio_boss = nullptr;
@@ -44,6 +45,7 @@ namespace godot
 		void _start_mute_volume();
 		void _input(Variant event);
 		void _audio_fade_to_main_menu();
+		void _spawn_exit();
 		CameraController();
 		~CameraController();
 	};

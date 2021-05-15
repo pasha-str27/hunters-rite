@@ -45,4 +45,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<MenuButtons>();
 	register_class<AudioEffect>();
 	register_class<ParticlesDestroyer>();
+	register_class<ExitHandler>();
 }

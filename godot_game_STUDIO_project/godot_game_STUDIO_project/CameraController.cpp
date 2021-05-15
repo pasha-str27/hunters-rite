@@ -17,12 +17,15 @@ void godot::CameraController::_register_methods()
 	register_method("_start_mute_volume", &CameraController::_start_mute_volume);
 	register_method("_input", &CameraController::_input);
 	register_method("_audio_fade_to_main_menu", &CameraController::_audio_fade_to_main_menu);
+	register_method("_spawn_exit", &CameraController::_spawn_exit);
+	
 
 	register_property<CameraController, Ref<PackedScene>>("Fade In Animation", &CameraController::fadeIn, nullptr);
 	register_property<CameraController, Ref<PackedScene>>("Fade Out Animation", &CameraController::fadeOut, nullptr);
 	register_property<CameraController, Ref<PackedScene>>("game_back", &CameraController::game_back, nullptr);
 	register_property<CameraController, Ref<PackedScene>>("boss_back", &CameraController::boss_back, nullptr);
 	register_property<CameraController, Ref<PackedScene>>("pause_menu", &CameraController::pause_menu, nullptr);
+	register_property<CameraController, Ref<PackedScene>>("Exit", &CameraController::exit, nullptr);
 }
 
 void godot::CameraController::_move(String dir)
@@ -279,6 +282,13 @@ void godot::CameraController::_audio_fade_to_main_menu()
 
 	timer_audio->connect("timeout", this, "_audio_fade_to_main_menu");
 	timer_audio->start(time_delta);
+}
+
+void godot::CameraController::_spawn_exit()
+{
+	auto exit_node = cast_to<Node2D>(exit->instance());
+	exit_node->set_global_position(this->get_global_position());
+	get_node("/root/Node2D/Node")->add_child(exit_node);
 }
 
 godot::CameraController::CameraController()
