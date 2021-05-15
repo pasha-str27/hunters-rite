@@ -203,7 +203,7 @@ void godot::CameraController::_change_audio_volume()
 			return;
 
 	AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()),
-		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) + 0.8);
+		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) + 1.6);
 
 	AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1,
 		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) - 0.8);
@@ -224,8 +224,7 @@ void godot::CameraController::_mute_audio_volume()
 		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) - 0.8);
 
 	AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1,
-		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) + 0.8);
-
+		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) + 1.6);
 	timer_audio->connect("timeout", this, "_mute_audio_volume");
 	timer_audio->start(time_delta);
 }
