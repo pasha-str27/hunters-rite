@@ -36,7 +36,10 @@ void godot::Player2::_move()
 		sprite->play("idle");
 
 	if (PlayerData::_get_dir() != Vector2::ZERO && sprite->get_animation() == "idle")
+	{
+		sprite->set_offset(Vector2::ZERO);
 		sprite->play("run");
+	}
 
 	if (sprite->is_flipped_h() && sprite->get_animation() == "attack")
 		sprite->set_offset(Vector2(-10, -5));
