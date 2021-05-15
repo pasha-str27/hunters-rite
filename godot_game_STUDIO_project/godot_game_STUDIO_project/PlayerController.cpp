@@ -241,6 +241,11 @@ void godot::PlayerController::_on_Area2D_area_entered(Node* node)
 	{
 		camera->call("_door_collision", node->get_name(), 1);
 	}
+
+	if (node->is_in_group("tutor"))
+	{
+		_show_tutorial_message(node);
+	}
 }
 
 void godot::PlayerController::_on_Area2D_area_exited(Node* node)
@@ -249,6 +254,11 @@ void godot::PlayerController::_on_Area2D_area_exited(Node* node)
 	if (node->is_in_group("door_zone")) 
 	{
 		camera->call("_door_collision", "-" + node->get_name(), 1);
+	}
+
+	if (node->is_in_group("tutor"))
+	{
+		_hide_tutorial_message(node);
 	}
 }
 
@@ -393,4 +403,14 @@ void godot::PlayerController::_update_max_health_bar_size()
 {
 	current_player->_get_health_bar()->set_max(current_player->_get_max_HP());
 	current_player->_update_health_bar();
+}
+
+void godot::PlayerController::_show_tutorial_message(Node* node)
+{
+	cast_to<TileMap>(CustomExtensions::GetChildByName(node, "Stuff"))->set_visible(true);
+}
+
+void godot::PlayerController::_hide_tutorial_message(Node* node)
+{
+	cast_to<TileMap>(CustomExtensions::GetChildByName(node, "Stuff"))->set_visible(false);
 }
