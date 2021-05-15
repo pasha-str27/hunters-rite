@@ -113,6 +113,7 @@ void godot::MenuButtons::load_game()
 	OS::get_singleton()->set_window_fullscreen(is_full_screen);
 	AudioServer::get_singleton()->set_bus_volume_db(1, effect_audio_level);
 	AudioServer::get_singleton()->set_bus_volume_db(2, music_audio_level);
+	AudioServer::get_singleton()->set_bus_volume_db(3, -80);
 
 	save_game->close();
 }
@@ -131,8 +132,11 @@ void godot::MenuButtons::_timeout()
 
 void godot::MenuButtons::_change_audio_volume()
 {
+	if (AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) <= -75)
+		return;
+
 	AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()),
-		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) + delta_step * 4);
+		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) - 0.8);
 
 	timer_music->disconnect("timeout", this, "_change_audio_volume");
 	timer_music->connect("timeout", this, "_change_audio_volume");
