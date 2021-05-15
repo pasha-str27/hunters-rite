@@ -269,7 +269,7 @@ void godot::PlayerController::_change_can_moving(bool value)
 		add_child(timer);
 
 	timer->start(1.5);
-
+	if(value == false)
 	current_player->_stop_animations();
 }
 
