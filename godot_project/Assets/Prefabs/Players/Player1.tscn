@@ -146,24 +146,24 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="CircleShape2D" id=30]
+[sub_resource type="CircleShape2D" id=28]
 radius = 16.8866
 
-[sub_resource type="Gradient" id=31]
+[sub_resource type="Gradient" id=29]
 offsets = PoolRealArray( 0.423237, 1 )
 colors = PoolColorArray( 1, 0, 0, 1, 1, 0, 0, 0 )
 
-[sub_resource type="GradientTexture" id=32]
-gradient = SubResource( 31 )
+[sub_resource type="GradientTexture" id=30]
+gradient = SubResource( 29 )
 
-[sub_resource type="Curve" id=33]
+[sub_resource type="Curve" id=31]
 max_value = 0.25
 _data = [ Vector2( 0, 0.109091 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0681818 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=34]
-curve = SubResource( 33 )
+[sub_resource type="CurveTexture" id=32]
+curve = SubResource( 31 )
 
-[sub_resource type="ParticlesMaterial" id=35]
+[sub_resource type="ParticlesMaterial" id=33]
 flag_rotate_y = true
 flag_disable_z = true
 direction = Vector3( 500, 500, 0 )
@@ -180,16 +180,16 @@ tangential_accel_random = 1.0
 damping_random = 1.0
 scale = 5.0
 scale_random = 1.0
-scale_curve = SubResource( 34 )
-color_ramp = SubResource( 32 )
+scale_curve = SubResource( 32 )
+color_ramp = SubResource( 30 )
 
-[sub_resource type="Gradient" id=36]
+[sub_resource type="Gradient" id=34]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=37]
-gradient = SubResource( 36 )
+[sub_resource type="GradientTexture" id=35]
+gradient = SubResource( 34 )
 
-[sub_resource type="ParticlesMaterial" id=38]
+[sub_resource type="ParticlesMaterial" id=36]
 emission_shape = 2
 emission_box_extents = Vector3( 16, 1, 1 )
 flag_disable_z = true
@@ -201,7 +201,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 720.0
 angle_random = 1.0
-color_ramp = SubResource( 37 )
+color_ramp = SubResource( 35 )
 
 [node name="Player1" type="Node2D"]
 
@@ -224,7 +224,7 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Player1/CollisionShape2D"]
 scale = Vector2( 2, 2 )
 frames = SubResource( 27 )
-animation = "damaged"
+animation = "idle"
 frame = 1
 playing = true
 offset = Vector2( 35, 0 )
@@ -238,7 +238,7 @@ scale = Vector2( 0.5, 0.5 )
 [node name="Area2D" type="Area2D" parent="Player1"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1/Area2D"]
-shape = SubResource( 30 )
+shape = SubResource( 28 )
 
 [node name="ItemGenerator" type="Node" parent="Player1"]
 script = ExtResource( 9 )
@@ -246,10 +246,10 @@ script = ExtResource( 9 )
 
 [node name="HurtParticles" parent="Player1" instance=ExtResource( 4 )]
 z_index = 7
-process_material = SubResource( 35 )
+process_material = SubResource( 33 )
 
 [node name="BuffDebuffParticles" parent="Player1" instance=ExtResource( 3 )]
-process_material = SubResource( 38 )
+process_material = SubResource( 36 )
 
 [node name="DashParticles" parent="Player1" instance=ExtResource( 1 )]
 
