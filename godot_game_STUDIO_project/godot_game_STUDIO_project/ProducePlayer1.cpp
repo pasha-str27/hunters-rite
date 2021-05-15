@@ -5,5 +5,5 @@
 
 IPlayer* ProducePlayer1::_get_player(Node2D* object, Ref<PackedScene>bullet)
 {
-    return Player1::get_singleton(object, bullet);
+    return new Player1(object, bullet);
 }

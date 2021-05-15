@@ -24,6 +24,7 @@ void godot::FadeAnimation::_ready()
 	add_child(timer);
 	timer->connect("timeout", this, "_on_timeout");
 	timer->start(animation_time);
+	Godot::print("anim started");
 }
 
 godot::FadeAnimation::FadeAnimation()
@@ -32,9 +33,10 @@ godot::FadeAnimation::FadeAnimation()
 
 void godot::FadeAnimation::_on_timeout()
 {
+	Godot::print("anim end");
 	timer->disconnect("timeout", this, "_on_timeout");
 
-	if (get_node("/root")->has_node("Node2D"))
+	if (!get_node("/root")->has_node("Pause") && !get_node("/root")->has_node("Notice") && !get_node("/root")->has_node("Menu"))
 	{
 		if (animation_name == "fade_in")
 			CustomExtensions::GetChildByName(get_node("/root/Node2D/Node/Camera2D"), "EnemySpawner")->call("_prepare_spawn");
@@ -42,6 +44,5 @@ void godot::FadeAnimation::_on_timeout()
 			if (animation_name == "fade_out")
 				CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->call("_start_move");
 	}
-
 	get_parent()->get_parent()->queue_free();
 }

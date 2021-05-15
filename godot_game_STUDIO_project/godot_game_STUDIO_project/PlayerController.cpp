@@ -104,6 +104,9 @@ void godot::PlayerController::_ready()
 	dash_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "DashParticles"));
 	revive_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "ReviveParticles"));
 
+	//if (current_player == nullptr)
+	//	printf("error");
+
 	_update_health_bar();
 }
 
@@ -216,7 +219,6 @@ void godot::PlayerController::_process(float delta)
 {
 	if (can_move && is_alive)
 		current_player->_move();
-
 }
 
 void godot::PlayerController::_take_damage(float damage, bool is_spike)

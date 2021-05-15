@@ -27,9 +27,9 @@ void godot::SpawnEnemyController::SpawnEnemies()
 void godot::SpawnEnemyController::SpawnBoss()
 {
 	get_parent()->call("_start_mute_volume");
-	//auto boss = cast_to<Node2D>(cast_to<PackedScene>(enemies[0])->instance());
-	//boss->set_global_position(cast_to<Node2D>(get_parent())->get_global_position());
-	//get_node("/root/Node2D/Node")->add_child(boss, true);
+	auto boss = cast_to<Node2D>(cast_to<PackedScene>(enemies[0])->instance());
+	boss->set_global_position(cast_to<Node2D>(get_parent())->get_global_position());
+	get_node("/root/Node2D/Node")->add_child(boss, true);
 	enemies.pop_front();
 }
 
@@ -81,7 +81,6 @@ void godot::SpawnEnemyController::_prepare_spawn()
 	SpawnEnemies();
 	if(Enemies::get_singleton()->_get_enemies_count() > 0)
 		get_parent()->call("_close_doors");
-
 	spawn_points.clear();
 }
 
