@@ -244,6 +244,11 @@ void godot::PlayerController::_on_Area2D_area_entered(Node* node)
 	{
 		camera->call("_door_collision", node->get_name(), 1);
 	}
+
+	if (node->is_in_group("tutor"))
+	{
+		_show_tutorial_message(node);
+	}
 }
 
 void godot::PlayerController::_on_Area2D_area_exited(Node* node)
@@ -252,6 +257,11 @@ void godot::PlayerController::_on_Area2D_area_exited(Node* node)
 	if (node->is_in_group("door_zone"))
 	{
 		camera->call("_door_collision", "-" + node->get_name(), 1);
+	}
+
+	if (node->is_in_group("tutor"))
+	{
+		_hide_tutorial_message(node);
 	}
 }
 
@@ -406,4 +416,13 @@ void godot::PlayerController::_animate_spider_web()
 {
 	cast_to<AnimatedSprite>(get_child(0)->get_node("SpiderWeb"))->set_frame(0);
 	cast_to<AnimatedSprite>(get_child(0)->get_node("SpiderWeb"))->play("idle");
+}
+void godot::PlayerController::_show_tutorial_message(Node* node)
+{
+	cast_to<TileMap>(CustomExtensions::GetChildByName(node, "Stuff"))->set_visible(true);
+}
+
+void godot::PlayerController::_hide_tutorial_message(Node* node)
+{
+	cast_to<TileMap>(CustomExtensions::GetChildByName(node, "Stuff"))->set_visible(false);
 }
