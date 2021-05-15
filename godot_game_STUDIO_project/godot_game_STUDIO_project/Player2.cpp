@@ -23,7 +23,8 @@ void godot::Player2::_move()
 
 
 	String animation_name = sprite->get_animation();
-	if (sprite->get_sprite_frames()->get_animation_loop(animation_name) == false && sprite->get_frame() == sprite->get_sprite_frames()->get_frame_count(animation_name) - 1) 
+	if (sprite->get_sprite_frames()->get_animation_loop(animation_name) == false 
+		&& sprite->get_frame() == sprite->get_sprite_frames()->get_frame_count(animation_name) - 1) 
 	{
 		sprite->set_offset(Vector2::ZERO);
 		sprite->play("idle");
