@@ -3,7 +3,7 @@
 #include "headers.h"
 #endif
 
-godot::Player1* godot::Player1::singleton = nullptr;
+//godot::Player1* godot::Player1::singleton = nullptr;
 
 godot::Player1::Player1(Node2D* object, Ref<PackedScene>bullet) : PlayerData(object)
 {
@@ -41,8 +41,6 @@ void godot::Player1::_set_HP(float value)
 		if (_was_revived())
 		{
 			_get_object()->get_parent()->queue_free();
-			return;
-			//_get_object()->queue_free();
 			return;
 		}
 

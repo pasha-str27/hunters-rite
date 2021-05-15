@@ -47,6 +47,9 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_start_item_particles", &PlayerController::_start_item_particles);
 	register_method((char*)"_update_health_bar", &PlayerController::_update_health_bar);
 	register_method((char*)"_update_max_health_bar_size", &PlayerController::_update_max_health_bar_size);
+	register_method((char*)"_animate_spider_web", &PlayerController::_animate_spider_web);
+	register_method((char*)"_stop_animations", &PlayerController::_stop_animations);
+	
 
 	register_property<PlayerController, float>("speed", &PlayerController::speed, 400);
 	register_property<PlayerController, Ref<PackedScene>>("bullet_prefab", &PlayerController::bullet_prefab, nullptr);
@@ -103,6 +106,9 @@ void godot::PlayerController::_ready()
 	hurt_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"));
 	dash_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "DashParticles"));
 	revive_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "ReviveParticles"));
+
+	//if (current_player == nullptr)
+	//	printf("error");
 
 	_update_health_bar();
 }
@@ -242,6 +248,11 @@ void godot::PlayerController::_on_Area2D_area_entered(Node* node)
 	{
 		camera->call("_door_collision", node->get_name(), 1);
 	}
+
+	if (node->is_in_group("tutor"))
+	{
+		_show_tutorial_message(node);
+	}
 }
 
 void godot::PlayerController::_on_Area2D_area_exited(Node* node)
@@ -251,13 +262,20 @@ void godot::PlayerController::_on_Area2D_area_exited(Node* node)
 	{
 		camera->call("_door_collision", "-" + node->get_name(), 1);
 	}
+
+	if (node->is_in_group("tutor"))
+	{
+		_hide_tutorial_message(node);
+	}
 }
 
 void godot::PlayerController::_change_can_moving(bool value)
 {
 	can_move = false;
 	if (timer->is_connected("timeout", this, "change_can_moving_timeout"))
-		return;
+	{
+		timer->disconnect("timeout", this, "change_can_moving_timeout");
+	}
 
 	timer->connect("timeout", this, "change_can_moving_timeout");
 
@@ -265,8 +283,9 @@ void godot::PlayerController::_change_can_moving(bool value)
 		add_child(timer);
 
 	timer->start(1.5);
-
-	current_player->_stop_animations();
+	
+	if(value == false)
+		current_player->_stop_animations();
 }
 
 void godot::PlayerController::change_can_moving_timeout()
@@ -396,4 +415,24 @@ void godot::PlayerController::_update_max_health_bar_size()
 {
 	current_player->_get_health_bar()->set_max(current_player->_get_max_HP());
 	current_player->_update_health_bar();
+}
+
+void godot::PlayerController::_animate_spider_web()
+{
+	cast_to<AnimatedSprite>(get_child(0)->get_node("SpiderWeb"))->set_frame(0);
+	cast_to<AnimatedSprite>(get_child(0)->get_node("SpiderWeb"))->play("idle");
+}
+void godot::PlayerController::_show_tutorial_message(Node* node)
+{
+	cast_to<TileMap>(CustomExtensions::GetChildByName(node, "Stuff"))->set_visible(true);
+}
+
+void godot::PlayerController::_hide_tutorial_message(Node* node)
+{
+	cast_to<TileMap>(CustomExtensions::GetChildByName(node, "Stuff"))->set_visible(false);
+}
+
+void godot::PlayerController::_stop_animations()
+{
+	current_player->_stop_animations();
 }
