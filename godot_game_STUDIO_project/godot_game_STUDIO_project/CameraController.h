@@ -37,6 +37,8 @@ namespace godot
 		void _close_doors();
 		void _start_move();
 		void _change_audio_volume();
+		void _mute_audio_volume();
+		void _start_mute_volume();
 		CameraController();
 		~CameraController();
 	};

@@ -19,7 +19,6 @@ namespace godot
 
 		static bool was_focused;
 		static bool is_full_screen;
-		static float music_audio_level;
 		static float effect_audio_level;
 
 		Timer* timer_music;
@@ -31,6 +30,8 @@ namespace godot
 	public:
 		MenuButtons();
 		~MenuButtons();
+
+		static float music_audio_level;
 
 		static void _register_methods();
 		void _init();

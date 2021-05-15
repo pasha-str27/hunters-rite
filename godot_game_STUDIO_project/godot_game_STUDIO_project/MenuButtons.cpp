@@ -85,7 +85,6 @@ void MenuButtons::_register_methods()
 
 void godot::MenuButtons::save_game()
 {
-	Godot::print("saving");
 	auto save_game = File::_new();
 	save_game->open("user://savegame_hunters.save", File::WRITE);
 
@@ -179,7 +178,7 @@ void godot::MenuButtons::_on_FullScreen_pressed(Variant)
 
 void godot::MenuButtons::_on_effects_value_changed(float value)
 {
-	if (value <= -20)
+	if (value <= -34)
 		value = -80;
 
 	effect_audio_level = value;
@@ -191,7 +190,7 @@ void godot::MenuButtons::_on_effects_value_changed(float value)
 
 void godot::MenuButtons::_on_music_value_changed(float value)
 {
-	if (value <= -20)
+	if (value <= -34)
 		value = -80;
 
 	music_audio_level = value;
