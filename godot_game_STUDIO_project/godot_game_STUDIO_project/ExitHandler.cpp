@@ -8,7 +8,9 @@ void godot::ExitHandler::_register_methods()
 	register_method("_ready", &ExitHandler::_ready);
 	register_method("_on_Area2D_area_entered", &ExitHandler::_on_Area2D_area_entered);
 	register_method("_on_Area2D_area_exited", &ExitHandler::_on_Area2D_area_exited);
-	register_method("_load_menu_scene", &ExitHandler::_load_menu_scene);	
+	register_method("_load_menu_scene", &ExitHandler::_load_menu_scene);
+	register_method("_show_exit", &ExitHandler::_show_exit);
+	
 
 	register_property<ExitHandler, Ref<PackedScene>>("Fade Out", &ExitHandler::fade_out, nullptr);
 }
@@ -21,6 +23,11 @@ void godot::ExitHandler::_ready()
 {
 	ResourceLoader* resource_loader = ResourceLoader::get_singleton();
 	menu_scene = resource_loader->load("res://Assets/Prefabs/Scenes/Menu.tscn");
+	add_child(timer);
+	timer->connect("timeout", this, "_show_exit");
+	timer->start(.5);
+	cast_to<Particles2D>(get_node("SpawnExitParticles"))->set_emitting(true);
+	cast_to<AnimationPlayer>(get_node("AnimationPlayer"))->play("show");
 }
 
 void godot::ExitHandler::_on_Area2D_area_entered(Node* other)
@@ -56,10 +63,18 @@ void godot::ExitHandler::_load_menu_scene()
 	get_parent()->get_parent()->queue_free();
 }
 
+void godot::ExitHandler::_show_exit()
+{
+	cast_to<Particles2D>(get_node("SpawnExitParticles"))->set_emitting(false);
+	timer->disconnect("timeout", this, "_show_exit");
+}
+
 godot::ExitHandler::ExitHandler()
 {
+	timer = Timer::_new();
 }
 
 godot::ExitHandler::~ExitHandler()
 {
+	timer = nullptr;
 }

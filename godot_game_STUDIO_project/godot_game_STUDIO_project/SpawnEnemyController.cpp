@@ -125,6 +125,8 @@ void godot::SpawnEnemyController::_on_Area2D_area_entered(Node* other)
 			SpawnItems();
 		}
 
+		get_parent()->call("_set_current_room_type", room_type);
+
 		other->queue_free();
 		return;
 	}

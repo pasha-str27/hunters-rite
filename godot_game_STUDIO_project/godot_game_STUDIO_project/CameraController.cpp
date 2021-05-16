@@ -18,7 +18,7 @@ void godot::CameraController::_register_methods()
 	register_method("_input", &CameraController::_input);
 	register_method("_audio_fade_to_main_menu", &CameraController::_audio_fade_to_main_menu);
 	register_method("_spawn_exit", &CameraController::_spawn_exit);
-	
+	register_method("_set_current_room_type", &CameraController::_set_current_room_type);	
 
 	register_property<CameraController, Ref<PackedScene>>("Fade In Animation", &CameraController::fadeIn, nullptr);
 	register_property<CameraController, Ref<PackedScene>>("Fade Out Animation", &CameraController::fadeOut, nullptr);
@@ -186,6 +186,9 @@ void godot::CameraController::_door_collision(String door_dir)
 
 void godot::CameraController::_open_doors()
 {
+	if (current_room_type == "boss")
+		_spawn_exit();
+
 	Godot::print("open doors");
 	is_open_door = true;
 }
@@ -289,6 +292,11 @@ void godot::CameraController::_spawn_exit()
 	auto exit_node = cast_to<Node2D>(exit->instance());
 	exit_node->set_global_position(this->get_global_position());
 	get_node("/root/Node2D/Node")->add_child(exit_node);
+}
+
+void godot::CameraController::_set_current_room_type(String type)
+{
+	current_room_type = type;
 }
 
 godot::CameraController::CameraController()

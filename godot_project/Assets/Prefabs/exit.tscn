@@ -1,12 +1,28 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Sprites/Tilesets/UI_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/Sprites/Tilesets/level1_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Assets/Scripts/ExitHandler.gdns" type="Script" id=3]
 [ext_resource path="res://Assets/Prefabs/Animations/FadeOut.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Prefabs/Particles/SpawnExitParticles.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 42.012, 40.8823 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "show"
+tracks/0/type = "value"
+tracks/0/path = NodePath("exit:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="exit" type="Node2D"]
 z_index = 2
@@ -14,6 +30,7 @@ script = ExtResource( 3 )
 "Fade Out" = ExtResource( 4 )
 
 [node name="exit" type="TileMap" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 z_index = -1
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
@@ -35,6 +52,11 @@ tile_data = PoolIntArray( -2, 8, 0 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="exit/ui/Area2D"]
 position = Vector2( -16.2407, 15.7325 )
 shape = SubResource( 1 )
+
+[node name="SpawnExitParticles" parent="." instance=ExtResource( 5 )]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/show = SubResource( 2 )
 
 [connection signal="area_entered" from="exit/ui/Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="exit/ui/Area2D" to="." method="_on_Area2D_area_exited"]
