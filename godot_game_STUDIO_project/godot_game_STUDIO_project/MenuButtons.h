@@ -17,13 +17,15 @@ namespace godot
 		Ref<PackedScene> items_scene;
 		Ref<PackedScene> game_scene;
 		Ref<PackedScene> fade;
+		Ref<PackedScene> fade_in;
 
 		static bool was_focused;
+		static bool was_loaded;
 		static bool is_full_screen;
-		static float music_audio_level;
 		static float effect_audio_level;
 
 		Timer* timer_music;
+		Timer* timer_music_out;
 		Timer* timer;
 		float delta_time;
 		static AudioStreamPlayer2D* audio;
@@ -32,6 +34,8 @@ namespace godot
 	public:
 		MenuButtons();
 		~MenuButtons();
+
+		static float music_audio_level;
 
 		static void _register_methods();
 		void _init();
@@ -52,5 +56,10 @@ namespace godot
 		void load_game();
 		void _timeout();
 		void _change_audio_volume();
+		void _on_Resume_pressed(Input* event);
+		void _on_Menu_pressed(Input* event);
+		void _move_to_main_menu();
+		void _audio_fade_to_main_menu();
+		void _fade_audio();
 	};
 }
