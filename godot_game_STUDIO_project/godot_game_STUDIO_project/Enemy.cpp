@@ -31,10 +31,11 @@ void godot::Enemy::_register_methods()
 	register_method("_set_current_player", &Enemy::_set_current_player);
 	register_method("_remove_current_player", &Enemy::_remove_current_player);
 	register_method("_check_angry", &Enemy::_check_angry);
+	register_method("_on_spawn_end", &Enemy::_on_spawn_end);
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
-
+	register_property<Enemy, Ref<PackedScene>>("Death particles", &Enemy::death_particles, nullptr);
 }
 
 godot::Enemy::Enemy()
@@ -44,6 +45,7 @@ godot::Enemy::Enemy()
 	timer = Timer::_new();
 	timer_change_dir = Timer::_new();
 	timer_check_angry = Timer::_new();
+	timer_particles = Timer::_new();
 	HP = 100;
 	is_angry = false;
 	died = false;
@@ -66,8 +68,10 @@ void godot::Enemy::_ready()
 	add_child(timer_change_dir);
 	add_child(timer);
 	add_child(timer_check_angry);
+	add_child(timer_particles);
 
 	sp = cast_to<AnimatedSprite>(get_node("CollisionShape2D/AnimatedSprite"));
+	spawn_particles = cast_to<Particles2D>(get_node("SpawnParticles"));
 
 	if (is_in_group("flower"))
 		ai->_set_strategy(new FlowerAI(bullet, this));
@@ -86,10 +90,23 @@ void godot::Enemy::_ready()
 
 	if (is_in_group("statue_shoot"))
 		ai->_set_strategy(new StatueShootAI(bullet, this));
+
+	spawn_particles->set_emitting(true);
+	timer_particles->connect("timeout", this, "_on_spawn_end");
+	timer_particles->start(0.5f);
+	cast_to<Node2D>(get_node("CollisionShape2D"))->set_visible(false);
+
+	if(is_in_group("flower"))
+		cast_to<ProgressBar>(get_parent()->get_node("BossHealthBar"))->set_visible(false);
+	else
+		cast_to<ProgressBar>(get_node("HealthBar"))->set_visible(false);
 }
 
 void godot::Enemy::_process(float delta)
 {
+	if (!can_move)
+		return;
+
 	if(!died)
 		ai->_process(delta);
 
@@ -103,7 +120,7 @@ void godot::Enemy::_process(float delta)
 
 void godot::Enemy::_take_damage(float damage, int player_id)
 {
-	if (HP <= 0)
+	if (HP <= 0 || !can_move)
 		return;
 
 	HP -= damage;
@@ -148,6 +165,10 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		get_child(0)->queue_free();
 		set_visible(false);
 		ai->change_can_fight(false);
+
+		auto particles = cast_to<Node2D>(death_particles->instance());
+		particles->set_global_position(this->get_global_position());
+		get_node("/root/Node2D/Node")->add_child(particles, true);
 
 		timer->connect("timeout", this, "_destroy_enemy");
 
@@ -371,4 +392,17 @@ void godot::Enemy::_check_angry()
 		entered = false;
 		ai->_change_dir();
 	}
+}
+
+void godot::Enemy::_on_spawn_end()
+{
+	timer_particles->disconnect("timeout", this, "_on_spawn_end");
+	can_move = true;
+	spawn_particles->set_emitting(false);
+	cast_to<Node2D>(get_node("CollisionShape2D"))->set_visible(true);
+
+	if (is_in_group("flower"))
+		cast_to<ProgressBar>(get_parent()->get_node("BossHealthBar"))->set_visible(true);
+	else
+		cast_to<ProgressBar>(get_node("HealthBar"))->set_visible(true);
 }

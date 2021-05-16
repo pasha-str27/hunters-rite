@@ -60,14 +60,19 @@ namespace godot
 		Timer* timer;
 		Timer* timer_change_dir;
 		Timer* timer_check_angry;
+		Timer* timer_particles = nullptr;
 
 		float HP;
 		Ref<PackedScene> bullet;
 		bool is_angry;
 		bool entered;
 		bool died;
+		bool can_move = false;
 
 		AnimatedSprite* sp = nullptr;
+
+		Particles2D* spawn_particles = nullptr;
+		Ref<PackedScene> death_particles = nullptr;
 
 		public:
 			static void _register_methods();
@@ -99,5 +104,6 @@ namespace godot
 			void _set_current_player(Node* node);
 			void _remove_current_player(Node* node);
 			void _check_angry();
+			void _on_spawn_end();
 	};
 }

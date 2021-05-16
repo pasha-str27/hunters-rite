@@ -44,6 +44,7 @@
     <ClCompile Include="MenuButtons.cpp" />
     <ClCompile Include="ParticlesDestroyer.cpp" />
     <ClCompile Include="ExitHandler.cpp" />
+    <ClCompile Include="Preloader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BatAI.h" />
@@ -89,5 +90,6 @@
     <ClInclude Include="MenuButtons.h" />
     <ClInclude Include="ParticlesDestroyer.h" />
     <ClInclude Include="ExitHandler.h" />
+    <ClInclude Include="Preloader.h" />
   </ItemGroup>
 </Project>
