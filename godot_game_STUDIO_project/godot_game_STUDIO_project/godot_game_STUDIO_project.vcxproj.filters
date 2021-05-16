@@ -91,5 +91,13 @@
     <ClInclude Include="StatueMeleeAI.h" />
     <ClInclude Include="StatueShootAI.h" />
     <ClInclude Include="Sword.h" />
+    <ClInclude Include="AudioEffect.h" />
+    <ClInclude Include="MenuButtons.h" />
+    <ClInclude Include="ParticlesDestroyer.h" />
+    <ClInclude Include="ExitHandler.h" />
+    <ClInclude Include="Preloader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="godot_game_STUDIO_project.vcxproj.user" />
   </ItemGroup>
 </Project>
