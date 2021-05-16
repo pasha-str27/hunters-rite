@@ -15,6 +15,7 @@ godot::StatueMeleeAI::StatueMeleeAI(Ref<PackedScene>& bullet, Node2D* node_tmp) 
 	damage = 20;
 	can_fight = true;
 
+	cast_to<Area2D>(_get_enemy()->get_child(3))->set_scale(Vector2(current_scale, current_scale));
 	cast_to<AnimationPlayer>(node_tmp->get_node("zone")->get_child(1)->get_child(0))->set_current_animation("idle");
 }
 
@@ -70,10 +71,19 @@ void godot::StatueMeleeAI::_delete_player2()
 
 void godot::StatueMeleeAI::_process(float delta)
 {
-	if (!(current_scale <= max_scale && current_scale >= min_scale))
-		dir *= -1;
+	if (!(current_scale < max_scale && current_scale > min_scale))
+	{
+		if (current_scale >= max_scale)
+			dir = -2;
+		else
+			dir = 8;
+		//if (dir > 0)
+		//	dir = 8;
+
+	}
 
 	current_scale += dir * delta;
+
 	cast_to<Area2D>(_get_enemy()->get_child(3))->set_scale(Vector2(current_scale, current_scale));
 
 	if(can_fight)
