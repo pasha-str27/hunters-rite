@@ -154,6 +154,10 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		set_visible(false);
 		ai->change_can_fight(false);
 
+		auto particles = cast_to<Node2D>(death_particles->instance());
+		particles->set_global_position(this->get_global_position());
+		get_node("/root/Node2D/Node")->add_child(particles, true);
+
 		timer->connect("timeout", this, "_destroy_enemy");
 
 		timer->start(1);
