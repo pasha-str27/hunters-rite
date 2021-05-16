@@ -121,9 +121,9 @@ void godot::SlimeAI::_process(float delta)
 	if (is_cheking)
 		return;
 
-	if ((abs(old_pos.distance_to(_get_enemy()->get_global_position())-32) <= 0.5
+	if ((abs(old_pos.distance_to(_get_enemy()->get_global_position())-32) <= 3
 		&&(dir==Vector2(0.5,0)|| dir == Vector2(-0.5, 0)|| dir == Vector2(0, 0.5)|| dir == Vector2(0, -0.5))
-			|| (abs(old_pos.distance_to(_get_enemy()->get_global_position()) - sqrt(32*32+32*32)) <= 1
+			|| (abs(old_pos.distance_to(_get_enemy()->get_global_position()) - sqrt(32*32+32*32)) <= 4.5
 			&& (dir == Vector2(0.5, 0.5) || dir == Vector2(-0.5, 0.5) || dir == Vector2(0.5, -0.5) || dir == Vector2(-0.5, -0.5)))))
 	{
 		is_cheking = true;
