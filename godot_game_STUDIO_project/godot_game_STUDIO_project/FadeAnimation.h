@@ -12,10 +12,12 @@ namespace godot
 		float animation_time;
 		String animation_name;
 		Timer* timer;
+		bool is_exit_anim = false;
 	public:
 		static void _register_methods();
 		void _init();
 		void _ready();
+		void _set_is_exit_anim(bool);
 		FadeAnimation();
 		void _on_timeout();
 	};

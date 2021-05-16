@@ -115,7 +115,6 @@ void godot::SpawnEnemyController::_on_Area2D_area_entered(Node* other)
 			enemies = other->get_parent()->call("_get_enemies");
 			get_parent()->call("_close_doors");
 			SpawnBoss();
-			_prepare_spawn();
 		}
 		else if (room_type == "item_room")
 		{

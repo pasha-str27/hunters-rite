@@ -1,17 +1,20 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Sprites/Tilesets/UI_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/Sprites/Tilesets/level1_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Assets/Scripts/ExitHandler.gdns" type="Script" id=3]
+[ext_resource path="res://Assets/Prefabs/Animations/FadeOut.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 47.1421, 47.2314 )
 
 [node name="exit" type="Node2D"]
-z_index = 10
+z_index = 2
 script = ExtResource( 3 )
+"Fade Out" = ExtResource( 4 )
 
 [node name="exit" type="TileMap" parent="."]
+z_index = -1
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 3

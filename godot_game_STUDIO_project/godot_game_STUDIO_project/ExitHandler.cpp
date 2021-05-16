@@ -8,7 +8,8 @@ void godot::ExitHandler::_register_methods()
 	register_method("_ready", &ExitHandler::_ready);
 	register_method("_on_Area2D_area_entered", &ExitHandler::_on_Area2D_area_entered);
 	register_method("_on_Area2D_area_exited", &ExitHandler::_on_Area2D_area_exited);
-	
+	register_method("_load_menu_scene", &ExitHandler::_load_menu_scene);	
+
 	register_property<ExitHandler, Ref<PackedScene>>("Fade Out", &ExitHandler::fade_out, nullptr);
 }
 
@@ -29,7 +30,17 @@ void godot::ExitHandler::_on_Area2D_area_entered(Node* other)
 
 	bool is_only_one_alive = CustomExtensions::IsOnlyOnePlayerAlive(other);
 	if (is_only_one_alive || (players_count == 2))
-		_load_menu_scene();
+	{
+		if (PlayersContainer::_get_instance()->_get_player1() != nullptr)
+			PlayersContainer::_get_instance()->_get_player1()->call("_change_can_moving", false);
+
+		if (PlayersContainer::_get_instance()->_get_player2() != nullptr)
+			PlayersContainer::_get_instance()->_get_player2()->call("_change_can_moving", false);
+
+		auto fade = cast_to<Node2D>(fade_out->instance());
+		CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->add_child(fade);
+		fade->get_child(0)->get_child(0)->call("_set_is_exit_anim", true);
+	}
 }
 
 void godot::ExitHandler::_on_Area2D_area_exited(Node* other)
