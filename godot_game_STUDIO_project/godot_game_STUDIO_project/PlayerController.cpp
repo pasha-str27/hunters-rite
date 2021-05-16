@@ -361,9 +361,6 @@ float godot::PlayerController::_get_attack_speed_delta()
 void godot::PlayerController::_die()
 {
 	is_alive = false;
-	Ref<PackedScene> prefab = nullptr;
-	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/PlayerDied.tscn");
-	add_child(prefab->instance());
 	add_child(revive_zone->instance());
 }
 

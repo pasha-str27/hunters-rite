@@ -88,3 +88,8 @@ void godot::EnemyAIContext::_set_speed(float value)
 {
 	strategy->_set_speed(value);
 }
+
+void godot::EnemyAIContext::_change_dir()
+{
+	strategy->_change_dir();
+}

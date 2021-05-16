@@ -21,7 +21,6 @@ void godot::Player2::_move()
 {
 	PlayerData::_move();
 
-
 	String animation_name = sprite->get_animation();
 	if (sprite->get_sprite_frames()->get_animation_loop(animation_name) == false && sprite->get_frame() == sprite->get_sprite_frames()->get_frame_count(animation_name) - 1) 
 	{
@@ -148,7 +147,9 @@ void godot::Player2::_take_damage(float damage, bool is_spike)
 	if (_get_HP() <= 0)
 	{
 		//PlayersContainer::_get_instance()->_set_player2(nullptr);
-
+		Ref<PackedScene> prefab = nullptr;
+		prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/PlayerDied.tscn");
+		_get_object()->get_parent()->add_child(prefab->instance());
 		Enemies::get_singleton()->_remove_player2();
 
 		sprite->play("death");

@@ -8,10 +8,10 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 20.2615
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=5]
 radius = 46.6656
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
 corner_radius_top_left = 30
 corner_radius_top_right = 30
@@ -53,7 +53,7 @@ collision_layer = 32768
 collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="flower"]
-shape = SubResource( 2 )
+shape = SubResource( 5 )
 
 [node name="BossHealthBar" type="ProgressBar" parent="."]
 anchor_right = 1.0
@@ -62,7 +62,7 @@ margin_left = -248.0
 margin_top = -264.0
 margin_right = 252.0
 margin_bottom = -248.0
-custom_styles/fg = SubResource( 3 )
+custom_styles/fg = SubResource( 6 )
 custom_styles/bg = SubResource( 4 )
 custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.941176, 0.894118, 0.894118, 1 )

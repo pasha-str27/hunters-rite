@@ -23,6 +23,7 @@ namespace godot
 		void _set_enemy(Node2D* enemy);
 		void _set_player1(Node2D* player1 = nullptr);
 		void _set_player2(Node2D* player2 = nullptr);
+		void _change_dir();
 		Node2D* _get_player1();
 		Node2D* _get_player2();
 	};

@@ -214,6 +214,9 @@ void  godot::Player1::_take_damage(float damage, bool is_spike)
 
 	if (_get_HP() <= 0)
 	{
+		Ref<PackedScene> prefab = nullptr;
+		prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/PlayerDied.tscn");
+		_get_object()->get_parent()->add_child(prefab->instance());
 		sprite->play("death");
 		PlayersContainer::_get_instance()->_set_player1(nullptr);
 		Enemies::get_singleton()->_remove_player1();

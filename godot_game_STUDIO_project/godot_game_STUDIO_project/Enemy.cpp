@@ -30,6 +30,7 @@ void godot::Enemy::_register_methods()
 	register_method("_change_animation", &Enemy::_change_animation);
 	register_method("_set_current_player", &Enemy::_set_current_player);
 	register_method("_remove_current_player", &Enemy::_remove_current_player);
+	register_method("_check_angry", &Enemy::_check_angry);
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
@@ -42,6 +43,7 @@ godot::Enemy::Enemy()
 	entered = false;
 	timer = Timer::_new();
 	timer_change_dir = Timer::_new();
+	timer_check_angry = Timer::_new();
 	HP = 100;
 	is_angry = false;
 	died = false;
@@ -63,6 +65,7 @@ void godot::Enemy::_ready()
 
 	add_child(timer_change_dir);
 	add_child(timer);
+	add_child(timer_check_angry);
 
 	sp = cast_to<AnimatedSprite>(get_node("CollisionShape2D/AnimatedSprite"));
 
@@ -169,7 +172,7 @@ void godot::Enemy::_start_timer()
 
 		if (is_in_group("spider"))
 		{
-			timer->start(2.5);
+			timer->start(3.5);
 			return;
 		}
 		
@@ -248,6 +251,8 @@ void godot::Enemy::_set_angry(Node* node)
 			{
 				timer_change_dir->connect("timeout", this, "_change_angry_on_timeout");
 				timer_change_dir->start(1);
+				timer_check_angry->connect("timeout", this, "_check_angry");
+				timer_check_angry->start(2);
 			}
 			return;
 		}
@@ -294,6 +299,12 @@ void godot::Enemy::_stop_timer()
 	ai->_set_speed(100);
 	is_angry = false;
 	entered = false;
+
+	if (timer_check_angry->is_connected("timeout", this, "_check_angry"))
+	{
+		timer_check_angry->stop();
+		timer_check_angry->disconnect("timeout", this, "_check_angry");
+	}
 
 	if (timer_change_dir->is_connected("timeout", this, "_change_angry_on_timeout"))
 	{
@@ -352,4 +363,16 @@ void godot::Enemy::_remove_current_player(Node* node)
 
 	if (node->is_in_group("player2"))
 		ai->_delete_player2();
+}
+
+void godot::Enemy::_check_angry()
+{
+	if (is_angry)
+	{
+		timer_check_angry->disconnect("timeout", this, "_check_angry");
+		is_angry = false;
+		ai->_set_speed(100);
+		entered = false;
+		ai->_change_dir();
+	}
 }
