@@ -14,6 +14,7 @@ namespace godot
 		Ref<PackedScene> menu_scene = nullptr;
 		int players_count = 0;
 		Timer* timer = nullptr;
+		Timer* timer_audio = nullptr;
 	public:
 
 		static void _register_methods();
@@ -23,9 +24,8 @@ namespace godot
 		void _on_Area2D_area_exited(Node* other);
 		void _load_menu_scene();
 		void _show_exit();
+		void _mute_audio();
 		ExitHandler();
 		~ExitHandler();
 	};
 }
-
-

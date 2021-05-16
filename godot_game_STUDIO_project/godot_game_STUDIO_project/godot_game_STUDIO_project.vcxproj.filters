@@ -92,4 +92,7 @@
     <ClInclude Include="ExitHandler.h" />
     <ClInclude Include="Preloader.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="godot_game_STUDIO_project.vcxproj.user" />
+  </ItemGroup>
 </Project>

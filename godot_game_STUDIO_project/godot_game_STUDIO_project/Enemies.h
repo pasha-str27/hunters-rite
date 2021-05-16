@@ -32,5 +32,6 @@ namespace godot
 		void _remove_player2();
 		void _set_player1(Node* player);
 		void _set_player2(Node* player);
+		void _clear();
 	};
 }

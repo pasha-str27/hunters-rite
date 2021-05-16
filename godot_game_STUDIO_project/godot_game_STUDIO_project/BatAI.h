@@ -23,5 +23,6 @@ namespace godot
 		void _delete_player2();
 		String _get_current_player();
 		void _set_speed(float value);
+		void _change_dir();
 	};
 }

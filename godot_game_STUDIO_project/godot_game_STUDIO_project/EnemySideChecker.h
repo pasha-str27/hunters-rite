@@ -21,5 +21,6 @@ namespace godot
 		void _ready();
 		Node2D* _get_current_node();
 		Vector2 directions_swich(int value);
+		int _get_side();
 	};
 }

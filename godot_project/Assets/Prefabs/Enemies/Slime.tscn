@@ -15,6 +15,7 @@ bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
 bg_color = Color( 0.568627, 0.14902, 0.14902, 0.313726 )
 
 [sub_resource type="CircleShape2D" id=3]
+radius = 11.42
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
@@ -89,7 +90,7 @@ animations = [ {
 extents = Vector2( 4.89366, 4.97602 )
 
 [sub_resource type="CircleShape2D" id=20]
-radius = 6.93173
+radius = 2.64047
 
 [node name="Slime" type="Node2D"]
 
@@ -130,18 +131,18 @@ playing = true
 
 [node name="Area2D2" type="Area2D" parent="Slime"]
 position = Vector2( -32, -32 )
-scale = Vector2( 1.5, 1.5 )
-collision_mask = 17
+collision_layer = 32769
+collision_mask = 32785
 script = ExtResource( 4 )
-side = 1
+side = -1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Slime/Area2D2"]
 shape = SubResource( 19 )
 
 [node name="Area2D4" type="Area2D" parent="Slime"]
-position = Vector2( 0.486, -32.703 )
-scale = Vector2( 1.5, 1.5 )
-collision_mask = 17
+position = Vector2( 0, -32 )
+collision_layer = 32769
+collision_mask = 32785
 script = ExtResource( 4 )
 side = 2
 
@@ -149,19 +150,19 @@ side = 2
 shape = SubResource( 19 )
 
 [node name="Area2D5" type="Area2D" parent="Slime"]
-position = Vector2( 32.486, -32.703 )
-scale = Vector2( 1.5, 1.5 )
-collision_mask = 17
+position = Vector2( 32, -32 )
+collision_layer = 32769
+collision_mask = 32785
 script = ExtResource( 4 )
-side = 3
+side = -1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Slime/Area2D5"]
 shape = SubResource( 19 )
 
 [node name="Area2D7" type="Area2D" parent="Slime"]
-position = Vector2( -31.514, -0.703 )
-scale = Vector2( 1.5, 1.5 )
-collision_mask = 17
+position = Vector2( -32, 0 )
+collision_layer = 32769
+collision_mask = 32785
 script = ExtResource( 4 )
 side = 4
 
@@ -169,9 +170,9 @@ side = 4
 shape = SubResource( 19 )
 
 [node name="Area2D8" type="Area2D" parent="Slime"]
-position = Vector2( 32.486, -0.703 )
-scale = Vector2( 1.5, 1.5 )
-collision_mask = 17
+position = Vector2( 32, 0 )
+collision_layer = 32769
+collision_mask = 32785
 script = ExtResource( 4 )
 side = 5
 
@@ -179,19 +180,19 @@ side = 5
 shape = SubResource( 19 )
 
 [node name="Area2D9" type="Area2D" parent="Slime"]
-position = Vector2( -31.514, 31.297 )
-scale = Vector2( 1.5, 1.5 )
-collision_mask = 17
+position = Vector2( -32, 32 )
+collision_layer = 32769
+collision_mask = 32785
 script = ExtResource( 4 )
-side = 6
+side = -1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Slime/Area2D9"]
 shape = SubResource( 19 )
 
 [node name="Area2D10" type="Area2D" parent="Slime"]
-position = Vector2( 0.486, 31.297 )
-scale = Vector2( 1.5, 1.5 )
-collision_mask = 17
+position = Vector2( 0, 32 )
+collision_layer = 32769
+collision_mask = 32785
 script = ExtResource( 4 )
 side = 7
 
@@ -199,11 +200,11 @@ side = 7
 shape = SubResource( 19 )
 
 [node name="Area2D11" type="Area2D" parent="Slime"]
-position = Vector2( 32.486, 31.297 )
-scale = Vector2( 1.5, 1.5 )
-collision_mask = 17
+position = Vector2( 32, 32 )
+collision_layer = 32769
+collision_mask = 32785
 script = ExtResource( 4 )
-side = 8
+side = -1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Slime/Area2D11"]
 shape = SubResource( 19 )
@@ -211,7 +212,6 @@ shape = SubResource( 19 )
 [node name="Area2D" type="Area2D" parent="Slime"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Slime/Area2D"]
-position = Vector2( -1.10243, -2.20486 )
 shape = SubResource( 20 )
 
 [node name="SpawnParticles" parent="Slime" instance=ExtResource( 6 )]

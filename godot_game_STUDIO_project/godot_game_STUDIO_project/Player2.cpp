@@ -58,29 +58,20 @@ void godot::Player2::_process_input()
 	}
 
 	//move up
-	if (input_controller->is_action_just_pressed("Player2_fight"))
-	{
-		_fight();
-	}
-
-	//move up
 	if (input_controller->is_action_pressed("Player2_up"))
 	{
-		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(270);
 		dir.y -= _get_speed();
 	}
 
 	//move down
 	if (input_controller->is_action_pressed("Player2_down"))
 	{
-		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(90);
 		dir.y += _get_speed();
 	}
 
 	//move left
 	if (input_controller->is_action_pressed("Player2_left"))
 	{
-		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(180);
 		sprite->set_flip_h(true);
 		dir.x -= _get_speed();
 	}
@@ -88,9 +79,38 @@ void godot::Player2::_process_input()
 	//move right	
 	if (input_controller->is_action_pressed("Player2_right"))
 	{
-		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(0);
 		sprite->set_flip_h(false);
 		dir.x += _get_speed();
+	}
+
+	//fight	up
+	if (input_controller->is_action_pressed("Player2_fight_up"))
+	{
+		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(270);
+		_fight();
+	}
+
+	//fight	down
+	if (input_controller->is_action_pressed("Player2_fight_down"))
+	{
+		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(90);
+		_fight();
+	}
+
+	//fight	left
+	if (input_controller->is_action_pressed("Player2_fight_left"))
+	{
+		sprite->set_flip_h(true);
+		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(180);
+		_fight();
+	}
+
+	//fight	right
+	if (input_controller->is_action_pressed("Player2_fight_right"))
+	{
+		sprite->set_flip_h(false);
+		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(0);
+		_fight();
 	}
 
 	PlayerData::_set_dir(dir);

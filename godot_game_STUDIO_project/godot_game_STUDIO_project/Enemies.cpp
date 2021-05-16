@@ -54,3 +54,8 @@ void godot::Enemies::_set_player2(Node* player)
 	for (auto node : enemies)
 		node->call("_set_player2", player);
 }
+
+void godot::Enemies::_clear()
+{
+	enemies.clear();
+}

@@ -49,7 +49,6 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_update_max_health_bar_size", &PlayerController::_update_max_health_bar_size);
 	register_method((char*)"_animate_spider_web", &PlayerController::_animate_spider_web);
 	register_method((char*)"_stop_animations", &PlayerController::_stop_animations);
-	
 
 	register_property<PlayerController, float>("speed", &PlayerController::speed, 400);
 	register_property<PlayerController, Ref<PackedScene>>("bullet_prefab", &PlayerController::bullet_prefab, nullptr);
@@ -143,7 +142,6 @@ void godot::PlayerController::_start_dash_timer()
 		if (!has_node(NodePath(timer->get_name())))
 			add_child(timer);
 
-		Godot::print("start dash");
 		_change_is_dashing_state();
 		current_player->_set_speed(speed * dash_speed_multiplier);
 
@@ -231,6 +229,9 @@ void godot::PlayerController::_take_damage(float damage, bool is_spike)
 	_update_health_bar();
 	if (is_alive)
 	{
+		Ref<PackedScene> prefab = nullptr;
+		prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/PlayerTakeDamage.tscn");
+		add_child(prefab->instance());
 		hurt_particles->restart();
 	}
 }
@@ -369,6 +370,9 @@ void godot::PlayerController::_revive()
 	revive_particles->set_emitting(true);
 	current_player->_revive();
 	is_alive = true;
+	Ref<PackedScene> prefab = nullptr;
+	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/PlayerRevive.tscn");
+	add_child(prefab->instance());
 	_set_HP(_get_max_HP() * (float)0.15);
 	_update_health_bar();
 }
