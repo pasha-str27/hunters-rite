@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Sprites/Tilesets/level1_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/Sprites/Tilesets/UI_tileset.tres" type="TileSet" id=2]
@@ -12,6 +12,8 @@ class_name = "Spike"
 library = ExtResource( 3 )
 
 [sub_resource type="RectangleShape2D" id=3]
+
+[sub_resource type="RectangleShape2D" id=4]
 
 [node name="Room" type="Node2D" groups=[
 "room",
@@ -65,7 +67,7 @@ position = Vector2( 0, -16 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( -327681, 23, 0, 65523, 24, 0 )
+tile_data = PoolIntArray( 65523, 24, 0, 12, 25, 0 )
 
 [node name="spike" type="TileMap" parent="." groups=[
 "spike",
@@ -91,7 +93,7 @@ cell_size = Vector2( 32, 32 )
 collision_layer = 0
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( -196609, 4, 0, -262144, 4, 0, 131059, 4, 0 )
+tile_data = PoolIntArray( 131059, 4, 0, 65548, 4, 0 )
 
 [node name="left" type="Area2D" parent="ui" groups=[
 "door_zone",
@@ -103,12 +105,12 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ui/left"]
 shape = SubResource( 3 )
 
-[node name="top" type="Area2D" parent="ui" groups=[
+[node name="right" type="Area2D" parent="ui" groups=[
 "door_zone",
 ]]
-position = Vector2( 0.551865, -111.995 )
-scale = Vector2( 3.12, 1.52 )
+position = Vector2( 400.47, 47.5892 )
+scale = Vector2( 1.6, 1.52 )
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ui/top"]
-shape = SubResource( 3 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ui/right"]
+shape = SubResource( 4 )
