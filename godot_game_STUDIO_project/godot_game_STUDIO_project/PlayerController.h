@@ -80,6 +80,9 @@ namespace godot
 		void _change_is_dashing_state();
 		void _update_health_bar();
 		void _update_max_health_bar_size();
+		void _animate_spider_web();
+		void _show_tutorial_message(Node* node);
+		void _hide_tutorial_message(Node* node);
 		void _stop_animations();
 	};
 }

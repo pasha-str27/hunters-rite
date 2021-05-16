@@ -266,6 +266,8 @@ void godot::Enemy::_change_angry_on_timeout()
 	_change_animation("attack", 1.5f);
 	timer_change_dir->disconnect("timeout", this, "_change_angry_on_timeout");
 
+	cast_to<Particles2D>(get_node("BatDashParticles"))->restart();
+
 	ai->_set_speed(200);
 	is_angry = true;
 }
