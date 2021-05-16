@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Assets/Prefabs/web_bullet_prefab.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Sprites/Tilesets/Monsters/monster_bat_damage.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/Sprites/Tilesets/Monsters/monster_bat_idle.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Sprites/Tilesets/Monsters/monster_bat_attack.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Prefabs/Particles/BatDashParticles.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=7]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
@@ -164,6 +165,8 @@ shape = SubResource( 23 )
 [node name="BatDashParticles" parent="Bat" instance=ExtResource( 6 )]
 amount = 100
 lifetime = 0.5
+
+[node name="SpawnParticles" parent="Bat" instance=ExtResource( 7 )]
 
 [connection signal="body_entered" from="Bat/Area2D" to="Bat" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Bat/angry_zone" to="Bat" method="_set_angry"]

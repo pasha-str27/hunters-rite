@@ -14,10 +14,14 @@ void godot::SpawnEnemyController::SpawnEnemies()
 			break;
 
 		int rand_point = rng->randi_range(0, (int64_t)spawn_points.size() - 1);
+
+		Vector2 pos = cast_to<Node2D>(spawn_points[rand_point])->get_global_position();
+
 		auto spawned_enemy = cast_to<Node2D>(cast_to<PackedScene>(enemies[i])->instance());
-		spawned_enemy->set_global_position(cast_to<Node2D>(spawn_points[rand_point])->get_global_position());
-		spawn_points.remove(rand_point);
+		spawned_enemy->set_global_position(pos);
 		get_node("/root/Node2D/Node")->call_deferred("add_child", spawned_enemy);
+
+		spawn_points.remove(rand_point);
 	}
 
 	rng = nullptr;
@@ -65,7 +69,7 @@ void godot::SpawnEnemyController::_register_methods()
 	register_method("_on_Area2D_area_entered", &SpawnEnemyController::_on_Area2D_area_entered);
 	
 
-	register_property<SpawnEnemyController, Ref<PackedScene>>("Altar prefab", &SpawnEnemyController::altar, nullptr);
+	register_property<SpawnEnemyController, Ref<PackedScene>>("Altar prefab", &SpawnEnemyController::altar, nullptr);	
 }
 
 void godot::SpawnEnemyController::_init()
