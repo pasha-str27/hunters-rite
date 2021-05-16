@@ -46,7 +46,7 @@ namespace godot
 		void _on_Quit_pressed(Variant body);
 		void _on_Back_pressed(Variant body);
 		void _on_Flower_pressed(Variant body);
-		void _on_Bonuses_pressed(Variant body);
+		void _on_Items_pressed(Variant body);
 		void _on_FullScreen_pressed(Variant body);
 		void _play_effect();
 		void _play_change_cursor_effect();
@@ -58,6 +58,7 @@ namespace godot
 		void _change_audio_volume();
 		void _on_Resume_pressed(Input* event);
 		void _on_Menu_pressed(Input* event);
+		void _on_Retry_pressed(Variant body);
 		void _move_to_main_menu();
 		void _audio_fade_to_main_menu();
 		void _fade_audio();

@@ -36,7 +36,7 @@ void godot::MenuButtons::_ready()
 	// Set focus button in Menu and Notise scenes
 	set_focus_mode(true);
 
-	std::vector<String> name_buttons{ "Play", "Flower_button", "Back", "Resume" };
+	std::vector<String> name_buttons{ "Play", "Flower_button", "Back", "Resume", "Retry" };
 
 	if (find_parent("root") != nullptr && !find_parent("root")->has_node("MenuBackMusic"))
 	{
@@ -87,7 +87,7 @@ void MenuButtons::_register_methods()
 	register_method((char*)"_on_Quit_pressed", &MenuButtons::_on_Quit_pressed);
 	register_method((char*)"_on_Back_pressed", &MenuButtons::_on_Back_pressed);
 	register_method((char*)"_on_Flower_pressed", &MenuButtons::_on_Flower_pressed);
-	register_method((char*)"_on_Bonuses_pressed", &MenuButtons::_on_Bonuses_pressed);
+	register_method((char*)"_on_Items_pressed", &MenuButtons::_on_Items_pressed);
 	register_method((char*)"_on_FullScreen_pressed", &MenuButtons::_on_FullScreen_pressed);
 	register_method((char*)"_play_change_cursor_effect", &MenuButtons::_play_change_cursor_effect);
 	register_method((char*)"_on_effects_value_changed", &MenuButtons::_on_effects_value_changed);
@@ -96,6 +96,7 @@ void MenuButtons::_register_methods()
 	register_method((char*)"_change_audio_volume", &MenuButtons::_change_audio_volume);
 	register_method((char*)"_on_Resume_pressed", &MenuButtons::_on_Resume_pressed);
 	register_method((char*)"_on_Menu_pressed", &MenuButtons::_on_Menu_pressed);
+	register_method((char*)"_on_Retry_pressed", &MenuButtons::_on_Retry_pressed);
 	register_method((char*)"_move_to_main_menu", &MenuButtons::_move_to_main_menu);
 	register_method((char*)"_audio_fade_to_main_menu", &MenuButtons::_audio_fade_to_main_menu);
 	register_method((char*)"_fade_audio", &MenuButtons::_fade_audio);
@@ -107,6 +108,14 @@ void MenuButtons::_register_methods()
 }
 
 void godot::MenuButtons::_on_Resume_pressed(Input*)
+{
+	_play_effect();
+	get_tree()->set_pause(false);
+	cast_to<Camera2D>(get_node("/root/Node2D/Node/Camera2D"))->_set_current(true);
+	get_parent()->queue_free();
+}
+
+void godot::MenuButtons::_on_Retry_pressed(Variant)
 {
 	_play_effect();
 	get_tree()->set_pause(false);
@@ -235,7 +244,7 @@ void godot::MenuButtons::_on_Option_pressed(Variant)
 	get_parent()->queue_free();
 }
 
-void godot::MenuButtons::_on_Bonuses_pressed(Variant)
+void godot::MenuButtons::_on_Items_pressed(Variant)
 {
 	_play_effect();
 	get_node("/root")->add_child(items_scene->instance());

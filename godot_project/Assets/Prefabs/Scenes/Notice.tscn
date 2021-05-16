@@ -242,47 +242,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer2" type="CenterContainer" parent="Notice/VBoxContainer"]
-margin_top = 646.0
-margin_right = 1280.0
-margin_bottom = 716.0
-rect_min_size = Vector2( 0, 52 )
-
-[node name="Bonuses" type="TextureButton" parent="Notice/VBoxContainer/CenterContainer2"]
-margin_left = 500.0
-margin_right = 780.0
-margin_bottom = 70.0
-rect_min_size = Vector2( 280, 70 )
-focus_neighbour_top = NodePath("../../CenterContainer/Back")
-focus_neighbour_bottom = NodePath("../../Tasks/HBoxContainer/Coming_soon_one/Coming_soon_button")
-mouse_filter = 2
-texture_normal = ExtResource( 6 )
-texture_focused = ExtResource( 5 )
-expand = true
-stretch_mode = 3
-
-[node name="Label" type="Label" parent="Notice/VBoxContainer/CenterContainer2/Bonuses"]
-modulate = Color( 0.831373, 0.831373, 0.831373, 1 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/line_spacing = 0
-custom_constants/shadow_offset_y = 3
-custom_constants/shadow_as_outline = 0
-text = "Bonuses"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/Flower_button" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="pressed" from="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/Flower_button" to="Notice" method="_on_Flower_pressed"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/CenterContainer/Back" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="pressed" from="Notice/VBoxContainer/CenterContainer/Back" to="Notice" method="_on_Back_pressed"]
-[connection signal="focus_entered" from="Notice/VBoxContainer/CenterContainer2/Bonuses" to="Notice" method="_play_change_cursor_effect"]
-[connection signal="pressed" from="Notice/VBoxContainer/CenterContainer2/Bonuses" to="Notice" method="_on_Bonuses_pressed"]

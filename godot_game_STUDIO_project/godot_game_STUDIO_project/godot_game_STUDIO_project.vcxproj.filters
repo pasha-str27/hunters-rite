@@ -42,7 +42,6 @@
     <ClCompile Include="Sword.cpp" />
     <ClCompile Include="AudioEffect.cpp" />
     <ClCompile Include="MenuButtons.cpp" />
-    <ClCompile Include="PauseButtons.cpp" />
     <ClCompile Include="ParticlesDestroyer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -87,7 +86,6 @@
     <ClInclude Include="Sword.h" />
     <ClInclude Include="AudioEffect.h" />
     <ClInclude Include="MenuButtons.h" />
-    <ClInclude Include="PauseButtons.h" />
     <ClInclude Include="ParticlesDestroyer.h" />
   </ItemGroup>
 </Project>
