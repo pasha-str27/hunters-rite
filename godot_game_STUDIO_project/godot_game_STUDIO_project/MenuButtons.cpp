@@ -13,6 +13,8 @@ AudioStreamPlayer2D* MenuButtons::audio = nullptr;
 
 MenuButtons::MenuButtons()
 {
+	click_counter = 0;
+	was_quit_focused = false;
 	was_focused = false;
 	delta_time = 1.0 / 50;
 }
@@ -23,12 +25,15 @@ void godot::MenuButtons::_init() {}
 
 void godot::MenuButtons::_ready()
 {
+
 	Input::get_singleton()->set_mouse_mode(Input::MOUSE_MODE_CAPTURED);
 
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	menu_scene = rld->load("res://Assets/Prefabs/Scenes/Menu.tscn");
 	option_scene = rld->load("res://Assets/Prefabs/Scenes/Option.tscn");
 	notice_scene = rld->load("res://Assets/Prefabs/Scenes/Notice.tscn");
+	authors_scene = rld->load("res://Assets/Prefabs/Scenes/Authors.tscn");
+	items_scene = rld->load("res://Assets/Prefabs/Scenes/Items.tscn");
 	game_scene = rld->load("res://main_scene.tscn");
 
 	cast_to<Camera2D>(get_parent())->_set_current(true);
@@ -36,7 +41,7 @@ void godot::MenuButtons::_ready()
 	// Set focus button in Menu and Notise scenes
 	set_focus_mode(true);
 
-	std::vector<String> name_buttons{ "Play", "Flower_button", "Back", "Resume" };
+	std::vector<String> name_buttons{ "Play", "Flower_button", "Back", "Resume", "Retry" };
 
 	if (find_parent("root") != nullptr && !find_parent("root")->has_node("MenuBackMusic"))
 	{
@@ -87,14 +92,18 @@ void MenuButtons::_register_methods()
 	register_method((char*)"_on_Quit_pressed", &MenuButtons::_on_Quit_pressed);
 	register_method((char*)"_on_Back_pressed", &MenuButtons::_on_Back_pressed);
 	register_method((char*)"_on_Flower_pressed", &MenuButtons::_on_Flower_pressed);
+	register_method((char*)"_on_Items_pressed", &MenuButtons::_on_Items_pressed);
 	register_method((char*)"_on_FullScreen_pressed", &MenuButtons::_on_FullScreen_pressed);
 	register_method((char*)"_play_change_cursor_effect", &MenuButtons::_play_change_cursor_effect);
+	register_method((char*)"_on_Quit_focus_entered", &MenuButtons::_on_Quit_focus_entered);
+	register_method((char*)"_on_Quit_focus_exited", &MenuButtons::_on_Quit_focus_exited);
 	register_method((char*)"_on_effects_value_changed", &MenuButtons::_on_effects_value_changed);
 	register_method((char*)"_on_music_value_changed", &MenuButtons::_on_music_value_changed);
 	register_method((char*)"_timeout", &MenuButtons::_timeout);
 	register_method((char*)"_change_audio_volume", &MenuButtons::_change_audio_volume);
 	register_method((char*)"_on_Resume_pressed", &MenuButtons::_on_Resume_pressed);
 	register_method((char*)"_on_Menu_pressed", &MenuButtons::_on_Menu_pressed);
+	register_method((char*)"_on_Retry_pressed", &MenuButtons::_on_Retry_pressed);
 	register_method((char*)"_move_to_main_menu", &MenuButtons::_move_to_main_menu);
 	register_method((char*)"_audio_fade_to_main_menu", &MenuButtons::_audio_fade_to_main_menu);
 	register_method((char*)"_fade_audio", &MenuButtons::_fade_audio);
@@ -112,6 +121,12 @@ void godot::MenuButtons::_on_Resume_pressed(Input*)
 	get_tree()->set_pause(false);
 	cast_to<Camera2D>(get_node("/root/Node2D/Node/Camera2D"))->_set_current(true);
 	get_parent()->queue_free();
+}
+
+void godot::MenuButtons::_on_Retry_pressed(Variant)
+{
+	//_play_effect();
+	//get_tree()->reload_current_scene();
 }
 
 void godot::MenuButtons::_on_Menu_pressed(Input*)
@@ -236,9 +251,24 @@ void godot::MenuButtons::_on_Option_pressed(Variant)
 	get_parent()->queue_free();
 }
 
+
+void godot::MenuButtons::_on_Items_pressed(Variant)
+{
+	_play_effect();
+	get_node("/root")->add_child(items_scene->instance());
+	get_parent()->queue_free();
+}
+
 void godot::MenuButtons::_on_Quit_pressed(Variant)
 {
 	_play_effect();
+
+	if (click_counter > 7) {
+		_play_effect();
+		click_counter = 0;
+		get_node("/root")->add_child(authors_scene->instance());
+		get_parent()->queue_free();
+	}else 
 	_exit_tree();
 }
 
@@ -251,6 +281,7 @@ void godot::MenuButtons::_on_FullScreen_pressed(Variant)
 
 	save_game();
 }
+
 
 void godot::MenuButtons::_on_effects_value_changed(float value)
 {
@@ -357,8 +388,33 @@ void godot::MenuButtons::_fade_audio()
 	timer_music->start(0.01);
 }
 
+void godot::MenuButtons::_on_Quit_focus_entered()
+{
+	was_quit_focused = true;
+}
+
+void godot::MenuButtons::_on_Quit_focus_exited()
+{
+	was_quit_focused = false;
+	click_counter = 0;
+	cast_to<Label>(find_node("QuitLabel"))->set_text("Quit");
+}
+
 void godot::MenuButtons::_input(Input* event)
 {
+	if (Input::get_singleton()->is_action_just_pressed("ui_left"))
+	{
+		if (was_quit_focused)
+		{
+			click_counter++;
+			Godot::print(String::num(click_counter));
+			if (click_counter > 7)
+			{
+				cast_to<Label>(find_node("QuitLabel"))->set_text("Authors");
+			}
+			
+		}
+	}
 	if (Input::get_singleton()->is_action_just_pressed("ui_pause"))
 	{
 		Input::get_singleton()->action_release("ui_pause");
