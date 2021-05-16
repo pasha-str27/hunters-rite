@@ -1,6 +1,9 @@
 #pragma once
 #include <Godot.hpp>
 #include <Sprite.hpp>
+#include <Texture.hpp>
+#include <PackedScene.hpp>
+#include <ResourceLoader.hpp>
 
 namespace godot 
 {
@@ -11,6 +14,8 @@ namespace godot
 	public:
 		static void _register_methods();
 		void _ready();
+		//	decleared property
+		Ref<PackedScene> spritePrefab;
 
 		void _init();
 
