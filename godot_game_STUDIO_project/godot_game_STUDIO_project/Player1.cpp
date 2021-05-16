@@ -72,7 +72,6 @@ void godot::Player1::_process_input()
 		sprite->set_flip_h(true);
 		sprite->set_offset(Vector2(-35, 0));
 		shoot_particles->set_position(Vector2(-11, 0));
-
 	}
 
 	if (input_controller->is_action_just_pressed("Player1_right"))
@@ -80,13 +79,6 @@ void godot::Player1::_process_input()
 		sprite->set_flip_h(false);
 		sprite->set_offset(Vector2(35, 0));
 		shoot_particles->set_position(Vector2(11, 0));
-
-	}
-
-	//dash
-	if (input_controller->is_action_just_pressed("Player1_dash"))
-	{
-		_get_object()->call("_start_dash_timer");
 	}
 
 	//move up
@@ -99,6 +91,12 @@ void godot::Player1::_process_input()
 	if (input_controller->is_action_pressed("Player1_down"))
 	{
 		dir.y += _get_speed();
+	}
+
+	//dash
+	if (input_controller->is_action_just_pressed("Player1_dash"))
+	{
+		_get_object()->call("_start_dash_timer");
 	}
 
 	//move left

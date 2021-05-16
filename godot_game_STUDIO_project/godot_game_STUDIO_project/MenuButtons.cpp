@@ -98,6 +98,7 @@ void MenuButtons::_register_methods()
 	register_method((char*)"_move_to_main_menu", &MenuButtons::_move_to_main_menu);
 	register_method((char*)"_audio_fade_to_main_menu", &MenuButtons::_audio_fade_to_main_menu);
 	register_method((char*)"_fade_audio", &MenuButtons::_fade_audio);
+	register_method((char*)"_input", &MenuButtons::_input);
 	
 	register_property<MenuButtons, Ref<PackedScene>>("click_effect", &MenuButtons::click_effect, nullptr);
 	register_property<MenuButtons, Ref<PackedScene>>("menu back music", &MenuButtons::menu_back, nullptr);
@@ -354,4 +355,33 @@ void godot::MenuButtons::_fade_audio()
 
 	timer_music->connect("timeout", this, "_fade_audio");
 	timer_music->start(0.01);
+}
+
+void godot::MenuButtons::_input(Input* event)
+{
+	if (Input::get_singleton()->is_action_just_pressed("ui_pause"))
+	{
+		Input::get_singleton()->action_release("ui_pause");
+
+		if (get_name() == "Pause")
+		{
+			get_tree()->set_pause(false);
+			cast_to<Camera2D>(get_node("/root/Node2D/Node/Camera2D"))->_set_current(true);
+			get_parent()->queue_free();
+			return;
+		}
+
+		if (get_name() == "Menu")
+		{
+			_exit_tree();
+			return;
+		}
+
+		if (get_name() == "Option" || get_name() == "Notice")
+		{
+			get_node("/root")->add_child(menu_scene->instance());
+			get_parent()->queue_free();
+			return;
+		}
+	}
 }

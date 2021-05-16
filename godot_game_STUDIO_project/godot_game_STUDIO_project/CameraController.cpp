@@ -256,9 +256,9 @@ void godot::CameraController::_start_mute_volume()
 
 void godot::CameraController::_input(Variant event)
 {
-	InputEvent* _event = event;
-	if (_event->is_action_pressed("ui_pause"))
+	if (Input::get_singleton()->is_action_just_pressed("ui_pause"))
 	{
+		Input::get_singleton()->action_release("ui_pause");
 		if (PlayersContainer::_get_instance()->_get_player1() != nullptr)
 			PlayersContainer::_get_instance()->_get_player1()->call("_stop_animations");
 
