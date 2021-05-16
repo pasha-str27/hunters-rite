@@ -13,7 +13,7 @@
 [ext_resource path="res://Assets/Sprites/UI/wanted_backgroud_base_v4.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Sprites/UI/wanted_focus.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Sprites/UI/wanted_coming_soon_v1.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Prefabs/SoundsEffects/ButtonClick.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/Prefabs/SoundsEffects/Effects/ButtonClick.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Assets/Prefabs/Animations/FadeOut.tscn" type="PackedScene" id=16]
 
 [sub_resource type="DynamicFont" id=1]
@@ -82,6 +82,7 @@ margin_left = 136.0
 margin_right = 456.0
 margin_bottom = 320.0
 rect_min_size = Vector2( 256, 256 )
+mouse_filter = 2
 
 [node name="Flower_button" type="TextureButton" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Flower"]
 margin_right = 320.0

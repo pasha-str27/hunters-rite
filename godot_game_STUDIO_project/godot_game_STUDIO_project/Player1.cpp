@@ -72,7 +72,6 @@ void godot::Player1::_process_input()
 		sprite->set_flip_h(true);
 		sprite->set_offset(Vector2(-35, 0));
 		shoot_particles->set_position(Vector2(-11, 0));
-
 	}
 
 	if (input_controller->is_action_just_pressed("Player1_right"))
@@ -80,13 +79,6 @@ void godot::Player1::_process_input()
 		sprite->set_flip_h(false);
 		sprite->set_offset(Vector2(35, 0));
 		shoot_particles->set_position(Vector2(11, 0));
-
-	}
-
-	//dash
-	if (input_controller->is_action_just_pressed("Player1_dash"))
-	{
-		_get_object()->call("_start_dash_timer");
 	}
 
 	//move up
@@ -99,6 +91,12 @@ void godot::Player1::_process_input()
 	if (input_controller->is_action_pressed("Player1_down"))
 	{
 		dir.y += _get_speed();
+	}
+
+	//dash
+	if (input_controller->is_action_just_pressed("Player1_dash"))
+	{
+		_get_object()->call("_start_dash_timer");
 	}
 
 	//move left
@@ -157,6 +155,10 @@ void godot::Player1::_fight(Node* node)
 	if (!_can_fight())
 		return;
 
+	Ref<PackedScene> prefab = nullptr;
+	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/Player1Fight.tscn");
+	_get_object()->add_child(prefab->instance());
+
 	_change_can_fight(false);
 
 	available_bullets[available_bullets.size() - 1]->set_position(_get_object()->get_global_position());
@@ -210,6 +212,9 @@ void  godot::Player1::_take_damage(float damage, bool is_spike)
 
 	if (_get_HP() <= 0)
 	{
+		Ref<PackedScene> prefab = nullptr;
+		prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/PlayerDied.tscn");
+		_get_object()->get_parent()->add_child(prefab->instance());
 		sprite->play("death");
 		PlayersContainer::_get_instance()->_set_player1(nullptr);
 		Enemies::get_singleton()->_remove_player1();

@@ -17,8 +17,11 @@ void godot::EnemySideChecker::_register_methods()
 
 void godot::EnemySideChecker::_on_Area2D_body_entered(Node2D* node)
 {
-	is_in_boby = true;
-	current_node = node;
+	if (node->get_name()=="wall" || node->get_name()=="flower" || node->get_name()=="spike" || node->is_in_group("player"))
+	{
+		is_in_boby = true;
+		current_node = node;
+	}
 }
 
 void godot::EnemySideChecker::_on_Area2D_body_exited(Node2D* node)

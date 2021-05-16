@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/Sprites/UI/button_focus_v2.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Sprites/UI/button_background_v2.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Sprites/UI/notice_background_v2.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Prefabs/SoundsEffects/ButtonClick.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Prefabs/SoundsEffects/Effects/ButtonClick.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://Assets/Sprites/icon11.png" type="Texture" id=8]
 
@@ -61,6 +61,7 @@ margin_right = 196.0
 margin_bottom = 24.0
 focus_neighbour_top = NodePath("../../../CenterContainer/Back")
 focus_neighbour_bottom = NodePath("../effects")
+mouse_filter = 2
 custom_fonts/font = ExtResource( 1 )
 text = "FullScreen"
 align = 1
@@ -81,6 +82,7 @@ margin_right = 196.0
 margin_bottom = 136.0
 focus_neighbour_top = NodePath("../FullScreen")
 focus_neighbour_bottom = NodePath("../music")
+mouse_filter = 2
 custom_icons/grabber = ExtResource( 8 )
 min_value = -35.0
 max_value = 6.0

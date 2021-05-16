@@ -23,7 +23,8 @@ void godot::MenuButtons::_init() {}
 
 void godot::MenuButtons::_ready()
 {
-	//load scenes
+	Input::get_singleton()->set_mouse_mode(Input::MOUSE_MODE_CAPTURED);
+
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	menu_scene = rld->load("res://Assets/Prefabs/Scenes/Menu.tscn");
 	option_scene = rld->load("res://Assets/Prefabs/Scenes/Option.tscn");
@@ -100,6 +101,7 @@ void MenuButtons::_register_methods()
 	register_method((char*)"_move_to_main_menu", &MenuButtons::_move_to_main_menu);
 	register_method((char*)"_audio_fade_to_main_menu", &MenuButtons::_audio_fade_to_main_menu);
 	register_method((char*)"_fade_audio", &MenuButtons::_fade_audio);
+	register_method((char*)"_input", &MenuButtons::_input);
 	
 	register_property<MenuButtons, Ref<PackedScene>>("click_effect", &MenuButtons::click_effect, nullptr);
 	register_property<MenuButtons, Ref<PackedScene>>("menu back music", &MenuButtons::menu_back, nullptr);
@@ -148,6 +150,7 @@ void godot::MenuButtons::_on_Menu_pressed(Input*)
 
 	timer->connect("timeout", this, "_move_to_main_menu");
 	timer->start(1);
+	Enemies::get_singleton()->_clear();
 }
 
 void godot::MenuButtons::_move_to_main_menu()
@@ -243,6 +246,7 @@ void godot::MenuButtons::_on_Option_pressed(Variant)
 	get_node("/root")->add_child(option_scene->instance());
 	get_parent()->queue_free();
 }
+
 
 void godot::MenuButtons::_on_Items_pressed(Variant)
 {
@@ -343,11 +347,13 @@ void godot::MenuButtons::_audio_fade_to_main_menu()
 		&& AudioServer::get_singleton()->get_bus_volume_db(3) <= -75)
 			return;
 
-	AudioServer::get_singleton()->set_bus_volume_db(2,
-		AudioServer::get_singleton()->get_bus_volume_db(2) - 0.8);
+	if (AudioServer::get_singleton()->get_bus_volume_db(2) > -75)
+		AudioServer::get_singleton()->set_bus_volume_db(2,
+			AudioServer::get_singleton()->get_bus_volume_db(2) - 0.8);
 
-	AudioServer::get_singleton()->set_bus_volume_db(3,
-		AudioServer::get_singleton()->get_bus_volume_db(3) - 0.8);
+	if (AudioServer::get_singleton()->get_bus_volume_db(3) > -75)
+		AudioServer::get_singleton()->set_bus_volume_db(3,
+			AudioServer::get_singleton()->get_bus_volume_db(3) - 0.8);
 
 	timer_music_out->connect("timeout", this, "_audio_fade_to_main_menu");
 	timer_music_out->start(0.01);
@@ -369,4 +375,33 @@ void godot::MenuButtons::_fade_audio()
 
 	timer_music->connect("timeout", this, "_fade_audio");
 	timer_music->start(0.01);
+}
+
+void godot::MenuButtons::_input(Input* event)
+{
+	if (Input::get_singleton()->is_action_just_pressed("ui_pause"))
+	{
+		Input::get_singleton()->action_release("ui_pause");
+
+		if (get_name() == "Pause")
+		{
+			get_tree()->set_pause(false);
+			cast_to<Camera2D>(get_node("/root/Node2D/Node/Camera2D"))->_set_current(true);
+			get_parent()->queue_free();
+			return;
+		}
+
+		if (get_name() == "Menu")
+		{
+			_exit_tree();
+			return;
+		}
+
+		if (get_name() == "Option" || get_name() == "Notice")
+		{
+			get_node("/root")->add_child(menu_scene->instance());
+			get_parent()->queue_free();
+			return;
+		}
+	}
 }

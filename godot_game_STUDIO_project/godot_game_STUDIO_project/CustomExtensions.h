@@ -76,5 +76,11 @@ namespace godot
 
 			return nullptr;
 		}
+
+		static bool IsOnlyOnePlayerAlive(Node *from)
+		{
+			return !from->has_node("/root/Node2D/Node/Player1") || !from->has_node("/root/Node2D/Node/Player2");
+		}
+
 	};
 }
