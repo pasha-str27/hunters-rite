@@ -203,11 +203,13 @@ void godot::CameraController::_change_audio_volume()
 		&& AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) <= -75)
 			return;
 
-	AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()),
-		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) + 1.6);
+	if (AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) < MenuButtons::music_audio_level - 0.4)
+		AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()),
+			AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) + 1.6);
 
-	AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1,
-		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) - 0.8);
+	if(AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) > -75)
+		AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1,
+			AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) - 0.8);
 
 	timer_audio->connect("timeout", this, "_change_audio_volume");
 	timer_audio->start(time_delta);
@@ -221,11 +223,13 @@ void godot::CameraController::_mute_audio_volume()
 		&& AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())+1) >= MenuButtons::music_audio_level-0.4)
 			return;
 
-	AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()),
-		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) - 0.8);
+	if (AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) > -75)
+		AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()),
+			AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) - 0.8);
 
-	AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1,
-		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) + 1.6);
+	if (AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) < MenuButtons::music_audio_level - 0.4)
+		AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1,
+			AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) + 1.6);
 	timer_audio->connect("timeout", this, "_mute_audio_volume");
 	timer_audio->start(time_delta);
 }
@@ -247,7 +251,7 @@ void godot::CameraController::_input(Variant event)
 		if (PlayersContainer::_get_instance()->_get_player2() != nullptr)
 			PlayersContainer::_get_instance()->_get_player2()->call("_stop_animations");
 		get_tree()->set_pause(true);
-		get_node("/root")->add_child(pause_menu->instance());
+		add_child(pause_menu->instance());
 	}
 }
 
@@ -264,13 +268,15 @@ void godot::CameraController::_audio_fade_to_main_menu()
 
 	if (AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) <= -75
 		&& AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) <= -75)
-		return;
+			return;
 
-	AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()),
-		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) - 1.6);
+	if (AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) > -75)
+		AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()),
+			AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) - 1.6);
 
-	AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1,
-		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) - 1.6);
+	if(AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) > -75)
+		AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1,
+			AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) - 1.6);
 
 	timer_audio->connect("timeout", this, "_audio_fade_to_main_menu");
 	timer_audio->start(time_delta);

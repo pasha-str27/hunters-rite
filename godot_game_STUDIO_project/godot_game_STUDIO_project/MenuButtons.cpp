@@ -137,6 +137,7 @@ void godot::MenuButtons::_on_Menu_pressed(Input*)
 
 	timer->connect("timeout", this, "_move_to_main_menu");
 	timer->start(1);
+	Enemies::get_singleton()->_clear();
 }
 
 void godot::MenuButtons::_move_to_main_menu()

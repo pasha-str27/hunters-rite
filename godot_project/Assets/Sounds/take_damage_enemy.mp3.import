@@ -11,5 +11,5 @@ dest_files=[ "res://.import/take_damage_enemy.mp3-4f6b8252bc970762bdd0dae8477877
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

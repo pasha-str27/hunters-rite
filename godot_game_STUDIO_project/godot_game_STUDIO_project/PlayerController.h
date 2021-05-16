@@ -33,6 +33,7 @@ namespace godot
 		Particles2D* buff_debuff_particles = nullptr;
 		Particles2D* dash_particles = nullptr;
 		Particles2D* revive_particles = nullptr;
+
 	public:
 		static void _register_methods();
 		PlayerController();

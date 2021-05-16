@@ -157,6 +157,10 @@ void godot::Player1::_fight(Node* node)
 	if (!_can_fight())
 		return;
 
+	Ref<PackedScene> prefab = nullptr;
+	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/Player1Fight.tscn");
+	_get_object()->add_child(prefab->instance());
+
 	_change_can_fight(false);
 
 	available_bullets[available_bullets.size() - 1]->set_position(_get_object()->get_global_position());

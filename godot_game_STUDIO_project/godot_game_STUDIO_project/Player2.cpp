@@ -93,6 +93,10 @@ void godot::Player2::_fight(Node* node)
 	if (!_can_fight())
 		return;
 
+	Ref<PackedScene> prefab = nullptr;
+	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/Player2Fight.tscn");
+	_get_object()->add_child(prefab->instance());
+
 	sprite->play("attack");
 	sprite->set_offset(Vector2(10, -5));
 

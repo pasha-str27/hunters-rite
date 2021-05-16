@@ -106,9 +106,6 @@ void godot::PlayerController::_ready()
 	dash_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "DashParticles"));
 	revive_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "ReviveParticles"));
 
-	//if (current_player == nullptr)
-	//	printf("error");
-
 	_update_health_bar();
 }
 
@@ -142,7 +139,6 @@ void godot::PlayerController::_start_dash_timer()
 		if (!has_node(NodePath(timer->get_name())))
 			add_child(timer);
 
-		Godot::print("start dash");
 		_change_is_dashing_state();
 		current_player->_set_speed(speed * dash_speed_multiplier);
 
@@ -229,6 +225,9 @@ void godot::PlayerController::_take_damage(float damage, bool is_spike)
 	_update_health_bar();
 	if (is_alive)
 	{
+		Ref<PackedScene> prefab = nullptr;
+		prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/PlayerTakeDamage.tscn");
+		add_child(prefab->instance());
 		hurt_particles->restart();
 	}
 }
@@ -346,6 +345,9 @@ float godot::PlayerController::_get_attack_speed_delta()
 void godot::PlayerController::_die()
 {
 	is_alive = false;
+	Ref<PackedScene> prefab = nullptr;
+	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/PlayerDied.tscn");
+	add_child(prefab->instance());
 	add_child(revive_zone->instance());
 }
 
@@ -354,6 +356,9 @@ void godot::PlayerController::_revive()
 	revive_particles->set_emitting(true);
 	current_player->_revive();
 	is_alive = true;
+	Ref<PackedScene> prefab = nullptr;
+	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/PlayerRevive.tscn");
+	add_child(prefab->instance());
 	_set_HP(_get_max_HP() * (float)0.15);
 	_update_health_bar();
 }

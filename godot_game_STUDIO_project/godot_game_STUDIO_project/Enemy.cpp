@@ -110,6 +110,10 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 	if(sp != nullptr)
 		sp->play("damaged");
 
+	Ref<PackedScene> prefab = nullptr;
+	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/EnemyTakeDamage.tscn");
+	add_child(prefab->instance());
+
 	if (HP <= 0)
 	{
 		Node *player = nullptr;
@@ -126,8 +130,14 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		died = true;
 		Enemies::get_singleton()->_remove_enemy(this);
 
-		if(Enemies::get_singleton()->_get_enemies_count() == 0)
+		if (Enemies::get_singleton()->_get_enemies_count() == 0)
+		{
+			Ref<PackedScene> prefab = nullptr;
+			prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/OpenDoors.tscn");
+			add_child(prefab->instance());
 			CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->call("_open_doors");
+		}
+
 
 		Godot::print("enemies count: " + String::num(Enemies::get_singleton()->_get_enemies_count()));
 
