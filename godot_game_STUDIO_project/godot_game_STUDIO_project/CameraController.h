@@ -13,6 +13,7 @@ namespace godot
 		Node2D* player2;
 		Array dirs = {};	//	0 - left, 1 - right, 2 - top, 3 - bottom
 		bool is_open_door = true;
+		String current_room_type = "";
 
 		Ref<PackedScene> fadeIn = nullptr;
 		Ref<PackedScene> fadeOut = nullptr;
@@ -46,6 +47,7 @@ namespace godot
 		void _input(Variant event);
 		void _audio_fade_to_main_menu();
 		void _spawn_exit();
+		void _set_current_room_type(String);
 		CameraController();
 		~CameraController();
 	};

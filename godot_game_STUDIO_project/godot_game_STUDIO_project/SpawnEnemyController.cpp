@@ -10,9 +10,13 @@ void godot::SpawnEnemyController::SpawnEnemies()
 	
 	for (int i = 0; i < enemies.size(); i++) 
 	{
+		if (spawn_points.size() == 0)
+			break;
+
 		int rand_point = rng->randi_range(0, (int64_t)spawn_points.size() - 1);
 		auto spawned_enemy = cast_to<Node2D>(cast_to<PackedScene>(enemies[i])->instance());
 		spawned_enemy->set_global_position(cast_to<Node2D>(spawn_points[rand_point])->get_global_position());
+		spawn_points.remove(rand_point);
 		get_node("/root/Node2D/Node")->call_deferred("add_child", spawned_enemy);
 	}
 
@@ -115,12 +119,13 @@ void godot::SpawnEnemyController::_on_Area2D_area_entered(Node* other)
 			enemies = other->get_parent()->call("_get_enemies");
 			get_parent()->call("_close_doors");
 			SpawnBoss();
-			_prepare_spawn();
 		}
 		else if (room_type == "item_room")
 		{
 			SpawnItems();
 		}
+
+		get_parent()->call("_set_current_room_type", room_type);
 
 		other->queue_free();
 		return;
