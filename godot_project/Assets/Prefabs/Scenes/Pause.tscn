@@ -63,6 +63,7 @@ margin_bottom = 472.0
 [node name="Resume" type="TextureButton" parent="Pause/CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer"]
 margin_right = 240.0
 margin_bottom = 72.0
+mouse_filter = 2
 texture_normal = ExtResource( 2 )
 texture_focused = ExtResource( 1 )
 
@@ -81,6 +82,7 @@ __meta__ = {
 margin_top = 76.0
 margin_right = 240.0
 margin_bottom = 148.0
+mouse_filter = 2
 texture_normal = ExtResource( 2 )
 texture_focused = ExtResource( 1 )
 
@@ -99,6 +101,7 @@ __meta__ = {
 margin_top = 152.0
 margin_right = 240.0
 margin_bottom = 224.0
+mouse_filter = 2
 texture_normal = ExtResource( 2 )
 texture_focused = ExtResource( 1 )
 

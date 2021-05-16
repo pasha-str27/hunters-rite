@@ -23,7 +23,8 @@ void godot::MenuButtons::_init() {}
 
 void godot::MenuButtons::_ready()
 {
-	//load scenes
+	Input::get_singleton()->set_mouse_mode(Input::MOUSE_MODE_CAPTURED);
+
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	menu_scene = rld->load("res://Assets/Prefabs/Scenes/Menu.tscn");
 	option_scene = rld->load("res://Assets/Prefabs/Scenes/Option.tscn");
