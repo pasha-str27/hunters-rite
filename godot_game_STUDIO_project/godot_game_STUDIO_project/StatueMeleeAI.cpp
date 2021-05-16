@@ -77,9 +77,6 @@ void godot::StatueMeleeAI::_process(float delta)
 			dir = -2;
 		else
 			dir = 8;
-		//if (dir > 0)
-		//	dir = 8;
-
 	}
 
 	current_scale += dir * delta;

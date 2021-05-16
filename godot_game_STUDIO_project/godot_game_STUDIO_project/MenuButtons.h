@@ -19,7 +19,6 @@ namespace godot
 		Ref<PackedScene> fade_in;
 
 		static bool was_focused;
-		static bool was_loaded;
 		static bool is_full_screen;
 		static float effect_audio_level;
 
@@ -35,6 +34,7 @@ namespace godot
 		~MenuButtons();
 
 		static float music_audio_level;
+		static bool was_loaded;
 
 		static void _register_methods();
 		void _init();

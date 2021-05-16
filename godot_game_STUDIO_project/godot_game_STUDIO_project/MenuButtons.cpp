@@ -325,11 +325,13 @@ void godot::MenuButtons::_audio_fade_to_main_menu()
 		&& AudioServer::get_singleton()->get_bus_volume_db(3) <= -75)
 			return;
 
-	AudioServer::get_singleton()->set_bus_volume_db(2,
-		AudioServer::get_singleton()->get_bus_volume_db(2) - 0.8);
+	if (AudioServer::get_singleton()->get_bus_volume_db(2) > -75)
+		AudioServer::get_singleton()->set_bus_volume_db(2,
+			AudioServer::get_singleton()->get_bus_volume_db(2) - 0.8);
 
-	AudioServer::get_singleton()->set_bus_volume_db(3,
-		AudioServer::get_singleton()->get_bus_volume_db(3) - 0.8);
+	if (AudioServer::get_singleton()->get_bus_volume_db(3) > -75)
+		AudioServer::get_singleton()->set_bus_volume_db(3,
+			AudioServer::get_singleton()->get_bus_volume_db(3) - 0.8);
 
 	timer_music_out->connect("timeout", this, "_audio_fade_to_main_menu");
 	timer_music_out->start(0.01);
