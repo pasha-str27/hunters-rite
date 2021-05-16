@@ -187,7 +187,10 @@ void godot::CameraController::_door_collision(String door_dir)
 void godot::CameraController::_open_doors()
 {
 	if (current_room_type == "boss")
+	{
 		_spawn_exit();
+		current_room_type = "";
+	}
 
 	Godot::print("open doors");
 	is_open_door = true;
