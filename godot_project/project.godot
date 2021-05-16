@@ -15,7 +15,7 @@ _global_script_class_icons={
 [application]
 
 config/name="hunters"
-run/main_scene="res://Assets/Prefabs/Scenes/Menu.tscn"
+run/main_scene="res://Assets/Prefabs/Scenes/Preloader.tscn"
 boot_splash/fullsize=false
 boot_splash/use_filter=false
 

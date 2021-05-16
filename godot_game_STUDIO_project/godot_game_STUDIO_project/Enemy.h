@@ -57,14 +57,19 @@ namespace godot
 		EnemyAIContext *ai;
 		Timer* timer;
 		Timer* timer_change_dir;
+		Timer* timer_particles = nullptr;
 
 		float HP;
 		Ref<PackedScene> bullet;
 		bool is_angry;
 		bool entered;
 		bool died;
+		bool can_move = false;
 
 		AnimatedSprite* sp = nullptr;
+
+		Particles2D* spawn_particles = nullptr;
+		Ref<PackedScene> death_particles = nullptr;
 
 		public:
 			static void _register_methods();
@@ -95,5 +100,6 @@ namespace godot
 			void _change_animation(String, float);
 			void _set_current_player(Node* node);
 			void _remove_current_player(Node* node);
+			void _on_spawn_end();
 	};
 }
