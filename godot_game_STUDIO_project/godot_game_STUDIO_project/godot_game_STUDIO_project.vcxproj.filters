@@ -90,4 +90,7 @@
     <ClInclude Include="ParticlesDestroyer.h" />
     <ClInclude Include="ExitHandler.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="godot_game_STUDIO_project.vcxproj.user" />
+  </ItemGroup>
 </Project>

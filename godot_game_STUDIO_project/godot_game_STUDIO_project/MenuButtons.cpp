@@ -119,10 +119,8 @@ void godot::MenuButtons::_on_Resume_pressed(Input*)
 
 void godot::MenuButtons::_on_Retry_pressed(Variant)
 {
-	_play_effect();
-	get_tree()->set_pause(false);
-	cast_to<Camera2D>(get_node("/root/Node2D/Node/Camera2D"))->_set_current(true);
-	get_parent()->queue_free();
+	//_play_effect();
+	//get_tree()->reload_current_scene();
 }
 
 void godot::MenuButtons::_on_Menu_pressed(Input*)
