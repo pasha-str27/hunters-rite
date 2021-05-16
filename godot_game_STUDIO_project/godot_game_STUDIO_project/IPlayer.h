@@ -23,5 +23,8 @@ namespace godot
 		virtual bool _was_revived() = 0;
 		virtual float _get_max_HP() = 0;
 		virtual void _set_max_HP(float value) = 0;
+		virtual void _update_health_bar() = 0;
+		virtual ProgressBar* _get_health_bar() = 0;
+		virtual void _stop_animations() = 0;
 	};
 }

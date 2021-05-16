@@ -6,11 +6,17 @@
 
 namespace godot 
 {
+	class ItemsContainer;
 	class SpawnEnemyController: public Node2D
 	{
 	private:
 		GODOT_CLASS(SpawnEnemyController, Node2D);
 		void SpawnEnemies();
+		void SpawnBoss();
+		void SpawnItems();
+		ItemsContainer* i_container = nullptr;
+		Ref<PackedScene> altar = nullptr;
+		Timer* timer = nullptr;
 	public:
 		Array enemies = {};
 		Array spawn_points = {};
@@ -19,8 +25,9 @@ namespace godot
 		static void _register_methods();
 		void _init();
 		void _ready();
-
+		
 		void _prepare_spawn();
+		void _spawn();
 		void _on_Area2D_area_entered(Node* other);
 		
 		SpawnEnemyController();

@@ -49,7 +49,12 @@ void godot::Item::_ready()
 
 void godot::Item::_on_Area2D_body_entered(Node* node)
 {
+	VBoxContainer* item_box = nullptr;
+
 	if (!node->is_in_group("player"))
+		return;
+
+	if (!(bool)node->call("_is_alive"))
 		return;
 
 	node->call("_set_speed", (float)node->call("_get_speed") + speed);
@@ -65,7 +70,30 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 
 		if (encrease_attack_radius)
 			node->call("_encrease_attack_radius");
+
+		//getting item box for player 2
+		item_box = cast_to<VBoxContainer>(get_node("/root/Node2D/Node/Camera2D/ItemHolder/P2Items"));
 	}
+	else
+		//getting item box for player 1
+		item_box = cast_to<VBoxContainer>(get_node("/root/Node2D/Node/Camera2D/ItemHolder/P1Items"));
+
+	//creating new sprite for item in item box
+	auto item_sprite = Sprite::_new();
+	item_sprite->set_texture(cast_to<Sprite>(get_child(0))->get_texture());
+
+	//creating container fot item sprite
+	auto control = Control::_new();
+	control->set_custom_minimum_size(Vector2(32, 32));
+	control->add_child(item_sprite);
+
+	if (item_sprite != nullptr)
+		Godot::print("Got sprite");
+	if (item_box != nullptr)
+		Godot::print("Got item box");
+
+	//adding item to item box
+	item_box->add_child(control);
 
 	node->call("_start_item_particles", is_buff);
 	queue_free();

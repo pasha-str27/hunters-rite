@@ -41,10 +41,8 @@ void godot::SlimeAI::_set_speed(float value)
 	speed = value;
 }
 
-godot::SlimeAI::SlimeAI(Ref<PackedScene>& bullet, Node2D* node_tmp, Node2D* player1, Node2D* player2):
-	EnemyData(node_tmp, player1, player2)
+godot::SlimeAI::SlimeAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
 {
-	//enemy = cast_to<KinematicBody2D>(node_tmp);
 	can_move = true;
 	is_cheking = false;
 	speed = 400;
@@ -69,7 +67,7 @@ void godot::SlimeAI::change_direction()
 	reset_directions();
 	for (int i = 2; i < 9; ++i)
 	{
-		if (_get_enemy()->get_child(i)->call("_get_current_node") != nullptr
+		if ((int)_get_enemy()->get_child(i)->call("_get_side") != -1 && _get_enemy()->get_child(i)->call("_get_current_node") != nullptr
 			&& cast_to<Node2D>(_get_enemy()->get_child(i)->call("_get_current_node"))->is_in_group("player")
 			&& (bool)cast_to<Node2D>(_get_enemy()->get_child(i)->call("_get_current_node"))->call("_is_alive"))
 		{

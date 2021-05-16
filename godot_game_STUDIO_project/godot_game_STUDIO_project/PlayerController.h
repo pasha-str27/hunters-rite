@@ -31,6 +31,9 @@ namespace godot
 
 		Particles2D* hurt_particles = nullptr;
 		Particles2D* buff_debuff_particles = nullptr;
+		Particles2D* dash_particles = nullptr;
+		Particles2D* revive_particles = nullptr;
+
 	public:
 		static void _register_methods();
 		PlayerController();
@@ -75,5 +78,11 @@ namespace godot
 		bool _is_alive();
 		void _start_item_particles(bool is_buff);
 		void _change_is_dashing_state();
+		void _update_health_bar();
+		void _update_max_health_bar_size();
+		void _animate_spider_web();
+		void _show_tutorial_message(Node* node);
+		void _hide_tutorial_message(Node* node);
+		void _stop_animations();
 	};
 }

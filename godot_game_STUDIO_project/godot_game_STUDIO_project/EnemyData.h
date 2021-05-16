@@ -8,11 +8,9 @@ namespace godot
 	class EnemyData : public IEnemyAI
 	{
 		Node2D* enemy;
-		Node2D* player1;
-		Node2D* player2;
 
 	public:
-		EnemyData(Node2D* enemy, Node2D* player1 = nullptr, Node2D* player2 = nullptr);
+		EnemyData(Node2D* enemy);
 		~EnemyData();
 		void _add_bullet(Node* bullet = nullptr);
 		void _remove_side(int side);
@@ -25,6 +23,7 @@ namespace godot
 		void _set_enemy(Node2D* enemy);
 		void _set_player1(Node2D* player1 = nullptr);
 		void _set_player2(Node2D* player2 = nullptr);
+		void _change_dir();
 		Node2D* _get_player1();
 		Node2D* _get_player2();
 	};

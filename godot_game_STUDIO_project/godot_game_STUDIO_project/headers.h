@@ -6,7 +6,12 @@
 #include <functional>
 #include <math.h>
 
+//Godot includes
+#include <TextureRect.hpp>
+#include <ResourceLoader.hpp>
 #include <Godot.hpp>
+#include <Button.hpp>
+#include <TextureButton.hpp>
 #include <KinematicBody2D.hpp>
 #include <CollisionObject2D.hpp>
 #include <Node.hpp>
@@ -24,6 +29,7 @@
 #include <InputEvent.hpp>
 #include <TileMap.hpp>
 #include <Tree.hpp>
+#include <Label.hpp>
 #include <Array.hpp>
 #include <ProgressBar.hpp>
 #include <InputEventKey.hpp>
@@ -31,7 +37,27 @@
 #include <Particles2D.hpp>
 #include <ParticlesMaterial.hpp>
 #include <AnimatedSprite.hpp>
+#include <SpriteFrames.hpp>
+#include <SceneTree.hpp>
+#include <VBoxContainer.hpp>
+#include <SceneTree.hpp>
+#include <Texture.hpp>
+#include <AudioServer.hpp>
+#include <AudioStreamPlayer2D.hpp>
+#include <AudioStream.hpp>
+#include <File.hpp>
+#include <JSON.hpp>
+#include <JSONParseResult.hpp>
+#include <SpriteFrames.hpp>
+#include <Slider.hpp>
+#include <Dictionary.hpp>
+#include <ResourceSaver.hpp>
+#include <Control.hpp>
 
+
+using namespace godot;
+
+//project includes
 #include "IPlayer.h"
 #include "PlayerData.h"
 #include "Player1.h"
@@ -57,6 +83,14 @@
 #include "InputReviveManager.h"
 #include "StatueMeleeAI.h"
 #include "StatueShootAI.h"
+#include "FadeAnimation.h"
+#include "PlayersContainer.h"
+#include "RoomStats.h"
+#include "MenuButtons.h"
+#include "AudioEffect.h"
+#include "ParticlesDestroyer.h"
+#include "ExitHandler.h"
+#include "Preloader.h"
 
 #include "Generation.h"
 #include "SpawnPointChecker.h"
@@ -67,5 +101,3 @@
 #include "SpawnEnemyController.h"
 #include "ItemsContainer.h"
 #include "ItemGenerator.h"
-
-using namespace godot;

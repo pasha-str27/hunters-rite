@@ -3,16 +3,20 @@
 #include "headers.h"
 #endif
 
-godot::StatueMeleeAI::StatueMeleeAI(Ref<PackedScene>& bullet, Node2D* node_tmp, Node2D* player1, Node2D* player2):
-	EnemyData(node_tmp, nullptr, nullptr)
+godot::StatueMeleeAI::StatueMeleeAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
 {
-	min_scale = 1;
-	max_scale = 10;
+	player1 = nullptr;
+	player2 = nullptr;
+	min_scale = 0;
+	max_scale = 8;
 	current_scale = min_scale;
 	dir = 1;
 	speed = 5;
 	damage = 20;
 	can_fight = true;
+
+	cast_to<Area2D>(_get_enemy()->get_child(3))->set_scale(Vector2(current_scale, current_scale));
+	cast_to<AnimationPlayer>(node_tmp->get_node("zone")->get_child(1)->get_child(0))->set_current_animation("idle");
 }
 
 void godot::StatueMeleeAI::change_can_fight(bool value)
@@ -39,40 +43,46 @@ void godot::StatueMeleeAI::_set_speed(float value)
 
 void godot::StatueMeleeAI::_set_player1(Node2D* player1)
 {
-	EnemyData::_set_player1(player1);
+	this->player1 = player1;
 	player1->call("_take_damage", damage, false);
 }
 
 void godot::StatueMeleeAI::_set_player2(Node2D* player2)
 {
-	EnemyData::_set_player2(player2);
+	this->player2 = player2;
 	player2->call("_take_damage", damage, false);
 }
 
 void godot::StatueMeleeAI::_delete_player1()
 {
-	EnemyData::_delete_player1();
+	this->player1 = nullptr;
 
-	if (_get_player1() == nullptr && _get_player2() == nullptr)
+	if (player1 == nullptr && player2 == nullptr)
 		can_fight = false;
 }
 
 void godot::StatueMeleeAI::_delete_player2()
 {
-	EnemyData::_delete_player2();
+	this->player2 = nullptr;
 
-	if (_get_player1() == nullptr && _get_player2() == nullptr)
+	if (player1 == nullptr && player2 == nullptr)
 		can_fight = false;
 }
 
 void godot::StatueMeleeAI::_process(float delta)
 {
-	if (!(current_scale <= max_scale && current_scale >= min_scale))
-		dir *= -1;
+	if (!(current_scale < max_scale && current_scale > min_scale))
+	{
+		if (current_scale >= max_scale)
+			dir = -2;
+		else
+			dir = 8;
+	}
 
 	current_scale += dir * delta;
+
 	cast_to<Area2D>(_get_enemy()->get_child(3))->set_scale(Vector2(current_scale, current_scale));
 
 	if(can_fight)
-		_fight(_get_player1(), _get_player2());
+		_fight(player1, player2);
 }

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/start.wav-69d583d4a3ed0cea627d01d461f9c099.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/Preloader/start.wav"
+dest_files=[ "res://.import/start.wav-69d583d4a3ed0cea627d01d461f9c099.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

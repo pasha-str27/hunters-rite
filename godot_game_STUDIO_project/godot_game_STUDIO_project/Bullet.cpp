@@ -15,10 +15,12 @@ void godot::Bullet::_register_methods()
 	register_property<Bullet, Vector2>("direction", &Bullet::dir, Vector2(5, 5));
 	register_property<Bullet, float>("speed", &Bullet::speed, 10);
 	register_property<Bullet, float>("damage", &Bullet::damage, 10);
+	register_property<Bullet, Ref<PackedScene>>("Explosion Particles", &Bullet::explosion_particles, nullptr);
 }
 
 void godot::Bullet::_ready()
 {
+	cast_to<AnimationPlayer>(get_child(0)->get_child(0)->get_child(0))->set_current_animation("idle");
 }
 
 void godot::Bullet::_init()
@@ -34,9 +36,19 @@ void godot::Bullet::_on_Area2D_body_entered(Node* node)
 		return;
 
 	cast_to<Node2D>(this)->set_visible(false);
+	if (explosion_particles != nullptr)
+	{
+		auto particles = cast_to<Node2D>(explosion_particles->instance());
+		particles->set_global_position(this->get_global_position());
+		get_node("/root/Node2D/Node")->add_child(particles);
+	}
 
-	if (node->is_in_group("player") && is_in_group("web_bullet"))
+
+	if (node->is_in_group("player") && is_in_group("web_bullet")) 
+	{
 		node->call("_change_can_moving", false);
+		node->call("_animate_spider_web");
+	}
 	else
 	{
 		if (node->is_in_group("enemy"))
