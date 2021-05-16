@@ -16,7 +16,7 @@
 [ext_resource path="res://Assets/Prefabs/SpiderWeb.tscn" type="PackedScene" id=14]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 15.6514
+radius = 10.1296
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
@@ -147,7 +147,7 @@ animations = [ {
 } ]
 
 [sub_resource type="CircleShape2D" id=28]
-radius = 16.8866
+radius = 10.0102
 
 [sub_resource type="Gradient" id=29]
 offsets = PoolRealArray( 0.423237, 1 )
@@ -225,7 +225,7 @@ shape = SubResource( 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 27 )
 animation = "idle"
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( 35, 0 )
 
@@ -235,7 +235,11 @@ scale = Vector2( 0.5, 0.5 )
 
 [node name="SpiderWeb" parent="Player1/CollisionShape2D" instance=ExtResource( 14 )]
 
-[node name="Area2D" type="Area2D" parent="Player1"]
+[node name="Area2D" type="Area2D" parent="Player1" groups=[
+"player",
+"player1",
+]]
+position = Vector2( 0, 12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1/Area2D"]
 shape = SubResource( 28 )

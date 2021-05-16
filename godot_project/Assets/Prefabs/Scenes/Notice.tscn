@@ -3,7 +3,7 @@
 [ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Assets/Scripts/MenuButtons.gdns" type="Script" id=3]
-[ext_resource path="res://Assets/Sprites/monster_finger_flower.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/Monsters/flower.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Sprites/UI/button_focus_v2.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Sprites/UI/button_background_v2.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Sprites/UI/wanted_backgroud_base_v3.png" type="Texture" id=7]
@@ -13,7 +13,7 @@
 [ext_resource path="res://Assets/Sprites/UI/wanted_backgroud_base_v4.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Sprites/UI/wanted_focus.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Sprites/UI/wanted_coming_soon_v1.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Prefabs/SoundsEffects/ButtonClick.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/Prefabs/SoundsEffects/Effects/ButtonClick.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Assets/Prefabs/Animations/FadeOut.tscn" type="PackedScene" id=16]
 
 [sub_resource type="DynamicFont" id=1]
@@ -82,6 +82,7 @@ margin_left = 136.0
 margin_right = 456.0
 margin_bottom = 320.0
 rect_min_size = Vector2( 256, 256 )
+mouse_filter = 2
 
 [node name="Flower_button" type="TextureButton" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Flower"]
 margin_right = 320.0
@@ -218,7 +219,7 @@ margin_right = 780.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 280, 70 )
 focus_neighbour_top = NodePath("../../Tasks/HBoxContainer/Flower/Flower_button")
-focus_neighbour_bottom = NodePath("../../Tasks/HBoxContainer/Coming_soon_one/Coming_soon_button")
+focus_neighbour_bottom = NodePath("../../CenterContainer2/Bonuses")
 mouse_filter = 2
 texture_normal = ExtResource( 6 )
 texture_focused = ExtResource( 5 )
@@ -245,6 +246,8 @@ __meta__ = {
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/Flower_button" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="pressed" from="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/Flower_button" to="Notice" method="_on_Flower_pressed"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes" to="Notice" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes/Slime_button" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one" to="Notice" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one/Coming_soon_button" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/CenterContainer/Back" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="pressed" from="Notice/VBoxContainer/CenterContainer/Back" to="Notice" method="_on_Back_pressed"]

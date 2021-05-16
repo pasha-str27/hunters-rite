@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Assets/Prefabs/Jertovnik.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Scripts/SpawnEnemyController.gdns" type="Script" id=2]
@@ -6,9 +6,10 @@
 [ext_resource path="res://Assets/Prefabs/Animations/FadeOut.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=5]
 [ext_resource path="res://Assets/Scripts/CameraController.gdns" type="Script" id=6]
-[ext_resource path="res://Assets/Prefabs/SoundsEffects/GameBackMusic.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Assets/Prefabs/SoundsEffects/BossBackMusic.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Prefabs/SoundsEffects/BackMusic/GameBackMusic.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Prefabs/SoundsEffects/BackMusic/BossBackMusic.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Prefabs/Scenes/Pause.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Prefabs/Particles/BoomPowerBallParticles.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -51,6 +52,7 @@ pause_menu = ExtResource( 9 )
 [node name="EnemySpawner" type="Node2D" parent="."]
 script = ExtResource( 2 )
 "Altar prefab" = ExtResource( 1 )
+"Spawn particles" = ExtResource( 10 )
 
 [node name="ItemPoints" type="Node2D" parent="EnemySpawner"]
 
