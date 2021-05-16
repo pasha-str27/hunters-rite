@@ -96,7 +96,6 @@ void godot::Enemy::_process(float delta)
 		if (sp->get_sprite_frames()->get_animation_loop(animation_name) == false && sp->get_frame() == sp->get_sprite_frames()->get_frame_count(animation_name) - 1)
 			sp->play("idle");
 	}
-
 }
 
 void godot::Enemy::_take_damage(float damage, int player_id)
@@ -168,6 +167,12 @@ void godot::Enemy::_start_timer()
 	{
 		timer->connect("timeout", this, "_on_timeout");
 
+		if (is_in_group("spider"))
+		{
+			timer->start(2.5);
+			return;
+		}
+		
 		timer->start(1);
 	}
 }
@@ -219,7 +224,11 @@ void godot::Enemy::_on_Area2D_body_entered(Node* node)
 	if (node->is_in_group("player") && !died)
 	{
 		float damage = 20;
-		if (is_angry)
+
+		if (is_in_group("slime"))
+			damage = 33;
+
+		if (is_in_group("bat") && is_angry)
 			damage = 30;
 
 		node->call("_take_damage", damage, false);
