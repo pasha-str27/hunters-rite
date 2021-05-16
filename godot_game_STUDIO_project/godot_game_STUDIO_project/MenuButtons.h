@@ -14,6 +14,7 @@ namespace godot
 		Ref<PackedScene> menu_scene;
 		Ref<PackedScene> option_scene;
 		Ref<PackedScene> notice_scene;
+		Ref<PackedScene> authors_scene;
 		Ref<PackedScene> items_scene;
 		Ref<PackedScene> game_scene;
 		Ref<PackedScene> fade;
@@ -34,8 +35,10 @@ namespace godot
 		MenuButtons();
 		~MenuButtons();
 
+		int click_counter;
 		static float music_audio_level;
 		static bool was_loaded;
+		bool was_quit_focused;	
 
 		static void _register_methods();
 		void _init();
@@ -50,6 +53,8 @@ namespace godot
 		void _on_FullScreen_pressed(Variant body);
 		void _play_effect();
 		void _play_change_cursor_effect();
+		void _on_Quit_focus_entered();
+		void _on_Quit_focus_exited();
 		void _on_effects_value_changed(float value);
 		void _on_music_value_changed(float value);
 		void save_game();

@@ -162,7 +162,7 @@ texture_focused = ExtResource( 4 )
 expand = true
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="Menu/VBoxContainer/Buttons/QuitAndItems/Quit"]
+[node name="QuitLabel" type="Label" parent="Menu/VBoxContainer/Buttons/QuitAndItems/Quit"]
 modulate = Color( 0.831373, 0.831373, 0.831373, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -221,5 +221,7 @@ __meta__ = {
 [connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/Option" to="Menu" method="_play_change_cursor_effect"]
 [connection signal="pressed" from="Menu/VBoxContainer/Buttons/Option" to="Menu" method="_on_Option_pressed"]
 [connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/QuitAndItems/Quit" to="Menu" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/QuitAndItems/Quit" to="Menu" method="_on_Quit_focus_entered"]
+[connection signal="focus_exited" from="Menu/VBoxContainer/Buttons/QuitAndItems/Quit" to="Menu" method="_on_Quit_focus_exited"]
 [connection signal="pressed" from="Menu/VBoxContainer/Buttons/QuitAndItems/Quit" to="Menu" method="_on_Quit_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Buttons/QuitAndItems/Items" to="Menu" method="_on_Items_pressed"]
