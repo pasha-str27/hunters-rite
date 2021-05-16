@@ -1,0 +1,183 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Assets/Prefabs/Jertovnik.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Scripts/SpawnEnemyController.gdns" type="Script" id=2]
+[ext_resource path="res://Assets/Prefabs/Animations/FadeIn.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Prefabs/Animations/FadeOut.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Assets/Scripts/CameraController.gdns" type="Script" id=6]
+[ext_resource path="res://Assets/Prefabs/SoundsEffects/BackMusic/GameBackMusic.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Prefabs/SoundsEffects/BackMusic/BossBackMusic.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Prefabs/Scenes/Pause.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Prefabs/Particles/BoomPowerBallParticles.tscn" type="PackedScene" id=10]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.6, 0.6, 0.6, 0.117647 )
+corner_radius_top_left = 60
+corner_radius_top_right = 30
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.215686, 1, 0.415686, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.6, 0.6, 0.6, 0.117647 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.6, 0.6, 0.6, 0.117647 )
+corner_radius_top_left = 30
+corner_radius_top_right = 60
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 60
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0, 0.811765, 0.85098, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.6, 0.6, 0.6, 0.117647 )
+
+[node name="Camera2D" type="Camera2D"]
+z_index = 100
+zoom = Vector2( 0.75, 0.75 )
+script = ExtResource( 6 )
+"Fade In Animation" = ExtResource( 3 )
+"Fade Out Animation" = ExtResource( 4 )
+game_back = ExtResource( 7 )
+boss_back = ExtResource( 8 )
+pause_menu = ExtResource( 9 )
+
+[node name="EnemySpawner" type="Node2D" parent="."]
+script = ExtResource( 2 )
+"Altar prefab" = ExtResource( 1 )
+"Spawn particles" = ExtResource( 10 )
+
+[node name="ItemPoints" type="Node2D" parent="EnemySpawner"]
+
+[node name="Node2D" type="Node2D" parent="EnemySpawner/ItemPoints"]
+position = Vector2( -80, 5 )
+
+[node name="Node2D2" type="Node2D" parent="EnemySpawner/ItemPoints"]
+position = Vector2( 80, 5 )
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2( 2, 2 )
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
+
+[node name="P1HealthBarWrapper" type="Control" parent="."]
+margin_left = -478.0
+margin_top = 270.0
+margin_right = 61.0
+margin_bottom = 290.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="P1HealthBarWrapper"]
+anchor_left = 0.889
+anchor_right = 0.999
+anchor_bottom = 1.0
+margin_left = -1.17099
+margin_right = -0.460999
+margin_bottom = 1.0
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0.215686, 1, 0.415686, 1 )
+text = "P1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="P1HealthBarWrapper"]
+anchor_right = 1.0
+margin_left = 1.0
+margin_right = -69.0
+margin_bottom = 20.0
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )
+value = 50.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="P2HealthBarWrapper" type="Control" parent="."]
+margin_left = 458.0
+margin_top = 268.0
+margin_right = 994.0
+margin_bottom = 288.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="P2HealthBarWrapper"]
+anchor_left = 0.888
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.0319519
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0, 0.811765, 0.85098, 1 )
+text = "P2"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="P2HealthBarWrapper"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -20.0
+margin_right = -66.0
+rect_min_size = Vector2( 0, 5 )
+custom_styles/fg = SubResource( 6 )
+custom_styles/bg = SubResource( 7 )
+value = 50.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="ItemHolder" type="Control" parent="."]
+margin_left = -432.0
+margin_top = -176.0
+margin_right = 432.0
+margin_bottom = 264.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="P1Items" type="VBoxContainer" parent="ItemHolder"]
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 70 )
+rect_pivot_offset = Vector2( 16, 0 )
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="P2Items" type="VBoxContainer" parent="ItemHolder"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 70 )
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="area_entered" from="Area2D" to="EnemySpawner" method="_on_Area2D_area_entered"]

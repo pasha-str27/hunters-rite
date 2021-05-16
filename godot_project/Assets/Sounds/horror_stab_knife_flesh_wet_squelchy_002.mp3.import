@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/horror_stab_knife_flesh_wet_squelchy_002.mp3-d03fb1342fd56b8099d8bfa15b1e6d71.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/horror_stab_knife_flesh_wet_squelchy_002.mp3"
+dest_files=[ "res://.import/horror_stab_knife_flesh_wet_squelchy_002.mp3-d03fb1342fd56b8099d8bfa15b1e6d71.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

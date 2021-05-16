@@ -1,0 +1,175 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://Assets/Prefabs/web_bullet_prefab.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Sprites/Tilesets/Monsters/monster_bat_damage.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Scripts/Enemy.gdns" type="Script" id=3]
+[ext_resource path="res://Assets/Sprites/Tilesets/Monsters/monster_bat_idle.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/Tilesets/Monsters/monster_bat_attack.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Prefabs/Particles/BatDashParticles.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Prefabs/Particles/DeathParticles.tscn" type="PackedScene" id=8]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.568627, 0.14902, 0.14902, 0.313726 )
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 9.90974
+height = 0.0
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 4 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 4 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 5 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 5 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 5 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 5 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 5 )
+region = Rect2( 320, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 5 )
+region = Rect2( 384, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 5 )
+region = Rect2( 448, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 5 )
+region = Rect2( 512, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=20]
+animations = [ {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "idle",
+"speed": 7.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ) ],
+"loop": false,
+"name": "damaged",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
+"loop": false,
+"name": "attack",
+"speed": 10.0
+} ]
+
+[sub_resource type="CircleShape2D" id=21]
+radius = 6.93173
+
+[sub_resource type="CircleShape2D" id=22]
+radius = 35.5065
+
+[sub_resource type="CircleShape2D" id=23]
+radius = 37.2881
+
+[node name="Bat" type="Node2D"]
+
+[node name="Bat" type="KinematicBody2D" parent="." groups=[
+"bat",
+"enemy",
+]]
+z_index = 25
+collision_layer = 4
+collision_mask = 512
+script = ExtResource( 3 )
+bullet = ExtResource( 1 )
+"Death particles" = ExtResource( 8 )
+
+[node name="HealthBar" type="ProgressBar" parent="Bat"]
+margin_left = -20.0
+margin_top = -30.0
+margin_right = 20.0
+margin_bottom = -25.0
+rect_scale = Vector2( 1, 0.5 )
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+value = 50.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bat"]
+shape = SubResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Bat/CollisionShape2D"]
+frames = SubResource( 20 )
+animation = "damaged"
+frame = 1
+playing = true
+
+[node name="Area2D" type="Area2D" parent="Bat"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bat/Area2D"]
+position = Vector2( -1.10243, -2.20486 )
+shape = SubResource( 21 )
+
+[node name="angry_zone" type="Area2D" parent="Bat"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bat/angry_zone"]
+shape = SubResource( 22 )
+
+[node name="Area2D2" type="Area2D" parent="Bat"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bat/Area2D2"]
+shape = SubResource( 23 )
+
+[node name="BatDashParticles" parent="Bat" instance=ExtResource( 6 )]
+amount = 100
+lifetime = 0.5
+
+[node name="SpawnParticles" parent="Bat" instance=ExtResource( 7 )]
+
+[connection signal="body_entered" from="Bat/Area2D" to="Bat" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Bat/angry_zone" to="Bat" method="_set_angry"]
+[connection signal="body_exited" from="Bat/Area2D2" to="Bat" method="_set_angry"]

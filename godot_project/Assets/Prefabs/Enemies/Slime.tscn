@@ -1,0 +1,235 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://Assets/Sprites/Tilesets/Monsters/monster_slime.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Prefabs/web_bullet_prefab.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Scripts/Enemy.gdns" type="Script" id=3]
+[ext_resource path="res://Assets/Scripts/SpiderSide.gdns" type="Script" id=4]
+[ext_resource path="res://Assets/Sprites/Tilesets/Monsters/monster_slime_damage.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Prefabs/Particles/DeathParticles.tscn" type="PackedScene" id=7]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.568627, 0.14902, 0.14902, 0.313726 )
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 11.42
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 160, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 224, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 256, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 1 )
+region = Rect2( 320, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 5 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 5 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=18]
+animations = [ {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
+"loop": true,
+"name": "idle",
+"speed": 7.0
+}, {
+"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"loop": false,
+"name": "damaged",
+"speed": 10.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=19]
+extents = Vector2( 4.89366, 4.97602 )
+
+[sub_resource type="CircleShape2D" id=20]
+radius = 2.64047
+
+[node name="Slime" type="Node2D"]
+
+[node name="Slime" type="KinematicBody2D" parent="." groups=[
+"enemy",
+"slime",
+]]
+z_index = 25
+collision_layer = 4
+collision_mask = 512
+script = ExtResource( 3 )
+bullet = ExtResource( 2 )
+"Death particles" = ExtResource( 7 )
+
+[node name="HealthBar" type="ProgressBar" parent="Slime"]
+margin_left = -20.0
+margin_top = -25.0
+margin_right = 20.0
+margin_bottom = -20.0
+rect_scale = Vector2( 1, 0.5 )
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+value = 50.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Slime"]
+shape = SubResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Slime/CollisionShape2D"]
+frames = SubResource( 18 )
+animation = "damaged"
+frame = 2
+playing = true
+
+[node name="Area2D2" type="Area2D" parent="Slime"]
+position = Vector2( -32, -32 )
+collision_layer = 32769
+collision_mask = 32785
+script = ExtResource( 4 )
+side = -1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Slime/Area2D2"]
+shape = SubResource( 19 )
+
+[node name="Area2D4" type="Area2D" parent="Slime"]
+position = Vector2( 0, -32 )
+collision_layer = 32769
+collision_mask = 32785
+script = ExtResource( 4 )
+side = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Slime/Area2D4"]
+shape = SubResource( 19 )
+
+[node name="Area2D5" type="Area2D" parent="Slime"]
+position = Vector2( 32, -32 )
+collision_layer = 32769
+collision_mask = 32785
+script = ExtResource( 4 )
+side = -1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Slime/Area2D5"]
+shape = SubResource( 19 )
+
+[node name="Area2D7" type="Area2D" parent="Slime"]
+position = Vector2( -32, 0 )
+collision_layer = 32769
+collision_mask = 32785
+script = ExtResource( 4 )
+side = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Slime/Area2D7"]
+shape = SubResource( 19 )
+
+[node name="Area2D8" type="Area2D" parent="Slime"]
+position = Vector2( 32, 0 )
+collision_layer = 32769
+collision_mask = 32785
+script = ExtResource( 4 )
+side = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Slime/Area2D8"]
+shape = SubResource( 19 )
+
+[node name="Area2D9" type="Area2D" parent="Slime"]
+position = Vector2( -32, 32 )
+collision_layer = 32769
+collision_mask = 32785
+script = ExtResource( 4 )
+side = -1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Slime/Area2D9"]
+shape = SubResource( 19 )
+
+[node name="Area2D10" type="Area2D" parent="Slime"]
+position = Vector2( 0, 32 )
+collision_layer = 32769
+collision_mask = 32785
+script = ExtResource( 4 )
+side = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Slime/Area2D10"]
+shape = SubResource( 19 )
+
+[node name="Area2D11" type="Area2D" parent="Slime"]
+position = Vector2( 32, 32 )
+collision_layer = 32769
+collision_mask = 32785
+script = ExtResource( 4 )
+side = -1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Slime/Area2D11"]
+shape = SubResource( 19 )
+
+[node name="Area2D" type="Area2D" parent="Slime"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Slime/Area2D"]
+shape = SubResource( 20 )
+
+[node name="SpawnParticles" parent="Slime" instance=ExtResource( 6 )]
+
+[connection signal="body_entered" from="Slime/Area2D2" to="Slime/Area2D2" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Slime/Area2D2" to="Slime/Area2D2" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="Slime/Area2D4" to="Slime/Area2D4" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Slime/Area2D4" to="Slime/Area2D4" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="Slime/Area2D5" to="Slime/Area2D5" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Slime/Area2D5" to="Slime/Area2D5" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="Slime/Area2D7" to="Slime/Area2D7" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Slime/Area2D7" to="Slime/Area2D7" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="Slime/Area2D8" to="Slime/Area2D8" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Slime/Area2D8" to="Slime/Area2D8" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="Slime/Area2D9" to="Slime/Area2D9" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Slime/Area2D9" to="Slime/Area2D9" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="Slime/Area2D10" to="Slime/Area2D10" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Slime/Area2D10" to="Slime/Area2D10" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="Slime/Area2D11" to="Slime/Area2D11" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Slime/Area2D11" to="Slime/Area2D11" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="Slime/Area2D" to="Slime" method="_on_Area2D_body_entered"]
