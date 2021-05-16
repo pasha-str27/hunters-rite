@@ -5,17 +5,18 @@
 
 void godot::SpawnEnemyController::SpawnEnemies()
 {
-	if (spawn_points.size() == 0 || enemies.size() == 0)
-		return;
-
 	RandomNumberGenerator* rng = RandomNumberGenerator::_new();
 	rng->randomize();
 	
 	for (int i = 0; i < enemies.size(); i++) 
 	{
+		if (spawn_points.size() == 0)
+			break;
+
 		int rand_point = rng->randi_range(0, (int64_t)spawn_points.size() - 1);
 		auto spawned_enemy = cast_to<Node2D>(cast_to<PackedScene>(enemies[i])->instance());
 		spawned_enemy->set_global_position(cast_to<Node2D>(spawn_points[rand_point])->get_global_position());
+		spawn_points.remove(rand_point);
 		get_node("/root/Node2D/Node")->call_deferred("add_child", spawned_enemy);
 	}
 
@@ -60,7 +61,9 @@ void godot::SpawnEnemyController::_register_methods()
 {
 	register_method("_ready", &SpawnEnemyController::_ready);
 	register_method("_prepare_spawn", &SpawnEnemyController::_prepare_spawn);
+	register_method("_spawn", &SpawnEnemyController::_spawn);
 	register_method("_on_Area2D_area_entered", &SpawnEnemyController::_on_Area2D_area_entered);
+	
 
 	register_property<SpawnEnemyController, Ref<PackedScene>>("Altar prefab", &SpawnEnemyController::altar, nullptr);
 }
@@ -72,15 +75,30 @@ void godot::SpawnEnemyController::_init()
 
 void godot::SpawnEnemyController::_ready()
 {
-
+	add_child(timer);
 }
 
 void godot::SpawnEnemyController::_prepare_spawn()
 {
-	Godot::print("spawning enemies");
+	if (spawn_points.size() == 0 || enemies.size() == 0)
+	{
+		get_parent()->call("_open_doors");
+		return;
+	}
+
+	timer->connect("timeout", this, "_spawn");
+	timer->start(.5f);
+}
+
+void godot::SpawnEnemyController::_spawn()
+{
+	timer->disconnect("timeout", this, "_spawn");
+
 	SpawnEnemies();
-	if(Enemies::get_singleton()->_get_enemies_count() > 0)
+
+	if (Enemies::get_singleton()->_get_enemies_count() > 0)
 		get_parent()->call("_close_doors");
+
 	spawn_points.clear();
 }
 
@@ -89,7 +107,6 @@ void godot::SpawnEnemyController::_on_Area2D_area_entered(Node* other)
 	if (other->is_in_group("room")) 
 	{
 		String room_type = other->get_parent()->call("_get_type");
-		Godot::print(room_type);
 		if (room_type == "room") 
 		{
 			get_parent()->call("_close_doors");
@@ -102,22 +119,27 @@ void godot::SpawnEnemyController::_on_Area2D_area_entered(Node* other)
 			enemies = other->get_parent()->call("_get_enemies");
 			get_parent()->call("_close_doors");
 			SpawnBoss();
-			_prepare_spawn();
 		}
 		else if (room_type == "item_room")
 		{
 			SpawnItems();
 		}
+
+		get_parent()->call("_set_current_room_type", room_type);
+
 		other->queue_free();
+		return;
 	}
 }
 
 godot::SpawnEnemyController::SpawnEnemyController()
 {
+	timer = Timer::_new();
 }
 
 godot::SpawnEnemyController::~SpawnEnemyController()
 {
 	enemies = {};
 	spawn_points = {};
+	timer = nullptr;
 }

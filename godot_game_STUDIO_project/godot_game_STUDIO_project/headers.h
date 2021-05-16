@@ -87,6 +87,7 @@ using namespace godot;
 #include "MenuButtons.h"
 #include "AudioEffect.h"
 #include "ParticlesDestroyer.h"
+#include "ExitHandler.h"
 
 #include "Generation.h"
 #include "SpawnPointChecker.h"

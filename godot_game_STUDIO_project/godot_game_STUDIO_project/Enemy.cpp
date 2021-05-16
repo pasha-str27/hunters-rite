@@ -93,7 +93,7 @@ void godot::Enemy::_process(float delta)
 	if(!died)
 		ai->_process(delta);
 
-	if (sp != nullptr) 
+	if (sp != nullptr && !died) 
 	{
 		String animation_name = sp->get_animation();
 		if (sp->get_sprite_frames()->get_animation_loop(animation_name) == false && sp->get_frame() == sp->get_sprite_frames()->get_frame_count(animation_name) - 1)
@@ -122,12 +122,10 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 
 		if (player_id == 1)
 			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node/Player1"), "Player1");
-		else 
-			if(player_id == 2)
-				player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player2");
+		else if(player_id == 2)
+			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player2");
 
-		if(!died)
-			player->call("_on_enemy_die", this->get_global_position());
+		player->call("_on_enemy_die", this->get_global_position());
 
 		died = true;
 		Enemies::get_singleton()->_remove_enemy(this);
@@ -140,8 +138,6 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 			CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->call("_open_doors");
 		}
 
-
-		Godot::print("enemies count: " + String::num(Enemies::get_singleton()->_get_enemies_count()));
 
 		set_collision_layer_bit(2, false);
 		set_collision_mask_bit(9, false);

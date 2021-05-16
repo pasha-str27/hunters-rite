@@ -17,21 +17,26 @@ void godot::CameraController::_register_methods()
 	register_method("_start_mute_volume", &CameraController::_start_mute_volume);
 	register_method("_input", &CameraController::_input);
 	register_method("_audio_fade_to_main_menu", &CameraController::_audio_fade_to_main_menu);
+	register_method("_spawn_exit", &CameraController::_spawn_exit);
+	register_method("_set_current_room_type", &CameraController::_set_current_room_type);	
 
 	register_property<CameraController, Ref<PackedScene>>("Fade In Animation", &CameraController::fadeIn, nullptr);
 	register_property<CameraController, Ref<PackedScene>>("Fade Out Animation", &CameraController::fadeOut, nullptr);
 	register_property<CameraController, Ref<PackedScene>>("game_back", &CameraController::game_back, nullptr);
 	register_property<CameraController, Ref<PackedScene>>("boss_back", &CameraController::boss_back, nullptr);
 	register_property<CameraController, Ref<PackedScene>>("pause_menu", &CameraController::pause_menu, nullptr);
+	register_property<CameraController, Ref<PackedScene>>("Exit", &CameraController::exit, nullptr);
 }
 
 void godot::CameraController::_move(String dir)
 {
+	_close_doors();
+
 	auto fade = cast_to<Node2D>(fadeIn->instance());
 	add_child(fade);
 
-	float vertical_offset = 450;
-	float horizontal_offset = 320;
+	float vertical_offset = 390;
+	float horizontal_offset = 250;
 	
 	timer_audio->connect("timeout", this, "_change_audio_volume");
 	timer_audio->start(time_delta);
@@ -112,6 +117,7 @@ bool godot::CameraController::_is_one_player_alive()
 	return !has_node("/root/Node2D/Node/Player1") || !has_node("/root/Node2D/Node/Player2");
 }
 
+
 void godot::CameraController::_init()
 {
 	for (int i = 0; i < 4; i++)
@@ -180,11 +186,19 @@ void godot::CameraController::_door_collision(String door_dir)
 
 void godot::CameraController::_open_doors()
 {
+	if (current_room_type == "boss")
+	{
+		_spawn_exit();
+		current_room_type = "";
+	}
+
+	Godot::print("open doors");
 	is_open_door = true;
 }
 
 void godot::CameraController::_close_doors()
 {
+	Godot::print("close doors");
 	is_open_door = false;
 }
 
@@ -280,6 +294,18 @@ void godot::CameraController::_audio_fade_to_main_menu()
 
 	timer_audio->connect("timeout", this, "_audio_fade_to_main_menu");
 	timer_audio->start(time_delta);
+}
+
+void godot::CameraController::_spawn_exit()
+{
+	auto exit_node = cast_to<Node2D>(exit->instance());
+	exit_node->set_global_position(this->get_global_position());
+	get_node("/root/Node2D/Node")->add_child(exit_node);
+}
+
+void godot::CameraController::_set_current_room_type(String type)
+{
+	current_room_type = type;
 }
 
 godot::CameraController::CameraController()

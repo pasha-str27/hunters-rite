@@ -220,6 +220,7 @@ void godot::PlayerController::_process(float delta)
 {
 	if (can_move && is_alive)
 		current_player->_move();
+
 }
 
 void godot::PlayerController::_take_damage(float damage, bool is_spike)
@@ -284,7 +285,7 @@ void godot::PlayerController::_change_can_moving(bool value)
 
 	timer->start(1.5);
 	
-	if(value == false)
+	if(value == false && is_alive)
 		current_player->_stop_animations();
 }
 
