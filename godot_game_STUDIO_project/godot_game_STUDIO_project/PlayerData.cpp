@@ -95,7 +95,7 @@ float godot::PlayerData::_get_HP()
 
 void godot::PlayerData::_set_HP(float HP)
 {
-	this->HP = HP > 1 ? HP : 1;
+	this->HP = HP > 10 ? HP : 10;
 	this->HP = HP > max_HP ? max_HP : HP;
 }
 

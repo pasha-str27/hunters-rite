@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-godot::Player2* godot::Player2::singleton = nullptr;
-
 godot::Player2::Player2(Node2D* obj, Ref<PackedScene> bullet) : PlayerData(obj)
 {
 	_change_can_fight(true);
@@ -29,13 +27,17 @@ void godot::Player2::_move()
 	{
 		sprite->set_offset(Vector2::ZERO);
 		sprite->play("idle");
+		vfx_sprite->stop();
 	}
 
 	if (PlayerData::_get_dir() == Vector2::ZERO && animation_name != "revive" && animation_name != "damaged" && animation_name != "attack")
 		sprite->play("idle");
 
 	if (PlayerData::_get_dir() != Vector2::ZERO && sprite->get_animation() == "idle")
+	{
+		sprite->set_offset(Vector2::ZERO);
 		sprite->play("run");
+	}
 
 	if (sprite->is_flipped_h() && sprite->get_animation() == "attack")
 		sprite->set_offset(Vector2(-10, -5));
@@ -97,6 +99,7 @@ void godot::Player2::_fight(Node* node)
 
 	sprite->play("attack");
 	sprite->set_offset(Vector2(10, -5));
+	vfx_sprite->set_frame(0);
 
 	_change_can_fight(false);
 
@@ -110,7 +113,6 @@ void godot::Player2::_fight(Node* node)
 
 	cast_to<Node2D>(_get_object()->get_child(1))->set_visible(true);
 
-	vfx_sprite->set_frame(0);
 	vfx_sprite->play("idle");
 
 	_get_object()->call("_start_timer");
@@ -148,7 +150,6 @@ void godot::Player2::_take_damage(float damage, bool is_spike)
 		sprite->play("death");
 		if (_was_revived())
 		{
-
 			_get_object()->queue_free();
 			return;
 		}
@@ -200,5 +201,8 @@ ProgressBar* godot::Player2::_get_health_bar()
 void godot::Player2::_stop_animations()
 {
 	sprite->play("idle");
+	sprite->set_offset(Vector2::ZERO);
 	_set_dir(Vector2::ZERO);
+	vfx_sprite->stop();
+	vfx_sprite->set_frame(0);
 }
