@@ -33,7 +33,7 @@ shape = SubResource( 1 )
 [node name="SpawnPoints" type="Node2D" parent="."]
 
 [node name="EnemySpawner" type="Node2D" parent="SpawnPoints"]
-position = Vector2( -16, 128 )
+position = Vector2( -48, 128 )
 
 [node name="EnemySpawner2" type="Node2D" parent="SpawnPoints"]
 position = Vector2( 272, -32 )
