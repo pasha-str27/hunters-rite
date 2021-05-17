@@ -20,10 +20,6 @@ namespace godot
 		Ref<PackedScene> fade;
 		Ref<PackedScene> fade_in;
 
-		static bool was_focused;
-		static bool is_full_screen;
-		static float effect_audio_level;
-
 		Timer* timer_music;
 		Timer* timer_music_out;
 		Timer* timer;
@@ -38,6 +34,9 @@ namespace godot
 		int click_counter;
 		static float music_audio_level;
 		static bool was_loaded;
+		static bool was_focused;
+		static bool is_full_screen;
+		static float effect_audio_level;
 		bool was_quit_focused;	
 
 		static void _register_methods();
@@ -54,6 +53,15 @@ namespace godot
 		void _play_effect();
 		void _play_change_cursor_effect();
 		void _on_Quit_focus_entered();
+		void _on_Flower_button_focus_entered();
+		void _on_Flower_button_focus_exited();
+		void _on_Slime_button_focus_entered();
+		void _on_Slime_button_focus_exited();
+		void _on_Coming_soon_button_focus_entered();
+		void _on_Coming_soon_button_focus_exited();
+		void _on_animated_focus_entered(String button_name, String animated_name);
+		void _on_animated_focus_exited(String button_name, String animated_name);
+		void _set_animated_focus(String button_name,String animated_name,bool mode);
 		void _on_Quit_focus_exited();
 		void _on_effects_value_changed(float value);
 		void _on_music_value_changed(float value);

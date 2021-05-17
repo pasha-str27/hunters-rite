@@ -25,8 +25,6 @@ void godot::MenuButtons::_init() {}
 
 void godot::MenuButtons::_ready()
 {
-	Input::get_singleton()->set_mouse_mode(Input::MOUSE_MODE_CAPTURED);
-
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	menu_scene = rld->load("res://Assets/Prefabs/Scenes/Menu.tscn");
 	option_scene = rld->load("res://Assets/Prefabs/Scenes/Option.tscn");
@@ -67,7 +65,7 @@ void godot::MenuButtons::_ready()
 
 	if (get_name() == "Menu")
 	{
-		load_game();
+		//load_game();
 		if (!was_loaded)
 		{
 			add_child(fade_in->instance());
@@ -95,7 +93,16 @@ void MenuButtons::_register_methods()
 	register_method((char*)"_on_FullScreen_pressed", &MenuButtons::_on_FullScreen_pressed);
 	register_method((char*)"_play_change_cursor_effect", &MenuButtons::_play_change_cursor_effect);
 	register_method((char*)"_on_Quit_focus_entered", &MenuButtons::_on_Quit_focus_entered);
+	//register_method((char*)"_on_Flower_button_focus_entered", &MenuButtons::_on_Flower_button_focus_entered);
+	//register_method((char*)"_on_Slime_button_focus_entered", &MenuButtons::_on_Slime_button_focus_entered);
+	//register_method((char*)"_on_Coming_soon_button_focus_entered", &MenuButtons::_on_Coming_soon_button_focus_entered);
+
 	register_method((char*)"_on_Quit_focus_exited", &MenuButtons::_on_Quit_focus_exited);
+	//register_method((char*)"_on_Flower_button_focus_exited", &MenuButtons::_on_Flower_button_focus_exited);
+	//register_method((char*)"_on_Slime_button_focus_exited", &MenuButtons::_on_Slime_button_focus_exited);
+	//register_method((char*)"_on_Coming_soon_button_focus_exited", &MenuButtons::_on_Coming_soon_button_focus_exited);
+	register_method((char*)"_on_animated_focus_entered", &MenuButtons::_on_animated_focus_entered);
+	register_method((char*)"_on_animated_focus_exited", &MenuButtons::_on_animated_focus_exited);
 	register_method((char*)"_on_effects_value_changed", &MenuButtons::_on_effects_value_changed);
 	register_method((char*)"_on_music_value_changed", &MenuButtons::_on_music_value_changed);
 	register_method((char*)"_timeout", &MenuButtons::_timeout);
@@ -431,6 +438,29 @@ void godot::MenuButtons::_on_Quit_focus_exited()
 	cast_to<Label>(find_node("QuitLabel"))->set_text("Quit");
 }
 
+void godot::MenuButtons::_set_animated_focus(String button_name, String animated_name, bool mode)
+{
+	if (mode){
+		cast_to<AnimationPlayer>(find_node(animated_name))->play("Focus_scale");
+	}
+	else{
+		cast_to<AnimationPlayer>(find_node(animated_name))->stop();
+	}
+	if (cast_to<TextureRect>(find_node(button_name)->get_child(0)) != nullptr) {}
+		cast_to<TextureRect>(find_node(button_name)->get_child(0))->set_visible(mode);
+}
+
+void godot::MenuButtons::_on_animated_focus_entered(String button_name, String animated_name)
+{
+	_set_animated_focus(button_name, animated_name, true);
+}
+
+void godot::MenuButtons::_on_animated_focus_exited(String button_name, String animated_name)
+{
+	_set_animated_focus(button_name, animated_name, false);
+}
+
+
 void godot::MenuButtons::_input(Input* event)
 {
 	if (Input::get_singleton()->is_action_just_pressed("ui_left"))
@@ -438,7 +468,6 @@ void godot::MenuButtons::_input(Input* event)
 		if (was_quit_focused)
 		{
 			click_counter++;
-			Godot::print(String::num(click_counter));
 			if (click_counter > 7)
 			{
 				cast_to<Label>(find_node("QuitLabel"))->set_text("Authors");

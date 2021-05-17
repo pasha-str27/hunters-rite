@@ -33,13 +33,13 @@ void godot::FadeAnimation::_set_is_exit_anim(bool value)
 	is_exit_anim = value;
 }
 
+
 godot::FadeAnimation::FadeAnimation()
 {
 }
 
 void godot::FadeAnimation::_on_timeout()
 {
-	Godot::print("anim end");
 	timer->disconnect("timeout", this, "_on_timeout");
 
 	if (!get_node("/root")->has_node("Pause") && !get_node("/root")->has_node("Notice") && !get_node("/root")->has_node("Menu"))

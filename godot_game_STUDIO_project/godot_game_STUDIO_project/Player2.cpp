@@ -121,9 +121,15 @@ void godot::Player2::_fight(Node* node)
 	if (!_can_fight())
 		return;
 
+	sprite->stop();
+	sprite->set_frame(0);
 	sprite->play("attack");
 	sprite->set_offset(Vector2(10, -5));
 	vfx_sprite->set_frame(0);
+
+	Ref<PackedScene> prefab = nullptr;
+	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/Player2Fight.tscn");
+	_get_object()->add_child(prefab->instance());
 
 	_change_can_fight(false);
 
@@ -211,7 +217,6 @@ void godot::Player2::_revive()
 
 void godot::Player2::_update_health_bar()
 {
-	printf("Player2' hp updating\n");
 	auto health_bar = _get_health_bar();
 	if (health_bar != nullptr)
 		health_bar->set_value(_get_HP());

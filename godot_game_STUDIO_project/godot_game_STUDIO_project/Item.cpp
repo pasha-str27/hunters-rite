@@ -38,7 +38,6 @@ godot::Item::~Item()
 
 void godot::Item::_ready()
 {
-	Godot::print("vvvv");
 	//	get animator
 	animator = cast_to<AnimationPlayer>(get_child(0)->get_child(0));
 	//	start animation
@@ -87,10 +86,10 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 	control->set_custom_minimum_size(Vector2(32, 32));
 	control->add_child(item_sprite);
 
-	if (item_sprite != nullptr)
-		Godot::print("Got sprite");
-	if (item_box != nullptr)
-		Godot::print("Got item box");
+	//if (item_sprite != nullptr)
+	//	Godot::print("Got sprite");
+	//if (item_box != nullptr)
+	//	Godot::print("Got item box");
 
 	//adding item to item box
 	item_box->add_child(control);

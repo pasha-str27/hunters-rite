@@ -7,14 +7,12 @@ void godot::ClosedRoom::SpawnPossibleRoom()
     timer->disconnect("timeout", this, "SpawnPossibleRoom");
     //  get correct list
     Generation *templates = get_node("/root/Node2D")->call("_get_instance");
-    Godot::print("door directions in closed room spawn: " + String::num(door_directions.size()));
     Array possible_rooms = templates->GetListByDirections(door_directions);
 
 
     if (possible_rooms.size() == 0)
     {
         possible_rooms = templates->all_rooms;
-        Godot::print("Zero in closed room spawn func");
         return;
     }
 
@@ -25,7 +23,6 @@ void godot::ClosedRoom::SpawnPossibleRoom()
 
     //  spawn new room
     auto new_room = cast_to<Node2D>(cast_to<PackedScene>(possible_rooms[rand])->instance());
-    Godot::print("33");
     new_room->set_global_position(this->get_global_position());
     //  delete spawned room from possible list
     possible_rooms.remove(rand);

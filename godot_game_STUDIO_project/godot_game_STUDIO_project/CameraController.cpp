@@ -192,13 +192,11 @@ void godot::CameraController::_open_doors()
 		current_room_type = "";
 	}
 
-	Godot::print("open doors");
 	is_open_door = true;
 }
 
 void godot::CameraController::_close_doors()
 {
-	Godot::print("close doors");
 	is_open_door = false;
 }
 
