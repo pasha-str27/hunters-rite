@@ -1,9 +1,8 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Assets/Prefabs/Players/Player1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Prefabs/Players/Player2.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Prefabs/Rooms/4/LRTB.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Sprites/Tilesets/level1_tileset.tres" type="TileSet" id=4]
 [ext_resource path="res://Assets/Prefabs/Items/BadTusk.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Scripts/ItemsContainer.gdns" type="Script" id=7]
 [ext_resource path="res://Assets/Prefabs/exit.tscn" type="PackedScene" id=8]
@@ -20,9 +19,6 @@
 [ext_resource path="res://Assets/Prefabs/Items/FireSword.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Assets/Prefabs/Items/Boot.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Assets/Prefabs/Items/Chicken.tscn" type="PackedScene" id=22]
-
-[sub_resource type="CircleShape2D" id=1]
-radius = 47.1954
 
 [node name="Node" type="Node"]
 
@@ -44,35 +40,3 @@ Type = ""
 
 [node name="TutorialSprites" parent="Room8" instance=ExtResource( 9 )]
 scale = Vector2( 0.4, 0.4 )
-
-[node name="Kek2" type="Area2D" parent="Room8" groups=[
-"tutor",
-]]
-
-[node name="Stuff" type="TileMap" parent="Room8/Kek2"]
-visible = false
-position = Vector2( -12.7136, -2.11893 )
-tile_set = ExtResource( 4 )
-cell_size = Vector2( 32, 32 )
-format = 1
-tile_data = PoolIntArray( -65540, 16, 0, -65537, 16, 0, -131071, 16, 0, -131070, 16, 0, -131069, 16, 0, -131068, 16, 0, -131066, 16, 0, -131063, 16, 0, -4, 16, 0, -2, 16, 0, -65535, 16, 0, -65530, 16, 0, -65528, 16, 0, 65532, 16, 0, 65534, 16, 0, 1, 16, 0, 6, 16, 0, 8, 16, 0, 131068, 16, 0, 131069, 16, 0, 65537, 16, 0, 65538, 16, 0, 65539, 16, 0, 65540, 16, 0, 65542, 16, 0, 65543, 16, 0, 196604, 16, 0, 196606, 16, 0, 131073, 16, 0, 131078, 16, 0, 131080, 16, 0, 262140, 16, 0, 262142, 16, 0, 196609, 16, 0, 196614, 16, 0, 196616, 16, 0, 327676, 16, 0, 327679, 16, 0, 262145, 16, 0, 262146, 16, 0, 262147, 16, 0, 262148, 16, 0, 262150, 16, 0, 262153, 16, 0 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Room8/Kek2"]
-position = Vector2( 361.277, 180.109 )
-shape = SubResource( 1 )
-
-[node name="Lol2" type="Area2D" parent="Room8" groups=[
-"tutor",
-]]
-
-[node name="Stuff" type="TileMap" parent="Room8/Lol2"]
-visible = false
-position = Vector2( -12.7136, -2.11893 )
-tile_set = ExtResource( 4 )
-cell_size = Vector2( 32, 32 )
-format = 1
-tile_data = PoolIntArray( -9, 16, 0, -3, 16, 0, -2, 16, 0, -1, 16, 0, -65534, 16, 0, 65527, 16, 0, 65532, 16, 0, 0, 16, 0, 2, 16, 0, 131063, 16, 0, 131068, 16, 0, 65536, 16, 0, 65538, 16, 0, 196599, 16, 0, 196604, 16, 0, 131072, 16, 0, 131074, 16, 0, 262135, 16, 0, 262140, 16, 0, 196608, 16, 0, 196610, 16, 0, 327671, 16, 0, 327676, 16, 0, 262144, 16, 0, 262146, 16, 0, 393207, 16, 0, 393208, 16, 0, 393209, 16, 0, 393210, 16, 0, 393213, 16, 0, 393214, 16, 0, 393215, 16, 0, 327682, 16, 0, 327683, 16, 0, 327684, 16, 0, 327685, 16, 0 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Room8/Lol2"]
-position = Vector2( -344.323, 182.49 )
-shape = SubResource( 1 )
