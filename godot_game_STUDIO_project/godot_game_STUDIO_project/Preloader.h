@@ -20,9 +20,8 @@ namespace godot
 		void _play_logo_sound();
 		void _play_sound(Ref<AudioStream>);
 		void _stop_sounds();
+		void load();
 		Preloader();
 		~Preloader();
 	};
 }
-
-
