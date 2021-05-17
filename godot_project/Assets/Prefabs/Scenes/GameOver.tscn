@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/Sprites/UI/button_focus_v2.png" type="Texture" id=2]
@@ -12,11 +12,6 @@
 
 [sub_resource type="DynamicFont" id=1]
 size = 90
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 27
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
@@ -81,35 +76,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Description" type="CenterContainer" parent="GameOver/VBoxContainer"]
+[node name="Buttons" type="CenterContainer" parent="GameOver/VBoxContainer"]
 margin_top = 454.0
 margin_right = 1280.0
-margin_bottom = 534.0
-rect_min_size = Vector2( 0, 80 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="GameOver/VBoxContainer/Description"]
-margin_left = 397.0
-margin_top = 17.0
-margin_right = 883.0
-margin_bottom = 63.0
-rect_min_size = Vector2( 368, 46 )
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.870588, 0.870588, 0.870588, 1 )
-custom_colors/font_color_shadow = Color( 0.298039, 0.109804, 0.109804, 1 )
-custom_constants/shadow_offset_x = 6
-custom_constants/shadow_offset_y = 6
-text = "Maybe next time..."
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Buttons" type="CenterContainer" parent="GameOver/VBoxContainer"]
-margin_top = 538.0
-margin_right = 1280.0
-margin_bottom = 608.0
+margin_bottom = 524.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GameOver/VBoxContainer/Buttons"]
 margin_left = 358.0
@@ -125,8 +95,6 @@ __meta__ = {
 }
 
 [node name="Retry" type="TextureButton" parent="GameOver/VBoxContainer/Buttons/HBoxContainer/RetryButton"]
-anchor_left = -0.00357143
-anchor_right = -0.00357143
 margin_right = 280.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 280, 70 )
