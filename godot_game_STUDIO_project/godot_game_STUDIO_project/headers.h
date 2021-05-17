@@ -44,6 +44,7 @@
 #include <Texture.hpp>
 #include <AudioServer.hpp>
 #include <AudioStreamPlayer2D.hpp>
+#include <AudioStream.hpp>
 #include <File.hpp>
 #include <JSON.hpp>
 #include <JSONParseResult.hpp>
