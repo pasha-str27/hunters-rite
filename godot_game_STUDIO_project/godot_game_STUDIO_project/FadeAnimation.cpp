@@ -33,10 +33,6 @@ void godot::FadeAnimation::_set_is_exit_anim(bool value)
 	is_exit_anim = value;
 }
 
-void godot::FadeAnimation::_set_is_exit_anim(bool value)
-{
-	is_exit_anim = value;
-}
 
 godot::FadeAnimation::FadeAnimation()
 {
