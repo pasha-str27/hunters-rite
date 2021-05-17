@@ -29,6 +29,7 @@
 #include <InputEvent.hpp>
 #include <TileMap.hpp>
 #include <Tree.hpp>
+#include <Label.hpp>
 #include <Array.hpp>
 #include <ProgressBar.hpp>
 #include <InputEventKey.hpp>
@@ -43,6 +44,7 @@
 #include <Texture.hpp>
 #include <AudioServer.hpp>
 #include <AudioStreamPlayer2D.hpp>
+#include <AudioStream.hpp>
 #include <File.hpp>
 #include <JSON.hpp>
 #include <JSONParseResult.hpp>
@@ -87,6 +89,8 @@ using namespace godot;
 #include "MenuButtons.h"
 #include "AudioEffect.h"
 #include "ParticlesDestroyer.h"
+#include "ExitHandler.h"
+#include "Preloader.h"
 
 #include "Generation.h"
 #include "SpawnPointChecker.h"

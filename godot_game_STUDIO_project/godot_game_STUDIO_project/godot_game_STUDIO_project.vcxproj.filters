@@ -2,6 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="GodotLibrary.cpp" />
+    <ClCompile Include="AudioEffect.cpp" />
     <ClCompile Include="BatAI.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CameraController.cpp" />
@@ -14,6 +15,7 @@
     <ClCompile Include="EnemyAIContext.cpp" />
     <ClCompile Include="EnemyData.cpp" />
     <ClCompile Include="EnemySideChecker.cpp" />
+    <ClCompile Include="ExitHandler.cpp" />
     <ClCompile Include="FadeAnimation.cpp" />
     <ClCompile Include="FlowerAI.cpp" />
     <ClCompile Include="Generation.cpp" />
@@ -22,11 +24,14 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemGenerator.cpp" />
     <ClCompile Include="ItemsContainer.cpp" />
+    <ClCompile Include="MenuButtons.cpp" />
+    <ClCompile Include="ParticlesDestroyer.cpp" />
     <ClCompile Include="Player1.cpp" />
     <ClCompile Include="Player2.cpp" />
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="PlayerData.cpp" />
     <ClCompile Include="PlayersContainer.cpp" />
+    <ClCompile Include="Preloader.cpp" />
     <ClCompile Include="ProducePlayer1.cpp" />
     <ClCompile Include="ProducePlayer2.cpp" />
     <ClCompile Include="ReviveZone.cpp" />
@@ -40,11 +45,9 @@
     <ClCompile Include="StatueMeleeAI.cpp" />
     <ClCompile Include="StatueShootAI.cpp" />
     <ClCompile Include="Sword.cpp" />
-    <ClCompile Include="AudioEffect.cpp" />
-    <ClCompile Include="MenuButtons.cpp" />
-    <ClCompile Include="ParticlesDestroyer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioEffect.h" />
     <ClInclude Include="BatAI.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="CameraController.h" />
@@ -56,6 +59,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyData.h" />
     <ClInclude Include="EnemySideChecker.h" />
+    <ClInclude Include="ExitHandler.h" />
     <ClInclude Include="FadeAnimation.h" />
     <ClInclude Include="FlowerAI.h" />
     <ClInclude Include="Generation.h" />
@@ -65,12 +69,15 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemGenerator.h" />
     <ClInclude Include="ItemsContainer.h" />
+    <ClInclude Include="MenuButtons.h" />
+    <ClInclude Include="ParticlesDestroyer.h" />
     <ClInclude Include="Player1.h" />
     <ClInclude Include="Player2.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="PlayerData.h" />
     <ClInclude Include="PlayerProduce.h" />
     <ClInclude Include="PlayersContainer.h" />
+    <ClInclude Include="Preloader.h" />
     <ClInclude Include="ProducePlayer1.h" />
     <ClInclude Include="ProducePlayer2.h" />
     <ClInclude Include="ReviveZone.h" />
@@ -87,5 +94,10 @@
     <ClInclude Include="AudioEffect.h" />
     <ClInclude Include="MenuButtons.h" />
     <ClInclude Include="ParticlesDestroyer.h" />
+    <ClInclude Include="ExitHandler.h" />
+    <ClInclude Include="Preloader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="godot_game_STUDIO_project.vcxproj.user" />
   </ItemGroup>
 </Project>

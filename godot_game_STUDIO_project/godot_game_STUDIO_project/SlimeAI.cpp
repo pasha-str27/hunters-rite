@@ -67,7 +67,7 @@ void godot::SlimeAI::change_direction()
 	reset_directions();
 	for (int i = 2; i < 9; ++i)
 	{
-		if (_get_enemy()->get_child(i)->call("_get_current_node") != nullptr
+		if ((int)_get_enemy()->get_child(i)->call("_get_side") != -1 && _get_enemy()->get_child(i)->call("_get_current_node") != nullptr
 			&& cast_to<Node2D>(_get_enemy()->get_child(i)->call("_get_current_node"))->is_in_group("player")
 			&& (bool)cast_to<Node2D>(_get_enemy()->get_child(i)->call("_get_current_node"))->call("_is_alive"))
 		{

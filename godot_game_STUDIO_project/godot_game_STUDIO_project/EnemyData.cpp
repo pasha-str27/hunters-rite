@@ -23,6 +23,10 @@ void godot::EnemyData::_set_player2(Node2D* player2)
 	//PlayersContainer::_get_instance()->_set_player2(player2);
 }
 
+void godot::EnemyData::_change_dir()
+{
+}
+
 Node2D* godot::EnemyData::_get_player1()
 {
 	return PlayersContainer::_get_instance()->_get_player1();

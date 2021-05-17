@@ -11,5 +11,5 @@ dest_files=[ "res://.import/open_dors.mp3-de9bd1c1c2a43168fe56c648db4659e7.mp3st
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
