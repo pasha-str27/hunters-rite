@@ -40,10 +40,10 @@ position = Vector2( 272, -32 )
 position = Vector2( -16, -64 )
 
 [node name="EnemySpawner4" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 240, 128 )
+position = Vector2( 272, 160 )
 
 [node name="EnemySpawner5" type="Node2D" parent="SpawnPoints"]
-position = Vector2( -240, 96 )
+position = Vector2( -208, 96 )
 
 [node name="floor" type="TileMap" parent="."]
 position = Vector2( 0, -16 )

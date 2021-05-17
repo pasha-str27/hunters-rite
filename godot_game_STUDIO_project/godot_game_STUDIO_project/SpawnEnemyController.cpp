@@ -129,6 +129,9 @@ void godot::SpawnEnemyController::_on_Area2D_area_entered(Node* other)
 		}
 		else if (room_type == "item_room")
 		{
+			spawn_points = other->get_parent()->get_node("SpawnPoints")->get_children();
+			enemies = other->get_parent()->call("_get_enemies");
+			get_parent()->call("_close_doors");
 			SpawnItems();
 		}
 
