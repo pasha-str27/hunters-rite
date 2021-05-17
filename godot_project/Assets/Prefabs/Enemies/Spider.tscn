@@ -7,7 +7,7 @@
 [ext_resource path="res://Assets/Sprites/Tilesets/Monsters/monster_spider_damage.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Sprites/Tilesets/Monsters/monster_spider_idle.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Assets/Prefabs/Particles/DeathParticles.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Prefabs/Particles/DeathParticles/DeathSpiderParticles.tscn" type="PackedScene" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
@@ -45,40 +45,40 @@ atlas = ExtResource( 6 )
 region = Rect2( 144, 0, 36, 31 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 5 )
-region = Rect2( 36, 0, 36, 31 )
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 36, 31 )
 
 [sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 36, 31 )
+atlas = ExtResource( 1 )
+region = Rect2( 36, 0, 36, 31 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 36, 31 )
+region = Rect2( 72, 0, 36, 31 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 1 )
-region = Rect2( 36, 0, 36, 31 )
+region = Rect2( 108, 0, 36, 31 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 1 )
-region = Rect2( 72, 0, 36, 31 )
+region = Rect2( 144, 0, 36, 31 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 1 )
-region = Rect2( 108, 0, 36, 31 )
+region = Rect2( 180, 0, 36, 31 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 1 )
-region = Rect2( 144, 0, 36, 31 )
+region = Rect2( 216, 0, 36, 31 )
 
 [sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 1 )
-region = Rect2( 180, 0, 36, 31 )
+atlas = ExtResource( 5 )
+region = Rect2( 36, 0, 36, 31 )
 
 [sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 1 )
-region = Rect2( 216, 0, 36, 31 )
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 36, 31 )
 
 [sub_resource type="SpriteFrames" id=18]
 animations = [ {
@@ -87,15 +87,15 @@ animations = [ {
 "name": "idle",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 9 ), SubResource( 10 ) ],
-"loop": false,
-"name": "damaged",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
 "loop": true,
 "name": "run",
 "speed": 15.0
+}, {
+"frames": [ SubResource( 16 ), SubResource( 17 ) ],
+"loop": false,
+"name": "damaged",
+"speed": 10.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=19]
@@ -137,7 +137,7 @@ shape = SubResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Spider/CollisionShape2D"]
 frames = SubResource( 18 )
 animation = "idle"
-frame = 4
+frame = 3
 playing = true
 
 [node name="Area2D2" type="Area2D" parent="Spider"]
