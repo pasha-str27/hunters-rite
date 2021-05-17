@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/Scripts/MenuButtons.gdns" type="Script" id=2]
@@ -7,10 +7,24 @@
 [ext_resource path="res://Assets/Sprites/UI/notice_background_v2.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Prefabs/SoundsEffects/Effects/ButtonClick.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://Assets/Sprites/icon11.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/UI/SliderStyle.tres" type="Theme" id=8]
 
 [sub_resource type="DynamicFont" id=1]
-size = 28
+size = 30
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 30
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 7 )
 
 [node name="Option" type="Camera2D"]
@@ -51,60 +65,61 @@ margin_bottom = 568.0
 rect_min_size = Vector2( 1280, 568 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Option/VBoxContainer/CenterContainer2"]
-margin_left = 542.0
-margin_top = 160.0
-margin_right = 738.0
-margin_bottom = 408.0
+margin_left = 476.0
+margin_top = 94.0
+margin_right = 804.0
+margin_bottom = 474.0
 
 [node name="FullScreen" type="CheckBox" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer"]
-margin_right = 196.0
-margin_bottom = 24.0
+margin_right = 328.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 0, 120 )
 focus_neighbour_top = NodePath("../../../CenterContainer/Back")
 focus_neighbour_bottom = NodePath("../effects")
 mouse_filter = 2
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = SubResource( 1 )
 text = "FullScreen"
 align = 1
 
 [node name="Effect_text" type="Label" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer"]
-margin_top = 28.0
-margin_right = 196.0
-margin_bottom = 68.0
-rect_min_size = Vector2( 0, 40 )
-custom_fonts/font = SubResource( 1 )
+margin_top = 124.0
+margin_right = 328.0
+margin_bottom = 204.0
+rect_min_size = Vector2( 0, 80 )
+custom_fonts/font = SubResource( 2 )
 text = "Effects"
 align = 1
-valign = 1
+valign = 2
 
 [node name="effects" type="HSlider" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer"]
-margin_top = 72.0
-margin_right = 196.0
-margin_bottom = 136.0
+margin_top = 208.0
+margin_right = 328.0
+margin_bottom = 240.0
 focus_neighbour_top = NodePath("../FullScreen")
 focus_neighbour_bottom = NodePath("../music")
 mouse_filter = 2
-custom_icons/grabber = ExtResource( 8 )
+theme = ExtResource( 8 )
 min_value = -35.0
 max_value = 6.0
 
 [node name="Music_text" type="Label" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer"]
-margin_top = 140.0
-margin_right = 196.0
-margin_bottom = 180.0
-rect_min_size = Vector2( 0, 40 )
-custom_fonts/font = SubResource( 1 )
+margin_top = 244.0
+margin_right = 328.0
+margin_bottom = 344.0
+rect_min_size = Vector2( 0, 100 )
+custom_fonts/font = SubResource( 3 )
 text = "Music"
 align = 1
-valign = 1
+valign = 2
 
 [node name="music" type="HSlider" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer"]
-margin_top = 184.0
-margin_right = 196.0
-margin_bottom = 248.0
+margin_top = 348.0
+margin_right = 328.0
+margin_bottom = 380.0
 focus_neighbour_top = NodePath("../effects")
 focus_neighbour_bottom = NodePath("../../../CenterContainer/Back")
 mouse_filter = 2
-custom_icons/grabber = ExtResource( 8 )
+theme = ExtResource( 8 )
 min_value = -35.0
 max_value = 6.0
 

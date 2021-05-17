@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/Sprites/UI/tutorial_next_board_V2.png" type="Texture" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://Assets/Sprites/UI/tutorial_move_p2_player_next_room.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Sprites/UI/tutorial_attack_p2.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Sprites/UI/tutorial_dash_p1.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Sprites/UI/tutorial_dash_p2.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Sprites/UI/tutorial_four_key.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Sprites/UI/tutorial_move_p1_player.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Sprites/UI/tutorial_move_p2_player.png" type="Texture" id=17]
@@ -20,11 +19,11 @@
 [ext_resource path="res://Assets/Sprites/UI/tutorial_dash_p1_player.png" type="Texture" id=23]
 [ext_resource path="res://Assets/Sprites/UI/tutorial_atack_p2_player.png" type="Texture" id=24]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 size = 48
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 size = 34
 font_data = ExtResource( 1 )
 
@@ -106,7 +105,7 @@ __meta__ = {
 
 [node name="Attack" type="VBoxContainer" parent="TutorialMoveAttackDash"]
 margin_right = 288.0
-margin_bottom = 720.0
+margin_bottom = 788.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -116,7 +115,7 @@ modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
 margin_right = 288.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "Attack"
 align = 1
 __meta__ = {
@@ -129,53 +128,54 @@ margin_right = 288.0
 margin_bottom = 184.0
 rect_min_size = Vector2( 0, 80 )
 texture = ExtResource( 15 )
+stretch_mode = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Key_H" type="Label" parent="TutorialMoveAttackDash/Attack/AtackP1"]
-modulate = Color( 0.305882, 0.305882, 0.305882, 1 )
-margin_left = 12.0
-margin_top = 12.0
-margin_right = 46.0
-margin_bottom = 46.0
-custom_fonts/font = SubResource( 4 )
+modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
+margin_left = 21.5
+margin_top = 23.0
+margin_right = 55.5
+margin_bottom = 57.0
+custom_fonts/font = SubResource( 2 )
 text = "H"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Key_U" type="Label" parent="TutorialMoveAttackDash/Attack/AtackP1"]
-modulate = Color( 0.305882, 0.305882, 0.305882, 1 )
-margin_left = 83.0
-margin_top = 12.0
-margin_right = 117.0
-margin_bottom = 46.0
-custom_fonts/font = SubResource( 4 )
+modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
+margin_left = 92.5
+margin_top = 23.0
+margin_right = 126.5
+margin_bottom = 57.0
+custom_fonts/font = SubResource( 2 )
 text = "U"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Key_J" type="Label" parent="TutorialMoveAttackDash/Attack/AtackP1"]
-modulate = Color( 0.305882, 0.305882, 0.305882, 1 )
-margin_left = 154.0
-margin_top = 12.0
-margin_right = 188.0
-margin_bottom = 46.0
-custom_fonts/font = SubResource( 4 )
+modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
+margin_left = 163.0
+margin_top = 23.0
+margin_right = 197.0
+margin_bottom = 57.0
+custom_fonts/font = SubResource( 2 )
 text = "J"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Key_K" type="Label" parent="TutorialMoveAttackDash/Attack/AtackP1"]
-modulate = Color( 0.305882, 0.305882, 0.305882, 1 )
-margin_left = 224.0
-margin_top = 12.0
-margin_right = 258.0
-margin_bottom = 46.0
-custom_fonts/font = SubResource( 4 )
+modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
+margin_left = 235.5
+margin_top = 23.0
+margin_right = 269.5
+margin_bottom = 57.0
+custom_fonts/font = SubResource( 2 )
 text = "K"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -199,27 +199,61 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AttackP2" type="TextureRect" parent="TutorialMoveAttackDash/Attack"]
+[node name="AtackP2" type="TextureRect" parent="TutorialMoveAttackDash/Attack"]
 margin_top = 318.0
 margin_right = 288.0
 margin_bottom = 418.0
 rect_min_size = Vector2( 0, 100 )
-texture = ExtResource( 14 )
+texture = ExtResource( 15 )
 stretch_mode = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key_Ctrl" type="Label" parent="TutorialMoveAttackDash/Attack/AttackP2"]
+[node name="Key_H" type="Label" parent="TutorialMoveAttackDash/Attack/AtackP2"]
 modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 2.9496
-margin_bottom = 2.94958
-custom_fonts/font = SubResource( 4 )
-text = "Ctrl"
-align = 1
-valign = 1
+margin_left = 21.5
+margin_top = 33.0
+margin_right = 55.5
+margin_bottom = 67.0
+custom_fonts/font = SubResource( 2 )
+text = "L"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key_U" type="Label" parent="TutorialMoveAttackDash/Attack/AtackP2"]
+modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
+margin_left = 92.5
+margin_top = 33.0
+margin_right = 126.5
+margin_bottom = 67.0
+custom_fonts/font = SubResource( 2 )
+text = "P"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key_J" type="Label" parent="TutorialMoveAttackDash/Attack/AtackP2"]
+modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
+margin_left = 163.0
+margin_top = 33.0
+margin_right = 197.0
+margin_bottom = 67.0
+custom_fonts/font = SubResource( 2 )
+text = ";"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key_K" type="Label" parent="TutorialMoveAttackDash/Attack/AtackP2"]
+modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
+margin_left = 235.5
+margin_top = 33.0
+margin_right = 269.5
+margin_bottom = 67.0
+custom_fonts/font = SubResource( 2 )
+text = "'"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -257,21 +291,21 @@ __meta__ = {
 [node name="FreeSpace" type="CenterContainer" parent="TutorialMoveAttackDash"]
 margin_left = 292.0
 margin_right = 592.0
-margin_bottom = 720.0
+margin_bottom = 788.0
 rect_min_size = Vector2( 300, 0 )
 
 [node name="TextureRect" type="TextureRect" parent="TutorialMoveAttackDash/FreeSpace"]
 visible = false
-margin_top = 296.0
+margin_top = 330.0
 margin_right = 300.0
-margin_bottom = 424.0
+margin_bottom = 458.0
 texture = ExtResource( 2 )
 flip_h = true
 
 [node name="Move" type="VBoxContainer" parent="TutorialMoveAttackDash"]
 margin_left = 596.0
 margin_right = 869.0
-margin_bottom = 720.0
+margin_bottom = 788.0
 rect_min_size = Vector2( 0, 400 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -282,7 +316,7 @@ modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
 margin_right = 273.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "Move"
 align = 1
 __meta__ = {
@@ -295,17 +329,18 @@ margin_right = 273.0
 margin_bottom = 184.0
 rect_min_size = Vector2( 0, 80 )
 texture = ExtResource( 15 )
+stretch_mode = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Key_A" type="Label" parent="TutorialMoveAttackDash/Move/MoveP1"]
 modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
-margin_left = 12.0
-margin_top = 12.0
-margin_right = 46.0
-margin_bottom = 46.0
-custom_fonts/font = SubResource( 4 )
+margin_left = 15.5
+margin_top = 23.0
+margin_right = 49.5
+margin_bottom = 57.0
+custom_fonts/font = SubResource( 2 )
 text = "A"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -313,11 +348,11 @@ __meta__ = {
 
 [node name="Key_W" type="Label" parent="TutorialMoveAttackDash/Move/MoveP1"]
 modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
-margin_left = 83.0
-margin_top = 12.0
-margin_right = 117.0
-margin_bottom = 46.0
-custom_fonts/font = SubResource( 4 )
+margin_left = 86.0
+margin_top = 23.0
+margin_right = 120.0
+margin_bottom = 57.0
+custom_fonts/font = SubResource( 2 )
 text = "W"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -325,20 +360,20 @@ __meta__ = {
 
 [node name="Key_S" type="Label" parent="TutorialMoveAttackDash/Move/MoveP1"]
 modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
-margin_left = 155.0
-margin_top = 12.0
-margin_right = 189.0
-margin_bottom = 46.0
-custom_fonts/font = SubResource( 4 )
+margin_left = 158.0
+margin_top = 23.0
+margin_right = 192.0
+margin_bottom = 57.0
+custom_fonts/font = SubResource( 2 )
 text = "S"
 
 [node name="Key_D" type="Label" parent="TutorialMoveAttackDash/Move/MoveP1"]
 modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
-margin_left = 227.0
-margin_top = 12.0
-margin_right = 261.0
-margin_bottom = 46.0
-custom_fonts/font = SubResource( 4 )
+margin_left = 230.0
+margin_top = 23.0
+margin_right = 264.0
+margin_bottom = 57.0
+custom_fonts/font = SubResource( 2 )
 text = "D"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -368,7 +403,7 @@ margin_right = 273.0
 margin_bottom = 418.0
 rect_min_size = Vector2( 0, 100 )
 texture = ExtResource( 3 )
-stretch_mode = 6
+stretch_mode = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -405,20 +440,20 @@ __meta__ = {
 [node name="FreeSpace2" type="CenterContainer" parent="TutorialMoveAttackDash"]
 margin_left = 873.0
 margin_right = 1173.0
-margin_bottom = 720.0
+margin_bottom = 788.0
 rect_min_size = Vector2( 300, 0 )
 
 [node name="TextureRect" type="TextureRect" parent="TutorialMoveAttackDash/FreeSpace2"]
 visible = false
-margin_top = 296.0
+margin_top = 330.0
 margin_right = 300.0
-margin_bottom = 424.0
+margin_bottom = 458.0
 texture = ExtResource( 2 )
 
 [node name="Dash" type="VBoxContainer" parent="TutorialMoveAttackDash"]
 margin_left = 1177.0
 margin_right = 1393.0
-margin_bottom = 720.0
+margin_bottom = 788.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -428,7 +463,7 @@ modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
 margin_right = 216.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "Dash"
 align = 1
 __meta__ = {
@@ -453,8 +488,8 @@ margin_left = 1.48651
 margin_top = 1.48651
 margin_right = 1.48651
 margin_bottom = 2.48651
-custom_fonts/font = SubResource( 4 )
-text = "F"
+custom_fonts/font = SubResource( 2 )
+text = "Q"
 align = 1
 valign = 1
 __meta__ = {
@@ -484,7 +519,7 @@ margin_right = 216.0
 margin_bottom = 417.0
 rect_min_size = Vector2( 0, 100 )
 texture = ExtResource( 12 )
-stretch_mode = 6
+stretch_mode = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -497,7 +532,7 @@ margin_left = 3.53554
 margin_top = 3.53554
 margin_right = 3.53552
 margin_bottom = 3.53552
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Shift"
 align = 1
 valign = 1
@@ -541,7 +576,7 @@ margin_left = 0.78743
 margin_top = 6.29961
 margin_right = 4.78743
 margin_bottom = 6.29961
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "R2"
 align = 1
 valign = 1
