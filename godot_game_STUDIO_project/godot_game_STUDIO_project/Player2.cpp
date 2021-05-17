@@ -21,6 +21,7 @@ void godot::Player2::_move()
 {
 	PlayerData::_move();
 
+
 	String animation_name = sprite->get_animation();
 	if (sprite->get_sprite_frames()->get_animation_loop(animation_name) == false 
 		&& sprite->get_frame() == sprite->get_sprite_frames()->get_frame_count(animation_name) - 1) 

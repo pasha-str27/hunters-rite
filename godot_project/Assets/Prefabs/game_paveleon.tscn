@@ -26,6 +26,8 @@ radius = 47.1954
 
 [node name="Node" type="Node"]
 
+[node name="Level_2" parent="." instance=ExtResource( 4 )]
+
 [node name="ItemsContainer" type="Node" parent="."]
 script = ExtResource( 7 )
 Items = [ ExtResource( 5 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 22 ), ExtResource( 19 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 13 ) ]
