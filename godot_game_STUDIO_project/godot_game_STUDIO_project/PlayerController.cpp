@@ -428,12 +428,12 @@ void godot::PlayerController::_animate_spider_web()
 }
 void godot::PlayerController::_show_tutorial_message(Node* node)
 {
-	cast_to<TileMap>(CustomExtensions::GetChildByName(node, "Stuff"))->set_visible(true);
+	cast_to<VBoxContainer>(CustomExtensions::GetChildByName(node, "Stuff"))->set_visible(true);
 }
 
 void godot::PlayerController::_hide_tutorial_message(Node* node)
 {
-	cast_to<TileMap>(CustomExtensions::GetChildByName(node, "Stuff"))->set_visible(false);
+	cast_to<VBoxContainer>(CustomExtensions::GetChildByName(node, "Stuff"))->set_visible(false);
 }
 
 void godot::PlayerController::_stop_animations()

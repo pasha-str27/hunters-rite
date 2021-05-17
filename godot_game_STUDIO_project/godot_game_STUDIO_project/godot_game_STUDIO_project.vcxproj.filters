@@ -15,7 +15,6 @@
     <ClCompile Include="EnemyAIContext.cpp" />
     <ClCompile Include="EnemyData.cpp" />
     <ClCompile Include="EnemySideChecker.cpp" />
-    <ClCompile Include="ExitHandler.cpp" />
     <ClCompile Include="FadeAnimation.cpp" />
     <ClCompile Include="FlowerAI.cpp" />
     <ClCompile Include="Generation.cpp" />
@@ -31,7 +30,6 @@
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="PlayerData.cpp" />
     <ClCompile Include="PlayersContainer.cpp" />
-    <ClCompile Include="Preloader.cpp" />
     <ClCompile Include="ProducePlayer1.cpp" />
     <ClCompile Include="ProducePlayer2.cpp" />
     <ClCompile Include="ReviveZone.cpp" />
@@ -45,6 +43,8 @@
     <ClCompile Include="StatueMeleeAI.cpp" />
     <ClCompile Include="StatueShootAI.cpp" />
     <ClCompile Include="Sword.cpp" />
+    <ClCompile Include="ExitHandler.cpp" />
+    <ClCompile Include="Preloader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioEffect.h" />
@@ -59,7 +59,6 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyData.h" />
     <ClInclude Include="EnemySideChecker.h" />
-    <ClInclude Include="ExitHandler.h" />
     <ClInclude Include="FadeAnimation.h" />
     <ClInclude Include="FlowerAI.h" />
     <ClInclude Include="Generation.h" />
@@ -77,7 +76,6 @@
     <ClInclude Include="PlayerData.h" />
     <ClInclude Include="PlayerProduce.h" />
     <ClInclude Include="PlayersContainer.h" />
-    <ClInclude Include="Preloader.h" />
     <ClInclude Include="ProducePlayer1.h" />
     <ClInclude Include="ProducePlayer2.h" />
     <ClInclude Include="ReviveZone.h" />
@@ -96,8 +94,7 @@
     <ClInclude Include="ParticlesDestroyer.h" />
     <ClInclude Include="ExitHandler.h" />
     <ClInclude Include="Preloader.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="godot_game_STUDIO_project.vcxproj.user" />
+    <ClInclude Include="ExitHandler.h" />
+    <ClInclude Include="Preloader.h" />
   </ItemGroup>
 </Project>

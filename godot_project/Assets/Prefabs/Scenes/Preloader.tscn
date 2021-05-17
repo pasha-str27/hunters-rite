@@ -3,7 +3,7 @@
 [ext_resource path="res://Assets/Sprites/Logo/wwi_logo.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Scripts/Preloader.gdns" type="Script" id=2]
 [ext_resource path="res://Assets/Sounds/Preloader/wait...what_interactive.wav" type="AudioStream" id=3]
-[ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Assets/Font/StampRSPKOne-ExtraLight.otf" type="DynamicFontData" id=4]
 [ext_resource path="res://Assets/Sounds/Preloader/start.wav" type="AudioStream" id=5]
 [ext_resource path="res://Assets/Sounds/Preloader/glitched.wav" type="AudioStream" id=6]
 [ext_resource path="res://Assets/Sounds/Preloader/end.wav" type="AudioStream" id=7]
@@ -87,7 +87,7 @@ tracks/4/keys = {
 }
 
 [sub_resource type="DynamicFont" id=2]
-size = 50
+size = 64
 font_data = ExtResource( 4 )
 
 [sub_resource type="AudioStreamSample" id=3]
@@ -121,17 +121,16 @@ region_rect = Rect2( 1536, 0, 64, 64 )
 anims/logo = SubResource( 1 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = -441.229
-margin_top = -146.184
-margin_right = 408.771
-margin_bottom = 139.816
+margin_left = -430.0
+margin_top = -150.0
+margin_right = 430.0
+margin_bottom = 150.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.972549, 0.894118, 0.894118, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "wait...what?
-interactive"
+Interactive"
 align = 1
 valign = 1
-uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
