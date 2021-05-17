@@ -25,8 +25,6 @@ void godot::MenuButtons::_init() {}
 
 void godot::MenuButtons::_ready()
 {
-	Input::get_singleton()->set_mouse_mode(Input::MOUSE_MODE_CAPTURED);
-
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	menu_scene = rld->load("res://Assets/Prefabs/Scenes/Menu.tscn");
 	option_scene = rld->load("res://Assets/Prefabs/Scenes/Option.tscn");
@@ -67,7 +65,7 @@ void godot::MenuButtons::_ready()
 
 	if (get_name() == "Menu")
 	{
-		load_game();
+		//load_game();
 		if (!was_loaded)
 		{
 			add_child(fade_in->instance());
@@ -382,7 +380,6 @@ void godot::MenuButtons::_play_change_cursor_effect()
 
 void godot::MenuButtons::_audio_fade_to_main_menu()
 {
-	Godot::print("here");
 	timer_music_out->disconnect("timeout", this, "_audio_fade_to_main_menu");
 
 	if (AudioServer::get_singleton()->get_bus_volume_db(2) <= -75
@@ -438,7 +435,6 @@ void godot::MenuButtons::_input(Input* event)
 		if (was_quit_focused)
 		{
 			click_counter++;
-			Godot::print(String::num(click_counter));
 			if (click_counter > 7)
 			{
 				cast_to<Label>(find_node("QuitLabel"))->set_text("Authors");

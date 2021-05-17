@@ -1280,4 +1280,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/Legendary Chiken" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/Legendary Chiken/VBoxContainer" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/FastBoots" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/DragonsEye" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/SwordOfRange" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/GlassesOfBillGates" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/LuckyClever" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/CoreWithAChain" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/VikingShield" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/DarkGragonsTooth" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/HolyDragonsTooth" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/ItsAreDevil" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/UkrainianGorilka" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Back_button/Back" to="Items" method="_play_change_cursor_effect"]
 [connection signal="pressed" from="Items/Back_button/Back" to="Items" method="_on_Back_pressed"]

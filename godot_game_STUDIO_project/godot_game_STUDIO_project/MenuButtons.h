@@ -20,10 +20,6 @@ namespace godot
 		Ref<PackedScene> fade;
 		Ref<PackedScene> fade_in;
 
-		static bool was_focused;
-		static bool is_full_screen;
-		static float effect_audio_level;
-
 		Timer* timer_music;
 		Timer* timer_music_out;
 		Timer* timer;
@@ -38,6 +34,9 @@ namespace godot
 		int click_counter;
 		static float music_audio_level;
 		static bool was_loaded;
+		static bool was_focused;
+		static bool is_full_screen;
+		static float effect_audio_level;
 		bool was_quit_focused;	
 
 		static void _register_methods();

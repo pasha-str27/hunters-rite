@@ -50,7 +50,6 @@ void godot::Generation::_register_methods()
 
 void godot::Generation::_init() {
 	doorsCount = 5;
-	Godot::print("init");
 	all_rooms_spawned = all_rooms;
 }
 
@@ -125,7 +124,6 @@ godot::Generation::~Generation()
 
 godot::Generation::Generation()
 {
-	Godot::print("constructor");
 }
 
 void godot::CrossedRoom::_register_methods()
