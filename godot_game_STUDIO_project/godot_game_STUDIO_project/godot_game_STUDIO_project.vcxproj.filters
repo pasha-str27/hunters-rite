@@ -31,7 +31,6 @@
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="PlayerData.cpp" />
     <ClCompile Include="PlayersContainer.cpp" />
-    <ClCompile Include="Preloader.cpp" />
     <ClCompile Include="ProducePlayer1.cpp" />
     <ClCompile Include="ProducePlayer2.cpp" />
     <ClCompile Include="ReviveZone.cpp" />
@@ -45,6 +44,7 @@
     <ClCompile Include="StatueMeleeAI.cpp" />
     <ClCompile Include="StatueShootAI.cpp" />
     <ClCompile Include="Sword.cpp" />
+    <ClCompile Include="Preloader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioEffect.h" />
@@ -77,7 +77,6 @@
     <ClInclude Include="PlayerData.h" />
     <ClInclude Include="PlayerProduce.h" />
     <ClInclude Include="PlayersContainer.h" />
-    <ClInclude Include="Preloader.h" />
     <ClInclude Include="ProducePlayer1.h" />
     <ClInclude Include="ProducePlayer2.h" />
     <ClInclude Include="ReviveZone.h" />
@@ -95,6 +94,7 @@
     <ClInclude Include="MenuButtons.h" />
     <ClInclude Include="ParticlesDestroyer.h" />
     <ClInclude Include="ExitHandler.h" />
+    <ClInclude Include="Preloader.h" />
     <ClInclude Include="Preloader.h" />
   </ItemGroup>
   <ItemGroup>
