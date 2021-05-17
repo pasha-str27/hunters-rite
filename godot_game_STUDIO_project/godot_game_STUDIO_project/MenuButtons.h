@@ -68,5 +68,6 @@ namespace godot
 		void _audio_fade_to_main_menu();
 		void _fade_audio();
 		void _input(Input* event);
+		void _reload_scene();
 	};
 }

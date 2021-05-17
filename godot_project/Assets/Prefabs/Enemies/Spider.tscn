@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Assets/Sprites/Tilesets/Monsters/monster_spider_run.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Prefabs/web_bullet_prefab.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Assets/Scripts/SpiderSide.gdns" type="Script" id=4]
 [ext_resource path="res://Assets/Sprites/Tilesets/Monsters/monster_spider_damage.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Sprites/Tilesets/Monsters/monster_spider_idle.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Prefabs/Particles/DeathParticles.tscn" type="PackedScene" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
@@ -112,6 +114,7 @@ collision_layer = 4
 collision_mask = 512
 script = ExtResource( 3 )
 bullet = ExtResource( 2 )
+"Death particles" = ExtResource( 8 )
 
 [node name="HealthBar" type="ProgressBar" parent="Spider"]
 margin_left = -20.0
@@ -134,7 +137,7 @@ shape = SubResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Spider/CollisionShape2D"]
 frames = SubResource( 18 )
 animation = "idle"
-frame = 1
+frame = 4
 playing = true
 
 [node name="Area2D2" type="Area2D" parent="Spider"]
@@ -176,6 +179,8 @@ side = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spider/Area2D7"]
 shape = SubResource( 19 )
+
+[node name="SpawnParticles" parent="Spider" instance=ExtResource( 7 )]
 
 [connection signal="body_entered" from="Spider/Area2D2" to="Spider/Area2D2" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Spider/Area2D2" to="Spider/Area2D2" method="_on_Area2D_body_exited"]

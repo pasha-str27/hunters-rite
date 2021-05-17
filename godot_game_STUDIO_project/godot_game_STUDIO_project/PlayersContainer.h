@@ -11,6 +11,7 @@ namespace godot
 
 		Node2D* player1;
 		Node2D* player2;
+		Node* main_camera;
 		PlayersContainer();
 
 	public:
