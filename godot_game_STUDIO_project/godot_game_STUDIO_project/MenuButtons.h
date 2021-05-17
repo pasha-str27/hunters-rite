@@ -54,6 +54,15 @@ namespace godot
 		void _play_effect();
 		void _play_change_cursor_effect();
 		void _on_Quit_focus_entered();
+		void _on_Flower_button_focus_entered();
+		void _on_Flower_button_focus_exited();
+		void _on_Slime_button_focus_entered();
+		void _on_Slime_button_focus_exited();
+		void _on_Coming_soon_button_focus_entered();
+		void _on_Coming_soon_button_focus_exited();
+		void _on_animated_focus_entered(String button_name, String animated_name);
+		void _on_animated_focus_exited(String button_name, String animated_name);
+		void _set_animated_focus(String button_name,String animated_name,bool mode);
 		void _on_Quit_focus_exited();
 		void _on_effects_value_changed(float value);
 		void _on_music_value_changed(float value);
@@ -68,5 +77,6 @@ namespace godot
 		void _audio_fade_to_main_menu();
 		void _fade_audio();
 		void _input(Input* event);
+		void _reload_scene();
 	};
 }

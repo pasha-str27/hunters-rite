@@ -11,8 +11,9 @@ void godot::EnemySideChecker::_register_methods()
 	register_method("_get_on_body", &EnemySideChecker::_get_on_body);
 	register_method("_get_current_node", &EnemySideChecker::_get_current_node);
 	register_method("_on_Area2D_body_exited", &EnemySideChecker::_on_Area2D_body_exited);
+	register_method("_get_side", &EnemySideChecker::_get_side);
 	
-	register_property<EnemySideChecker, int>("side", &EnemySideChecker::side, -1);
+	register_property<EnemySideChecker, int>("side", &EnemySideChecker::side, -2);
 }
 
 void godot::EnemySideChecker::_on_Area2D_body_entered(Node2D* node)
@@ -36,6 +37,9 @@ void godot::EnemySideChecker::_init()
 
 bool godot::EnemySideChecker::_get_on_body()
 {
+	if (side == -1)
+		return true;
+
 	return is_in_boby;
 }
 
@@ -48,4 +52,9 @@ void godot::EnemySideChecker::_ready()
 Node2D* godot::EnemySideChecker::_get_current_node()
 {
 	return current_node;
+}
+
+int godot::EnemySideChecker::_get_side()
+{
+	return side;
 }

@@ -1,39 +1,53 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Assets/Sprites/Monsters/flower.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Prefabs/flower_bullet_prefab.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Scripts/Enemy.gdns" type="Script" id=3]
 [ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Assets/Sprites/Monsters/monster_flower_damage.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Prefabs/Particles/DeathParticles.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 20.2615
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 5 )
+region = Rect2( 448, 0, 448, 448 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 448, 448 )
+
+[sub_resource type="SpriteFrames" id=9]
 animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 1 ) ],
 "loop": true,
 "name": "idle",
 "speed": 10.0
 }, {
-"frames": [ null, null ],
+"frames": [ SubResource( 7 ), SubResource( 8 ) ],
 "loop": false,
 "name": "damaged",
 "speed": 10.0
 } ]
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
 corner_radius_top_left = 30
 corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.568627, 0.14902, 0.14902, 0.313726 )
 corner_radius_top_left = 30
 corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
+
+[sub_resource type="CircleShape2D" id=10]
+radius = 55.8611
 
 [node name="FlowerBoss" type="Node2D"]
 
@@ -48,14 +62,17 @@ collision_layer = 4
 collision_mask = 512
 script = ExtResource( 3 )
 bullet = ExtResource( 2 )
+"Death particles" = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flower"]
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Flower/CollisionShape2D"]
 scale = Vector2( 0.23, 0.2 )
-frames = SubResource( 5 )
+frames = SubResource( 9 )
 animation = "idle"
+
+[node name="SpawnParticles" parent="Flower" instance=ExtResource( 6 )]
 
 [node name="BossHealthBar" type="ProgressBar" parent="."]
 anchor_right = 1.0
@@ -64,11 +81,18 @@ margin_left = -248.0
 margin_top = -264.0
 margin_right = 252.0
 margin_bottom = -248.0
-custom_styles/fg = SubResource( 6 )
-custom_styles/bg = SubResource( 4 )
+custom_styles/fg = SubResource( 5 )
+custom_styles/bg = SubResource( 6 )
 custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.941176, 0.894118, 0.894118, 1 )
 percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="flower" type="KinematicBody2D" parent="."]
+collision_layer = 32768
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="flower"]
+shape = SubResource( 10 )
