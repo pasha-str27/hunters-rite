@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assets/Prefabs/Rooms/1/R.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Prefabs/Rooms/1/T.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Prefabs/Rooms/2/LT.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Prefabs/Rooms/2/LB.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Prefabs/Rooms/1/L.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Prefabs/Rooms/4/LRTB.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Prefabs/Rooms/1/B.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Scripts/RoomStats.gdns" type="Script" id=8]
+
+[node name="Level_3" type="Node2D"]
+
+[node name="Boss" type="Node2D" parent="." groups=[
+"room",
+] instance=ExtResource( 7 )]
+position = Vector2( 0, -2160 )
+script = ExtResource( 8 )
+
+[node name="Room" type="Node2D" parent="." groups=[
+"room",
+] instance=ExtResource( 6 )]
+position = Vector2( 0, -720 )
+script = ExtResource( 8 )
+
+[node name="Room2" type="Node2D" parent="." groups=[
+"room",
+] instance=ExtResource( 6 )]
+position = Vector2( 0, -1440 )
+script = ExtResource( 8 )
+
+[node name="Room3" type="Node2D" parent="." groups=[
+"room",
+] instance=ExtResource( 5 )]
+position = Vector2( 1024, 0 )
+script = ExtResource( 8 )
+
+[node name="Room4" type="Node2D" parent="." groups=[
+"room",
+] instance=ExtResource( 4 )]
+position = Vector2( 1024, -1440 )
+script = ExtResource( 8 )
+
+[node name="Room5" type="Node2D" parent="." groups=[
+"room",
+] instance=ExtResource( 3 )]
+position = Vector2( 1024, -720 )
+script = ExtResource( 8 )
+
+[node name="ItemRoom" type="Node2D" parent="." groups=[
+"room",
+] instance=ExtResource( 2 )]
+position = Vector2( 0, 720 )
+script = ExtResource( 8 )
+
+[node name="Room6" type="Node2D" parent="." groups=[
+"room",
+] instance=ExtResource( 1 )]
+position = Vector2( -1024, 0 )
+script = ExtResource( 8 )
+
+[node name="Room7" type="Node2D" parent="." groups=[
+"room",
+] instance=ExtResource( 1 )]
+position = Vector2( -1024, -720 )
+script = ExtResource( 8 )
+
+[node name="Room8" type="Node2D" parent="." groups=[
+"room",
+] instance=ExtResource( 1 )]
+position = Vector2( -1024, -1440 )
+script = ExtResource( 8 )

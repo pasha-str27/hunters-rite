@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/Scripts/MenuButtons.gdns" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Assets/Sprites/UI/notice_background_v2.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Sprites/UI/button_background_v2.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Assets/Prefabs/SoundsEffects/Effects/ButtonClick.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Prefabs/SoundsEffects/BackMusic/MenuBackMusic.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -20,6 +22,8 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+click_effect = ExtResource( 7 )
+"menu back music" = ExtResource( 8 )
 
 [node name="Background" type="TextureRect" parent="Menu"]
 light_mask = 2

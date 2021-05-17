@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Scripts/AudioEffect.gdns" type="Script" id=1]
+[ext_resource path="res://Assets/Sounds/take_damage_enemy.mp3" type="AudioStream" id=2]
+
+[node name="EnemyTakeDamage" type="AudioStreamPlayer2D"]
+pause_mode = 2
+stream = ExtResource( 2 )
+attenuation = 0.34151
+bus = "AudioEffects"
+script = ExtResource( 1 )
+duration = 1.0

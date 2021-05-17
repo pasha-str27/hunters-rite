@@ -29,6 +29,7 @@
 #include <InputEvent.hpp>
 #include <TileMap.hpp>
 #include <Tree.hpp>
+#include <Label.hpp>
 #include <Array.hpp>
 #include <ProgressBar.hpp>
 #include <InputEventKey.hpp>
@@ -36,13 +37,23 @@
 #include <Particles2D.hpp>
 #include <ParticlesMaterial.hpp>
 #include <AnimatedSprite.hpp>
+#include <SpriteFrames.hpp>
+#include <SceneTree.hpp>
 #include <VBoxContainer.hpp>
 #include <SceneTree.hpp>
 #include <Texture.hpp>
-#include <SpriteFrames.hpp>
 #include <AudioServer.hpp>
 #include <AudioStreamPlayer2D.hpp>
+#include <AudioStream.hpp>
+#include <File.hpp>
+#include <JSON.hpp>
+#include <JSONParseResult.hpp>
+#include <SpriteFrames.hpp>
+#include <Slider.hpp>
+#include <Dictionary.hpp>
+#include <ResourceSaver.hpp>
 #include <Control.hpp>
+
 
 using namespace godot;
 
@@ -78,6 +89,8 @@ using namespace godot;
 #include "MenuButtons.h"
 #include "AudioEffect.h"
 #include "ParticlesDestroyer.h"
+#include "ExitHandler.h"
+#include "Preloader.h"
 
 #include "Generation.h"
 #include "SpawnPointChecker.h"
