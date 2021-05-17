@@ -93,7 +93,16 @@ void MenuButtons::_register_methods()
 	register_method((char*)"_on_FullScreen_pressed", &MenuButtons::_on_FullScreen_pressed);
 	register_method((char*)"_play_change_cursor_effect", &MenuButtons::_play_change_cursor_effect);
 	register_method((char*)"_on_Quit_focus_entered", &MenuButtons::_on_Quit_focus_entered);
+	//register_method((char*)"_on_Flower_button_focus_entered", &MenuButtons::_on_Flower_button_focus_entered);
+	//register_method((char*)"_on_Slime_button_focus_entered", &MenuButtons::_on_Slime_button_focus_entered);
+	//register_method((char*)"_on_Coming_soon_button_focus_entered", &MenuButtons::_on_Coming_soon_button_focus_entered);
+
 	register_method((char*)"_on_Quit_focus_exited", &MenuButtons::_on_Quit_focus_exited);
+	//register_method((char*)"_on_Flower_button_focus_exited", &MenuButtons::_on_Flower_button_focus_exited);
+	//register_method((char*)"_on_Slime_button_focus_exited", &MenuButtons::_on_Slime_button_focus_exited);
+	//register_method((char*)"_on_Coming_soon_button_focus_exited", &MenuButtons::_on_Coming_soon_button_focus_exited);
+	register_method((char*)"_on_animated_focus_entered", &MenuButtons::_on_animated_focus_entered);
+	register_method((char*)"_on_animated_focus_exited", &MenuButtons::_on_animated_focus_exited);
 	register_method((char*)"_on_effects_value_changed", &MenuButtons::_on_effects_value_changed);
 	register_method((char*)"_on_music_value_changed", &MenuButtons::_on_music_value_changed);
 	register_method((char*)"_timeout", &MenuButtons::_timeout);
@@ -380,6 +389,7 @@ void godot::MenuButtons::_play_change_cursor_effect()
 
 void godot::MenuButtons::_audio_fade_to_main_menu()
 {
+	Godot::print("here");
 	timer_music_out->disconnect("timeout", this, "_audio_fade_to_main_menu");
 
 	if (AudioServer::get_singleton()->get_bus_volume_db(2) <= -75
@@ -427,6 +437,29 @@ void godot::MenuButtons::_on_Quit_focus_exited()
 	click_counter = 0;
 	cast_to<Label>(find_node("QuitLabel"))->set_text("Quit");
 }
+
+void godot::MenuButtons::_set_animated_focus(String button_name, String animated_name, bool mode)
+{
+	if (mode){
+		cast_to<AnimationPlayer>(find_node(animated_name))->play("Focus_scale");
+	}
+	else{
+		cast_to<AnimationPlayer>(find_node(animated_name))->stop();
+	}
+	if (cast_to<TextureRect>(find_node(button_name)->get_child(0)) != nullptr) {}
+		cast_to<TextureRect>(find_node(button_name)->get_child(0))->set_visible(mode);
+}
+
+void godot::MenuButtons::_on_animated_focus_entered(String button_name, String animated_name)
+{
+	_set_animated_focus(button_name, animated_name, true);
+}
+
+void godot::MenuButtons::_on_animated_focus_exited(String button_name, String animated_name)
+{
+	_set_animated_focus(button_name, animated_name, false);
+}
+
 
 void godot::MenuButtons::_input(Input* event)
 {
