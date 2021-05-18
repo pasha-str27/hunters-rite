@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-using namespace godot;
-
 void godot::PlayerController::_register_methods()
 {
 	register_method((char*)"_process", &PlayerController::_process);
@@ -106,9 +104,6 @@ void godot::PlayerController::_ready()
 	dash_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "DashParticles"));
 	revive_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "ReviveParticles"));
 
-	//if (current_player == nullptr)
-	//	printf("error");
-
 	_update_health_bar();
 }
 
@@ -149,10 +144,6 @@ void godot::PlayerController::_start_dash_timer()
 
 		dash_particles->restart();
 	}
-	else
-	{
-		Godot::print("already dashing");
-	}
 }
 
 void godot::PlayerController::_on_dash_timeout()
@@ -181,7 +172,7 @@ void godot::PlayerController::_on_dash_cooldown_timeout()
 {
 	if (is_dashing)
 		is_dashing = false;
-	Godot::print("end dash");
+
 	timer->disconnect("timeout", this, "_on_dash_cooldown_timeout");
 }
 
@@ -220,13 +211,13 @@ void godot::PlayerController::_process(float delta)
 {
 	if (can_move && is_alive)
 		current_player->_move();
-
 }
 
 void godot::PlayerController::_take_damage(float damage, bool is_spike)
 {
 	current_player->_take_damage(damage, is_spike);
 	_update_health_bar();
+
 	if (is_alive)
 	{
 		Ref<PackedScene> prefab = nullptr;
@@ -245,38 +236,31 @@ void godot::PlayerController::_on_Area2D_body_entered(Node* node)
 void godot::PlayerController::_on_Area2D_area_entered(Node* node)
 {
 	auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
+
 	if (node->is_in_group("door_zone"))
-	{
 		camera->call("_door_collision", node->get_name(), 1);
-	}
 
 	if (node->is_in_group("tutor"))
-	{
 		_show_tutorial_message(node);
-	}
 }
 
 void godot::PlayerController::_on_Area2D_area_exited(Node* node)
 {
 	auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
+
 	if (node->is_in_group("door_zone"))
-	{
 		camera->call("_door_collision", "-" + node->get_name(), 1);
-	}
 
 	if (node->is_in_group("tutor"))
-	{
 		_hide_tutorial_message(node);
-	}
 }
 
 void godot::PlayerController::_change_can_moving(bool value)
 {
 	can_move = false;
+
 	if (timer->is_connected("timeout", this, "change_can_moving_timeout"))
-	{
 		timer->disconnect("timeout", this, "change_can_moving_timeout");
-	}
 
 	timer->connect("timeout", this, "change_can_moving_timeout");
 
@@ -400,7 +384,6 @@ bool godot::PlayerController::_is_alive()
 void godot::PlayerController::_start_item_particles(bool is_buff)
 {
 	_update_max_health_bar_size();
-	Godot::print(String::num(current_player->_get_max_HP()));
 
 	if (is_buff)
 		buff_debuff_particles->get_process_material()->set("hue_variation", .85);
@@ -426,6 +409,7 @@ void godot::PlayerController::_animate_spider_web()
 	cast_to<AnimatedSprite>(get_child(0)->get_node("SpiderWeb"))->set_frame(0);
 	cast_to<AnimatedSprite>(get_child(0)->get_node("SpiderWeb"))->play("idle");
 }
+
 void godot::PlayerController::_show_tutorial_message(Node* node)
 {
 	cast_to<VBoxContainer>(CustomExtensions::GetChildByName(node, "Stuff"))->set_visible(true);

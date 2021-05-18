@@ -6,27 +6,27 @@
 [ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Assets/Sprites/Monsters/monster_flower_damage.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/Prefabs/Particles/DeathParticles.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Prefabs/Particles/DeathParticles/DeathFlowerParticles.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 20.2615
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 5 )
 region = Rect2( 448, 0, 448, 448 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 448, 448 )
 
-[sub_resource type="SpriteFrames" id=9]
+[sub_resource type="SpriteFrames" id=4]
 animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 1 ) ],
 "loop": true,
 "name": "idle",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 7 ), SubResource( 8 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ) ],
 "loop": false,
 "name": "damaged",
 "speed": 10.0
@@ -46,7 +46,7 @@ corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 
-[sub_resource type="CircleShape2D" id=10]
+[sub_resource type="CircleShape2D" id=7]
 radius = 55.8611
 
 [node name="FlowerBoss" type="Node2D"]
@@ -62,6 +62,7 @@ collision_layer = 4
 collision_mask = 512
 script = ExtResource( 3 )
 bullet = ExtResource( 2 )
+HP = 350.0
 "Death particles" = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flower"]
@@ -69,7 +70,7 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Flower/CollisionShape2D"]
 scale = Vector2( 0.23, 0.2 )
-frames = SubResource( 9 )
+frames = SubResource( 4 )
 animation = "idle"
 
 [node name="SpawnParticles" parent="Flower" instance=ExtResource( 6 )]
@@ -85,6 +86,7 @@ custom_styles/fg = SubResource( 5 )
 custom_styles/bg = SubResource( 6 )
 custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.941176, 0.894118, 0.894118, 1 )
+max_value = 350.0
 percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -95,4 +97,4 @@ collision_layer = 32768
 collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="flower"]
-shape = SubResource( 10 )
+shape = SubResource( 7 )

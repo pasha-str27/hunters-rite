@@ -25,13 +25,11 @@ tracks/0/keys = {
 }
 
 [node name="exit" type="Node2D"]
-z_index = 2
 script = ExtResource( 3 )
 "Fade Out" = ExtResource( 4 )
 
 [node name="exit" type="TileMap" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-z_index = -1
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 3
