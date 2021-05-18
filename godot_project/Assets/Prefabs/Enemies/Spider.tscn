@@ -1,13 +1,14 @@
 [gd_scene load_steps=28 format=2]
 
-[ext_resource path="res://Assets/Sprites/Tilesets/Monsters/monster_spider_run.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Prefabs/web_bullet_prefab.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Sprites/Monsters/Spider/monster_spider_run.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/web_bullet_prefab.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Scripts/Enemy.gdns" type="Script" id=3]
 [ext_resource path="res://Assets/Scripts/SpiderSide.gdns" type="Script" id=4]
-[ext_resource path="res://Assets/Sprites/Tilesets/Monsters/monster_spider_damage.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Sprites/Tilesets/Monsters/monster_spider_idle.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/Monsters/Spider/monster_spider_damage.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/Monsters/Spider/monster_spider_idle.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Prefabs/Particles/DeathParticles/DeathSpiderParticles.tscn" type="PackedScene" id=8]
+
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )

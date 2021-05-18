@@ -28,12 +28,13 @@
 [ext_resource path="res://Assets/Sprites/Items/glass.png" type="Texture" id=26]
 [ext_resource path="res://Assets/Sprites/Items/chicken.png" type="Texture" id=27]
 [ext_resource path="res://Assets/Sprites/Items/shield.png" type="Texture" id=28]
-[ext_resource path="res://Assets/Sprites/UI/health_bar_white.png" type="Texture" id=29]
-[ext_resource path="res://Assets/Sprites/UI/health_bar_white_left.png" type="Texture" id=30]
-[ext_resource path="res://Assets/Sprites/UI/bg_Item.png" type="Texture" id=31]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/health_bar_white.png" type="Texture" id=29]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/health_bar_white_left.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/bg_Item.png" type="Texture" id=31]
 [ext_resource path="res://Assets/Sprites/UI/Sprite-0001.png" type="Texture" id=32]
-[ext_resource path="res://Assets/Sprites/UI/health_bar.png" type="Texture" id=33]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/health_bar.png" type="Texture" id=33]
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=34]
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
