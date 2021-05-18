@@ -7,6 +7,7 @@
 namespace godot
 {
 	class ItemGenerator;
+
 	class PlayerController : public KinematicBody2D
 	{
 	private:

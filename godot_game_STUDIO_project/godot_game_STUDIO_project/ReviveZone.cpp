@@ -19,7 +19,6 @@ godot::ReviveZone::ReviveZone()
 
 godot::ReviveZone::~ReviveZone()
 {
-	//keys.clear();
 }
 
 void godot::ReviveZone::_register_methods()
@@ -46,17 +45,13 @@ void godot::ReviveZone::_ready()
 	timer->connect("timeout", this, "_kill_revive_progress");
 	timer->start(0.1);
 
-	Godot::print(get_parent()->get_name());
-
 	if (get_parent()->is_in_group("player1"))
 	{
 		keys->_set_player1_buttons();
-		_update_arrow_direction();
-
-		Godot::print(keys->_get_current_key());
-		
+		_update_arrow_direction();		
 		return;
 	}
+
 	keys->_set_player2_buttons();
 
 	_update_arrow_direction();
@@ -74,8 +69,6 @@ void godot::ReviveZone::_input(Input* _event)
 	if (Input::get_singleton()->is_action_just_released(keys->_get_current_key()))
 	{
 		keys->_generate_new_key();
-
-		Godot::print("Enter " + keys->_get_current_key()/*keys->_get_current_key().split("_")[1]*/);
 
 		cast_to<ProgressBar>(get_child(1))->set_value(cast_to<ProgressBar>(get_child(1))->get_value() + 30);
 
@@ -102,9 +95,6 @@ void godot::ReviveZone::_on_revive_zone_body_entered(Node* node)
 	player_is_in_area = true;
 
 	set_visible(true);
-
-
-	Godot::print("Enter " + keys->_get_current_key()/*keys->_get_current_key().split("_")[1]*/);
 }
 
 void godot::ReviveZone::_on_revive_zone_body_exited(Node* node)
@@ -120,7 +110,7 @@ void godot::ReviveZone::_on_revive_zone_body_exited(Node* node)
 
 int godot::ReviveZone::_generate_key()
 {
-	return /*keys[random->randi_range(0,keys.size()-1)]*/0;
+	return 0;
 }
 
 void godot::ReviveZone::_kill_revive_progress()
@@ -137,11 +127,22 @@ void godot::ReviveZone::_update_arrow_direction()
 	auto current_key = keys->_get_current_key();
 
 	if (current_key == "Player1_right" || current_key == "Player2_right")
+	{
 		arrow->set_rotation_degrees(90);
-	else if (current_key == "Player1_down" || current_key == "Player2_down")
+		return;
+	}
+
+	if (current_key == "Player1_down" || current_key == "Player2_down")
+	{
 		arrow->set_rotation_degrees(180);
-	else if (current_key == "Player1_left" || current_key == "Player2_left")
+		return;
+	}
+
+	if (current_key == "Player1_left" || current_key == "Player2_left")
+	{
 		arrow->set_rotation_degrees(270);
-	else
-		arrow->set_rotation_degrees(0);
+		return;
+	}
+
+	arrow->set_rotation_degrees(0);
 }

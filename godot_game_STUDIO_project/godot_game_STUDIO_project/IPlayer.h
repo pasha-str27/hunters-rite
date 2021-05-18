@@ -1,5 +1,7 @@
-#include <Godot.hpp>
-#include <Node.hpp>
+#ifndef HEADERFILE_H
+#define HEADERFILE_H
+#include "headers.h"
+#endif
 
 namespace godot
 {

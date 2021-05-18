@@ -12,6 +12,7 @@ namespace godot
 		GODOT_CLASS(Preloader, Node2D);
 		Ref<PackedScene> menu_scene = nullptr;
 		AudioStreamPlayer2D* audio = nullptr;
+
 	public:
 		static void _register_methods();
 		void _init();

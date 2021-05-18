@@ -54,6 +54,7 @@ Node2D* godot::EnemySideChecker::_get_current_node()
 	return current_node;
 }
 
+
 int godot::EnemySideChecker::_get_side()
 {
 	return side;

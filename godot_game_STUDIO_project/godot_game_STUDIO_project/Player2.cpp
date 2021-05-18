@@ -21,7 +21,6 @@ void godot::Player2::_move()
 {
 	PlayerData::_move();
 
-
 	String animation_name = sprite->get_animation();
 	if (sprite->get_sprite_frames()->get_animation_loop(animation_name) == false 
 		&& sprite->get_frame() == sprite->get_sprite_frames()->get_frame_count(animation_name) - 1) 
@@ -31,20 +30,18 @@ void godot::Player2::_move()
 		vfx_sprite->stop();
 	}
 
-	if (PlayerData::_get_dir() == Vector2::ZERO && animation_name != "revive" && animation_name != "damaged" && animation_name != "attack")
-		sprite->play("idle");
+	if (PlayerData::_get_dir() == Vector2::ZERO && animation_name != "revive" 
+		&& animation_name != "damaged" && animation_name != "attack")
+			sprite->play("idle");
 
 	if (PlayerData::_get_dir() != Vector2::ZERO && sprite->get_animation() == "idle")
-	{
-		//sprite->set_offset(Vector2::ZERO);
 		sprite->play("run");
-	}
 
 	if (sprite->is_flipped_h() && sprite->get_animation() == "attack")
 		sprite->set_offset(Vector2(-10, -5));
-	else if (!sprite->is_flipped_h() && sprite->get_animation() == "attack")
-		sprite->set_offset(Vector2(10, -5));
-
+	else 
+		if (!sprite->is_flipped_h() && sprite->get_animation() == "attack")
+			sprite->set_offset(Vector2(10, -5));
 }
 
 void godot::Player2::_process_input()
@@ -53,21 +50,15 @@ void godot::Player2::_process_input()
 
 	//dash
 	if (input_controller->is_action_just_pressed("Player2_dash"))
-	{
 		_get_object()->call("_start_dash_timer");
-	}
 
 	//move up
 	if (input_controller->is_action_pressed("Player2_up"))
-	{
 		dir.y -= _get_speed();
-	}
 
 	//move down
 	if (input_controller->is_action_pressed("Player2_down"))
-	{
 		dir.y += _get_speed();
-	}
 
 	//move left
 	if (input_controller->is_action_pressed("Player2_left"))
@@ -173,8 +164,6 @@ void godot::Player2::_take_damage(float damage, bool is_spike)
 
 	if (_get_HP() <= 0)
 	{
-		//PlayersContainer::_get_instance()->_set_player2(nullptr);
-
 		Enemies::get_singleton()->_remove_player2();
 
 		sprite->play("death");
@@ -218,6 +207,7 @@ void godot::Player2::_revive()
 void godot::Player2::_update_health_bar()
 {
 	auto health_bar = _get_health_bar();
+
 	if (health_bar != nullptr)
 		health_bar->set_value(_get_HP());
 }

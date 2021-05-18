@@ -25,7 +25,6 @@ void godot::FadeAnimation::_ready()
 	add_child(timer);
 	timer->connect("timeout", this, "_on_timeout");
 	timer->start(animation_time);
-	Godot::print("anim started");
 }
 
 void godot::FadeAnimation::_set_is_exit_anim(bool value)
