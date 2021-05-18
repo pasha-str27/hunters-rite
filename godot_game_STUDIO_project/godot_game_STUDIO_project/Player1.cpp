@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-//godot::Player1* godot::Player1::singleton = nullptr;
-
 godot::Player1::Player1(Node2D* object, Ref<PackedScene>bullet) : PlayerData(object)
 {
 	max_bullet_count = 10;
@@ -15,6 +13,7 @@ godot::Player1::Player1(Node2D* object, Ref<PackedScene>bullet) : PlayerData(obj
 	sprite = cast_to<AnimatedSprite>(_get_object()->get_child(0)->get_child(0));
 
 	shoot_particles = cast_to<Particles2D>(_get_object()->get_child(0)->get_child(0)->get_child(0));
+
 	for (int i = 0; i < max_bullet_count; ++i)
 	{
 		auto new_obj = bullet->instance();
@@ -215,6 +214,7 @@ void  godot::Player1::_take_damage(float damage, bool is_spike)
 		Ref<PackedScene> prefab = nullptr;
 		prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/PlayerDied.tscn");
 		_get_object()->get_parent()->add_child(prefab->instance());
+
 		sprite->play("death");
 		PlayersContainer::_get_instance()->_set_player1(nullptr);
 		Enemies::get_singleton()->_remove_player1();
@@ -253,5 +253,4 @@ void godot::Player1::_stop_animations()
 {
 	sprite->play("idle");
 	_set_dir(Vector2::ZERO);
-
 }

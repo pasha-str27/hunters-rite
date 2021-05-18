@@ -31,7 +31,6 @@ radius = 0.330442
 [node name="bullet" type="KinematicBody2D" groups=[
 "player_bullet",
 ]]
-position = Vector2( -1e+06, -1e+06 )
 scale = Vector2( 5, 5 )
 collision_layer = 0
 collision_mask = 0

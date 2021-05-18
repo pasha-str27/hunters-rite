@@ -6,10 +6,6 @@
     <ClCompile Include="BatAI.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CameraController.cpp" />
-    <ClCompile Include="ClosedRoom.cpp" />
-    <ClCompile Include="CustomExtensions.cpp" />
-    <ClCompile Include="Destroyer.cpp" />
-    <ClCompile Include="Door.cpp" />
     <ClCompile Include="Enemies.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyAIContext.cpp" />
@@ -18,9 +14,7 @@
     <ClCompile Include="ExitHandler.cpp" />
     <ClCompile Include="FadeAnimation.cpp" />
     <ClCompile Include="FlowerAI.cpp" />
-    <ClCompile Include="Generation.cpp" />
     <ClCompile Include="InputReviveManager.cpp" />
-    <ClCompile Include="IPlayer.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemGenerator.cpp" />
     <ClCompile Include="ItemsContainer.cpp" />
@@ -35,11 +29,9 @@
     <ClCompile Include="ProducePlayer1.cpp" />
     <ClCompile Include="ProducePlayer2.cpp" />
     <ClCompile Include="ReviveZone.cpp" />
-    <ClCompile Include="Room.cpp" />
     <ClCompile Include="RoomStats.cpp" />
     <ClCompile Include="SlimeAI.cpp" />
     <ClCompile Include="SpawnEnemyController.cpp" />
-    <ClCompile Include="SpawnPointChecker.cpp" />
     <ClCompile Include="SpiderAI.cpp" />
     <ClCompile Include="Spike.cpp" />
     <ClCompile Include="StatueMeleeAI.cpp" />
@@ -51,10 +43,7 @@
     <ClInclude Include="BatAI.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="CameraController.h" />
-    <ClInclude Include="ClosedRoom.h" />
     <ClInclude Include="CustomExtensions.h" />
-    <ClInclude Include="Destroyer.h" />
-    <ClInclude Include="Door.h" />
     <ClInclude Include="Enemies.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyData.h" />
@@ -62,7 +51,6 @@
     <ClInclude Include="ExitHandler.h" />
     <ClInclude Include="FadeAnimation.h" />
     <ClInclude Include="FlowerAI.h" />
-    <ClInclude Include="Generation.h" />
     <ClInclude Include="headers.h" />
     <ClInclude Include="InputReviveManager.h" />
     <ClInclude Include="IPlayer.h" />
@@ -81,11 +69,9 @@
     <ClInclude Include="ProducePlayer1.h" />
     <ClInclude Include="ProducePlayer2.h" />
     <ClInclude Include="ReviveZone.h" />
-    <ClInclude Include="Room.h" />
     <ClInclude Include="RoomStats.h" />
     <ClInclude Include="SlimeAI.h" />
     <ClInclude Include="SpawnEnemyController.h" />
-    <ClInclude Include="SpawnPointChecker.h" />
     <ClInclude Include="SpiderAI.h" />
     <ClInclude Include="Spike.h" />
     <ClInclude Include="StatueMeleeAI.h" />
@@ -96,8 +82,5 @@
     <ClInclude Include="ParticlesDestroyer.h" />
     <ClInclude Include="ExitHandler.h" />
     <ClInclude Include="Preloader.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="godot_game_STUDIO_project.vcxproj.user" />
   </ItemGroup>
 </Project>

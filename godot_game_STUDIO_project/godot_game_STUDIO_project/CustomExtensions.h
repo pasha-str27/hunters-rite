@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef HEADERFILE_H
 #define HEADERFILE_H
 #include "headers.h"
@@ -19,6 +17,7 @@ namespace godot
 				if (isCorrect(a))
 					returned.push_back(a);
 			}
+
 			return returned;
 		}
 
@@ -32,6 +31,7 @@ namespace godot
 				if (isCorrect(a))
 					returned.push_back(a);
 			}
+
 			return returned;
 		}
 
@@ -44,6 +44,7 @@ namespace godot
 				if (isCorrect(a))
 					return Object::cast_to<PackedScene>(a);
 			}
+
 			return nullptr;
 		}
 
@@ -57,12 +58,15 @@ namespace godot
 		{
 			Array arr = _this->get_node(parent_node_name)->get_children();
 			Array children_instances = {};
+
 			for (int i = 0; i < arr.size(); i++) 
 			{
 				auto instance = Object::cast_to<Node2D>(arr[i])->call("_get_instance");
+
 				if(instance != nullptr)
 					children_instances.push_back(instance);
 			}
+
 			return children_instances;
 		}
 
@@ -70,6 +74,7 @@ namespace godot
 		static Node* GetChildByName(Node *parent, String child_name) 
 		{
 			Array children = parent->get_children();
+
 			for (int i = 0; i < children.size(); i++)
 				if (Object::cast_to<Node>(children[i])->get_name() == child_name) 
 					return Object::cast_to<Node>(children[i]);
@@ -81,6 +86,5 @@ namespace godot
 		{
 			return !from->has_node("/root/Node2D/Node/Player1") || !from->has_node("/root/Node2D/Node/Player2");
 		}
-
 	};
 }

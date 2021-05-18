@@ -37,6 +37,7 @@ void godot::ExitHandler::_on_Area2D_area_entered(Node* other)
 		players_count++;
 
 	bool is_only_one_alive = CustomExtensions::IsOnlyOnePlayerAlive(other);
+
 	if (is_only_one_alive || (players_count == 2))
 	{
 		if (PlayersContainer::_get_instance()->_get_player1() != nullptr)
@@ -78,17 +79,17 @@ void godot::ExitHandler::_mute_audio()
 {
 	timer_audio->disconnect("timeout", this, "_mute_audio");
 
-	if (AudioServer::get_singleton()->get_bus_volume_db(2) <= -75
-		&& AudioServer::get_singleton()->get_bus_volume_db(3) <= -75)
+	if (audio_server->get_bus_volume_db(2) <= -75
+		&& audio_server->get_bus_volume_db(3) <= -75)
 		return;
 
-	if (AudioServer::get_singleton()->get_bus_volume_db(2) > -75)
-		AudioServer::get_singleton()->set_bus_volume_db(2,
-			AudioServer::get_singleton()->get_bus_volume_db(2) - 0.8);
+	if (audio_server->get_bus_volume_db(2) > -75)
+		audio_server->set_bus_volume_db(2,
+			audio_server->get_bus_volume_db(2) - 0.8);
 
-	if (AudioServer::get_singleton()->get_bus_volume_db(3) > -75)
-		AudioServer::get_singleton()->set_bus_volume_db(3,
-			AudioServer::get_singleton()->get_bus_volume_db(3) - 0.8);
+	if (audio_server->get_bus_volume_db(3) > -75)
+		audio_server->set_bus_volume_db(3,
+			audio_server->get_bus_volume_db(3) - 0.8);
 
 	timer_audio->connect("timeout", this, "_mute_audio");
 	timer_audio->start(0.01);

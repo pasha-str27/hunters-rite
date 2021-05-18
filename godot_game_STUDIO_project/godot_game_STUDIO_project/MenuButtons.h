@@ -26,6 +26,7 @@ namespace godot
 		float delta_time;
 		static AudioStreamPlayer2D* audio;
 		float delta_step;
+		AudioServer* audio_server = nullptr;
 
 	public:
 		MenuButtons();
@@ -53,12 +54,6 @@ namespace godot
 		void _play_effect();
 		void _play_change_cursor_effect();
 		void _on_Quit_focus_entered();
-		void _on_Flower_button_focus_entered();
-		void _on_Flower_button_focus_exited();
-		void _on_Slime_button_focus_entered();
-		void _on_Slime_button_focus_exited();
-		void _on_Coming_soon_button_focus_entered();
-		void _on_Coming_soon_button_focus_exited();
 		void _on_animated_focus_entered(String button_name, String animated_name);
 		void _on_animated_focus_exited(String button_name, String animated_name);
 		void _set_animated_focus(String button_name,String animated_name,bool mode);
@@ -66,7 +61,6 @@ namespace godot
 		void _on_effects_value_changed(float value);
 		void _on_music_value_changed(float value);
 		void save_game();
-		void load_game();
 		void _timeout();
 		void _change_audio_volume();
 		void _on_Resume_pressed(Input* event);

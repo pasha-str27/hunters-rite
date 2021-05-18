@@ -25,6 +25,7 @@ void godot::MenuButtons::_init() {}
 
 void godot::MenuButtons::_ready()
 {
+	audio_server = AudioServer::get_singleton();
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	menu_scene = rld->load("res://Assets/Prefabs/Scenes/Menu.tscn");
 	option_scene = rld->load("res://Assets/Prefabs/Scenes/Option.tscn");
@@ -47,13 +48,11 @@ void godot::MenuButtons::_ready()
 	}
 
 	for (auto name : name_buttons)
-	{
 		if (find_node(name) != nullptr) 
 		{
 			cast_to<TextureButton>(find_node(name))->grab_focus();
 			break;
 		}
-	}
 
 	if (get_name() == "Option")
 	{
@@ -65,15 +64,16 @@ void godot::MenuButtons::_ready()
 
 	if (get_name() == "Menu")
 	{
-		//load_game();
 		if (!was_loaded)
 		{
 			add_child(fade_in->instance());
+
 			if (timer_music == nullptr)
 			{
 				timer_music = Timer::_new();
 				add_child(timer_music);
 			}
+
 			timer_music->connect("timeout", this, "_fade_audio");
 			timer_music->start(0.01);
 			was_loaded = true;
@@ -93,14 +93,7 @@ void MenuButtons::_register_methods()
 	register_method((char*)"_on_FullScreen_pressed", &MenuButtons::_on_FullScreen_pressed);
 	register_method((char*)"_play_change_cursor_effect", &MenuButtons::_play_change_cursor_effect);
 	register_method((char*)"_on_Quit_focus_entered", &MenuButtons::_on_Quit_focus_entered);
-	//register_method((char*)"_on_Flower_button_focus_entered", &MenuButtons::_on_Flower_button_focus_entered);
-	//register_method((char*)"_on_Slime_button_focus_entered", &MenuButtons::_on_Slime_button_focus_entered);
-	//register_method((char*)"_on_Coming_soon_button_focus_entered", &MenuButtons::_on_Coming_soon_button_focus_entered);
-
 	register_method((char*)"_on_Quit_focus_exited", &MenuButtons::_on_Quit_focus_exited);
-	//register_method((char*)"_on_Flower_button_focus_exited", &MenuButtons::_on_Flower_button_focus_exited);
-	//register_method((char*)"_on_Slime_button_focus_exited", &MenuButtons::_on_Slime_button_focus_exited);
-	//register_method((char*)"_on_Coming_soon_button_focus_exited", &MenuButtons::_on_Coming_soon_button_focus_exited);
 	register_method((char*)"_on_animated_focus_entered", &MenuButtons::_on_animated_focus_entered);
 	register_method((char*)"_on_animated_focus_exited", &MenuButtons::_on_animated_focus_exited);
 	register_method((char*)"_on_effects_value_changed", &MenuButtons::_on_effects_value_changed);
@@ -219,30 +212,6 @@ void godot::MenuButtons::save_game()
 	save_game->close();
 }
 
-void godot::MenuButtons::load_game()
-{
-	auto save_game = File::_new();
-	if (!save_game->file_exists("user://savegame_hunters.save"))
-		return; 
-
-	save_game->open("user://savegame_hunters.save", File::READ);
-	Dictionary node_data = JSON::get_singleton()->parse(save_game->get_line())->get_result();
-
-	is_full_screen = node_data.values()[1];
-	music_audio_level = node_data.values()[2];
-	effect_audio_level = node_data.values()[0];
-
-	OS::get_singleton()->set_window_fullscreen(is_full_screen);
-	AudioServer::get_singleton()->set_bus_volume_db(1, effect_audio_level);
-	if (!was_loaded)
-	{
-		AudioServer::get_singleton()->set_bus_volume_db(2, -80);
-		AudioServer::get_singleton()->set_bus_volume_db(3, -80);
-	}
-
-	save_game->close();
-}
-
 void godot::MenuButtons::_timeout()
 {
 	timer->disconnect("timeout", this, "_timeout");
@@ -256,13 +225,11 @@ void godot::MenuButtons::_timeout()
 
 void godot::MenuButtons::_change_audio_volume()
 {
-	if (AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) <= -75)
-	{
+	if (audio_server->get_bus_volume_db(audio_server->get_bus_index(audio->get_bus())) <= -75)
 		return;
-	}
 
-	AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()),
-		AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) - 0.8);
+	audio_server->set_bus_volume_db(audio_server->get_bus_index(audio->get_bus()),
+		audio_server->get_bus_volume_db(audio_server->get_bus_index(audio->get_bus())) - 0.8);
 
 	timer_music->disconnect("timeout", this, "_change_audio_volume");
 	timer_music->connect("timeout", this, "_change_audio_volume");
@@ -301,12 +268,15 @@ void godot::MenuButtons::_on_Quit_pressed(Variant)
 {
 	_play_effect();
 
-	if (click_counter > 7) {
+	if (click_counter > 7) 
+	{
 		_play_effect();
 		click_counter = 0;
 		get_node("/root")->add_child(authors_scene->instance());
 		get_parent()->queue_free();
-	}else 
+		return;
+	}
+
 	_exit_tree();
 }
 
@@ -327,7 +297,7 @@ void godot::MenuButtons::_on_effects_value_changed(float value)
 
 	effect_audio_level = value;
 
-	AudioServer::get_singleton()->set_bus_volume_db(1, value);
+	audio_server->set_bus_volume_db(1, value);
 
 	save_game();
 }
@@ -339,7 +309,7 @@ void godot::MenuButtons::_on_music_value_changed(float value)
 
 	music_audio_level = value;
 
-	AudioServer::get_singleton()->set_bus_volume_db(2, value);
+	audio_server->set_bus_volume_db(2, value);
 
 	save_game();
 }
@@ -365,8 +335,6 @@ void godot::MenuButtons::_on_Flower_pressed(Variant)
 
 	timer_music->connect("timeout", this, "_change_audio_volume");
 
-	delta_step = AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) / 50;
-
 	timer_music->start(0.01);
 	timer->start(1);
 }
@@ -389,20 +357,17 @@ void godot::MenuButtons::_play_change_cursor_effect()
 
 void godot::MenuButtons::_audio_fade_to_main_menu()
 {
-	Godot::print("here");
 	timer_music_out->disconnect("timeout", this, "_audio_fade_to_main_menu");
 
-	if (AudioServer::get_singleton()->get_bus_volume_db(2) <= -75
-		&& AudioServer::get_singleton()->get_bus_volume_db(3) <= -75)
+	if (audio_server->get_bus_volume_db(2) <= -75
+		&& audio_server->get_bus_volume_db(3) <= -75)
 			return;
 
-	if (AudioServer::get_singleton()->get_bus_volume_db(2) > -75)
-		AudioServer::get_singleton()->set_bus_volume_db(2,
-			AudioServer::get_singleton()->get_bus_volume_db(2) - 0.8);
+	if (audio_server->get_bus_volume_db(2) > -75)
+		audio_server->set_bus_volume_db(2, audio_server->get_bus_volume_db(2) - 0.8);
 
-	if (AudioServer::get_singleton()->get_bus_volume_db(3) > -75)
-		AudioServer::get_singleton()->set_bus_volume_db(3,
-			AudioServer::get_singleton()->get_bus_volume_db(3) - 0.8);
+	if (audio_server->get_bus_volume_db(3) > -75)
+		audio_server->set_bus_volume_db(3, audio_server->get_bus_volume_db(3) - 0.8);
 
 	timer_music_out->connect("timeout", this, "_audio_fade_to_main_menu");
 	timer_music_out->start(0.01);
@@ -412,15 +377,13 @@ void godot::MenuButtons::_fade_audio()
 {
 	timer_music->disconnect("timeout", this, "_fade_audio");
 
-	if (AudioServer::get_singleton()->get_bus_volume_db(2) >= music_audio_level
-		&& AudioServer::get_singleton()->get_bus_volume_db(3) >= music_audio_level)
-		return;
+	if (audio_server->get_bus_volume_db(2) >= music_audio_level
+		&& audio_server->get_bus_volume_db(3) >= music_audio_level)
+			return;
 
-	AudioServer::get_singleton()->set_bus_volume_db(2,
-		AudioServer::get_singleton()->get_bus_volume_db(2) + 0.8);
+	audio_server->set_bus_volume_db(2, audio_server->get_bus_volume_db(2) + 0.8);
 
-	AudioServer::get_singleton()->set_bus_volume_db(3,
-		AudioServer::get_singleton()->get_bus_volume_db(3) + 0.8);
+	audio_server->set_bus_volume_db(3, audio_server->get_bus_volume_db(3) + 0.8);
 
 	timer_music->connect("timeout", this, "_fade_audio");
 	timer_music->start(0.01);
@@ -440,12 +403,11 @@ void godot::MenuButtons::_on_Quit_focus_exited()
 
 void godot::MenuButtons::_set_animated_focus(String button_name, String animated_name, bool mode)
 {
-	if (mode){
+	if (mode)
 		cast_to<AnimationPlayer>(find_node(animated_name))->play("Focus_scale");
-	}
-	else{
+	else
 		cast_to<AnimationPlayer>(find_node(animated_name))->stop();
-	}
+
 	if (cast_to<TextureRect>(find_node(button_name)->get_child(0)) != nullptr) {}
 		cast_to<TextureRect>(find_node(button_name)->get_child(0))->set_visible(mode);
 }
@@ -460,21 +422,16 @@ void godot::MenuButtons::_on_animated_focus_exited(String button_name, String an
 	_set_animated_focus(button_name, animated_name, false);
 }
 
-
 void godot::MenuButtons::_input(Input* event)
 {
-	if (Input::get_singleton()->is_action_just_pressed("ui_left"))
+	if (Input::get_singleton()->is_action_just_pressed("ui_left") && was_quit_focused)
 	{
-		if (was_quit_focused)
-		{
-			click_counter++;
-			if (click_counter > 7)
-			{
-				cast_to<Label>(find_node("QuitLabel"))->set_text("Authors");
-			}
-			
-		}
+		click_counter++;
+
+		if (click_counter > 7)
+			cast_to<Label>(find_node("QuitLabel"))->set_text("Authors");	
 	}
+
 	if (Input::get_singleton()->is_action_just_pressed("ui_pause"))
 	{
 		Input::get_singleton()->action_release("ui_pause");

@@ -45,11 +45,10 @@ void godot::SpiderAI::reset_directions()
 void godot::SpiderAI::change_direction()
 {
 	reset_directions();
+
 	for (int i = 2; i < 6; ++i)
-	{
 		if (!_get_enemy()->get_child(i)->call("_get_on_body"))
 			directions.push_back(i - 1);
-	}
 
 	_change_dir_after_time();
 }
@@ -105,16 +104,6 @@ void godot::SpiderAI::_fight(Node2D* player1, Node2D* player2)
 	rng->randomize();
 
 	Vector2 bullet_dir;
-	//Godot::print("mes from fight");
-	//if (player1 == nullptr)
-	//	Godot::print("player1 is null");
-	//else
-	//	Godot::print("player1 is not null");
-
-	//if (player2 == nullptr)
-	//	Godot::print("player2 is null");
-	//else
-	//	Godot::print("player2 is not null");
 
 	if (player1 != nullptr && player2 != nullptr)
 	{

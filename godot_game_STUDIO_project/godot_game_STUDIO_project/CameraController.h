@@ -25,6 +25,7 @@ namespace godot
 		AudioStreamPlayer2D* audio = nullptr;
 		AudioStreamPlayer2D* audio_boss = nullptr;
 		Timer* timer_audio;
+		AudioServer* audio_server = nullptr;
 
 		float time_delta = 1.0 / 50;
 		float delta_step = -80.0 / 50.0;

@@ -86,11 +86,6 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 	control->set_custom_minimum_size(Vector2(32, 32));
 	control->add_child(item_sprite);
 
-	//if (item_sprite != nullptr)
-	//	Godot::print("Got sprite");
-	//if (item_box != nullptr)
-	//	Godot::print("Got item box");
-
 	//adding item to item box
 	item_box->add_child(control);
 
