@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/star.png-0f311247b1f54028e9d40c89a9845c9c.stex"
+path="res://.import/dead_author.png-84dbcb588ad7d2465d694dbe4c29ff19.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Particles/star.png"
-dest_files=[ "res://.import/star.png-0f311247b1f54028e9d40c89a9845c9c.stex" ]
+source_file="res://Assets/Sprites/UI/dead_author.png"
+dest_files=[ "res://.import/dead_author.png-84dbcb588ad7d2465d694dbe4c29ff19.stex" ]
 
 [params]
 

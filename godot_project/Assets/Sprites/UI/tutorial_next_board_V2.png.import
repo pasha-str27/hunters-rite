@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/star.png-0f311247b1f54028e9d40c89a9845c9c.stex"
+path="res://.import/tutorial_next_board_V2.png-94e5453c90f843e7c76d4ec268403e37.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Particles/star.png"
-dest_files=[ "res://.import/star.png-0f311247b1f54028e9d40c89a9845c9c.stex" ]
+source_file="res://Assets/Sprites/UI/tutorial_next_board_V2.png"
+dest_files=[ "res://.import/tutorial_next_board_V2.png-94e5453c90f843e7c76d4ec268403e37.stex" ]
 
 [params]
 
