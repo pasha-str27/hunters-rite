@@ -47,15 +47,11 @@ void PlayersContainer::_set_player2(Node2D* player2)
 
 Node2D* godot::PlayersContainer::_get_player1()
 {
-	//if (player1 == nullptr)
-	//	Godot::print("player1 is null");
 	return player1;
 }
 
 Node2D* godot::PlayersContainer::_get_player2()
 {
-	//if (player2 == nullptr)
-	//	Godot::print("player2 is null");
 	return player2;
 }
 
