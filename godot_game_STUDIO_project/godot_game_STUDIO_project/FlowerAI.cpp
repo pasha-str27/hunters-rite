@@ -14,7 +14,7 @@ godot::FlowerAI::FlowerAI(Ref<PackedScene>& bullet, Node2D *node_tmp) : EnemyDat
 	{
 		auto new_obj = bullet->instance();
 		node->call_deferred("add_child", new_obj);
-		//node->add_child(new_obj);
+
 		bullets.push_back(cast_to<Node2D>(new_obj));
 	}
 

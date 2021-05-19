@@ -15,10 +15,16 @@ void PlayersContainer::_set_player1(Node2D* player1)
 {
 	this->player1 = player1;
 
+	if (player1 != nullptr)
+		main_camera = player1->get_node("/root/Node2D/Node/Camera2D");
+
 	//game over
 	if (player1 == nullptr && player2 == nullptr)
 	{
-		Godot::print("Game over");
+		ResourceLoader* rld = ResourceLoader::get_singleton();
+		Ref<PackedScene> game_over_screen = rld->load("res://Assets/Prefabs/Scenes/GameOver.tscn");
+		main_camera->add_child(game_over_screen->instance());
+		main_camera->get_tree()->set_pause(true);
 	}
 }
 
@@ -26,24 +32,26 @@ void PlayersContainer::_set_player2(Node2D* player2)
 {
 	this->player2 = player2;
 
+	if (player2 != nullptr)
+		main_camera = player2->get_node("/root/Node2D/Node/Camera2D");
+
 	//game over
 	if (player1 == nullptr && player2 == nullptr)
 	{
-		Godot::print("Game over");
+		ResourceLoader* rld = ResourceLoader::get_singleton();
+		Ref<PackedScene> game_over_screen = rld->load("res://Assets/Prefabs/Scenes/GameOver.tscn");
+		main_camera->add_child(game_over_screen->instance());
+		main_camera->get_tree()->set_pause(true);
 	}
 }
 
 Node2D* godot::PlayersContainer::_get_player1()
 {
-	//if (player1 == nullptr)
-	//	Godot::print("player1 is null");
 	return player1;
 }
 
 Node2D* godot::PlayersContainer::_get_player2()
 {
-	//if (player2 == nullptr)
-	//	Godot::print("player2 is null");
 	return player2;
 }
 

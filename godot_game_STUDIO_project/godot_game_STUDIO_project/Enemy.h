@@ -5,7 +5,6 @@
 
 namespace godot
 {
-
 	class IEnemyAI
 	{
 	public:
@@ -23,6 +22,7 @@ namespace godot
 		virtual void _set_player2(Node2D* player2) = 0;
 		virtual Node2D* _get_player1() = 0;
 		virtual Node2D* _get_player2() = 0;
+		virtual void _change_dir() = 0;
 	};
 
 	class EnemyAIContext
@@ -47,6 +47,7 @@ namespace godot
 		void _change_dir_after_time();
 		String _get_current_player();
 		void _set_speed(float value);
+		void _change_dir();
 	};
 
 
@@ -57,14 +58,20 @@ namespace godot
 		EnemyAIContext *ai;
 		Timer* timer;
 		Timer* timer_change_dir;
+		Timer* timer_check_angry;
+		Timer* timer_particles = nullptr;
 
 		float HP;
 		Ref<PackedScene> bullet;
 		bool is_angry;
 		bool entered;
 		bool died;
+		bool can_move = false;
 
 		AnimatedSprite* sp = nullptr;
+
+		Particles2D* spawn_particles = nullptr;
+		Ref<PackedScene> death_particles = nullptr;
 
 		public:
 			static void _register_methods();
@@ -95,5 +102,7 @@ namespace godot
 			void _change_animation(String, float);
 			void _set_current_player(Node* node);
 			void _remove_current_player(Node* node);
+			void _check_angry();
+			void _on_spawn_end();
 	};
 }

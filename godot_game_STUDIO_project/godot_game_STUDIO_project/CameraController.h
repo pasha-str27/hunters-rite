@@ -13,16 +13,19 @@ namespace godot
 		Node2D* player2;
 		Array dirs = {};	//	0 - left, 1 - right, 2 - top, 3 - bottom
 		bool is_open_door = true;
+		String current_room_type = "";
 
 		Ref<PackedScene> fadeIn = nullptr;
 		Ref<PackedScene> fadeOut = nullptr;
 		Ref<PackedScene> game_back = nullptr;
 		Ref<PackedScene> boss_back = nullptr;
 		Ref<PackedScene> pause_menu = nullptr;
+		Ref<PackedScene> exit = nullptr;
 
 		AudioStreamPlayer2D* audio = nullptr;
 		AudioStreamPlayer2D* audio_boss = nullptr;
 		Timer* timer_audio;
+		AudioServer* audio_server = nullptr;
 
 		float time_delta = 1.0 / 50;
 		float delta_step = -80.0 / 50.0;
@@ -44,6 +47,8 @@ namespace godot
 		void _start_mute_volume();
 		void _input(Variant event);
 		void _audio_fade_to_main_menu();
+		void _spawn_exit();
+		void _set_current_room_type(String);
 		CameraController();
 		~CameraController();
 	};

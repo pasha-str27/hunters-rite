@@ -21,26 +21,27 @@ void godot::Player2::_move()
 {
 	PlayerData::_move();
 
-
 	String animation_name = sprite->get_animation();
-	if (sprite->get_sprite_frames()->get_animation_loop(animation_name) == false && sprite->get_frame() == sprite->get_sprite_frames()->get_frame_count(animation_name) - 1) 
+	if (sprite->get_sprite_frames()->get_animation_loop(animation_name) == false 
+		&& sprite->get_frame() == sprite->get_sprite_frames()->get_frame_count(animation_name) - 1) 
 	{
 		sprite->set_offset(Vector2::ZERO);
 		sprite->play("idle");
 		vfx_sprite->stop();
 	}
 
-	if (PlayerData::_get_dir() == Vector2::ZERO && animation_name != "revive" && animation_name != "damaged" && animation_name != "attack")
-		sprite->play("idle");
+	if (PlayerData::_get_dir() == Vector2::ZERO && animation_name != "revive" 
+		&& animation_name != "damaged" && animation_name != "attack")
+			sprite->play("idle");
 
 	if (PlayerData::_get_dir() != Vector2::ZERO && sprite->get_animation() == "idle")
-	{
-		sprite->set_offset(Vector2::ZERO);
 		sprite->play("run");
-	}
 
 	if (sprite->is_flipped_h() && sprite->get_animation() == "attack")
 		sprite->set_offset(Vector2(-10, -5));
+	else 
+		if (!sprite->is_flipped_h() && sprite->get_animation() == "attack")
+			sprite->set_offset(Vector2(10, -5));
 }
 
 void godot::Player2::_process_input()
@@ -49,34 +50,19 @@ void godot::Player2::_process_input()
 
 	//dash
 	if (input_controller->is_action_just_pressed("Player2_dash"))
-	{
 		_get_object()->call("_start_dash_timer");
-	}
-
-	//move up
-	if (input_controller->is_action_just_pressed("Player2_fight"))
-	{
-		_fight();
-	}
 
 	//move up
 	if (input_controller->is_action_pressed("Player2_up"))
-	{
-		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(270);
 		dir.y -= _get_speed();
-	}
 
 	//move down
 	if (input_controller->is_action_pressed("Player2_down"))
-	{
-		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(90);
 		dir.y += _get_speed();
-	}
 
 	//move left
 	if (input_controller->is_action_pressed("Player2_left"))
 	{
-		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(180);
 		sprite->set_flip_h(true);
 		dir.x -= _get_speed();
 	}
@@ -84,9 +70,38 @@ void godot::Player2::_process_input()
 	//move right	
 	if (input_controller->is_action_pressed("Player2_right"))
 	{
-		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(0);
 		sprite->set_flip_h(false);
 		dir.x += _get_speed();
+	}
+
+	//fight	up
+	if (input_controller->is_action_pressed("Player2_fight_up"))
+	{
+		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(270);
+		_fight();
+	}
+
+	//fight	down
+	if (input_controller->is_action_pressed("Player2_fight_down"))
+	{
+		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(90);
+		_fight();
+	}
+
+	//fight	left
+	if (input_controller->is_action_pressed("Player2_fight_left"))
+	{
+		sprite->set_flip_h(true);
+		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(180);
+		_fight();
+	}
+
+	//fight	right
+	if (input_controller->is_action_pressed("Player2_fight_right"))
+	{
+		sprite->set_flip_h(false);
+		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(0);
+		_fight();
 	}
 
 	PlayerData::_set_dir(dir);
@@ -97,9 +112,15 @@ void godot::Player2::_fight(Node* node)
 	if (!_can_fight())
 		return;
 
+	sprite->stop();
+	sprite->set_frame(0);
 	sprite->play("attack");
 	sprite->set_offset(Vector2(10, -5));
 	vfx_sprite->set_frame(0);
+
+	Ref<PackedScene> prefab = nullptr;
+	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/Player2Fight.tscn");
+	_get_object()->add_child(prefab->instance());
 
 	_change_can_fight(false);
 
@@ -143,8 +164,6 @@ void godot::Player2::_take_damage(float damage, bool is_spike)
 
 	if (_get_HP() <= 0)
 	{
-		//PlayersContainer::_get_instance()->_set_player2(nullptr);
-
 		Enemies::get_singleton()->_remove_player2();
 
 		sprite->play("death");
@@ -187,8 +206,8 @@ void godot::Player2::_revive()
 
 void godot::Player2::_update_health_bar()
 {
-	printf("Player2' hp updating\n");
 	auto health_bar = _get_health_bar();
+
 	if (health_bar != nullptr)
 		health_bar->set_value(_get_HP());
 }

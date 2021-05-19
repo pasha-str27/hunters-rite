@@ -4,7 +4,8 @@
 #include "headers.h"
 #endif
 
-namespace godot {
+namespace godot 
+{
 	class RoomStats: public Node2D
 	{
 	private:
@@ -21,5 +22,3 @@ namespace godot {
 		~RoomStats();
 	};
 }
-
-
