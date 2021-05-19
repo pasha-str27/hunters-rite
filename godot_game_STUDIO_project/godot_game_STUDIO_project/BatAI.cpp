@@ -57,7 +57,7 @@ void godot::BatAI::_change_dir()
 
 	if (PlayersContainer::_get_instance()->_players_count() == 2)
 	{
-		if (rng->randi_range(0, 2))
+		if (rng->randi_range(0, 1))
 		{
 			current_goal = PlayersContainer::_get_instance()->_get_player2();
 			current_player = "player2";

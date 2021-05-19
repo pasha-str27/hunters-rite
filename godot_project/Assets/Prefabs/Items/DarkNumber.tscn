@@ -4,7 +4,6 @@
 [ext_resource path="res://Assets/Sprites/Items/unluck.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Scripts/Item.gdns" type="Script" id=3]
 
-
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
 length = 1.5
@@ -43,7 +42,7 @@ speed = 0.0
 HP = 25.0
 damage = 10.0
 attack_speed_delta = 0.0
-number_to_next_item = 10
+number_to_next_item = 3
 "Is Buff" = false
 
 [node name="Sprite" type="Sprite" parent="."]

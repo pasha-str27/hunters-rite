@@ -8,7 +8,6 @@
 [ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Prefabs/Particles/DeathParticles/DeathParticles.tscn" type="PackedScene" id=7]
 
-
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
 
@@ -135,7 +134,7 @@ position = Vector2( 0, -32 )
 collision_layer = 32769
 collision_mask = 32785
 script = ExtResource( 4 )
-side = 2
+side = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Slime/Area2D4"]
 shape = SubResource( 19 )
@@ -145,7 +144,7 @@ position = Vector2( -32, 0 )
 collision_layer = 32769
 collision_mask = 32785
 script = ExtResource( 4 )
-side = 4
+side = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Slime/Area2D7"]
 shape = SubResource( 19 )
@@ -155,7 +154,7 @@ position = Vector2( 32, 0 )
 collision_layer = 32769
 collision_mask = 32785
 script = ExtResource( 4 )
-side = 5
+side = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Slime/Area2D8"]
 shape = SubResource( 19 )
@@ -165,7 +164,7 @@ position = Vector2( 0, 32 )
 collision_layer = 32769
 collision_mask = 32785
 script = ExtResource( 4 )
-side = 7
+side = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Slime/Area2D10"]
 shape = SubResource( 19 )

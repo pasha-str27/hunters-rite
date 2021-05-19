@@ -4,7 +4,6 @@
 [ext_resource path="res://Assets/Sprites/Items/metal_sphere.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Scripts/Item.gdns" type="Script" id=3]
 
-
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
 length = 1.5
@@ -39,11 +38,12 @@ tracks/1/keys = {
 [node name="MetalSphere" type="Node2D"]
 z_index = 5
 script = ExtResource( 3 )
-speed = -50.0
-HP = 0.0
-damage = 10.0
+speed = -75.0
+HP = 50.0
+damage = 30.0
 attack_speed_delta = 0.0
 number_to_next_item = 0
+decrease_attack_radius = true
 "Is Buff" = false
 
 [node name="Sprite" type="Sprite" parent="."]

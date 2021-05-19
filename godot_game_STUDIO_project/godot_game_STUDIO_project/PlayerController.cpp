@@ -48,6 +48,8 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_animate_spider_web", &PlayerController::_animate_spider_web);
 	register_method((char*)"_stop_animations", &PlayerController::_stop_animations);
 
+	register_property<PlayerController, float>("hp", &PlayerController::_hp, 0);
+	register_property<PlayerController, float>("damage", &PlayerController::_damage, 0);
 	register_property<PlayerController, float>("speed", &PlayerController::speed, 400);
 	register_property<PlayerController, Ref<PackedScene>>("bullet_prefab", &PlayerController::bullet_prefab, nullptr);
 	register_property<PlayerController, Ref<PackedScene>>("revive_zone", &PlayerController::revive_zone, nullptr);
@@ -96,6 +98,10 @@ void godot::PlayerController::_ready()
 
 	current_player = player_producer->_get_player(this, bullet_prefab);
 	current_player->_set_speed(speed);
+	current_player->_set_max_HP(_hp);
+	current_player->_set_HP(_hp);
+	current_player->_set_damage(_damage);
+
 
 	item_generator = CustomExtensions::GetChildByName(this, "ItemGenerator")->call("_get_instance");
 
@@ -104,7 +110,7 @@ void godot::PlayerController::_ready()
 	dash_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "DashParticles"));
 	revive_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "ReviveParticles"));
 
-	_update_health_bar();
+	_update_max_health_bar_size();
 }
 
 void godot::PlayerController::_start_timer()
