@@ -2,15 +2,24 @@
 
 importer="texture"
 type="StreamTexture"
+<<<<<<< HEAD:godot_project/Assets/Sprites/UI/Tutorial/tutorial_move.png.import
 path="res://.import/tutorial_move.png-6e33409929bc4a5e1415c9000a894d27.stex"
+=======
+path="res://.import/tutorial_move.png-b2cf594c31c315831f581cf835b30df6.stex"
+>>>>>>> dev:godot_project/Assets/Sprites/UI/tutorial_move.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
+<<<<<<< HEAD:godot_project/Assets/Sprites/UI/Tutorial/tutorial_move.png.import
 source_file="res://Assets/Sprites/UI/Tutorial/tutorial_move.png"
 dest_files=[ "res://.import/tutorial_move.png-6e33409929bc4a5e1415c9000a894d27.stex" ]
+=======
+source_file="res://Assets/Sprites/UI/tutorial_move.png"
+dest_files=[ "res://.import/tutorial_move.png-b2cf594c31c315831f581cf835b30df6.stex" ]
+>>>>>>> dev:godot_project/Assets/Sprites/UI/tutorial_move.png.import
 
 [params]
 
