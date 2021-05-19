@@ -3,17 +3,17 @@
 [ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Assets/Scripts/MenuButtons.gdns" type="Script" id=3]
-[ext_resource path="res://Assets/Sprites/monster_finger_flower.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Sprites/UI/button_focus_v2.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Sprites/UI/button_background_v2.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Sprites/UI/wanted_backgroud_base_v3.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Sprites/UI/monster_slime1.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Sprites/UI/wanted_backgroud_base_v2.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Sprites/UI/notice_background_v2.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Sprites/UI/wanted_backgroud_base_v4.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Sprites/UI/wanted_coming_soon_v1.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Sprites/Monsters/Flower/monster_flower.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_focus_v2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_background_v2.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/UI/WantedLabel/wanted_backgroud_base_v3.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/monster_slime1.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/UI/WantedLabel/wanted_backgroud_base_v2.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/notice_background_v2.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Sprites/UI/WantedLabel/wanted_backgroud_base_v4.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Sprites/UI/WantedLabel/wanted_coming_soon_v1.png" type="Texture" id=13]
 [ext_resource path="res://Assets/Prefabs/SoundsEffects/Effects/ButtonClick.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Assets/Sprites/UI/wanted_focus_v2.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Sprites/UI/WantedLabel/wanted_focus_v2.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Prefabs/Animations/FadeOut.tscn" type="PackedScene" id=16]
 
 [sub_resource type="Animation" id=1]
@@ -78,13 +78,12 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=4]
 size = 22
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="Animation" id=4]
-resource_name = "Focus_scale"
+[sub_resource type="Animation" id=5]
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -306,7 +305,7 @@ margin_left = 94.0
 margin_top = 124.0
 margin_right = 226.0
 margin_bottom = 196.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "Coming
 
 Soon"
@@ -379,7 +378,7 @@ __meta__ = {
 }
 
 [node name="SoonAnimated" type="AnimationPlayer" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one/Coming_soon_button"]
-anims/Focus_scale = SubResource( 4 )
+anims/Focus_scale = SubResource( 5 )
 
 [node name="TextureRect" type="TextureRect" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one"]
 visible = false
@@ -396,7 +395,7 @@ margin_left = 94.0
 margin_top = 124.0
 margin_right = 226.0
 margin_bottom = 196.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "Coming
 
 Soon"

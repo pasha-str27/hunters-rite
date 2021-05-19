@@ -16,7 +16,7 @@ _global_script_class_icons={
 
 config/name="hunters"
 run/main_scene="res://Assets/Prefabs/Scenes/Preloader.tscn"
-config/icon="res://Assets/Sprites/player2.png"
+config/icon="res://Assets/Sprites/GameIcon.png"
 config/windows_native_icon="res://Assets/Sprites/player2.ico"
 
 [display]

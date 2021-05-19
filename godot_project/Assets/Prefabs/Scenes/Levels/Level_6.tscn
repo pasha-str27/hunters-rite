@@ -38,6 +38,7 @@ position = Vector2( 2048, 0 )
 
 [node name="Boss" parent="." instance=ExtResource( 4 )]
 position = Vector2( -2048, 720 )
+Type = "boss"
 Enemies = [ ExtResource( 8 ), ExtResource( 7 ), ExtResource( 7 ), ExtResource( 7 ) ]
 
 [node name="Room6" parent="." instance=ExtResource( 1 )]
