@@ -36,7 +36,7 @@ void godot::ItemGenerator::_dead_enemy(Vector2 enemy_position)
 		auto item = cast_to<Node2D>(cast_to<PackedScene>(items_container->items[(int)index])->instance());
 		item->set_global_position(enemy_position);
 		item->set_z_index(1);
-		Godot::print("spawned");
+
 		CustomExtensions::GetChildByName(get_node("/root/Node2D"), "Items")->add_child(item);
 		current_count = count_to_spawn;
 	}

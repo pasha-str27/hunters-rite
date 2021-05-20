@@ -18,6 +18,7 @@ namespace godot
 		Ref<PackedScene> altar = nullptr;
 		Timer* timer = nullptr;
 		int levels_count = 7;
+
 	public:
 		Array enemies = {};
 		Array spawn_points = {};

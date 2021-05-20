@@ -66,6 +66,7 @@ void godot::Preloader::load()
 
 	OS::get_singleton()->set_window_fullscreen(MenuButtons::is_full_screen);
 	AudioServer::get_singleton()->set_bus_volume_db(1, MenuButtons::effect_audio_level);
+
 	if (!MenuButtons::was_loaded)
 	{
 		AudioServer::get_singleton()->set_bus_volume_db(2, -80);

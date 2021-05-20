@@ -7,6 +7,7 @@
 namespace godot
 {
 	class ItemGenerator;
+
 	class PlayerController : public KinematicBody2D
 	{
 	private:
@@ -17,6 +18,8 @@ namespace godot
 
 		ItemGenerator* item_generator = nullptr;
 
+		float _hp;
+		float _damage;		
 		float speed;
 		Timer* timer;
 		bool can_move;

@@ -23,11 +23,8 @@ namespace godot
 		}
 
 		int _get_enemies_count();
-
 		void _add_enemy(Node2D* enemy);
-
 		void _remove_enemy(Node2D* enemy);
-
 		void _remove_player1();
 		void _remove_player2();
 		void _set_player1(Node* player);

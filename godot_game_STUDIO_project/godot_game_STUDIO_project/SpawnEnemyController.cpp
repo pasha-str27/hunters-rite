@@ -3,6 +3,18 @@
 #include "headers.h"
 #endif
 
+void godot::SpawnEnemyController::_register_methods()
+{
+	register_method("_ready", &SpawnEnemyController::_ready);
+	register_method("_prepare_spawn", &SpawnEnemyController::_prepare_spawn);
+	register_method("_spawn", &SpawnEnemyController::_spawn);
+	register_method("_on_Area2D_area_entered", &SpawnEnemyController::_on_Area2D_area_entered);
+
+
+	register_property<SpawnEnemyController, Ref<PackedScene>>("Altar prefab", &SpawnEnemyController::altar, nullptr);
+	register_property<SpawnEnemyController, int>("Levels Count", &SpawnEnemyController::levels_count, 7);
+}
+
 void godot::SpawnEnemyController::SpawnEnemies()
 {
 	RandomNumberGenerator* rng = RandomNumberGenerator::_new();
@@ -52,26 +64,15 @@ void godot::SpawnEnemyController::SpawnItems()
 
 	get_node("/root/Node2D/Node")->add_child(spawned_altar, true);
 
-	for (int i = 0; i < item_points.size(); i++) {
+	for (int i = 0; i < item_points.size(); i++)
+	{
 		int index = rng->randi_range(0, i_container->items.size() - 1);
 		auto item = cast_to<Node2D>(cast_to<PackedScene>(i_container->items[index])->instance());
 		item->set_global_position(cast_to<Node2D>(item_points[i])->get_global_position());
 		get_node("/root/Node2D/Items")->add_child(item, true);
 	}
+
 	rng = nullptr;
-}
-
-void godot::SpawnEnemyController::_register_methods()
-{
-	register_method("_ready", &SpawnEnemyController::_ready);
-	register_method("_prepare_spawn", &SpawnEnemyController::_prepare_spawn);
-	register_method("_spawn", &SpawnEnemyController::_spawn);
-	register_method("_on_Area2D_area_entered", &SpawnEnemyController::_on_Area2D_area_entered);
-	
-
-	register_property<SpawnEnemyController, Ref<PackedScene>>("Altar prefab", &SpawnEnemyController::altar, nullptr);
-	register_property<SpawnEnemyController, int>("Levels Count", &SpawnEnemyController::levels_count, 7);
-	
 }
 
 void godot::SpawnEnemyController::_init()
@@ -120,20 +121,22 @@ void godot::SpawnEnemyController::_on_Area2D_area_entered(Node* other)
 			spawn_points = other->get_parent()->get_node("SpawnPoints")->get_children();
 			enemies = other->get_parent()->call("_get_enemies");
 		}
-		else if (room_type == "boss") 
-		{
-			spawn_points = other->get_parent()->get_node("SpawnPoints")->get_children();
-			enemies = other->get_parent()->call("_get_enemies");
-			get_parent()->call("_close_doors");
-			SpawnBoss();
-		}
-		else if (room_type == "item_room")
-		{
-			spawn_points = other->get_parent()->get_node("SpawnPoints")->get_children();
-			enemies = other->get_parent()->call("_get_enemies");
-			get_parent()->call("_close_doors");
-			SpawnItems();
-		}
+		else 
+			if (room_type == "boss") 
+			{
+				spawn_points = other->get_parent()->get_node("SpawnPoints")->get_children();
+				enemies = other->get_parent()->call("_get_enemies");
+				get_parent()->call("_close_doors");
+				SpawnBoss();
+			}
+			else 
+				if (room_type == "item_room")
+				{
+					spawn_points = other->get_parent()->get_node("SpawnPoints")->get_children();
+					enemies = other->get_parent()->call("_get_enemies");
+					get_parent()->call("_close_doors");
+					SpawnItems();
+				}
 
 		get_parent()->call("_set_current_room_type", room_type);
 
