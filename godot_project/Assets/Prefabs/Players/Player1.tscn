@@ -39,20 +39,22 @@ atlas = ExtResource( 2 )
 region = Rect2( 424, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=7]
+flags = 4
 atlas = ExtResource( 12 )
 region = Rect2( 0, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=8]
+flags = 4
 atlas = ExtResource( 12 )
 region = Rect2( 106, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 13 )
-region = Rect2( 0, 0, 106, 22 )
+region = Rect2( 424, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 13 )
-region = Rect2( 106, 0, 106, 22 )
+region = Rect2( 318, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 13 )
@@ -60,11 +62,11 @@ region = Rect2( 212, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 13 )
-region = Rect2( 318, 0, 106, 22 )
+region = Rect2( 106, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 13 )
-region = Rect2( 424, 0, 106, 22 )
+region = Rect2( 0, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 10 )
@@ -100,11 +102,11 @@ region = Rect2( 742, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=22]
 atlas = ExtResource( 13 )
-region = Rect2( 424, 0, 106, 22 )
+region = Rect2( 0, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=23]
 atlas = ExtResource( 13 )
-region = Rect2( 318, 0, 106, 22 )
+region = Rect2( 106, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 13 )
@@ -112,11 +114,11 @@ region = Rect2( 212, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=25]
 atlas = ExtResource( 13 )
-region = Rect2( 106, 0, 106, 22 )
+region = Rect2( 318, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=26]
 atlas = ExtResource( 13 )
-region = Rect2( 0, 0, 106, 22 )
+region = Rect2( 424, 0, 106, 22 )
 
 [sub_resource type="SpriteFrames" id=27]
 animations = [ {
@@ -132,7 +134,7 @@ animations = [ {
 }, {
 "frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
 "loop": false,
-"name": "death",
+"name": "revive",
 "speed": 10.0
 }, {
 "frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
@@ -142,12 +144,13 @@ animations = [ {
 }, {
 "frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ) ],
 "loop": false,
-"name": "revive",
+"name": "death",
 "speed": 10.0
 } ]
 
-[sub_resource type="CircleShape2D" id=28]
-radius = 10.0102
+[sub_resource type="CapsuleShape2D" id=28]
+radius = 6.5
+height = 0.0
 
 [sub_resource type="Gradient" id=29]
 offsets = PoolRealArray( 0.423237, 1 )
@@ -244,6 +247,7 @@ scale = Vector2( 0.5, 0.5 )
 position = Vector2( 0, 12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1/Area2D"]
+position = Vector2( -0.780037, -1.08792 )
 shape = SubResource( 28 )
 
 [node name="ItemGenerator" type="Node" parent="Player1"]
