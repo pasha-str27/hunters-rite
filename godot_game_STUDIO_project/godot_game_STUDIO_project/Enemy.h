@@ -5,7 +5,6 @@
 
 namespace godot
 {
-
 	class IEnemyAI
 	{
 	public:
