@@ -103,6 +103,7 @@ void godot::PlayerController::_ready()
 	current_player->_set_HP(_hp);
 	current_player->_set_damage(_damage);
 
+	_update_max_health_bar_size();
 
 	item_generator = CustomExtensions::GetChildByName(this, "ItemGenerator")->call("_get_instance");
 
@@ -111,7 +112,6 @@ void godot::PlayerController::_ready()
 	dash_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "DashParticles"));
 	revive_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "ReviveParticles"));
 
-	_update_max_health_bar_size();
 }
 
 void godot::PlayerController::_start_timer()
@@ -245,7 +245,7 @@ void godot::PlayerController::_on_Area2D_area_entered(Node* node)
 	auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
 
 	if (node->is_in_group("door_zone"))
-		camera->call("_door_collision", node->get_name(), 1);
+		camera->call("_door_collision", node->get_name());
 
 	if (node->is_in_group("tutor"))
 		_show_tutorial_message(node);
@@ -256,7 +256,7 @@ void godot::PlayerController::_on_Area2D_area_exited(Node* node)
 	auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
 
 	if (node->is_in_group("door_zone"))
-		camera->call("_door_collision", "-" + node->get_name(), 1);
+		camera->call("_door_collision", "-" + node->get_name());
 
 	if (node->is_in_group("tutor"))
 		_hide_tutorial_message(node);

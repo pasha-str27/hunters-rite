@@ -111,9 +111,6 @@ void godot::SpawnEnemyController::_spawn()
 
 	SpawnEnemies();
 
-	if (Enemies::get_singleton()->_get_enemies_count() > 0)
-		get_parent()->call("_close_doors");
-
 	spawn_points.clear();
 }
 
