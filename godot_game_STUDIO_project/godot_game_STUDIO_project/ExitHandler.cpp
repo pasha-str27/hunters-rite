@@ -46,12 +46,14 @@ void godot::ExitHandler::_on_Area2D_area_entered(Node* other)
 		if (PlayersContainer::_get_instance()->_get_player2() != nullptr)
 			PlayersContainer::_get_instance()->_get_player2()->call("_change_can_moving", false);
 
-		timer_audio->connect("timeout", this, "_mute_audio");
-		timer_audio->start(0.01);
+		//timer_audio->connect("timeout", this, "_mute_audio");
+		//timer_audio->start(0.01);
 
 		auto fade = cast_to<Node2D>(fade_out->instance());
 		CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->add_child(fade);
 		fade->get_child(0)->get_child(0)->call("_set_is_exit_anim", true);
+
+		Godot::print("going to menu");
 	}
 }
 
@@ -64,8 +66,15 @@ void godot::ExitHandler::_on_Area2D_area_exited(Node* other)
 void godot::ExitHandler::_load_menu_scene()
 {
 	MenuButtons::was_loaded = false;
+
+	ResourceLoader* rld = ResourceLoader::get_singleton();
+	Ref<PackedScene> res = rld->load("res://main_scene.tscn");
+
+	Enemies::get_singleton()->_clear();
+	get_node("/root/Node2D")->set_name("to_delete");
+	get_node("/root/to_delete")->queue_free();
 	SceneTree* tree = get_tree();
-	get_node("/root")->add_child(menu_scene->instance());
+	get_node("/root")->add_child(res->instance());
 	get_parent()->get_parent()->queue_free();
 }
 

@@ -5,14 +5,14 @@
 [ext_resource path="res://Assets/Sprites/Players/MeleePlayer/idle.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Prefabs/Particles/BuffDebuffParticles.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Prefabs/Particles/HurtParticles.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/Prefabs/revive_zone.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/revive_zone.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Sprites/Players/MeleePlayer/fx_attack.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Prefabs/Particles/ReviveParticles.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Scripts/PlayerController.gdns" type="Script" id=9]
 [ext_resource path="res://Assets/Scripts/ItemGenerator.gdns" type="Script" id=10]
 [ext_resource path="res://Assets/Sprites/Players/MeleePlayer/run.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Sprites/Players/MeleePlayer/death.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Prefabs/SpiderWeb.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/SpiderWeb.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Assets/Sprites/Players/MeleePlayer/attack.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Sprites/Players/MeleePlayer/hit.png" type="Texture" id=16]
 
@@ -48,108 +48,108 @@ atlas = ExtResource( 16 )
 region = Rect2( 42, 0, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 11 )
-region = Rect2( 42, 0, 42, 39 )
+atlas = ExtResource( 12 )
+region = Rect2( 42, 156, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 11 )
-region = Rect2( 42, 39, 42, 39 )
+atlas = ExtResource( 12 )
+region = Rect2( 42, 117, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 11 )
+atlas = ExtResource( 12 )
 region = Rect2( 42, 78, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 11 )
-region = Rect2( 42, 117, 42, 39 )
+atlas = ExtResource( 12 )
+region = Rect2( 42, 39, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 11 )
-region = Rect2( 42, 156, 42, 39 )
+atlas = ExtResource( 12 )
+region = Rect2( 42, 0, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 11 )
-region = Rect2( 42, 195, 42, 39 )
+region = Rect2( 42, 0, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 11 )
-region = Rect2( 42, 234, 42, 39 )
+region = Rect2( 42, 39, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 11 )
-region = Rect2( 42, 273, 42, 39 )
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 12 )
-region = Rect2( 42, 156, 42, 39 )
-
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 12 )
-region = Rect2( 42, 117, 42, 39 )
-
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 12 )
 region = Rect2( 42, 78, 42, 39 )
 
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 11 )
+region = Rect2( 42, 117, 42, 39 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 11 )
+region = Rect2( 42, 156, 42, 39 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 11 )
+region = Rect2( 42, 195, 42, 39 )
+
 [sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 12 )
-region = Rect2( 42, 39, 42, 39 )
+atlas = ExtResource( 11 )
+region = Rect2( 42, 234, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 11 )
+region = Rect2( 42, 273, 42, 39 )
+
+[sub_resource type="AtlasTexture" id=22]
 atlas = ExtResource( 12 )
 region = Rect2( 42, 0, 42, 39 )
 
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 15 )
-region = Rect2( 0, 64, 192, 64 )
-
 [sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 15 )
-region = Rect2( 192, 64, 192, 64 )
+atlas = ExtResource( 12 )
+region = Rect2( 42, 39, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 15 )
-region = Rect2( 384, 64, 192, 64 )
+atlas = ExtResource( 12 )
+region = Rect2( 42, 78, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 15 )
-region = Rect2( 576, 64, 192, 64 )
+atlas = ExtResource( 12 )
+region = Rect2( 42, 117, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 15 )
-region = Rect2( 768, 64, 192, 64 )
+atlas = ExtResource( 12 )
+region = Rect2( 42, 156, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=27]
 atlas = ExtResource( 15 )
-region = Rect2( 960, 64, 192, 64 )
+region = Rect2( 0, 64, 192, 64 )
 
 [sub_resource type="AtlasTexture" id=28]
 atlas = ExtResource( 15 )
-region = Rect2( 1152, 64, 192, 64 )
+region = Rect2( 192, 64, 192, 64 )
 
 [sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 15 )
-region = Rect2( 1344, 64, 192, 64 )
+region = Rect2( 384, 64, 192, 64 )
 
 [sub_resource type="AtlasTexture" id=30]
-atlas = ExtResource( 12 )
-region = Rect2( 42, 0, 42, 39 )
+atlas = ExtResource( 15 )
+region = Rect2( 576, 64, 192, 64 )
 
 [sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 12 )
-region = Rect2( 42, 39, 42, 39 )
+atlas = ExtResource( 15 )
+region = Rect2( 768, 64, 192, 64 )
 
 [sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 12 )
-region = Rect2( 42, 78, 42, 39 )
+atlas = ExtResource( 15 )
+region = Rect2( 960, 64, 192, 64 )
 
 [sub_resource type="AtlasTexture" id=33]
-atlas = ExtResource( 12 )
-region = Rect2( 42, 117, 42, 39 )
+atlas = ExtResource( 15 )
+region = Rect2( 1152, 64, 192, 64 )
 
 [sub_resource type="AtlasTexture" id=34]
-atlas = ExtResource( 12 )
-region = Rect2( 42, 156, 42, 39 )
+atlas = ExtResource( 15 )
+region = Rect2( 1344, 64, 192, 64 )
 
 [sub_resource type="SpriteFrames" id=35]
 animations = [ {
@@ -163,24 +163,24 @@ animations = [ {
 "name": "damaged",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
-"loop": true,
-"name": "run",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
 "loop": false,
 "name": "revive",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
-"loop": false,
-"name": "attack",
+"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
+"loop": true,
+"name": "run",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ) ],
+"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ) ],
 "loop": false,
 "name": "death",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ) ],
+"loop": false,
+"name": "attack",
 "speed": 10.0
 } ]
 
@@ -235,8 +235,9 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="CircleShape2D" id=46]
-radius = 9.5011
+[sub_resource type="CapsuleShape2D" id=46]
+radius = 6.5
+height = 0.0
 
 [sub_resource type="Gradient" id=47]
 offsets = PoolRealArray( 0.423237, 1 )
@@ -309,6 +310,8 @@ hue_variation_curve = SubResource( 55 )
 z_index = 26
 collision_mask = 2
 script = ExtResource( 9 )
+hp = 175.0
+damage = 40.0
 speed = 230.0
 revive_zone = ExtResource( 6 )
 
@@ -319,7 +322,6 @@ shape = SubResource( 1 )
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 35 )
 animation = "idle"
-frame = 4
 playing = true
 
 [node name="SpiderWeb" parent="CollisionShape2D" instance=ExtResource( 13 )]
@@ -352,11 +354,12 @@ position = Vector2( 4.71939, 17.6632 )
 z_index = 27
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -0.26078, -2.66233 )
 shape = SubResource( 46 )
 
 [node name="ItemGenerator" type="Node" parent="."]
 script = ExtResource( 10 )
-"Count Enemies to Spawn" = 5
+"Count Enemies to Spawn" = 3
 
 [node name="HurtParticles" parent="." instance=ExtResource( 5 )]
 z_index = 7

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Assets/Prefabs/ItemAnimator.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/ItemAnimator.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Sprites/Items/vodka.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Scripts/Item.gdns" type="Script" id=3]
 
@@ -39,8 +39,8 @@ tracks/1/keys = {
 z_index = 5
 script = ExtResource( 3 )
 speed = 0.0
-HP = -50.0
-damage = 30.0
+HP = -25.0
+damage = 15.0
 attack_speed_delta = 0.0
 number_to_next_item = 0
 "Is Buff" = false
