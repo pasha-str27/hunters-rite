@@ -69,6 +69,7 @@ godot::PlayerController::PlayerController()
 	is_alive = true;
 	is_dashing = false;
 	speed = 250;
+	door = nullptr;
 }
 
 godot::PlayerController::~PlayerController()
@@ -244,8 +245,11 @@ void godot::PlayerController::_on_Area2D_area_entered(Node* node)
 {
 	auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
 
-	if (node->is_in_group("door_zone"))
+	if (node->is_in_group("door_zone") && is_alive)
+	{
 		camera->call("_door_collision", node->get_name());
+		door = node;
+	}
 
 	if (node->is_in_group("tutor"))
 		_show_tutorial_message(node);
@@ -255,8 +259,11 @@ void godot::PlayerController::_on_Area2D_area_exited(Node* node)
 {
 	auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
 
-	if (node->is_in_group("door_zone"))
+	if (node->is_in_group("door_zone") && is_alive)
+	{
 		camera->call("_door_collision", "-" + node->get_name());
+		door = nullptr;
+	}
 
 	if (node->is_in_group("tutor"))
 		_hide_tutorial_message(node);
@@ -356,6 +363,11 @@ float godot::PlayerController::_get_attack_speed_delta()
 
 void godot::PlayerController::_die()
 {
+	if (door != nullptr)
+	{
+		auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
+		camera->call("_door_collision", "-" + door->get_name());
+	}
 	is_alive = false;
 	add_child(revive_zone->instance());
 }

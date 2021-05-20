@@ -156,16 +156,22 @@ void godot::CameraController::_door_collision(String door_dir)
 	if (door_dir.find("bottom") != -1)
 		index = 3;
 
+	Godot::print(door_dir + ": " + String::num((int)dirs[index]));
 	if (door_dir[0] == '-')
 	{
-		dirs[index] = (int)dirs[index] - 1;
+		if((int)dirs[index] > 0)
+			dirs[index] = (int)dirs[index] - 1;
 		return;
 	}
 
 	dirs[index] = (int)dirs[index] + 1;
 
+	Godot::print(door_dir + ": " + String::num((int)dirs[index]));
+
+
 	if (((int)dirs[index] == 2 && is_open_door && !_is_one_player_alive()) || (_is_one_player_alive() && is_open_door && (int)dirs[index] == 1))
 	{
+		Godot::print("going to next room");
 		if(PlayersContainer::_get_instance()->_get_player1() != nullptr)
 			PlayersContainer::_get_instance()->_get_player1()->call("_change_moving", false);
 
@@ -197,7 +203,11 @@ void godot::CameraController::_start_move()
 {
 	for (int i = 0; i < 4; i++) 
 		if ((int)dirs[i] == 2 || (_is_one_player_alive() && (int)dirs[i] == 1))
+		{
 			_move(_get_dir_on_index(i));
+			for (int i = 0; i < 4; i++)
+				dirs[i] = 0;
+		}
 }
 
 void godot::CameraController::_change_audio_volume()

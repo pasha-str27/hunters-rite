@@ -15,6 +15,7 @@ namespace godot
 		IPlayer* current_player;
 		Ref<PackedScene> bullet_prefab;
 		Ref<PackedScene> revive_zone;
+		Node* door = nullptr;
 
 		ItemGenerator* item_generator = nullptr;
 
