@@ -88,6 +88,13 @@ void godot::SpawnEnemyController::_ready()
 
 void godot::SpawnEnemyController::_prepare_spawn()
 {
+	if (PlayersContainer::_get_instance()->_get_player1() != nullptr)
+		PlayersContainer::_get_instance()->_get_player1()->call("_change_moving", true);
+
+	if (PlayersContainer::_get_instance()->_get_player2() != nullptr)
+		PlayersContainer::_get_instance()->_get_player2()->call("_change_moving", true);
+
+
 	if (spawn_points.size() == 0 || enemies.size() == 0)
 	{
 		get_parent()->call("_open_doors");
@@ -95,7 +102,7 @@ void godot::SpawnEnemyController::_prepare_spawn()
 	}
 
 	timer->connect("timeout", this, "_spawn");
-	timer->start(.5f);
+	timer->start(.3f);
 }
 
 void godot::SpawnEnemyController::_spawn()

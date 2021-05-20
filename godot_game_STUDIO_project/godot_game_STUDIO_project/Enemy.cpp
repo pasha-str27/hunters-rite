@@ -93,7 +93,7 @@ void godot::Enemy::_ready()
 
 	spawn_particles->set_emitting(true);
 	timer_particles->connect("timeout", this, "_on_spawn_end");
-	timer_particles->start(0.5f);
+	timer_particles->start(0.2f);
 	cast_to<Node2D>(get_node("CollisionShape2D"))->set_visible(false);
 
 	if(is_in_group("flower"))

@@ -22,6 +22,7 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_on_Area2D_area_exited", &PlayerController::_on_Area2D_area_exited);
 	register_method((char*)"_take_damage", &PlayerController::_take_damage);
 	register_method((char*)"_change_can_moving", &PlayerController::_change_can_moving);
+	register_method((char*)"_change_moving", &PlayerController::_change_moving);	
 	register_method((char*)"change_can_moving_timeout", &PlayerController::change_can_moving_timeout);
 	register_method((char*)"_decrease_attack_radius", &PlayerController::_decrease_attack_radius);
 	register_method((char*)"_encrease_attack_radius", &PlayerController::_encrease_attack_radius);
@@ -274,8 +275,12 @@ void godot::PlayerController::_change_can_moving(bool value)
 		add_child(timer);
 
 	timer->start(1.5);
-	
-	if(value == false && is_alive)
+}
+
+void godot::PlayerController::_change_moving(bool value)
+{
+	can_move = value;
+	if (value == false && is_alive)
 		current_player->_stop_animations();
 }
 

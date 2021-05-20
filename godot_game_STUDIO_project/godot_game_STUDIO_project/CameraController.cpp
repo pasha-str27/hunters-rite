@@ -38,8 +38,8 @@ void godot::CameraController::_move(String dir)
 	float vertical_offset = 390;
 	float horizontal_offset = 250;
 	
-	timer_audio->connect("timeout", this, "_change_audio_volume");
-	timer_audio->start(time_delta);
+	//timer_audio->connect("timeout", this, "_change_audio_volume");
+	//timer_audio->start(time_delta);
 
 	if (dir == "top")
 	{
@@ -92,12 +92,6 @@ void godot::CameraController::_move(String dir)
 		if (has_node("/root/Node2D/Node/Player2"))
 			player2->set_global_position(player2->get_global_position() + Vector2(horizontal_offset, 0));
 	}
-
-	if (PlayersContainer::_get_instance()->_get_player1() != nullptr)
-		PlayersContainer::_get_instance()->_get_player1()->call("_change_can_moving", true);
-
-	if (PlayersContainer::_get_instance()->_get_player2() != nullptr)
-		PlayersContainer::_get_instance()->_get_player2()->call("_change_can_moving", true);
 }
 
 String godot::CameraController::_get_dir_on_index(int i)
@@ -173,10 +167,10 @@ void godot::CameraController::_door_collision(String door_dir)
 	if (((int)dirs[index] == 2 && is_open_door && !_is_one_player_alive()) || (_is_one_player_alive() && is_open_door && (int)dirs[index] == 1))
 	{
 		if(PlayersContainer::_get_instance()->_get_player1() != nullptr)
-			PlayersContainer::_get_instance()->_get_player1()->call("_change_can_moving", false);
+			PlayersContainer::_get_instance()->_get_player1()->call("_change_moving", false);
 
 		if (PlayersContainer::_get_instance()->_get_player2() != nullptr)
-			PlayersContainer::_get_instance()->_get_player2()->call("_change_can_moving", false);
+			PlayersContainer::_get_instance()->_get_player2()->call("_change_moving", false);
 
 		auto fade = cast_to<Node2D>(fadeOut->instance());
 		add_child(fade);
