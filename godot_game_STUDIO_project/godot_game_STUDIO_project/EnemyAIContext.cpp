@@ -41,12 +41,12 @@ void godot::EnemyAIContext::set_player2(Node2D* player2)
 
 Node2D* godot::EnemyAIContext::get_player1()
 {
-	return 	strategy->_get_player1();
+	return strategy->_get_player1();
 }
 
 Node2D* godot::EnemyAIContext::get_player2()
 {
-	return 	strategy->_get_player2();
+	return strategy->_get_player2();
 }
 
 void godot::EnemyAIContext::_add_bullet(Node* bullet)
