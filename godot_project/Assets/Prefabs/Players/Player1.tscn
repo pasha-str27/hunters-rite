@@ -230,7 +230,6 @@ shape = SubResource( 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 27 )
 animation = "idle"
-frame = 3
 playing = true
 offset = Vector2( 35, 0 )
 

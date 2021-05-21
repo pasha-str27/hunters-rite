@@ -94,7 +94,7 @@ void godot::Enemy::_ready()
 	spawn_particles->set_emitting(true);
 	timer_particles->connect("timeout", this, "_on_spawn_end");
 	timer_particles->start(0.2f);
-	cast_to<Node2D>(get_node("CollisionShape2D"))->set_visible(false);
+	cast_to<Node2D>(get_node("CollisionShape2D"))->call_deferred("set_visible", false);
 
 	if(is_in_group("flower"))
 		cast_to<ProgressBar>(get_parent()->get_node("BossHealthBar"))->set_visible(false);
@@ -344,7 +344,7 @@ void godot::Enemy::_update_health_bar()
 		health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(this->get_parent(), "BossHealthBar"));
 
 	if (health_bar != nullptr)
-		health_bar->set_value(HP);
+		health_bar->call_deferred("set_value", HP);
 
 }	
 
