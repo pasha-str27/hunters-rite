@@ -92,3 +92,4 @@ using namespace godot;
 #include "ItemsContainer.h"
 #include "ItemGenerator.h"
 #include "CustomExtensions.h"
+#include "MagnitZone.h"
