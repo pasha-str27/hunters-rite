@@ -40,7 +40,7 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_die", &PlayerController::_die);
 	register_method((char*)"_revive", &PlayerController::_revive);
 	register_method((char*)"_set_max_HP", &PlayerController::_set_max_HP);
-	register_method((char*)"_is_alive", &PlayerController::_is_alive);
+	register_method((char*)"_get_max_HP", &PlayerController::_get_max_HP);
 	register_method((char*)"_on_enemy_die", &PlayerController::_on_enemy_die);
 	register_method((char*)"_is_alive", &PlayerController::_is_alive);
 	register_method((char*)"_start_item_particles", &PlayerController::_start_item_particles);
