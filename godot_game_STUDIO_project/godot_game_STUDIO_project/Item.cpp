@@ -38,12 +38,8 @@ godot::Item::~Item()
 
 void godot::Item::_ready()
 {
-	//	get animator
 	animator = cast_to<AnimationPlayer>(get_child(0)->get_child(0));
-	//	start animation
 	animator->play("idle");
-	//	stop animation
-	//animator->stop();
 }
 
 void godot::Item::_on_Area2D_body_entered(Node* node)
