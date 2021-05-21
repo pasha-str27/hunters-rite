@@ -107,6 +107,9 @@
     <ClCompile Include="AudioEffect.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
+    <ClCompile Include="MagnitZone.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
@@ -223,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="AudioEffect.h">
       <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="MagnitZone.h">
+      <Filter>Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
