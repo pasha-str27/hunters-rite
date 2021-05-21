@@ -9,7 +9,9 @@ void godot::SpawnEnemyController::_register_methods()
 	register_method("_prepare_spawn", &SpawnEnemyController::_prepare_spawn);
 	register_method("_spawn", &SpawnEnemyController::_spawn);
 	register_method("_on_Area2D_area_entered", &SpawnEnemyController::_on_Area2D_area_entered);
-
+	register_method("_get_current_level_name", &SpawnEnemyController::_get_current_level_name);
+	register_method("_stand_random_level", &SpawnEnemyController::_stand_random_level);
+	
 
 	register_property<SpawnEnemyController, Ref<PackedScene>>("Altar prefab", &SpawnEnemyController::altar, nullptr);
 	register_property<SpawnEnemyController, int>("Levels Count", &SpawnEnemyController::levels_count, 7);
@@ -88,6 +90,13 @@ void godot::SpawnEnemyController::_ready()
 
 void godot::SpawnEnemyController::_prepare_spawn()
 {
+	if (PlayersContainer::_get_instance()->_get_player1() != nullptr)
+		PlayersContainer::_get_instance()->_get_player1()->call("_change_moving", true);
+
+	if (PlayersContainer::_get_instance()->_get_player2() != nullptr)
+		PlayersContainer::_get_instance()->_get_player2()->call("_change_moving", true);
+
+
 	if (spawn_points.size() == 0 || enemies.size() == 0)
 	{
 		get_parent()->call("_open_doors");
@@ -95,7 +104,7 @@ void godot::SpawnEnemyController::_prepare_spawn()
 	}
 
 	timer->connect("timeout", this, "_spawn");
-	timer->start(.5f);
+	timer->start(.3f);
 }
 
 void godot::SpawnEnemyController::_spawn()
@@ -103,9 +112,6 @@ void godot::SpawnEnemyController::_spawn()
 	timer->disconnect("timeout", this, "_spawn");
 
 	SpawnEnemies();
-
-	if (Enemies::get_singleton()->_get_enemies_count() > 0)
-		get_parent()->call("_close_doors");
 
 	spawn_points.clear();
 }
@@ -151,12 +157,19 @@ void godot::SpawnEnemyController::_stand_random_level()
 	rng->randomize();
 	int level_number = rng->randi_range(1, levels_count);
 
+
 	ResourceLoader* resource_loader = ResourceLoader::get_singleton();
 	Ref<PackedScene> level = resource_loader->load("res://Assets/Prefabs/Scenes/Levels/Level_" + String::num(level_number) + ".tscn");
 	auto spawned_level = cast_to<Node2D>(level->instance());
 	get_node("/root/Node2D/Node")->call_deferred("add_child", spawned_level, true);
 
+	current_level = "Level_" + String::num(level_number);
 	rng = nullptr;
+}
+
+String godot::SpawnEnemyController::_get_current_level_name()
+{
+	return this->current_level;
 }
 
 godot::SpawnEnemyController::SpawnEnemyController()

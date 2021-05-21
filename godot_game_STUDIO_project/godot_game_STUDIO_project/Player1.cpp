@@ -66,20 +66,6 @@ void godot::Player1::_process_input()
 {
 	Vector2 dir = Vector2(0, 0);
 
-	if (input_controller->is_action_just_pressed("Player1_left"))
-	{
-		sprite->set_flip_h(true);
-		sprite->set_offset(Vector2(-35, 0));
-		shoot_particles->set_position(Vector2(-11, 0));
-	}
-
-	if (input_controller->is_action_just_pressed("Player1_right"))
-	{
-		sprite->set_flip_h(false);
-		sprite->set_offset(Vector2(35, 0));
-		shoot_particles->set_position(Vector2(11, 0));
-	}
-
 	//move up
 	if (input_controller->is_action_pressed("Player1_up"))
 	{
@@ -101,12 +87,18 @@ void godot::Player1::_process_input()
 	//move left
 	if (input_controller->is_action_pressed("Player1_left"))
 	{
+		sprite->set_flip_h(true);
+		sprite->set_offset(Vector2(-35, 0));
+		shoot_particles->set_position(Vector2(-11, 0));
 		dir.x -= _get_speed();
 	}
 
 	//move right	
 	if (input_controller->is_action_pressed("Player1_right"))
 	{
+		sprite->set_flip_h(false);
+		sprite->set_offset(Vector2(35, 0));
+		shoot_particles->set_position(Vector2(11, 0));
 		dir.x += _get_speed();
 	}
 

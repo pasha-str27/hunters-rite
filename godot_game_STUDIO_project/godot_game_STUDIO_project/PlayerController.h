@@ -15,6 +15,7 @@ namespace godot
 		IPlayer* current_player;
 		Ref<PackedScene> bullet_prefab;
 		Ref<PackedScene> revive_zone;
+		Node* door = nullptr;
 
 		ItemGenerator* item_generator = nullptr;
 
@@ -60,6 +61,7 @@ namespace godot
 		void _on_Area2D_area_entered(Node* node);
 		void _on_Area2D_area_exited(Node* node);
 		void _change_can_moving(bool value);
+		void _change_moving(bool value);
 		void change_can_moving_timeout();
 		void _decrease_attack_radius();
 		void _encrease_attack_radius();
