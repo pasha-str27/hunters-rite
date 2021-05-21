@@ -18,6 +18,7 @@ namespace godot
 		Ref<PackedScene> altar = nullptr;
 		Timer* timer = nullptr;
 		int levels_count = 7;
+		String current_level = "";
 
 	public:
 		Array enemies = {};
@@ -32,6 +33,7 @@ namespace godot
 		void _spawn();
 		void _on_Area2D_area_entered(Node* other);
 		void _stand_random_level();
+		String _get_current_level_name();
 		SpawnEnemyController();
 		~SpawnEnemyController();
 	};

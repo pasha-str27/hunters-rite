@@ -18,7 +18,9 @@ void godot::CameraController::_register_methods()
 	register_method("_input", &CameraController::_input);
 	register_method("_audio_fade_to_main_menu", &CameraController::_audio_fade_to_main_menu);
 	register_method("_spawn_exit", &CameraController::_spawn_exit);
-	register_method("_set_current_room_type", &CameraController::_set_current_room_type);	
+	register_method("_set_current_room_type", &CameraController::_set_current_room_type);
+	register_method("_go_to_start", &CameraController::_go_to_start);
+	
 
 	register_property<CameraController, Ref<PackedScene>>("Fade In Animation", &CameraController::fadeIn, nullptr);
 	register_property<CameraController, Ref<PackedScene>>("Fade Out Animation", &CameraController::fadeOut, nullptr);
@@ -156,7 +158,6 @@ void godot::CameraController::_door_collision(String door_dir)
 	if (door_dir.find("bottom") != -1)
 		index = 3;
 
-	Godot::print(door_dir + ": " + String::num((int)dirs[index]));
 	if (door_dir[0] == '-')
 	{
 		if((int)dirs[index] > 0)
@@ -165,8 +166,6 @@ void godot::CameraController::_door_collision(String door_dir)
 	}
 
 	dirs[index] = (int)dirs[index] + 1;
-
-	Godot::print(door_dir + ": " + String::num((int)dirs[index]));
 
 
 	if (((int)dirs[index] == 2 && is_open_door && !_is_one_player_alive()) || (_is_one_player_alive() && is_open_door && (int)dirs[index] == 1))
@@ -302,12 +301,32 @@ void godot::CameraController::_spawn_exit()
 {
 	auto exit_node = cast_to<Node2D>(exit->instance());
 	exit_node->set_global_position(this->get_global_position());
-	get_node("/root/Node2D/Node")->add_child(exit_node);
+	get_node("/root/Node2D/Node/")->add_child(exit_node);
 }
 
 void godot::CameraController::_set_current_room_type(String type)
 {
 	current_room_type = type;
+}
+
+void godot::CameraController::_go_to_start()
+{
+	auto fade = cast_to<Node2D>(fadeIn->instance());
+	add_child(fade);
+
+	timer_audio->connect("timeout", this, "_change_audio_volume");
+	timer_audio->start(time_delta);
+
+	set_global_position(Vector2(0, 0));
+
+	player1 = PlayersContainer::_get_instance()->_get_player1();
+	player2 = PlayersContainer::_get_instance()->_get_player2();
+
+	if (player1 != nullptr)
+		player1->set_global_position(Vector2(30, 0));
+
+	if (player2 != nullptr)
+		player2->set_global_position(Vector2(-30, 0));
 }
 
 godot::CameraController::CameraController()
