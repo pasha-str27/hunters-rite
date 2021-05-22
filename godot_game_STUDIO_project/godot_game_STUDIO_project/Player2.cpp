@@ -10,7 +10,7 @@ godot::Player2::Player2(Node2D* obj, Ref<PackedScene> bullet) : PlayerData(obj)
 	sprite = cast_to<AnimatedSprite>(obj->get_child(0)->get_child(0));
 	sprite->play("idle");
 
-	vfx_sprite = cast_to<AnimatedSprite>(obj->get_child(1)->get_child(0)->get_child(0));
+	vfx_sprite = cast_to<AnimatedSprite>(obj->get_child(1)->get_child(1));
 }
 
 godot::Player2::~Player2()
@@ -27,7 +27,7 @@ void godot::Player2::_move()
 	{
 		sprite->set_offset(Vector2::ZERO);
 		sprite->play("idle");
-		vfx_sprite->stop();
+		//vfx_sprite->stop();
 	}
 
 	if (PlayerData::_get_dir() == Vector2::ZERO && animation_name != "revive" 
@@ -38,10 +38,10 @@ void godot::Player2::_move()
 		sprite->play("run");
 
 	if (sprite->is_flipped_h() && sprite->get_animation() == "attack")
-		sprite->set_offset(Vector2(-10, -5));
+		sprite->set_offset(Vector2(-26, -4));
 	else 
 		if (!sprite->is_flipped_h() && sprite->get_animation() == "attack")
-			sprite->set_offset(Vector2(10, -5));
+			sprite->set_offset(Vector2(26, -4));
 }
 
 void godot::Player2::_process_input()
@@ -78,14 +78,18 @@ void godot::Player2::_process_input()
 	if (input_controller->is_action_pressed("Player2_fight_up"))
 	{
 		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(270);
-		_fight();
+		cast_to<AnimationPlayer>(_get_object()->get_node("AnimationPlayer"))->play("attack");
+		
+		//_fight();
 	}
 
 	//fight	down
 	if (input_controller->is_action_pressed("Player2_fight_down"))
 	{
 		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(90);
-		_fight();
+		cast_to<AnimationPlayer>(_get_object()->get_node("AnimationPlayer"))->play("attack");
+
+		//_fight();
 	}
 
 	//fight	left
@@ -93,7 +97,9 @@ void godot::Player2::_process_input()
 	{
 		sprite->set_flip_h(true);
 		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(180);
-		_fight();
+		cast_to<AnimationPlayer>(_get_object()->get_node("AnimationPlayer"))->play("attack");
+
+		//_fight();
 	}
 
 	//fight	right
@@ -101,7 +107,9 @@ void godot::Player2::_process_input()
 	{
 		sprite->set_flip_h(false);
 		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(0);
-		_fight();
+		cast_to<AnimationPlayer>(_get_object()->get_node("AnimationPlayer"))->play("attack");
+
+		//_fight();
 	}
 
 	PlayerData::_set_dir(dir);
@@ -112,11 +120,11 @@ void godot::Player2::_fight(Node* node)
 	if (!_can_fight())
 		return;
 
-	sprite->stop();
-	sprite->set_frame(0);
-	sprite->play("attack");
-	sprite->set_offset(Vector2(10, -5));
-	vfx_sprite->set_frame(0);
+	//sprite->stop();
+	//sprite->set_frame(0);
+	//sprite->play("attack");
+	//sprite->set_offset(Vector2(10, -5));
+	//vfx_sprite->set_frame(0);
 
 	Ref<PackedScene> prefab = nullptr;
 	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/Player2Fight.tscn");
@@ -132,9 +140,9 @@ void godot::Player2::_fight(Node* node)
 		current_enemy->call("_take_damage", args);
 	}
 
-	cast_to<Node2D>(_get_object()->get_child(1))->set_visible(true);
+	//cast_to<Node2D>(_get_object()->get_child(1))->set_visible(true);
 
-	vfx_sprite->play("idle");
+	//vfx_sprite->play("idle");
 
 	_get_object()->call("_start_timer");
 }
