@@ -149,7 +149,15 @@ void godot::PlayerController::_start_dash_timer()
 		_change_is_dashing_state();
 		current_player->_set_speed(speed * dash_speed_multiplier);
 
-		timer->start(dash_time_delta);
+		if (is_in_group("player1"))
+			timer->start(dash_time_delta);
+
+		if (is_in_group("player2"))
+		{
+			timer->start(5);
+			cast_to<AnimationPlayer>(get_node("Shield")->get_child(0)->get_child(0)->get_child(0))->play("shield_start");
+		}
+
 
 		dash_particles->restart();
 	}
@@ -159,6 +167,9 @@ void godot::PlayerController::_on_dash_timeout()
 {
 	current_player->_set_speed(speed / dash_speed_multiplier);
 	current_player->_process_input();
+	if(is_in_group("player2"))
+		cast_to<AnimationPlayer>(get_node("Shield")->get_child(0)->get_child(0)->get_child(0))->play("shield_end");
+
 
 	timer->disconnect("timeout", this, "_on_dash_timeout");
 	_start_dash_cooldow_timer();
