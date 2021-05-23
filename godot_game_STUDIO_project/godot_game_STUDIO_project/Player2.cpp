@@ -11,6 +11,7 @@ godot::Player2::Player2(Node2D* obj, Ref<PackedScene> bullet) : PlayerData(obj)
 	sprite->play("idle");
 
 	vfx_sprite = cast_to<AnimatedSprite>(obj->get_child(1)->get_child(1));
+	_set_special_time(1.5);
 }
 
 godot::Player2::~Player2()
@@ -49,8 +50,8 @@ void godot::Player2::_process_input()
 	Vector2 dir = Vector2(0, 0);
 
 	//dash
-	if (input_controller->is_action_just_pressed("Player2_dash"))
-		_get_object()->call("_start_dash_timer");
+	if (input_controller->is_action_just_pressed("Player2_special"))
+		_get_object()->call("_start_special_timer");
 
 	//move up
 	if (input_controller->is_action_pressed("Player2_up"))
@@ -117,6 +118,7 @@ void godot::Player2::_process_input()
 
 void godot::Player2::_fight(Node* node)
 {
+	Godot::print("fight");
 	if (!_can_fight())
 		return;
 
@@ -232,4 +234,19 @@ void godot::Player2::_stop_animations()
 	_set_dir(Vector2::ZERO);
 	vfx_sprite->stop();
 	vfx_sprite->set_frame(0);
+}
+
+void godot::Player2::_stop_special()
+{
+	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_layer_bit(0, false);
+	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_mask_bit(0, false);
+	cast_to<AnimationPlayer>(_get_object()->get_node("Shield")->get_child(0)->get_child(0)->get_child(0))->play("shield_end");
+}
+
+void godot::Player2::_start_special()
+{
+	cast_to<AnimationPlayer>(_get_object()->get_node("Shield")->get_child(0)->get_child(0)->get_child(0))->play("shield_start");
+
+	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_layer_bit(0, true);
+	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_mask_bit(0, true);
 }

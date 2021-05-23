@@ -27,5 +27,7 @@ namespace godot
 		void _update_health_bar();
 		ProgressBar* _get_health_bar();
 		void _stop_animations();
+		void _stop_special();
+		void _start_special();
 	};
 }

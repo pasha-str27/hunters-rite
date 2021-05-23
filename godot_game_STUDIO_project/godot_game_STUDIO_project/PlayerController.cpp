@@ -11,8 +11,8 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_add_bullet", &PlayerController::_add_bullet);
 	register_method((char*)"_start_timer", &PlayerController::_start_timer);
 	register_method((char*)"_on_timeout", &PlayerController::_on_timeout);
-	register_method((char*)"_start_dash_timer", &PlayerController::_start_dash_timer);
-	register_method((char*)"_on_dash_timeout", &PlayerController::_on_dash_timeout);
+	register_method((char*)"_start_special_timer", &PlayerController::_start_special_timer);
+	register_method((char*)"_on_special_timeout", &PlayerController::_on_special_timeout);
 	register_method((char*)"_start_dash_cooldow_timer", &PlayerController::_start_dash_cooldow_timer);
 	register_method((char*)"_on_dash_cooldown_timeout", &PlayerController::_on_dash_cooldown_timeout);
 	register_method((char*)"_can_fight", &PlayerController::_can_fight);
@@ -55,6 +55,7 @@ void godot::PlayerController::_register_methods()
 	register_property<PlayerController, float>("speed", &PlayerController::speed, 400);
 	register_property<PlayerController, Ref<PackedScene>>("bullet_prefab", &PlayerController::bullet_prefab, nullptr);
 	register_property<PlayerController, Ref<PackedScene>>("revive_zone", &PlayerController::revive_zone, nullptr);
+	register_property<PlayerController, float>("dash_cooldown_delta", &PlayerController::dash_cooldown_delta, 0);
 }
 
 godot::PlayerController::PlayerController()
@@ -68,7 +69,7 @@ godot::PlayerController::PlayerController()
 	number_to_next_item = 15;
 	can_move = true;
 	is_alive = true;
-	is_dashing = false;
+	is_special = false;
 	speed = 250;
 	door = nullptr;
 }
@@ -137,47 +138,38 @@ void godot::PlayerController::_on_timeout()
 		//cast_to<Node2D>(get_child(1))->set_visible(false);
 }
 
-void godot::PlayerController::_start_dash_timer()
+void godot::PlayerController::_start_special_timer()
 {
-	if (!timer->is_connected("timeout", this, "_on_dash_timeout") && !is_dashing)
+	if (!timer->is_connected("timeout", this, "_start_special_timer") && !is_special)
 	{
-		timer->connect("timeout", this, "_on_dash_timeout");
+		timer->connect("timeout", this, "_on_special_timeout");
 
 		if (!has_node(NodePath(timer->get_name())))
 			add_child(timer);
 
+		current_player->_start_special();
+
 		_change_is_dashing_state();
-		current_player->_set_speed(speed * dash_speed_multiplier);
 
-		if (is_in_group("player1"))
-			timer->start(dash_time_delta);
-
-		if (is_in_group("player2"))
-		{
-			timer->start(5);
-			cast_to<AnimationPlayer>(get_node("Shield")->get_child(0)->get_child(0)->get_child(0))->play("shield_start");
-		}
-
+		timer->start(current_player->_get_special_time());
 
 		dash_particles->restart();
 	}
 }
 
-void godot::PlayerController::_on_dash_timeout()
+void godot::PlayerController::_on_special_timeout()
 {
-	current_player->_set_speed(speed / dash_speed_multiplier);
+	current_player->_stop_special();
+
 	current_player->_process_input();
-	if(is_in_group("player2"))
-		cast_to<AnimationPlayer>(get_node("Shield")->get_child(0)->get_child(0)->get_child(0))->play("shield_end");
 
-
-	timer->disconnect("timeout", this, "_on_dash_timeout");
+	timer->disconnect("timeout", this, "_on_special_timeout");
 	_start_dash_cooldow_timer();
 }
 
 void godot::PlayerController::_start_dash_cooldow_timer()
 {
-	if (!timer->is_connected("timeout", this, "_on_dash_cooldown_timeout") && is_dashing)
+	if (!timer->is_connected("timeout", this, "_on_dash_cooldown_timeout") && is_special)
 	{
 		timer->connect("timeout", this, "_on_dash_cooldown_timeout");
 
@@ -190,15 +182,15 @@ void godot::PlayerController::_start_dash_cooldow_timer()
 
 void godot::PlayerController::_on_dash_cooldown_timeout()
 {
-	if (is_dashing)
-		is_dashing = false;
+	if (is_special)
+		is_special = false;
 
 	timer->disconnect("timeout", this, "_on_dash_cooldown_timeout");
 }
 
 void godot::PlayerController::_change_is_dashing_state()
 {
-	is_dashing = !is_dashing;
+	is_special = !is_special;
 }
 
 bool godot::PlayerController::_can_fight()

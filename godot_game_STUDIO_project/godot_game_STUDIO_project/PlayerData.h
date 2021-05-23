@@ -15,6 +15,7 @@ namespace godot
 		float damage;
 		float max_HP;
 		bool was_revived;
+		float special_time = 0;
 
 	public:
 		PlayerData(Node2D* object, Ref<PackedScene>bullet = 0);
@@ -45,7 +46,8 @@ namespace godot
 		void _set_max_HP(float value);
 		virtual void _update_health_bar() = 0;
 		virtual void _stop_animations() = 0;
-
+		float _get_special_time();
+		void _set_special_time(float value);
 		static Input* input_controller;
 	};
 }

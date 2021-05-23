@@ -131,3 +131,13 @@ void godot::PlayerData::_set_max_HP(float value)
 	float _hp = this->HP + diff;
 	_set_HP(_hp);
 }
+
+float godot::PlayerData::_get_special_time()
+{
+	return special_time;
+}
+
+void godot::PlayerData::_set_special_time(float value)
+{
+	special_time = value;
+}
