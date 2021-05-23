@@ -33,4 +33,3 @@ void godot::AudioEffect::_on_time_out()
 {
 	queue_free();
 }
-

@@ -24,14 +24,7 @@ void godot::BatAI::_delete_player1()
 		current_goal = _get_player2();
 		current_player = "player2";
 		dir = (current_goal->get_global_position() - _get_enemy()->get_global_position()).normalized();
-		return;
 	}
-
-	//RandomNumberGenerator* random = RandomNumberGenerator::_new();
-	//random->randomize();
-
-	//current_player = "";
-	//dir = (Vector2(random->randf_range(-100,100), random->randf_range(-100, 100))).normalized();
 }
 
 void godot::BatAI::_delete_player2()
@@ -42,14 +35,7 @@ void godot::BatAI::_delete_player2()
 		current_goal = _get_player1();
 		current_player = "player1";
 		dir = (current_goal->get_global_position() - _get_enemy()->get_global_position()).normalized();
-		return;
 	}
-
-	/*RandomNumberGenerator* random = RandomNumberGenerator::_new();
-	random->randomize();
-
-	current_player = "";
-	dir = (Vector2(random->randf_range(-100, 100), random->randf_range(-100, 100))).normalized();*/
 }
 
 
@@ -71,8 +57,7 @@ void godot::BatAI::_change_dir()
 
 	if (PlayersContainer::_get_instance()->_players_count() == 2)
 	{
-
-		if (rng->randi_range(0, 2))
+		if (rng->randi_range(0, 1))
 		{
 			current_goal = PlayersContainer::_get_instance()->_get_player2();
 			current_player = "player2";

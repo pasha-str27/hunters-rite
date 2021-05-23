@@ -18,7 +18,9 @@ void godot::CameraController::_register_methods()
 	register_method("_input", &CameraController::_input);
 	register_method("_audio_fade_to_main_menu", &CameraController::_audio_fade_to_main_menu);
 	register_method("_spawn_exit", &CameraController::_spawn_exit);
-	register_method("_set_current_room_type", &CameraController::_set_current_room_type);	
+	register_method("_set_current_room_type", &CameraController::_set_current_room_type);
+	register_method("_go_to_start", &CameraController::_go_to_start);
+	
 
 	register_property<CameraController, Ref<PackedScene>>("Fade In Animation", &CameraController::fadeIn, nullptr);
 	register_property<CameraController, Ref<PackedScene>>("Fade Out Animation", &CameraController::fadeOut, nullptr);
@@ -38,8 +40,8 @@ void godot::CameraController::_move(String dir)
 	float vertical_offset = 390;
 	float horizontal_offset = 250;
 	
-	timer_audio->connect("timeout", this, "_change_audio_volume");
-	timer_audio->start(time_delta);
+	//timer_audio->connect("timeout", this, "_change_audio_volume");
+	//timer_audio->start(time_delta);
 
 	if (dir == "top")
 	{
@@ -92,12 +94,6 @@ void godot::CameraController::_move(String dir)
 		if (has_node("/root/Node2D/Node/Player2"))
 			player2->set_global_position(player2->get_global_position() + Vector2(horizontal_offset, 0));
 	}
-
-	if (PlayersContainer::_get_instance()->_get_player1() != nullptr)
-		PlayersContainer::_get_instance()->_get_player1()->call("_change_can_moving", true);
-
-	if (PlayersContainer::_get_instance()->_get_player2() != nullptr)
-		PlayersContainer::_get_instance()->_get_player2()->call("_change_can_moving", true);
 }
 
 String godot::CameraController::_get_dir_on_index(int i)
@@ -117,7 +113,6 @@ bool godot::CameraController::_is_one_player_alive()
 	return !has_node("/root/Node2D/Node/Player1") || !has_node("/root/Node2D/Node/Player2");
 }
 
-
 void godot::CameraController::_init()
 {
 	for (int i = 0; i < 4; i++)
@@ -126,6 +121,7 @@ void godot::CameraController::_init()
 
 void godot::CameraController::_ready()
 {
+	audio_server = AudioServer::get_singleton();
 	_set_current(true);
 	player1 = cast_to<Node2D>(get_node("/root/Node2D/Node/Player1"));
 	player2 = cast_to<Node2D>(get_node("/root/Node2D/Node/Player2"));
@@ -136,8 +132,8 @@ void godot::CameraController::_ready()
 		audio_boss = cast_to<AudioStreamPlayer2D>(boss_back->instance());
 		add_child(audio);
 		add_child(audio_boss);
-		AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()), -80);
-		AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1, -80);
+		audio_server->set_bus_volume_db(audio_server->get_bus_index(audio->get_bus()), -80);
+		audio_server->set_bus_volume_db(audio_server->get_bus_index(audio->get_bus()) + 1, -80);
 	}
 
 	timer_audio = Timer::_new();
@@ -164,20 +160,22 @@ void godot::CameraController::_door_collision(String door_dir)
 
 	if (door_dir[0] == '-')
 	{
-		dirs[index] = (int)dirs[index] - 1;
+		if((int)dirs[index] > 0)
+			dirs[index] = (int)dirs[index] - 1;
 		return;
 	}
+
 	dirs[index] = (int)dirs[index] + 1;
+
 
 	if (((int)dirs[index] == 2 && is_open_door && !_is_one_player_alive()) || (_is_one_player_alive() && is_open_door && (int)dirs[index] == 1))
 	{
-		//_start_mute_volume();
-
+		Godot::print("going to next room");
 		if(PlayersContainer::_get_instance()->_get_player1() != nullptr)
-			PlayersContainer::_get_instance()->_get_player1()->call("_change_can_moving", false);
+			PlayersContainer::_get_instance()->_get_player1()->call("_change_moving", false);
 
 		if (PlayersContainer::_get_instance()->_get_player2() != nullptr)
-			PlayersContainer::_get_instance()->_get_player2()->call("_change_can_moving", false);
+			PlayersContainer::_get_instance()->_get_player2()->call("_change_moving", false);
 
 		auto fade = cast_to<Node2D>(fadeOut->instance());
 		add_child(fade);
@@ -192,13 +190,11 @@ void godot::CameraController::_open_doors()
 		current_room_type = "";
 	}
 
-	Godot::print("open doors");
 	is_open_door = true;
 }
 
 void godot::CameraController::_close_doors()
 {
-	Godot::print("close doors");
 	is_open_door = false;
 }
 
@@ -206,24 +202,28 @@ void godot::CameraController::_start_move()
 {
 	for (int i = 0; i < 4; i++) 
 		if ((int)dirs[i] == 2 || (_is_one_player_alive() && (int)dirs[i] == 1))
+		{
 			_move(_get_dir_on_index(i));
+			for (int i = 0; i < 4; i++)
+				dirs[i] = 0;
+		}
 }
 
 void godot::CameraController::_change_audio_volume()
 {
 	timer_audio->disconnect("timeout", this, "_change_audio_volume");
 
-	if (AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) >= MenuButtons::music_audio_level-0.4
-		&& AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) <= -75)
+	if (audio_server->get_bus_volume_db(audio_server->get_bus_index(audio->get_bus())) >= MenuButtons::music_audio_level-0.4
+		&& audio_server->get_bus_volume_db(audio_server->get_bus_index(audio->get_bus()) + 1) <= -75)
 			return;
 
-	if (AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) < MenuButtons::music_audio_level - 0.4)
-		AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()),
-			AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) + 1.6);
+	if (audio_server->get_bus_volume_db(audio_server->get_bus_index(audio->get_bus())) < MenuButtons::music_audio_level - 0.4)
+		audio_server->set_bus_volume_db(audio_server->get_bus_index(audio->get_bus()),
+			audio_server->get_bus_volume_db(audio_server->get_bus_index(audio->get_bus())) + 1.6);
 
-	if(AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) > -75)
-		AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1,
-			AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) - 0.8);
+	if(audio_server->get_bus_volume_db(audio_server->get_bus_index(audio->get_bus()) + 1) > -75)
+		audio_server->set_bus_volume_db(audio_server->get_bus_index(audio->get_bus()) + 1,
+			audio_server->get_bus_volume_db(audio_server->get_bus_index(audio->get_bus()) + 1) - 0.8);
 
 	timer_audio->connect("timeout", this, "_change_audio_volume");
 	timer_audio->start(time_delta);
@@ -233,17 +233,18 @@ void godot::CameraController::_mute_audio_volume()
 {
 	timer_audio->disconnect("timeout", this, "_mute_audio_volume");
 
-	if (AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) <= -75
-		&& AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())+1) >= MenuButtons::music_audio_level-0.4)
+	if (audio_server->get_bus_volume_db(audio_server->get_bus_index(audio->get_bus())) <= -75
+		&& audio_server->get_bus_volume_db(audio_server->get_bus_index(audio->get_bus())+1) >= MenuButtons::music_audio_level-0.4)
 			return;
 
-	if (AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) > -75)
-		AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()),
-			AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) - 0.8);
+	if (audio_server->get_bus_volume_db(audio_server->get_bus_index(audio->get_bus())) > -75)
+		audio_server->set_bus_volume_db(audio_server->get_bus_index(audio->get_bus()),
+			audio_server->get_bus_volume_db(audio_server->get_bus_index(audio->get_bus())) - 0.8);
 
-	if (AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) < MenuButtons::music_audio_level - 0.4)
-		AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1,
-			AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) + 1.6);
+	if (audio_server->get_bus_volume_db(audio_server->get_bus_index(audio->get_bus()) + 1) < MenuButtons::music_audio_level - 0.4)
+		audio_server->set_bus_volume_db(audio_server->get_bus_index(audio->get_bus()) + 1,
+			audio_server->get_bus_volume_db(audio_server->get_bus_index(audio->get_bus()) + 1) + 1.6);
+	
 	timer_audio->connect("timeout", this, "_mute_audio_volume");
 	timer_audio->start(time_delta);
 }
@@ -280,17 +281,17 @@ void godot::CameraController::_audio_fade_to_main_menu()
 		return;
 	}
 
-	if (AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) <= -75
-		&& AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) <= -75)
+	if (audio_server->get_bus_volume_db(audio_server->get_bus_index(audio->get_bus())) <= -75
+		&& audio_server->get_bus_volume_db(audio_server->get_bus_index(audio->get_bus()) + 1) <= -75)
 			return;
 
-	if (AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) > -75)
-		AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()),
-			AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus())) - 1.6);
+	if (audio_server->get_bus_volume_db(audio_server->get_bus_index(audio->get_bus())) > -75)
+		audio_server->set_bus_volume_db(audio_server->get_bus_index(audio->get_bus()),
+			audio_server->get_bus_volume_db(audio_server->get_bus_index(audio->get_bus())) - 1.6);
 
-	if(AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) > -75)
-		AudioServer::get_singleton()->set_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1,
-			AudioServer::get_singleton()->get_bus_volume_db(AudioServer::get_singleton()->get_bus_index(audio->get_bus()) + 1) - 1.6);
+	if(audio_server->get_bus_volume_db(audio_server->get_bus_index(audio->get_bus()) + 1) > -75)
+		audio_server->set_bus_volume_db(audio_server->get_bus_index(audio->get_bus()) + 1,
+			audio_server->get_bus_volume_db(audio_server->get_bus_index(audio->get_bus()) + 1) - 1.6);
 
 	timer_audio->connect("timeout", this, "_audio_fade_to_main_menu");
 	timer_audio->start(time_delta);
@@ -300,12 +301,32 @@ void godot::CameraController::_spawn_exit()
 {
 	auto exit_node = cast_to<Node2D>(exit->instance());
 	exit_node->set_global_position(this->get_global_position());
-	get_node("/root/Node2D/Node")->add_child(exit_node);
+	get_node("/root/Node2D/Node/")->add_child(exit_node);
 }
 
 void godot::CameraController::_set_current_room_type(String type)
 {
 	current_room_type = type;
+}
+
+void godot::CameraController::_go_to_start()
+{
+	auto fade = cast_to<Node2D>(fadeIn->instance());
+	add_child(fade);
+
+	timer_audio->connect("timeout", this, "_change_audio_volume");
+	timer_audio->start(time_delta);
+
+	set_global_position(Vector2(0, 0));
+
+	player1 = PlayersContainer::_get_instance()->_get_player1();
+	player2 = PlayersContainer::_get_instance()->_get_player2();
+
+	if (player1 != nullptr)
+		player1->set_global_position(Vector2(30, 0));
+
+	if (player2 != nullptr)
+		player2->set_global_position(Vector2(-30, 0));
 }
 
 godot::CameraController::CameraController()

@@ -12,6 +12,7 @@ namespace godot
 	{
 	private:
 		GODOT_CLASS(ItemGenerator, Node);
+
 	public:
 		ItemsContainer* items_container = nullptr;
 		int count_to_spawn = 15;

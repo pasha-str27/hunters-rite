@@ -14,7 +14,6 @@
 #include <TextureButton.hpp>
 #include <KinematicBody2D.hpp>
 #include <CollisionObject2D.hpp>
-#include <Node.hpp>
 #include <Node2D.hpp>
 #include <Node.hpp>
 #include <Input.hpp>
@@ -48,12 +47,10 @@
 #include <File.hpp>
 #include <JSON.hpp>
 #include <JSONParseResult.hpp>
-#include <SpriteFrames.hpp>
 #include <Slider.hpp>
 #include <Dictionary.hpp>
 #include <ResourceSaver.hpp>
 #include <Control.hpp>
-
 
 using namespace godot;
 
@@ -91,13 +88,8 @@ using namespace godot;
 #include "ParticlesDestroyer.h"
 #include "ExitHandler.h"
 #include "Preloader.h"
-
-#include "Generation.h"
-#include "SpawnPointChecker.h"
-#include "Room.h"
-#include "Destroyer.h"
-#include "ClosedRoom.h"
-#include "Door.h"
 #include "SpawnEnemyController.h"
 #include "ItemsContainer.h"
 #include "ItemGenerator.h"
+#include "CustomExtensions.h"
+#include "MagnitZone.h"

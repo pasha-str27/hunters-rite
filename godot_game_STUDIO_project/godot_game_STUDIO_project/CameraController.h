@@ -25,6 +25,7 @@ namespace godot
 		AudioStreamPlayer2D* audio = nullptr;
 		AudioStreamPlayer2D* audio_boss = nullptr;
 		Timer* timer_audio;
+		AudioServer* audio_server = nullptr;
 
 		float time_delta = 1.0 / 50;
 		float delta_step = -80.0 / 50.0;
@@ -48,6 +49,7 @@ namespace godot
 		void _audio_fade_to_main_menu();
 		void _spawn_exit();
 		void _set_current_room_type(String);
+		void _go_to_start();
 		CameraController();
 		~CameraController();
 	};

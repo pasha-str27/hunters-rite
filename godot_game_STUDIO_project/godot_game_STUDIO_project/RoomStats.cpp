@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-using namespace godot;
-
 void godot::RoomStats::_register_methods()
 {
 	register_method("_get_type", &RoomStats::_get_type);

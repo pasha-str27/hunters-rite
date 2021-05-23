@@ -9,8 +9,8 @@ godot::PlayerData::PlayerData(Node2D* object, Ref<PackedScene> bullet)
 {
 	this->object = object;
 	dir = Vector2(0, 0);
-	HP = 100;
-	max_HP = 100;
+	HP = 0;
+	max_HP = 0;
 	damage = 25;
 	was_revived = false;
 	can_fight_value = true;
@@ -23,10 +23,10 @@ godot::PlayerData::PlayerData(Node2D* object, Ref<PackedScene> bullet)
 godot::PlayerData::PlayerData()
 {
 	object = nullptr;
-	HP = 100;
+	HP = 0;
 	dir = Vector2(0, 0);
 	was_revived = false;
-	max_HP = 100;
+	max_HP = 0;
 	damage = 25;
 	speed = 250;
 	can_fight_value = true;
@@ -95,8 +95,8 @@ float godot::PlayerData::_get_HP()
 
 void godot::PlayerData::_set_HP(float HP)
 {
-	this->HP = HP > 10 ? HP : 10;
-	this->HP = HP > max_HP ? max_HP : HP;
+	this->HP = HP > 0 ? HP : 10;
+	this->HP = HP > max_HP ? max_HP : this->HP;
 }
 
 float godot::PlayerData::_get_damage()
@@ -126,6 +126,8 @@ float godot::PlayerData::_get_max_HP()
 
 void godot::PlayerData::_set_max_HP(float value)
 {
-	max_HP += value > 0 ? value : 0;
-	this->HP += value;
+	float diff = value - max_HP;
+	max_HP = value;
+	float _hp = this->HP + diff;
+	_set_HP(_hp);
 }

@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-//godot::Player1* godot::Player1::singleton = nullptr;
-
 godot::Player1::Player1(Node2D* object, Ref<PackedScene>bullet) : PlayerData(object)
 {
 	max_bullet_count = 10;
@@ -15,6 +13,7 @@ godot::Player1::Player1(Node2D* object, Ref<PackedScene>bullet) : PlayerData(obj
 	sprite = cast_to<AnimatedSprite>(_get_object()->get_child(0)->get_child(0));
 
 	shoot_particles = cast_to<Particles2D>(_get_object()->get_child(0)->get_child(0)->get_child(0));
+
 	for (int i = 0; i < max_bullet_count; ++i)
 	{
 		auto new_obj = bullet->instance();
@@ -67,20 +66,6 @@ void godot::Player1::_process_input()
 {
 	Vector2 dir = Vector2(0, 0);
 
-	if (input_controller->is_action_just_pressed("Player1_left"))
-	{
-		sprite->set_flip_h(true);
-		sprite->set_offset(Vector2(-35, 0));
-		shoot_particles->set_position(Vector2(-11, 0));
-	}
-
-	if (input_controller->is_action_just_pressed("Player1_right"))
-	{
-		sprite->set_flip_h(false);
-		sprite->set_offset(Vector2(35, 0));
-		shoot_particles->set_position(Vector2(11, 0));
-	}
-
 	//move up
 	if (input_controller->is_action_pressed("Player1_up"))
 	{
@@ -102,12 +87,18 @@ void godot::Player1::_process_input()
 	//move left
 	if (input_controller->is_action_pressed("Player1_left"))
 	{
+		sprite->set_flip_h(true);
+		sprite->set_offset(Vector2(-35, 0));
+		shoot_particles->set_position(Vector2(-11, 0));
 		dir.x -= _get_speed();
 	}
 
 	//move right	
 	if (input_controller->is_action_pressed("Player1_right"))
 	{
+		sprite->set_flip_h(false);
+		sprite->set_offset(Vector2(35, 0));
+		shoot_particles->set_position(Vector2(11, 0));
 		dir.x += _get_speed();
 	}
 
@@ -215,6 +206,7 @@ void  godot::Player1::_take_damage(float damage, bool is_spike)
 		Ref<PackedScene> prefab = nullptr;
 		prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/PlayerDied.tscn");
 		_get_object()->get_parent()->add_child(prefab->instance());
+
 		sprite->play("death");
 		PlayersContainer::_get_instance()->_set_player1(nullptr);
 		Enemies::get_singleton()->_remove_player1();
@@ -239,11 +231,9 @@ void godot::Player1::_revive()
 
 void godot::Player1::_update_health_bar()
 {
-	printf("Player1' hp updating\n");
 	auto health_bar = _get_health_bar();
 	if (health_bar != nullptr)
 		health_bar->set_value(_get_HP());
-	//Godot::print(String::num(_get_HP()));
 }
 
 ProgressBar* godot::Player1::_get_health_bar()
@@ -255,5 +245,4 @@ void godot::Player1::_stop_animations()
 {
 	sprite->play("idle");
 	_set_dir(Vector2::ZERO);
-
 }

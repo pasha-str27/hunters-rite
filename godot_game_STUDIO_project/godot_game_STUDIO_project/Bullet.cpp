@@ -43,10 +43,10 @@ void godot::Bullet::_on_Area2D_body_entered(Node* node)
 		get_node("/root/Node2D/Node")->add_child(particles);
 	}
 
-
 	if (node->is_in_group("player") && is_in_group("web_bullet")) 
 	{
 		node->call("_change_can_moving", false);
+		node->call("_change_moving", false);		
 		node->call("_animate_spider_web");
 	}
 	else
