@@ -32,6 +32,7 @@ void godot::Enemy::_register_methods()
 	register_method("_remove_current_player", &Enemy::_remove_current_player);
 	register_method("_check_angry", &Enemy::_check_angry);
 	register_method("_on_spawn_end", &Enemy::_on_spawn_end);
+	register_method("_on_Area2D_body_exited", &Enemy::_on_Area2D_body_exited);
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
@@ -162,6 +163,9 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		if (has_node("zone"))
 			get_node("zone")->queue_free();
 
+		if(is_in_group("statue_melee"))
+			get_node("MagnitZone")->queue_free();
+
 		get_child(0)->queue_free();
 		set_visible(false);
 		ai->change_can_fight(false);
@@ -246,7 +250,15 @@ void godot::Enemy::_on_Area2D_body_entered(Node* node)
 		float damage = 20;
 
 		if (is_in_group("slime"))
-			damage = 33;
+		{
+			if (node->is_in_group("player1"))
+				ai->_set_is_player1_onArea(true);
+			if(node->is_in_group("player2"))
+				ai->_set_is_player2_onArea(true);
+
+			return;
+		}
+			
 
 		if (is_in_group("bat") && is_angry)
 			damage = 30;
@@ -406,4 +418,13 @@ void godot::Enemy::_on_spawn_end()
 		cast_to<ProgressBar>(get_parent()->get_node("BossHealthBar"))->set_visible(true);
 	else
 		cast_to<ProgressBar>(get_node("HealthBar"))->set_visible(true);
+}
+
+void godot::Enemy::_on_Area2D_body_exited(Node* node)
+{
+	if (node->is_in_group("player1"))
+		ai->_set_is_player1_onArea(false);
+
+	if (node->is_in_group("player2"))
+		ai->_set_is_player2_onArea(false);
 }
