@@ -35,7 +35,7 @@ tracks/0/keys = {
 
 [node name="FadeOut" type="Node2D"]
 pause_mode = 2
-z_index = 100
+z_index = 101
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_left = -3086.0
