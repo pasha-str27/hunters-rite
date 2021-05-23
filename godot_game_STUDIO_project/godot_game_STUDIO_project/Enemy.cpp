@@ -93,7 +93,7 @@ void godot::Enemy::_ready()
 
 	spawn_particles->set_emitting(true);
 	timer_particles->connect("timeout", this, "_on_spawn_end");
-	timer_particles->start(0.5f);
+	timer_particles->start(0.2f);
 	cast_to<Node2D>(get_node("CollisionShape2D"))->set_visible(false);
 
 	if(is_in_group("flower"))
@@ -115,7 +115,7 @@ void godot::Enemy::_process(float delta)
 		String animation_name = sp->get_animation();
 
 		if (sp->get_sprite_frames()->get_animation_loop(animation_name) == false && sp->get_frame() == sp->get_sprite_frames()->get_frame_count(animation_name) - 1)
-			sp->play("idle");
+			_change_animation("idle", 1);
 	}
 }
 
@@ -391,6 +391,7 @@ void godot::Enemy::_check_angry()
 		ai->_set_speed(100);
 		entered = false;
 		ai->_change_dir();
+		_change_animation("idle", 1);
 	}
 }
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Assets/Sprites/Monsters/Statue/monster_statue_circle.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Sprites/Monsters/Statue/monster_statue_idle.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Assets/Sprites/Monsters/Statue/monster_statue_damage.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Prefabs/Particles/DeathParticles/DeathStatueParticles.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
@@ -135,6 +136,14 @@ tracks/0/keys = {
 "values": [ 0.0, 360.0, 0.0 ]
 }
 
+[sub_resource type="NativeScript" id=28]
+resource_name = "MagnitZone"
+class_name = "MagnitZone"
+library = ExtResource( 8 )
+
+[sub_resource type="CircleShape2D" id=29]
+radius = 17.5739
+
 [node name="StatueMelee" type="Node2D"]
 __meta__ = {
 "_editor_description_": ""
@@ -200,6 +209,16 @@ anims/idle = SubResource( 27 )
 
 [node name="SpawnParticles" parent="StatueMelee" instance=ExtResource( 6 )]
 
+[node name="MagnitZone" type="Area2D" parent="StatueMelee"]
+position = Vector2( 0.198425, 19.6441 )
+scale = Vector2( 10, 10 )
+script = SubResource( 28 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StatueMelee/MagnitZone"]
+shape = SubResource( 29 )
+
 [connection signal="body_entered" from="StatueMelee/Area2D" to="StatueMelee" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="StatueMelee/zone" to="StatueMelee" method="_set_current_player"]
 [connection signal="body_exited" from="StatueMelee/zone" to="StatueMelee" method="_remove_current_player"]
+[connection signal="body_entered" from="StatueMelee/MagnitZone" to="StatueMelee/MagnitZone" method="_on_body_entered"]
+[connection signal="body_exited" from="StatueMelee/MagnitZone" to="StatueMelee/MagnitZone" method="_on_body_exited"]

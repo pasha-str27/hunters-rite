@@ -104,7 +104,7 @@ margin_right = -69.0
 margin_bottom = 20.0
 custom_styles/fg = SubResource( 3 )
 custom_styles/bg = SubResource( 4 )
-value = 50.0
+max_value = 0.0
 percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false,
@@ -145,7 +145,7 @@ margin_right = -66.0
 rect_min_size = Vector2( 0, 5 )
 custom_styles/fg = SubResource( 6 )
 custom_styles/bg = SubResource( 7 )
-value = 50.0
+max_value = 0.0
 percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false,
