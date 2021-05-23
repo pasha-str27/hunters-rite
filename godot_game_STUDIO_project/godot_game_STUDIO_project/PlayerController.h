@@ -89,5 +89,6 @@ namespace godot
 		void _show_tutorial_message(Node* node);
 		void _hide_tutorial_message(Node* node);
 		void _stop_animations();
+		void _player_fight();
 	};
 }

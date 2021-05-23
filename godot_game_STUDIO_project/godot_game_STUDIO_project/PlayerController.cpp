@@ -48,6 +48,7 @@ void godot::PlayerController::_register_methods()
 	register_method((char*)"_update_max_health_bar_size", &PlayerController::_update_max_health_bar_size);
 	register_method((char*)"_animate_spider_web", &PlayerController::_animate_spider_web);
 	register_method((char*)"_stop_animations", &PlayerController::_stop_animations);
+	register_method((char*)"_player_fight", &PlayerController::_player_fight);	
 
 	register_property<PlayerController, float>("hp", &PlayerController::_hp, 0);
 	register_property<PlayerController, float>("damage", &PlayerController::_damage, 0);
@@ -132,8 +133,8 @@ void godot::PlayerController::_on_timeout()
 
 	current_player->_change_can_fight(true);
 
-	if (get_name() == "Player2")
-		cast_to<Node2D>(get_child(1))->set_visible(false);
+	//if (get_name() == "Player2")
+		//cast_to<Node2D>(get_child(1))->set_visible(false);
 }
 
 void godot::PlayerController::_start_dash_timer()
@@ -148,7 +149,15 @@ void godot::PlayerController::_start_dash_timer()
 		_change_is_dashing_state();
 		current_player->_set_speed(speed * dash_speed_multiplier);
 
-		timer->start(dash_time_delta);
+		if (is_in_group("player1"))
+			timer->start(dash_time_delta);
+
+		if (is_in_group("player2"))
+		{
+			timer->start(5);
+			cast_to<AnimationPlayer>(get_node("Shield")->get_child(0)->get_child(0)->get_child(0))->play("shield_start");
+		}
+
 
 		dash_particles->restart();
 	}
@@ -158,6 +167,9 @@ void godot::PlayerController::_on_dash_timeout()
 {
 	current_player->_set_speed(speed / dash_speed_multiplier);
 	current_player->_process_input();
+	if(is_in_group("player2"))
+		cast_to<AnimationPlayer>(get_node("Shield")->get_child(0)->get_child(0)->get_child(0))->play("shield_end");
+
 
 	timer->disconnect("timeout", this, "_on_dash_timeout");
 	_start_dash_cooldow_timer();
@@ -446,4 +458,9 @@ void godot::PlayerController::_hide_tutorial_message(Node* node)
 void godot::PlayerController::_stop_animations()
 {
 	current_player->_stop_animations();
+}
+
+void godot::PlayerController::_player_fight()
+{
+	current_player->_fight();
 }
