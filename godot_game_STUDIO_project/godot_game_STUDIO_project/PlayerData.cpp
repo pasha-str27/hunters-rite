@@ -141,3 +141,13 @@ void godot::PlayerData::_set_special_time(float value)
 {
 	special_time = value;
 }
+
+void godot::PlayerData::_set_safe_mode(bool value)
+{
+	is_safe_mode = value;
+}
+
+bool godot::PlayerData::_get_safe_mode()
+{
+	return is_safe_mode;
+}

@@ -238,6 +238,7 @@ void godot::Player2::_stop_animations()
 
 void godot::Player2::_stop_special()
 {
+	_set_safe_mode(false);
 	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_layer_bit(0, false);
 	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_mask_bit(0, false);
 	cast_to<AnimationPlayer>(_get_object()->get_node("Shield")->get_child(0)->get_child(0)->get_child(0))->play("shield_end");
@@ -245,6 +246,7 @@ void godot::Player2::_stop_special()
 
 void godot::Player2::_start_special()
 {
+	_set_safe_mode(true);
 	cast_to<AnimationPlayer>(_get_object()->get_node("Shield")->get_child(0)->get_child(0)->get_child(0))->play("shield_start");
 
 	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_layer_bit(0, true);

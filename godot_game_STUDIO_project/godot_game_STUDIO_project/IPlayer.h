@@ -32,5 +32,6 @@ namespace godot
 		virtual void _set_special_time(float value) = 0;
 		virtual void _stop_special() = 0;
 		virtual void _start_special() = 0;
+		virtual bool _get_safe_mode() = 0;
 	};
 }

@@ -16,6 +16,7 @@ namespace godot
 		float max_HP;
 		bool was_revived;
 		float special_time = 0;
+		bool is_safe_mode = false;
 
 	public:
 		PlayerData(Node2D* object, Ref<PackedScene>bullet = 0);
@@ -48,6 +49,8 @@ namespace godot
 		virtual void _stop_animations() = 0;
 		float _get_special_time();
 		void _set_special_time(float value);
+		void _set_safe_mode(bool value);
+		bool _get_safe_mode();
 		static Input* input_controller;
 	};
 }

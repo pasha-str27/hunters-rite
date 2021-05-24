@@ -227,6 +227,9 @@ void godot::PlayerController::_process(float delta)
 
 void godot::PlayerController::_take_damage(float damage, bool is_spike)
 {
+	if (current_player->_get_safe_mode())
+		return;
+
 	current_player->_take_damage(damage, is_spike);
 	_update_health_bar();
 
