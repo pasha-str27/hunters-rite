@@ -16,7 +16,7 @@ godot::PlayerData::PlayerData(Node2D* object, Ref<PackedScene> bullet)
 	can_fight_value = true;
 	speed = 250;
 
-	if(input_controller==nullptr)
+	if(input_controller == nullptr)
 		input_controller = Input::get_singleton();
 }
 
