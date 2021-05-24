@@ -156,6 +156,11 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 			CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->call("_open_doors");
 		}
 
+		if (is_in_group("flower"))
+		{
+			get_node("/root/Node2D/Node/ItemsContainer")->call("_spawn_random_item", get_global_position());
+		}
+
 		set_collision_layer_bit(2, false);
 		set_collision_mask_bit(9, false);
 
