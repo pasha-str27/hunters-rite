@@ -114,7 +114,6 @@ void godot::PlayerController::_ready()
 	hurt_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"));
 	dash_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "DashParticles"));
 	revive_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "ReviveParticles"));
-
 }
 
 void godot::PlayerController::_start_timer()
@@ -133,9 +132,6 @@ void godot::PlayerController::_on_timeout()
 	timer->disconnect("timeout", this, "_on_timeout");
 
 	current_player->_change_can_fight(true);
-
-	//if (get_name() == "Player2")
-		//cast_to<Node2D>(get_child(1))->set_visible(false);
 }
 
 void godot::PlayerController::_start_special_timer()
@@ -162,6 +158,9 @@ void godot::PlayerController::_on_special_timeout()
 	current_player->_stop_special();
 
 	current_player->_process_input();
+	if(is_in_group("player2"))
+		cast_to<AnimationPlayer>(get_node("Shield")->find_node("AnimationPlayer"))->play("shield_end");
+
 
 	timer->disconnect("timeout", this, "_on_special_timeout");
 	_start_dash_cooldow_timer();
