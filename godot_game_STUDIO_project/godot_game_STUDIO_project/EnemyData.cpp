@@ -36,6 +36,14 @@ Node2D* godot::EnemyData::_get_player2()
 	return PlayersContainer::_get_instance()->_get_player2();
 }
 
+void godot::EnemyData::_set_is_player1_onArea(bool value)
+{
+}
+
+void godot::EnemyData::_set_is_player2_onArea(bool value)
+{
+}
+
 godot::EnemyData::EnemyData(Node2D* enemy)
 {
 	this->enemy = enemy;
