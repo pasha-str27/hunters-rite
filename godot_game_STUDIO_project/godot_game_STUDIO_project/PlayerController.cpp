@@ -131,9 +131,6 @@ void godot::PlayerController::_on_timeout()
 	timer->disconnect("timeout", this, "_on_timeout");
 
 	current_player->_change_can_fight(true);
-
-	//if (get_name() == "Player2")
-		//cast_to<Node2D>(get_child(1))->set_visible(false);
 }
 
 void godot::PlayerController::_start_dash_timer()
@@ -154,9 +151,8 @@ void godot::PlayerController::_start_dash_timer()
 		if (is_in_group("player2"))
 		{
 			timer->start(5);
-			cast_to<AnimationPlayer>(get_node("Shield")->get_child(0)->get_child(0)->get_child(0))->play("shield_start");
+			cast_to<AnimationPlayer>(get_node("Shield")->find_node("AnimationPlayer"))->play("shield_start");
 		}
-
 
 		dash_particles->restart();
 	}
@@ -167,7 +163,7 @@ void godot::PlayerController::_on_dash_timeout()
 	current_player->_set_speed(speed / dash_speed_multiplier);
 	current_player->_process_input();
 	if(is_in_group("player2"))
-		cast_to<AnimationPlayer>(get_node("Shield")->get_child(0)->get_child(0)->get_child(0))->play("shield_end");
+		cast_to<AnimationPlayer>(get_node("Shield")->find_node("AnimationPlayer"))->play("shield_end");
 
 
 	timer->disconnect("timeout", this, "_on_dash_timeout");
