@@ -12,6 +12,8 @@ namespace godot
 		AnimatedSprite* sprite = nullptr;
 		AnimatedSprite* vfx_sprite = nullptr;
 
+		AnimationPlayer* animator = nullptr;
+
 	public:
 		Player2(Node2D* obj, Ref<PackedScene> bullet = 0);
 		~Player2();
