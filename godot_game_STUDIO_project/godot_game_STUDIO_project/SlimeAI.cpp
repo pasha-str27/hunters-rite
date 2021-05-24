@@ -30,6 +30,16 @@ void godot::SlimeAI::_set_speed(float value)
 	speed = value;
 }
 
+void godot::SlimeAI::_set_is_player1_onArea(bool value)
+{
+	is_player1_onArea = value;
+}
+
+void godot::SlimeAI::_set_is_player2_onArea(bool value)
+{
+	is_player2_onArea = value;
+}
+
 godot::SlimeAI::SlimeAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
 {
 	can_move = true;
@@ -97,6 +107,13 @@ void godot::SlimeAI::_change_dir_after_time()
 void godot::SlimeAI::_fight(Node2D* player1, Node2D* player2)
 {
 	can_move = false;
+
+	if (is_player1_onArea && player1 != nullptr)
+		player1->call("_take_damage", damage, false);
+
+	if (is_player2_onArea && player2 != nullptr)
+		player2->call("_take_damage", damage, false);
+
 	_get_enemy()->call("_start_timer");
 }
 

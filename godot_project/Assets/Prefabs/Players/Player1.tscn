@@ -69,56 +69,56 @@ atlas = ExtResource( 13 )
 region = Rect2( 0, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 10 )
+atlas = ExtResource( 13 )
 region = Rect2( 0, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 10 )
+atlas = ExtResource( 13 )
 region = Rect2( 106, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 10 )
+atlas = ExtResource( 13 )
 region = Rect2( 212, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 10 )
+atlas = ExtResource( 13 )
 region = Rect2( 318, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 10 )
+atlas = ExtResource( 13 )
 region = Rect2( 424, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 10 )
-region = Rect2( 530, 0, 106, 22 )
+region = Rect2( 0, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 10 )
-region = Rect2( 636, 0, 106, 22 )
+region = Rect2( 106, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 10 )
-region = Rect2( 742, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 13 )
-region = Rect2( 0, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 13 )
-region = Rect2( 106, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 13 )
 region = Rect2( 212, 0, 106, 22 )
 
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 13 )
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 10 )
 region = Rect2( 318, 0, 106, 22 )
 
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 13 )
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 10 )
 region = Rect2( 424, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 10 )
+region = Rect2( 530, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 10 )
+region = Rect2( 636, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 10 )
+region = Rect2( 742, 0, 106, 22 )
 
 [sub_resource type="SpriteFrames" id=27]
 animations = [ {
@@ -137,14 +137,14 @@ animations = [ {
 "name": "revive",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
-"loop": true,
-"name": "run",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ) ],
+"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
 "loop": false,
 "name": "death",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ) ],
+"loop": true,
+"name": "run",
 "speed": 10.0
 } ]
 
@@ -214,7 +214,7 @@ color_ramp = SubResource( 35 )
 "player",
 "player1",
 ]]
-z_index = 26
+z_index = 100
 collision_mask = 2
 script = ExtResource( 8 )
 hp = 80.0
@@ -222,6 +222,7 @@ damage = 25.0
 speed = 200.0
 bullet_prefab = ExtResource( 5 )
 revive_zone = ExtResource( 6 )
+dash_cooldown_delta = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
 shape = SubResource( 1 )
@@ -230,7 +231,7 @@ shape = SubResource( 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 27 )
 animation = "idle"
-frame = 3
+frame = 4
 playing = true
 offset = Vector2( 35, 0 )
 

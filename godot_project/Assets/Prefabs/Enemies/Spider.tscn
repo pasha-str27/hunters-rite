@@ -9,7 +9,6 @@
 [ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Prefabs/Particles/DeathParticles/DeathSpiderParticles.tscn" type="PackedScene" id=8]
 
-
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
 
@@ -138,10 +137,12 @@ shape = SubResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Spider/CollisionShape2D"]
 frames = SubResource( 18 )
 animation = "idle"
-frame = 3
+frame = 4
 playing = true
 
-[node name="Area2D2" type="Area2D" parent="Spider"]
+[node name="Area2D2" type="Area2D" parent="Spider" groups=[
+"side",
+]]
 position = Vector2( 0.486, -32.703 )
 scale = Vector2( 1.5, 1.5 )
 collision_mask = 17
@@ -151,7 +152,9 @@ side = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spider/Area2D2"]
 shape = SubResource( 19 )
 
-[node name="Area2D4" type="Area2D" parent="Spider"]
+[node name="Area2D4" type="Area2D" parent="Spider" groups=[
+"side",
+]]
 position = Vector2( -31.514, -0.703 )
 scale = Vector2( 1.5, 1.5 )
 collision_mask = 17
@@ -161,7 +164,9 @@ side = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spider/Area2D4"]
 shape = SubResource( 19 )
 
-[node name="Area2D5" type="Area2D" parent="Spider"]
+[node name="Area2D5" type="Area2D" parent="Spider" groups=[
+"side",
+]]
 position = Vector2( 32.486, -0.703 )
 scale = Vector2( 1.5, 1.5 )
 collision_mask = 17
@@ -171,7 +176,9 @@ side = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spider/Area2D5"]
 shape = SubResource( 19 )
 
-[node name="Area2D7" type="Area2D" parent="Spider"]
+[node name="Area2D7" type="Area2D" parent="Spider" groups=[
+"side",
+]]
 position = Vector2( 0.486, 31.297 )
 scale = Vector2( 1.5, 1.5 )
 collision_mask = 17

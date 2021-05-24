@@ -90,7 +90,7 @@ animations = [ {
 extents = Vector2( 4.89366, 4.97602 )
 
 [sub_resource type="CircleShape2D" id=20]
-radius = 2.64047
+radius = 7.19773
 
 [node name="Slime" type="Node2D"]
 
@@ -185,3 +185,4 @@ shape = SubResource( 20 )
 [connection signal="body_entered" from="Slime/Area2D10" to="Slime/Area2D10" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Slime/Area2D10" to="Slime/Area2D10" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="Slime/Area2D" to="Slime" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Slime/Area2D" to="Slime" method="_on_Area2D_body_exited"]
