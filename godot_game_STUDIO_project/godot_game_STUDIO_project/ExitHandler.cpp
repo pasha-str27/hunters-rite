@@ -82,6 +82,10 @@ void godot::ExitHandler::_load_menu_scene()
 	if (PlayersContainer::_get_instance()->_get_player2() != nullptr)
 		PlayersContainer::_get_instance()->_get_player2()->call("_change_moving", true);
 
+	auto children_item = get_node("/root/Node2D/Items")->get_children();
+	for (int i = 0; i < children_item.size(); i++)
+		cast_to<Node2D>(children_item[i])->queue_free();
+
 	queue_free();
 
 }
