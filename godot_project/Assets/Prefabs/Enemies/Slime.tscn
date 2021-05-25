@@ -90,7 +90,7 @@ animations = [ {
 extents = Vector2( 4.89366, 4.97602 )
 
 [sub_resource type="CircleShape2D" id=20]
-radius = 7.19773
+radius = 18.2109
 
 [node name="Slime" type="Node2D"]
 
@@ -131,6 +131,7 @@ playing = true
 
 [node name="Area2D4" type="Area2D" parent="Slime"]
 position = Vector2( 0, -32 )
+scale = Vector2( 2.5, 2.5 )
 collision_layer = 32769
 collision_mask = 32785
 script = ExtResource( 4 )
@@ -141,6 +142,7 @@ shape = SubResource( 19 )
 
 [node name="Area2D7" type="Area2D" parent="Slime"]
 position = Vector2( -32, 0 )
+scale = Vector2( 2.5, 2.5 )
 collision_layer = 32769
 collision_mask = 32785
 script = ExtResource( 4 )
@@ -151,6 +153,7 @@ shape = SubResource( 19 )
 
 [node name="Area2D8" type="Area2D" parent="Slime"]
 position = Vector2( 32, 0 )
+scale = Vector2( 2.5, 2.5 )
 collision_layer = 32769
 collision_mask = 32785
 script = ExtResource( 4 )
@@ -161,6 +164,7 @@ shape = SubResource( 19 )
 
 [node name="Area2D10" type="Area2D" parent="Slime"]
 position = Vector2( 0, 32 )
+scale = Vector2( 2.5, 2.5 )
 collision_layer = 32769
 collision_mask = 32785
 script = ExtResource( 4 )

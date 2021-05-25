@@ -261,6 +261,9 @@ void godot::Enemy::_on_Area2D_body_entered(Node* node)
 			if(node->is_in_group("player2"))
 				ai->_set_is_player2_onArea(true);
 
+			damage = 33;
+
+			node->call("_take_damage", damage, false);
 			return;
 		}
 			

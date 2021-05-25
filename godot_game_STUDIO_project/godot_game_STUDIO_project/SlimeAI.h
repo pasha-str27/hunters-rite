@@ -17,6 +17,8 @@ namespace godot
 		bool is_player1_onArea = false;
 		bool is_player2_onArea = false;
 
+		bool was_setted = false;
+
 		Vector2 old_pos;
 
 	public:
