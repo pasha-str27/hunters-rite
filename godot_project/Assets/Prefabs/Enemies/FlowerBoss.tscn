@@ -94,8 +94,8 @@ __meta__ = {
 }
 
 [node name="flower" type="KinematicBody2D" parent="."]
-collision_layer = 32768
-collision_mask = 32768
+collision_layer = 262144
+collision_mask = 262144
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="flower"]
 shape = SubResource( 7 )

@@ -132,8 +132,8 @@ playing = true
 [node name="Area2D4" type="Area2D" parent="Slime"]
 position = Vector2( 0, -32 )
 scale = Vector2( 2.5, 2.5 )
-collision_layer = 32769
-collision_mask = 32785
+collision_layer = 262145
+collision_mask = 262161
 script = ExtResource( 4 )
 side = 1
 
@@ -143,8 +143,8 @@ shape = SubResource( 19 )
 [node name="Area2D7" type="Area2D" parent="Slime"]
 position = Vector2( -32, 0 )
 scale = Vector2( 2.5, 2.5 )
-collision_layer = 32769
-collision_mask = 32785
+collision_layer = 262145
+collision_mask = 262161
 script = ExtResource( 4 )
 side = 2
 
@@ -154,8 +154,8 @@ shape = SubResource( 19 )
 [node name="Area2D8" type="Area2D" parent="Slime"]
 position = Vector2( 32, 0 )
 scale = Vector2( 2.5, 2.5 )
-collision_layer = 32769
-collision_mask = 32785
+collision_layer = 262145
+collision_mask = 262161
 script = ExtResource( 4 )
 side = 3
 
@@ -165,8 +165,8 @@ shape = SubResource( 19 )
 [node name="Area2D10" type="Area2D" parent="Slime"]
 position = Vector2( 0, 32 )
 scale = Vector2( 2.5, 2.5 )
-collision_layer = 32769
-collision_mask = 32785
+collision_layer = 262145
+collision_mask = 262161
 script = ExtResource( 4 )
 side = 4
 
