@@ -323,10 +323,34 @@ void godot::CameraController::_go_to_start()
 	player2 = PlayersContainer::_get_instance()->_get_player2();
 
 	if (player1 != nullptr)
-		player1->set_global_position(Vector2(30, 0));
+		player1->set_global_position(Vector2(0, -50));
+	else
+	{
+		ResourceLoader* rld = ResourceLoader::get_singleton();
+		Ref<PackedScene> _player1 = rld->load("res://Assets/Prefabs/Players/Player1.tscn");
+		Node2D* _player1_node = cast_to<Node2D>(_player1->instance());
+		get_parent()->add_child(_player1_node);
+		player1 = _player1_node;
+
+		Node* items = get_node("ItemHolder/P1Items");
+		for (int i = items->get_child_count() - 1; i >= 0; --i)
+			items->get_child(i)->queue_free();
+	}
 
 	if (player2 != nullptr)
-		player2->set_global_position(Vector2(-30, 0));
+		player2->set_global_position(Vector2(0, -50));
+	else
+	{
+		ResourceLoader* rld = ResourceLoader::get_singleton();
+		Ref<PackedScene> _player2 = rld->load("res://Assets/Prefabs/Players/Player2.tscn");
+		Node2D* _player2_node = cast_to<Node2D>(_player2 -> instance());
+		get_parent()->add_child(_player2_node);
+		player2 = _player2_node;
+
+		Node* items = get_node("ItemHolder/P2Items");
+		for (int i = items->get_child_count() - 1; i >= 0; --i)
+			items->get_child(i)->queue_free();
+	}
 }
 
 godot::CameraController::CameraController()

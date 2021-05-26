@@ -27,17 +27,7 @@ void godot::ItemGenerator::_dead_enemy(Vector2 enemy_position)
 	current_count -= 1;
 	if (current_count <= 0) 
 	{
-		RandomNumberGenerator* rng = RandomNumberGenerator::_new();
-		rng->randomize();
-
-		int64_t index = rng->randi_range(0, (int64_t)items_container->items.size() - 1);
-		rng = nullptr;
-
-		auto item = cast_to<Node2D>(cast_to<PackedScene>(items_container->items[(int)index])->instance());
-		item->set_global_position(enemy_position);
-		item->set_z_index(1);
-
-		CustomExtensions::GetChildByName(get_node("/root/Node2D"), "Items")->add_child(item);
+		items_container->_spawn_random_item(enemy_position);
 		current_count = count_to_spawn;
 	}
 }

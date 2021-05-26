@@ -32,6 +32,7 @@ void godot::Enemy::_register_methods()
 	register_method("_remove_current_player", &Enemy::_remove_current_player);
 	register_method("_check_angry", &Enemy::_check_angry);
 	register_method("_on_spawn_end", &Enemy::_on_spawn_end);
+	register_method("_on_Area2D_body_exited", &Enemy::_on_Area2D_body_exited);
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
@@ -94,7 +95,7 @@ void godot::Enemy::_ready()
 	spawn_particles->set_emitting(true);
 	timer_particles->connect("timeout", this, "_on_spawn_end");
 	timer_particles->start(0.2f);
-	cast_to<Node2D>(get_node("CollisionShape2D"))->set_visible(false);
+	cast_to<Node2D>(get_node("CollisionShape2D"))->call_deferred("set_visible", false);
 
 	if(is_in_group("flower"))
 		cast_to<ProgressBar>(get_parent()->get_node("BossHealthBar"))->set_visible(false);
@@ -143,9 +144,11 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		else if(player_id == 2)
 			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player2");
 
-		player->call("_on_enemy_die", this->get_global_position());
+		if(!is_in_group("flower"))
+			player->call("_on_enemy_die", this->get_global_position());
 
 		died = true;
+
 		Enemies::get_singleton()->_remove_enemy(this);
 
 		if (Enemies::get_singleton()->_get_enemies_count() == 0)
@@ -156,11 +159,19 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 			CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->call("_open_doors");
 		}
 
+		if (is_in_group("flower"))
+		{
+			get_node("/root/Node2D/Node/ItemsContainer")->call("_spawn_random_item", get_global_position());
+		}
+
 		set_collision_layer_bit(2, false);
 		set_collision_mask_bit(9, false);
 
 		if (has_node("zone"))
 			get_node("zone")->queue_free();
+
+		if(is_in_group("statue_melee"))
+			get_node("MagnitZone")->queue_free();
 
 		get_child(0)->queue_free();
 		set_visible(false);
@@ -246,7 +257,18 @@ void godot::Enemy::_on_Area2D_body_entered(Node* node)
 		float damage = 20;
 
 		if (is_in_group("slime"))
+		{
+			if (node->is_in_group("player1"))
+				ai->_set_is_player1_onArea(true);
+			if(node->is_in_group("player2"))
+				ai->_set_is_player2_onArea(true);
+
 			damage = 33;
+
+			node->call("_take_damage", damage, false);
+			return;
+		}
+			
 
 		if (is_in_group("bat") && is_angry)
 			damage = 30;
@@ -344,7 +366,7 @@ void godot::Enemy::_update_health_bar()
 		health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(this->get_parent(), "BossHealthBar"));
 
 	if (health_bar != nullptr)
-		health_bar->set_value(HP);
+		health_bar->call_deferred("set_value", HP);
 
 }	
 
@@ -406,4 +428,13 @@ void godot::Enemy::_on_spawn_end()
 		cast_to<ProgressBar>(get_parent()->get_node("BossHealthBar"))->set_visible(true);
 	else
 		cast_to<ProgressBar>(get_node("HealthBar"))->set_visible(true);
+}
+
+void godot::Enemy::_on_Area2D_body_exited(Node* node)
+{
+	if (node->is_in_group("player1"))
+		ai->_set_is_player1_onArea(false);
+
+	if (node->is_in_group("player2"))
+		ai->_set_is_player2_onArea(false);
 }
