@@ -12,6 +12,7 @@ namespace godot
 
 		Vector2 bullet_dir;
 		AnimatedSprite* sprite = nullptr;
+		float speed_delta = 2.5;
 
 		Particles2D* shoot_particles = nullptr;
 
@@ -30,5 +31,7 @@ namespace godot
 		void _update_health_bar();
 		ProgressBar* _get_health_bar();
 		void _stop_animations();
+		void _stop_special();
+		void _start_special();
 	};
 }

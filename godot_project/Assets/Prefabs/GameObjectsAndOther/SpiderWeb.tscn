@@ -2,8 +2,6 @@
 
 [ext_resource path="res://Assets/Sprites/Monsters/Spider/monster_spider_webshell_full.png" type="Texture" id=1]
 
-
-
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 1 )

@@ -26,5 +26,7 @@ namespace godot
 		void _change_dir();
 		Node2D* _get_player1();
 		Node2D* _get_player2();
+		void _set_is_player1_onArea(bool value);
+		void _set_is_player2_onArea(bool value);
 	};
 }

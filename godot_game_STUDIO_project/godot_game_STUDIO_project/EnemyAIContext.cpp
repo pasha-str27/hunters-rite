@@ -93,3 +93,13 @@ void godot::EnemyAIContext::_change_dir()
 {
 	strategy->_change_dir();
 }
+
+void godot::EnemyAIContext::_set_is_player1_onArea(bool value)
+{
+	strategy->_set_is_player1_onArea(value);
+}
+
+void godot::EnemyAIContext::_set_is_player2_onArea(bool value)
+{
+	strategy->_set_is_player2_onArea(value);
+}

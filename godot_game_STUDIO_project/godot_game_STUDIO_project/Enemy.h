@@ -23,6 +23,8 @@ namespace godot
 		virtual Node2D* _get_player1() = 0;
 		virtual Node2D* _get_player2() = 0;
 		virtual void _change_dir() = 0;
+		virtual void _set_is_player1_onArea(bool value) = 0;
+		virtual void _set_is_player2_onArea(bool value) = 0;
 	};
 
 	class EnemyAIContext
@@ -48,6 +50,8 @@ namespace godot
 		String _get_current_player();
 		void _set_speed(float value);
 		void _change_dir();
+		void _set_is_player1_onArea(bool value);
+		void _set_is_player2_onArea(bool value);
 	};
 
 
@@ -104,5 +108,6 @@ namespace godot
 			void _remove_current_player(Node* node);
 			void _check_angry();
 			void _on_spawn_end();
+			void _on_Area2D_body_exited(Node* node);
 	};
 }
