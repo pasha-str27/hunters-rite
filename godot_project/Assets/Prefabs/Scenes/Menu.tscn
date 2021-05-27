@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=2]
@@ -6,10 +6,6 @@
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_focus_v2.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_background_v2.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/notice_background_v2.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Prefabs/SoundsEffects/Effects/ButtonClick.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Assets/Prefabs/SoundsEffects/BackMusic/MenuBackMusic.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Assets/Prefabs/Animations/FadeIn.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Assets/Prefabs/Animations/FadeOut.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/background_item.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/background_item_focus.png" type="Texture" id=12]
 
@@ -153,10 +149,6 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-click_effect = ExtResource( 7 )
-"menu back music" = ExtResource( 8 )
-fade = ExtResource( 10 )
-fade_in = ExtResource( 9 )
 
 [node name="Background" type="TextureRect" parent="Menu"]
 light_mask = 2
@@ -427,21 +419,21 @@ __meta__ = {
 [node name="ItemsAnimated" type="AnimationPlayer" parent="Menu/VBoxContainer/Buttons/QuitAndItems/Items"]
 anims/Focus_scale = SubResource( 6 )
 
-[connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/Play" to="Menu" method="_on_animated_focus_entered" binds= [ "Play", "PlayAnimated" ]]
 [connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/Play" to="Menu" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/Play" to="Menu" method="_on_animated_focus_entered" binds= [ "Play", "PlayAnimated" ]]
 [connection signal="focus_exited" from="Menu/VBoxContainer/Buttons/Play" to="Menu" method="_on_animated_focus_exited" binds= [ "Play", "PlayAnimated" ]]
 [connection signal="pressed" from="Menu/VBoxContainer/Buttons/Play" to="Menu" method="_on_Play_pressed"]
-[connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/Option" to="Menu" method="_on_animated_focus_entered" binds= [ "Option", "OptionAnimated" ]]
 [connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/Option" to="Menu" method="_play_change_cursor_effect" binds= [ "Option", "OptionAnimated" ]]
+[connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/Option" to="Menu" method="_on_animated_focus_entered" binds= [ "Option", "OptionAnimated" ]]
 [connection signal="focus_exited" from="Menu/VBoxContainer/Buttons/Option" to="Menu" method="_on_animated_focus_exited" binds= [ "Option", "OptionAnimated" ]]
 [connection signal="pressed" from="Menu/VBoxContainer/Buttons/Option" to="Menu" method="_on_Option_pressed"]
-[connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/QuitAndItems/Quit" to="Menu" method="_on_Quit_focus_entered"]
-[connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/QuitAndItems/Quit" to="Menu" method="_on_animated_focus_entered" binds= [ "Quit", "QuitAnimated" ]]
 [connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/QuitAndItems/Quit" to="Menu" method="_play_change_cursor_effect"]
-[connection signal="focus_exited" from="Menu/VBoxContainer/Buttons/QuitAndItems/Quit" to="Menu" method="_on_animated_focus_exited" binds= [ "Quit", "QuitAnimated" ]]
+[connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/QuitAndItems/Quit" to="Menu" method="_on_animated_focus_entered" binds= [ "Quit", "QuitAnimated" ]]
+[connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/QuitAndItems/Quit" to="Menu" method="_on_Quit_focus_entered"]
 [connection signal="focus_exited" from="Menu/VBoxContainer/Buttons/QuitAndItems/Quit" to="Menu" method="_on_Quit_focus_exited"]
+[connection signal="focus_exited" from="Menu/VBoxContainer/Buttons/QuitAndItems/Quit" to="Menu" method="_on_animated_focus_exited" binds= [ "Quit", "QuitAnimated" ]]
 [connection signal="pressed" from="Menu/VBoxContainer/Buttons/QuitAndItems/Quit" to="Menu" method="_on_Quit_pressed"]
-[connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/QuitAndItems/Items" to="Menu" method="_on_animated_focus_entered" binds= [ "Items", "ItemsAnimated" ]]
 [connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/QuitAndItems/Items" to="Menu" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/QuitAndItems/Items" to="Menu" method="_on_animated_focus_entered" binds= [ "Items", "ItemsAnimated" ]]
 [connection signal="focus_exited" from="Menu/VBoxContainer/Buttons/QuitAndItems/Items" to="Menu" method="_on_animated_focus_exited" binds= [ "Items", "ItemsAnimated" ]]
 [connection signal="pressed" from="Menu/VBoxContainer/Buttons/QuitAndItems/Items" to="Menu" method="_on_Items_pressed"]

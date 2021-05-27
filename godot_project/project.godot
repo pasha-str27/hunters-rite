@@ -15,7 +15,7 @@ _global_script_class_icons={
 [application]
 
 config/name="hunters"
-run/main_scene="res://Genetation.tscn"
+run/main_scene="res://Assets/Prefabs/Scenes/Menu.tscn"
 config/icon="res://Assets/Sprites/GameIcon.png"
 config/windows_native_icon="res://Assets/Sprites/player2.ico"
 
