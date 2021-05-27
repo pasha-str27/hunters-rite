@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Sprites/Tilesets/level1_tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://Assets/Sprites/Tilesets/UI_tileset.tres" type="TileSet" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="UpDoor" type="Node2D"]
+scale = Vector2( 2, 2 )
+z_index = 25
+
+[node name="wall" type="TileMap" parent="."]
+position = Vector2( 0, -8 )
+scale = Vector2( 0.5, 0.5 )
+z_index = 26
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 3
+format = 1
+tile_data = PoolIntArray( -393229, 15, 0, -393222, 13, 0, -458752, 15, 0, -458741, 15, 0, -458740, 13, 0, -327691, 13, 0, -327688, 15, 0, -327686, 13, 0, -327682, 13, 0, -327681, 23, 0, -393213, 15, 0, -393208, 13, 0, -262155, 15, 0, -262152, 13, 0, -262149, 15, 0, -327678, 13, 0, -327672, 13, 0, -327669, 15, 0 )
+
+[node name="ui" type="TileMap" parent="."]
+position = Vector2( 0, -8 )
+scale = Vector2( 0.5, 0.5 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 0
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( -196609, 4, 0, -262144, 4, 0 )
+
+[node name="top" type="Area2D" parent="ui" groups=[
+"door_zone",
+]]
+position = Vector2( 0.551865, -111.995 )
+scale = Vector2( 3.12, 1.52 )
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ui/top"]
+shape = SubResource( 1 )
