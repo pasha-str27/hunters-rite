@@ -37,3 +37,6 @@ tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( 524287, 26, 0 )
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+position = Vector2( 0, 84 )
