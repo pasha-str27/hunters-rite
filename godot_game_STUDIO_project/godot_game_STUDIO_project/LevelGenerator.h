@@ -11,6 +11,10 @@ namespace godot
 		int map_size = 10;
 		int size = 0;
 		Ref<PackedScene> room = nullptr;
+		Ref<PackedScene> up_door = nullptr;
+		Ref<PackedScene> right_door = nullptr;
+		Ref<PackedScene> down_door = nullptr;
+		Ref<PackedScene> left_door = nullptr;
 
 		float step_x = 1024;
 		float step_y = 720;
@@ -27,5 +31,6 @@ namespace godot
 		void _generate();
 		bool _has_room(std::vector<Vector2> positions, Vector2 pos);
 		void _buid_room(Vector2 dir);
+		void _buid_doors();
 	};
 }
