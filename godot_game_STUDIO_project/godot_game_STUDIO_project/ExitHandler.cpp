@@ -38,7 +38,7 @@ void godot::ExitHandler::_on_Area2D_area_entered(Node* other)
 
 	bool is_only_one_alive = CustomExtensions::IsOnlyOnePlayerAlive(other);
 
-	if ((is_only_one_alive || players_count == 2) && is_spawned)
+	if (((is_only_one_alive && players_count == 1) || players_count == 2) && is_spawned)
 	{
 		if (PlayersContainer::_get_instance()->_get_player1() != nullptr)
 			PlayersContainer::_get_instance()->_get_player1()->call("_change_moving", false);

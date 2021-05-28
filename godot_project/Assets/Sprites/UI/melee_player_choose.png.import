@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/monster_slime_damage.png-ef001c350a6db6f8367bc94d8968e4da.stex"
+path="res://.import/melee_player_choose.png-aa7fe5c9f80376412a48a0b5fdad4fe6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Monsters/Slime/monster_slime_damage.png"
-dest_files=[ "res://.import/monster_slime_damage.png-ef001c350a6db6f8367bc94d8968e4da.stex" ]
+source_file="res://Assets/Sprites/UI/melee_player_choose.png"
+dest_files=[ "res://.import/melee_player_choose.png-aa7fe5c9f80376412a48a0b5fdad4fe6.stex" ]
 
 [params]
 

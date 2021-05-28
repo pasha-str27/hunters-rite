@@ -112,6 +112,11 @@
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
     <ClInclude Include="headers.h" />
+    <ClInclude Include="AudioEffect.h" />
+    <ClInclude Include="MenuButtons.h" />
+    <ClInclude Include="ParticlesDestroyer.h" />
+    <ClInclude Include="ExitHandler.h" />
+    <ClInclude Include="Preloader.h" />
     <ClInclude Include="Player1.h">
       <Filter>Players</Filter>
     </ClInclude>
@@ -221,21 +226,6 @@
       <Filter>Audio</Filter>
     </ClInclude>
     <ClInclude Include="MagnitZone.h" />
-    <ClInclude Include="ExitHandler.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuButtons.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Preloader.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticlesDestroyer.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="AudioEffect.h">
-      <Filter>Audio</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Players">
