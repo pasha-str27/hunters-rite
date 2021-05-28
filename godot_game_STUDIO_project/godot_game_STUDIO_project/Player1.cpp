@@ -10,9 +10,9 @@ godot::Player1::Player1(Node2D* object, Ref<PackedScene>bullet) : PlayerData(obj
 
 	auto node = _get_object()->get_parent()->get_child(0);
 	
-	sprite = cast_to<AnimatedSprite>(_get_object()->get_child(0)->get_child(0));
+	sprite = cast_to<AnimatedSprite>(_get_object()->get_node("AnimatedSprite"));
 
-	shoot_particles = cast_to<Particles2D>(_get_object()->get_child(0)->get_child(0)->get_child(0));
+	shoot_particles = cast_to<Particles2D>(sprite->get_child(0));
 
 	for (int i = 0; i < max_bullet_count; ++i)
 	{
