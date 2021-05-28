@@ -144,9 +144,11 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		else if(player_id == 2)
 			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player2");
 
-		player->call("_on_enemy_die", this->get_global_position());
+		if(!is_in_group("flower"))
+			player->call("_on_enemy_die", this->get_global_position());
 
 		died = true;
+
 		Enemies::get_singleton()->_remove_enemy(this);
 
 		if (Enemies::get_singleton()->_get_enemies_count() == 0)

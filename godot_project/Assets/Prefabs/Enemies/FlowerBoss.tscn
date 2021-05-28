@@ -50,6 +50,7 @@ corner_radius_bottom_left = 30
 radius = 55.8611
 
 [node name="FlowerBoss" type="Node2D"]
+z_index = 100
 
 [node name="BulletConteinerFlower" type="Node" parent="."]
 

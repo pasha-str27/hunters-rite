@@ -31,6 +31,7 @@
 #include <Tree.hpp>
 #include <Label.hpp>
 #include <Array.hpp>
+#include <ScrollContainer.hpp>
 #include <ProgressBar.hpp>
 #include <InputEventKey.hpp>
 #include <AnimationPlayer.hpp>
