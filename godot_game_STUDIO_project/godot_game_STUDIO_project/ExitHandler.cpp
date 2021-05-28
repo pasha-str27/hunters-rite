@@ -38,7 +38,7 @@ void godot::ExitHandler::_on_Area2D_area_entered(Node* other)
 
 	bool is_only_one_alive = CustomExtensions::IsOnlyOnePlayerAlive(other);
 
-	if (is_only_one_alive || (players_count == 2))
+	if (((is_only_one_alive && players_count == 1) || players_count == 2) && is_spawned)
 	{
 		if (PlayersContainer::_get_instance()->_get_player1() != nullptr)
 			PlayersContainer::_get_instance()->_get_player1()->call("_change_moving", false);
@@ -73,14 +73,20 @@ void godot::ExitHandler::_load_menu_scene()
 	camera->call("_go_to_start");
 	
 	auto enemy_spawner = camera->find_node("EnemySpawner");
-	get_node((NodePath)("/root/Node2D/Node/" + (String)enemy_spawner->call("_get_current_level_name")))->queue_free();
+	auto current_level = get_node((NodePath)("/root/Node2D/Node/" + (String)enemy_spawner->call("_get_current_level_name")));
+	current_level->set_name("to_delete");
 	enemy_spawner->call("_stand_random_level");
+	current_level->queue_free();
 
 	if (PlayersContainer::_get_instance()->_get_player1() != nullptr)
 		PlayersContainer::_get_instance()->_get_player1()->call("_change_moving", true);
 
 	if (PlayersContainer::_get_instance()->_get_player2() != nullptr)
 		PlayersContainer::_get_instance()->_get_player2()->call("_change_moving", true);
+
+	auto children_item = get_node("/root/Node2D/Items")->get_children();
+	for (int i = 0; i < children_item.size(); i++)
+		cast_to<Node2D>(children_item[i])->queue_free();
 
 	queue_free();
 
@@ -90,6 +96,7 @@ void godot::ExitHandler::_show_exit()
 {
 	cast_to<Particles2D>(get_node("SpawnExitParticles"))->set_emitting(false);
 	timer->disconnect("timeout", this, "_show_exit");
+	is_spawned = true;
 }
 
 void godot::ExitHandler::_mute_audio()

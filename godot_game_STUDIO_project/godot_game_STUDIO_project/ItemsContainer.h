@@ -17,6 +17,7 @@ namespace godot
 		void _init();
 		void _ready();
 		ItemsContainer* _get_instance();
+		void _spawn_random_item(Vector2 pos);
 		ItemsContainer();
 		~ItemsContainer();
 	};

@@ -25,7 +25,7 @@ namespace godot
 		Timer* timer;
 		bool can_move;
 		bool is_alive;
-		bool is_dashing;
+		bool is_special;
 
 		int number_to_next_item;
 		float attack_speed_delta;
@@ -47,8 +47,8 @@ namespace godot
 		void _ready();
 		void _start_timer();
 		void _on_timeout();
-		void _start_dash_timer();
-		void _on_dash_timeout();
+		void _start_special_timer();
+		void _on_special_timeout();
 		void _start_dash_cooldow_timer();
 		void _on_dash_cooldown_timeout();
 		bool _can_fight();
@@ -89,5 +89,6 @@ namespace godot
 		void _show_tutorial_message(Node* node);
 		void _hide_tutorial_message(Node* node);
 		void _stop_animations();
+		void _player_fight();
 	};
 }

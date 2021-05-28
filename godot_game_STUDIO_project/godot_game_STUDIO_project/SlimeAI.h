@@ -13,6 +13,11 @@ namespace godot
 		Vector2 dir;
 		bool is_cheking;
 		float speed;
+		float damage = 33;
+		bool is_player1_onArea = false;
+		bool is_player2_onArea = false;
+
+		bool was_setted = false;
 
 		Vector2 old_pos;
 
@@ -27,5 +32,7 @@ namespace godot
 		void _fight(Node2D* player1, Node2D* player2);
 		Vector2 directions_swich(int value);
 		void _set_speed(float value);
+		void _set_is_player1_onArea(bool value);
+		void _set_is_player2_onArea(bool value);
 	};
 }

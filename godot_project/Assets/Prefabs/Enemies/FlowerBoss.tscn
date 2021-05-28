@@ -8,7 +8,6 @@
 [ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Prefabs/Particles/DeathParticles/DeathFlowerParticles.tscn" type="PackedScene" id=7]
 
-
 [sub_resource type="CircleShape2D" id=1]
 radius = 20.2615
 
@@ -51,6 +50,7 @@ corner_radius_bottom_left = 30
 radius = 55.8611
 
 [node name="FlowerBoss" type="Node2D"]
+z_index = 100
 
 [node name="BulletConteinerFlower" type="Node" parent="."]
 
@@ -68,6 +68,7 @@ HP = 350.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flower"]
 shape = SubResource( 1 )
+one_way_collision = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Flower/CollisionShape2D"]
 scale = Vector2( 0.23, 0.2 )
@@ -94,8 +95,8 @@ __meta__ = {
 }
 
 [node name="flower" type="KinematicBody2D" parent="."]
-collision_layer = 32768
-collision_mask = 32768
+collision_layer = 262144
+collision_mask = 262144
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="flower"]
 shape = SubResource( 7 )

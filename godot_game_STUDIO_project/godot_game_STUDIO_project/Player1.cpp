@@ -10,9 +10,9 @@ godot::Player1::Player1(Node2D* object, Ref<PackedScene>bullet) : PlayerData(obj
 
 	auto node = _get_object()->get_parent()->get_child(0);
 	
-	sprite = cast_to<AnimatedSprite>(_get_object()->get_child(0)->get_child(0));
+	sprite = cast_to<AnimatedSprite>(_get_object()->get_node("AnimatedSprite"));
 
-	shoot_particles = cast_to<Particles2D>(_get_object()->get_child(0)->get_child(0)->get_child(0));
+	shoot_particles = cast_to<Particles2D>(sprite->get_child(0));
 
 	for (int i = 0; i < max_bullet_count; ++i)
 	{
@@ -22,6 +22,7 @@ godot::Player1::Player1(Node2D* object, Ref<PackedScene>bullet) : PlayerData(obj
 	}
 
 	sprite->play("idle");
+	_set_special_time(0.5);
 }
 
 godot::Player1::~Player1()
@@ -79,9 +80,10 @@ void godot::Player1::_process_input()
 	}
 
 	//dash
-	if (input_controller->is_action_just_pressed("Player1_dash"))
+	if (input_controller->is_action_just_pressed("Player1_special"))
 	{
-		_get_object()->call("_start_dash_timer");
+
+		_get_object()->call("_start_special_timer");
 	}
 
 	//move left
@@ -245,4 +247,14 @@ void godot::Player1::_stop_animations()
 {
 	sprite->play("idle");
 	_set_dir(Vector2::ZERO);
+}
+
+void godot::Player1::_stop_special()
+{
+	_set_speed(_get_speed() / speed_delta);
+}
+
+void godot::Player1::_start_special()
+{
+	_set_speed(_get_speed() * speed_delta);
 }

@@ -16,7 +16,7 @@ godot::PlayerData::PlayerData(Node2D* object, Ref<PackedScene> bullet)
 	can_fight_value = true;
 	speed = 250;
 
-	if(input_controller==nullptr)
+	if(input_controller == nullptr)
 		input_controller = Input::get_singleton();
 }
 
@@ -130,4 +130,24 @@ void godot::PlayerData::_set_max_HP(float value)
 	max_HP = value;
 	float _hp = this->HP + diff;
 	_set_HP(_hp);
+}
+
+float godot::PlayerData::_get_special_time()
+{
+	return special_time;
+}
+
+void godot::PlayerData::_set_special_time(float value)
+{
+	special_time = value;
+}
+
+void godot::PlayerData::_set_safe_mode(bool value)
+{
+	is_safe_mode = value;
+}
+
+bool godot::PlayerData::_get_safe_mode()
+{
+	return is_safe_mode;
 }
