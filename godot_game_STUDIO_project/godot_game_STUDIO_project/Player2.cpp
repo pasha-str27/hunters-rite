@@ -7,10 +7,10 @@ godot::Player2::Player2(Node2D* obj, Ref<PackedScene> bullet) : PlayerData(obj)
 {
 	_change_can_fight(true);
 	current_enemy = nullptr;
-	sprite = cast_to<AnimatedSprite>(obj->get_child(0)->get_child(0));
+	sprite = cast_to<AnimatedSprite>(obj->get_child(0));
 	sprite->play("idle");
 
-	vfx_sprite = cast_to<AnimatedSprite>(obj->get_child(1)->get_child(1));
+	vfx_sprite = cast_to<AnimatedSprite>(obj->get_node("Area2D3")->get_child(1));
 
 	animator = cast_to<AnimationPlayer>(_get_object()->get_node("AnimationPlayer"));
 	_set_special_time(1.5);
@@ -79,7 +79,7 @@ void godot::Player2::_process_input()
 	//fight	up
 	if (input_controller->is_action_pressed("Player2_fight_up"))
 	{
-		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(270);
+		cast_to<Node2D>(_get_object()->get_node("Area2D3"))->set_rotation_degrees(270);
 		if(_can_fight())
 			animator->play("attack");
 	}
@@ -87,7 +87,7 @@ void godot::Player2::_process_input()
 	//fight	down
 	if (input_controller->is_action_pressed("Player2_fight_down"))
 	{
-		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(90);
+		cast_to<Node2D>(_get_object()->get_node("Area2D3"))->set_rotation_degrees(90);
 		if (_can_fight()) 
 			animator->play("attack");
 	}
@@ -96,7 +96,7 @@ void godot::Player2::_process_input()
 	if (input_controller->is_action_pressed("Player2_fight_left"))
 	{
 		sprite->set_flip_h(true);
-		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(180);
+		cast_to<Node2D>(_get_object()->get_node("Area2D3"))->set_rotation_degrees(180);
 		if (_can_fight())
 			animator->play("attack");
 	}
@@ -105,7 +105,7 @@ void godot::Player2::_process_input()
 	if (input_controller->is_action_pressed("Player2_fight_right"))
 	{
 		sprite->set_flip_h(false);
-		cast_to<Node2D>(_get_object()->get_child(1))->set_rotation_degrees(0);
+		cast_to<Node2D>(_get_object()->get_node("Area2D3"))->set_rotation_degrees(0);
 		if (_can_fight())
 			animator->play("attack");
 	}

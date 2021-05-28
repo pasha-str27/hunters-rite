@@ -435,8 +435,8 @@ void godot::PlayerController::_update_max_health_bar_size()
 
 void godot::PlayerController::_animate_spider_web()
 {
-	cast_to<AnimatedSprite>(get_child(0)->get_node("SpiderWeb"))->set_frame(0);
-	cast_to<AnimatedSprite>(get_child(0)->get_node("SpiderWeb"))->play("idle");
+	cast_to<AnimatedSprite>(get_node("SpiderWeb"))->set_frame(0);
+	cast_to<AnimatedSprite>(get_node("SpiderWeb"))->play("idle");
 }
 
 void godot::PlayerController::_show_tutorial_message(Node* node)
