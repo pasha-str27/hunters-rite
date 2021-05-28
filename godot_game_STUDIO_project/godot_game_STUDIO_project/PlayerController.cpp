@@ -86,18 +86,18 @@ void godot::PlayerController::_init()
 
 void godot::PlayerController::_ready()
 {
-	if (is_in_group("player1") && (MenuButtons::player_name == 1))
-	{
-		
-			//current_player
-			//get_parent()->queue_free();
-	}
+	//if (is_in_group("player1") && (MenuButtons::player_name == 1))
+	//{
+	//	set_visible(false);
+	//		//current_player
+	//		//get_parent()->queue_free();
+	//}
 
-	if (is_in_group("player2") && (MenuButtons::player_name == 2))
-	{
-		set_visible(false);
-			//queue_free();
-	}
+	//if (is_in_group("player2") && (MenuButtons::player_name == 2))
+	//{
+	//	set_visible(false);
+	//		//queue_free();
+	//}
 
 	PlayerProduce* player_producer = nullptr;
 

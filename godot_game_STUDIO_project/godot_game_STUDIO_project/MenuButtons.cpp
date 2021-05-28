@@ -225,6 +225,7 @@ void godot::MenuButtons::_move_to_main_menu()
 	get_node("/root")->add_child(menu_scene->instance());
 	get_node("/root/Node2D")->queue_free();
 	get_parent()->queue_free();
+	PlayersContainer::_get_instance()->_clear();
 }
 
 void godot::MenuButtons::save_game()
@@ -295,12 +296,14 @@ void godot::MenuButtons::_on_Items_pressed(Variant)
 
 void godot::MenuButtons::_on_Flower_pressed(Variant)
 {
-	if (single_mode) {
+	if (single_mode) 
+	{
 		_play_effect();
 		get_node("/root")->add_child(choose_player_scene->instance());
 		get_parent()->queue_free();
 		return;
 	}
+	player_name = 3;
 	_start_game(player_name);
 }
 
@@ -356,10 +359,11 @@ void godot::MenuButtons::_on_music_value_changed(float value)
 
 void godot::MenuButtons::_start_game(int name)
 {
-	if (name != player_name)
-	{
-		player_name = name;
-	}
+	player_name = name;
+	//if (name != player_name)
+	//{
+	//	player_name = name;
+	//}
 
 	_play_effect();
 	add_child(fade->instance());
