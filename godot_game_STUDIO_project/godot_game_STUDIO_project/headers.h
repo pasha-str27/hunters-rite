@@ -5,6 +5,7 @@
 #include <string>
 #include <functional>
 #include <math.h>
+#include <map>
 
 //Godot includes
 #include <TextureRect.hpp>
@@ -93,3 +94,5 @@ using namespace godot;
 #include "ItemGenerator.h"
 #include "CustomExtensions.h"
 #include "MagnitZone.h"
+#include "Room.h"
+#include "LevelGenerator.h"
