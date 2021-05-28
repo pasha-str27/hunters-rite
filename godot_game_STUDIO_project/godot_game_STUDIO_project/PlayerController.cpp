@@ -162,7 +162,8 @@ void godot::PlayerController::_start_special_timer()
 
 		timer->start(current_player->_get_special_time());
 
-		dash_particles->restart();
+		if(is_in_group("player1"))
+			dash_particles->restart();
 	}
 }
 
