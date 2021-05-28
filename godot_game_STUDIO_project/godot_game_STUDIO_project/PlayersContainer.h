@@ -23,6 +23,7 @@ namespace godot
 			return object;
 		}
 
+		void _clear();
 		void _set_player1(Node2D* player1);
 		void _set_player2(Node2D* player2);
 		Node2D* _get_player1();

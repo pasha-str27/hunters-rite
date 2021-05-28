@@ -119,12 +119,55 @@ void godot::CameraController::_init()
 		dirs.push_back(0);
 }
 
+void godot::CameraController::_spawn_players()
+{
+	ResourceLoader* loader = ResourceLoader::get_singleton();
+	if (MenuButtons::player_name == 2)
+	{
+		Ref<PackedScene> pl1 = loader->load("res://Assets/Prefabs/Players/Player1.tscn");
+		Node2D* player = cast_to<Node2D>(pl1->instance());
+		get_parent()->call_deferred("add_child", player);
+		player1 = player;
+		player2 = nullptr;
+		//PlayersContainer::_get_instance()->_set_player1(player1);
+		//PlayersContainer::_get_instance()->_set_player2(player2);
+	}
+	else
+	{
+		if (MenuButtons::player_name == 1)
+		{
+			Ref<PackedScene> pl2 = loader->load("res://Assets/Prefabs/Players/Player2.tscn");
+			Node2D* player = cast_to<Node2D>(pl2->instance());
+			get_parent()->call_deferred("add_child", player);
+			player2 = player;
+			player1 = nullptr;
+			//PlayersContainer::_get_instance()->_set_player1(player1);
+			//PlayersContainer::_get_instance()->_set_player2(player2);
+		}
+		else
+		{
+			Ref<PackedScene> pl1 = loader->load("res://Assets/Prefabs/Players/Player1.tscn");
+			Node2D* player_1 = cast_to<Node2D>(pl1->instance());
+			get_parent()->call_deferred("add_child", player_1);
+			player1 = player_1;
+
+			Ref<PackedScene> pl2 = loader->load("res://Assets/Prefabs/Players/Player2.tscn");
+			Node2D* player_2 = cast_to<Node2D>(pl2->instance());
+			get_parent()->call_deferred("add_child", player_2);
+			player2 = player_2;
+
+			//PlayersContainer::_get_instance()->_set_player1(player1);
+			//PlayersContainer::_get_instance()->_set_player2(player2);
+		}
+	}
+}
+
 void godot::CameraController::_ready()
 {
 	audio_server = AudioServer::get_singleton();
 	_set_current(true);
-	player1 = cast_to<Node2D>(get_node("/root/Node2D/Node/Player1"));
-	player2 = cast_to<Node2D>(get_node("/root/Node2D/Node/Player2"));
+
+	_spawn_players();
 
 	if (find_parent("root") != nullptr && !find_parent("root")->has_node("MenuGameMusic"))
 	{
