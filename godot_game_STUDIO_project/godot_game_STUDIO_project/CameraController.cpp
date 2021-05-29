@@ -131,6 +131,10 @@ void godot::CameraController::_spawn_players()
 		player2 = nullptr;
 		//PlayersContainer::_get_instance()->_set_player1(player1);
 		//PlayersContainer::_get_instance()->_set_player2(player2);
+		get_node("P2HealthBarWrapper")->queue_free();
+		//	hiding label
+		//get_node("P1HealthBarWrapper/Label")->queue_free();
+
 	}
 	else
 	{
@@ -143,6 +147,10 @@ void godot::CameraController::_spawn_players()
 			player1 = nullptr;
 			//PlayersContainer::_get_instance()->_set_player1(player1);
 			//PlayersContainer::_get_instance()->_set_player2(player2);
+			get_node("P1HealthBarWrapper")->queue_free();
+			//	hiding label
+			//get_node("P2HealthBarWrapper/Label")->queue_free();
+
 		}
 		else
 		{
