@@ -85,7 +85,7 @@ void godot::SpawnEnemyController::_init()
 void godot::SpawnEnemyController::_ready()
 {
 	add_child(timer);
-	_stand_random_level();
+	//_stand_random_level();
 }
 
 void godot::SpawnEnemyController::_prepare_spawn()

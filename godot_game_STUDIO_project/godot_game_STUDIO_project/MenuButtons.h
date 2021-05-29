@@ -21,7 +21,7 @@ namespace godot
 		Ref<PackedScene> game_scene;
 		Ref<PackedScene> fade;
 		Ref<PackedScene> fade_in;
-
+		
 		Timer* timer_music;
 		Timer* timer_music_out;
 		Timer* timer;
