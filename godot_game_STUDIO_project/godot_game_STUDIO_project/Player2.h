@@ -12,6 +12,8 @@ namespace godot
 		AnimatedSprite* sprite = nullptr;
 		AnimatedSprite* vfx_sprite = nullptr;
 
+		AnimationPlayer* animator = nullptr;
+
 	public:
 		Player2(Node2D* obj, Ref<PackedScene> bullet = 0);
 		~Player2();
@@ -27,5 +29,7 @@ namespace godot
 		void _update_health_bar();
 		ProgressBar* _get_health_bar();
 		void _stop_animations();
+		void _stop_special();
+		void _start_special();
 	};
 }

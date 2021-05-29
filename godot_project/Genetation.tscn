@@ -1,0 +1,21 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Scripts/LevelGenerator.gdns" type="Script" id=1]
+[ext_resource path="res://Assets/Prefabs/Doors/UpDoor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Prefabs/Doors/LeftDoor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Prefabs/Doors/RightDoor.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Prefabs/Doors/DownDoor.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Prefabs/Rooms/base.tscn" type="PackedScene" id=6]
+
+[node name="Camera2D" type="Camera2D"]
+current = true
+zoom = Vector2( 7, 7 )
+
+[node name="Genetation" type="Node" parent="."]
+script = ExtResource( 1 )
+map_size = 25
+room = ExtResource( 6 )
+down_door = ExtResource( 5 )
+up_door = ExtResource( 2 )
+right_door = ExtResource( 4 )
+left_door = ExtResource( 3 )

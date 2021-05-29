@@ -15,6 +15,7 @@ namespace godot
 		IPlayer* current_player;
 		Ref<PackedScene> bullet_prefab;
 		Ref<PackedScene> revive_zone;
+		Node* door = nullptr;
 
 		ItemGenerator* item_generator = nullptr;
 
@@ -24,7 +25,7 @@ namespace godot
 		Timer* timer;
 		bool can_move;
 		bool is_alive;
-		bool is_dashing;
+		bool is_special;
 
 		int number_to_next_item;
 		float attack_speed_delta;
@@ -46,8 +47,8 @@ namespace godot
 		void _ready();
 		void _start_timer();
 		void _on_timeout();
-		void _start_dash_timer();
-		void _on_dash_timeout();
+		void _start_special_timer();
+		void _on_special_timeout();
 		void _start_dash_cooldow_timer();
 		void _on_dash_cooldown_timeout();
 		bool _can_fight();
@@ -60,6 +61,7 @@ namespace godot
 		void _on_Area2D_area_entered(Node* node);
 		void _on_Area2D_area_exited(Node* node);
 		void _change_can_moving(bool value);
+		void _change_moving(bool value);
 		void change_can_moving_timeout();
 		void _decrease_attack_radius();
 		void _encrease_attack_radius();
@@ -87,5 +89,6 @@ namespace godot
 		void _show_tutorial_message(Node* node);
 		void _hide_tutorial_message(Node* node);
 		void _stop_animations();
+		void _player_fight();
 	};
 }

@@ -29,6 +29,9 @@ void godot::Bullet::_init()
 
 void godot::Bullet::_on_Area2D_body_entered(Node* node)
 {
+	if (node->is_in_group("side"))
+		return;
+
 	if (node->is_in_group("player") && !node->call("_is_alive"))
 		return;
 
@@ -46,6 +49,7 @@ void godot::Bullet::_on_Area2D_body_entered(Node* node)
 	if (node->is_in_group("player") && is_in_group("web_bullet")) 
 	{
 		node->call("_change_can_moving", false);
+		node->call("_change_moving", false);		
 		node->call("_animate_spider_web");
 	}
 	else

@@ -40,7 +40,7 @@ bg_color = Color( 0, 0.811765, 0.85098, 1 )
 bg_color = Color( 0.6, 0.6, 0.6, 0.117647 )
 
 [node name="Camera2D" type="Camera2D"]
-z_index = 100
+z_index = 101
 zoom = Vector2( 0.75, 0.75 )
 script = ExtResource( 6 )
 "Fade In Animation" = ExtResource( 3 )
@@ -53,6 +53,7 @@ Exit = ExtResource( 10 )
 [node name="EnemySpawner" type="Node2D" parent="."]
 script = ExtResource( 2 )
 "Altar prefab" = ExtResource( 1 )
+"Levels Count" = 1
 
 [node name="ItemPoints" type="Node2D" parent="EnemySpawner"]
 
@@ -104,7 +105,7 @@ margin_right = -69.0
 margin_bottom = 20.0
 custom_styles/fg = SubResource( 3 )
 custom_styles/bg = SubResource( 4 )
-value = 50.0
+max_value = 0.0
 percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false,
@@ -145,7 +146,7 @@ margin_right = -66.0
 rect_min_size = Vector2( 0, 5 )
 custom_styles/fg = SubResource( 6 )
 custom_styles/bg = SubResource( 7 )
-value = 50.0
+max_value = 0.0
 percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false,

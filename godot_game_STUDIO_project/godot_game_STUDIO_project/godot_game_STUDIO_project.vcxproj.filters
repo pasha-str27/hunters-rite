@@ -107,6 +107,13 @@
     <ClCompile Include="AudioEffect.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
+    <ClCompile Include="MagnitZone.cpp" />
+    <ClCompile Include="Room.cpp">
+      <Filter>Genetation</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelGenerator.cpp">
+      <Filter>Genetation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
@@ -224,6 +231,13 @@
     <ClInclude Include="AudioEffect.h">
       <Filter>Audio</Filter>
     </ClInclude>
+    <ClInclude Include="MagnitZone.h" />
+    <ClInclude Include="Room.h">
+      <Filter>Genetation</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelGenerator.h">
+      <Filter>Genetation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Players">
@@ -249,6 +263,9 @@
     </Filter>
     <Filter Include="Audio">
       <UniqueIdentifier>{bb5c4f92-65f2-4c94-b1cd-546ee213d807}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Genetation">
+      <UniqueIdentifier>{599ab0d3-6352-475c-8a1c-15d8323a3b93}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

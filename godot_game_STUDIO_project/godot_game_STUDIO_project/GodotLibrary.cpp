@@ -36,4 +36,7 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<ParticlesDestroyer>();
 	register_class<ExitHandler>();
 	register_class<Preloader>();
+	register_class<MagnitZone>();
+	register_class<Room>();
+	register_class<LevelGenerator>();
 }

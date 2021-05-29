@@ -49,6 +49,8 @@ namespace godot
 		void _audio_fade_to_main_menu();
 		void _spawn_exit();
 		void _set_current_room_type(String);
+		void _go_to_start();
+		void _spawn_players();
 		CameraController();
 		~CameraController();
 	};

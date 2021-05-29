@@ -1,0 +1,369 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_background_v2.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_focus_v2.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/notice_background_v2.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/shoot_player_choose.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Scripts/MenuButtons.gdns" type="Script" id=5]
+[ext_resource path="res://Assets/Sprites/UI/item_menu_background.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/UI/WantedLabel/wanted_focus_v2.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/melee_player_choose.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Prefabs/SoundsEffects/Effects/ButtonClick.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Prefabs/Animations/FadeOut.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=12]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Focus_scale"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Focus:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Focus:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
+}
+
+[sub_resource type="DynamicFont" id=2]
+size = 17
+font_data = ExtResource( 11 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "Focus_scale"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Focus:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Focus:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Focus_scale"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Focus:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Focus:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
+}
+
+[node name="ChoosePlayer" type="Camera2D"]
+
+[node name="ChoosePlayer" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -640.0
+margin_top = -360.0
+margin_right = -640.0
+margin_bottom = -360.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+click_effect = ExtResource( 9 )
+fade = ExtResource( 10 )
+
+[node name="BackGroung" type="TextureRect" parent="ChoosePlayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 3 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ChoosePlayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1280.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Free_space_top" type="CenterContainer" parent="ChoosePlayer/VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
+
+[node name="Tasks" type="CenterContainer" parent="ChoosePlayer/VBoxContainer"]
+margin_top = 104.0
+margin_right = 1280.0
+margin_bottom = 424.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ChoosePlayer/VBoxContainer/Tasks"]
+margin_right = 1280.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 1280, 256 )
+alignment = 1
+
+[node name="PlayerOne" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer"]
+margin_left = 318.0
+margin_right = 638.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 256, 256 )
+mouse_filter = 2
+
+[node name="PlayerOne_button" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerOne"]
+margin_right = 320.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 320, 320 )
+focus_neighbour_left = NodePath("../../PlayerTwo/PlayerTwo_button")
+focus_neighbour_top = NodePath("../../../../CenterContainer/Back")
+focus_neighbour_right = NodePath("../../PlayerTwo/PlayerTwo_button")
+focus_neighbour_bottom = NodePath("../../../../CenterContainer/Back")
+mouse_filter = 2
+texture_normal = ExtResource( 6 )
+expand = true
+
+[node name="Focus" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerOne/PlayerOne_button"]
+visible = false
+modulate = Color( 1, 1, 1, 0.869608 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -2.00854
+margin_top = -1.33903
+margin_right = -2.00854
+margin_bottom = -1.33902
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 1.0375, 1.0375 )
+rect_pivot_offset = Vector2( 160, 160 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerOneAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerOne/PlayerOne_button"]
+anims/Focus_scale = SubResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerOne"]
+margin_left = 96.0
+margin_top = 65.0
+margin_right = 224.0
+margin_bottom = 254.0
+
+[node name="PlayerOne_sprite" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerOne/VBoxContainer"]
+margin_right = 128.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 128, 128 )
+mouse_filter = 2
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+
+[node name="Description" type="Label" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerOne/VBoxContainer"]
+margin_top = 132.0
+margin_right = 128.0
+margin_bottom = 189.0
+custom_fonts/font = SubResource( 2 )
+text = "Melee
+HP:100
+DMG:20"
+align = 1
+
+[node name="PlayerTwo" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer"]
+margin_left = 642.0
+margin_right = 962.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 256, 256 )
+mouse_filter = 2
+
+[node name="PlayerTwo_button" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerTwo"]
+margin_right = 320.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 320, 320 )
+focus_neighbour_left = NodePath("../../PlayerOne/PlayerOne_button")
+focus_neighbour_top = NodePath("../../../../CenterContainer/Back")
+focus_neighbour_right = NodePath("../../PlayerOne/PlayerOne_button")
+focus_neighbour_bottom = NodePath("../../../../CenterContainer/Back")
+mouse_filter = 2
+texture_normal = ExtResource( 6 )
+expand = true
+
+[node name="Focus" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerTwo/PlayerTwo_button"]
+visible = false
+modulate = Color( 1, 1, 1, 0.869608 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -2.00854
+margin_top = -1.33903
+margin_right = -2.00854
+margin_bottom = -1.33902
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 1.0375, 1.0375 )
+rect_pivot_offset = Vector2( 160, 160 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerTwoAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerTwo/PlayerTwo_button"]
+anims/Focus_scale = SubResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerTwo"]
+margin_left = 96.0
+margin_top = 65.0
+margin_right = 224.0
+margin_bottom = 254.0
+
+[node name="PlayerTwo_sprite" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerTwo/VBoxContainer"]
+margin_right = 128.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 128, 128 )
+mouse_filter = 2
+texture = ExtResource( 4 )
+expand = true
+
+[node name="Description" type="Label" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerTwo/VBoxContainer"]
+margin_top = 132.0
+margin_right = 128.0
+margin_bottom = 189.0
+custom_fonts/font = SubResource( 2 )
+text = "Shooter
+HP:90
+DMG:25"
+align = 1
+
+[node name="Free_space_bottom" type="CenterContainer" parent="ChoosePlayer/VBoxContainer"]
+margin_top = 428.0
+margin_right = 1280.0
+margin_bottom = 568.0
+rect_min_size = Vector2( 0, 140 )
+
+[node name="CenterContainer" type="CenterContainer" parent="ChoosePlayer/VBoxContainer"]
+margin_top = 572.0
+margin_right = 1280.0
+margin_bottom = 642.0
+rect_min_size = Vector2( 0, 52 )
+
+[node name="Back" type="TextureButton" parent="ChoosePlayer/VBoxContainer/CenterContainer"]
+margin_left = 500.0
+margin_right = 780.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 280, 70 )
+focus_neighbour_top = NodePath("../../Tasks/HBoxContainer/PlayerOne/PlayerOne_button")
+focus_neighbour_bottom = NodePath("../../Tasks/HBoxContainer/PlayerOne/PlayerOne_button")
+mouse_filter = 2
+texture_normal = ExtResource( 1 )
+expand = true
+stretch_mode = 3
+
+[node name="Focus" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer/Back"]
+visible = false
+modulate = Color( 1, 1, 1, 0.780417 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 1.02895, 1.02895 )
+rect_pivot_offset = Vector2( 100, 30 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ChoosePlayer/VBoxContainer/CenterContainer/Back"]
+modulate = Color( 0.831373, 0.831373, 0.831373, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 12 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/line_spacing = 0
+custom_constants/shadow_offset_y = 3
+custom_constants/shadow_as_outline = 0
+text = "Back"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/CenterContainer/Back"]
+anims/Focus_scale = SubResource( 4 )
+
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerOne/PlayerOne_button" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "PlayerOne_button", "PlayerOneAnimated" ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerOne/PlayerOne_button" to="ChoosePlayer" method="_play_change_cursor_effect"]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerOne/PlayerOne_button" to="ChoosePlayer" method="_on_animated_focus_exited" binds= [ "PlayerOne_button", "PlayerTwoAnimated" ]]
+[connection signal="pressed" from="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerOne/PlayerOne_button" to="ChoosePlayer" method="_start_game" binds= [ 1 ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerTwo/PlayerTwo_button" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "PlayerTwo_button", "PlayerTwoAnimated" ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerTwo/PlayerTwo_button" to="ChoosePlayer" method="_play_change_cursor_effect"]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerTwo/PlayerTwo_button" to="ChoosePlayer" method="_on_animated_focus_exited" binds= [ "PlayerTwo_button", "PlayerTwoAnimated" ]]
+[connection signal="pressed" from="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerTwo/PlayerTwo_button" to="ChoosePlayer" method="_start_game" binds= [ 2 ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/CenterContainer/Back" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "Back", "BackAnimated" ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/CenterContainer/Back" to="ChoosePlayer" method="_play_change_cursor_effect"]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/CenterContainer/Back" to="ChoosePlayer" method="_on_animated_focus_exited" binds= [ "Back", "BackAnimated" ]]
+[connection signal="pressed" from="ChoosePlayer/VBoxContainer/CenterContainer/Back" to="ChoosePlayer" method="_on_Back_pressed"]
