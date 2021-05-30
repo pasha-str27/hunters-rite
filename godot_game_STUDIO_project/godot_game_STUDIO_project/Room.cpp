@@ -5,7 +5,7 @@
 
 bool godot::Room::_adjacent_room_is_null(Vector2 pos)
 {
-	return adjacent_rooms[pos]==nullptr;
+	return adjacent_rooms[pos] == nullptr;
 }
 
 void godot::Room::_register_methods()
@@ -15,7 +15,7 @@ void godot::Room::_register_methods()
 	register_method("_adjacent_room_is_null", &Room::_adjacent_room_is_null);
 	register_method("_set_num_of_adjacent_rooms", &Room::_set_num_of_adjacent_rooms);
 	register_method("_get_num_of_adjacent_rooms", &Room::_get_num_of_adjacent_rooms);
-	register_method("_set_adjacent_room", &Room::_set_adjacent_room);	
+	register_method("_set_adjacent_room", &Room::_set_adjacent_room);
 }
 
 godot::Room::Room()

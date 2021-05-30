@@ -32,5 +32,6 @@ namespace godot
 		bool _has_room(std::vector<Vector2> positions, Vector2 pos);
 		void _buid_room(Vector2 dir);
 		void _buid_doors();
+		Node2D* _get_next_room(Vector2 current_room_position);
 	};
 }
