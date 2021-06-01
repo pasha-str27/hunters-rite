@@ -10,8 +10,12 @@ namespace godot
 		GODOT_CLASS(Room, Node2D);
 		std::map<Vector2, Node2D*> adjacent_rooms;
 		int num_of_adjacent_rooms = 0;
+
+		std::vector<std::vector<int>> room_map;
+
 	public:
 		Room();
+		~Room();
 		static void _register_methods();
 		void _init();
 		void _ready();
@@ -19,5 +23,6 @@ namespace godot
 		void _set_adjacent_room(Vector2 pos, Node2D* value);
 		int _get_num_of_adjacent_rooms();
 		void _set_num_of_adjacent_rooms(int value);
+		bool _is_empty_pos(int i, int j);
 	};
 }

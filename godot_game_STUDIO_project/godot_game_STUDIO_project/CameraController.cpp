@@ -3,6 +3,8 @@
 #include "headers.h"
 #endif
 
+Node2D* CameraController::current_room = nullptr;
+
 void godot::CameraController::_register_methods()
 {
 	register_method("_process", &CameraController::_process);
