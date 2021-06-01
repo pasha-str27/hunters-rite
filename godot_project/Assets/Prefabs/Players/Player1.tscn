@@ -16,157 +16,27 @@
 [ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/SpiderWeb.tscn" type="PackedScene" id=14]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 10.1296
+radius = 6.6875
 
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 2 )
-region = Rect2( 106, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 2 )
-region = Rect2( 212, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 2 )
-region = Rect2( 318, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 2 )
-region = Rect2( 424, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=7]
-flags = 4
-atlas = ExtResource( 12 )
-region = Rect2( 0, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=8]
-flags = 4
-atlas = ExtResource( 12 )
-region = Rect2( 106, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 13 )
-region = Rect2( 424, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 13 )
-region = Rect2( 318, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 13 )
-region = Rect2( 212, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 13 )
-region = Rect2( 106, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 13 )
-region = Rect2( 0, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 13 )
-region = Rect2( 0, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 13 )
-region = Rect2( 106, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 13 )
-region = Rect2( 212, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 13 )
-region = Rect2( 318, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 13 )
-region = Rect2( 424, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 10 )
-region = Rect2( 0, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 10 )
-region = Rect2( 106, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 10 )
-region = Rect2( 212, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 10 )
-region = Rect2( 318, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 10 )
-region = Rect2( 424, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 10 )
-region = Rect2( 530, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 10 )
-region = Rect2( 636, 0, 106, 22 )
-
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 10 )
-region = Rect2( 742, 0, 106, 22 )
-
-[sub_resource type="SpriteFrames" id=27]
-animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
-"loop": true,
-"name": "idle",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 7 ), SubResource( 8 ) ],
-"loop": false,
-"name": "damaged",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
-"loop": false,
-"name": "revive",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
-"loop": false,
-"name": "death",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ) ],
-"loop": true,
-"name": "run",
-"speed": 10.0
-} ]
-
-[sub_resource type="CapsuleShape2D" id=28]
-radius = 6.5
+[sub_resource type="CapsuleShape2D" id=37]
+radius = 6.9321
 height = 0.0
 
-[sub_resource type="Gradient" id=29]
+[sub_resource type="Gradient" id=38]
 offsets = PoolRealArray( 0.423237, 1 )
 colors = PoolColorArray( 1, 0, 0, 1, 1, 0, 0, 0 )
 
-[sub_resource type="GradientTexture" id=30]
-gradient = SubResource( 29 )
+[sub_resource type="GradientTexture" id=39]
+gradient = SubResource( 38 )
 
-[sub_resource type="Curve" id=31]
+[sub_resource type="Curve" id=40]
 max_value = 0.25
 _data = [ Vector2( 0, 0.109091 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0681818 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=32]
-curve = SubResource( 31 )
+[sub_resource type="CurveTexture" id=41]
+curve = SubResource( 40 )
 
-[sub_resource type="ParticlesMaterial" id=33]
+[sub_resource type="ParticlesMaterial" id=42]
 flag_rotate_y = true
 flag_disable_z = true
 direction = Vector3( 500, 500, 0 )
@@ -183,16 +53,16 @@ tangential_accel_random = 1.0
 damping_random = 1.0
 scale = 5.0
 scale_random = 1.0
-scale_curve = SubResource( 32 )
-color_ramp = SubResource( 30 )
+scale_curve = SubResource( 41 )
+color_ramp = SubResource( 39 )
 
-[sub_resource type="Gradient" id=34]
+[sub_resource type="Gradient" id=43]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=35]
-gradient = SubResource( 34 )
+[sub_resource type="GradientTexture" id=44]
+gradient = SubResource( 43 )
 
-[sub_resource type="ParticlesMaterial" id=36]
+[sub_resource type="ParticlesMaterial" id=45]
 emission_shape = 2
 emission_box_extents = Vector3( 16, 1, 1 )
 flag_disable_z = true
@@ -204,9 +74,140 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 720.0
 angle_random = 1.0
-color_ramp = SubResource( 35 )
+color_ramp = SubResource( 44 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 2 )
+region = Rect2( 106, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 2 )
+region = Rect2( 212, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 2 )
+region = Rect2( 318, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 2 )
+region = Rect2( 424, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 13 )
+region = Rect2( 424, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 13 )
+region = Rect2( 318, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 13 )
+region = Rect2( 212, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 13 )
+region = Rect2( 106, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=21]
+flags = 4
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 4
+atlas = ExtResource( 12 )
+region = Rect2( 106, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 10 )
+region = Rect2( 0, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 10 )
+region = Rect2( 106, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 10 )
+region = Rect2( 212, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 10 )
+region = Rect2( 318, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 10 )
+region = Rect2( 424, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 10 )
+region = Rect2( 530, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 10 )
+region = Rect2( 636, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 10 )
+region = Rect2( 742, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 13 )
+region = Rect2( 106, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 13 )
+region = Rect2( 212, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 13 )
+region = Rect2( 318, 0, 106, 22 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 13 )
+region = Rect2( 424, 0, 106, 22 )
+
+[sub_resource type="SpriteFrames" id=36]
+animations = [ {
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
+"loop": true,
+"name": "idle",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"loop": false,
+"name": "revive",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 21 ), SubResource( 22 ) ],
+"loop": false,
+"name": "damaged",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
+"loop": true,
+"name": "run",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ) ],
+"loop": false,
+"name": "death",
+"speed": 10.0
+} ]
 
 [node name="Player1" type="Node2D"]
+z_index = 100
 
 [node name="BulletConteiner" type="Node" parent="."]
 
@@ -214,7 +215,7 @@ color_ramp = SubResource( 35 )
 "player",
 "player1",
 ]]
-z_index = 100
+collision_layer = 32769
 collision_mask = 2
 script = ExtResource( 8 )
 hp = 80.0
@@ -225,21 +226,8 @@ revive_zone = ExtResource( 6 )
 dash_cooldown_delta = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
+position = Vector2( -0.875, 10.9375 )
 shape = SubResource( 1 )
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Player1/CollisionShape2D"]
-scale = Vector2( 2, 2 )
-frames = SubResource( 27 )
-animation = "idle"
-frame = 4
-playing = true
-offset = Vector2( 35, 0 )
-
-[node name="SpawnPowerBallParticles" parent="Player1/CollisionShape2D/AnimatedSprite" instance=ExtResource( 7 )]
-position = Vector2( 11, 0 )
-scale = Vector2( 0.5, 0.5 )
-
-[node name="SpiderWeb" parent="Player1/CollisionShape2D" instance=ExtResource( 14 )]
 
 [node name="Area2D" type="Area2D" parent="Player1" groups=[
 "player",
@@ -249,7 +237,7 @@ position = Vector2( 0, 12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1/Area2D"]
 position = Vector2( -0.780037, -1.08792 )
-shape = SubResource( 28 )
+shape = SubResource( 37 )
 
 [node name="ItemGenerator" type="Node" parent="Player1"]
 script = ExtResource( 9 )
@@ -257,14 +245,28 @@ script = ExtResource( 9 )
 
 [node name="HurtParticles" parent="Player1" instance=ExtResource( 4 )]
 z_index = 7
-process_material = SubResource( 33 )
+process_material = SubResource( 42 )
 
 [node name="BuffDebuffParticles" parent="Player1" instance=ExtResource( 3 )]
-process_material = SubResource( 36 )
+process_material = SubResource( 45 )
 
 [node name="DashParticles" parent="Player1" instance=ExtResource( 1 )]
 
 [node name="ReviveParticles" parent="Player1" instance=ExtResource( 11 )]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Player1"]
+scale = Vector2( 2, 2 )
+frames = SubResource( 36 )
+animation = "idle"
+frame = 1
+playing = true
+offset = Vector2( 35, 0 )
+
+[node name="SpawnPowerBallParticles" parent="Player1/AnimatedSprite" instance=ExtResource( 7 )]
+position = Vector2( 11, 0 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="SpiderWeb" parent="Player1" instance=ExtResource( 14 )]
 
 [connection signal="area_entered" from="Player1/Area2D" to="Player1" method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Player1/Area2D" to="Player1" method="_on_Area2D_area_exited"]

@@ -5,6 +5,7 @@
 #include <string>
 #include <functional>
 #include <math.h>
+#include <map>
 
 //Godot includes
 #include <TextureRect.hpp>
@@ -30,6 +31,7 @@
 #include <Tree.hpp>
 #include <Label.hpp>
 #include <Array.hpp>
+#include <ScrollContainer.hpp>
 #include <ProgressBar.hpp>
 #include <InputEventKey.hpp>
 #include <AnimationPlayer.hpp>
@@ -93,3 +95,5 @@ using namespace godot;
 #include "ItemGenerator.h"
 #include "CustomExtensions.h"
 #include "MagnitZone.h"
+#include "Room.h"
+#include "LevelGenerator.h"

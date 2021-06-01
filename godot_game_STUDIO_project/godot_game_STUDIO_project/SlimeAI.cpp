@@ -33,11 +33,13 @@ void godot::SlimeAI::_set_speed(float value)
 void godot::SlimeAI::_set_is_player1_onArea(bool value)
 {
 	is_player1_onArea = value;
+	was_setted = true;
 }
 
 void godot::SlimeAI::_set_is_player2_onArea(bool value)
 {
 	is_player2_onArea = value;
+	was_setted = true;
 }
 
 godot::SlimeAI::SlimeAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
@@ -64,6 +66,8 @@ void godot::SlimeAI::reset_directions()
 void godot::SlimeAI::change_direction()
 {
 	reset_directions();
+
+	_fight(_get_player1(), _get_player2());
 
 	for (int i = 2; i < 6; ++i)
 	{
@@ -108,11 +112,16 @@ void godot::SlimeAI::_fight(Node2D* player1, Node2D* player2)
 {
 	can_move = false;
 
-	if (is_player1_onArea && player1 != nullptr)
-		player1->call("_take_damage", damage, false);
+	if (!was_setted)
+	{
+		if (is_player1_onArea && player1 != nullptr)
+			player1->call("_take_damage", damage, false);
 
-	if (is_player2_onArea && player2 != nullptr)
-		player2->call("_take_damage", damage, false);
+		if (is_player2_onArea && player2 != nullptr)
+			player2->call("_take_damage", damage, false);
+	}
+
+	was_setted = false;
 
 	_get_enemy()->call("_start_timer");
 }
@@ -133,7 +142,7 @@ void godot::SlimeAI::_process(float delta)
 			&& (dir == Vector2(0.5, 0.5) || dir == Vector2(-0.5, 0.5) || dir == Vector2(0.5, -0.5) || dir == Vector2(-0.5, -0.5)))))
 	{
 		is_cheking = true;
-		_fight(_get_player1(), _get_player2());
+		/*_fight(_get_player1(), _get_player2());*/
 		change_direction();
 		old_pos = _get_enemy()->get_global_position();
 		return;

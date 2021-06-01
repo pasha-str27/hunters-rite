@@ -41,7 +41,8 @@ void godot::FadeAnimation::_on_timeout()
 {
 	timer->disconnect("timeout", this, "_on_timeout");
 
-	if (!get_node("/root")->has_node("Pause") && !get_node("/root")->has_node("Notice") && !get_node("/root")->has_node("Menu"))
+	if (!get_node("/root")->has_node("Pause") && !get_node("/root")->has_node("Notice") && !get_node("/root")->has_node("Menu") 
+		&& !get_node("/root")->has_node("ChoosePlayer"))
 	{
 		if (animation_name == "fade_in")
 			CustomExtensions::GetChildByName(get_node("/root/Node2D/Node/Camera2D"), "EnemySpawner")->call("_prepare_spawn");

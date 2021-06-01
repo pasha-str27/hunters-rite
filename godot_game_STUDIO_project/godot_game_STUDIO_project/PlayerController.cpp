@@ -86,6 +86,19 @@ void godot::PlayerController::_init()
 
 void godot::PlayerController::_ready()
 {
+	//if (is_in_group("player1") && (MenuButtons::player_name == 1))
+	//{
+	//	set_visible(false);
+	//		//current_player
+	//		//get_parent()->queue_free();
+	//}
+
+	//if (is_in_group("player2") && (MenuButtons::player_name == 2))
+	//{
+	//	set_visible(false);
+	//		//queue_free();
+	//}
+
 	PlayerProduce* player_producer = nullptr;
 
 	if (is_in_group("player1"))
@@ -149,7 +162,8 @@ void godot::PlayerController::_start_special_timer()
 
 		timer->start(current_player->_get_special_time());
 
-		dash_particles->restart();
+		if(is_in_group("player1"))
+			dash_particles->restart();
 	}
 }
 
@@ -435,8 +449,8 @@ void godot::PlayerController::_update_max_health_bar_size()
 
 void godot::PlayerController::_animate_spider_web()
 {
-	cast_to<AnimatedSprite>(get_child(0)->get_node("SpiderWeb"))->set_frame(0);
-	cast_to<AnimatedSprite>(get_child(0)->get_node("SpiderWeb"))->play("idle");
+	cast_to<AnimatedSprite>(get_node("SpiderWeb"))->set_frame(0);
+	cast_to<AnimatedSprite>(get_node("SpiderWeb"))->play("idle");
 }
 
 void godot::PlayerController::_show_tutorial_message(Node* node)
