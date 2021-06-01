@@ -11,6 +11,7 @@ void godot::LevelGenerator::_register_methods()
 {
 	register_method("_init", &LevelGenerator::_init);
 	register_method("_ready", &LevelGenerator::_ready);
+	register_method("_get_next_room", &LevelGenerator::_get_next_room);	
 
 	register_property<LevelGenerator, int>("map_size", &LevelGenerator::map_size, -1);
 	register_property<LevelGenerator, Ref<PackedScene>>("room", &LevelGenerator::room, nullptr);
@@ -167,4 +168,19 @@ void godot::LevelGenerator::_buid_doors()
 		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2(-1, 0)))
 			rooms[i]->add_child(left_door->instance());
 	}	
+}
+
+Node2D* godot::LevelGenerator::_get_next_room(Vector2 current_room_position)
+{
+	int index = 0;
+	for(auto i: positions)
+	{
+		Godot::print(i);
+		if (i == current_room_position)
+			break;
+
+		index++;
+	}
+
+	return rooms[index];
 }
