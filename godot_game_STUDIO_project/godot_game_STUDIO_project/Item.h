@@ -11,9 +11,11 @@ namespace godot
 
 		AnimationPlayer* animator = nullptr;
 
+		String name;
 		float speed;
 		float HP;
 		float damage;
+		int counter;
 		bool decrease_attack_radius;
 		bool encrease_attack_radius;
 		int number_to_next_item;

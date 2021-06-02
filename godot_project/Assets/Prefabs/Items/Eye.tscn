@@ -38,12 +38,14 @@ tracks/1/keys = {
 [node name="Eye" type="Node2D"]
 z_index = 5
 script = ExtResource( 3 )
+Name = "Eye"
 speed = 20.0
 HP = 0.0
 damage = 20.0
 attack_speed_delta = 0.0
 number_to_next_item = 0
 decrease_attack_radius = true
+encrease_attack_radius = null
 "Is Buff" = false
 
 [node name="Sprite" type="Sprite" parent="."]

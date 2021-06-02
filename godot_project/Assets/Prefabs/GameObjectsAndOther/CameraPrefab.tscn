@@ -154,10 +154,10 @@ __meta__ = {
 }
 
 [node name="ItemHolder" type="Control" parent="."]
-margin_left = -432.0
-margin_top = -176.0
-margin_right = 432.0
-margin_bottom = 264.0
+margin_left = -439.0
+margin_top = -178.0
+margin_right = 433.0
+margin_bottom = 270.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -165,6 +165,7 @@ __meta__ = {
 [node name="P1Items" type="VBoxContainer" parent="ItemHolder"]
 anchor_bottom = 1.0
 rect_min_size = Vector2( 32, 70 )
+rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 16, 0 )
 custom_constants/separation = 10
 __meta__ = {
@@ -176,6 +177,8 @@ anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 32, 70 )
+rect_scale = Vector2( 0.9, 0.9 )
+rect_pivot_offset = Vector2( 16, 0 )
 custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false

@@ -29,6 +29,7 @@
 #include <InputEvent.hpp>
 #include <TileMap.hpp>
 #include <Tree.hpp>
+#include <Theme.hpp>
 #include <Label.hpp>
 #include <Array.hpp>
 #include <ScrollContainer.hpp>
