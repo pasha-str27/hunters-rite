@@ -37,7 +37,7 @@ godot::PlayerData::PlayerData()
 
 godot::PlayerData::~PlayerData()
 {
-	//delete object;
+	object = nullptr;
 }
 
 void godot::PlayerData::_move()

@@ -7,6 +7,13 @@ godot::LevelGenerator::LevelGenerator()
 {
 }
 
+godot::LevelGenerator::~LevelGenerator()
+{
+	positions.clear();
+
+	rooms.clear();
+}
+
 void godot::LevelGenerator::_register_methods()
 {
 	register_method("_init", &LevelGenerator::_init);
@@ -28,6 +35,14 @@ void godot::LevelGenerator::_init()
 void godot::LevelGenerator::_ready()
 {
 	_generate();
+
+	//for (int i = 1; i < rooms.size(); ++i)
+	//{
+	//	rooms[i]->set_process(false);
+	//	rooms[i]->hide();
+	//}
+		
+
 	_buid_doors();
 }
 
@@ -49,7 +64,7 @@ void godot::LevelGenerator::_generate()
 
 	size++;
 
-	RandomNumberGenerator* rng = RandomNumberGenerator::_new();
+	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
 
 	while (size < map_size)
@@ -69,10 +84,6 @@ void godot::LevelGenerator::_generate()
 					_buid_room(new_room_position);
 					_connect_rooms(rooms[index], rooms[rooms.size() - 1], Vector2(1, 0));
 				}
-				//	_buid_room(new_room_position);
-
-				//if ((bool)rooms[index]->call("_adjacent_room_is_null", Vector2(1, 0)))
-				//	_connect_rooms(rooms[index], rooms[rooms.size() - 1], Vector2(1, 0));
 
 				break;
 			}
@@ -84,10 +95,6 @@ void godot::LevelGenerator::_generate()
 					_buid_room(new_room_position);
 					_connect_rooms(rooms[index], rooms[rooms.size() - 1], Vector2(-1, 0));
 				}
-				//	_buid_room(new_room_position);
-
-				//if ((bool)rooms[index]->call("_adjacent_room_is_null", Vector2(-1, 0)))
-				//	_connect_rooms(rooms[index], rooms[rooms.size() - 1], Vector2(-1, 0));
 
 				break;	
 			}
@@ -97,12 +104,8 @@ void godot::LevelGenerator::_generate()
 				if (!_has_room(old_positions, new_room_position))
 				{
 					_buid_room(new_room_position);
-					_connect_rooms(rooms[index], rooms[rooms.size() - 1], Vector2(0, 1));
+					_connect_rooms(rooms[index],rooms[rooms.size() - 1], Vector2(0, 1));
 				}
-				//	_buid_room(new_room_position);
-
-				//if ((bool)rooms[index]->call("_adjacent_room_is_null", Vector2(0, 1)))
-				//	_connect_rooms(rooms[index], rooms[rooms.size() - 1], Vector2(0, 1));
 
 				break;
 			}
@@ -114,10 +117,6 @@ void godot::LevelGenerator::_generate()
 					_buid_room(new_room_position);
 					_connect_rooms(rooms[index], rooms[rooms.size() - 1], Vector2(0, -1));
 				}
-				//	_buid_room(new_room_position);
-
-				//if ((bool)rooms[index]->call("_adjacent_room_is_null", Vector2(0, -1)))
-				//	_connect_rooms(rooms[index], rooms[rooms.size() - 1], Vector2(0, -1));
 
 				break;
 			}
@@ -173,9 +172,8 @@ void godot::LevelGenerator::_buid_doors()
 Node2D* godot::LevelGenerator::_get_next_room(Vector2 current_room_position)
 {
 	int index = 0;
-	for(auto i: positions)
+	for(auto i : positions)
 	{
-		Godot::print(i);
 		if (i == current_room_position)
 			break;
 

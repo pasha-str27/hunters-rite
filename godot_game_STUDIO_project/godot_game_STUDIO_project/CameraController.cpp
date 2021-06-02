@@ -426,4 +426,10 @@ godot::CameraController::CameraController()
 
 godot::CameraController::~CameraController()
 {
+	audio = nullptr;
+	audio_boss = nullptr;
+	timer_audio = nullptr;
+	audio_server = nullptr;
+	player1 = nullptr;
+	player2 = nullptr;
 }

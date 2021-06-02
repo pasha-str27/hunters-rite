@@ -23,6 +23,7 @@ namespace godot
 
 	public:
 		SlimeAI(Ref<PackedScene>& bullet, Node2D* node);
+		~SlimeAI();
 		void _process(float delta);
 		void change_can_fight(bool value);
 		void reset_directions();
