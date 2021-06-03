@@ -29,7 +29,6 @@ script = ExtResource( 7 )
 Items = [ ExtResource( 5 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 22 ), ExtResource( 19 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 13 ) ]
 
 [node name="Camera2D" parent="." instance=ExtResource( 10 )]
-zoom = Vector2( 5, 5 )
 
 [node name="TutorialSprites" parent="." instance=ExtResource( 9 )]
 scale = Vector2( 0.4, 0.4 )
@@ -39,9 +38,14 @@ script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": ""
 }
-map_size = 800
+map_size = 25
 room = ExtResource( 6 )
 down_door = ExtResource( 8 )
 up_door = ExtResource( 2 )
 right_door = ExtResource( 4 )
 left_door = ExtResource( 3 )
+wall_top_count = 14
+floor_count = 15
+stone_count = 15
+spike_count = 14
+roof_count = 15

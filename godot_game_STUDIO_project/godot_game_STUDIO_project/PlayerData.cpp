@@ -42,7 +42,7 @@ godot::PlayerData::~PlayerData()
 
 void godot::PlayerData::_move()
 {
-	cast_to<KinematicBody2D>(object)->move_and_slide(dir);
+	cast_to<KinematicBody2D>(object)->move_and_slide(dir.normalized()*speed);
 }
 
 void godot::PlayerData::_set_speed(float speed)

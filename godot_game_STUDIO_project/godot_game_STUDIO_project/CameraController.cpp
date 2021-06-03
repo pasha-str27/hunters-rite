@@ -56,6 +56,8 @@ void godot::CameraController::_move(String dir)
 		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
 		Node2D* move_point = cast_to<Node2D>(next_room->get_node("DownDoor/SpawnPoint"));
 
+		current_room = next_room;
+
 		if (has_node("/root/Node2D/Node/Player1"))
 			cast_to<Node2D>(player1->get_node("Player1"))->set_global_position(move_point->get_global_position());
 
@@ -71,6 +73,8 @@ void godot::CameraController::_move(String dir)
 
 		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
 		Node2D* move_point = cast_to<Node2D>(next_room->get_node("UpDoor/SpawnPoint"));
+
+		current_room = next_room;
 
 		if (has_node("/root/Node2D/Node/Player1"))
 			cast_to<Node2D>(player1->get_node("Player1"))->set_global_position(move_point->get_global_position());
@@ -88,6 +92,8 @@ void godot::CameraController::_move(String dir)
 		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
 		Node2D* move_point = cast_to<Node2D>(next_room->get_node("RightDoor/SpawnPoint"));
 
+		current_room = next_room;
+
 		if (has_node("/root/Node2D/Node/Player1"))
 			cast_to<Node2D>(player1->get_node("Player1"))->set_global_position(move_point->get_global_position());
 
@@ -103,6 +109,8 @@ void godot::CameraController::_move(String dir)
 
 		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
 		Node2D* move_point = cast_to<Node2D>(next_room->get_node("LeftDoor/SpawnPoint"));
+
+		current_room = next_room;
 
 		if (has_node("/root/Node2D/Node/Player1"))
 			cast_to<Node2D>(player1->get_node("Player1"))->set_global_position(move_point->get_global_position());
