@@ -16,8 +16,8 @@ namespace godot
 		Ref<PackedScene> down_door = nullptr;
 		Ref<PackedScene> left_door = nullptr;
 
-		float step_x = 1024;
-		float step_y = 720;
+		int step_x = 1024;
+		int step_y = 720;
 
 		std::vector<Vector2> positions;
 		std::vector<Node2D*> rooms;
@@ -42,6 +42,10 @@ namespace godot
 		void _buid_roofs();
 		void _buid_floors();
 		void _buid_top_wall();
+		void _buid_stones_first_step(Node2D* room);
+		void _buid_stones_second_step(Node2D* room);
+		void _buid_spikes_first_step(Node2D* room);
+		void _buid_spikes_second_step(Node2D* room);
 		Node2D* _get_next_room(Vector2 current_room_position);
 	};
 }
