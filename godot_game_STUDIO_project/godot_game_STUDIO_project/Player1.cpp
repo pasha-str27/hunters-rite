@@ -27,6 +27,8 @@ godot::Player1::Player1(Node2D* object, Ref<PackedScene>bullet) : PlayerData(obj
 
 godot::Player1::~Player1()
 {
+	sprite = nullptr;
+	shoot_particles = nullptr;
 	available_bullets.clear();
 }
 

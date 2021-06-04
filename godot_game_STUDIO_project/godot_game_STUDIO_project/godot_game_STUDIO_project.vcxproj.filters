@@ -114,11 +114,11 @@
     <ClCompile Include="LevelGenerator.cpp">
       <Filter>Genetation</Filter>
     </ClCompile>
+    <ClCompile Include="TileMapAnalyzer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
     <ClInclude Include="headers.h" />
-    <ClInclude Include="AudioEffect.h" />
     <ClInclude Include="MenuButtons.h" />
     <ClInclude Include="ParticlesDestroyer.h" />
     <ClInclude Include="ExitHandler.h" />
@@ -238,6 +238,10 @@
     <ClInclude Include="LevelGenerator.h">
       <Filter>Genetation</Filter>
     </ClInclude>
+    <ClInclude Include="AudioEffect.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMapAnalyzer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Players">

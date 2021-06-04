@@ -22,8 +22,15 @@ namespace godot
 		std::vector<Vector2> positions;
 		std::vector<Node2D*> rooms;
 
+		int wall_top_count;
+		int floor_count;
+		int stone_count;
+		int spike_count;
+		int roof_count;
+
 	public:
 		LevelGenerator();
+		~LevelGenerator();
 		static void _register_methods();
 		void _init();
 		void _ready();
@@ -32,6 +39,9 @@ namespace godot
 		bool _has_room(std::vector<Vector2> positions, Vector2 pos);
 		void _buid_room(Vector2 dir);
 		void _buid_doors();
+		void _buid_roofs();
+		void _buid_floors();
+		void _buid_top_wall();
 		Node2D* _get_next_room(Vector2 current_room_position);
 	};
 }

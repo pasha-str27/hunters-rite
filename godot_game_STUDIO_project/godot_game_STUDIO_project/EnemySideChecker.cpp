@@ -3,6 +3,11 @@
 #include "headers.h"
 #endif
 
+godot::EnemySideChecker::~EnemySideChecker()
+{
+	current_node = nullptr;
+}
+
 void godot::EnemySideChecker::_register_methods()
 {
 	register_method("_init", &EnemySideChecker::_init);

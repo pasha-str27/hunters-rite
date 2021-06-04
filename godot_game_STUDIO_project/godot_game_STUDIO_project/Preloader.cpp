@@ -82,4 +82,5 @@ godot::Preloader::Preloader()
 
 godot::Preloader::~Preloader()
 {
+	audio = nullptr;
 }

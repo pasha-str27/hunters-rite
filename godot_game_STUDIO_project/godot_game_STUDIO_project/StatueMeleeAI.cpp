@@ -19,6 +19,12 @@ godot::StatueMeleeAI::StatueMeleeAI(Ref<PackedScene>& bullet, Node2D* node_tmp) 
 	cast_to<AnimationPlayer>(node_tmp->get_node("zone")->get_child(1)->get_child(0))->set_current_animation("idle");
 }
 
+godot::StatueMeleeAI::~StatueMeleeAI()
+{
+	player1 = nullptr;
+	player2 = nullptr;
+}
+
 void godot::StatueMeleeAI::change_can_fight(bool value)
 {
 	can_fight = value;

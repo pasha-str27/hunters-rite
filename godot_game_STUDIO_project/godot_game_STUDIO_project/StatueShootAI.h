@@ -14,6 +14,7 @@ namespace godot
 
 	public:
 		StatueShootAI(Ref<PackedScene>& bullet, Node2D* node);
+		~StatueShootAI();
 		void _process(float delta);
 		void _add_bullet(Node* node = nullptr);
 		void change_can_fight(bool value);

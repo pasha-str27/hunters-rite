@@ -16,6 +16,7 @@ namespace godot
 	public:
 		static void _register_methods();
 		MagnitZone();
+		~MagnitZone();
 		void _init();
 		void _ready();
 		void _process(float delta);
