@@ -36,10 +36,12 @@ void godot::LevelGenerator::_register_methods()
 
 
 	register_property<LevelGenerator, Ref<PackedScene>>("key_sprite", &LevelGenerator::key_room_sprite, nullptr);
-	register_property<LevelGenerator, Ref<PackedScene>>("item_sprite", &LevelGenerator::boss_room_sprite, nullptr);
-	register_property<LevelGenerator, Ref<PackedScene>>("boss_sprite", &LevelGenerator::item_room_sprite, nullptr);
+	register_property<LevelGenerator, Ref<PackedScene>>("item_sprite", &LevelGenerator::item_room_sprite, nullptr);
+	register_property<LevelGenerator, Ref<PackedScene>>("boss_sprite", &LevelGenerator::boss_room_sprite, nullptr);
 
-
+	register_property<LevelGenerator, Ref<PackedScene>>("jertovnik", &LevelGenerator::jertovnik, nullptr);
+	register_property<LevelGenerator, Ref<PackedScene>>("key_room_pedestal", &LevelGenerator::key_room_pedestal, nullptr);
+	
 }
 
 void godot::LevelGenerator::_init()
@@ -312,7 +314,6 @@ std::vector<Node2D*> godot::LevelGenerator::_create_keys_rooms(std::vector<Node2
 				contains = true;
 				break;
 			}
-
 		}
 
 		if (!contains)
@@ -329,9 +330,8 @@ std::vector<Node2D*> godot::LevelGenerator::_create_keys_rooms(std::vector<Node2
 				_buid_room(new_room_position);
 				_connect_rooms(room_to_build, rooms[rooms.size() - 1], Vector2(1, 0));
 
-				auto sprite = cast_to<Node2D>(key_room_sprite->instance());
-				add_child(sprite);
-				sprite->set_global_position(new_room_position);
+				_generate_key(new_room_position);
+
 				i++;
 			}
 
@@ -345,11 +345,10 @@ std::vector<Node2D*> godot::LevelGenerator::_create_keys_rooms(std::vector<Node2
 				_buid_room(new_room_position);
 				_connect_rooms(room_to_build, rooms[rooms.size() - 1], Vector2(-1, 0));
 
-				auto sprite = cast_to<Node2D>(key_room_sprite->instance());
-				add_child(sprite);
-				sprite->set_global_position(new_room_position);
-				i++;
+				_generate_key(new_room_position);
 
+
+				i++;
 			}
 
 			break;
@@ -362,11 +361,9 @@ std::vector<Node2D*> godot::LevelGenerator::_create_keys_rooms(std::vector<Node2
 				_buid_room(new_room_position);
 				_connect_rooms(room_to_build, rooms[rooms.size() - 1], Vector2(0, 1));
 
-				auto sprite = cast_to<Node2D>(key_room_sprite->instance());
-				add_child(sprite);
-				sprite->set_global_position(new_room_position);
-				i++;
+				_generate_key(new_room_position);
 
+				i++;
 			}
 
 			break;
@@ -379,9 +376,7 @@ std::vector<Node2D*> godot::LevelGenerator::_create_keys_rooms(std::vector<Node2
 				_buid_room(new_room_position);
 				_connect_rooms(room_to_build, rooms[rooms.size() - 1], Vector2(0, -1));
 
-				auto sprite = cast_to<Node2D>(key_room_sprite->instance());
-				add_child(sprite);
-				sprite->set_global_position(new_room_position);
+				_generate_key(new_room_position);
 				i++;
 			}
 
@@ -462,6 +457,20 @@ void godot::LevelGenerator::_create_item_room(std::vector<Node2D*>& cornered_roo
 	sprite->set_global_position(builded_room->get_global_position());
 
 	cornered_rooms.erase(cornered_rooms.begin() + index, cornered_rooms.begin() + index + 1);
+
+	auto spawned_jertovnik = cast_to<Node2D>(jertovnik->instance());
+	add_child(spawned_jertovnik);
+	spawned_jertovnik->set_global_position(builded_room->get_global_position());
+
+	auto item_points = get_parent()->get_node("Camera2D/EnemySpawner/ItemPoints");
+
+	Vector2 left_item = cast_to<Node2D>(item_points->get_child(0))->get_position();
+	Vector2 right_item = cast_to<Node2D>(item_points->get_child(1))->get_position();
+
+	auto items_container = get_parent()->get_node("ItemsContainer");
+
+	items_container->call("_spawn_random_item", builded_room->get_global_position() + left_item);
+	items_container->call("_spawn_random_item", builded_room->get_global_position() + right_item);
 }
 
 void godot::LevelGenerator::_create_boss_room(std::vector<Node2D*>& cornered_rooms)
@@ -558,4 +567,17 @@ Node2D* godot::LevelGenerator::_generate_room_to(Node2D* room_to_build)
 	
 
 	return rooms[rooms.size() - 1];
+}
+
+void godot::LevelGenerator::_generate_key(Vector2 pos)
+{
+	auto sprite = cast_to<Node2D>(key_room_sprite->instance());
+	add_child(sprite);
+	sprite->set_global_position(pos);
+
+	auto pedestal = cast_to<Node2D>(key_room_pedestal->instance());
+	add_child(pedestal);
+	pedestal->set_global_position(pos);
+
+	get_parent()->get_node("ItemsContainer")->call("_spawn_random_item", pos);
 }

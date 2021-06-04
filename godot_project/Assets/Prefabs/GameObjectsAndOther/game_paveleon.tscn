@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Assets/Scripts/LevelGenerator.gdns" type="Script" id=1]
 [ext_resource path="res://Assets/Prefabs/Doors/UpDoor.tscn" type="PackedScene" id=2]
@@ -24,6 +24,8 @@
 [ext_resource path="res://Assets/Prefabs/Items/Chicken.tscn" type="PackedScene" id=22]
 [ext_resource path="res://TestBossIdentifier.tscn" type="PackedScene" id=23]
 [ext_resource path="res://TestItemIdentifier.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Pedestal.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/Jertovnik.tscn" type="PackedScene" id=26]
 
 [node name="Node" type="Node"]
 
@@ -57,3 +59,5 @@ roof_count = 15
 key_sprite = ExtResource( 11 )
 item_sprite = ExtResource( 24 )
 boss_sprite = ExtResource( 23 )
+jertovnik = ExtResource( 26 )
+key_room_pedestal = ExtResource( 25 )

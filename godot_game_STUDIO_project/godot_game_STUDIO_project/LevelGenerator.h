@@ -35,6 +35,9 @@ namespace godot
 		Ref<PackedScene> item_room_sprite = nullptr;
 		Ref<PackedScene> boss_room_sprite = nullptr;
 
+		Ref<PackedScene> jertovnik = nullptr;
+		Ref<PackedScene> key_room_pedestal = nullptr;
+
 	public:
 		LevelGenerator();
 		~LevelGenerator();
@@ -57,7 +60,7 @@ namespace godot
 		void _rebuild_doors(Node2D*);
 		void _create_item_room(std::vector<Node2D*>& cornered_rooms);
 		void _create_boss_room(std::vector<Node2D*>& cornered_rooms);
-
 		Node2D* _generate_room_to(Node2D* room);
+		void _generate_key(Vector2 pos);
 	};
 }
