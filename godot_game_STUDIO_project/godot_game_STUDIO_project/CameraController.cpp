@@ -54,7 +54,8 @@ void godot::CameraController::_move(String dir)
 		set_global_position(get_global_position() - Vector2(0, delta));
 
 		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
-		Node2D* move_point = cast_to<Node2D>(next_room->get_node("DownDoor/SpawnPoint"));
+		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "DownDoor");
+		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
 
 		current_room = next_room;
 
@@ -72,7 +73,8 @@ void godot::CameraController::_move(String dir)
 		set_global_position(get_global_position() + Vector2(0, delta));
 
 		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
-		Node2D* move_point = cast_to<Node2D>(next_room->get_node("UpDoor/SpawnPoint"));
+		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "UpDoor");
+		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
 
 		current_room = next_room;
 
@@ -90,7 +92,8 @@ void godot::CameraController::_move(String dir)
 		set_global_position(get_global_position() - Vector2(delta, 0));
 
 		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
-		Node2D* move_point = cast_to<Node2D>(next_room->get_node("RightDoor/SpawnPoint"));
+		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "RightDoor");
+		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
 
 		current_room = next_room;
 
@@ -108,7 +111,8 @@ void godot::CameraController::_move(String dir)
 		set_global_position(get_global_position() + Vector2(delta, 0));
 
 		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
-		Node2D* move_point = cast_to<Node2D>(next_room->get_node("LeftDoor/SpawnPoint"));
+		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "LeftDoor");
+		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
 
 		current_room = next_room;
 
