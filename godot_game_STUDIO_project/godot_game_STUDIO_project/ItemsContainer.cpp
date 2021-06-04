@@ -27,7 +27,7 @@ ItemsContainer* godot::ItemsContainer::_get_instance()
 
 void godot::ItemsContainer::_spawn_random_item(Vector2 pos)
 {
-	RandomNumberGenerator* rng = RandomNumberGenerator::_new();
+	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
 	int64_t rand_index = rng->randi_range(0, (int64_t)items.size() - 1);
 	auto item = cast_to<Node2D>(cast_to<PackedScene>(items[rand_index])->instance());
@@ -41,5 +41,5 @@ godot::ItemsContainer::ItemsContainer()
 
 godot::ItemsContainer::~ItemsContainer()
 {
-	items = {};
+	items.clear();
 }

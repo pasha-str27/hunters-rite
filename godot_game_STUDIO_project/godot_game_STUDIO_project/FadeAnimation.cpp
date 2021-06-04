@@ -37,6 +37,11 @@ godot::FadeAnimation::FadeAnimation()
 {
 }
 
+godot::FadeAnimation::~FadeAnimation()
+{
+	timer = nullptr;
+}
+
 void godot::FadeAnimation::_on_timeout()
 {
 	timer->disconnect("timeout", this, "_on_timeout");

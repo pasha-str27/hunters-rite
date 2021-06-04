@@ -17,6 +17,7 @@ namespace godot
 
 	public:
 		BatAI(Ref<PackedScene>& bullet, Node2D* node);
+		~BatAI();
 		void _process(float delta);
 		void change_can_fight(bool value);
 		void _delete_player1();

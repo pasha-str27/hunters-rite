@@ -23,6 +23,11 @@ godot::StatueShootAI::StatueShootAI(Ref<PackedScene>& bullet, Node2D* node_tmp) 
 	directions[3] = Vector2::LEFT;
 }
 
+godot::StatueShootAI::~StatueShootAI()
+{
+	bullets.clear();
+}
+
 void godot::StatueShootAI::_add_bullet(Node* node)
 {
 	bullets.push_back(cast_to<Node2D>(node));
