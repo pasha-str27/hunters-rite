@@ -14,8 +14,10 @@ namespace godot
 		void SpawnEnemies();
 		void SpawnBoss();
 		void SpawnItems();
+		void SpawnKey();
 		ItemsContainer* i_container = nullptr;
 		Ref<PackedScene> altar = nullptr;
+		Ref<PackedScene> pedestal = nullptr;
 		Timer* timer = nullptr;
 		int levels_count = 7;
 		String current_level = "";

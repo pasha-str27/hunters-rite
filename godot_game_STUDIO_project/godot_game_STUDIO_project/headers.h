@@ -53,6 +53,7 @@
 #include <Dictionary.hpp>
 #include <ResourceSaver.hpp>
 #include <Control.hpp>
+#include <MarginContainer.hpp>
 
 using namespace godot;
 
@@ -98,3 +99,4 @@ using namespace godot;
 #include "Room.h"
 #include "LevelGenerator.h"
 #include "TileMapAnalyzer.h"
+#include "MiniMapController.h"
