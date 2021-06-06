@@ -24,10 +24,10 @@ void godot::Room::_register_methods()
 
 godot::Room::Room()
 {
-	adjacent_rooms.insert(std::make_pair(Vector2(1, 0), nullptr));
-	adjacent_rooms.insert(std::make_pair(Vector2(-1, 0), nullptr));
-	adjacent_rooms.insert(std::make_pair(Vector2(0, 1), nullptr));
-	adjacent_rooms.insert(std::make_pair(Vector2(0, -1), nullptr));
+	adjacent_rooms.insert(std::make_pair(Vector2::RIGHT, nullptr));
+	adjacent_rooms.insert(std::make_pair(Vector2::LEFT, nullptr));
+	adjacent_rooms.insert(std::make_pair(Vector2::DOWN, nullptr));
+	adjacent_rooms.insert(std::make_pair(Vector2::UP, nullptr));
 
 	std::vector<int> tmp_vector;
 	for (int i = 0; i < 4; ++i)
@@ -46,9 +46,7 @@ godot::Room::Room()
 			tmp_vector.push_back(0);
 		tmp_vector.push_back(1);
 		room_map.push_back(tmp_vector);
-	}
-
-	
+	}	
 
 	tmp_vector.clear();
 	for (int j = 0; j < 28; ++j)

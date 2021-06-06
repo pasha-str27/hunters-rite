@@ -74,6 +74,8 @@ void godot::LevelGenerator::_ready()
 
 		}
 	}
+
+	CameraController::current_room = rooms[0];
 }
 
 void godot::LevelGenerator::_connect_rooms(Node2D* prev, Node2D* next, Vector2 dir)
@@ -163,7 +165,7 @@ void godot::LevelGenerator::_generate()
 				break;
 			}
 
-			if (size >= map_size)
+			if (size > map_size)
 				return;
 
 			++index;

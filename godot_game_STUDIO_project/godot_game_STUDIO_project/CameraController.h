@@ -22,8 +22,6 @@ namespace godot
 		Ref<PackedScene> pause_menu = nullptr;
 		Ref<PackedScene> exit = nullptr;
 
-		static Node2D* current_room;
-
 		AudioStreamPlayer2D* audio = nullptr;
 		AudioStreamPlayer2D* audio_boss = nullptr;
 		Timer* timer_audio;
@@ -36,6 +34,8 @@ namespace godot
 		String _get_dir_on_index(int i);
 		bool _is_one_player_alive();
 	public:
+		static Node2D* current_room;
+
 		static void _register_methods();
 		void _init();
 		void _ready();
