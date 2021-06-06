@@ -38,9 +38,6 @@
     <ClCompile Include="EnemyData.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="EnemySideChecker.cpp">
-      <Filter>Enemies</Filter>
-    </ClCompile>
     <ClCompile Include="FlowerAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
@@ -159,9 +156,6 @@
       <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="EnemyData.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemySideChecker.h">
       <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="FlowerAI.h">

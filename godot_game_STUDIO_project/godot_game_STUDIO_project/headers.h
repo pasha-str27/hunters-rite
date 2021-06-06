@@ -74,7 +74,6 @@ using namespace godot;
 #include "SlimeAI.h"
 #include "BatAI.h"
 #include "SpiderAI.h"
-#include "EnemySideChecker.h"
 #include "Enemies.h"
 #include "FlowerAI.h"
 #include "Item.h"

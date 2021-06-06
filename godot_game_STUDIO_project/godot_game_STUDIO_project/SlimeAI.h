@@ -8,7 +8,7 @@ namespace godot
 	class SlimeAI : public EnemyData, public KinematicBody2D
 	{
 		bool can_move;
-		std::vector<int> directions;
+		std::vector<Vector2> directions;
 
 		Vector2 dir;
 		bool is_cheking;
@@ -20,6 +20,7 @@ namespace godot
 		bool was_setted = false;
 
 		Vector2 old_pos;
+		Vector2 cur_pos;
 
 	public:
 		SlimeAI(Ref<PackedScene>& bullet, Node2D* node);
@@ -31,7 +32,7 @@ namespace godot
 		void _remove_side(int side);
 		void _change_dir_after_time();
 		void _fight(Node2D* player1, Node2D* player2);
-		Vector2 directions_swich(int value);
+		bool _is_player_near(Node2D* player);
 		void _set_speed(float value);
 		void _set_is_player1_onArea(bool value);
 		void _set_is_player2_onArea(bool value);
