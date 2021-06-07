@@ -86,5 +86,29 @@ namespace godot
 		{
 			return !from->has_node("/root/Node2D/Node/Player1") || !from->has_node("/root/Node2D/Node/Player2");
 		}
+
+		static std::vector<Node2D*> GetChildrenByWordInName(Node2D* parent, String word)
+		{
+			std::vector<Node2D*> children = {};
+
+			Array childs = parent->get_children();
+
+			for (int i = 0; i < childs.size(); i++)
+				if (Object::cast_to<Node>(childs[i])->get_name().find(word) != -1)
+					children.push_back(childs[i]);
+
+			return children;
+		}
+
+		static Node2D* GetChildByWordInName(Node2D* parent, String word)
+		{
+			Array childs = parent->get_children();
+
+			for (int i = 0; i < childs.size(); i++)
+				if (Object::cast_to<Node>(childs[i])->get_name().find(word) != -1)
+					return childs[i];
+
+			return nullptr;
+		}
 	};
 }

@@ -16,8 +16,10 @@ namespace godot
 		Ref<PackedScene> down_door = nullptr;
 		Ref<PackedScene> left_door = nullptr;
 
-		int step_x = 1024;
-		int step_y = 720;
+		int keys_frequency = 5;
+
+		float step_x = 1024;
+		float step_y = 720;
 
 		std::vector<Vector2> positions;
 		std::vector<Node2D*> rooms;
@@ -27,6 +29,14 @@ namespace godot
 		int stone_count;
 		int spike_count;
 		int roof_count;
+
+		//	for tests
+		Ref<PackedScene> key_room_sprite = nullptr;
+		Ref<PackedScene> item_room_sprite = nullptr;
+		Ref<PackedScene> boss_room_sprite = nullptr;
+
+		Ref<PackedScene> jertovnik = nullptr;
+		Ref<PackedScene> key_room_pedestal = nullptr;
 
 	public:
 		LevelGenerator();
@@ -46,6 +56,15 @@ namespace godot
 		void _buid_stones_second_step(Node2D* room);
 		void _buid_spikes_first_step(Node2D* room);
 		void _buid_spikes_second_step(Node2D* room);
+		void _build_doors(int start_index, int end_index);
 		Node2D* _get_next_room(Vector2 current_room_position);
+		std::vector<Node2D*> _get_corner_rooms();
+		std::vector<Node2D*> _create_keys_rooms(std::vector<Node2D*> &cornered_rooms);
+		void _rebuild_doors(std::vector<Node2D*>);
+		void _rebuild_doors(Node2D*);
+		void _create_item_room(std::vector<Node2D*>& cornered_rooms);
+		void _create_boss_room(std::vector<Node2D*>& cornered_rooms);
+		Node2D* _generate_room_to(Node2D* room);
+		void _generate_key(Vector2 pos);
 	};
 }
