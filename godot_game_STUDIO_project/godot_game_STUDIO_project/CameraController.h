@@ -36,6 +36,8 @@ namespace godot
 		String _get_dir_on_index(int i);
 		bool _is_one_player_alive();
 	public:
+		static Node2D* current_room;
+
 		static void _register_methods();
 		void _init();
 		void _ready();

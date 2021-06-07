@@ -38,12 +38,14 @@ zoom = Vector2( 7, 7 )
 
 [node name="TutorialSprites" parent="." instance=ExtResource( 9 )]
 scale = Vector2( 0.4, 0.4 )
+z_index = 25
 
 [node name="Generation" type="Node2D" parent="."]
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": ""
 }
+map_size = 12
 map_size = 10
 keys_frequency = 5
 room = ExtResource( 6 )
