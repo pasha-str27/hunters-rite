@@ -365,6 +365,7 @@ float godot::PlayerController::_get_speed()
 void godot::PlayerController::_set_HP(float value)
 {
 	current_player->_set_HP(value);
+	_update_health_bar();
 }
 
 float godot::PlayerController::_get_HP()

@@ -410,7 +410,7 @@ void godot::CameraController::_go_to_start()
 		player1->set_global_position(Vector2(0, -50));
 	else
 	{
-		if (MenuButtons::player_name == 0)
+		if (MenuButtons::player_name == 3)
 		{
 			ResourceLoader* rld = ResourceLoader::get_singleton();
 			Ref<PackedScene> _player1 = rld->load("res://Assets/Prefabs/Players/Player1.tscn");

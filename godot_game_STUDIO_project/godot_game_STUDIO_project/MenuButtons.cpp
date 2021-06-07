@@ -8,7 +8,7 @@ bool MenuButtons::was_loaded = false;
 bool MenuButtons::is_full_screen = false;
 float MenuButtons::music_audio_level = -12.5;
 float MenuButtons::effect_audio_level = 6;
-int MenuButtons::player_name = 0;
+int MenuButtons::player_name = 3;
 AudioStreamPlayer2D* MenuButtons::audio = nullptr;
 
 MenuButtons::MenuButtons()

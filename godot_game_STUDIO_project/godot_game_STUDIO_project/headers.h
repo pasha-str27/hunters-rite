@@ -96,3 +96,4 @@ using namespace godot;
 #include "MagnitZone.h"
 #include "Room.h"
 #include "LevelGenerator.h"
+#include "BigStone.h"
