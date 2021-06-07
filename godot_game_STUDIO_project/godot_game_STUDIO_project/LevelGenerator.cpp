@@ -104,6 +104,9 @@ void godot::LevelGenerator::_ready()
 		_build_doors(rooms.size() - (map_size / keys_frequency), rooms.size());
 		_rebuild_doors(rebuild_doors);
 	}
+
+	for(auto node : rooms)
+		node->call("_fill_empty_positions");
 }
 
 void godot::LevelGenerator::_connect_rooms(Node2D* prev, Node2D* next, Vector2 dir)
@@ -272,21 +275,6 @@ void godot::LevelGenerator::_buid_roofs()
 	loader = nullptr;
 }
 
-//void godot::LevelGenerator::_buid_floors()
-//{
-//	Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
-//	ResourceLoader* loader = ResourceLoader::get_singleton();
-//	Ref<PackedScene> prefab = nullptr;
-//	random->randomize();
-//	for (auto room : rooms)
-//		if (random->randi_range(0, 5) >= 1)
-//		{
-//			prefab = loader->load(NodePath("res://Assets/Prefabs/Rooms/Floor/floor" + String::num(random->randi_range(1, floor_count)) + ".tscn"));
-//			room->add_child(prefab->instance());
-//		}
-//	loader = nullptr;
-//}
-
 void godot::LevelGenerator::_buid_top_wall()
 {
 	Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
@@ -302,21 +290,6 @@ void godot::LevelGenerator::_buid_top_wall()
 	loader = nullptr;
 }
 
-//void godot::LevelGenerator::_buid_roofs()
-//{
-//	Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
-//	ResourceLoader *loader = ResourceLoader::get_singleton();
-//	Ref<PackedScene> prefab = nullptr;
-//	random->randomize();
-//	for (auto room : rooms)
-//		if (random->randi_range(0, 5) >= 1)
-//		{
-//			prefab = loader->load(NodePath("res://Assets/Prefabs/Rooms/WallTops/roof" + String::num(random->randi_range(1, roof_count)) + ".tscn"));
-//			room->add_child(prefab->instance());
-//		}
-//	loader = nullptr;
-//}
-
 void godot::LevelGenerator::_buid_floors()
 {
 	Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
@@ -331,21 +304,6 @@ void godot::LevelGenerator::_buid_floors()
 	loader = nullptr;
 	prefab = nullptr;
 }
-
-//void godot::LevelGenerator::_buid_top_wall()
-//{
-//	Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
-//	ResourceLoader* loader = ResourceLoader::get_singleton();
-//	Ref<PackedScene> prefab = nullptr;
-//	random->randomize();
-//	for (auto room : rooms)
-//		if (random->randi_range(0, 5) >= 1)
-//		{
-//			prefab = loader->load(NodePath("res://Assets/Prefabs/Rooms/Walls/wall" + String::num(random->randi_range(1, wall_top_count)) + ".tscn"));
-//			room->add_child(prefab->instance());
-//		}
-//	loader = nullptr;
-//}
 
 void godot::LevelGenerator::_buid_stones_first_step(Node2D* room)
 {

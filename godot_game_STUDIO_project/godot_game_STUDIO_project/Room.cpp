@@ -20,6 +20,7 @@ void godot::Room::_register_methods()
 	register_method("_set_cell_value", &Room::_set_cell_value);
 	register_method("_get_cell_value", &Room::_get_cell_value);
 	register_method("print", &Room::print);
+	register_method("_fill_empty_positions", &Room::_fill_empty_positions);
 }
 
 godot::Room::Room()
@@ -59,6 +60,8 @@ godot::Room::~Room()
 	for (auto row : room_map)
 		row.clear();
 	room_map.clear();
+	empty_pos_world_coordinates.clear();
+	adjacent_rooms.clear();
 }
 
 void godot::Room::_init()
@@ -78,6 +81,18 @@ int godot::Room::_get_cell_value(int i, int j)
 void godot::Room::_set_cell_value(int i, int j, int value)
 {
 	room_map[i][j] = value;
+}
+
+void godot::Room::_fill_empty_positions()
+{
+	for (int i=3;i<room_map.size()-1;++i)
+		for (int j=1; j<room_map[i].size()-1;++j)
+			if (room_map[i][j] == 0)
+			{
+				empty_pos_world_coordinates.push_back((Vector2(j, i) * 32 
+					+ CameraController::current_room->get_global_position()
+					- Vector2(896, 544) / 2 + Vector2(16, 16)));
+			}			
 }
 
 void godot::Room::print()

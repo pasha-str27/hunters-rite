@@ -11,6 +11,7 @@ namespace godot
 		std::map<Vector2, Node2D*> adjacent_rooms;
 		int num_of_adjacent_rooms = 0;
 		std::vector<std::vector<int>> room_map;
+		std::vector<Vector2> empty_pos_world_coordinates;
 
 	public:
 		Room();
@@ -25,6 +26,7 @@ namespace godot
 		bool _is_empty_pos(int i, int j);
 		int _get_cell_value(int i, int j);
 		void _set_cell_value(int i, int j, int value);
+		void _fill_empty_positions();
 		void print();
 	};
 }
