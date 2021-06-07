@@ -14,6 +14,7 @@ namespace godot
 	public:
 		static void _register_methods();
 		AudioEffect();
+		~AudioEffect();
 		void _init();
 		void _ready();
 		void _on_time_out();

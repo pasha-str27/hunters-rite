@@ -19,6 +19,11 @@ godot::ReviveZone::ReviveZone()
 
 godot::ReviveZone::~ReviveZone()
 {
+	arrow = nullptr;
+	if(keys!=nullptr)
+		delete keys;
+	keys = nullptr;
+	timer = nullptr;
 }
 
 void godot::ReviveZone::_register_methods()

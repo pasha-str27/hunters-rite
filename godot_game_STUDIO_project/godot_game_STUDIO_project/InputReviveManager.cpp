@@ -3,6 +3,11 @@
 #include "headers.h"
 #endif
 
+godot::InputReviveManager::~InputReviveManager()
+{
+	keys.clear();
+}
+
 void godot::InputReviveManager::_set_player1_buttons()
 {
 	keys.push_back("Player1_up");
@@ -23,7 +28,7 @@ void godot::InputReviveManager::_set_player2_buttons()
 
 void godot::InputReviveManager::_generate_new_key()
 {
-	RandomNumberGenerator* random = RandomNumberGenerator::_new();
+	Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
 	random->randomize();
 	current_key = keys[random->randi_range(0, keys.size()-1)];
 }

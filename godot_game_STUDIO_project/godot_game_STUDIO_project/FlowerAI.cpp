@@ -29,6 +29,11 @@ godot::FlowerAI::FlowerAI(Ref<PackedScene>& bullet, Node2D *node_tmp) : EnemyDat
 	directions[7] = Vector2(-0.5, -0.5);
 }
 
+godot::FlowerAI::~FlowerAI()
+{
+	bullets.clear();
+}
+
 void godot::FlowerAI::_add_bullet(Node* node)
 {
 	bullets.push_back(cast_to<Node2D>(node));

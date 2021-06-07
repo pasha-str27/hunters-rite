@@ -19,7 +19,7 @@ void godot::SpawnEnemyController::_register_methods()
 
 void godot::SpawnEnemyController::SpawnEnemies()
 {
-	RandomNumberGenerator* rng = RandomNumberGenerator::_new();
+	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
 	
 	for (int i = 0; i < enemies.size(); i++) 
@@ -58,7 +58,7 @@ void godot::SpawnEnemyController::SpawnItems()
 
 	Array item_points = get_node("ItemPoints")->get_children();
 
-	RandomNumberGenerator* rng = RandomNumberGenerator::_new();
+	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
 
 	auto spawned_altar = cast_to<Node2D>(altar->instance());
@@ -153,7 +153,7 @@ void godot::SpawnEnemyController::_on_Area2D_area_entered(Node* other)
 
 void godot::SpawnEnemyController::_stand_random_level()
 {
-	RandomNumberGenerator* rng = RandomNumberGenerator::_new();
+	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
 	int level_number = rng->randi_range(1, levels_count);
 
@@ -179,7 +179,8 @@ godot::SpawnEnemyController::SpawnEnemyController()
 
 godot::SpawnEnemyController::~SpawnEnemyController()
 {
-	enemies = {};
-	spawn_points = {};
+	enemies.clear();
+	spawn_points.clear();
 	timer = nullptr;
+	i_container = nullptr;
 }

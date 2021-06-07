@@ -18,6 +18,7 @@ namespace godot
 		Node2D* player2;
 	public:
 		StatueMeleeAI(Ref<PackedScene>& bullet, Node2D* node);
+		~StatueMeleeAI();
 		void _process(float delta);
 		void change_can_fight(bool value);
 		void _fight(Node2D* player1, Node2D* player2);

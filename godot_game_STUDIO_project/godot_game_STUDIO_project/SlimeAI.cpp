@@ -53,6 +53,11 @@ godot::SlimeAI::SlimeAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(
 	change_direction();
 }
 
+godot::SlimeAI::~SlimeAI()
+{
+	directions.clear();
+}
+
 void godot::SlimeAI::change_can_fight(bool value)
 {
 	can_move = value;
@@ -100,7 +105,7 @@ void godot::SlimeAI::_change_dir_after_time()
 		return;
 	}	
 
-	RandomNumberGenerator* rand = RandomNumberGenerator::_new();
+	Ref<RandomNumberGenerator> rand = RandomNumberGenerator::_new();
 	rand->randomize();
 
 	is_cheking = false;

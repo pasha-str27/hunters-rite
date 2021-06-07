@@ -13,6 +13,7 @@ namespace godot
 		Node2D* current_node;
 
 	public:
+		~EnemySideChecker();
 		static void _register_methods();
 		void _on_Area2D_body_entered(Node2D* node);
 		void _on_Area2D_body_exited(Node2D* node);

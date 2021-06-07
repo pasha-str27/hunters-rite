@@ -3,6 +3,8 @@
 #include "headers.h"
 #endif
 
+Node2D* CameraController::current_room = nullptr;
+
 void godot::CameraController::_register_methods()
 {
 	register_method("_process", &CameraController::_process);
@@ -52,7 +54,10 @@ void godot::CameraController::_move(String dir)
 		set_global_position(get_global_position() - Vector2(0, delta));
 
 		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
-		Node2D* move_point = cast_to<Node2D>(next_room->get_node("DownDoor/SpawnPoint"));
+		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "DownDoor");
+		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
+
+		current_room = next_room;
 
 		if (has_node("/root/Node2D/Node/Player1"))
 			cast_to<Node2D>(player1->get_node("Player1"))->set_global_position(move_point->get_global_position());
@@ -68,7 +73,10 @@ void godot::CameraController::_move(String dir)
 		set_global_position(get_global_position() + Vector2(0, delta));
 
 		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
-		Node2D* move_point = cast_to<Node2D>(next_room->get_node("UpDoor/SpawnPoint"));
+		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "UpDoor");
+		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
+
+		current_room = next_room;
 
 		if (has_node("/root/Node2D/Node/Player1"))
 			cast_to<Node2D>(player1->get_node("Player1"))->set_global_position(move_point->get_global_position());
@@ -84,7 +92,10 @@ void godot::CameraController::_move(String dir)
 		set_global_position(get_global_position() - Vector2(delta, 0));
 
 		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
-		Node2D* move_point = cast_to<Node2D>(next_room->get_node("RightDoor/SpawnPoint"));
+		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "RightDoor");
+		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
+
+		current_room = next_room;
 
 		if (has_node("/root/Node2D/Node/Player1"))
 			cast_to<Node2D>(player1->get_node("Player1"))->set_global_position(move_point->get_global_position());
@@ -100,7 +111,10 @@ void godot::CameraController::_move(String dir)
 		set_global_position(get_global_position() + Vector2(delta, 0));
 
 		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
-		Node2D* move_point = cast_to<Node2D>(next_room->get_node("LeftDoor/SpawnPoint"));
+		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "LeftDoor");
+		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
+
+		current_room = next_room;
 
 		if (has_node("/root/Node2D/Node/Player1"))
 			cast_to<Node2D>(player1->get_node("Player1"))->set_global_position(move_point->get_global_position());
@@ -148,7 +162,6 @@ void godot::CameraController::_spawn_players()
 		get_node("P2HealthBarWrapper")->queue_free();
 		//	hiding label
 		//get_node("P1HealthBarWrapper/Label")->queue_free();
-
 	}
 	else
 	{
@@ -164,7 +177,6 @@ void godot::CameraController::_spawn_players()
 			get_node("P1HealthBarWrapper")->queue_free();
 			//	hiding label
 			//get_node("P2HealthBarWrapper/Label")->queue_free();
-
 		}
 		else
 		{
@@ -426,4 +438,10 @@ godot::CameraController::CameraController()
 
 godot::CameraController::~CameraController()
 {
+	audio = nullptr;
+	audio_boss = nullptr;
+	timer_audio = nullptr;
+	audio_server = nullptr;
+	player1 = nullptr;
+	player2 = nullptr;
 }

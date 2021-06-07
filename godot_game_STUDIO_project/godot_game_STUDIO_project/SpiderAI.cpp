@@ -25,6 +25,12 @@ godot::SpiderAI::SpiderAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyDat
 	change_direction();
 }
 
+godot::SpiderAI::~SpiderAI()
+{
+	bullets.clear();
+	directions.clear();
+}
+
 void godot::SpiderAI::_add_bullet(Node* node)
 {
 	bullets.push_back(cast_to<Node2D>(node));
@@ -66,7 +72,7 @@ void godot::SpiderAI::_change_dir_after_time()
 		return;
 	}	
 
-	RandomNumberGenerator* rand = RandomNumberGenerator::_new();
+	Ref<RandomNumberGenerator> rand = RandomNumberGenerator::_new();
 	rand->randomize();
 
 	is_cheking = false;
@@ -99,7 +105,7 @@ void godot::SpiderAI::_fight(Node2D* player1, Node2D* player2)
 	can_move = false;
 	_get_enemy()->call("_start_timer");
 
-	RandomNumberGenerator* rng = RandomNumberGenerator::_new();
+	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 
 	rng->randomize();
 
