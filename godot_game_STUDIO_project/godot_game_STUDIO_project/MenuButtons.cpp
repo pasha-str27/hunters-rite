@@ -21,7 +21,13 @@ MenuButtons::MenuButtons()
 	single_mode = true;
 }
 
-MenuButtons::~MenuButtons() {}
+MenuButtons::~MenuButtons()
+{
+	audio_server = nullptr;
+	timer = nullptr;
+	timer_music_out = nullptr;
+	timer_music = nullptr;
+}
 
 void godot::MenuButtons::_init() {}
 

@@ -11,6 +11,7 @@ namespace godot
 		String current_key;
 
 	public:
+		~InputReviveManager();
 		void _set_player1_buttons();
 		void _set_player2_buttons();
 		void _generate_new_key();

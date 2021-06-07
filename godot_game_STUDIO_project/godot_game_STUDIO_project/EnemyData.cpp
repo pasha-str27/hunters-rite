@@ -51,6 +51,7 @@ godot::EnemyData::EnemyData(Node2D* enemy)
 
 godot::EnemyData::~EnemyData()
 {
+	enemy = nullptr;
 }
 
 void godot::EnemyData::_add_bullet(Node* bullet)

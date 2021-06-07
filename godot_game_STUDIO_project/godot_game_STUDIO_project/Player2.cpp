@@ -18,6 +18,12 @@ godot::Player2::Player2(Node2D* obj, Ref<PackedScene> bullet) : PlayerData(obj)
 
 godot::Player2::~Player2()
 {
+	current_enemy = nullptr;
+
+	sprite = nullptr;
+	vfx_sprite = nullptr;
+
+	animator = nullptr;
 }
 
 void godot::Player2::_move()
