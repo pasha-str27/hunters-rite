@@ -129,4 +129,5 @@ godot::ExitHandler::~ExitHandler()
 {
 	timer = nullptr;
 	timer_audio = nullptr;
+	audio_server = nullptr;
 }

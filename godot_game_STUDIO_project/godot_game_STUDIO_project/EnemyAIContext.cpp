@@ -10,7 +10,9 @@ EnemyAIContext::EnemyAIContext()
 
 EnemyAIContext::~EnemyAIContext()
 {
-	//delete strategy;
+	if(strategy!=nullptr)
+		delete strategy;
+	strategy = nullptr;
 }
 
 
