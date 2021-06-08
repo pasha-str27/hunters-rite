@@ -39,7 +39,6 @@ namespace godot
 		static void _register_methods();
 		void _init();
 		void _ready();
-		void _process();
 		void _door_collision(String door_dir);
 		void _open_doors();
 		void _close_doors();

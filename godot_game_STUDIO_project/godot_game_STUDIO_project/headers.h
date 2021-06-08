@@ -97,3 +97,4 @@ using namespace godot;
 #include "Room.h"
 #include "LevelGenerator.h"
 #include "BigStone.h"
+#include "AudioController.h"
