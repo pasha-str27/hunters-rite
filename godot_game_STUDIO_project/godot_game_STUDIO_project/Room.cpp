@@ -20,6 +20,7 @@ void godot::Room::_register_methods()
 	register_method("_set_cell_value", &Room::_set_cell_value);
 	register_method("_get_cell_value", &Room::_get_cell_value);
 	register_method("print", &Room::print);
+	register_method("_add_list", &Room::_add_list);
 }
 
 godot::Room::Room()
@@ -89,6 +90,14 @@ void godot::Room::print()
 			tmp += String::num(room_map[i][j]);
 		Godot::print(tmp);
 	}
+}
+
+void godot::Room::_add_list(Array list)
+{
+	Godot::print(String::num(list.size()));
+	list_of_keys.push_back(list);
+	//for(int i = 0; i < *list.size(); i++)
+	//	Godot::print(*list[i]);
 }
 
 void godot::Room::_set_num_of_adjacent_rooms(int value)

@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Assets/Sprites/key.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Scripts/Key.gdns" type="Script" id=2]
 
 [node name="Key" type="Node2D"]
+script = ExtResource( 2 )
+key_type = "key_A"
 
 [node name="key" type="Sprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
