@@ -1,9 +1,8 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Assets/Sprites/Monsters/Spider/monster_spider_run.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/web_bullet_prefab.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Scripts/Enemy.gdns" type="Script" id=3]
-[ext_resource path="res://Assets/Scripts/SpiderSide.gdns" type="Script" id=4]
 [ext_resource path="res://Assets/Sprites/Monsters/Spider/monster_spider_damage.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Sprites/Monsters/Spider/monster_spider_idle.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=7]
@@ -98,9 +97,6 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=19]
-extents = Vector2( 4.89366, 4.97602 )
-
 [node name="Spider" type="Node2D"]
 
 [node name="BulletConteinerSpider" type="Node" parent="."]
@@ -140,65 +136,4 @@ animation = "idle"
 frame = 4
 playing = true
 
-[node name="Area2D2" type="Area2D" parent="Spider" groups=[
-"side",
-]]
-position = Vector2( 0.486, -32.703 )
-scale = Vector2( 2.5, 2.5 )
-collision_layer = 262145
-collision_mask = 262161
-script = ExtResource( 4 )
-side = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Spider/Area2D2"]
-shape = SubResource( 19 )
-
-[node name="Area2D4" type="Area2D" parent="Spider" groups=[
-"side",
-]]
-position = Vector2( -31.514, -0.703 )
-scale = Vector2( 2.5, 2.5 )
-collision_layer = 262145
-collision_mask = 262161
-script = ExtResource( 4 )
-side = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Spider/Area2D4"]
-shape = SubResource( 19 )
-
-[node name="Area2D5" type="Area2D" parent="Spider" groups=[
-"side",
-]]
-position = Vector2( 32.486, -0.703 )
-scale = Vector2( 2.5, 2.5 )
-collision_layer = 262145
-collision_mask = 262161
-script = ExtResource( 4 )
-side = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Spider/Area2D5"]
-shape = SubResource( 19 )
-
-[node name="Area2D7" type="Area2D" parent="Spider" groups=[
-"side",
-]]
-position = Vector2( 0.486, 31.297 )
-scale = Vector2( 2.5, 2.5 )
-collision_layer = 262145
-collision_mask = 262161
-script = ExtResource( 4 )
-side = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Spider/Area2D7"]
-shape = SubResource( 19 )
-
 [node name="SpawnParticles" parent="Spider" instance=ExtResource( 7 )]
-
-[connection signal="body_entered" from="Spider/Area2D2" to="Spider/Area2D2" method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="Spider/Area2D2" to="Spider/Area2D2" method="_on_Area2D_body_exited"]
-[connection signal="body_entered" from="Spider/Area2D4" to="Spider/Area2D4" method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="Spider/Area2D4" to="Spider/Area2D4" method="_on_Area2D_body_exited"]
-[connection signal="body_entered" from="Spider/Area2D5" to="Spider/Area2D5" method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="Spider/Area2D5" to="Spider/Area2D5" method="_on_Area2D_body_exited"]
-[connection signal="body_entered" from="Spider/Area2D7" to="Spider/Area2D7" method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="Spider/Area2D7" to="Spider/Area2D7" method="_on_Area2D_body_exited"]

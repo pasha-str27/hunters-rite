@@ -3,26 +3,39 @@
 #include "headers.h"
 #endif
 
-Vector2 godot::SlimeAI::directions_swich(int value)
+bool godot::SlimeAI::_is_player_near(Node2D* player)
 {
-	float d = .5f;
-	Vector2 direction;
+	Vector2 player_pos_index = (player->get_global_position()
+		- CameraController::current_room->get_global_position()
+		+ Vector2(896, 544) / 2) / 32;
 
-	switch (value)
+	player_pos_index = Vector2((int)player_pos_index.y, (int)player_pos_index.x);
+
+	if (player_pos_index == Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::LEFT).x))
 	{
-	case 1:
-		return Vector2(0, -d);
-	case 2:
-		cast_to<AnimatedSprite>(_get_enemy()->get_child(1)->get_child(0))->set_flip_h(false);
-		return Vector2(-d, 0);
-	case 3:
-		cast_to<AnimatedSprite>(_get_enemy()->get_child(1)->get_child(0))->set_flip_h(true);
-		return Vector2(d, 0);
-	case 4:
-		return Vector2(0, d);
-	default:
-		return Vector2();
+		directions.push_back(Vector2::LEFT);
+		return true;
 	}
+
+	if (player_pos_index == Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::RIGHT).x))
+	{
+		directions.push_back(Vector2::RIGHT);
+		return true;
+	}
+
+	if (player_pos_index == Vector2((int)(cur_pos + Vector2::DOWN).y, (int)cur_pos.x))
+	{
+		directions.push_back(Vector2::DOWN);
+		return true;
+	}
+
+	if (player_pos_index == Vector2((int)(cur_pos + Vector2::UP).y, (int)cur_pos.x))
+	{
+		directions.push_back(Vector2::UP);
+		return true;
+	}
+
+	return false;
 }
 
 void godot::SlimeAI::_set_speed(float value)
@@ -44,6 +57,9 @@ void godot::SlimeAI::_set_is_player2_onArea(bool value)
 
 godot::SlimeAI::SlimeAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
 {
+	dir = Vector2::ZERO;
+	cur_pos = (node_tmp->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+
 	can_move = true;
 	is_cheking = false;
 	speed = 400;
@@ -74,19 +90,51 @@ void godot::SlimeAI::change_direction()
 
 	_fight(_get_player1(), _get_player2());
 
-	for (int i = 2; i < 6; ++i)
-	{
-		if ((int)_get_enemy()->get_child(i)->call("_get_side") != -1 && _get_enemy()->get_child(i)->call("_get_current_node") != nullptr
-			&& cast_to<Node2D>(_get_enemy()->get_child(i)->call("_get_current_node"))->is_in_group("player")
-			&& (bool)cast_to<Node2D>(_get_enemy()->get_child(i)->call("_get_current_node"))->call("_is_alive"))
-		{
-			dir = directions_swich(i - 1);
-			is_cheking = false;
-			return;
-		}
+	bool is_player_near = false;
 
-		if (!_get_enemy()->get_child(i)->call("_get_on_body"))
-			directions.push_back(i - 1);
+	if (PlayersContainer::_get_instance()->_players_count() > 0)
+	{
+		if (PlayersContainer::_get_instance()->_get_player1() != nullptr
+			&& PlayersContainer::_get_instance()->_get_player2() != nullptr)
+		{
+			Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
+			random->randomize();
+
+			if (random->randi_range(0, 1))
+			{
+				is_player_near = _is_player_near(PlayersContainer::_get_instance()->_get_player2());
+				if(!is_player_near)
+					is_player_near = _is_player_near(PlayersContainer::_get_instance()->_get_player1());
+			}
+			else
+			{
+				is_player_near = _is_player_near(PlayersContainer::_get_instance()->_get_player1());
+				if (!is_player_near)
+					is_player_near = _is_player_near(PlayersContainer::_get_instance()->_get_player2());
+			}
+		}
+		else
+		{
+			if (PlayersContainer::_get_instance()->_get_player1() == nullptr)
+				is_player_near = _is_player_near(PlayersContainer::_get_instance()->_get_player2());
+			else
+				is_player_near = _is_player_near(PlayersContainer::_get_instance()->_get_player1());
+		}
+	}
+
+	if (!is_player_near)
+	{
+		if ((int)CameraController::current_room->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::LEFT).x) == 0)
+			directions.push_back(Vector2::LEFT);
+
+		if ((int)CameraController::current_room->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::RIGHT).x) == 0)
+			directions.push_back(Vector2::RIGHT);
+
+		if ((int)CameraController::current_room->call("_get_cell_value", (cur_pos + Vector2::DOWN).y, cur_pos.x) == 0)
+			directions.push_back(Vector2::DOWN);
+
+		if ((int)CameraController::current_room->call("_get_cell_value", (cur_pos + Vector2::UP).y, cur_pos.x) == 0)
+			directions.push_back(Vector2::UP);
 	}
 
 	_change_dir_after_time();
@@ -94,7 +142,7 @@ void godot::SlimeAI::change_direction()
 
 void godot::SlimeAI::_remove_side(int dir)
 {
-	directions.push_back(dir);
+	//directions.push_back(dir);
 }
 
 void godot::SlimeAI::_change_dir_after_time()
@@ -110,7 +158,9 @@ void godot::SlimeAI::_change_dir_after_time()
 
 	is_cheking = false;
 
-	dir = directions_swich(directions[rand->randi_range(0, directions.size() - 1)]);
+	dir = directions[rand->randi_range(0, directions.size() - 1)]/2;
+
+	cur_pos += dir * 2;
 }
 
 void godot::SlimeAI::_fight(Node2D* player1, Node2D* player2)

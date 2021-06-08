@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Assets/Sprites/Tilesets/level1_tileset.tres" type="TileSet" id=1]
-[ext_resource path="res://Assets/Scripts/TileMapAnalyzer.gdns" type="Script" id=2]
 
 [node name="wall" type="TileMap"]
 position = Vector2( 0, -16 )
@@ -11,4 +10,3 @@ cell_size = Vector2( 32, 32 )
 collision_layer = 3
 format = 1
 tile_data = PoolIntArray( -393227, 15, 0, -458751, 13, 0, -458740, 15, 0, -327693, 13, 0, -327689, 13, 0, -327686, 15, 0, -393208, 13, 0, -262153, 15, 0, -262149, 13, 0, -327680, 15, 0, -327675, 15, 0, -327668, 13, 0 )
-script = ExtResource( 2 )
