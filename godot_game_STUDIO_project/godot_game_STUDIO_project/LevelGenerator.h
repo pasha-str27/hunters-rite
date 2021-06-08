@@ -38,6 +38,8 @@ namespace godot
 		Ref<PackedScene> jertovnik = nullptr;
 		Ref<PackedScene> key_room_pedestal = nullptr;
 
+		Array keys_prefabs = {};
+
 	public:
 		LevelGenerator();
 		~LevelGenerator();

@@ -22,7 +22,7 @@ namespace godot
 		Ref<PackedScene> pause_menu = nullptr;
 		Ref<PackedScene> exit = nullptr;
 
-		static Node2D* current_room;
+		//static Node2D* current_room;
 
 		AudioStreamPlayer2D* audio = nullptr;
 		AudioStreamPlayer2D* audio_boss = nullptr;
