@@ -41,6 +41,8 @@ void godot::LevelGenerator::_register_methods()
 
 	register_property<LevelGenerator, Ref<PackedScene>>("jertovnik", &LevelGenerator::jertovnik, nullptr);
 	register_property<LevelGenerator, Ref<PackedScene>>("key_room_pedestal", &LevelGenerator::key_room_pedestal, nullptr);
+
+	register_property<LevelGenerator, Array>("keys_prefabs", &LevelGenerator::keys_prefabs, {});
 	
 }
 
@@ -484,7 +486,6 @@ std::vector<Node2D*> godot::LevelGenerator::_create_keys_rooms(std::vector<Node2
 
 	for (int i = 0; i < keys_count;)
 	{
-
 		bool contains = false;
 
 		int index = rng->randi_range(0, cornered_rooms.size() - 1);
@@ -755,6 +756,9 @@ Node2D* godot::LevelGenerator::_generate_room_to(Node2D* room_to_build)
 
 void godot::LevelGenerator::_generate_key(Vector2 pos)
 {
+	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
+	rng->randomize();
+
 	auto sprite = cast_to<Node2D>(key_room_sprite->instance());
 	add_child(sprite);
 	sprite->set_global_position(pos);
@@ -763,5 +767,13 @@ void godot::LevelGenerator::_generate_key(Vector2 pos)
 	add_child(pedestal);
 	pedestal->set_global_position(pos);
 
-	get_parent()->get_node("ItemsContainer")->call("_spawn_random_item", pos);
+	int key_index = rng->randi_range(0, keys_prefabs.size() - 1);
+	Ref<PackedScene> key_prefab = keys_prefabs[key_index];
+	auto key = cast_to<Node2D>(key_prefab->instance());
+	add_child(key);
+	key->set_global_position(pos);
+
+	keys_prefabs.remove(key_index);
+
+	//get_parent()->get_node("ItemsContainer")->call("_spawn_random_item", pos);
 }
