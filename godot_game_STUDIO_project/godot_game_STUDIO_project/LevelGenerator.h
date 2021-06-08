@@ -39,6 +39,7 @@ namespace godot
 		Ref<PackedScene> key_room_pedestal = nullptr;
 
 		Array keys_prefabs = {};
+		Array generated_keys = {};
 
 	public:
 		LevelGenerator();
@@ -49,7 +50,7 @@ namespace godot
 		void _connect_rooms(Node2D *prev, Node2D* next, Vector2 dir);
 		void _generate();
 		bool _has_room(std::vector<Vector2> positions, Vector2 pos);
-		void _buid_room(Vector2 dir);
+		Node2D* _buid_room(Vector2 dir);
 		void _buid_doors();
 		void _buid_roofs();
 		void _buid_floors();
@@ -67,6 +68,6 @@ namespace godot
 		void _create_item_room(std::vector<Node2D*>& cornered_rooms);
 		void _create_boss_room(std::vector<Node2D*>& cornered_rooms);
 		Node2D* _generate_room_to(Node2D* room);
-		void _generate_key(Vector2 pos);
+		void _generate_key(Node2D* room);
 	};
 }

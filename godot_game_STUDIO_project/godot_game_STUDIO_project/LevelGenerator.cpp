@@ -215,7 +215,7 @@ bool godot::LevelGenerator::_has_room(std::vector<Vector2> positions, Vector2 po
 	return false;
 }
 
-void godot::LevelGenerator::_buid_room(Vector2 pos)
+Node2D* godot::LevelGenerator::_buid_room(Vector2 pos)
 {
 	Node2D* node = cast_to<Node2D>(room->instance());
 	node->set_global_position(pos);
@@ -223,7 +223,7 @@ void godot::LevelGenerator::_buid_room(Vector2 pos)
 	positions.push_back(pos);
 	add_child(node);
 	size++;
-	node = nullptr;
+	return node;
 }
 
 void godot::LevelGenerator::_buid_doors()
@@ -512,10 +512,10 @@ std::vector<Node2D*> godot::LevelGenerator::_create_keys_rooms(std::vector<Node2
 			Vector2 new_room_position = room_to_build->get_global_position() + Vector2(step_x, 0);
 			if (!_has_room(positions, new_room_position))
 			{
-				_buid_room(new_room_position);
+				auto builded_room = _buid_room(new_room_position);
 				_connect_rooms(room_to_build, rooms[rooms.size() - 1], Vector2(1, 0));
 
-				_generate_key(new_room_position);
+				_generate_key(builded_room);
 
 				i++;
 			}
@@ -527,11 +527,10 @@ std::vector<Node2D*> godot::LevelGenerator::_create_keys_rooms(std::vector<Node2
 			Vector2 new_room_position = room_to_build->get_global_position() + Vector2(-step_x, 0);
 			if (!_has_room(positions, new_room_position))
 			{
-				_buid_room(new_room_position);
+				auto builded_room = _buid_room(new_room_position);
 				_connect_rooms(room_to_build, rooms[rooms.size() - 1], Vector2(-1, 0));
 
-				_generate_key(new_room_position);
-
+				_generate_key(builded_room);
 
 				i++;
 			}
@@ -543,10 +542,10 @@ std::vector<Node2D*> godot::LevelGenerator::_create_keys_rooms(std::vector<Node2
 			Vector2 new_room_position = room_to_build->get_global_position() + Vector2(0, step_y);
 			if (!_has_room(positions, new_room_position))
 			{
-				_buid_room(new_room_position);
+				auto builded_room = _buid_room(new_room_position);
 				_connect_rooms(room_to_build, rooms[rooms.size() - 1], Vector2(0, 1));
 
-				_generate_key(new_room_position);
+				_generate_key(builded_room);
 
 				i++;
 			}
@@ -558,10 +557,10 @@ std::vector<Node2D*> godot::LevelGenerator::_create_keys_rooms(std::vector<Node2
 			Vector2 new_room_position = room_to_build->get_global_position() + Vector2(0, -step_y);
 			if (!_has_room(positions, new_room_position))
 			{
-				_buid_room(new_room_position);
+				auto builded_room = _buid_room(new_room_position);
 				_connect_rooms(room_to_build, rooms[rooms.size() - 1], Vector2(0, -1));
 
-				_generate_key(new_room_position);
+				_generate_key(builded_room);
 				i++;
 			}
 
@@ -754,8 +753,9 @@ Node2D* godot::LevelGenerator::_generate_room_to(Node2D* room_to_build)
 	return rooms[rooms.size() - 1];
 }
 
-void godot::LevelGenerator::_generate_key(Vector2 pos)
+void godot::LevelGenerator::_generate_key(Node2D* room)
 {
+	Vector2 pos = room->get_global_position();
 	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
 
@@ -775,5 +775,14 @@ void godot::LevelGenerator::_generate_key(Vector2 pos)
 
 	keys_prefabs.remove(key_index);
 
-	//get_parent()->get_node("ItemsContainer")->call("_spawn_random_item", pos);
+	if (!generated_keys.empty())
+	{
+		Godot::print("11111");
+		room->call("_add_list", generated_keys);
+	}
+
+	generated_keys.push_back(key->call("_get_type"));	
+	for (int i = 0; i < generated_keys.size(); i++) {
+		Godot::print(generated_keys[i]);
+	}
 }

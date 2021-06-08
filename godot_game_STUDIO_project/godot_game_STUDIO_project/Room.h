@@ -12,6 +12,7 @@ namespace godot
 		int num_of_adjacent_rooms = 0;
 		std::vector<std::vector<int>> room_map;
 		std::vector<Vector2> empty_pos_world_coordinates;
+		std::vector<Array> list_of_keys;
 
 	public:
 		Room();
@@ -28,5 +29,6 @@ namespace godot
 		void _set_cell_value(int i, int j, int value);
 		void _fill_empty_positions();
 		void print();
+		void _add_list(Array);
 	};
 }

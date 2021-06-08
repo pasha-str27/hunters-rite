@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Assets/Scripts/LevelGenerator.gdns" type="Script" id=1]
 [ext_resource path="res://Assets/Prefabs/Doors/UpDoor.tscn" type="PackedScene" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/Jertovnik.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Key2.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Key.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Key3.tscn" type="PackedScene" id=29]
 
 [node name="Node" type="Node"]
 
@@ -47,7 +48,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 map_size = 10
-keys_frequency = 5
+keys_frequency = 3
 room = ExtResource( 6 )
 down_door = ExtResource( 8 )
 up_door = ExtResource( 2 )
@@ -63,4 +64,4 @@ item_sprite = ExtResource( 24 )
 boss_sprite = ExtResource( 23 )
 jertovnik = ExtResource( 26 )
 key_room_pedestal = ExtResource( 25 )
-keys_prefabs = [ ExtResource( 28 ), ExtResource( 27 ) ]
+keys_prefabs = [ ExtResource( 28 ), ExtResource( 27 ), ExtResource( 29 ) ]
