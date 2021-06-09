@@ -36,6 +36,7 @@ godot::Item::Item()
 
 godot::Item::~Item()
 {
+	animator = nullptr;
 }
 
 void godot::Item::_ready()

@@ -24,7 +24,6 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<Sword>();
 	register_class<CameraController>();
 	register_class<Spike>();
-	register_class<EnemySideChecker>();
 	register_class<Item>();
 	register_class<ReviveZone>();
 	register_class<ItemsContainer>();
@@ -39,4 +38,6 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<MagnitZone>();
 	register_class<Room>();
 	register_class<LevelGenerator>();
+	register_class<BigStone>();
+	register_class<Key>();
 }

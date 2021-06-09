@@ -76,6 +76,16 @@ godot::PlayerController::PlayerController()
 
 godot::PlayerController::~PlayerController()
 {
+	if(current_player!=nullptr)
+		delete current_player;
+	current_player = nullptr;
+	door = nullptr;
+	item_generator = nullptr;
+	timer = nullptr;
+	hurt_particles = nullptr;
+	buff_debuff_particles = nullptr;
+	dash_particles = nullptr;
+	revive_particles = nullptr;
 	//if(current_player)
 	//	delete current_player;
 }
@@ -127,6 +137,7 @@ void godot::PlayerController::_ready()
 	hurt_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"));
 	dash_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "DashParticles"));
 	revive_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "ReviveParticles"));
+	delete player_producer;
 }
 
 void godot::PlayerController::_start_timer()
@@ -354,6 +365,7 @@ float godot::PlayerController::_get_speed()
 void godot::PlayerController::_set_HP(float value)
 {
 	current_player->_set_HP(value);
+	_update_health_bar();
 }
 
 float godot::PlayerController::_get_HP()

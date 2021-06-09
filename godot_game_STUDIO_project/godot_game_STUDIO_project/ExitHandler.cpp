@@ -101,22 +101,8 @@ void godot::ExitHandler::_show_exit()
 
 void godot::ExitHandler::_mute_audio()
 {
-	timer_audio->disconnect("timeout", this, "_mute_audio");
-
-	if (audio_server->get_bus_volume_db(2) <= -75
-		&& audio_server->get_bus_volume_db(3) <= -75)
+	if (AudioController::get_singleton()->_mute_audio(timer_audio, this))
 		return;
-
-	if (audio_server->get_bus_volume_db(2) > -75)
-		audio_server->set_bus_volume_db(2,
-			audio_server->get_bus_volume_db(2) - 0.8);
-
-	if (audio_server->get_bus_volume_db(3) > -75)
-		audio_server->set_bus_volume_db(3,
-			audio_server->get_bus_volume_db(3) - 0.8);
-
-	timer_audio->connect("timeout", this, "_mute_audio");
-	timer_audio->start(0.01);
 }
 
 godot::ExitHandler::ExitHandler()
@@ -129,4 +115,5 @@ godot::ExitHandler::~ExitHandler()
 {
 	timer = nullptr;
 	timer_audio = nullptr;
+	audio_server = nullptr;
 }

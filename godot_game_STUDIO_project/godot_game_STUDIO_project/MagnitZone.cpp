@@ -18,6 +18,12 @@ godot::MagnitZone::MagnitZone()
 {
 }
 
+godot::MagnitZone::~MagnitZone()
+{
+	player1 = nullptr;
+	player2 = nullptr;
+}
+
 void godot::MagnitZone::_init()
 {
 }

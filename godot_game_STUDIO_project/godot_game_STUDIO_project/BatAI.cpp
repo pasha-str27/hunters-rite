@@ -11,6 +11,11 @@ godot::BatAI::BatAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node
 	_change_dir();
 }
 
+godot::BatAI::~BatAI()
+{
+	current_goal = nullptr;
+}
+
 void godot::BatAI::change_can_fight(bool value)
 {
 	can_move = value;
@@ -51,7 +56,7 @@ void godot::BatAI::_set_speed(float value)
 
 void godot::BatAI::_change_dir()
 {
-	RandomNumberGenerator* rng = RandomNumberGenerator::_new();
+	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 
 	rng->randomize();
 
@@ -99,7 +104,7 @@ void godot::BatAI::_process(float delta)
 
 	if (current_player == "")
 	{
-		RandomNumberGenerator* random = RandomNumberGenerator::_new();
+		Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
 		random->randomize();
 		dir = (Vector2(random->randf_range(-100, 100), random->randf_range(-100, 100))).normalized();
 	}

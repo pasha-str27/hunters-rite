@@ -54,6 +54,15 @@ godot::Enemy::Enemy()
 
 godot::Enemy::~Enemy()
 {
+	sp = nullptr;
+	spawn_particles = nullptr;
+	if(ai!=nullptr)
+		delete ai; 
+	ai = nullptr;
+	timer = nullptr;
+	timer_change_dir = nullptr;
+	timer_check_angry = nullptr;
+	timer_particles = nullptr;
 }
 
 void godot::Enemy::_init()
