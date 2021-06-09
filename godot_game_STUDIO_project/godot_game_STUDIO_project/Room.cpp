@@ -95,9 +95,20 @@ void godot::Room::print()
 void godot::Room::_add_list(Array list)
 {
 	Godot::print(String::num(list.size()));
+
+	for (int i = 0; i < list.size(); i++)
+	{
+		Array arr = list[i];
+		Godot::print("arr size: " + String::num(arr.size()));
+
+		Godot::print("Keys need: ");
+		for (int j = 0; j < arr.size(); j++)
+		{
+			Godot::print(arr[j]);
+		}
+	}
+	
 	list_of_keys.push_back(list);
-	//for(int i = 0; i < *list.size(); i++)
-	//	Godot::print(*list[i]);
 }
 
 void godot::Room::_set_num_of_adjacent_rooms(int value)

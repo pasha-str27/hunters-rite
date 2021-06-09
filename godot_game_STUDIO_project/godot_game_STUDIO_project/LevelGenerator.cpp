@@ -819,12 +819,17 @@ void godot::LevelGenerator::_generate_key(Node2D* room)
 
 	if (!generated_keys.empty())
 	{
-		Godot::print("11111");
-		room->call("_add_list", generated_keys);
+		//	creating fucking wrapper for transferring array
+		Array params = {};
+		//	creating another stupid array for our array
+		Array keys = {};
+		//	pushing our data
+		keys.push_back(generated_keys);
+		//	pushing stupid array to fucking wrapper
+		params.push_back(keys);
+		//	calling func
+		room->call("_add_list", params);
 	}
 
 	generated_keys.push_back(key->call("_get_type"));	
-	for (int i = 0; i < generated_keys.size(); i++) {
-		Godot::print(generated_keys[i]);
-	}
 }
