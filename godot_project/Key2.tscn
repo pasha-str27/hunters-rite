@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Sprites/key.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Scripts/Key.gdns" type="Script" id=2]
+
+[node name="Key" type="Node2D"]
+script = ExtResource( 2 )
+key_type = "key_B"
+
+[node name="key" type="Sprite" parent="."]
+modulate = Color( 0.592157, 0.0862745, 0.0862745, 1 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
