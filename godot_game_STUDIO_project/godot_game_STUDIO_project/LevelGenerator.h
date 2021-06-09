@@ -66,8 +66,9 @@ namespace godot
 		void _rebuild_doors(std::vector<Node2D*>);
 		void _rebuild_doors(Node2D*);
 		void _create_item_room(std::vector<Node2D*>& cornered_rooms);
-		void _create_boss_room(std::vector<Node2D*>& cornered_rooms);
+		Node2D* _create_boss_room(std::vector<Node2D*>& cornered_rooms);
 		Node2D* _generate_room_to(Node2D* room);
 		void _generate_key(Node2D* room);
+		void _set_keys(Node2D* room, Array keys);
 	};
 }
