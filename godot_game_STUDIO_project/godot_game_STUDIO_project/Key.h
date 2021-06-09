@@ -14,9 +14,8 @@ namespace godot {
 		void _init();
 		void _ready();
 		String _get_type();
+		void _on_Area2D_body_entered(Node* node);
 		Key();
 		~Key();
 	};
 }
-
-

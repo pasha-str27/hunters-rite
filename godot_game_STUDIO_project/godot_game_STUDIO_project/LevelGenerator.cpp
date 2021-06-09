@@ -781,7 +781,6 @@ void godot::LevelGenerator::_generate_key(Node2D* room)
 
 	if (!generated_keys.empty())
 	{
-
 		_set_keys(room, generated_keys);
 		////	creating fucking wrapper for transferring array
 		//Array params = {};
@@ -800,7 +799,7 @@ void godot::LevelGenerator::_generate_key(Node2D* room)
 
 void godot::LevelGenerator::_set_keys(Node2D* room, Array t_keys)
 {
-	//	creating fucking wrapper for transferring array
+	////	creating fucking wrapper for transferring array
 	Array params = {};
 	//	creating another stupid array for our array
 	Array keys = {};

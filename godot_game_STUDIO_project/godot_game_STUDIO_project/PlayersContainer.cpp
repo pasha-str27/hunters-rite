@@ -68,3 +68,13 @@ int godot::PlayersContainer::_players_count()
 	player_count += player2 != nullptr;
 	return player_count;
 }
+
+void godot::PlayersContainer::_add_key(String key_type)
+{
+	key_list.push_back(key_type);
+}
+
+Array godot::PlayersContainer::_get_key_list()
+{
+	return key_list;
+}
