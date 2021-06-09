@@ -14,7 +14,7 @@ godot::FlowerAI::FlowerAI(Ref<PackedScene>& bullet, Node2D *node_tmp) : EnemyDat
 	{
 		auto new_obj = bullet->instance();
 		node->call_deferred("add_child", new_obj);
-		//node->add_child(new_obj);
+
 		bullets.push_back(cast_to<Node2D>(new_obj));
 	}
 
@@ -27,6 +27,11 @@ godot::FlowerAI::FlowerAI(Ref<PackedScene>& bullet, Node2D *node_tmp) : EnemyDat
 	directions[3] = Vector2(0.5, -0.5);
 	directions[5] = Vector2(-0.5, 0.5);
 	directions[7] = Vector2(-0.5, -0.5);
+}
+
+godot::FlowerAI::~FlowerAI()
+{
+	bullets.clear();
 }
 
 void godot::FlowerAI::_add_bullet(Node* node)

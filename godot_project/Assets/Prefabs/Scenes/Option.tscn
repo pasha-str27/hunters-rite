@@ -2,9 +2,9 @@
 
 [ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/Scripts/MenuButtons.gdns" type="Script" id=2]
-[ext_resource path="res://Assets/Sprites/UI/button_focus_v2.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Sprites/UI/button_background_v2.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Sprites/UI/notice_background_v2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_focus_v2.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_background_v2.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/notice_background_v2.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Prefabs/SoundsEffects/Effects/ButtonClick.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://Assets/Sprites/UI/SliderStyle.tres" type="Theme" id=8]
@@ -172,7 +172,7 @@ stretch_mode = 3
 
 [node name="Focus" type="TextureRect" parent="Option/VBoxContainer/CenterContainer/Back"]
 visible = false
-modulate = Color( 1, 1, 1, 0.541065 )
+modulate = Color( 1, 1, 1, 0.842508 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -3.0878
@@ -181,7 +181,7 @@ margin_right = -3.0878
 margin_bottom = -0.926346
 grow_horizontal = 2
 grow_vertical = 2
-rect_scale = Vector2( 1.006, 1.006 )
+rect_scale = Vector2( 1.0349, 1.0349 )
 rect_pivot_offset = Vector2( 100, 30 )
 size_flags_horizontal = 4
 size_flags_vertical = 4

@@ -31,14 +31,24 @@ void godot::Enemies::_remove_enemy(Node2D* enemy)
 
 void godot::Enemies::_remove_player1()
 {
-	for (auto node : enemies)
+	for (Node2D* node : enemies)
+	{
+		if (node->is_in_group("statue_melee"))
+			node->get_node("MagnitZone")->call("_set_player1");
+
 		node->call("_remove_player1");
+	}
 }
 
 void godot::Enemies::_remove_player2()
 {
-	for (auto node : enemies)
+	for (Node2D* node : enemies)
+	{
+		if (node->is_in_group("statue_melee"))
+			node->get_node("MagnitZone")->call("_set_player2");
+
 		node->call("_remove_player2");
+	}
 
 	PlayersContainer::_get_instance()->_set_player2(nullptr);
 }

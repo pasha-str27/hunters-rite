@@ -15,6 +15,8 @@ namespace godot
 		int players_count = 0;
 		Timer* timer = nullptr;
 		Timer* timer_audio = nullptr;
+		AudioServer* audio_server = nullptr;
+		bool is_spawned = false;
 	public:
 
 		static void _register_methods();

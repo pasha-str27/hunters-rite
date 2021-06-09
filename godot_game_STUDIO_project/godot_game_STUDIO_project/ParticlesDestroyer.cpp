@@ -1,6 +1,7 @@
-#include "ParticlesDestroyer.h"
-
-using namespace godot;
+#ifndef HEADERFILE_H
+#define HEADERFILE_H
+#include "headers.h"
+#endif
 
 void godot::ParticlesDestroyer::_register_methods()
 {

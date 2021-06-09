@@ -1,6 +1,6 @@
-[gd_resource type="TileSet" load_steps=16 format=2]
+[gd_resource type="TileSet" load_steps=17 format=2]
 
-[ext_resource path="res://Assets/Sprites/Tilesets/Level1/level1_tileset.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/Tilesets/GreyTiles/level1_tileset.png" type="Texture" id=1]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -21,10 +21,10 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="ConvexPolygonShape2D" id=7]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+points = PoolVector2Array( 17.9405, 2.77396, 28.9228, 8.91118, 31.4641, 17.8152, 30.8151, 30.4069, 15.5623, 31.0559, 1.60761, 30.7314, 0.569126, 16.4522, 3.56646, 4.87354 )
 
 [sub_resource type="ConvexPolygonShape2D" id=8]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+points = PoolVector2Array( 19.394, 3.39807, 29.8919, 8.24326, 31.0224, 17.2876, 29.9064, 29.1153, 16.471, 30.5432, 1.93214, 30.2836, 1.14388, 19.7101, 3.08195, 5.01314 )
 
 [sub_resource type="ConcavePolygonShape2D" id=9]
 segments = PoolVector2Array( 9.18685, 24.3881, 9.38067, 24.5819, 9.38067, 24.5819, 0.271751, 16.442, 0.271751, 16.442, 32, 15.6668, 32, 15.6668, 22.3657, 24.3881, 22.3657, 24.3881, 23.7224, 27.8766, 23.7224, 27.8766, 7.24879, 28.0704, 7.24879, 28.0704, 9.18685, 24.3881 )
@@ -36,12 +36,15 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="ConvexPolygonShape2D" id=12]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+points = PoolVector2Array( 12.9119, 0.228546, 17.2725, 0.228546, 30.3545, 14.764, 31.3235, 28.9765, 29.2239, 30.7531, 1.44498, 31.0761, 0.475952, 29.9456, 0.475952, 21.0627, 3.70605, 12.6645, 9.52026, 4.9122 )
 
-[sub_resource type="ConvexPolygonShape2D" id=13]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+[sub_resource type="ConcavePolygonShape2D" id=13]
+segments = PoolVector2Array( 0, 0, 32, 0, 32, 0, 32, 32, 32, 32, 0, 32, 0, 32, 0, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=14]
+points = PoolVector2Array( 17.2725, 6.72742, 30.6775, 16.0947, 31.0005, 19.9709, 22.6022, 28.8537, 9.19725, 28.5307, 2.57552, 21.4244, 1.60649, 16.7408, 11.7813, 6.2429, 12.4274, 5.75839 )
+
+[sub_resource type="ConvexPolygonShape2D" id=15]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [resource]
@@ -83,14 +86,14 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 9/navigation_offset = Vector2( 0, 0 )
 9/shape_offset = Vector2( 0, 0 )
 9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-9/shape = SubResource( 14 )
+9/shape = SubResource( 15 )
 9/shape_one_way = false
 9/shape_one_way_margin = 1.0
 9/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 14 ),
+"shape": SubResource( 15 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 9/z_index = 0
@@ -441,6 +444,12 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 "one_way_margin": 1.0,
 "shape": SubResource( 12 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 13 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 29/z_index = 0
 30/name = "level1_tileset.png 30"
@@ -453,14 +462,14 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 30/navigation_offset = Vector2( 0, 0 )
 30/shape_offset = Vector2( 0, 0 )
 30/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-30/shape = SubResource( 13 )
+30/shape = SubResource( 14 )
 30/shape_one_way = false
 30/shape_one_way_margin = 1.0
 30/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 13 ),
+"shape": SubResource( 14 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 30/z_index = 0

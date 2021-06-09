@@ -1,5 +1,7 @@
-#include <Godot.hpp>
-#include <Node.hpp>
+#ifndef HEADERFILE_H
+#define HEADERFILE_H
+#include "headers.h"
+#endif
 
 namespace godot
 {
@@ -26,5 +28,10 @@ namespace godot
 		virtual void _update_health_bar() = 0;
 		virtual ProgressBar* _get_health_bar() = 0;
 		virtual void _stop_animations() = 0;
+		virtual float _get_special_time() = 0;
+		virtual void _set_special_time(float value) = 0;
+		virtual void _stop_special() = 0;
+		virtual void _start_special() = 0;
+		virtual bool _get_safe_mode() = 0;
 	};
 }

@@ -1,19 +1,20 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Assets/Scripts/MenuButtons.gdns" type="Script" id=3]
-[ext_resource path="res://Assets/Sprites/monster_finger_flower.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Sprites/UI/button_focus_v2.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Sprites/UI/button_background_v2.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Sprites/UI/wanted_backgroud_base_v3.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Sprites/UI/monster_slime1.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Sprites/UI/wanted_backgroud_base_v2.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Sprites/UI/notice_background_v2.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Sprites/UI/wanted_backgroud_base_v4.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Sprites/UI/wanted_coming_soon_v1.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Sprites/Monsters/Flower/monster_flower.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_focus_v2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_background_v2.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/UI/WantedLabel/wanted_backgroud_base_v3.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/monster_slime1.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/UI/WantedLabel/wanted_backgroud_base_v2.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/notice_background_v2.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Sprites/UI/WantedLabel/wanted_backgroud_base_v4.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Sprites/UI/arrow_left.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Sprites/UI/WantedLabel/wanted_coming_soon_v1.png" type="Texture" id=13]
 [ext_resource path="res://Assets/Prefabs/SoundsEffects/Effects/ButtonClick.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Assets/Sprites/UI/wanted_focus_v2.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Sprites/UI/WantedLabel/wanted_focus_v2.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Prefabs/Animations/FadeOut.tscn" type="PackedScene" id=16]
 
 [sub_resource type="Animation" id=1]
@@ -78,12 +79,44 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=4]
 size = 22
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Focus:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Focus:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
+}
+
+[sub_resource type="DynamicFont" id=6]
+size = 17
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=7]
 resource_name = "Focus_scale"
 length = 1.5
 loop = true
@@ -112,8 +145,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "Focus_scale"
+[sub_resource type="Animation" id=8]
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -178,13 +210,13 @@ __meta__ = {
 
 [node name="Free_space_top" type="CenterContainer" parent="Notice/VBoxContainer"]
 margin_right = 1280.0
-margin_bottom = 140.0
-rect_min_size = Vector2( 0, 140 )
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
 
 [node name="Tasks" type="CenterContainer" parent="Notice/VBoxContainer"]
-margin_top = 144.0
+margin_top = 104.0
 margin_right = 1280.0
-margin_bottom = 464.0
+margin_bottom = 424.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Notice/VBoxContainer/Tasks"]
 margin_left = 20.0
@@ -207,13 +239,13 @@ rect_min_size = Vector2( 320, 320 )
 focus_neighbour_left = NodePath("../../Coming_soon_one/Coming_soon_button")
 focus_neighbour_top = NodePath("../../../../CenterContainer/Back")
 focus_neighbour_right = NodePath("../../Slimes/Slime_button")
-focus_neighbour_bottom = NodePath("../../../../CenterContainer/Back")
+focus_neighbour_bottom = NodePath("../../../../VBoxContainer/HBoxContainer/CenterContainer2/Mode")
 mouse_filter = 2
 texture_normal = ExtResource( 9 )
 expand = true
 
 [node name="Focus" type="TextureRect" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/Flower_button"]
-modulate = Color( 1, 1, 1, 0.649982 )
+modulate = Color( 1, 1, 1, 0.869608 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -2.00854
@@ -222,7 +254,7 @@ margin_right = -2.00854
 margin_bottom = -1.33902
 grow_horizontal = 2
 grow_vertical = 2
-rect_scale = Vector2( 1.01645, 1.01645 )
+rect_scale = Vector2( 1.0375, 1.0375 )
 rect_pivot_offset = Vector2( 160, 160 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -271,14 +303,14 @@ rect_min_size = Vector2( 320, 320 )
 focus_neighbour_left = NodePath("../../Flower/Flower_button")
 focus_neighbour_top = NodePath("../../../../CenterContainer/Back")
 focus_neighbour_right = NodePath("../../Coming_soon_one/Coming_soon_button")
-focus_neighbour_bottom = NodePath("../../../../CenterContainer/Back")
+focus_neighbour_bottom = NodePath("../../../../VBoxContainer/HBoxContainer/CenterContainer2/Mode")
 mouse_filter = 2
 texture_normal = ExtResource( 7 )
 expand = true
 
 [node name="Focus" type="TextureRect" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes/Slime_button"]
 visible = false
-modulate = Color( 1, 1, 1, 0.964545 )
+modulate = Color( 1, 1, 1, 0.869608 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -2.00854
@@ -287,7 +319,7 @@ margin_right = -2.00854
 margin_bottom = -1.33902
 grow_horizontal = 2
 grow_vertical = 2
-rect_scale = Vector2( 1.0466, 1.0466 )
+rect_scale = Vector2( 1.0375, 1.0375 )
 rect_pivot_offset = Vector2( 160, 160 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -306,7 +338,7 @@ margin_left = 94.0
 margin_top = 124.0
 margin_right = 226.0
 margin_bottom = 196.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "Coming
 
 Soon"
@@ -352,7 +384,7 @@ rect_min_size = Vector2( 320, 320 )
 focus_neighbour_left = NodePath("../../Slimes/Slime_button")
 focus_neighbour_top = NodePath("../../../../CenterContainer/Back")
 focus_neighbour_right = NodePath("../../Flower/Flower_button")
-focus_neighbour_bottom = NodePath("../../../../CenterContainer/Back")
+focus_neighbour_bottom = NodePath("../../../../VBoxContainer/HBoxContainer/CenterContainer2/Mode")
 mouse_filter = 2
 texture_normal = ExtResource( 11 )
 expand = true
@@ -379,7 +411,7 @@ __meta__ = {
 }
 
 [node name="SoonAnimated" type="AnimationPlayer" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one/Coming_soon_button"]
-anims/Focus_scale = SubResource( 4 )
+anims/Focus_scale = SubResource( 5 )
 
 [node name="TextureRect" type="TextureRect" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one"]
 visible = false
@@ -396,17 +428,115 @@ margin_left = 94.0
 margin_top = 124.0
 margin_right = 226.0
 margin_bottom = 196.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "Coming
 
 Soon"
 align = 1
 
 [node name="Free_space_bottom" type="CenterContainer" parent="Notice/VBoxContainer"]
-margin_top = 468.0
+margin_top = 428.0
+margin_right = 1280.0
+margin_bottom = 483.0
+rect_min_size = Vector2( 0, 55 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Notice/VBoxContainer"]
+margin_top = 487.0
 margin_right = 1280.0
 margin_bottom = 568.0
-rect_min_size = Vector2( 0, 100 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Notice/VBoxContainer/VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 17.0
+custom_fonts/font = SubResource( 6 )
+text = "Mode:"
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Notice/VBoxContainer/VBoxContainer"]
+margin_top = 21.0
+margin_right = 1280.0
+margin_bottom = 81.0
+rect_min_size = Vector2( 0, 60 )
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="Notice/VBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 464.0
+margin_right = 496.0
+margin_bottom = 60.0
+texture = ExtResource( 12 )
+stretch_mode = 6
+
+[node name="CenterContainer2" type="CenterContainer" parent="Notice/VBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 500.0
+margin_right = 780.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 52 )
+
+[node name="Mode" type="TextureButton" parent="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2"]
+margin_right = 280.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 280, 60 )
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../../../../Tasks/HBoxContainer/Flower/Flower_button")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../../../../CenterContainer/Back")
+mouse_filter = 2
+texture_normal = ExtResource( 6 )
+expand = true
+stretch_mode = 3
+
+[node name="Focus" type="TextureRect" parent="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode"]
+visible = false
+modulate = Color( 1, 1, 1, 0.869608 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 1.0375, 1.0375 )
+rect_pivot_offset = Vector2( 100, 30 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ModeAnimated" type="AnimationPlayer" parent="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode"]
+anims/Focus_scale = SubResource( 7 )
+
+[node name="ModeText" type="Label" parent="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode"]
+modulate = Color( 0.831373, 0.831373, 0.831373, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/line_spacing = 0
+custom_constants/shadow_offset_y = 3
+custom_constants/shadow_as_outline = 0
+text = "Single"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Notice/VBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 784.0
+margin_right = 816.0
+margin_bottom = 60.0
+texture = ExtResource( 12 )
+stretch_mode = 6
+flip_h = true
 
 [node name="CenterContainer" type="CenterContainer" parent="Notice/VBoxContainer"]
 margin_top = 572.0
@@ -419,8 +549,8 @@ margin_left = 500.0
 margin_right = 780.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 280, 70 )
-focus_neighbour_top = NodePath("../../Tasks/HBoxContainer/Flower/Flower_button")
-focus_neighbour_bottom = NodePath("../../CenterContainer2/Bonuses")
+focus_neighbour_top = NodePath("../../VBoxContainer/HBoxContainer/CenterContainer2/Mode")
+focus_neighbour_bottom = NodePath("../../Tasks/HBoxContainer/Flower/Flower_button")
 mouse_filter = 2
 texture_normal = ExtResource( 6 )
 expand = true
@@ -462,7 +592,7 @@ __meta__ = {
 }
 
 [node name="BackAnimated" type="AnimationPlayer" parent="Notice/VBoxContainer/CenterContainer/Back"]
-anims/Focus_scale = SubResource( 6 )
+anims/Focus_scale = SubResource( 8 )
 
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/Flower_button" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/Flower_button" to="Notice" method="_on_animated_focus_entered" binds= [ "Flower_button", "FlowerAnimated" ]]
@@ -472,10 +602,16 @@ anims/Focus_scale = SubResource( 6 )
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes/Slime_button" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes/Slime_button" to="Notice" method="_on_animated_focus_entered" binds= [ "Slime_button", "SlimeAnimated" ]]
 [connection signal="focus_exited" from="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes/Slime_button" to="Notice" method="_on_animated_focus_exited" binds= [ "Slime_button", "SlimeAnimated" ]]
+[connection signal="pressed" from="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes/Slime_button" to="Notice" method="_start_game"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one/Coming_soon_button" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one/Coming_soon_button" to="Notice" method="_on_animated_focus_entered" binds= [ "Coming_soon_button", "SoonAnimated" ]]
 [connection signal="focus_exited" from="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one/Coming_soon_button" to="Notice" method="_on_animated_focus_exited" binds= [ "Coming_soon_button", "SoonAnimated" ]]
+[connection signal="focus_entered" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_on_animated_focus_entered" binds= [ "Mode", "ModeAnimated" ]]
+[connection signal="focus_entered" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_on_Mode_focus"]
+[connection signal="focus_exited" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_on_animated_focus_exited" binds= [ "Mode", "ModeAnimated" ]]
+[connection signal="focus_exited" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_on_Mode_focus"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/CenterContainer/Back" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/CenterContainer/Back" to="Notice" method="_on_animated_focus_entered" binds= [ "Back", "BackAnimated" ]]
 [connection signal="focus_exited" from="Notice/VBoxContainer/CenterContainer/Back" to="Notice" method="_on_animated_focus_exited" binds= [ "Back", "BackAnimated" ]]

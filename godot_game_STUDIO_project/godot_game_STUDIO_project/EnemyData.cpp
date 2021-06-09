@@ -15,17 +15,16 @@ void godot::EnemyData::_set_enemy(Node2D* enemy)
 
 void godot::EnemyData::_set_player1(Node2D* player1)
 {
-	//PlayersContainer::_get_instance()->_set_player1(player1);
 }
 
 void godot::EnemyData::_set_player2(Node2D* player2)
 {
-	//PlayersContainer::_get_instance()->_set_player2(player2);
 }
 
 void godot::EnemyData::_change_dir()
 {
 }
+
 
 Node2D* godot::EnemyData::_get_player1()
 {
@@ -37,6 +36,14 @@ Node2D* godot::EnemyData::_get_player2()
 	return PlayersContainer::_get_instance()->_get_player2();
 }
 
+void godot::EnemyData::_set_is_player1_onArea(bool value)
+{
+}
+
+void godot::EnemyData::_set_is_player2_onArea(bool value)
+{
+}
+
 godot::EnemyData::EnemyData(Node2D* enemy)
 {
 	this->enemy = enemy;
@@ -44,6 +51,7 @@ godot::EnemyData::EnemyData(Node2D* enemy)
 
 godot::EnemyData::~EnemyData()
 {
+	enemy = nullptr;
 }
 
 void godot::EnemyData::_add_bullet(Node* bullet)
@@ -60,12 +68,10 @@ void godot::EnemyData::_change_dir_after_time()
 
 void godot::EnemyData::_delete_player1()
 {
-	//PlayersContainer::_get_instance()->_set_player1(nullptr);
 }
 
 void godot::EnemyData::_delete_player2()
 {
-	//PlayersContainer::_get_instance()->_set_player2(nullptr);
 }
 
 String godot::EnemyData::_get_current_player()

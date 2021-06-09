@@ -16,6 +16,11 @@ godot::AudioEffect::AudioEffect()
 {
 }
 
+godot::AudioEffect::~AudioEffect()
+{
+	timer = nullptr;
+}
+
 void godot::AudioEffect::_init()
 {
 }
@@ -33,4 +38,3 @@ void godot::AudioEffect::_on_time_out()
 {
 	queue_free();
 }
-

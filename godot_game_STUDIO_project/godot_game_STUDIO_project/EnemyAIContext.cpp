@@ -10,7 +10,9 @@ EnemyAIContext::EnemyAIContext()
 
 EnemyAIContext::~EnemyAIContext()
 {
-	//delete strategy;
+	if(strategy!=nullptr)
+		delete strategy;
+	strategy = nullptr;
 }
 
 
@@ -41,12 +43,12 @@ void godot::EnemyAIContext::set_player2(Node2D* player2)
 
 Node2D* godot::EnemyAIContext::get_player1()
 {
-	return 	strategy->_get_player1();
+	return strategy->_get_player1();
 }
 
 Node2D* godot::EnemyAIContext::get_player2()
 {
-	return 	strategy->_get_player2();
+	return strategy->_get_player2();
 }
 
 void godot::EnemyAIContext::_add_bullet(Node* bullet)
@@ -92,4 +94,14 @@ void godot::EnemyAIContext::_set_speed(float value)
 void godot::EnemyAIContext::_change_dir()
 {
 	strategy->_change_dir();
+}
+
+void godot::EnemyAIContext::_set_is_player1_onArea(bool value)
+{
+	strategy->_set_is_player1_onArea(value);
+}
+
+void godot::EnemyAIContext::_set_is_player2_onArea(bool value)
+{
+	strategy->_set_is_player2_onArea(value);
 }

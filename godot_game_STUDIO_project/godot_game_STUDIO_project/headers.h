@@ -5,6 +5,7 @@
 #include <string>
 #include <functional>
 #include <math.h>
+#include <map>
 
 //Godot includes
 #include <TextureRect.hpp>
@@ -14,7 +15,6 @@
 #include <TextureButton.hpp>
 #include <KinematicBody2D.hpp>
 #include <CollisionObject2D.hpp>
-#include <Node.hpp>
 #include <Node2D.hpp>
 #include <Node.hpp>
 #include <Input.hpp>
@@ -29,8 +29,10 @@
 #include <InputEvent.hpp>
 #include <TileMap.hpp>
 #include <Tree.hpp>
+#include <Theme.hpp>
 #include <Label.hpp>
 #include <Array.hpp>
+#include <ScrollContainer.hpp>
 #include <ProgressBar.hpp>
 #include <InputEventKey.hpp>
 #include <AnimationPlayer.hpp>
@@ -48,12 +50,10 @@
 #include <File.hpp>
 #include <JSON.hpp>
 #include <JSONParseResult.hpp>
-#include <SpriteFrames.hpp>
 #include <Slider.hpp>
 #include <Dictionary.hpp>
 #include <ResourceSaver.hpp>
 #include <Control.hpp>
-
 
 using namespace godot;
 
@@ -75,7 +75,6 @@ using namespace godot;
 #include "SlimeAI.h"
 #include "BatAI.h"
 #include "SpiderAI.h"
-#include "EnemySideChecker.h"
 #include "Enemies.h"
 #include "FlowerAI.h"
 #include "Item.h"
@@ -91,13 +90,13 @@ using namespace godot;
 #include "ParticlesDestroyer.h"
 #include "ExitHandler.h"
 #include "Preloader.h"
-
-#include "Generation.h"
-#include "SpawnPointChecker.h"
-#include "Room.h"
-#include "Destroyer.h"
-#include "ClosedRoom.h"
-#include "Door.h"
 #include "SpawnEnemyController.h"
 #include "ItemsContainer.h"
 #include "ItemGenerator.h"
+#include "CustomExtensions.h"
+#include "MagnitZone.h"
+#include "Room.h"
+#include "LevelGenerator.h"
+#include "BigStone.h"
+#include "AudioController.h"
+#include "Key.h"

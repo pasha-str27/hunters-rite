@@ -10,15 +10,17 @@ namespace godot
 		std::vector<Node2D*> bullets;
 		int max_bullet_count;
 		bool can_move;
-		std::vector<int> directions;
+		std::vector<Vector2> directions;
 
 		Vector2 dir;
 		bool is_cheking;
 		float speed;
 		Vector2 old_pos;
+		Vector2 cur_pos;
 
 	public:
 		SpiderAI(Ref<PackedScene>& bullet, Node2D* node);
+		~SpiderAI();
 		void _process(float delta);
 		void _add_bullet(Node* node = nullptr);
 		void change_can_fight(bool value);
