@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Assets/Sprites/UI/MiniMapBorder.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Scripts/MiniMapController.gdns" type="Script" id=2]
 
 [node name="MiniMapController" type="MarginContainer"]
 margin_right = 150.0
@@ -10,7 +9,6 @@ custom_constants/margin_right = 5
 custom_constants/margin_top = 5
 custom_constants/margin_left = 5
 custom_constants/margin_bottom = 5
-script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
