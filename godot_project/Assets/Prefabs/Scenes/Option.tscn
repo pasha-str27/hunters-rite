@@ -172,7 +172,7 @@ stretch_mode = 3
 
 [node name="Focus" type="TextureRect" parent="Option/VBoxContainer/CenterContainer/Back"]
 visible = false
-modulate = Color( 1, 1, 1, 0.541065 )
+modulate = Color( 1, 1, 1, 0.842508 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -3.0878
@@ -181,7 +181,7 @@ margin_right = -3.0878
 margin_bottom = -0.926346
 grow_horizontal = 2
 grow_vertical = 2
-rect_scale = Vector2( 1.006, 1.006 )
+rect_scale = Vector2( 1.0349, 1.0349 )
 rect_pivot_offset = Vector2( 100, 30 )
 size_flags_horizontal = 4
 size_flags_vertical = 4

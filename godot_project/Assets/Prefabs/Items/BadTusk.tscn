@@ -43,11 +43,13 @@ tracks/1/keys = {
 [node name="BadTusk" type="Node2D"]
 z_index = 5
 script = SubResource( 1 )
-speed = 25.0
+Name = "BadTusk"
+speed = 50.0
 HP = 10.0
 damage = 4.0
 attack_speed_delta = 10.0
 number_to_next_item = 0
+decrease_attack_radius = null
 encrease_attack_radius = true
 "Is Buff" = false
 

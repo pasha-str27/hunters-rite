@@ -38,11 +38,14 @@ tracks/1/keys = {
 [node name="BottleVine" type="Node2D"]
 z_index = 5
 script = ExtResource( 3 )
-speed = 0.0
-HP = -25.0
+Name = "BottleVine"
+speed = 10.0
+HP = 15.0
 damage = 15.0
 attack_speed_delta = 0.0
 number_to_next_item = 0
+decrease_attack_radius = null
+encrease_attack_radius = null
 "Is Buff" = false
 
 [node name="Sprite" type="Sprite" parent="."]

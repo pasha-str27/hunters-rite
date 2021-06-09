@@ -38,12 +38,14 @@ tracks/1/keys = {
 [node name="MetalSphere" type="Node2D"]
 z_index = 5
 script = ExtResource( 3 )
+Name = "MetalSphere"
 speed = -75.0
 HP = 50.0
 damage = 30.0
 attack_speed_delta = 0.0
 number_to_next_item = 0
 decrease_attack_radius = true
+encrease_attack_radius = null
 "Is Buff" = false
 
 [node name="Sprite" type="Sprite" parent="."]
