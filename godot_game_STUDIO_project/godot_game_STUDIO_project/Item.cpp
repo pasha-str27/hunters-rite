@@ -24,7 +24,7 @@ void godot::Item::_register_methods()
 
 godot::Item::Item()
 {
-	counter = 1;
+	items_counter = 1;
 	HP = 0;
 	attack_speed_delta = 0;
 	damage = 0;
@@ -53,44 +53,23 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 
 	if (!(bool)node->call("_is_alive"))
 		return;
-	Godot::print("-----------------------------");
-	Godot::print("Speed" + String::num((float)node->call("_get_speed")));
-	Godot::print("Hp" + String::num((float)node->call("_get_HP")));
-	Godot::print("MaxHp" + String::num((float)node->call("_get_max_HP")));
-	Godot::print("Damage" + String::num((float)node->call("_get_damage")));
 
-	// speed max 350 min 100
-	// damage max 150 min 10
-	//max Hp 1000 min 50
+	// speed max 350 / min 100
+	// damage max 150 /  min 10
+	// max Hp 1000 / min 50
 
 	if (((float)node->call("_get_speed") + speed <= 100) || ((float)node->call("_get_speed") + speed >= 380))
-	{
 		speed = 0;
-	}
-
 	if (((float)node->call("_get_damage") + damage <= 10) || ((float)node->call("_get_damage") + damage >= 200))
-	{
 		damage = 0;
-	}
-
 	if (((float)node->call("_get_max_HP") + HP >= 1000) || ((float)node->call("_get_max_HP") + HP <= 50))
-	{
 		HP = 0;
-	}
 
 	node->call("_set_max_HP", (float)node->call("_get_max_HP") + HP);
 	node->call("_set_speed", (float)node->call("_get_speed") + speed);
 	node->call("_set_damage", (float)node->call("_get_damage") + damage);
 	node->call("_set_number_to_next_item", (int)node->call("_get_number_to_next_item") + number_to_next_item);
 	node->call("_set_attack_speed_delta", (float)node->call("_get_attack_speed_delta") + attack_speed_delta);
-
-
-	Godot::print("---------------" + node->get_name() + "--------------");
-	Godot::print("Speed" + String::num((float)node->call("_get_speed")));
-	Godot::print("Hp" + String::num((float)node->call("_get_HP")));
-	Godot::print("MaxHp" + String::num((float)node->call("_get_max_HP")));
-	Godot::print("Damage" + String::num((float)node->call("_get_damage")));
-	Godot::print("-----------------------------");
 
 	if (node->is_in_group("player2"))
 	{
@@ -111,28 +90,26 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 	auto item_sprite = Sprite::_new();
 	item_sprite->set_texture(cast_to<Sprite>(get_child(0))->get_texture());
 	
+	//creating backdound for item in item box
 	auto item_bacground = Sprite::_new();
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	Ref<Texture> res = rld->load("res://Assets/Sprites/UI/BacksButtonsAndOther/bg_Item.png");
 	item_bacground->set_texture(res);
-
 	item_bacground->set_modulate(Color(1,1,1,0.6f));
 	item_bacground->set_scale(Vector2(0.7 , 0.7));
+	res->free();
 
+	//create label and set parameters for him
 	auto text = Label::_new();
+	Ref<Theme> theme = rld->load("res://Assets/Font/font_theme.tres");
 	text->set_name("counter");
 	text->set_visible(false);
-	Ref<Theme> theme = rld->load("res://Assets/Font/font_theme.tres");
 	text->set_theme(theme);
-	//text->get_theme();
-	//text->set_size(Vector2(1,1),false);
 	text->set_position(Vector2(5,6));
-	//text->set_modulate(Color(0,255,0,100));
-	//text->has_color("ffffff");
-	text->set_text("x" + String::num(counter));
-	Godot::print(String::num(text->get_position()[0])+ String::num(text->get_position()[1]));
+	text->set_text("x" + String::num(items_counter));
+	theme->free();
 
-	//creating container fot item sprite
+	//creating container for item
 	auto control = Control::_new();
 	control->set_name(name);
 	control->set_custom_minimum_size(Vector2(28, 28));
@@ -143,24 +120,24 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 
 
 	//adding item to item box
-	if (CustomExtensions::IsIncludedInChildrenWithName(item_box, name) != nullptr)
+	auto item_in_box = CustomExtensions::IsIncludedInChildrenWithName(item_box, name);
+	if (item_in_box != nullptr)
 	{
-		Godot::print(String::num(counter));
-		cast_to<Label>(CustomExtensions::IsIncludedInChildrenWithName(item_box, name)->get_child(2))->set_visible(true);
-		String count = cast_to<Label>(CustomExtensions::IsIncludedInChildrenWithName(item_box, name)->get_child(2))->get_text();
-		Godot::print(count);
-		count.erase(0, 1);
-		Godot::print(count);
-		counter = count.to_int();
-		counter++;
-		cast_to<Label>(CustomExtensions::IsIncludedInChildrenWithName(item_box, name)->get_child(2))->set_text("x" + String::num(counter));
-		Godot::print("---------------one more item--------------");
+		//get label and set counter +1
+		auto label_in_item = cast_to<Label>(item_in_box->get_child(2));
+		label_in_item->set_visible(true);
+		String items_amount = label_in_item->get_text();
+		items_amount.erase(0, 1); //erase symbol "x"
+		items_counter = items_amount.to_int();
+		items_counter++;
+		label_in_item->set_text("x" + String::num(items_counter));
 	}
 	else 
 	{
 		item_box->add_child(control);
 	}
 
+	//achievement
 	if (item_box->get_children().size() == 12) {
 		Godot::print("Congratulation you collect all items");
 	}

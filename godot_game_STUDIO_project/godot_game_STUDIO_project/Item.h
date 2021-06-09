@@ -15,7 +15,7 @@ namespace godot
 		float speed;
 		float HP;
 		float damage;
-		int counter;
+		int items_counter;
 		bool decrease_attack_radius;
 		bool encrease_attack_radius;
 		int number_to_next_item;
