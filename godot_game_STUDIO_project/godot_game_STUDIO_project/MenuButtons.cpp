@@ -494,48 +494,19 @@ void godot::MenuButtons::_play_change_cursor_effect()
 
 void godot::MenuButtons::_change_audio_volume()
 {
-	if (audio_server->get_bus_volume_db(audio_server->get_bus_index(audio->get_bus())) <= -75)
+	if (AudioController::get_singleton()->_change_audio_volume(timer_music, this, audio, delta_time))
 		return;
-
-	audio_server->set_bus_volume_db(audio_server->get_bus_index(audio->get_bus()),
-		audio_server->get_bus_volume_db(audio_server->get_bus_index(audio->get_bus())) - 0.8);
-
-	timer_music->disconnect("timeout", this, "_change_audio_volume");
-	timer_music->connect("timeout", this, "_change_audio_volume");
-	timer_music->start(delta_time);
 }
 
 void godot::MenuButtons::_audio_fade_to_main_menu()
 {
-	timer_music_out->disconnect("timeout", this, "_audio_fade_to_main_menu");
-
-	if (audio_server->get_bus_volume_db(2) <= -75
-		&& audio_server->get_bus_volume_db(3) <= -75)
+	if (AudioController::get_singleton()->_audio_fade_to_main_menu(timer_music_out, this))
 		return;
-
-	if (audio_server->get_bus_volume_db(2) > -75)
-		audio_server->set_bus_volume_db(2, audio_server->get_bus_volume_db(2) - 0.8);
-
-	if (audio_server->get_bus_volume_db(3) > -75)
-		audio_server->set_bus_volume_db(3, audio_server->get_bus_volume_db(3) - 0.8);
-
-	timer_music_out->connect("timeout", this, "_audio_fade_to_main_menu");
-	timer_music_out->start(0.01);
 }
 
 void godot::MenuButtons::_fade_audio()
 {
-	timer_music->disconnect("timeout", this, "_fade_audio");
-
-	if (audio_server->get_bus_volume_db(2) >= music_audio_level
-		&& audio_server->get_bus_volume_db(3) >= music_audio_level)
+	if (AudioController::get_singleton()->_fade_audio(timer_music, this))
 		return;
-
-	audio_server->set_bus_volume_db(2, audio_server->get_bus_volume_db(2) + 0.8);
-
-	audio_server->set_bus_volume_db(3, audio_server->get_bus_volume_db(3) + 0.8);
-
-	timer_music->connect("timeout", this, "_fade_audio");
-	timer_music->start(0.01);
 }
 
