@@ -21,4 +21,61 @@ position = Vector2( -400, -128 )
 [node name="Slime" parent="." instance=ExtResource( 4 )]
 position = Vector2( 400, 224 )
 
+[node name="Slime2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 400, 224 )
+
+[node name="Slime3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 400, 224 )
+
+[node name="Slime4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 400, 224 )
+
+[node name="Slime5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 400, 224 )
+
+[node name="Slime6" parent="." instance=ExtResource( 4 )]
+position = Vector2( 400, 224 )
+
+[node name="Slime7" parent="." instance=ExtResource( 4 )]
+position = Vector2( 400, 224 )
+
+[node name="Slime8" parent="." instance=ExtResource( 4 )]
+position = Vector2( 400, 224 )
+
+[node name="Slime9" parent="." instance=ExtResource( 4 )]
+position = Vector2( 400, 224 )
+
+[node name="Slime10" parent="." instance=ExtResource( 4 )]
+position = Vector2( 400, 224 )
+
+[node name="Slime11" parent="." instance=ExtResource( 4 )]
+position = Vector2( 400, 224 )
+
+[node name="Slime12" parent="." instance=ExtResource( 4 )]
+position = Vector2( 400, 224 )
+
+[node name="Slime13" parent="." instance=ExtResource( 4 )]
+position = Vector2( 400, 224 )
+
+[node name="Slime14" parent="." instance=ExtResource( 4 )]
+position = Vector2( 400, 224 )
+
+[node name="Slime15" parent="." instance=ExtResource( 4 )]
+position = Vector2( 400, 224 )
+
+[node name="Slime16" parent="." instance=ExtResource( 4 )]
+position = Vector2( 400, 224 )
+
+[node name="Slime17" parent="." instance=ExtResource( 4 )]
+position = Vector2( 400, 224 )
+
+[node name="Slime18" parent="." instance=ExtResource( 4 )]
+position = Vector2( 400, 224 )
+
+[node name="Slime19" parent="." instance=ExtResource( 4 )]
+position = Vector2( 400, 224 )
+
+[node name="Slime20" parent="." instance=ExtResource( 4 )]
+position = Vector2( 400, 224 )
+
 [node name="Stone" parent="." instance=ExtResource( 5 )]

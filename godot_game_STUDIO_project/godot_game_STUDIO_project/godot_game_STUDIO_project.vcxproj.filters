@@ -111,8 +111,14 @@
     <ClCompile Include="LevelGenerator.cpp">
       <Filter>Genetation</Filter>
     </ClCompile>
+    <ClCompile Include="AudioController.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="BigStone.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
     <ClCompile Include="Key.cpp">
-      <Filter>Items</Filter>
+      <Filter>Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -237,8 +243,14 @@
     <ClInclude Include="AudioEffect.h">
       <Filter>Audio</Filter>
     </ClInclude>
+    <ClInclude Include="AudioController.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="BigStone.h">
+      <Filter>Level</Filter>
+    </ClInclude>
     <ClInclude Include="Key.h">
-      <Filter>Items</Filter>
+      <Filter>Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

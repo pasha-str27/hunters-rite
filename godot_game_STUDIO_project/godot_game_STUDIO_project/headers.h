@@ -31,6 +31,7 @@
 #include <Tree.hpp>
 #include <Theme.hpp>
 #include <Label.hpp>
+#include <TextEdit.hpp>
 #include <Array.hpp>
 #include <ScrollContainer.hpp>
 #include <ProgressBar.hpp>

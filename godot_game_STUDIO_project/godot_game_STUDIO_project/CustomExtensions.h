@@ -93,7 +93,9 @@ namespace godot
 			for (int i = 0; i < children.size(); i++)
 				if (Object::cast_to<Node>(children[i])->get_name().find(name) != -1)
 					return children[i];
+			return nullptr;
 		}
+
 		static std::vector<Node2D*> GetChildrenByWordInName(Node2D* parent, String word)
 		{
 			std::vector<Node2D*> children = {};
