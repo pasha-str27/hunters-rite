@@ -114,6 +114,8 @@
     <ClCompile Include="Key.cpp">
       <Filter>Items</Filter>
     </ClCompile>
+    <ClCompile Include="AudioController.cpp" />
+    <ClCompile Include="BigStone.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
@@ -240,6 +242,8 @@
     <ClInclude Include="Key.h">
       <Filter>Items</Filter>
     </ClInclude>
+    <ClInclude Include="AudioController.h" />
+    <ClInclude Include="BigStone.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Players">

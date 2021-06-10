@@ -92,7 +92,7 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 	item_sprite->set_texture(cast_to<Sprite>(get_child(0))->get_texture());
 	
 	//creating backdound for item in item box
-	auto item_bacground = Sprite::_new();
+	auto item_bacground = TextureRect::_new();
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	Ref<Texture> res = rld->load("res://Assets/Sprites/UI/BacksButtonsAndOther/bg_Item.png");
 	item_bacground->set_texture(res);
