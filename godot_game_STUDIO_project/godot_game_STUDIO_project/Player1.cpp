@@ -69,6 +69,43 @@ void godot::Player1::_process_input()
 {
 	Vector2 dir = Vector2(0, 0);
 
+	//fight	up
+	if (input_controller->is_action_pressed("Player1_fight_up"))
+	{
+		shoot_particles->set_position(Vector2(0, -9));
+		bullet_dir = Vector2::UP;
+		_fight();
+		//input_controller->action_press("Player1_fight_up");
+	}
+
+	//fight	down
+	if (input_controller->is_action_pressed("Player1_fight_down"))
+	{
+		shoot_particles->set_position(Vector2(0, 9));
+		bullet_dir = Vector2::DOWN;
+		_fight();
+	}
+
+	//fight	left
+	if (input_controller->is_action_pressed("Player1_fight_left"))
+	{
+		bullet_dir = Vector2::LEFT;
+		sprite->set_flip_h(true);
+		sprite->set_offset(Vector2(-35, 0));
+		shoot_particles->set_position(Vector2(-11, 0));
+		_fight();
+	}
+
+	//fight	right
+	if (input_controller->is_action_pressed("Player1_fight_right"))
+	{
+		bullet_dir = Vector2::RIGHT;
+		sprite->set_flip_h(false);
+		sprite->set_offset(Vector2(35, 0));
+		shoot_particles->set_position(Vector2(11, 0));
+		_fight();
+	}
+
 	//move up
 	if (input_controller->is_action_pressed("Player1_up"))
 	{
@@ -104,42 +141,6 @@ void godot::Player1::_process_input()
 		sprite->set_offset(Vector2(35, 0));
 		shoot_particles->set_position(Vector2(11, 0));
 		dir.x += _get_speed();
-	}
-
-	//fight	up
-	if (input_controller->is_action_pressed("Player1_fight_up"))
-	{
-		shoot_particles->set_position(Vector2(0, -9));
-		bullet_dir = Vector2::UP;
-		_fight();
-	}
-
-	//fight	down
-	if (input_controller->is_action_pressed("Player1_fight_down"))
-	{
-		shoot_particles->set_position(Vector2(0, 9));
-		bullet_dir = Vector2::DOWN;
-		_fight();
-	}
-
-	//fight	left
-	if (input_controller->is_action_pressed("Player1_fight_left"))
-	{
-		bullet_dir = Vector2::LEFT;
-		sprite->set_flip_h(true);
-		sprite->set_offset(Vector2(-35, 0));
-		shoot_particles->set_position(Vector2(-11, 0));
-		_fight();
-	}
-
-	//fight	right
-	if (input_controller->is_action_pressed("Player1_fight_right"))
-	{
-		bullet_dir = Vector2::RIGHT;
-		sprite->set_flip_h(false);
-		sprite->set_offset(Vector2(35, 0));
-		shoot_particles->set_position(Vector2(11, 0));
-		_fight();
 	}
 
 	PlayerData::_set_dir(dir);
