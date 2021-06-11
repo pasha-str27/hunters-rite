@@ -14,6 +14,8 @@ namespace godot
 		std::vector<Vector2> empty_pos_world_coordinates;
 		Array list_of_keys;
 
+		bool is_special = false;
+
 	public:
 		Room();
 		~Room();
@@ -31,5 +33,7 @@ namespace godot
 		void print();
 		void _add_list(Array);
 		Array _get_list_of_keys();
+		void _set_is_special(bool value);
+		bool _get_is_special();
 	};
 }

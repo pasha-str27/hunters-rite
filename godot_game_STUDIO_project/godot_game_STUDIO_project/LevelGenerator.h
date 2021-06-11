@@ -41,6 +41,8 @@ namespace godot
 		Array keys_prefabs = {};
 		Array generated_keys = {};
 
+		Ref<PackedScene> big_stone = nullptr;
+
 	public:
 		LevelGenerator();
 		~LevelGenerator();
@@ -70,5 +72,6 @@ namespace godot
 		Node2D* _generate_room_to(Node2D* room);
 		void _generate_key(Node2D* room);
 		void _set_keys(Node2D* room, Array keys);
+		void _spawn_big_stone();
 	};
 }
