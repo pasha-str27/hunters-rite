@@ -4,6 +4,7 @@
 #endif
 
 Node2D* CameraController::current_room = nullptr;
+bool CameraController::show_tutorial = true;
 
 void godot::CameraController::_register_methods()
 {
@@ -39,9 +40,6 @@ void godot::CameraController::_move(String dir)
 
 	float vertical_offset = 390;
 	float horizontal_offset = 250;
-	
-	//timer_audio->connect("timeout", this, "_change_audio_volume");
-	//timer_audio->start(time_delta);
 
 	auto generation_node = get_parent()->get_node("Generation");
 
@@ -137,6 +135,11 @@ String godot::CameraController::_get_dir_on_index(int i)
 bool godot::CameraController::_is_one_player_alive()
 {
 	return !has_node("/root/Node2D/Node/Player1") || !has_node("/root/Node2D/Node/Player2");
+}
+
+void godot::CameraController::hide_tutorial()
+{
+	get_parent()->get_node("TutorialSprites")->queue_free();
 }
 
 void godot::CameraController::_init()
@@ -236,6 +239,9 @@ void godot::CameraController::_ready()
 	add_child(timer_audio);
 	timer_audio->connect("timeout", this, "_change_audio_volume");
 	timer_audio->start(time_delta);
+
+	if (!show_tutorial)
+		hide_tutorial();
 }
 
 void godot::CameraController::_door_collision(String door_dir)
@@ -266,28 +272,24 @@ void godot::CameraController::_door_collision(String door_dir)
 	case 0:
 	{
 		float delta = 1024;
-		//	0 - left, 1 - right, 2 - top, 3 - bottom
 		new_pos = get_global_position() - Vector2(delta, 0);
 		break;
 	}
 	case 1:
 	{
 		float delta = 1024;
-		//	0 - left, 1 - right, 2 - top, 3 - bottom
 		new_pos = get_global_position() + Vector2(delta, 0);
 		break;
 	}
 	case 2:
 	{
 		float delta = 720;
-		//	0 - left, 1 - right, 2 - top, 3 - bottom
 		new_pos = get_global_position() - Vector2(0, delta);
 		break;
 	}
 	case 3:
 	{
 		float delta = 720;
-		//	0 - left, 1 - right, 2 - top, 3 - bottom
 		new_pos = get_global_position() + Vector2(0, delta);
 		break;
 	}
@@ -327,6 +329,7 @@ void godot::CameraController::_open_doors()
 
 void godot::CameraController::_close_doors()
 {
+	//current_room->call("_spawn_enemies");
 	is_open_door = false;
 }
 

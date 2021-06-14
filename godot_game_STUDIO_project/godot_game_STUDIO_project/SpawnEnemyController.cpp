@@ -11,18 +11,24 @@ void godot::SpawnEnemyController::_register_methods()
 	register_method("_on_Area2D_area_entered", &SpawnEnemyController::_on_Area2D_area_entered);
 	register_method("_get_current_level_name", &SpawnEnemyController::_get_current_level_name);
 	register_method("_stand_random_level", &SpawnEnemyController::_stand_random_level);
-	
 
 	register_property<SpawnEnemyController, Ref<PackedScene>>("Altar prefab", &SpawnEnemyController::altar, nullptr);
-	register_property<SpawnEnemyController, int>("Levels Count", &SpawnEnemyController::levels_count, 7);
+	//register_property<SpawnEnemyController, int>("Levels Count", &SpawnEnemyController::levels_count, 7);
+	register_property<SpawnEnemyController, Array>("enemy_list", &SpawnEnemyController::enemy_list_prefabs, {});
 }
 
 void godot::SpawnEnemyController::SpawnEnemies()
 {
+	Godot::print(enemies.size());
 	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
-	
-	for (int i = 0; i < enemies.size(); i++) 
+
+	////////////////////////////////////////////////////////////////
+	//тут генерація мобів
+	////////////////////////////////////////////////////////////////
+
+
+	/*for (int i = 0; i < enemies.size(); i++) 
 	{
 		if (spawn_points.size() == 0)
 			break;
@@ -36,7 +42,7 @@ void godot::SpawnEnemyController::SpawnEnemies()
 		get_node("/root/Node2D/Node")->call_deferred("add_child", spawned_enemy);
 
 		spawn_points.remove(rand_point);
-	}
+	}*/
 
 	rng = nullptr;
 
@@ -97,11 +103,11 @@ void godot::SpawnEnemyController::_prepare_spawn()
 		PlayersContainer::_get_instance()->_get_player2()->call("_change_moving", true);
 
 
-	if (spawn_points.size() == 0 || enemies.size() == 0)
-	{
-		get_parent()->call("_open_doors");
-		return;
-	}
+	//if (enemies.size() == 0)
+	//{
+	//	get_parent()->call("_open_doors");
+	//	return;
+	//}
 
 	timer->connect("timeout", this, "_spawn");
 	timer->start(.3f);

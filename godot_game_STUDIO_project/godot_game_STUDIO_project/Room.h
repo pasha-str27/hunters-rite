@@ -30,6 +30,7 @@ namespace godot
 		void _fill_empty_positions();
 		void print();
 		void _add_list(Array);
+		void _spawn_enemies();
 		Array _get_list_of_keys();
 	};
 }

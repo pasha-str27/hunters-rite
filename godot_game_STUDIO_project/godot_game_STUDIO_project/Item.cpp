@@ -20,6 +20,7 @@ void godot::Item::_register_methods()
 	register_property<Item, bool>("decrease_attack_radius", &Item::decrease_attack_radius, false);
 	register_property<Item, bool>("encrease_attack_radius", &Item::encrease_attack_radius, false);
 	register_property<Item, bool>("Is Buff", &Item::is_buff, true);
+	register_property<Item, float>("item_price", &Item::item_price, -1);
 }
 
 godot::Item::Item()
@@ -150,6 +151,11 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 bool godot::Item::_get_is_buff()
 {
 	return is_buff;
+}
+
+float godot::Item::_get_item_price()
+{
+	return item_price;
 }
 
 void godot::Item::_init()

@@ -130,6 +130,7 @@ void MenuButtons::_register_methods()
 
 void godot::MenuButtons::_start_game(int name)
 {
+	CameraController::show_tutorial = true;
 	player_name = name;
 	_play_effect();
 	add_child(fade->instance());

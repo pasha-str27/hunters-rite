@@ -19,6 +19,7 @@ namespace godot
 		Timer* timer = nullptr;
 		int levels_count = 7;
 		String current_level = "";
+		Array enemy_list_prefabs = {};
 
 	public:
 		Array enemies = {};
