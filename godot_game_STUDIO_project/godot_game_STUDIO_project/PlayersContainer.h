@@ -12,6 +12,7 @@ namespace godot
 		Node2D* player1;
 		Node2D* player2;
 		Node* main_camera;
+		Array key_list = {};
 		PlayersContainer();
 
 	public:
@@ -29,5 +30,7 @@ namespace godot
 		Node2D* _get_player1();
 		Node2D* _get_player2();
 		int _players_count();
+		void _add_key(String key_type);
+		Array _get_key_list();
 	};
 }

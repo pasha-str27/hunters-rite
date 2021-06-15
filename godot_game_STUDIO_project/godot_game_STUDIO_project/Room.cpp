@@ -22,6 +22,8 @@ void godot::Room::_register_methods()
 	register_method("print", &Room::print);
 	register_method("_fill_empty_positions", &Room::_fill_empty_positions);
 	register_method("_add_list", &Room::_add_list);
+	register_method("_get_list_of_keys", &Room::_get_list_of_keys);
+	register_method("_spawn_enemies", &Room::_spawn_enemies);
 }
 
 godot::Room::Room()
@@ -108,11 +110,21 @@ void godot::Room::print()
 }
 
 void godot::Room::_add_list(Array list)
+{	
+	Array lst = ((String)list[0]).split(", ");
+	for (int i = 0; i < lst.size(); ++i)
+		list_of_keys.push_back(lst[i]);
+	//list_of_keys.push_back(list);
+}
+
+void godot::Room::_spawn_enemies()
 {
-	Godot::print(String::num(list.size()));
-	list_of_keys.push_back(list);
-	//for(int i = 0; i < *list.size(); i++)
-	//	Godot::print(*list[i]);
+	Godot::print("spawning");
+}
+
+Array godot::Room::_get_list_of_keys()
+{
+	return list_of_keys;
 }
 
 void godot::Room::_set_num_of_adjacent_rooms(int value)

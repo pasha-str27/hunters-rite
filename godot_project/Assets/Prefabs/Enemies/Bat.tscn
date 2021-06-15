@@ -9,7 +9,6 @@
 [ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Prefabs/Particles/DeathParticles/DeathBatParticles.tscn" type="PackedScene" id=8]
 
-
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
 
@@ -154,13 +153,11 @@ position = Vector2( -1.10243, -2.20486 )
 shape = SubResource( 21 )
 
 [node name="angry_zone" type="Area2D" parent="Bat"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bat/angry_zone"]
 shape = SubResource( 22 )
 
 [node name="Area2D2" type="Area2D" parent="Bat"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bat/Area2D2"]
 shape = SubResource( 23 )

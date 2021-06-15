@@ -4,6 +4,7 @@
 #endif
 
 Node2D* CameraController::current_room = nullptr;
+bool CameraController::show_tutorial = true;
 
 void godot::CameraController::_register_methods()
 {
@@ -39,9 +40,6 @@ void godot::CameraController::_move(String dir)
 
 	float vertical_offset = 390;
 	float horizontal_offset = 250;
-	
-	//timer_audio->connect("timeout", this, "_change_audio_volume");
-	//timer_audio->start(time_delta);
 
 	auto generation_node = get_parent()->get_node("Generation");
 
@@ -139,6 +137,11 @@ bool godot::CameraController::_is_one_player_alive()
 	return !has_node("/root/Node2D/Node/Player1") || !has_node("/root/Node2D/Node/Player2");
 }
 
+void godot::CameraController::hide_tutorial()
+{
+	get_parent()->get_node("TutorialSprites")->queue_free();
+}
+
 void godot::CameraController::_init()
 {
 	for (int i = 0; i < 4; i++)
@@ -194,6 +197,27 @@ void godot::CameraController::_spawn_players()
 	}
 }
 
+bool godot::CameraController::_is_player_have_need_keys(Array rooms_keys)
+{
+	if (rooms_keys.size() == 0)
+		return true;
+
+	Array players_keys = PlayersContainer::_get_instance()->_get_key_list();
+
+	if (players_keys.size() == 0)
+		return false;
+
+	bool check_result = true;
+	for (int i = 0; i < rooms_keys.size(); ++i)
+	{
+		String row = rooms_keys[i];
+		for (int k = 0; k < players_keys.size(); ++k)
+			check_result = row.find(players_keys[k])!=-1 ? true : false;
+	}
+
+	return check_result;
+}
+
 void godot::CameraController::_ready()
 {
 	audio_server = AudioServer::get_singleton();
@@ -215,6 +239,9 @@ void godot::CameraController::_ready()
 	add_child(timer_audio);
 	timer_audio->connect("timeout", this, "_change_audio_volume");
 	timer_audio->start(time_delta);
+
+	if (!show_tutorial)
+		hide_tutorial();
 }
 
 void godot::CameraController::_door_collision(String door_dir)
@@ -238,6 +265,43 @@ void godot::CameraController::_door_collision(String door_dir)
 
 	dirs[index] = (int)dirs[index] + 1;
 
+	Vector2 new_pos;
+
+	switch (index)
+	{
+	case 0:
+	{
+		float delta = 1024;
+		new_pos = get_global_position() - Vector2(delta, 0);
+		break;
+	}
+	case 1:
+	{
+		float delta = 1024;
+		new_pos = get_global_position() + Vector2(delta, 0);
+		break;
+	}
+	case 2:
+	{
+		float delta = 720;
+		new_pos = get_global_position() - Vector2(0, delta);
+		break;
+	}
+	case 3:
+	{
+		float delta = 720;
+		new_pos = get_global_position() + Vector2(0, delta);
+		break;
+	}
+	default:
+		break;
+	}
+
+	auto generation_node = get_parent()->get_node("Generation");
+	Node2D* next_room = generation_node->call("_get_next_room", new_pos);
+
+	if (!_is_player_have_need_keys((Array)next_room->call("_get_list_of_keys")))
+		return;
 
 	if (((int)dirs[index] == 2 && is_open_door && !_is_one_player_alive()) || (_is_one_player_alive() && is_open_door && (int)dirs[index] == 1))
 	{
@@ -265,6 +329,7 @@ void godot::CameraController::_open_doors()
 
 void godot::CameraController::_close_doors()
 {
+	//current_room->call("_spawn_enemies");
 	is_open_door = false;
 }
 

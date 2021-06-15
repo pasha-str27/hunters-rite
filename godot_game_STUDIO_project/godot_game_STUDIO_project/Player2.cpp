@@ -121,7 +121,6 @@ void godot::Player2::_process_input()
 
 void godot::Player2::_fight(Node* node)
 {
-	Godot::print("fight");
 	if (!_can_fight())
 		return;
 

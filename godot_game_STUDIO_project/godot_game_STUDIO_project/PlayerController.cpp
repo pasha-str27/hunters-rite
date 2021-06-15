@@ -182,7 +182,7 @@ void godot::PlayerController::_on_special_timeout()
 {
 	current_player->_stop_special();
 
-	current_player->_process_input();
+	//current_player->_process_input();
 	if(is_in_group("player2"))
 		cast_to<AnimationPlayer>(get_node("Shield")->find_node("AnimationPlayer"))->play("shield_end");
 
@@ -237,14 +237,16 @@ void godot::PlayerController::_add_bullet(Node* node)
 	current_player->_add_bullet(node);
 }
 
-void godot::PlayerController::_input(InputEventKey* event)
+void godot::PlayerController::_input(InputEvent* event)
 {
-	if (can_move && is_alive)
-		current_player->_process_input();
+	//if (can_move && is_alive)
+	//	current_player->_process_input(event);
 }
 
 void godot::PlayerController::_process(float delta)
 {
+	if (can_move && is_alive)
+		current_player->_process_input();
 	if (can_move && is_alive)
 		current_player->_move();
 }

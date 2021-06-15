@@ -77,6 +77,8 @@ namespace godot
 		Particles2D* spawn_particles = nullptr;
 		Ref<PackedScene> death_particles = nullptr;
 
+		float enemy_price=0;
+
 		public:
 			static void _register_methods();
 			Enemy();
@@ -109,5 +111,6 @@ namespace godot
 			void _check_angry();
 			void _on_spawn_end();
 			void _on_Area2D_body_exited(Node* node);
+			float _get_enemy_price();
 	};
 }

@@ -90,7 +90,7 @@ void godot::LevelGenerator::_ready()
 	CameraController::current_room = rooms[0];
 	std::vector<Node2D*> cornered_rooms = this->_get_corner_rooms();
 
-	_create_boss_room(cornered_rooms);
+	auto boss_room = _create_boss_room(cornered_rooms);
 	_create_item_room(cornered_rooms);
 
 	if (map_size / keys_frequency > cornered_rooms.size())
@@ -109,6 +109,8 @@ void godot::LevelGenerator::_ready()
 
 	for(auto node : rooms)
 		node->call("_fill_empty_positions");
+		
+	_set_keys(boss_room, generated_keys);
 }
 
 void godot::LevelGenerator::_connect_rooms(Node2D* prev, Node2D* next, Vector2 dir)
@@ -657,7 +659,7 @@ void godot::LevelGenerator::_create_item_room(std::vector<Node2D*>& cornered_roo
 	items_container->call("_spawn_random_item", builded_room->get_global_position() + right_item);
 }
 
-void godot::LevelGenerator::_create_boss_room(std::vector<Node2D*>& cornered_rooms)
+Node2D* godot::LevelGenerator::_create_boss_room(std::vector<Node2D*>& cornered_rooms)
 {
 	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
@@ -682,6 +684,8 @@ void godot::LevelGenerator::_create_boss_room(std::vector<Node2D*>& cornered_roo
 	_rebuild_doors(room_to_build);
 
 	cornered_rooms.erase(cornered_rooms.begin() + index, cornered_rooms.begin() + index + 1);
+
+	return builded_room;
 }
 
 Node2D* godot::LevelGenerator::_generate_room_to(Node2D* room_to_build)
@@ -777,12 +781,32 @@ void godot::LevelGenerator::_generate_key(Node2D* room)
 
 	if (!generated_keys.empty())
 	{
-		Godot::print("11111");
-		room->call("_add_list", generated_keys);
+		_set_keys(room, generated_keys);
+		////	creating fucking wrapper for transferring array
+		//Array params = {};
+		////	creating another stupid array for our array
+		//Array keys = {};
+		////	pushing our data
+		//keys.push_back(generated_keys);
+		////	pushing stupid array to fucking wrapper
+		//params.push_back(keys);
+		////	calling func
+		//room->call("_add_list", params);
 	}
 
 	generated_keys.push_back(key->call("_get_type"));	
-	for (int i = 0; i < generated_keys.size(); i++) {
-		Godot::print(generated_keys[i]);
-	}
+}
+
+void godot::LevelGenerator::_set_keys(Node2D* room, Array t_keys)
+{
+	////	creating fucking wrapper for transferring array
+	Array params = {};
+	//	creating another stupid array for our array
+	Array keys = {};
+	//	pushing our data
+	keys.push_back(t_keys);
+	//	pushing stupid array to fucking wrapper
+	params.push_back(keys);
+	//	calling func
+	room->call("_add_list", params);
 }

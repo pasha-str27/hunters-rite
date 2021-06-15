@@ -43,7 +43,7 @@ namespace godot
 		PlayerController();
 		~PlayerController();
 		void _init();
-		void _input(InputEventKey* event);
+		void _input(InputEvent* event);
 		void _ready();
 		void _start_timer();
 		void _on_timeout();

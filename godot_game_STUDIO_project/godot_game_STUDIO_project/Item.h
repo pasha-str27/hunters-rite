@@ -21,7 +21,7 @@ namespace godot
 		int number_to_next_item;
 		float attack_speed_delta;
 		bool is_buff = true;
-
+		float item_price = 0;
 	public:
 		static void _register_methods();
 		Item();
@@ -31,5 +31,6 @@ namespace godot
 		void _process();
 		void _on_Area2D_body_entered(Node* node);
 		bool _get_is_buff();
+		float _get_item_price();
 	};
 }

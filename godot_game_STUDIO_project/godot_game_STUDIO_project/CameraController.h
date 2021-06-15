@@ -35,8 +35,10 @@ namespace godot
 		void _move(String dir);
 		String _get_dir_on_index(int i);
 		bool _is_one_player_alive();
+		void hide_tutorial();
 	public:
 		static Node2D* current_room;
+		static bool show_tutorial;
 
 		static void _register_methods();
 		void _init();
@@ -54,6 +56,7 @@ namespace godot
 		void _set_current_room_type(String);
 		void _go_to_start();
 		void _spawn_players();
+		bool _is_player_have_need_keys(Array rooms_keys);
 		CameraController();
 		~CameraController();
 	};
