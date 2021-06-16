@@ -88,10 +88,13 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 		//getting item box for player 1
 		item_box = cast_to<VBoxContainer>(get_node("/root/Node2D/Node/Camera2D/ItemHolder/P1Items"));
 
+	//Godot::print(item_box->get_name());
 	//creating new sprite for item in item box
-	auto item_sprite = Sprite::_new();
+
+	auto item_sprite = TextureRect::_new();
 	item_sprite->set_texture(cast_to<Sprite>(get_child(0))->get_texture());
-	
+	item_sprite->set_position(Vector2(-15,-15));
+
 	//creating backdound for item in item box
 	auto item_bacground = TextureRect::_new();
 	ResourceLoader* rld = ResourceLoader::get_singleton();
@@ -99,7 +102,7 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 	item_bacground->set_texture(res);
 	item_bacground->set_modulate(Color(1,1,1,0.6f));
 	item_bacground->set_scale(Vector2(0.7 , 0.7));
-	res->free();
+	//res->free();
 
 	//create label and set parameters for him
 	auto text = Label::_new();
@@ -109,9 +112,14 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 	text->set_theme(theme);
 	text->set_position(Vector2(5,6));
 	text->set_text("x" + String::num(items_counter));
-	theme->free();
+	//theme->free();
 
 	//creating container for item
+	Ref<PackedScene> background = rld->load("res://Assets/Prefabs/Items/BackgroundItem.tscn");
+	
+	auto one = (cast_to<Node2D>(background->instance()))->get_child(0);
+	auto two = (cast_to<Node2D>(background->instance()))->get_child(1);
+
 	auto control = Control::_new();
 	control->set_name(name);
 	control->set_custom_minimum_size(Vector2(28, 28));
@@ -120,9 +128,11 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 	control->add_child(item_sprite);
 	control->add_child(text);
 
-
-	//adding item to item box
+	//Node2D* item_in_box = nullptr;
+	//item_box->add_child(control);
+	////adding item to item box
 	auto item_in_box = CustomExtensions::IsIncludedInChildrenWithName(item_box, name);
+	////Godot::print(item_in_box->get_name());
 	if (item_in_box != nullptr)
 	{
 		//get label and set counter +1
@@ -138,16 +148,17 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 	{
 		item_box->add_child(control);
 	}
-
-	//achievement
-	if (item_box->get_children().size() == 12) {
-		Godot::print("Congratulation you collect all items");
-	}
+	//Godot::print("here11");
+	////achievement
+	//if (item_box->get_children().size() == 12) {
+	//	Godot::print("Congratulation you collect all items");
+	//}
 
 	node->call("_start_item_particles", is_buff);
 	queue_free();	
-}
+	//Godot::print("here12");//
 
+}
 bool godot::Item::_get_is_buff()
 {
 	return is_buff;

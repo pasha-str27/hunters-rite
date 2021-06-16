@@ -48,7 +48,7 @@ void godot::MenuButtons::_ready()
 	// Set focus button in Menu and Notise scenes
 	set_focus_mode(true);
 
-	std::vector<String> name_buttons{ "Play", "Flower_button", "Back", "Resume", "Retry" };
+	std::vector<String> name_buttons{ "Play", "Flower_button","PlayerOne_button", "Back", "Resume", "Retry" };
 
 	if (get_name() == "Menu" && find_parent("root") != nullptr && !find_parent("root")->has_node("MenuBackMusic"))
 	{
