@@ -33,11 +33,10 @@ void godot::Enemy::_register_methods()
 	register_method("_check_angry", &Enemy::_check_angry);
 	register_method("_on_spawn_end", &Enemy::_on_spawn_end);
 	register_method("_on_Area2D_body_exited", &Enemy::_on_Area2D_body_exited);
-	register_method("_get_enemy_price", &Enemy::_get_enemy_price);
-
+	register_method("_change_start_parameters", &Enemy::_change_start_parameters);
+	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
-	register_property<Enemy, float>("enemy_price", &Enemy::enemy_price, -1);
 	register_property<Enemy, Ref<PackedScene>>("Death particles", &Enemy::death_particles, nullptr);
 }
 
@@ -439,6 +438,11 @@ void godot::Enemy::_on_spawn_end()
 		cast_to<ProgressBar>(get_parent()->get_node("BossHealthBar"))->set_visible(true);
 	else
 		cast_to<ProgressBar>(get_node("HealthBar"))->set_visible(true);
+
+	Enemies* enemies = Enemies::get_singleton();
+	enemies->set_enemy_to_spawn_count(enemies->get_enemy_to_spawn_count()-1);
+	if (enemies->get_enemy_to_spawn_count() == 0)
+		enemies->set_spawning(false);
 }
 
 void godot::Enemy::_on_Area2D_body_exited(Node* node)
@@ -450,7 +454,7 @@ void godot::Enemy::_on_Area2D_body_exited(Node* node)
 		ai->_set_is_player2_onArea(false);
 }
 
-float godot::Enemy::_get_enemy_price()
+void godot::Enemy::_change_start_parameters()
 {
-	return enemy_price;
+	ai->_change_start_parameters();
 }

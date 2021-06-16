@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Assets/Sprites/Monsters/Statue/monster_statue_damage.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/statue_bullet.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/Sprites/Monsters/Statue/monster_statue_idle.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Prefabs/Particles/DeathParticles/DeathStatueParticles.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Scripts/EnemyPrice.gdns" type="Script" id=7]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
@@ -110,13 +111,15 @@ animations = [ {
 } ]
 
 [node name="StatueShoot" type="Node2D"]
+script = ExtResource( 7 )
 __meta__ = {
 "_editor_description_": ""
 }
+enemy_price = 20.0
 
 [node name="BulletConteinerStatue" type="Node" parent="."]
 
-[node name="statue_shoot" type="KinematicBody2D" parent="." groups=[
+[node name="StatueShoot" type="KinematicBody2D" parent="." groups=[
 "enemy",
 "statue_shoot",
 ]]
@@ -127,7 +130,7 @@ script = ExtResource( 3 )
 bullet = ExtResource( 2 )
 "Death particles" = ExtResource( 6 )
 
-[node name="HealthBar" type="ProgressBar" parent="statue_shoot"]
+[node name="HealthBar" type="ProgressBar" parent="StatueShoot"]
 margin_left = -20.0
 margin_top = -35.0
 margin_right = 20.0
@@ -142,13 +145,13 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="statue_shoot"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StatueShoot"]
 shape = SubResource( 3 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="statue_shoot/CollisionShape2D"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="StatueShoot/CollisionShape2D"]
 frames = SubResource( 24 )
 animation = "damaged"
 frame = 1
 playing = true
 
-[node name="SpawnParticles" parent="statue_shoot" instance=ExtResource( 5 )]
+[node name="SpawnParticles" parent="StatueShoot" instance=ExtResource( 5 )]

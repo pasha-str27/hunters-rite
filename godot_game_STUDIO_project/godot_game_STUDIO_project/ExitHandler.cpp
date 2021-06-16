@@ -53,7 +53,6 @@ void godot::ExitHandler::_on_Area2D_area_entered(Node* other)
 		CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->add_child(fade);
 		fade->get_child(0)->get_child(0)->call("_set_is_exit_anim", true);
 
-		Godot::print("going to menu");
 		CameraController::show_tutorial = false;
 	}
 }

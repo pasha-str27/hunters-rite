@@ -104,7 +104,6 @@
     <ClCompile Include="AudioEffect.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
-    <ClCompile Include="MagnitZone.cpp" />
     <ClCompile Include="Room.cpp">
       <Filter>Genetation</Filter>
     </ClCompile>
@@ -114,13 +113,24 @@
     <ClCompile Include="Key.cpp">
       <Filter>Items</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyPrice.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="MagnitZone.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="BigStone.cpp">
+      <Filter>Ammo</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioController.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
     <ClInclude Include="headers.h" />
     <ClInclude Include="MenuButtons.h" />
     <ClInclude Include="ParticlesDestroyer.h" />
-    <ClInclude Include="ExitHandler.h" />
     <ClInclude Include="Preloader.h" />
     <ClInclude Include="Player1.h">
       <Filter>Players</Filter>
@@ -227,7 +237,6 @@
     <ClInclude Include="AudioEffect.h">
       <Filter>Audio</Filter>
     </ClInclude>
-    <ClInclude Include="MagnitZone.h" />
     <ClInclude Include="Room.h">
       <Filter>Genetation</Filter>
     </ClInclude>
@@ -239,6 +248,21 @@
     </ClInclude>
     <ClInclude Include="Key.h">
       <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyPrice.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="MagnitZone.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="BigStone.h">
+      <Filter>Ammo</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioController.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="ExitHandler.h">
+      <Filter>Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

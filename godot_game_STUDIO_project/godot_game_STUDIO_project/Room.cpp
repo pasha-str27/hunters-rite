@@ -24,6 +24,11 @@ void godot::Room::_register_methods()
 	register_method("_add_list", &Room::_add_list);
 	register_method("_get_list_of_keys", &Room::_get_list_of_keys);
 	register_method("_spawn_enemies", &Room::_spawn_enemies);
+	register_method("_get_room_difficulty", &Room::_get_room_difficulty);
+	register_method("_get_room_type", &Room::_get_room_type);
+	register_method("_set_room_type", &Room::_set_room_type);
+	register_method("_get_were_here", &Room::_get_were_here);
+	register_method("_set_were_here", &Room::_set_were_here);
 }
 
 godot::Room::Room()
@@ -125,6 +130,31 @@ void godot::Room::_spawn_enemies()
 Array godot::Room::_get_list_of_keys()
 {
 	return list_of_keys;
+}
+
+float godot::Room::_get_room_difficulty()
+{
+	return room_difficulty;
+}
+
+String godot::Room::_get_room_type()
+{
+	return room_type;
+}
+
+void godot::Room::_set_room_type(String type)
+{
+	room_type = type;
+}
+
+bool godot::Room::_get_were_here()
+{
+	return were_here;
+}
+
+void godot::Room::_set_were_here(bool value)
+{
+	were_here = value;
 }
 
 void godot::Room::_set_num_of_adjacent_rooms(int value)

@@ -58,7 +58,7 @@ Exit = ExtResource( 10 )
 [node name="EnemySpawner" type="Node2D" parent="."]
 script = ExtResource( 2 )
 "Altar prefab" = ExtResource( 1 )
-enemy_list = [ ExtResource( 15 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 12 ) ]
+enemy_list = [ ExtResource( 14 ), ExtResource( 12 ), ExtResource( 15 ), ExtResource( 11 ), ExtResource( 13 ) ]
 
 [node name="ItemPoints" type="Node2D" parent="EnemySpawner"]
 

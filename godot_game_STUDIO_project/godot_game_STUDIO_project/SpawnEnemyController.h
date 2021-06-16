@@ -20,10 +20,10 @@ namespace godot
 		int levels_count = 7;
 		String current_level = "";
 		Array enemy_list_prefabs = {};
+		float min_enemy_price;
 
 	public:
 		Array enemies = {};
-		Array spawn_points = {};
 		int enemies_count = 5;
 
 		static void _register_methods();

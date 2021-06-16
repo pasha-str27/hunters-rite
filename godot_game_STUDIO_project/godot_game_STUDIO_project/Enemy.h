@@ -25,6 +25,7 @@ namespace godot
 		virtual void _change_dir() = 0;
 		virtual void _set_is_player1_onArea(bool value) = 0;
 		virtual void _set_is_player2_onArea(bool value) = 0;
+		virtual void _change_start_parameters() = 0;
 	};
 
 	class EnemyAIContext
@@ -52,6 +53,7 @@ namespace godot
 		void _change_dir();
 		void _set_is_player1_onArea(bool value);
 		void _set_is_player2_onArea(bool value);
+		void _change_start_parameters();
 	};
 
 
@@ -76,8 +78,6 @@ namespace godot
 
 		Particles2D* spawn_particles = nullptr;
 		Ref<PackedScene> death_particles = nullptr;
-
-		float enemy_price=0;
 
 		public:
 			static void _register_methods();
@@ -111,6 +111,6 @@ namespace godot
 			void _check_angry();
 			void _on_spawn_end();
 			void _on_Area2D_body_exited(Node* node);
-			float _get_enemy_price();
+			void _change_start_parameters();
 	};
 }

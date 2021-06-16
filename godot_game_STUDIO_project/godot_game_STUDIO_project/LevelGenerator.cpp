@@ -129,9 +129,12 @@ void godot::LevelGenerator::_generate()
 
 	add_child(rooms[0]);
 
+	rooms[0]->call("_set_room_type", "tutorial");
+	rooms[0]->call("_set_were_here", true);
+
 	size++;
 
-	Vector2 new_room_position = Vector2::ZERO + Vector2(0, step_y);
+	Vector2 new_room_position = Vector2(0, step_y);
 	if (!_has_room(positions, new_room_position))
 	{
 		_buid_room(new_room_position);
@@ -224,6 +227,7 @@ Node2D* godot::LevelGenerator::_buid_room(Vector2 pos)
 	rooms.push_back(node);
 	positions.push_back(pos);
 	add_child(node);
+	node->call("_set_room_type", "game_room");
 	size++;
 	return node;
 }

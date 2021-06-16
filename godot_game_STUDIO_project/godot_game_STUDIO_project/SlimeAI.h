@@ -21,6 +21,7 @@ namespace godot
 
 		Vector2 old_pos;
 		Vector2 cur_pos;
+		Vector2 goal=Vector2::ZERO;
 
 	public:
 		SlimeAI(Ref<PackedScene>& bullet, Node2D* node);
@@ -36,5 +37,6 @@ namespace godot
 		void _set_speed(float value);
 		void _set_is_player1_onArea(bool value);
 		void _set_is_player2_onArea(bool value);
+		void _change_start_parameters();
 	};
 }

@@ -13,6 +13,9 @@ namespace godot
 		std::vector<std::vector<int>> room_map;
 		std::vector<Vector2> empty_pos_world_coordinates;
 		Array list_of_keys;
+		float room_difficulty=100;
+		String room_type="";
+		bool were_here = false;
 
 	public:
 		Room();
@@ -32,5 +35,10 @@ namespace godot
 		void _add_list(Array);
 		void _spawn_enemies();
 		Array _get_list_of_keys();
+		float _get_room_difficulty();
+		String _get_room_type();
+		void _set_room_type(String type);
+		bool _get_were_here();
+		void _set_were_here(bool value);
 	};
 }

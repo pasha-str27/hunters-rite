@@ -55,18 +55,22 @@ void godot::SlimeAI::_set_is_player2_onArea(bool value)
 	was_setted = true;
 }
 
-godot::SlimeAI::SlimeAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
+void godot::SlimeAI::_change_start_parameters()
 {
-	dir = Vector2::ZERO;
-	cur_pos = (node_tmp->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
-
-	can_move = true;
-	is_cheking = false;
-	speed = 400;
+	cur_pos = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
 
 	old_pos = _get_enemy()->get_global_position();
 
 	change_direction();
+}
+
+godot::SlimeAI::SlimeAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
+{
+	dir = Vector2::ZERO;
+
+	can_move = true;
+	is_cheking = false;
+	speed = 400;
 }
 
 godot::SlimeAI::~SlimeAI()
@@ -149,6 +153,8 @@ void godot::SlimeAI::_change_dir_after_time()
 {
 	if (directions.size() == 0)
 	{
+		goal = _get_enemy()->get_global_position();
+
 		dir = Vector2::ZERO;
 		return;
 	}	
@@ -158,9 +164,10 @@ void godot::SlimeAI::_change_dir_after_time()
 
 	is_cheking = false;
 
-	dir = directions[rand->randi_range(0, directions.size() - 1)]/2;
+	dir = directions[rand->randi_range(0, directions.size() - 1)];
+	goal = _get_enemy()->get_global_position() + dir * 32;
 
-	cur_pos += dir * 2;
+	cur_pos += dir;
 }
 
 void godot::SlimeAI::_fight(Node2D* player1, Node2D* player2)
@@ -186,15 +193,13 @@ void godot::SlimeAI::_process(float delta)
 	if (!can_move)
 		return;
 
-	_get_enemy()->set_global_position(_get_enemy()->get_global_position() + dir * delta * 235);
+	_get_enemy()->set_global_position(_get_enemy()->get_global_position().move_toward(goal, delta*speed));
 
 	if (is_cheking)
 		return;
 
-	if ((abs(old_pos.distance_to(_get_enemy()->get_global_position())-32) <= 3
-		&&(dir==Vector2(0.5,0)|| dir == Vector2(-0.5, 0)|| dir == Vector2(0, 0.5)|| dir == Vector2(0, -0.5))
-			|| (abs(old_pos.distance_to(_get_enemy()->get_global_position()) - sqrt(32*32+32*32)) <= 4.5
-			&& (dir == Vector2(0.5, 0.5) || dir == Vector2(-0.5, 0.5) || dir == Vector2(0.5, -0.5) || dir == Vector2(-0.5, -0.5)))))
+	if (abs(old_pos.distance_to(_get_enemy()->get_global_position())-32) <= 1
+		&& (dir==Vector2::RIGHT || dir == Vector2::LEFT || dir == Vector2::DOWN || dir == Vector2::UP))
 	{
 		is_cheking = true;
 		/*_fight(_get_player1(), _get_player2());*/

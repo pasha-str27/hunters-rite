@@ -75,7 +75,6 @@ void godot::Player1::_process_input()
 		shoot_particles->set_position(Vector2(0, -9));
 		bullet_dir = Vector2::UP;
 		_fight();
-		//input_controller->action_press("Player1_fight_up");
 	}
 
 	//fight	down

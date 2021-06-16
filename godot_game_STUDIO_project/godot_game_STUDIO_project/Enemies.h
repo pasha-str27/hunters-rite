@@ -10,6 +10,8 @@ namespace godot
 		static Enemies* list;
 
 		std::vector<Node2D*> enemies;
+		bool is_spawning = false;
+		int enemy_to_spawn_count = 0;
 
 		Enemies();
 
@@ -30,5 +32,9 @@ namespace godot
 		void _set_player1(Node* player);
 		void _set_player2(Node* player);
 		void _clear();
+		bool spawning();
+		void set_spawning(bool value);
+		int get_enemy_to_spawn_count();
+		void set_enemy_to_spawn_count(int count);
 	};
 }

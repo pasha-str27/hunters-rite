@@ -44,6 +44,10 @@ void godot::EnemyData::_set_is_player2_onArea(bool value)
 {
 }
 
+void godot::EnemyData::_change_start_parameters()
+{
+}
+
 godot::EnemyData::EnemyData(Node2D* enemy)
 {
 	this->enemy = enemy;

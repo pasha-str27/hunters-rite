@@ -246,6 +246,10 @@ void godot::CameraController::_ready()
 
 void godot::CameraController::_door_collision(String door_dir)
 {
+	//Godot::print(Enemies::get_singleton()->_get_enemies_count());
+	if (Enemies::get_singleton()->_get_enemies_count() != 0 || Enemies::get_singleton()->spawning())
+		return;
+
 	int index = 0;
 	if (door_dir.find("left") != -1)
 		index = 0;
@@ -303,8 +307,10 @@ void godot::CameraController::_door_collision(String door_dir)
 	if (!_is_player_have_need_keys((Array)next_room->call("_get_list_of_keys")))
 		return;
 
-	if (((int)dirs[index] == 2 && is_open_door && !_is_one_player_alive()) || (_is_one_player_alive() && is_open_door && (int)dirs[index] == 1))
+	if (((int)dirs[index] == 2 && !_is_one_player_alive()) || (_is_one_player_alive() && (int)dirs[index] == 1))
 	{
+		Enemies::get_singleton()->set_spawning(true);
+
 		if(PlayersContainer::_get_instance()->_get_player1() != nullptr)
 			PlayersContainer::_get_instance()->_get_player1()->call("_change_moving", false);
 
@@ -314,6 +320,8 @@ void godot::CameraController::_door_collision(String door_dir)
 		auto fade = cast_to<Node2D>(fadeOut->instance());
 		add_child(fade);
 	}
+	else
+		Godot::print("im here");
 }
 
 void godot::CameraController::_open_doors()

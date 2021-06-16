@@ -105,3 +105,8 @@ void godot::EnemyAIContext::_set_is_player2_onArea(bool value)
 {
 	strategy->_set_is_player2_onArea(value);
 }
+
+void godot::EnemyAIContext::_change_start_parameters()
+{
+	strategy->_change_start_parameters();
+}
