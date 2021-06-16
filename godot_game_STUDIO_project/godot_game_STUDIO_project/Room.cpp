@@ -158,6 +158,8 @@ bool godot::Room::_get_were_here()
 void godot::Room::_set_were_here(bool value)
 {
 	were_here = value;
+}
+
 void godot::Room::_set_is_special(bool value)
 {
 	is_special = value;

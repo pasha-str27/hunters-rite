@@ -819,13 +819,13 @@ void godot::LevelGenerator::_spawn_big_stone()
 
 	int rand = rng->randi_range(1, rooms.size() - 1);
 
-	auto room = rooms[rand];
+	Node* room = nullptr;
 
-	while ((bool)room->call("_get_is_special"))
+	do
 	{
 		rand = rng->randi_range(1, rooms.size() - 1);
 		room = rooms[rand];
-	}
+	} while (!(bool)room->call("_get_is_special"));
 
 	auto stone = cast_to<Node2D>(big_stone->instance());
 	room->add_child(stone);
