@@ -29,6 +29,9 @@ void godot::Room::_register_methods()
 	register_method("_set_room_type", &Room::_set_room_type);
 	register_method("_get_were_here", &Room::_get_were_here);
 	register_method("_set_were_here", &Room::_set_were_here);
+	register_method("_set_is_special", &Room::_set_is_special);
+	register_method("_get_is_special", &Room::_get_is_special);
+	
 }
 
 godot::Room::Room()
@@ -155,6 +158,14 @@ bool godot::Room::_get_were_here()
 void godot::Room::_set_were_here(bool value)
 {
 	were_here = value;
+void godot::Room::_set_is_special(bool value)
+{
+	is_special = value;
+}
+
+bool godot::Room::_get_is_special()
+{
+	return is_special;
 }
 
 void godot::Room::_set_num_of_adjacent_rooms(int value)

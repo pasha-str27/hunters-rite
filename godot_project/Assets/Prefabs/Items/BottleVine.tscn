@@ -44,8 +44,6 @@ HP = 15.0
 damage = 15.0
 attack_speed_delta = 0.0
 number_to_next_item = 0
-decrease_attack_radius = null
-encrease_attack_radius = null
 "Is Buff" = false
 
 [node name="Sprite" type="Sprite" parent="."]

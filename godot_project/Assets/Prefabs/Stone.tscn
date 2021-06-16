@@ -10,7 +10,7 @@ height = 15.915
 [sub_resource type="RectangleShape2D" id=2]
 
 [node name="Stone" type="KinematicBody2D"]
-position = Vector2( -118.183, -100.984 )
+position = Vector2( 0, 30 )
 z_index = 250
 script = ExtResource( 1 )
 

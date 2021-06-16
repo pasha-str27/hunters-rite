@@ -43,7 +43,8 @@ void godot::LevelGenerator::_register_methods()
 	register_property<LevelGenerator, Ref<PackedScene>>("key_room_pedestal", &LevelGenerator::key_room_pedestal, nullptr);
 
 	register_property<LevelGenerator, Array>("keys_prefabs", &LevelGenerator::keys_prefabs, {});
-	
+
+	register_property<LevelGenerator, Ref<PackedScene>>("big_stone", &LevelGenerator::big_stone, nullptr);	
 }
 
 void godot::LevelGenerator::_init()
@@ -111,6 +112,8 @@ void godot::LevelGenerator::_ready()
 		node->call("_fill_empty_positions");
 		
 	_set_keys(boss_room, generated_keys);
+
+	_spawn_big_stone();
 }
 
 void godot::LevelGenerator::_connect_rooms(Node2D* prev, Node2D* next, Vector2 dir)
@@ -661,6 +664,8 @@ void godot::LevelGenerator::_create_item_room(std::vector<Node2D*>& cornered_roo
 
 	items_container->call("_spawn_random_item", builded_room->get_global_position() + left_item);
 	items_container->call("_spawn_random_item", builded_room->get_global_position() + right_item);
+
+	builded_room->call("_set_is_special", true);
 }
 
 Node2D* godot::LevelGenerator::_create_boss_room(std::vector<Node2D*>& cornered_rooms)
@@ -688,6 +693,8 @@ Node2D* godot::LevelGenerator::_create_boss_room(std::vector<Node2D*>& cornered_
 	_rebuild_doors(room_to_build);
 
 	cornered_rooms.erase(cornered_rooms.begin() + index, cornered_rooms.begin() + index + 1);
+
+	builded_room->call("_set_is_special", true);
 
 	return builded_room;
 }
@@ -784,19 +791,9 @@ void godot::LevelGenerator::_generate_key(Node2D* room)
 	keys_prefabs.remove(key_index);
 
 	if (!generated_keys.empty())
-	{
 		_set_keys(room, generated_keys);
-		////	creating fucking wrapper for transferring array
-		//Array params = {};
-		////	creating another stupid array for our array
-		//Array keys = {};
-		////	pushing our data
-		//keys.push_back(generated_keys);
-		////	pushing stupid array to fucking wrapper
-		//params.push_back(keys);
-		////	calling func
-		//room->call("_add_list", params);
-	}
+
+	room->call("_set_is_special", true);
 
 	generated_keys.push_back(key->call("_get_type"));	
 }
@@ -813,4 +810,25 @@ void godot::LevelGenerator::_set_keys(Node2D* room, Array t_keys)
 	params.push_back(keys);
 	//	calling func
 	room->call("_add_list", params);
+}
+
+void godot::LevelGenerator::_spawn_big_stone()
+{
+	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
+	rng->randomize();
+
+	int rand = rng->randi_range(1, rooms.size() - 1);
+
+	auto room = rooms[rand];
+
+	while ((bool)room->call("_get_is_special"))
+	{
+		rand = rng->randi_range(1, rooms.size() - 1);
+		room = rooms[rand];
+	}
+
+	auto stone = cast_to<Node2D>(big_stone->instance());
+	room->add_child(stone);
+
+	room->call("_set_is_special", true);
 }

@@ -17,6 +17,8 @@ namespace godot
 		String room_type="";
 		bool were_here = false;
 
+		bool is_special = false;
+
 	public:
 		Room();
 		~Room();
@@ -40,5 +42,7 @@ namespace godot
 		void _set_room_type(String type);
 		bool _get_were_here();
 		void _set_were_here(bool value);
+		void _set_is_special(bool value);
+		bool _get_is_special();
 	};
 }
