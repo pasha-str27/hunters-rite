@@ -23,7 +23,6 @@ void godot::Room::_register_methods()
 	register_method("_fill_empty_positions", &Room::_fill_empty_positions);
 	register_method("_add_list", &Room::_add_list);
 	register_method("_get_list_of_keys", &Room::_get_list_of_keys);
-	register_method("_spawn_enemies", &Room::_spawn_enemies);
 	register_method("_get_room_difficulty", &Room::_get_room_difficulty);
 	register_method("_get_room_type", &Room::_get_room_type);
 	register_method("_set_room_type", &Room::_set_room_type);
@@ -123,11 +122,6 @@ void godot::Room::_add_list(Array list)
 	for (int i = 0; i < lst.size(); ++i)
 		list_of_keys.push_back(lst[i]);
 	//list_of_keys.push_back(list);
-}
-
-void godot::Room::_spawn_enemies()
-{
-	Godot::print("spawning");
 }
 
 Array godot::Room::_get_list_of_keys()

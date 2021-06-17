@@ -7,12 +7,16 @@
 namespace godot
 {
 	class ItemGenerator;
+	class PlayerProduce;
+	class PlayerStrategyContext;
 
 	class PlayerController : public KinematicBody2D
 	{
 	private:
 		GODOT_CLASS(PlayerController, KinematicBody2D);
-		IPlayer* current_player;
+		//IPlayer* current_player;
+		PlayerStrategyContext* current_player_strategy = nullptr;
+		PlayerProduce* player_producer = nullptr;
 		Ref<PackedScene> bullet_prefab;
 		Ref<PackedScene> revive_zone;
 		Node* door = nullptr;

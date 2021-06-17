@@ -405,7 +405,6 @@ void godot::LevelGenerator::_buid_spikes_first_step(Node2D* room)
 	{
 		Vector2 pos = (Vector2)arr[i];
 
-		//Godot::print(pos);
 		room->call("_set_cell_value", pos.y + 8, pos.x + 14, 3);
 	}
 	prefab = nullptr;

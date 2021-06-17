@@ -32,8 +32,6 @@ void godot::SpawnEnemyController::SpawnEnemies()
 	float current_value = _calculate_room_difficulty();
 	std::vector<Vector2> taken_positions;
 
-	Godot::print(current_value);
-
 	enemies->set_enemy_to_spawn_count(0);
 	enemies->set_spawning(true);
 

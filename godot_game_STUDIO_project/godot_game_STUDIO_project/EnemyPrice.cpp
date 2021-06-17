@@ -22,6 +22,5 @@ void godot::EnemyPrice::_ready()
 
 float godot::EnemyPrice::_get_enemy_price()
 {
-	//Godot::print(enemy_price);
 	return enemy_price;
 }

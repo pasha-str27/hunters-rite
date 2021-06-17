@@ -88,7 +88,6 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 		//getting item box for player 1
 		item_box = cast_to<VBoxContainer>(get_node("/root/Node2D/Node/Camera2D/ItemHolder/P1Items"));
 
-	//Godot::print(item_box->get_name());
 	//creating new sprite for item in item box
 
 	auto item_sprite = TextureRect::_new();
@@ -132,7 +131,6 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 	//item_box->add_child(control);
 	////adding item to item box
 	auto item_in_box = CustomExtensions::IsIncludedInChildrenWithName(item_box, name);
-	////Godot::print(item_in_box->get_name());
 	if (item_in_box != nullptr)
 	{
 		//get label and set counter +1
@@ -148,7 +146,7 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 	{
 		item_box->add_child(control);
 	}
-	//Godot::print("here11");
+
 	////achievement
 	//if (item_box->get_children().size() == 12) {
 	//	Godot::print("Congratulation you collect all items");
@@ -156,9 +154,8 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 
 	node->call("_start_item_particles", is_buff);
 	queue_free();	
-	//Godot::print("here12");//
-
 }
+
 bool godot::Item::_get_is_buff()
 {
 	return is_buff;

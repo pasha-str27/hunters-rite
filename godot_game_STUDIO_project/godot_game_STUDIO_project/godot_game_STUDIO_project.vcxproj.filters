@@ -2,10 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="GodotLibrary.cpp" />
-    <ClCompile Include="Player1.cpp">
+    <ClCompile Include="PlayerShoot.cpp">
       <Filter>Players</Filter>
     </ClCompile>
-    <ClCompile Include="Player2.cpp">
+    <ClCompile Include="PlayerMelee.cpp">
       <Filter>Players</Filter>
     </ClCompile>
     <ClCompile Include="PlayerController.cpp">
@@ -17,10 +17,10 @@
     <ClCompile Include="PlayersContainer.cpp">
       <Filter>Players</Filter>
     </ClCompile>
-    <ClCompile Include="ProducePlayer1.cpp">
+    <ClCompile Include="ProducePlayerShoot.cpp">
       <Filter>Players</Filter>
     </ClCompile>
-    <ClCompile Include="ProducePlayer2.cpp">
+    <ClCompile Include="ProducePlayerMelee.cpp">
       <Filter>Players</Filter>
     </ClCompile>
     <ClCompile Include="BatAI.cpp">
@@ -131,14 +131,15 @@
     <ClCompile Include="AudioController.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerStrategyContext.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
     <ClInclude Include="headers.h" />
-    <ClInclude Include="Player1.h">
+    <ClInclude Include="PlayerShoot.h">
       <Filter>Players</Filter>
     </ClInclude>
-    <ClInclude Include="Player2.h">
+    <ClInclude Include="PlayerMelee.h">
       <Filter>Players</Filter>
     </ClInclude>
     <ClInclude Include="PlayerController.h">
@@ -153,10 +154,10 @@
     <ClInclude Include="PlayersContainer.h">
       <Filter>Players</Filter>
     </ClInclude>
-    <ClInclude Include="ProducePlayer1.h">
+    <ClInclude Include="ProducePlayerShoot.h">
       <Filter>Players</Filter>
     </ClInclude>
-    <ClInclude Include="ProducePlayer2.h">
+    <ClInclude Include="ProducePlayerMelee.h">
       <Filter>Players</Filter>
     </ClInclude>
     <ClInclude Include="IPlayer.h">
@@ -282,6 +283,7 @@
     <ClInclude Include="ParticlesDestroyer.h">
       <Filter>Level</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerStrategyContext.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Players">

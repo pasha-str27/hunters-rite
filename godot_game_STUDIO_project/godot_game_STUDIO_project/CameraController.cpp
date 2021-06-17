@@ -272,7 +272,6 @@ void godot::CameraController::_ready()
 
 void godot::CameraController::_door_collision(String door_dir)
 {
-	//Godot::print(Enemies::get_singleton()->_get_enemies_count());
 	if (Enemies::get_singleton()->_get_enemies_count() != 0 || Enemies::get_singleton()->spawning())
 		return;
 
@@ -346,8 +345,6 @@ void godot::CameraController::_door_collision(String door_dir)
 		auto fade = cast_to<Node2D>(fadeOut->instance());
 		add_child(fade);
 	}
-	else
-		Godot::print("im here");
 }
 
 void godot::CameraController::_open_doors()

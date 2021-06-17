@@ -35,7 +35,6 @@ namespace godot
 		void _fill_empty_positions();
 		void print();
 		void _add_list(Array);
-		void _spawn_enemies();
 		Array _get_list_of_keys();
 		float _get_room_difficulty();
 		String _get_room_type();
