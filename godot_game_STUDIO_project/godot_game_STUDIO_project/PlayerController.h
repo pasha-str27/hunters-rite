@@ -90,5 +90,7 @@ namespace godot
 		void _hide_tutorial_message(Node* node);
 		void _stop_animations();
 		void _player_fight();
+		void _set_controll_buttons(String move_up, String move_down, String move_left, String move_right,
+			String fight_up, String fight_down, String fight_left, String fight_right, String special);
 	};
 }

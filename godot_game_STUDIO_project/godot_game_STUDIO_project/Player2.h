@@ -31,5 +31,7 @@ namespace godot
 		void _stop_animations();
 		void _stop_special();
 		void _start_special();
+		void _set_controll_buttons(String move_up, String move_down, String move_left,
+			String move_right, String fight_up, String fight_down, String fight_left, String fight_right, String special);
 	};
 }

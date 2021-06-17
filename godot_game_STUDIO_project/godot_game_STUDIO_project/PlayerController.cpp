@@ -5,51 +5,52 @@
 
 void godot::PlayerController::_register_methods()
 {
-	register_method((char*)"_process", &PlayerController::_process);
-	register_method((char*)"_ready", &PlayerController::_ready);
-	register_method((char*)"_input", &PlayerController::_input);
-	register_method((char*)"_add_bullet", &PlayerController::_add_bullet);
-	register_method((char*)"_start_timer", &PlayerController::_start_timer);
-	register_method((char*)"_on_timeout", &PlayerController::_on_timeout);
-	register_method((char*)"_start_special_timer", &PlayerController::_start_special_timer);
-	register_method((char*)"_on_special_timeout", &PlayerController::_on_special_timeout);
-	register_method((char*)"_start_dash_cooldow_timer", &PlayerController::_start_dash_cooldow_timer);
-	register_method((char*)"_on_dash_cooldown_timeout", &PlayerController::_on_dash_cooldown_timeout);
-	register_method((char*)"_can_fight", &PlayerController::_can_fight);
-	register_method((char*)"_set_enemy", &PlayerController::_set_enemy);
-	register_method((char*)"_on_Area2D_body_entered", &PlayerController::_on_Area2D_body_entered);
-	register_method((char*)"_on_Area2D_area_entered", &PlayerController::_on_Area2D_area_entered);
-	register_method((char*)"_on_Area2D_area_exited", &PlayerController::_on_Area2D_area_exited);
-	register_method((char*)"_take_damage", &PlayerController::_take_damage);
-	register_method((char*)"_change_can_moving", &PlayerController::_change_can_moving);
-	register_method((char*)"_change_moving", &PlayerController::_change_moving);	
-	register_method((char*)"change_can_moving_timeout", &PlayerController::change_can_moving_timeout);
-	register_method((char*)"_decrease_attack_radius", &PlayerController::_decrease_attack_radius);
-	register_method((char*)"_encrease_attack_radius", &PlayerController::_encrease_attack_radius);
-	register_method((char*)"_set_number_to_next_item", &PlayerController::_set_number_to_next_item);
-	register_method((char*)"_get_number_to_next_item", &PlayerController::_get_number_to_next_item);
-	register_method((char*)"_set_speed", &PlayerController::_set_speed);
-	register_method((char*)"_get_speed", &PlayerController::_get_speed);
-	register_method((char*)"_set_HP", &PlayerController::_set_HP);
-	register_method((char*)"_get_HP", &PlayerController::_get_HP);
-	register_method((char*)"_set_damage", &PlayerController::_set_damage);
-	register_method((char*)"_get_damage", &PlayerController::_get_damage);
-	register_method((char*)"_set_attack_speed_delta", &PlayerController::_set_attack_speed_delta);
-	register_method((char*)"_get_attack_speed_delta", &PlayerController::_get_attack_speed_delta);
-	register_method((char*)"_change_can_fight", &PlayerController::_change_can_fight);
-	register_method((char*)"_die", &PlayerController::_die);
-	register_method((char*)"_revive", &PlayerController::_revive);
-	register_method((char*)"_set_max_HP", &PlayerController::_set_max_HP);
-	register_method((char*)"_get_max_HP", &PlayerController::_get_max_HP);
-	register_method((char*)"_on_enemy_die", &PlayerController::_on_enemy_die);
-	register_method((char*)"_is_alive", &PlayerController::_is_alive);
-	register_method((char*)"_start_item_particles", &PlayerController::_start_item_particles);
-	register_method((char*)"_update_health_bar", &PlayerController::_update_health_bar);
-	register_method((char*)"_update_max_health_bar_size", &PlayerController::_update_max_health_bar_size);
-	register_method((char*)"_animate_spider_web", &PlayerController::_animate_spider_web);
-	register_method((char*)"_stop_animations", &PlayerController::_stop_animations);
-	register_method((char*)"_player_fight", &PlayerController::_player_fight);	
-
+	register_method("_process", &PlayerController::_process);
+	register_method("_ready", &PlayerController::_ready);
+	register_method("_input", &PlayerController::_input);
+	register_method("_add_bullet", &PlayerController::_add_bullet);
+	register_method("_start_timer", &PlayerController::_start_timer);
+	register_method("_on_timeout", &PlayerController::_on_timeout);
+	register_method("_start_special_timer", &PlayerController::_start_special_timer);
+	register_method("_on_special_timeout", &PlayerController::_on_special_timeout);
+	register_method("_start_dash_cooldow_timer", &PlayerController::_start_dash_cooldow_timer);
+	register_method("_on_dash_cooldown_timeout", &PlayerController::_on_dash_cooldown_timeout);
+	register_method("_can_fight", &PlayerController::_can_fight);
+	register_method("_set_enemy", &PlayerController::_set_enemy);
+	register_method("_on_Area2D_body_entered", &PlayerController::_on_Area2D_body_entered);
+	register_method("_on_Area2D_area_entered", &PlayerController::_on_Area2D_area_entered);
+	register_method("_on_Area2D_area_exited", &PlayerController::_on_Area2D_area_exited);
+	register_method("_take_damage", &PlayerController::_take_damage);
+	register_method("_change_can_moving", &PlayerController::_change_can_moving);
+	register_method("_change_moving", &PlayerController::_change_moving);	
+	register_method("change_can_moving_timeout", &PlayerController::change_can_moving_timeout);
+	register_method("_decrease_attack_radius", &PlayerController::_decrease_attack_radius);
+	register_method("_encrease_attack_radius", &PlayerController::_encrease_attack_radius);
+	register_method("_set_number_to_next_item", &PlayerController::_set_number_to_next_item);
+	register_method("_get_number_to_next_item", &PlayerController::_get_number_to_next_item);
+	register_method("_set_speed", &PlayerController::_set_speed);
+	register_method("_get_speed", &PlayerController::_get_speed);
+	register_method("_set_HP", &PlayerController::_set_HP);
+	register_method("_get_HP", &PlayerController::_get_HP);
+	register_method("_set_damage", &PlayerController::_set_damage);
+	register_method("_get_damage", &PlayerController::_get_damage);
+	register_method("_set_attack_speed_delta", &PlayerController::_set_attack_speed_delta);
+	register_method("_get_attack_speed_delta", &PlayerController::_get_attack_speed_delta);
+	register_method("_change_can_fight", &PlayerController::_change_can_fight);
+	register_method("_die", &PlayerController::_die);
+	register_method("_revive", &PlayerController::_revive);
+	register_method("_set_max_HP", &PlayerController::_set_max_HP);
+	register_method("_get_max_HP", &PlayerController::_get_max_HP);
+	register_method("_on_enemy_die", &PlayerController::_on_enemy_die);
+	register_method("_is_alive", &PlayerController::_is_alive);
+	register_method("_start_item_particles", &PlayerController::_start_item_particles);
+	register_method("_update_health_bar", &PlayerController::_update_health_bar);
+	register_method("_update_max_health_bar_size", &PlayerController::_update_max_health_bar_size);
+	register_method("_animate_spider_web", &PlayerController::_animate_spider_web);
+	register_method("_stop_animations", &PlayerController::_stop_animations);
+	register_method("_player_fight", &PlayerController::_player_fight);	
+	register_method("_set_controll_buttons", &PlayerController::_set_controll_buttons);
+	
 	register_property<PlayerController, float>("hp", &PlayerController::_hp, 0);
 	register_property<PlayerController, float>("damage", &PlayerController::_damage, 0);
 	register_property<PlayerController, float>("speed", &PlayerController::speed, 400);
@@ -485,4 +486,9 @@ void godot::PlayerController::_stop_animations()
 void godot::PlayerController::_player_fight()
 {
 	current_player->_fight();
+}
+
+void godot::PlayerController::_set_controll_buttons(String move_up, String move_down, String move_left, String move_right, String fight_up, String fight_down, String fight_left, String fight_right, String special)
+{
+	current_player->_set_controll_buttons(move_up, move_down, move_left, move_right, fight_up, fight_down, fight_left, fight_right, special);
 }

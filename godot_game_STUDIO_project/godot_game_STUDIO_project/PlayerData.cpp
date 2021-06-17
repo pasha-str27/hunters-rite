@@ -151,3 +151,16 @@ bool godot::PlayerData::_get_safe_mode()
 {
 	return is_safe_mode;
 }
+
+void godot::PlayerData::_set_controll_buttons(String move_up, String move_down, String move_left, String move_right, String fight_up, String fight_down, String fight_left, String fight_right, String special)
+{
+	this->move_up = move_up;
+	this->move_down = move_down;
+	this->move_left = move_left;
+	this->move_right = move_right;
+	this->fight_up = fight_up;
+	this->fight_down = fight_down;
+	this->fight_left = fight_left;
+	this->fight_right = fight_right;
+	this->special = special;
+}

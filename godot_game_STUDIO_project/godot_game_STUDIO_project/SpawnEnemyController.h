@@ -33,11 +33,9 @@ namespace godot
 		void _prepare_spawn();
 		void _spawn();
 		void _on_Area2D_area_entered(Node* other);
-		void _stand_random_level();
 		String _get_current_level_name();
+		float _calculate_room_difficulty();
 		SpawnEnemyController();
 		~SpawnEnemyController();
 	};
 }
-
-

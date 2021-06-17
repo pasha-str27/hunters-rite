@@ -73,5 +73,6 @@ namespace godot
 		void _generate_key(Node2D* room);
 		void _set_keys(Node2D* room, Array keys);
 		void _spawn_big_stone();
+		int _get_keys_count();
 	};
 }

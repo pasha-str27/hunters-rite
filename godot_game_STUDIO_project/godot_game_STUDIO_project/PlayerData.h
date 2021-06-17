@@ -19,6 +19,16 @@ namespace godot
 		bool is_safe_mode = false;
 
 	public:
+		String move_up = "Player_up",
+			move_down = "Player_down",
+			move_left = "Player_left",
+			move_right = "Player_right",
+			fight_up = "Player_fight_up",
+			fight_down = "Player_fight_down",
+			fight_left = "Player_fight_left",
+			fight_right = "Player_fight_right",
+			special = "Player_special";
+
 		PlayerData(Node2D* object, Ref<PackedScene>bullet = 0);
 		PlayerData();
 		~PlayerData();
@@ -52,5 +62,7 @@ namespace godot
 		void _set_safe_mode(bool value);
 		bool _get_safe_mode();
 		static Input* input_controller;
+		void _set_controll_buttons(String move_up, String move_down, String move_left,
+			String move_right, String fight_up, String fight_down, String fight_left, String fight_right, String special);
 	};
 }

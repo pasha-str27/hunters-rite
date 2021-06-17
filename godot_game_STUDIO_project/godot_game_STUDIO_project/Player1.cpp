@@ -70,7 +70,7 @@ void godot::Player1::_process_input()
 	Vector2 dir = Vector2(0, 0);
 
 	//fight	up
-	if (input_controller->is_action_pressed("Player1_fight_up"))
+	if (input_controller->is_action_pressed(fight_up))
 	{
 		shoot_particles->set_position(Vector2(0, -9));
 		bullet_dir = Vector2::UP;
@@ -78,7 +78,7 @@ void godot::Player1::_process_input()
 	}
 
 	//fight	down
-	if (input_controller->is_action_pressed("Player1_fight_down"))
+	if (input_controller->is_action_pressed(fight_down))
 	{
 		shoot_particles->set_position(Vector2(0, 9));
 		bullet_dir = Vector2::DOWN;
@@ -86,7 +86,7 @@ void godot::Player1::_process_input()
 	}
 
 	//fight	left
-	if (input_controller->is_action_pressed("Player1_fight_left"))
+	if (input_controller->is_action_pressed(fight_left))
 	{
 		bullet_dir = Vector2::LEFT;
 		sprite->set_flip_h(true);
@@ -96,7 +96,7 @@ void godot::Player1::_process_input()
 	}
 
 	//fight	right
-	if (input_controller->is_action_pressed("Player1_fight_right"))
+	if (input_controller->is_action_pressed(fight_right))
 	{
 		bullet_dir = Vector2::RIGHT;
 		sprite->set_flip_h(false);
@@ -106,26 +106,15 @@ void godot::Player1::_process_input()
 	}
 
 	//move up
-	if (input_controller->is_action_pressed("Player1_up"))
-	{
+	if (input_controller->is_action_pressed(move_up))
 		dir.y -= _get_speed();
-	}
 
 	//move down
-	if (input_controller->is_action_pressed("Player1_down"))
-	{
+	if (input_controller->is_action_pressed(move_down))
 		dir.y += _get_speed();
-	}
-
-	//dash
-	if (input_controller->is_action_just_pressed("Player1_special"))
-	{
-
-		_get_object()->call("_start_special_timer");
-	}
 
 	//move left
-	if (input_controller->is_action_pressed("Player1_left"))
+	if (input_controller->is_action_pressed(move_left))
 	{
 		sprite->set_flip_h(true);
 		sprite->set_offset(Vector2(-35, 0));
@@ -134,13 +123,17 @@ void godot::Player1::_process_input()
 	}
 
 	//move right	
-	if (input_controller->is_action_pressed("Player1_right"))
+	if (input_controller->is_action_pressed(move_right))
 	{
 		sprite->set_flip_h(false);
 		sprite->set_offset(Vector2(35, 0));
 		shoot_particles->set_position(Vector2(11, 0));
 		dir.x += _get_speed();
 	}
+
+	//dash
+	if (input_controller->is_action_just_pressed(special))
+		_get_object()->call("_start_special_timer");
 
 	PlayerData::_set_dir(dir);
 }
@@ -259,4 +252,9 @@ void godot::Player1::_stop_special()
 void godot::Player1::_start_special()
 {
 	_set_speed(_get_speed() * speed_delta);
+}
+
+void godot::Player1::_set_controll_buttons(String move_up, String move_down, String move_left, String move_right, String fight_up, String fight_down, String fight_left, String fight_right, String special)
+{
+	PlayerData::_set_controll_buttons(move_up, move_down, move_left, move_right, fight_up, fight_down, fight_left, fight_right, special);
 }

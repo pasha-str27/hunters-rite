@@ -57,33 +57,33 @@ void godot::Player2::_process_input()
 	Vector2 dir = Vector2(0, 0);
 
 	//dash
-	if (input_controller->is_action_just_pressed("Player2_special"))
+	if (input_controller->is_action_just_pressed(special))
 		_get_object()->call("_start_special_timer");
 
 	//move up
-	if (input_controller->is_action_pressed("Player2_up"))
+	if (input_controller->is_action_pressed(move_up))
 		dir.y -= _get_speed();
 
 	//move down
-	if (input_controller->is_action_pressed("Player2_down"))
+	if (input_controller->is_action_pressed(move_down))
 		dir.y += _get_speed();
 
 	//move left
-	if (input_controller->is_action_pressed("Player2_left"))
+	if (input_controller->is_action_pressed(move_left))
 	{
 		sprite->set_flip_h(true);
 		dir.x -= _get_speed();
 	}
 
 	//move right	
-	if (input_controller->is_action_pressed("Player2_right"))
+	if (input_controller->is_action_pressed(move_right))
 	{
 		sprite->set_flip_h(false);
 		dir.x += _get_speed();
 	}
 
 	//fight	up
-	if (input_controller->is_action_pressed("Player2_fight_up"))
+	if (input_controller->is_action_pressed(fight_up))
 	{
 		cast_to<Node2D>(_get_object()->get_node("Area2D3"))->set_rotation_degrees(270);
 		if(_can_fight())
@@ -91,7 +91,7 @@ void godot::Player2::_process_input()
 	}
 
 	//fight	down
-	if (input_controller->is_action_pressed("Player2_fight_down"))
+	if (input_controller->is_action_pressed(fight_down))
 	{
 		cast_to<Node2D>(_get_object()->get_node("Area2D3"))->set_rotation_degrees(90);
 		if (_can_fight()) 
@@ -99,7 +99,7 @@ void godot::Player2::_process_input()
 	}
 
 	//fight	left
-	if (input_controller->is_action_pressed("Player2_fight_left"))
+	if (input_controller->is_action_pressed(fight_left))
 	{
 		sprite->set_flip_h(true);
 		cast_to<Node2D>(_get_object()->get_node("Area2D3"))->set_rotation_degrees(180);
@@ -108,7 +108,7 @@ void godot::Player2::_process_input()
 	}
 
 	//fight	right
-	if (input_controller->is_action_pressed("Player2_fight_right"))
+	if (input_controller->is_action_pressed(fight_right))
 	{
 		sprite->set_flip_h(false);
 		cast_to<Node2D>(_get_object()->get_node("Area2D3"))->set_rotation_degrees(0);
@@ -243,4 +243,9 @@ void godot::Player2::_start_special()
 
 	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_layer_bit(0, true);
 	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_mask_bit(0, true);
+}
+
+void godot::Player2::_set_controll_buttons(String move_up, String move_down, String move_left, String move_right, String fight_up, String fight_down, String fight_left, String fight_right, String special)
+{
+	PlayerData::_set_controll_buttons(move_up, move_down, move_left, move_right, fight_up, fight_down, fight_left, fight_right, special);
 }

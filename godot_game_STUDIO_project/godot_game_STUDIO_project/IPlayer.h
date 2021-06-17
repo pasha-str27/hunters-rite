@@ -33,5 +33,7 @@ namespace godot
 		virtual void _stop_special() = 0;
 		virtual void _start_special() = 0;
 		virtual bool _get_safe_mode() = 0;
+		virtual void _set_controll_buttons(String move_up, String move_down, String move_left, String move_right, String fight_up, 
+			String fight_down, String fight_left, String fight_right, String special) = 0;
 	};
 }

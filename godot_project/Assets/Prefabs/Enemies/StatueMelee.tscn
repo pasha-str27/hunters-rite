@@ -156,6 +156,7 @@ enemy_price = 20.0
 "enemy",
 "statue_melee",
 ]]
+position = Vector2( 0, -16 )
 z_index = 25
 collision_layer = 4
 collision_mask = 512
