@@ -21,7 +21,7 @@ namespace godot
 		float step_x = 1024;
 		float step_y = 720;
 
-		std::vector<Vector2> positions;
+		static std::vector<Vector2> positions;
 		std::vector<Node2D*> rooms;
 
 		int wall_top_count;
@@ -70,5 +70,10 @@ namespace godot
 		Node2D* _generate_room_to(Node2D* room);
 		void _generate_key(Node2D* room);
 		void _set_keys(Node2D* room, Array keys);
+
+		static std::vector<Vector2> _get_rooms_positions()
+		{
+			return positions;
+		}
 	};
 }

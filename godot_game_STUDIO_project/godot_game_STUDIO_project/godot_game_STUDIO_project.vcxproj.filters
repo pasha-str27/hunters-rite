@@ -38,9 +38,6 @@
     <ClCompile Include="EnemyData.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="EnemySideChecker.cpp">
-      <Filter>Enemies</Filter>
-    </ClCompile>
     <ClCompile Include="FlowerAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
@@ -114,9 +111,6 @@
     <ClCompile Include="LevelGenerator.cpp">
       <Filter>Genetation</Filter>
     </ClCompile>
-    <ClCompile Include="TileMapAnalyzer.cpp">
-      <Filter>Genetation</Filter>
-    </ClCompile>
     <ClCompile Include="MiniMapController.cpp">
       <Filter>UI</Filter>
     </ClCompile>
@@ -166,9 +160,6 @@
       <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="EnemyData.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemySideChecker.h">
       <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="FlowerAI.h">
@@ -246,9 +237,6 @@
     </ClInclude>
     <ClInclude Include="AudioEffect.h">
       <Filter>Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="TileMapAnalyzer.h">
-      <Filter>Genetation</Filter>
     </ClInclude>
     <ClInclude Include="MiniMapController.h">
       <Filter>UI</Filter>

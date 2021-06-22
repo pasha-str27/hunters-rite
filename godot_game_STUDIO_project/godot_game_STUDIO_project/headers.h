@@ -98,3 +98,4 @@ using namespace godot;
 #include "Room.h"
 #include "LevelGenerator.h"
 #include "MiniMapController.h"
+#include "Key.h"

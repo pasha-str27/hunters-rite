@@ -11,10 +11,17 @@ namespace godot
 	private:
 		GODOT_CLASS(MiniMapController, MarginContainer);
 
-		Sprite* curr_room = nullptr;
+		Texture* curr_room = nullptr;
 		Sprite* undisc_room = nullptr;
 		Sprite* disc_room = nullptr;
+
+		TextureRect* grid = nullptr;
+
+		std::vector<Vector2> rooms_positions;
+
 		float zoom = 1.5;
+		float step_x = 1024;
+		float step_y = 720;
 
 	public:
 		static void _register_methods();
@@ -22,7 +29,7 @@ namespace godot
 		void _ready();
 		void _process();
 
-		void _status_checker();
+		
 
 		MiniMapController();
 		~MiniMapController();

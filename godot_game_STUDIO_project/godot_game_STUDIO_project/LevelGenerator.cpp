@@ -3,6 +3,8 @@
 #include "headers.h"
 #endif
 
+std::vector<Vector2> LevelGenerator::positions = {};
+
 godot::LevelGenerator::LevelGenerator()
 {
 }
