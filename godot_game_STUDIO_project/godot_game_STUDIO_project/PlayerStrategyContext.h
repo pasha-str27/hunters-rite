@@ -38,6 +38,9 @@ namespace godot
 		void _stop_special();
 		void _start_special();
 		bool _get_safe_mode();
+		IPlayer* _clone();
+		void _set_was_revived(bool value);
+		void _heal();
 		void _set_controll_buttons(String move_up, String move_down, String move_left, String move_right, String fight_up,
 			String fight_down, String fight_left, String fight_right, String special);
 	};

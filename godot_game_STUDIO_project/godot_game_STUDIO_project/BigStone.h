@@ -20,7 +20,8 @@ namespace godot
 		void _ready();
 		void _remove_player(Node2D* node);
 		void _add_player(Node2D* node);
-		void _hill_players();
+		void _heal_players();
 		void _can_heal_true();
+		void _heal_player(Node2D* player);
 	};
 }

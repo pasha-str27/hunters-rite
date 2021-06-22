@@ -11,6 +11,8 @@ namespace godot
 
 		Node2D* player1;
 		Node2D* player2;
+		Node2D* player1_regular;
+		Node2D* player2_regular;
 		Node* main_camera;
 		Array key_list = {};
 		PlayersContainer();
@@ -27,6 +29,10 @@ namespace godot
 		void _clear();
 		void _set_player1(Node2D* player1);
 		void _set_player2(Node2D* player2);
+		void _set_player1_regular(Node2D* player1);
+		void _set_player2_regular(Node2D* player2);
+		Node2D* _get_player1_regular();
+		Node2D* _get_player2_regular();
 		Node2D* _get_player1();
 		Node2D* _get_player2();
 		int _players_count();

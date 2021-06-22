@@ -29,7 +29,8 @@ void godot::SpawnEnemyController::SpawnEnemies()
 	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
 
-	float current_value = _calculate_room_difficulty();
+	/*float current_value = _calculate_room_difficulty();*/
+	float current_value = 10;
 	std::vector<Vector2> taken_positions;
 
 	enemies->set_enemy_to_spawn_count(0);

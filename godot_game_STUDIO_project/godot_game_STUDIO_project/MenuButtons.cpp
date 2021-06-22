@@ -300,7 +300,7 @@ void godot::MenuButtons::_on_Flower_pressed(Variant)
 		change_scene(choose_player_scene);
 		return;
 	}
-	player_name = 3;
+	//player_name = 3;
 	_start_game(player_name);
 }
 

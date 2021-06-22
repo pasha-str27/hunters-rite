@@ -50,6 +50,14 @@ void godot::PlayerData::_set_speed(float speed)
 	this->speed = speed > 0 ? speed : 0;
 }
 
+void godot::PlayerData::_fight(Node* node)
+{
+}
+
+void godot::PlayerData::_add_bullet(Node* node)
+{
+}
+
 float godot::PlayerData::_get_speed()
 {
 	return speed;
@@ -88,6 +96,14 @@ bool godot::PlayerData::_can_fight()
 	return can_fight_value;
 }
 
+void godot::PlayerData::_process_input()
+{
+}
+
+void godot::PlayerData::_set_enemy(Node* enemy)
+{
+}
+
 float godot::PlayerData::_get_HP()
 {
 	return HP;
@@ -119,6 +135,11 @@ bool godot::PlayerData::_was_revived()
 	return was_revived;
 }
 
+void godot::PlayerData::_set_was_revived(bool value)
+{
+	was_revived = value;
+}
+
 float godot::PlayerData::_get_max_HP()
 {
 	return max_HP;
@@ -126,10 +147,14 @@ float godot::PlayerData::_get_max_HP()
 
 void godot::PlayerData::_set_max_HP(float value)
 {
-	float diff = value - max_HP;
+	//float diff = value - max_HP;
 	max_HP = value;
-	float _hp = this->HP + diff;
-	_set_HP(_hp);
+	/*float _hp = this->HP + diff;
+	_set_HP(_hp);*/
+}
+
+void godot::PlayerData::_stop_animations()
+{
 }
 
 float godot::PlayerData::_get_special_time()
@@ -152,6 +177,14 @@ bool godot::PlayerData::_get_safe_mode()
 	return is_safe_mode;
 }
 
+void godot::PlayerData::_stop_special()
+{
+}
+
+void godot::PlayerData::_start_special()
+{
+}
+
 void godot::PlayerData::_set_controll_buttons(String move_up, String move_down, String move_left, String move_right, String fight_up, String fight_down, String fight_left, String fight_right, String special)
 {
 	this->move_up = move_up;
@@ -163,4 +196,29 @@ void godot::PlayerData::_set_controll_buttons(String move_up, String move_down, 
 	this->fight_left = fight_left;
 	this->fight_right = fight_right;
 	this->special = special;
+}
+
+std::map<String, String> godot::PlayerData::_get_controll_buttons()
+{
+	std::map<String, String> controlls;
+	controlls.insert(std::make_pair("move_up", move_up));
+	controlls.insert(std::make_pair("move_down", move_down));
+	controlls.insert(std::make_pair("move_left", move_left));
+	controlls.insert(std::make_pair("move_right", move_right));
+	controlls.insert(std::make_pair("fight_up", fight_up));
+	controlls.insert(std::make_pair("fight_down", fight_down));
+	controlls.insert(std::make_pair("fight_left", fight_left));
+	controlls.insert(std::make_pair("fight_right", fight_right));
+	controlls.insert(std::make_pair("special", special));
+	return controlls;
+}
+
+IPlayer* godot::PlayerData::_clone()
+{
+	return this;
+}
+
+void godot::PlayerData::_heal()
+{
+	_set_HP(_get_max_HP());
 }

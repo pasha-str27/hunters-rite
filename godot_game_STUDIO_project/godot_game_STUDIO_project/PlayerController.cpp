@@ -7,7 +7,6 @@ void godot::PlayerController::_register_methods()
 {
 	register_method("_process", &PlayerController::_process);
 	register_method("_ready", &PlayerController::_ready);
-	register_method("_input", &PlayerController::_input);
 	register_method("_add_bullet", &PlayerController::_add_bullet);
 	register_method("_start_timer", &PlayerController::_start_timer);
 	register_method("_on_timeout", &PlayerController::_on_timeout);
@@ -50,6 +49,9 @@ void godot::PlayerController::_register_methods()
 	register_method("_stop_animations", &PlayerController::_stop_animations);
 	register_method("_player_fight", &PlayerController::_player_fight);	
 	register_method("_set_controll_buttons", &PlayerController::_set_controll_buttons);
+	register_method("_stay_ghost", &PlayerController::_stay_ghost);
+	register_method("_heal", &PlayerController::_heal);
+	register_method("_ghost_to_player", &PlayerController::_ghost_to_player);
 	
 	register_property<PlayerController, float>("hp", &PlayerController::_hp, 0);
 	register_property<PlayerController, float>("damage", &PlayerController::_damage, 0);
@@ -172,10 +174,8 @@ void godot::PlayerController::_on_special_timeout()
 {
 	current_player_strategy->_stop_special();
 
-	//current_player->_process_input();
 	if(is_in_group("player2"))
 		cast_to<AnimationPlayer>(get_node("Shield")->find_node("AnimationPlayer"))->play("shield_end");
-
 
 	timer->disconnect("timeout", this, "_on_special_timeout");
 	_start_dash_cooldow_timer();
@@ -227,19 +227,13 @@ void godot::PlayerController::_add_bullet(Node* node)
 	current_player_strategy->_add_bullet(node);
 }
 
-void godot::PlayerController::_input(InputEvent* event)
-{
-	//if (can_move && is_alive)
-	//	current_player->_process_input(event);
-}
-
 void godot::PlayerController::_process(float delta)
 {
-	if (can_move && is_alive)
+	if (can_move && is_alive || is_ghost_mode)
+	{
 		current_player_strategy->_process_input();
-
-	if (can_move && is_alive)
 		current_player_strategy->_move();
+	}
 }
 
 void godot::PlayerController::_take_damage(float damage, bool is_spike)
@@ -269,7 +263,7 @@ void godot::PlayerController::_on_Area2D_area_entered(Node* node)
 {
 	auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
 
-	if (node->is_in_group("door_zone") && is_alive)
+	if (node->is_in_group("door_zone") && (is_alive || is_ghost_mode))
 	{
 		camera->call("_door_collision", node->get_name());
 		door = node;
@@ -366,6 +360,12 @@ float godot::PlayerController::_get_HP()
 	return current_player_strategy->_get_HP();
 }
 
+void godot::PlayerController::_heal()
+{
+	current_player_strategy->_heal();
+	_update_health_bar();
+}
+
 void godot::PlayerController::_set_damage(float value)
 {
 	current_player_strategy->_set_damage(value);
@@ -394,7 +394,25 @@ void godot::PlayerController::_die()
 		camera->call("_door_collision", "-" + door->get_name());
 	}
 	is_alive = false;
+
+	prev_state = current_player_strategy->_clone();
+
+	is_alive = false;
+
+	prev_state = current_player_strategy->_clone();
+	if (current_player_strategy->_was_revived())
+	{
+		is_ghost_mode = true;
+		current_player_strategy->_set_strategy(player_producer->_get_player_ghost(this, bullet_prefab));
+		_restore_data();
+		return;
+	}
+
+	current_player_strategy->_set_was_revived(true);
 	add_child(revive_zone->instance());
+	current_player_strategy->_set_strategy(player_producer->_get_player_died(this, bullet_prefab));
+	_restore_data();
+	current_player_strategy->_get_health_bar()->set_value(0);
 }
 
 void godot::PlayerController::_revive()
@@ -405,8 +423,10 @@ void godot::PlayerController::_revive()
 	Ref<PackedScene> prefab = nullptr;
 	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/PlayerRevive.tscn");
 	add_child(prefab->instance());
+	current_player_strategy->_set_strategy(player_producer->_get_player(this, bullet_prefab));
+	_restore_data();
+	_set_max_HP(prev_state->_get_max_HP());
 	_set_HP(_get_max_HP() * (float)0.15);
-	_update_health_bar();
 }
 
 float godot::PlayerController::_get_max_HP()
@@ -476,6 +496,49 @@ void godot::PlayerController::_stop_animations()
 void godot::PlayerController::_player_fight()
 {
 	current_player_strategy->_fight();
+}
+
+void godot::PlayerController::_restore_data()
+{
+	std::map<String, String> controll_buttons = prev_state->_get_controll_buttons();
+	
+	_set_controll_buttons(controll_buttons["move_up"], controll_buttons["move_down"],
+		controll_buttons["move_left"], controll_buttons["move_right"], controll_buttons["fight_up"], controll_buttons["fight_down"],
+		controll_buttons["fight_left"], controll_buttons["fight_right"], controll_buttons["special"]);
+	
+	controll_buttons.clear();
+
+	_set_max_HP(prev_state->_get_max_HP());
+	_set_damage(prev_state->_get_damage());
+	_set_speed(prev_state->_get_speed());
+	_set_was_revived(prev_state->_was_revived());
+}
+
+void godot::PlayerController::_stay_ghost()
+{
+	is_alive = false;
+
+	prev_state = current_player_strategy->_clone();
+	if (current_player_strategy->_was_revived())
+	{
+		current_player_strategy->_set_strategy(player_producer->_get_player_ghost(this, bullet_prefab));
+		_restore_data();
+	}
+}
+
+void godot::PlayerController::_set_was_revived(bool value)
+{
+	current_player_strategy->_set_was_revived(value);
+}
+
+void godot::PlayerController::_ghost_to_player()
+{
+	prev_state = current_player_strategy->_clone();
+	current_player_strategy->_set_strategy(player_producer->_get_player(this, bullet_prefab));
+	_restore_data();
+	_set_HP(_get_max_HP());
+	_update_health_bar();
+	current_player_strategy->_set_was_revived(false);
 }
 
 void godot::PlayerController::_set_controll_buttons(String move_up, String move_down, String move_left, String move_right, String fight_up, String fight_down, String fight_left, String fight_right, String special)

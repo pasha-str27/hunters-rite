@@ -103,3 +103,7 @@ using namespace godot;
 #include "Key.h"
 #include "EnemyPrice.h"
 #include "PlayerStrategyContext.h"
+#include "PlayerMeleeDied.h"
+#include "PlayerMeleeGhost.h"
+#include "PlayerShootDied.h"
+#include "PlayerShootGhost.h"

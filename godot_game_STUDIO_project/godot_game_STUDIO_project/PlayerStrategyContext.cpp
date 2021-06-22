@@ -50,7 +50,7 @@ void godot::PlayerStrategyContext::_set_special_time(float value)
 
 void godot::PlayerStrategyContext::_stop_special()
 {
-	strategy->_start_special();
+	strategy->_stop_special();
 }
 
 void godot::PlayerStrategyContext::_start_special()
@@ -61,6 +61,21 @@ void godot::PlayerStrategyContext::_start_special()
 bool godot::PlayerStrategyContext::_get_safe_mode()
 {
 	return strategy->_get_safe_mode();
+}
+
+IPlayer* godot::PlayerStrategyContext::_clone()
+{
+	return strategy->_clone();
+}
+
+void godot::PlayerStrategyContext::_set_was_revived(bool value)
+{
+	strategy->_set_was_revived(value);
+}
+
+void godot::PlayerStrategyContext::_heal()
+{
+	strategy->_heal();
 }
 
 godot::PlayerStrategyContext::PlayerStrategyContext()

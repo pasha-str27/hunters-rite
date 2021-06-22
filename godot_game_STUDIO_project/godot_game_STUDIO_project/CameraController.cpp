@@ -158,8 +158,8 @@ void godot::CameraController::_spawn_players()
 		get_parent()->call_deferred("add_child", player);
 		player1 = player;
 		player2 = nullptr;
-		//PlayersContainer::_get_instance()->_set_player1(player1);
-		//PlayersContainer::_get_instance()->_set_player2(player2);
+		PlayersContainer::_get_instance()->_set_player1_regular(player1);
+		PlayersContainer::_get_instance()->_set_player2_regular(player2);
 		get_node("P2HealthBarWrapper")->queue_free();
 		//	hiding label
 		//get_node("P1HealthBarWrapper/Label")->queue_free();
@@ -173,8 +173,8 @@ void godot::CameraController::_spawn_players()
 			get_parent()->call_deferred("add_child", player);
 			player2 = player;
 			player1 = nullptr;
-			//PlayersContainer::_get_instance()->_set_player1(player1);
-			//PlayersContainer::_get_instance()->_set_player2(player2);
+			PlayersContainer::_get_instance()->_set_player1_regular(player1);
+			PlayersContainer::_get_instance()->_set_player2_regular(player2);
 			get_node("P1HealthBarWrapper")->queue_free();
 			//	hiding label
 			//get_node("P2HealthBarWrapper/Label")->queue_free();
@@ -186,12 +186,14 @@ void godot::CameraController::_spawn_players()
 			get_parent()->call_deferred("add_child", player_1);
 			player1 = player_1;
 
-			
-
 			Ref<PackedScene> pl2 = loader->load("res://Assets/Prefabs/Players/Player2.tscn");
 			Node2D* player_2 = cast_to<Node2D>(pl2->instance());
 			get_parent()->call_deferred("add_child", player_2);
 			player2 = player_2;
+
+			PlayersContainer::_get_instance()->_set_player1_regular(player1);
+			PlayersContainer::_get_instance()->_set_player2_regular(player2);
+
 			//player1->call("_set_controll_buttons", "Player1_up", "Player1_down", "Player1_left", "Player1_right", "Player1_fight_up", "Player1_fight_down", "Player1_fight_left", "Player1_fight_right", "Player1_special");
 			if(player2->has_method("_set_controll_buttons"))
 				player2->call_deferred("_set_controll_buttons", "Player2_up", "Player2_down", "Player2_left", "Player2_right", "Player2_fight_up", "Player2_fight_down", "Player2_fight_left", "Player2_fight_right", "Player2_special");
@@ -336,11 +338,11 @@ void godot::CameraController::_door_collision(String door_dir)
 	{
 		Enemies::get_singleton()->set_spawning(true);
 
-		if(PlayersContainer::_get_instance()->_get_player1() != nullptr)
-			PlayersContainer::_get_instance()->_get_player1()->call("_change_moving", false);
+		if(PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
+			PlayersContainer::_get_instance()->_get_player1_regular()->call("_change_moving", false);
 
-		if (PlayersContainer::_get_instance()->_get_player2() != nullptr)
-			PlayersContainer::_get_instance()->_get_player2()->call("_change_moving", false);
+		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
+			PlayersContainer::_get_instance()->_get_player2_regular()->call("_change_moving", false);
 
 		auto fade = cast_to<Node2D>(fadeOut->instance());
 		add_child(fade);

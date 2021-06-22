@@ -23,11 +23,8 @@ namespace godot
 		void _process_input();
 		void _fight(Node* node = nullptr);
 		void _add_bullet(Node* node = nullptr);
-		void _set_enemy(Node* enemy = nullptr);
 		void _set_HP(float value);
-		void _set_speed(float speed);
 		void _take_damage(float damage, bool is_spike = false);
-		void _revive();
 		void _update_health_bar();
 		ProgressBar* _get_health_bar();
 		void _stop_animations();

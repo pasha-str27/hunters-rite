@@ -131,7 +131,21 @@
     <ClCompile Include="AudioController.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerStrategyContext.cpp" />
+    <ClCompile Include="PlayerMeleeDied.cpp">
+      <Filter>Players</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMeleeGhost.cpp">
+      <Filter>Players</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerShootDied.cpp">
+      <Filter>Players</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerShootGhost.cpp">
+      <Filter>Players</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStrategyContext.cpp">
+      <Filter>Players</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
@@ -283,7 +297,21 @@
     <ClInclude Include="ParticlesDestroyer.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerStrategyContext.h" />
+    <ClInclude Include="PlayerMeleeDied.h">
+      <Filter>Players</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMeleeGhost.h">
+      <Filter>Players</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerShootDied.h">
+      <Filter>Players</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerShootGhost.h">
+      <Filter>Players</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStrategyContext.h">
+      <Filter>Players</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Players">

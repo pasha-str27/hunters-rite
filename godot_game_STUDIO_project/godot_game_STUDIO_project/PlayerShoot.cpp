@@ -14,15 +14,27 @@ godot::PlayerShoot::PlayerShoot(Node2D* object, Ref<PackedScene> bullet) : Playe
 
 	shoot_particles = cast_to<Particles2D>(sprite->get_child(0));
 
-	for (int i = 0; i < max_bullet_count; ++i)
+	if (node->get_child_count() == 0)
 	{
-		auto new_obj = bullet->instance();
-		node->add_child(new_obj);
-		available_bullets.push_back(cast_to<Node2D>(new_obj));
+		for (int i = 0; i < max_bullet_count; ++i)
+		{
+			auto new_obj = bullet->instance();
+			node->add_child(new_obj);
+			available_bullets.push_back(cast_to<Node2D>(new_obj));
+		}
 	}
+	else
+		for (int i = 0; i < node->get_child_count(); ++i)
+			available_bullets.push_back(cast_to<Node2D>(node->get_child(i)));
 
 	sprite->play("idle");
 	_set_special_time(0.5);
+
+	cast_to<KinematicBody2D>(object)->set_collision_mask_bit(1, true);
+	cast_to<KinematicBody2D>(object)->set_collision_layer_bit(0, true);
+	cast_to<KinematicBody2D>(object)->set_collision_layer_bit(15, true);
+	cast_to<Area2D>(object->get_node("Area2D"))->set_collision_mask_bit(0, true);
+	cast_to<Area2D>(object->get_node("Area2D"))->set_collision_layer_bit(0, true);
 }
 
 godot::PlayerShoot::~PlayerShoot()
@@ -175,15 +187,6 @@ void godot::PlayerShoot::_fight(Node* node)
 	_get_object()->call("_start_timer");
 }
 
-void godot::PlayerShoot::_set_speed(float speed)
-{
-	PlayerData::_set_speed(speed);
-}
-
-void godot::PlayerShoot::_set_enemy(Node* enemy)
-{
-}
-
 void godot::PlayerShoot::_add_bullet(Node* node)
 {
 	available_bullets.push_back(cast_to<Node2D>(node));
@@ -208,22 +211,8 @@ void  godot::PlayerShoot::_take_damage(float damage, bool is_spike)
 		PlayersContainer::_get_instance()->_set_player1(nullptr);
 		Enemies::get_singleton()->_remove_player1();
 
-		if (_was_revived())
-		{
-			_get_object()->get_parent()->queue_free();
-			return;
-		}
-
 		_get_object()->call("_die");
 	}
-}
-
-void godot::PlayerShoot::_revive()
-{
-	sprite->play("revive");
-	
-	PlayerData::_revive();
-	PlayersContainer::_get_instance()->_set_player1(_get_object());
 }
 
 void godot::PlayerShoot::_update_health_bar()

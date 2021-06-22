@@ -14,6 +14,12 @@ godot::PlayerMelee::PlayerMelee(Node2D* obj, Ref<PackedScene> bullet) : PlayerDa
 
 	animator = cast_to<AnimationPlayer>(_get_object()->get_node("AnimationPlayer"));
 	_set_special_time(1.5);
+
+	cast_to<KinematicBody2D>(obj)->set_collision_mask_bit(1, true);
+	cast_to<KinematicBody2D>(obj)->set_collision_layer_bit(0, true);
+	cast_to<KinematicBody2D>(obj)->set_collision_layer_bit(15, true);
+	cast_to<Area2D>(obj->get_node("Area2D"))->set_collision_mask_bit(0, true);
+	cast_to<Area2D>(obj->get_node("Area2D"))->set_collision_layer_bit(0, true);
 }
 
 godot::PlayerMelee::~PlayerMelee()
@@ -141,18 +147,9 @@ void godot::PlayerMelee::_fight(Node* node)
 	_get_object()->call("_start_timer");
 }
 
-void godot::PlayerMelee::_add_bullet(Node* node)
-{
-}
-
 void godot::PlayerMelee::_set_enemy(Node* enemy)
 {
 	current_enemy = enemy;
-}
-
-void godot::PlayerMelee::_set_speed(float speed)
-{
-	PlayerData::_set_speed(speed);
 }
 
 void godot::PlayerMelee::_take_damage(float damage, bool is_spike)
@@ -166,15 +163,8 @@ void godot::PlayerMelee::_take_damage(float damage, bool is_spike)
 
 	if (_get_HP() <= 0)
 	{
-		Enemies::get_singleton()->_remove_player2();
-
 		sprite->play("death");
-		if (_was_revived())
-		{
-			_get_object()->queue_free();
-			return;
-		}
-
+		Enemies::get_singleton()->_remove_player2();
 		_get_object()->call("_die");
 	}
 }
@@ -188,6 +178,8 @@ void godot::PlayerMelee::_set_HP(float value)
 		Enemies::get_singleton()->_remove_player2();
 		PlayersContainer::_get_instance()->_set_player2(nullptr);
 
+		Godot::print(String::num(_was_revived()));
+
 		if (_was_revived())
 		{
 			_get_object()->queue_free();
@@ -196,14 +188,6 @@ void godot::PlayerMelee::_set_HP(float value)
 		
 		_get_object()->call("_die");
 	}
-}
-
-void godot::PlayerMelee::_revive()
-{
-	sprite->play("revive");
-
-	PlayerData::_revive();
-	PlayersContainer::_get_instance()->_set_player2(_get_object());
 }
 
 void godot::PlayerMelee::_update_health_bar()
@@ -243,9 +227,4 @@ void godot::PlayerMelee::_start_special()
 
 	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_layer_bit(0, true);
 	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_mask_bit(0, true);
-}
-
-void godot::PlayerMelee::_set_controll_buttons(String move_up, String move_down, String move_left, String move_right, String fight_up, String fight_down, String fight_left, String fight_right, String special)
-{
-	PlayerData::_set_controll_buttons(move_up, move_down, move_left, move_right, fight_up, fight_down, fight_left, fight_right, special);
 }
