@@ -99,6 +99,7 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	Ref<Texture> res = rld->load("res://Assets/Sprites/UI/BacksButtonsAndOther/bg_Item.png");
 	item_bacground->set_texture(res);
+	item_bacground->set_position(Vector2(-15, -15));
 	item_bacground->set_modulate(Color(1,1,1,0.6f));
 	item_bacground->set_scale(Vector2(0.7 , 0.7));
 	//res->free();
@@ -108,6 +109,7 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 	Ref<Theme> theme = rld->load("res://Assets/Font/font_theme.tres");
 	text->set_name("counter");
 	text->set_visible(false);
+	//text->set_scale(Vector2(0.3,0.3));
 	text->set_theme(theme);
 	text->set_position(Vector2(5,6));
 	text->set_text("x" + String::num(items_counter));

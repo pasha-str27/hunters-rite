@@ -119,9 +119,6 @@
     <ClCompile Include="Key.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyPrice.cpp">
-      <Filter>Enemies</Filter>
-    </ClCompile>
     <ClCompile Include="MagnitZone.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
@@ -145,6 +142,9 @@
     </ClCompile>
     <ClCompile Include="PlayerStrategyContext.cpp">
       <Filter>Players</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyPrice.cpp">
+      <Filter>Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -273,9 +273,6 @@
     <ClInclude Include="Key.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyPrice.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="MagnitZone.h">
       <Filter>Enemies</Filter>
     </ClInclude>
@@ -311,6 +308,9 @@
     </ClInclude>
     <ClInclude Include="PlayerStrategyContext.h">
       <Filter>Players</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyPrice.h">
+      <Filter>Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
