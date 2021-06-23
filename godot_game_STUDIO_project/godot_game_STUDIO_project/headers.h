@@ -29,7 +29,9 @@
 #include <InputEvent.hpp>
 #include <TileMap.hpp>
 #include <Tree.hpp>
+#include <Theme.hpp>
 #include <Label.hpp>
+#include <TextEdit.hpp>
 #include <Array.hpp>
 #include <ScrollContainer.hpp>
 #include <ProgressBar.hpp>
@@ -53,21 +55,24 @@
 #include <Dictionary.hpp>
 #include <ResourceSaver.hpp>
 #include <Control.hpp>
+#include <MarginContainer.hpp>
 
 using namespace godot;
 
 //project includes
 #include "IPlayer.h"
 #include "PlayerData.h"
-#include "Player1.h"
-#include "Player2.h"
+#include "PlayerShoot.h"
+#include "PlayerMelee.h"
 #include "PlayerController.h"
 #include "Bullet.h"
-#include "Enemy.h"
+#include "IEnemyAI.h"
 #include "EnemyData.h"
+#include "EnemyAIContext.h"
+#include "Enemy.h"
 #include "PlayerProduce.h"
-#include "ProducePlayer1.h"
-#include "ProducePlayer2.h"
+#include "ProducePlayerShoot.h"
+#include "ProducePlayerMelee.h"
 #include "Sword.h"
 #include "CameraController.h"
 #include "Spike.h"
@@ -96,3 +101,14 @@ using namespace godot;
 #include "MagnitZone.h"
 #include "Room.h"
 #include "LevelGenerator.h"
+#include "BigStone.h"
+#include "AudioController.h"
+#include "MiniMapController.h"
+#include "Key.h"
+#include "EnemyPrice.h"
+#include "PlayerStrategyContext.h"
+#include "PlayerMeleeDied.h"
+#include "PlayerMeleeGhost.h"
+#include "PlayerShootDied.h"
+#include "PlayerShootGhost.h"
+#include "SlimeShootAI.h"

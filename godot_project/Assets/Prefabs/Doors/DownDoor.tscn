@@ -24,7 +24,8 @@ tile_data = PoolIntArray( 524287, 4, 0, 458752, 4, 0 )
 ]]
 position = Vector2( -0.570603, 239.852 )
 scale = Vector2( 3.12, 1.52 )
-collision_mask = 3
+collision_layer = 524288
+collision_mask = 524290
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ui/bottom"]
 shape = SubResource( 1 )
@@ -35,6 +36,8 @@ scale = Vector2( 0.5, 0.5 )
 z_index = 100
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
+collision_layer = 0
+collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 524287, 26, 0 )
 

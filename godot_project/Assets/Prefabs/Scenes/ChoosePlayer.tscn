@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_background_v2.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_focus_v2.png" type="Texture" id=2]
@@ -12,6 +12,16 @@
 [ext_resource path="res://Assets/Prefabs/Animations/FadeOut.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=12]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/background_item_focus.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/mudguard.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/druid.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/Bot Wheel.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/stormhead.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/droid.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/Guardian.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Sprites/UI/background_item_focus.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/bg_Item.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Sprites/UI/arrow_left.png" type="Texture" id=22]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Focus_scale"
@@ -46,6 +56,12 @@ tracks/1/keys = {
 size = 17
 font_data = ExtResource( 11 )
 
+[sub_resource type="DynamicFont" id=5]
+size = 13
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 11 )
+
 [sub_resource type="Animation" id=3]
 resource_name = "Focus_scale"
 length = 1.5
@@ -74,6 +90,23 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
+
+[sub_resource type="DynamicFont" id=6]
+size = 27
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 8
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 11 )
+
+[sub_resource type="Theme" id=8]
+default_font = SubResource( 7 )
+Label/fonts/font = SubResource( 6 )
 
 [sub_resource type="Animation" id=4]
 resource_name = "Focus_scale"
@@ -134,7 +167,8 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="ChoosePlayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 1280.0
+margin_left = 1.78174
+margin_right = 1281.78
 margin_bottom = 720.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -145,28 +179,201 @@ margin_right = 1280.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
 
-[node name="Tasks" type="CenterContainer" parent="ChoosePlayer/VBoxContainer"]
+[node name="Skins" type="CenterContainer" parent="ChoosePlayer/VBoxContainer"]
+visible = false
 margin_top = 104.0
 margin_right = 1280.0
-margin_bottom = 424.0
+margin_bottom = 204.0
+rect_min_size = Vector2( 0, 100 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ChoosePlayer/VBoxContainer/Tasks"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ChoosePlayer/VBoxContainer/Skins"]
+margin_left = 122.0
+margin_top = 5.0
+margin_right = 1158.0
+margin_bottom = 95.0
+
+[node name="TextureRect2" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer"]
+margin_right = 32.0
+margin_bottom = 90.0
+texture = ExtResource( 22 )
+stretch_mode = 6
+
+[node name="CenterContainer5" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.682353 )
+margin_left = 36.0
+margin_right = 96.0
+margin_bottom = 90.0
+
+[node name="Skin6" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer5"]
+margin_top = 15.0
+margin_right = 60.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 60, 60 )
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer5"]
+modulate = Color( 0.960784, 0.152941, 0.152941, 1 )
+margin_left = 8.0
+margin_top = 21.0
+margin_right = 52.0
+margin_bottom = 69.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 8 )
+stretch_mode = 6
+
+[node name="CenterContainer6" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer"]
+margin_left = 100.0
+margin_right = 190.0
+margin_bottom = 90.0
+
+[node name="Skin5" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer6"]
+margin_right = 90.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 90, 90 )
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer6"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 60, 60 )
+texture = ExtResource( 8 )
+stretch_mode = 6
+
+[node name="CenterContainer7" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.682353 )
+margin_left = 194.0
+margin_right = 254.0
+margin_bottom = 90.0
+
+[node name="Skin6" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer7"]
+margin_top = 15.0
+margin_right = 60.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 60, 60 )
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer7"]
+modulate = Color( 0.898039, 0.905882, 0.0941176, 1 )
+margin_left = 8.0
+margin_top = 21.0
+margin_right = 52.0
+margin_bottom = 69.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 8 )
+stretch_mode = 6
+
+[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer"]
+margin_left = 258.0
+margin_right = 290.0
+margin_bottom = 90.0
+texture = ExtResource( 22 )
+stretch_mode = 6
+flip_h = true
+
+[node name="Free" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer"]
+margin_left = 294.0
+margin_right = 814.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 520, 0 )
+
+[node name="CenterContainer4" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.682353 )
+margin_left = 818.0
+margin_right = 878.0
+margin_bottom = 90.0
+
+[node name="Skin6" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer4"]
+margin_top = 15.0
+margin_right = 60.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 60, 60 )
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer4"]
+modulate = Color( 0, 0.486275, 1, 1 )
+margin_left = 14.0
+margin_top = 30.0
+margin_right = 46.0
+margin_bottom = 60.0
+texture = ExtResource( 4 )
+
+[node name="CenterContainer3" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer"]
+margin_left = 882.0
+margin_right = 972.0
+margin_bottom = 90.0
+
+[node name="Skin5" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer3"]
+margin_right = 90.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 90, 90 )
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer3"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 60, 60 )
+texture = ExtResource( 4 )
+stretch_mode = 6
+
+[node name="CenterContainer2" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.682353 )
+margin_left = 976.0
+margin_right = 1036.0
+margin_bottom = 90.0
+
+[node name="Skin6" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer2"]
+margin_top = 15.0
+margin_right = 60.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 60, 60 )
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer2"]
+modulate = Color( 1, 0.164706, 0.164706, 1 )
+margin_left = 14.0
+margin_top = 30.0
+margin_right = 46.0
+margin_bottom = 60.0
+texture = ExtResource( 4 )
+
+[node name="Players_animations" type="CenterContainer" parent="ChoosePlayer/VBoxContainer"]
+margin_top = 104.0
 margin_right = 1280.0
-margin_bottom = 320.0
+margin_bottom = 394.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ChoosePlayer/VBoxContainer/Players_animations"]
+margin_right = 1280.0
+margin_bottom = 290.0
 rect_min_size = Vector2( 1280, 256 )
 alignment = 1
 
-[node name="PlayerOne" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer"]
-margin_left = 318.0
-margin_right = 638.0
-margin_bottom = 320.0
+[node name="PlayerOne" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer"]
+margin_left = 122.0
+margin_right = 412.0
+margin_bottom = 290.0
 rect_min_size = Vector2( 256, 256 )
 mouse_filter = 2
 
-[node name="PlayerOne_button" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerOne"]
-margin_right = 320.0
-margin_bottom = 320.0
-rect_min_size = Vector2( 320, 320 )
+[node name="PlayerOne_button" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerOne"]
+margin_right = 290.0
+margin_bottom = 290.0
+rect_min_size = Vector2( 290, 290 )
 focus_neighbour_left = NodePath("../../PlayerTwo/PlayerTwo_button")
 focus_neighbour_top = NodePath("../../../../CenterContainer/Back")
 focus_neighbour_right = NodePath("../../PlayerTwo/PlayerTwo_button")
@@ -175,7 +382,7 @@ mouse_filter = 2
 texture_normal = ExtResource( 6 )
 expand = true
 
-[node name="Focus" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerOne/PlayerOne_button"]
+[node name="Focus" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerOne/PlayerOne_button"]
 visible = false
 modulate = Color( 1, 1, 1, 0.869608 )
 anchor_right = 1.0
@@ -197,17 +404,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayerOneAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerOne/PlayerOne_button"]
+[node name="PlayerOneAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerOne/PlayerOne_button"]
 anims/Focus_scale = SubResource( 1 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerOne"]
-margin_left = 96.0
-margin_top = 65.0
-margin_right = 224.0
-margin_bottom = 254.0
+[node name="VBoxContainer" type="VBoxContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerOne"]
+margin_left = 60.0
+margin_top = 69.0
+margin_right = 230.0
+margin_bottom = 221.0
 
-[node name="PlayerOne_sprite" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerOne/VBoxContainer"]
-margin_right = 128.0
+[node name="PlayerOne_sprite" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerOne/VBoxContainer"]
+margin_right = 170.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 128, 128 )
 mouse_filter = 2
@@ -215,27 +422,73 @@ texture = ExtResource( 8 )
 expand = true
 stretch_mode = 6
 
-[node name="Description" type="Label" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerOne/VBoxContainer"]
+[node name="Description" type="Label" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerOne/VBoxContainer"]
 margin_top = 132.0
-margin_right = 128.0
-margin_bottom = 189.0
+margin_right = 170.0
+margin_bottom = 152.0
+rect_min_size = Vector2( 0, 20 )
 custom_fonts/font = SubResource( 2 )
-text = "Melee
-HP:100
-DMG:20"
+text = "BLUE FANKA"
 align = 1
 
-[node name="PlayerTwo" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer"]
-margin_left = 642.0
-margin_right = 962.0
-margin_bottom = 320.0
+[node name="CenterContainer" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer"]
+margin_left = 416.0
+margin_right = 864.0
+margin_bottom = 290.0
+rect_min_size = Vector2( 440, 0 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/CenterContainer"]
+margin_top = 74.0
+margin_right = 448.0
+margin_bottom = 215.0
+
+[node name="Label" type="Label" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/CenterContainer/HBoxContainer"]
+margin_right = 195.0
+margin_bottom = 141.0
+custom_fonts/font = SubResource( 5 )
+text = "BLUE FANKA
+
+HP:100
+
+DMG:20
+
+SPEED:200
+
+Special: Shield"
+
+[node name="CenterContainer" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/CenterContainer/HBoxContainer"]
+margin_left = 199.0
+margin_right = 249.0
+margin_bottom = 141.0
+rect_min_size = Vector2( 50, 0 )
+
+[node name="Label2" type="Label" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/CenterContainer/HBoxContainer"]
+margin_left = 253.0
+margin_right = 448.0
+margin_bottom = 141.0
+custom_fonts/font = SubResource( 5 )
+text = "SPROTE
+
+HP:100
+
+DMG:20
+
+SPEED:200
+
+Special: Shield"
+align = 2
+
+[node name="PlayerTwo" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer"]
+margin_left = 868.0
+margin_right = 1158.0
+margin_bottom = 290.0
 rect_min_size = Vector2( 256, 256 )
 mouse_filter = 2
 
-[node name="PlayerTwo_button" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerTwo"]
-margin_right = 320.0
-margin_bottom = 320.0
-rect_min_size = Vector2( 320, 320 )
+[node name="PlayerTwo_button" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerTwo"]
+margin_right = 290.0
+margin_bottom = 290.0
+rect_min_size = Vector2( 290, 290 )
 focus_neighbour_left = NodePath("../../PlayerOne/PlayerOne_button")
 focus_neighbour_top = NodePath("../../../../CenterContainer/Back")
 focus_neighbour_right = NodePath("../../PlayerOne/PlayerOne_button")
@@ -244,7 +497,7 @@ mouse_filter = 2
 texture_normal = ExtResource( 6 )
 expand = true
 
-[node name="Focus" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerTwo/PlayerTwo_button"]
+[node name="Focus" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerTwo/PlayerTwo_button"]
 visible = false
 modulate = Color( 1, 1, 1, 0.869608 )
 anchor_right = 1.0
@@ -266,16 +519,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayerTwoAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerTwo/PlayerTwo_button"]
+[node name="PlayerTwoAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerTwo/PlayerTwo_button"]
 anims/Focus_scale = SubResource( 3 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerTwo"]
-margin_left = 96.0
-margin_top = 65.0
-margin_right = 224.0
-margin_bottom = 254.0
+[node name="VBoxContainer" type="VBoxContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerTwo"]
+margin_left = 81.0
+margin_top = 69.0
+margin_right = 209.0
+margin_bottom = 221.0
 
-[node name="PlayerTwo_sprite" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerTwo/VBoxContainer"]
+[node name="PlayerTwo_sprite" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerTwo/VBoxContainer"]
 margin_right = 128.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 128, 128 )
@@ -283,26 +536,440 @@ mouse_filter = 2
 texture = ExtResource( 4 )
 expand = true
 
-[node name="Description" type="Label" parent="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerTwo/VBoxContainer"]
+[node name="Description" type="Label" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerTwo/VBoxContainer"]
 margin_top = 132.0
 margin_right = 128.0
-margin_bottom = 189.0
+margin_bottom = 152.0
+rect_min_size = Vector2( 0, 20 )
 custom_fonts/font = SubResource( 2 )
-text = "Shooter
-HP:90
-DMG:25"
+text = "SPROTE"
 align = 1
 
 [node name="Free_space_bottom" type="CenterContainer" parent="ChoosePlayer/VBoxContainer"]
-margin_top = 428.0
+margin_top = 398.0
 margin_right = 1280.0
-margin_bottom = 568.0
-rect_min_size = Vector2( 0, 140 )
+margin_bottom = 438.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ChoosePlayer/VBoxContainer/Free_space_bottom"]
+margin_left = 232.0
+margin_top = 6.0
+margin_right = 1048.0
+margin_bottom = 33.0
+
+[node name="Label" type="Label" parent="ChoosePlayer/VBoxContainer/Free_space_bottom/HBoxContainer"]
+margin_right = 54.0
+margin_bottom = 27.0
+theme = SubResource( 8 )
+text = "P1"
+
+[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Free_space_bottom/HBoxContainer"]
+margin_left = 58.0
+margin_right = 758.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 700, 0 )
+
+[node name="Label2" type="Label" parent="ChoosePlayer/VBoxContainer/Free_space_bottom/HBoxContainer"]
+margin_left = 762.0
+margin_right = 816.0
+margin_bottom = 27.0
+theme = SubResource( 8 )
+text = "P2"
+
+[node name="Chapters" type="CenterContainer" parent="ChoosePlayer/VBoxContainer"]
+margin_top = 442.0
+margin_right = 1280.0
+margin_bottom = 542.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ChoosePlayer/VBoxContainer/Chapters"]
+margin_left = 226.0
+margin_right = 1054.0
+margin_bottom = 100.0
+
+[node name="CenterContainer7" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
+margin_right = 100.0
+margin_bottom = 100.0
+
+[node name="Backgr" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer7"]
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer7"]
+margin_left = 25.0
+margin_top = 25.0
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 50, 50 )
+texture = ExtResource( 4 )
+stretch_mode = 6
+
+[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer7"]
+modulate = Color( 0.4, 0.74902, 0.160784, 1 )
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = ExtResource( 20 )
+expand = true
+
+[node name="CenterContainer8" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
+margin_left = 104.0
+margin_right = 204.0
+margin_bottom = 100.0
+
+[node name="TextureButton" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer8"]
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+action_mode = 0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 13 )
+texture_focused = ExtResource( 13 )
+expand = true
+stretch_mode = 5
+
+[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer8"]
+margin_left = 25.0
+margin_top = 25.0
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 50, 50 )
+texture = ExtResource( 8 )
+stretch_mode = 6
+
+[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer8"]
+modulate = Color( 0.0705882, 0.823529, 0.858824, 1 )
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = ExtResource( 20 )
+expand = true
+
+[node name="CenterContainer" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
+margin_left = 208.0
+margin_right = 308.0
+margin_bottom = 100.0
+
+[node name="Backgr" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer"]
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer"]
+margin_left = 25.0
+margin_top = 25.0
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 50, 50 )
+texture = ExtResource( 16 )
+stretch_mode = 6
+
+[node name="CenterContainer2" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
+margin_left = 312.0
+margin_right = 412.0
+margin_bottom = 100.0
+
+[node name="Backgr" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer2"]
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer2"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 80.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 60, 60 )
+texture = ExtResource( 19 )
+stretch_mode = 6
+
+[node name="CenterContainer3" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
+margin_left = 416.0
+margin_right = 516.0
+margin_bottom = 100.0
+
+[node name="Backgr" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer3"]
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer3"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 80.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 60, 60 )
+texture = ExtResource( 18 )
+stretch_mode = 6
+
+[node name="CenterContainer4" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
+margin_left = 520.0
+margin_right = 620.0
+margin_bottom = 100.0
+
+[node name="Backgr" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer4"]
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer4"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 85.0
+margin_bottom = 85.0
+rect_min_size = Vector2( 70, 70 )
+texture = ExtResource( 15 )
+stretch_mode = 6
+
+[node name="CenterContainer5" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
+margin_left = 624.0
+margin_right = 724.0
+margin_bottom = 100.0
+
+[node name="Backgr" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer5"]
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer5"]
+margin_left = 17.0
+margin_top = 17.0
+margin_right = 82.0
+margin_bottom = 82.0
+rect_min_size = Vector2( 65, 65 )
+texture = ExtResource( 14 )
+stretch_mode = 6
+
+[node name="CenterContainer6" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
+margin_left = 728.0
+margin_right = 828.0
+margin_bottom = 100.0
+
+[node name="Backgr" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer6"]
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer6"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 80.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 60, 60 )
+texture = ExtResource( 17 )
+stretch_mode = 6
+
+[node name="CenterContainer2" type="CenterContainer" parent="ChoosePlayer/VBoxContainer"]
+visible = false
+margin_top = 442.0
+margin_right = 1280.0
+margin_bottom = 532.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ChoosePlayer/VBoxContainer/CenterContainer2"]
+margin_left = 121.0
+margin_right = 1159.0
+margin_bottom = 90.0
+
+[node name="TextureRect2" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer"]
+margin_right = 32.0
+margin_bottom = 90.0
+texture = ExtResource( 22 )
+stretch_mode = 6
+
+[node name="CenterContainer5" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.682353 )
+margin_left = 36.0
+margin_right = 96.0
+margin_bottom = 90.0
+
+[node name="Skin6" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer5"]
+margin_top = 15.0
+margin_right = 60.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 60, 60 )
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer5"]
+margin_left = 10.0
+margin_top = 25.0
+margin_right = 50.0
+margin_bottom = 65.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 18 )
+stretch_mode = 6
+
+[node name="CenterContainer6" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer"]
+margin_left = 100.0
+margin_right = 190.0
+margin_bottom = 90.0
+
+[node name="Skin5" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer6"]
+margin_right = 90.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 90, 90 )
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer6"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 60, 60 )
+texture = ExtResource( 8 )
+stretch_mode = 6
+
+[node name="CenterContainer7" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.682353 )
+margin_left = 194.0
+margin_right = 254.0
+margin_bottom = 90.0
+
+[node name="Skin6" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer7"]
+margin_top = 15.0
+margin_right = 60.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 60, 60 )
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer7"]
+margin_left = 10.0
+margin_top = 25.0
+margin_right = 50.0
+margin_bottom = 65.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 14 )
+stretch_mode = 6
+
+[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer"]
+margin_left = 258.0
+margin_right = 290.0
+margin_bottom = 90.0
+texture = ExtResource( 22 )
+stretch_mode = 6
+flip_h = true
+
+[node name="CenterContainer" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer"]
+margin_left = 294.0
+margin_right = 744.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 450, 0 )
+
+[node name="TextureRect3" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer"]
+margin_left = 748.0
+margin_right = 780.0
+margin_bottom = 90.0
+texture = ExtResource( 22 )
+stretch_mode = 6
+
+[node name="CenterContainer8" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.682353 )
+margin_left = 784.0
+margin_right = 844.0
+margin_bottom = 90.0
+
+[node name="Skin6" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer8"]
+margin_top = 15.0
+margin_right = 60.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 60, 60 )
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer8"]
+margin_left = 10.0
+margin_top = 25.0
+margin_right = 50.0
+margin_bottom = 65.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 18 )
+stretch_mode = 6
+
+[node name="CenterContainer9" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer"]
+margin_left = 848.0
+margin_right = 938.0
+margin_bottom = 90.0
+
+[node name="Skin5" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer9"]
+margin_right = 90.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 90, 90 )
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer9"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 60, 60 )
+texture = ExtResource( 4 )
+stretch_mode = 6
+
+[node name="CenterContainer10" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.682353 )
+margin_left = 942.0
+margin_right = 1002.0
+margin_bottom = 90.0
+
+[node name="Skin6" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer10"]
+margin_top = 15.0
+margin_right = 60.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 60, 60 )
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer10"]
+margin_left = 10.0
+margin_top = 25.0
+margin_right = 50.0
+margin_bottom = 65.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 14 )
+stretch_mode = 6
+
+[node name="TextureRect4" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer"]
+margin_left = 1006.0
+margin_right = 1038.0
+margin_bottom = 90.0
+texture = ExtResource( 22 )
+stretch_mode = 6
+flip_h = true
 
 [node name="CenterContainer" type="CenterContainer" parent="ChoosePlayer/VBoxContainer"]
-margin_top = 572.0
+margin_top = 546.0
 margin_right = 1280.0
-margin_bottom = 642.0
+margin_bottom = 616.0
 rect_min_size = Vector2( 0, 52 )
 
 [node name="Back" type="TextureButton" parent="ChoosePlayer/VBoxContainer/CenterContainer"]
@@ -355,14 +1022,14 @@ __meta__ = {
 [node name="BackAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/CenterContainer/Back"]
 anims/Focus_scale = SubResource( 4 )
 
-[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerOne/PlayerOne_button" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "PlayerOne_button", "PlayerOneAnimated" ]]
-[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerOne/PlayerOne_button" to="ChoosePlayer" method="_play_change_cursor_effect"]
-[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerOne/PlayerOne_button" to="ChoosePlayer" method="_on_animated_focus_exited" binds= [ "PlayerOne_button", "PlayerTwoAnimated" ]]
-[connection signal="pressed" from="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerOne/PlayerOne_button" to="ChoosePlayer" method="_start_game" binds= [ 1 ]]
-[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerTwo/PlayerTwo_button" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "PlayerTwo_button", "PlayerTwoAnimated" ]]
-[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerTwo/PlayerTwo_button" to="ChoosePlayer" method="_play_change_cursor_effect"]
-[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerTwo/PlayerTwo_button" to="ChoosePlayer" method="_on_animated_focus_exited" binds= [ "PlayerTwo_button", "PlayerTwoAnimated" ]]
-[connection signal="pressed" from="ChoosePlayer/VBoxContainer/Tasks/HBoxContainer/PlayerTwo/PlayerTwo_button" to="ChoosePlayer" method="_start_game" binds= [ 2 ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerOne/PlayerOne_button" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "PlayerOne_button", "PlayerOneAnimated" ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerOne/PlayerOne_button" to="ChoosePlayer" method="_play_change_cursor_effect"]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerOne/PlayerOne_button" to="ChoosePlayer" method="_on_animated_focus_exited" binds= [ "PlayerOne_button", "PlayerTwoAnimated" ]]
+[connection signal="pressed" from="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerOne/PlayerOne_button" to="ChoosePlayer" method="_start_game" binds= [ 1 ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerTwo/PlayerTwo_button" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "PlayerTwo_button", "PlayerTwoAnimated" ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerTwo/PlayerTwo_button" to="ChoosePlayer" method="_play_change_cursor_effect"]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerTwo/PlayerTwo_button" to="ChoosePlayer" method="_on_animated_focus_exited" binds= [ "PlayerTwo_button", "PlayerTwoAnimated" ]]
+[connection signal="pressed" from="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerTwo/PlayerTwo_button" to="ChoosePlayer" method="_start_game" binds= [ 2 ]]
 [connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/CenterContainer/Back" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "Back", "BackAnimated" ]]
 [connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/CenterContainer/Back" to="ChoosePlayer" method="_play_change_cursor_effect"]
 [connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/CenterContainer/Back" to="ChoosePlayer" method="_on_animated_focus_exited" binds= [ "Back", "BackAnimated" ]]

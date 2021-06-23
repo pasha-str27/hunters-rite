@@ -21,7 +21,7 @@ namespace godot
 		float step_x = 1024;
 		float step_y = 720;
 
-		std::vector<Vector2> positions;
+		static std::vector<Vector2> positions;
 		std::vector<Node2D*> rooms;
 
 		int wall_top_count;
@@ -38,6 +38,11 @@ namespace godot
 		Ref<PackedScene> jertovnik = nullptr;
 		Ref<PackedScene> key_room_pedestal = nullptr;
 
+		Array keys_prefabs = {};
+		Array generated_keys = {};
+
+		Ref<PackedScene> big_stone = nullptr;
+
 	public:
 		LevelGenerator();
 		~LevelGenerator();
@@ -47,7 +52,7 @@ namespace godot
 		void _connect_rooms(Node2D *prev, Node2D* next, Vector2 dir);
 		void _generate();
 		bool _has_room(std::vector<Vector2> positions, Vector2 pos);
-		void _buid_room(Vector2 dir);
+		Node2D* _buid_room(Vector2 dir);
 		void _buid_doors();
 		void _buid_roofs();
 		void _buid_floors();
@@ -63,8 +68,16 @@ namespace godot
 		void _rebuild_doors(std::vector<Node2D*>);
 		void _rebuild_doors(Node2D*);
 		void _create_item_room(std::vector<Node2D*>& cornered_rooms);
-		void _create_boss_room(std::vector<Node2D*>& cornered_rooms);
+		Node2D* _create_boss_room(std::vector<Node2D*>& cornered_rooms);
 		Node2D* _generate_room_to(Node2D* room);
-		void _generate_key(Vector2 pos);
+		void _generate_key(Node2D* room);
+		void _set_keys(Node2D* room, Array keys);
+		void _spawn_big_stone();
+		int _get_keys_count();
+
+		static std::vector<Vector2> _get_rooms_positions()
+		{
+			return positions;
+		}
 	};
 }

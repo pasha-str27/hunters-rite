@@ -10,13 +10,12 @@
 [ext_resource path="res://Assets/Prefabs/Animations/FadeOut.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Prefabs/Animations/FadeIn.tscn" type="PackedScene" id=9]
 
-
 [sub_resource type="DynamicFont" id=1]
 size = 90
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "Focus_scale"
 length = 1.5
 loop = true
@@ -45,7 +44,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "Focus_scale"
 length = 1.5
 loop = true
@@ -204,7 +203,7 @@ __meta__ = {
 }
 
 [node name="RetryAnimated" type="AnimationPlayer" parent="GameOver/VBoxContainer/Buttons/HBoxContainer/RetryButton/Retry"]
-anims/Focus_scale = SubResource( 3 )
+anims/Focus_scale = SubResource( 2 )
 
 [node name="MenuNutton" type="CenterContainer" parent="GameOver/VBoxContainer/Buttons/HBoxContainer"]
 margin_left = 284.0
@@ -266,13 +265,13 @@ __meta__ = {
 }
 
 [node name="MenuAnimated" type="AnimationPlayer" parent="GameOver/VBoxContainer/Buttons/HBoxContainer/MenuNutton/Menu"]
-anims/Focus_scale = SubResource( 4 )
+anims/Focus_scale = SubResource( 3 )
 
-[connection signal="focus_entered" from="GameOver/VBoxContainer/Buttons/HBoxContainer/RetryButton/Retry" to="GameOver" method="_on_animated_focus_entered" binds= [ "Retry", "RetryAnimated" ]]
 [connection signal="focus_entered" from="GameOver/VBoxContainer/Buttons/HBoxContainer/RetryButton/Retry" to="GameOver" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="GameOver/VBoxContainer/Buttons/HBoxContainer/RetryButton/Retry" to="GameOver" method="_on_animated_focus_entered" binds= [ "Retry", "RetryAnimated" ]]
 [connection signal="focus_exited" from="GameOver/VBoxContainer/Buttons/HBoxContainer/RetryButton/Retry" to="GameOver" method="_on_animated_focus_exited" binds= [ "Retry", "RetryAnimated" ]]
 [connection signal="pressed" from="GameOver/VBoxContainer/Buttons/HBoxContainer/RetryButton/Retry" to="GameOver" method="_on_Retry_pressed"]
-[connection signal="focus_entered" from="GameOver/VBoxContainer/Buttons/HBoxContainer/MenuNutton/Menu" to="GameOver" method="_on_animated_focus_entered" binds= [ "Menu", "MenuAnimated" ]]
 [connection signal="focus_entered" from="GameOver/VBoxContainer/Buttons/HBoxContainer/MenuNutton/Menu" to="GameOver" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="GameOver/VBoxContainer/Buttons/HBoxContainer/MenuNutton/Menu" to="GameOver" method="_on_animated_focus_entered" binds= [ "Menu", "MenuAnimated" ]]
 [connection signal="focus_exited" from="GameOver/VBoxContainer/Buttons/HBoxContainer/MenuNutton/Menu" to="GameOver" method="_on_animated_focus_exited" binds= [ "Menu", "MenuAnimated" ]]
 [connection signal="pressed" from="GameOver/VBoxContainer/Buttons/HBoxContainer/MenuNutton/Menu" to="GameOver" method="_on_Menu_pressed"]

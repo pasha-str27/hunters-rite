@@ -60,13 +60,11 @@ namespace godot
 		void _on_FullScreen_pressed(Variant body);
 		void _play_effect();
 		void _play_change_cursor_effect();
-		void _on_Quit_focus_entered();
-		void _on_Mode_focus_entered();
+		void _on_Mode_focus();
 		void _on_animated_focus_entered(String button_name, String animated_name);
 		void _on_animated_focus_exited(String button_name, String animated_name);
 		void _set_animated_focus(String button_name,String animated_name,bool mode);
-		void _on_Quit_focus_exited();
-		void _on_Mode_focus_exited();
+		void _on_Quit_focus(bool mode);
 		void _set_vertical_scroll(int scroll);
 		void _on_effects_value_changed(float value);
 		void _on_music_value_changed(float value);
@@ -83,5 +81,6 @@ namespace godot
 		void _fade_audio();
 		void _input(Input* event);
 		void _reload_scene();
+		void change_scene(Ref<PackedScene>& scene);
 	};
 }

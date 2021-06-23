@@ -38,6 +38,7 @@ tracks/1/keys = {
 [node name="FireSword" type="Node2D"]
 z_index = 5
 script = ExtResource( 3 )
+Name = "FireSword"
 speed = 0.0
 HP = 20.0
 damage = 20.0

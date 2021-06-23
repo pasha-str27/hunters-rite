@@ -14,15 +14,18 @@ namespace godot
 		void SpawnEnemies();
 		void SpawnBoss();
 		void SpawnItems();
+		void SpawnKey();
 		ItemsContainer* i_container = nullptr;
 		Ref<PackedScene> altar = nullptr;
+		Ref<PackedScene> pedestal = nullptr;
 		Timer* timer = nullptr;
 		int levels_count = 7;
 		String current_level = "";
+		Array enemy_list_prefabs = {};
+		float min_enemy_price;
 
 	public:
 		Array enemies = {};
-		Array spawn_points = {};
 		int enemies_count = 5;
 
 		static void _register_methods();
@@ -32,11 +35,9 @@ namespace godot
 		void _prepare_spawn();
 		void _spawn();
 		void _on_Area2D_area_entered(Node* other);
-		void _stand_random_level();
 		String _get_current_level_name();
+		float _calculate_room_difficulty();
 		SpawnEnemyController();
 		~SpawnEnemyController();
 	};
 }
-
-

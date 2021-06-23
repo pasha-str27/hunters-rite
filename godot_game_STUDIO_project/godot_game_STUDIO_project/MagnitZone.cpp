@@ -61,12 +61,10 @@ void godot::MagnitZone::_on_body_exited(Node* node)
 
 void godot::MagnitZone::_set_player1()
 {
-	Godot::print("set null pl1");
 	player1 = nullptr;
 }
 
 void godot::MagnitZone::_set_player2()
 {
-	Godot::print("set null pl2");
 	player2 = nullptr;
 }

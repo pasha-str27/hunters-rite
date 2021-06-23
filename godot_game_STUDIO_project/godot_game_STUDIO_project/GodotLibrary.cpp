@@ -38,4 +38,8 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<MagnitZone>();
 	register_class<Room>();
 	register_class<LevelGenerator>();
+	register_class<BigStone>();
+	register_class<Key>();
+	register_class<EnemyPrice>();
+	register_class<MiniMapController>();
 }

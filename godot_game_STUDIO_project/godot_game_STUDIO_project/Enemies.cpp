@@ -25,6 +25,8 @@ void godot::Enemies::_remove_enemy(Node2D* enemy)
 		if (enemies[i] == enemy)
 		{
 			enemies.erase(enemies.begin() + i, enemies.begin() + i + 1);
+			if (enemies.size() == 0)
+				CameraController::current_room->call("_set_were_here", true);
 			return;
 		}
 }
@@ -36,7 +38,7 @@ void godot::Enemies::_remove_player1()
 		if (node->is_in_group("statue_melee"))
 			node->get_node("MagnitZone")->call("_set_player1");
 
-		node->call("_remove_player1");
+		node->call_deferred("_remove_player1");
 	}
 }
 
@@ -68,4 +70,24 @@ void godot::Enemies::_set_player2(Node* player)
 void godot::Enemies::_clear()
 {
 	enemies.clear();
+}
+
+bool godot::Enemies::spawning()
+{
+	return is_spawning;
+}
+
+void godot::Enemies::set_spawning(bool value)
+{
+	is_spawning = value;
+}
+
+int godot::Enemies::get_enemy_to_spawn_count()
+{
+	return enemy_to_spawn_count;
+}
+
+void  godot::Enemies::set_enemy_to_spawn_count(int count)
+{
+	enemy_to_spawn_count = count;
 }
