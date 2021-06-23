@@ -18,6 +18,7 @@ namespace godot
 		bool were_here = false;
 
 		bool is_special = false;
+		std::vector<Array> list_of_keys;
 
 	public:
 		Room();

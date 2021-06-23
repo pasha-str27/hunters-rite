@@ -55,6 +55,7 @@
 #include <Dictionary.hpp>
 #include <ResourceSaver.hpp>
 #include <Control.hpp>
+#include <MarginContainer.hpp>
 
 using namespace godot;
 
@@ -102,6 +103,7 @@ using namespace godot;
 #include "LevelGenerator.h"
 #include "BigStone.h"
 #include "AudioController.h"
+#include "MiniMapController.h"
 #include "Key.h"
 #include "EnemyPrice.h"
 #include "PlayerStrategyContext.h"

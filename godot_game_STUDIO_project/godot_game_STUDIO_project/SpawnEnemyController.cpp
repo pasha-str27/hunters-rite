@@ -94,7 +94,7 @@ void godot::SpawnEnemyController::SpawnItems()
 	auto spawned_altar = cast_to<Node2D>(altar->instance());
 	spawned_altar->set_global_position(this->get_global_position());
 
-	get_node("/root/Node2D/Node")->add_child(spawned_altar, true);
+	get_node("/root/Node2D/Node/Generation")->add_child(spawned_altar, true);
 
 	for (int i = 0; i < item_points.size(); i++)
 	{
@@ -105,6 +105,13 @@ void godot::SpawnEnemyController::SpawnItems()
 	}
 
 	rng = nullptr;
+}
+
+void godot::SpawnEnemyController::SpawnKey()
+{
+	auto spawned_pedestal = cast_to<Node2D>(pedestal->instance());
+	spawned_pedestal->set_global_position(cast_to<Node2D>(get_parent())->get_global_position());
+	get_node("/root/Node2D/Node/Generation")->add_child(spawned_pedestal, true);
 }
 
 void godot::SpawnEnemyController::_init()
@@ -175,6 +182,11 @@ void godot::SpawnEnemyController::_on_Area2D_area_entered(Node* other)
 					get_parent()->call("_close_doors");
 					SpawnItems();
 				}
+				else
+					if (room_type == "quest_room")
+					{
+						SpawnKey();
+					}
 
 		get_parent()->call("_set_current_room_type", room_type);
 
