@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/background_item_focus.png-1fb411334041a37ea9faadf079460726.stex"
+path="res://.import/stormhead.png-75610b9033906b47ff2b8429027d9f6a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/UI/BacksButtonsAndOther/background_item_focus.png"
-dest_files=[ "res://.import/background_item_focus.png-1fb411334041a37ea9faadf079460726.stex" ]
+source_file="res://Assets/Sprites/UI/ChoosePlayers/stormhead.png"
+dest_files=[ "res://.import/stormhead.png-75610b9033906b47ff2b8429027d9f6a.stex" ]
 
 [params]
 

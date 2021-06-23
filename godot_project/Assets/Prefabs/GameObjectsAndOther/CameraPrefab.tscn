@@ -170,6 +170,10 @@ __meta__ = {
 
 [node name="P1Items" type="VBoxContainer" parent="ItemHolder"]
 anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = -22.0
+margin_right = 34.0
+margin_bottom = 3.0
 rect_min_size = Vector2( 32, 70 )
 rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 16, 0 )
@@ -182,6 +186,9 @@ __meta__ = {
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -2.0
+margin_right = 32.0
+margin_bottom = 1.0
 rect_min_size = Vector2( 32, 70 )
 rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 16, 0 )
