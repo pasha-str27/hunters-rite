@@ -11,7 +11,6 @@ namespace godot
 		virtual void _process(float delta) = 0;
 		virtual void _add_bullet(Node* bullet=nullptr) = 0;
 		virtual void change_can_fight(bool value) = 0;
-		virtual void _remove_side(int side) = 0;
 		virtual void _change_dir_after_time() = 0;
 		virtual void _delete_player1() = 0;
 		virtual void _delete_player2() = 0;
@@ -46,7 +45,6 @@ namespace godot
 		void change_can_fight(bool value);
 		void _delete_player1();
 		void _delete_player2();
-		void _remove_side(int side);
 		void _change_dir_after_time();
 		String _get_current_player();
 		void _set_speed(float value);
@@ -93,7 +91,6 @@ namespace godot
 			void _destroy_enemy();
 			void _remove_player1();
 			void _remove_player2();
-			void _remove_side(int side);
 			void _change_dir_after_time();
 			void _start_timer_for_dir_change();
 			void _on_Area2D_body_entered(Node* node);

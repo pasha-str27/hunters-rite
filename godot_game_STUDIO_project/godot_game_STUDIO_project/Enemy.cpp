@@ -15,7 +15,6 @@ void godot::Enemy::_register_methods()
 	register_method("_destroy_enemy", &Enemy::_destroy_enemy);
 	register_method("_remove_player1", &Enemy::_remove_player1);
 	register_method("_remove_player2", &Enemy::_remove_player2);
-	register_method("_remove_side", &Enemy::_remove_side);
 	register_method("_change_dir_after_time", &Enemy::_change_dir_after_time);
 	register_method("_start_timer_for_dir_change", &Enemy::_start_timer_for_dir_change);
 	register_method("_on_Area2D_body_entered", &Enemy::_on_Area2D_body_entered);
@@ -244,11 +243,6 @@ void godot::Enemy::_remove_player1()
 void godot::Enemy::_remove_player2()
 {
 	ai->_delete_player2();
-}
-
-void godot::Enemy::_remove_side(int side)
-{
-	ai->_remove_side(side);
 }
 
 void godot::Enemy::_start_timer_for_dir_change()

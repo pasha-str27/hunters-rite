@@ -62,10 +62,6 @@ void godot::EnemyData::_add_bullet(Node* bullet)
 {
 }
 
-void godot::EnemyData::_remove_side(int side)
-{
-}
-
 void godot::EnemyData::_change_dir_after_time()
 {
 }

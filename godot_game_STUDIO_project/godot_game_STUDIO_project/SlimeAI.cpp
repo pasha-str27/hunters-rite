@@ -3,37 +3,82 @@
 #include "headers.h"
 #endif
 
+void  godot::SlimeAI::remove_vector_element(Vector2 element)
+{
+	for (int i = 0; i < directions.size(); ++i)
+		if (directions[i] == element)
+		{
+			directions.erase(directions.begin() + i, directions.begin() + i + 1);
+			return;
+		}
+}
+
 bool godot::SlimeAI::_is_player_near(Node2D* player)
 {
 	Vector2 player_pos_index = (player->get_global_position()
 		- CameraController::current_room->get_global_position()
 		+ Vector2(896, 544) / 2) / 32;
 
+	bool is_player_ghost = (bool)player->call("_is_ghost_mode");
+
+	bool ghost_is_near = false;
+
 	player_pos_index = Vector2((int)player_pos_index.y, (int)player_pos_index.x);
 
 	if (player_pos_index == Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::LEFT).x))
 	{
-		directions.push_back(Vector2::LEFT);
-		return true;
+		if (!is_player_ghost)
+		{
+			directions.clear();
+			directions.push_back(Vector2::LEFT);
+			return true;
+		}
+
+		ghost_is_near = true;
+		remove_vector_element(Vector2::LEFT);
 	}
 
 	if (player_pos_index == Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::RIGHT).x))
 	{
-		directions.push_back(Vector2::RIGHT);
-		return true;
+		if (!is_player_ghost)
+		{
+			directions.clear();
+			directions.push_back(Vector2::RIGHT);
+			return true;
+		}
+
+		ghost_is_near = true;
+		remove_vector_element(Vector2::RIGHT);
 	}
 
 	if (player_pos_index == Vector2((int)(cur_pos + Vector2::DOWN).y, (int)cur_pos.x))
 	{
-		directions.push_back(Vector2::DOWN);
-		return true;
+		if (!is_player_ghost)
+		{
+			directions.clear();
+			directions.push_back(Vector2::DOWN);
+			return true;
+		}
+
+		ghost_is_near = true;
+		remove_vector_element(Vector2::DOWN);
 	}
 
 	if (player_pos_index == Vector2((int)(cur_pos + Vector2::UP).y, (int)cur_pos.x))
 	{
-		directions.push_back(Vector2::UP);
-		return true;
+		if (!is_player_ghost)
+		{
+			directions.clear();
+			directions.push_back(Vector2::UP);
+			return true;
+		}
+
+		ghost_is_near = true;
+		remove_vector_element(Vector2::UP);
 	}
+
+	if (ghost_is_near)
+		return true;
 
 	return false;
 }
@@ -92,61 +137,63 @@ void godot::SlimeAI::change_direction()
 {
 	reset_directions();
 
+	if ((int)CameraController::current_room->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::LEFT).x) == 0)
+		directions.push_back(Vector2::LEFT);
+
+	if ((int)CameraController::current_room->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::RIGHT).x) == 0)
+		directions.push_back(Vector2::RIGHT);
+
+	if ((int)CameraController::current_room->call("_get_cell_value", (cur_pos + Vector2::DOWN).y, cur_pos.x) == 0)
+		directions.push_back(Vector2::DOWN);
+
+	if ((int)CameraController::current_room->call("_get_cell_value", (cur_pos + Vector2::UP).y, cur_pos.x) == 0)
+		directions.push_back(Vector2::UP);
+
 	_fight(_get_player1(), _get_player2());
+
+	PlayersContainer* players = PlayersContainer::_get_instance();
+
+	if (players->_get_player1() == nullptr && players->_get_player1_regular() != nullptr
+		&& (bool)players->_get_player1_regular()->call("_is_ghost_mode") 
+		&& _is_player_near(players->_get_player1_regular()));
+
+	if (players->_get_player2() == nullptr && players->_get_player2_regular() != nullptr
+		&& (bool)players->_get_player2_regular()->call("_is_ghost_mode")
+		&& _is_player_near(players->_get_player2_regular()));
 
 	bool is_player_near = false;
 
-	if (PlayersContainer::_get_instance()->_players_count() > 0)
+	if (players->_players_count() > 0)
 	{
-		if (PlayersContainer::_get_instance()->_get_player1() != nullptr
-			&& PlayersContainer::_get_instance()->_get_player2() != nullptr)
+		if (players->_get_player1() != nullptr
+			&& players->_get_player2() != nullptr)
 		{
 			Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
 			random->randomize();
 
 			if (random->randi_range(0, 1))
 			{
-				is_player_near = _is_player_near(PlayersContainer::_get_instance()->_get_player2());
+				is_player_near = _is_player_near(players->_get_player2());
 				if(!is_player_near)
-					is_player_near = _is_player_near(PlayersContainer::_get_instance()->_get_player1());
+					is_player_near = _is_player_near(players->_get_player1());
 			}
 			else
 			{
-				is_player_near = _is_player_near(PlayersContainer::_get_instance()->_get_player1());
+				is_player_near = _is_player_near(players->_get_player1());
 				if (!is_player_near)
-					is_player_near = _is_player_near(PlayersContainer::_get_instance()->_get_player2());
+					is_player_near = _is_player_near(players->_get_player2());
 			}
 		}
 		else
 		{
-			if (PlayersContainer::_get_instance()->_get_player1() == nullptr)
-				is_player_near = _is_player_near(PlayersContainer::_get_instance()->_get_player2());
+			if (players->_get_player1() == nullptr)
+				is_player_near = _is_player_near(players->_get_player2());
 			else
-				is_player_near = _is_player_near(PlayersContainer::_get_instance()->_get_player1());
+				is_player_near = _is_player_near(players->_get_player1());
 		}
 	}
 
-	if (!is_player_near)
-	{
-		if ((int)CameraController::current_room->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::LEFT).x) == 0)
-			directions.push_back(Vector2::LEFT);
-
-		if ((int)CameraController::current_room->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::RIGHT).x) == 0)
-			directions.push_back(Vector2::RIGHT);
-
-		if ((int)CameraController::current_room->call("_get_cell_value", (cur_pos + Vector2::DOWN).y, cur_pos.x) == 0)
-			directions.push_back(Vector2::DOWN);
-
-		if ((int)CameraController::current_room->call("_get_cell_value", (cur_pos + Vector2::UP).y, cur_pos.x) == 0)
-			directions.push_back(Vector2::UP);
-	}
-
 	_change_dir_after_time();
-}
-
-void godot::SlimeAI::_remove_side(int dir)
-{
-	//directions.push_back(dir);
 }
 
 void godot::SlimeAI::_change_dir_after_time()

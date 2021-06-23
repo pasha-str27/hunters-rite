@@ -45,6 +45,61 @@ void godot::SpiderAI::reset_directions()
 	directions.clear();
 }
 
+void  godot::SpiderAI::remove_vector_element(Vector2 element)
+{
+	for (int i = 0; i < directions.size(); ++i)
+		if (directions[i] == element)
+		{
+			directions.erase(directions.begin() + i, directions.begin() + i + 1);
+			return;
+		}
+}
+
+bool godot::SpiderAI::_is_player_near(Node2D* player)
+{
+	Vector2 player_pos_index = (player->get_global_position()
+		- CameraController::current_room->get_global_position()
+		+ Vector2(896, 544) / 2) / 32;
+
+	bool is_player_ghost = (bool)player->call("_is_ghost_mode");
+
+	bool ghost_is_near = false;
+
+	player_pos_index = Vector2((int)player_pos_index.y, (int)player_pos_index.x);
+
+	if (is_player_ghost)
+	{
+		if (player_pos_index == Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::LEFT).x))
+		{
+			ghost_is_near = true;
+			remove_vector_element(Vector2::LEFT);
+		}
+
+		if (player_pos_index == Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::RIGHT).x))
+		{
+			ghost_is_near = true;
+			remove_vector_element(Vector2::RIGHT);
+		}
+
+		if (player_pos_index == Vector2((int)(cur_pos + Vector2::DOWN).y, (int)cur_pos.x))
+		{
+			ghost_is_near = true;
+			remove_vector_element(Vector2::DOWN);
+		}
+
+		if (player_pos_index == Vector2((int)(cur_pos + Vector2::UP).y, (int)cur_pos.x))
+		{
+			ghost_is_near = true;
+			remove_vector_element(Vector2::UP);
+		}
+	}
+
+	if (ghost_is_near)
+		return true;
+
+	return false;
+}
+
 void godot::SpiderAI::change_direction()
 {
 	reset_directions();
@@ -61,12 +116,17 @@ void godot::SpiderAI::change_direction()
 	if ((int)CameraController::current_room->call("_get_cell_value", (cur_pos + Vector2::UP).y, cur_pos.x) == 0)
 		directions.push_back(Vector2::UP);
 
-	_change_dir_after_time();
-}
+	PlayersContainer* players = PlayersContainer::_get_instance();
 
-void godot::SpiderAI::_remove_side(int dir)
-{
-	//directions.push_back(dir);
+	if (players->_get_player1() == nullptr && players->_get_player1_regular() != nullptr
+		&& (bool)players->_get_player1_regular()->call("_is_ghost_mode")
+		&& _is_player_near(players->_get_player1_regular()));
+
+	if (players->_get_player2() == nullptr && players->_get_player2_regular() != nullptr
+		&& (bool)players->_get_player2_regular()->call("_is_ghost_mode")
+		&& _is_player_near(players->_get_player2_regular()));
+
+	_change_dir_after_time();
 }
 
 void godot::SpiderAI::_change_dir_after_time()

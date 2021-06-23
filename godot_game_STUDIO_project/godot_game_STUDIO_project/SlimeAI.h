@@ -30,13 +30,13 @@ namespace godot
 		void change_can_fight(bool value);
 		void reset_directions();
 		void change_direction();
-		void _remove_side(int side);
 		void _change_dir_after_time();
-		void _fight(Node2D* player1, Node2D* player2);
+		virtual void _fight(Node2D* player1, Node2D* player2);
 		bool _is_player_near(Node2D* player);
 		void _set_speed(float value);
 		void _set_is_player1_onArea(bool value);
 		void _set_is_player2_onArea(bool value);
 		void _change_start_parameters();
+		void remove_vector_element(Vector2 element);
 	};
 }

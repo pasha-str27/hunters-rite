@@ -71,11 +71,6 @@ void godot::EnemyAIContext::_delete_player2()
 	strategy->_delete_player2();
 }
 
-void godot::EnemyAIContext::_remove_side(int side)
-{
-	strategy->_remove_side(side);
-}
-
 void godot::EnemyAIContext::_change_dir_after_time()
 {
 	strategy->_change_dir_after_time();

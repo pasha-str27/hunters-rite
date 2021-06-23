@@ -100,6 +100,7 @@ namespace godot
 		void _stay_ghost();
 		void _set_was_revived(bool value);
 		void _ghost_to_player();
+		bool _is_ghost_mode();
 		void _set_controll_buttons(String move_up, String move_down, String move_left, String move_right,
 			String fight_up, String fight_down, String fight_left, String fight_right, String special);
 	};
