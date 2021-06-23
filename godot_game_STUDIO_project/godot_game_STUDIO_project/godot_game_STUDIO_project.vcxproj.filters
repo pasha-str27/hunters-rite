@@ -149,6 +149,7 @@
     <ClCompile Include="SlimeShootAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="MiniMapController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
@@ -324,6 +325,7 @@
     <ClInclude Include="IEnemyAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="MiniMapController.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Players">
