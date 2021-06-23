@@ -219,6 +219,7 @@ void godot::SlimeAI::_change_dir_after_time()
 
 void godot::SlimeAI::_fight(Node2D* player1, Node2D* player2)
 {
+	Godot::print("fight2");
 	can_move = false;
 
 	if (!was_setted)

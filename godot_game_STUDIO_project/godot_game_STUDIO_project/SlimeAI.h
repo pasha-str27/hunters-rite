@@ -29,7 +29,7 @@ namespace godot
 		void _process(float delta);
 		void change_can_fight(bool value);
 		void reset_directions();
-		void change_direction();
+		virtual void change_direction();
 		void _change_dir_after_time();
 		virtual void _fight(Node2D* player1, Node2D* player2);
 		bool _is_player_near(Node2D* player);

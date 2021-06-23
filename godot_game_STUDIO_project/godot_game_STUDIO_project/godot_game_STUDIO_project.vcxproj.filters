@@ -146,6 +146,9 @@
     <ClCompile Include="PlayerStrategyContext.cpp">
       <Filter>Players</Filter>
     </ClCompile>
+    <ClCompile Include="SlimeShootAI.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
@@ -311,6 +314,9 @@
     </ClInclude>
     <ClInclude Include="PlayerStrategyContext.h">
       <Filter>Players</Filter>
+    </ClInclude>
+    <ClInclude Include="SlimeShootAI.h">
+      <Filter>Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -107,3 +107,4 @@ using namespace godot;
 #include "PlayerMeleeGhost.h"
 #include "PlayerShootDied.h"
 #include "PlayerShootGhost.h"
+#include "SlimeShootAI.h"
