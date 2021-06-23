@@ -5,11 +5,15 @@
 
 namespace godot
 {
+	class IEnemyAI;
+
 	class EnemyData : public IEnemyAI
 	{
 		Node2D* enemy;
 
 	public:
+		std::vector<Vector2> directions;
+
 		EnemyData(Node2D* enemy);
 		~EnemyData();
 		void _add_bullet(Node* bullet = nullptr);
@@ -28,5 +32,9 @@ namespace godot
 		void _set_is_player1_onArea(bool value);
 		void _set_is_player2_onArea(bool value);
 		void _change_start_parameters();
+		void remove_vector_element(Vector2 element);
+		void reset_directions();
+		void _set_player(Node2D* player);
+		void _remove_player(Node2D* player);
 	};
 }

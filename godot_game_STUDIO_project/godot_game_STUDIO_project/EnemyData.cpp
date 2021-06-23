@@ -3,6 +3,29 @@
 #include "headers.h"
 #endif
 
+void godot::EnemyData::remove_vector_element(Vector2 element)
+{
+	for (int i = 0; i < directions.size(); ++i)
+		if (directions[i] == element)
+		{
+			directions.erase(directions.begin() + i, directions.begin() + i + 1);
+			return;
+		}
+}
+
+void godot::EnemyData::reset_directions()
+{
+	directions.clear();
+}
+
+void godot::EnemyData::_set_player(Node2D* player)
+{
+}
+
+void godot::EnemyData::_remove_player(Node2D* player)
+{
+}
+
 Node2D* godot::EnemyData::_get_enemy()
 {
 	return enemy;

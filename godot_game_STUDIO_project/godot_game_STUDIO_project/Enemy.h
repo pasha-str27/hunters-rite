@@ -5,55 +5,8 @@
 
 namespace godot
 {
-	class IEnemyAI
-	{
-	public:
-		virtual void _process(float delta) = 0;
-		virtual void _add_bullet(Node* bullet=nullptr) = 0;
-		virtual void change_can_fight(bool value) = 0;
-		virtual void _change_dir_after_time() = 0;
-		virtual void _delete_player1() = 0;
-		virtual void _delete_player2() = 0;
-		virtual String _get_current_player() = 0;
-		virtual void _set_speed(float value) = 0;
-		virtual void _set_enemy(Node2D* enemy) = 0;
-		virtual void _set_player1(Node2D* player1) = 0;
-		virtual void _set_player2(Node2D* player2) = 0;
-		virtual Node2D* _get_player1() = 0;
-		virtual Node2D* _get_player2() = 0;
-		virtual void _change_dir() = 0;
-		virtual void _set_is_player1_onArea(bool value) = 0;
-		virtual void _set_is_player2_onArea(bool value) = 0;
-		virtual void _change_start_parameters() = 0;
-	};
-
-	class EnemyAIContext
-	{
-		IEnemyAI* strategy;
-
-	public:
-		EnemyAIContext();
-		~EnemyAIContext();
-		void _set_strategy(IEnemyAI* strategy);
-		void _process(float  delta);
-		void set_enemy(Node2D* enemy);
-		void set_player1(Node2D* player1);
-		void set_player2(Node2D* player2);
-		Node2D* get_player1();
-		Node2D* get_player2();
-		void _add_bullet(Node* bullet);
-		void change_can_fight(bool value);
-		void _delete_player1();
-		void _delete_player2();
-		void _change_dir_after_time();
-		String _get_current_player();
-		void _set_speed(float value);
-		void _change_dir();
-		void _set_is_player1_onArea(bool value);
-		void _set_is_player2_onArea(bool value);
-		void _change_start_parameters();
-	};
-
+	class IEnemyAI;
+	class EnemyAIContext;
 
 	class Enemy : public KinematicBody2D
 	{

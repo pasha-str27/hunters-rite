@@ -40,21 +40,6 @@ void godot::SpiderAI::change_can_fight(bool value)
 		_get_enemy()->call("_change_animation", "run", 2);
 }
 
-void godot::SpiderAI::reset_directions()
-{
-	directions.clear();
-}
-
-void  godot::SpiderAI::remove_vector_element(Vector2 element)
-{
-	for (int i = 0; i < directions.size(); ++i)
-		if (directions[i] == element)
-		{
-			directions.erase(directions.begin() + i, directions.begin() + i + 1);
-			return;
-		}
-}
-
 bool godot::SpiderAI::_is_player_near(Node2D* player)
 {
 	Vector2 player_pos_index = (player->get_global_position()

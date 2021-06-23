@@ -3,16 +3,6 @@
 #include "headers.h"
 #endif
 
-void  godot::SlimeAI::remove_vector_element(Vector2 element)
-{
-	for (int i = 0; i < directions.size(); ++i)
-		if (directions[i] == element)
-		{
-			directions.erase(directions.begin() + i, directions.begin() + i + 1);
-			return;
-		}
-}
-
 bool godot::SlimeAI::_is_player_near(Node2D* player)
 {
 	Vector2 player_pos_index = (player->get_global_position()
@@ -109,6 +99,30 @@ void godot::SlimeAI::_change_start_parameters()
 	change_direction();
 }
 
+void godot::SlimeAI::_set_player(Node2D* player)
+{
+	if (player->is_in_group("player1"))
+		_set_is_player1_onArea(true);
+
+	if(player->is_in_group("player2"))
+		_set_is_player2_onArea(true);
+}
+
+void godot::SlimeAI::_remove_player(Node2D* player)
+{
+	if (player->is_in_group("player1"))
+		_delete_player1();
+
+	if (player->is_in_group("player2"))
+		_delete_player2();
+
+	if (player->is_in_group("player1"))
+		_set_is_player1_onArea(false);
+
+	if (player->is_in_group("player2"))
+		_set_is_player2_onArea(false);
+}
+
 godot::SlimeAI::SlimeAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
 {
 	dir = Vector2::ZERO;
@@ -126,11 +140,6 @@ godot::SlimeAI::~SlimeAI()
 void godot::SlimeAI::change_can_fight(bool value)
 {
 	can_move = value;
-}
-
-void godot::SlimeAI::reset_directions()
-{
-	directions.clear();
 }
 
 void godot::SlimeAI::change_direction()
@@ -219,7 +228,6 @@ void godot::SlimeAI::_change_dir_after_time()
 
 void godot::SlimeAI::_fight(Node2D* player1, Node2D* player2)
 {
-	Godot::print("fight2");
 	can_move = false;
 
 	if (!was_setted)
@@ -250,7 +258,6 @@ void godot::SlimeAI::_process(float delta)
 		&& (dir==Vector2::RIGHT || dir == Vector2::LEFT || dir == Vector2::DOWN || dir == Vector2::UP))
 	{
 		is_cheking = true;
-		/*_fight(_get_player1(), _get_player2());*/
 		change_direction();
 		old_pos = _get_enemy()->get_global_position();
 		return;

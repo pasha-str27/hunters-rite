@@ -105,3 +105,13 @@ void godot::EnemyAIContext::_change_start_parameters()
 {
 	strategy->_change_start_parameters();
 }
+
+void godot::EnemyAIContext::_set_player(Node2D* player)
+{
+	strategy->_set_player(player);
+}
+
+void godot::EnemyAIContext::_remove_player(Node2D* player)
+{
+	strategy->_remove_player(player);
+}

@@ -38,7 +38,7 @@ void godot::Enemies::_remove_player1()
 		if (node->is_in_group("statue_melee"))
 			node->get_node("MagnitZone")->call("_set_player1");
 
-		node->call("_remove_player1");
+		node->call_deferred("_remove_player1");
 	}
 }
 

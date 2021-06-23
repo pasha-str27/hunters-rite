@@ -399,6 +399,12 @@ void godot::PlayerController::_die()
 	is_alive = false;
 
 	prev_state = current_player_strategy->_clone();
+
+	if(get_name() == "Player1")
+		Enemies::get_singleton()->_remove_player1();
+	if (get_name() == "Player2")
+		Enemies::get_singleton()->_remove_player2();
+
 	if (current_player_strategy->_was_revived())
 	{
 		is_ghost_mode = true;

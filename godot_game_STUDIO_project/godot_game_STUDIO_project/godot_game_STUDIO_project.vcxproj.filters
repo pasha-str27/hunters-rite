@@ -318,6 +318,12 @@
     <ClInclude Include="SlimeShootAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyAIContext.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="IEnemyAI.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Players">
