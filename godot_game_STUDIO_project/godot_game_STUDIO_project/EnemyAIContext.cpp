@@ -71,11 +71,6 @@ void godot::EnemyAIContext::_delete_player2()
 	strategy->_delete_player2();
 }
 
-void godot::EnemyAIContext::_remove_side(int side)
-{
-	strategy->_remove_side(side);
-}
-
 void godot::EnemyAIContext::_change_dir_after_time()
 {
 	strategy->_change_dir_after_time();
@@ -104,4 +99,19 @@ void godot::EnemyAIContext::_set_is_player1_onArea(bool value)
 void godot::EnemyAIContext::_set_is_player2_onArea(bool value)
 {
 	strategy->_set_is_player2_onArea(value);
+}
+
+void godot::EnemyAIContext::_change_start_parameters()
+{
+	strategy->_change_start_parameters();
+}
+
+void godot::EnemyAIContext::_set_player(Node2D* player)
+{
+	strategy->_set_player(player);
+}
+
+void godot::EnemyAIContext::_remove_player(Node2D* player)
+{
+	strategy->_remove_player(player);
 }

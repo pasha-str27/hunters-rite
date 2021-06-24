@@ -4,6 +4,7 @@
 #endif
 
 Node2D* CameraController::current_room = nullptr;
+bool CameraController::show_tutorial = true;
 
 void godot::CameraController::_register_methods()
 {
@@ -39,9 +40,6 @@ void godot::CameraController::_move(String dir)
 
 	float vertical_offset = 390;
 	float horizontal_offset = 250;
-	
-	//timer_audio->connect("timeout", this, "_change_audio_volume");
-	//timer_audio->start(time_delta);
 
 	auto generation_node = get_parent()->get_node("Generation");
 
@@ -139,6 +137,11 @@ bool godot::CameraController::_is_one_player_alive()
 	return !has_node("/root/Node2D/Node/Player1") || !has_node("/root/Node2D/Node/Player2");
 }
 
+void godot::CameraController::hide_tutorial()
+{
+	get_parent()->get_node("TutorialSprites")->queue_free();
+}
+
 void godot::CameraController::_init()
 {
 	for (int i = 0; i < 4; i++)
@@ -155,8 +158,8 @@ void godot::CameraController::_spawn_players()
 		get_parent()->call_deferred("add_child", player);
 		player1 = player;
 		player2 = nullptr;
-		//PlayersContainer::_get_instance()->_set_player1(player1);
-		//PlayersContainer::_get_instance()->_set_player2(player2);
+		PlayersContainer::_get_instance()->_set_player1_regular(player1);
+		PlayersContainer::_get_instance()->_set_player2_regular(player2);
 		get_node("P2HealthBarWrapper")->queue_free();
 		//	hiding label
 		//get_node("P1HealthBarWrapper/Label")->queue_free();
@@ -170,8 +173,8 @@ void godot::CameraController::_spawn_players()
 			get_parent()->call_deferred("add_child", player);
 			player2 = player;
 			player1 = nullptr;
-			//PlayersContainer::_get_instance()->_set_player1(player1);
-			//PlayersContainer::_get_instance()->_set_player2(player2);
+			PlayersContainer::_get_instance()->_set_player1_regular(player1);
+			PlayersContainer::_get_instance()->_set_player2_regular(player2);
 			get_node("P1HealthBarWrapper")->queue_free();
 			//	hiding label
 			//get_node("P2HealthBarWrapper/Label")->queue_free();
@@ -188,6 +191,34 @@ void godot::CameraController::_spawn_players()
 			get_parent()->call_deferred("add_child", player_2);
 			player2 = player_2;
 
+			PlayersContainer::_get_instance()->_set_player1_regular(player1);
+			PlayersContainer::_get_instance()->_set_player2_regular(player2);
+
+			//player1->call("_set_controll_buttons", "Player1_up", "Player1_down", "Player1_left", "Player1_right", "Player1_fight_up", "Player1_fight_down", "Player1_fight_left", "Player1_fight_right", "Player1_special");
+			if(player2->has_method("_set_controll_buttons"))
+				player2->call_deferred("_set_controll_buttons", "Player2_up", "Player2_down", "Player2_left", "Player2_right", "Player2_fight_up", "Player2_fight_down", "Player2_fight_left", "Player2_fight_right", "Player2_special");
+			else
+			{
+				for(int i=0;i<player2->get_child_count();++i)
+					if (player2->get_child(i)->has_method("_set_controll_buttons"))
+					{
+						player2-> get_child(i)->call_deferred("_set_controll_buttons", "Player2_up", "Player2_down", "Player2_left", "Player2_right", "Player2_fight_up", "Player2_fight_down", "Player2_fight_left", "Player2_fight_right", "Player2_special");
+						break;
+					}
+			}
+
+			if (player1->has_method("_set_controll_buttons"))
+				player1->call_deferred("_set_controll_buttons", "Player1_up", "Player1_down", "Player1_left", "Player1_right", "Player1_fight_up", "Player1_fight_down", "Player1_fight_left", "Player1_fight_right", "Player1_special");
+			else
+			{
+				for (int i = 0; i < player1->get_child_count(); ++i)
+					if (player1->get_child(i)->has_method("_set_controll_buttons"))
+					{
+						player1->get_child(i)->call_deferred("_set_controll_buttons", "Player1_up", "Player1_down", "Player1_left", "Player1_right", "Player1_fight_up", "Player1_fight_down", "Player1_fight_left", "Player1_fight_right", "Player1_special");
+						break;
+					}
+			}
+			
 			//PlayersContainer::_get_instance()->_set_player1(player1);
 			//PlayersContainer::_get_instance()->_set_player2(player2);
 		}
@@ -236,10 +267,16 @@ void godot::CameraController::_ready()
 	add_child(timer_audio);
 	timer_audio->connect("timeout", this, "_change_audio_volume");
 	timer_audio->start(time_delta);
+
+	if (!show_tutorial)
+		hide_tutorial();
 }
 
 void godot::CameraController::_door_collision(String door_dir)
 {
+	if (Enemies::get_singleton()->_get_enemies_count() != 0 || Enemies::get_singleton()->spawning())
+		return;
+
 	int index = 0;
 	if (door_dir.find("left") != -1)
 		index = 0;
@@ -266,28 +303,24 @@ void godot::CameraController::_door_collision(String door_dir)
 	case 0:
 	{
 		float delta = 1024;
-		//	0 - left, 1 - right, 2 - top, 3 - bottom
 		new_pos = get_global_position() - Vector2(delta, 0);
 		break;
 	}
 	case 1:
 	{
 		float delta = 1024;
-		//	0 - left, 1 - right, 2 - top, 3 - bottom
 		new_pos = get_global_position() + Vector2(delta, 0);
 		break;
 	}
 	case 2:
 	{
 		float delta = 720;
-		//	0 - left, 1 - right, 2 - top, 3 - bottom
 		new_pos = get_global_position() - Vector2(0, delta);
 		break;
 	}
 	case 3:
 	{
 		float delta = 720;
-		//	0 - left, 1 - right, 2 - top, 3 - bottom
 		new_pos = get_global_position() + Vector2(0, delta);
 		break;
 	}
@@ -301,13 +334,15 @@ void godot::CameraController::_door_collision(String door_dir)
 	if (!_is_player_have_need_keys((Array)next_room->call("_get_list_of_keys")))
 		return;
 
-	if (((int)dirs[index] == 2 && is_open_door && !_is_one_player_alive()) || (_is_one_player_alive() && is_open_door && (int)dirs[index] == 1))
+	if (((int)dirs[index] == 2 && !_is_one_player_alive()) || (_is_one_player_alive() && (int)dirs[index] == 1))
 	{
-		if(PlayersContainer::_get_instance()->_get_player1() != nullptr)
-			PlayersContainer::_get_instance()->_get_player1()->call("_change_moving", false);
+		Enemies::get_singleton()->set_spawning(true);
 
-		if (PlayersContainer::_get_instance()->_get_player2() != nullptr)
-			PlayersContainer::_get_instance()->_get_player2()->call("_change_moving", false);
+		if(PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
+			PlayersContainer::_get_instance()->_get_player1_regular()->call("_change_moving", false);
+
+		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
+			PlayersContainer::_get_instance()->_get_player2_regular()->call("_change_moving", false);
 
 		auto fade = cast_to<Node2D>(fadeOut->instance());
 		add_child(fade);
@@ -327,6 +362,7 @@ void godot::CameraController::_open_doors()
 
 void godot::CameraController::_close_doors()
 {
+	//current_room->call("_spawn_enemies");
 	is_open_door = false;
 }
 

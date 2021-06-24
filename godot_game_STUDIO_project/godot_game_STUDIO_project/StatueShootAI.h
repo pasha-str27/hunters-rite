@@ -19,5 +19,6 @@ namespace godot
 		void _add_bullet(Node* node = nullptr);
 		void change_can_fight(bool value);
 		void _set_speed(float value);
+		void _change_start_parameters();
 	};
 }

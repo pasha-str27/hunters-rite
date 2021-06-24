@@ -6,7 +6,7 @@
 godot::SpiderAI::SpiderAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
 {
 	dir = Vector2::ZERO;
-	cur_pos = (node_tmp->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+	
 	max_bullet_count = 5;
 	can_move = true;
 	is_cheking = false;
@@ -20,10 +20,6 @@ godot::SpiderAI::SpiderAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyDat
 		node->add_child(new_obj);
 		bullets.push_back(cast_to<Node2D>(new_obj));
 	}
-
-	old_pos = _get_enemy()->get_global_position();
-
-	change_direction();
 }
 
 godot::SpiderAI::~SpiderAI()
@@ -44,9 +40,49 @@ void godot::SpiderAI::change_can_fight(bool value)
 		_get_enemy()->call("_change_animation", "run", 2);
 }
 
-void godot::SpiderAI::reset_directions()
+bool godot::SpiderAI::_is_player_near(Node2D* player)
 {
-	directions.clear();
+	Vector2 player_pos_index = (player->get_global_position()
+		- CameraController::current_room->get_global_position()
+		+ Vector2(896, 544) / 2) / 32;
+
+	bool is_player_ghost = (bool)player->call("_is_ghost_mode");
+
+	bool ghost_is_near = false;
+
+	player_pos_index = Vector2((int)player_pos_index.y, (int)player_pos_index.x);
+
+	if (is_player_ghost)
+	{
+		if (player_pos_index == Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::LEFT).x))
+		{
+			ghost_is_near = true;
+			remove_vector_element(Vector2::LEFT);
+		}
+
+		if (player_pos_index == Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::RIGHT).x))
+		{
+			ghost_is_near = true;
+			remove_vector_element(Vector2::RIGHT);
+		}
+
+		if (player_pos_index == Vector2((int)(cur_pos + Vector2::DOWN).y, (int)cur_pos.x))
+		{
+			ghost_is_near = true;
+			remove_vector_element(Vector2::DOWN);
+		}
+
+		if (player_pos_index == Vector2((int)(cur_pos + Vector2::UP).y, (int)cur_pos.x))
+		{
+			ghost_is_near = true;
+			remove_vector_element(Vector2::UP);
+		}
+	}
+
+	if (ghost_is_near)
+		return true;
+
+	return false;
 }
 
 void godot::SpiderAI::change_direction()
@@ -65,12 +101,17 @@ void godot::SpiderAI::change_direction()
 	if ((int)CameraController::current_room->call("_get_cell_value", (cur_pos + Vector2::UP).y, cur_pos.x) == 0)
 		directions.push_back(Vector2::UP);
 
-	_change_dir_after_time();
-}
+	PlayersContainer* players = PlayersContainer::_get_instance();
 
-void godot::SpiderAI::_remove_side(int dir)
-{
-	//directions.push_back(dir);
+	if (players->_get_player1() == nullptr && players->_get_player1_regular() != nullptr
+		&& (bool)players->_get_player1_regular()->call("_is_ghost_mode")
+		&& _is_player_near(players->_get_player1_regular()));
+
+	if (players->_get_player2() == nullptr && players->_get_player2_regular() != nullptr
+		&& (bool)players->_get_player2_regular()->call("_is_ghost_mode")
+		&& _is_player_near(players->_get_player2_regular()));
+
+	_change_dir_after_time();
 }
 
 void godot::SpiderAI::_change_dir_after_time()
@@ -78,6 +119,7 @@ void godot::SpiderAI::_change_dir_after_time()
 	if (directions.size() == 0)
 	{
 		dir = Vector2::ZERO;
+		goal = _get_enemy()->get_global_position();
 		return;
 	}	
 
@@ -86,9 +128,9 @@ void godot::SpiderAI::_change_dir_after_time()
 
 	is_cheking = false;
 
-	dir = directions[rand->randi_range(0, directions.size() - 1)]/2;
-
-	cur_pos += dir*2;
+	dir = directions[rand->randi_range(0, directions.size() - 1)];
+	goal = _get_enemy()->get_global_position() + dir * 32;
+	cur_pos += dir;
 }
 
 void godot::SpiderAI::_fight(Node2D* player1, Node2D* player2)
@@ -149,20 +191,26 @@ void godot::SpiderAI::_set_speed(float value)
 	speed = value;
 }
 
+void godot::SpiderAI::_change_start_parameters()
+{
+	cur_pos = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+	old_pos = _get_enemy()->get_global_position();
+
+	change_direction();
+}
+
 void godot::SpiderAI::_process(float delta)
 {
 	if (!can_move)
 		return;
 
-	_get_enemy()->set_global_position(_get_enemy()->get_global_position() + dir * delta * 235);
-
+	//_get_enemy()->set_global_position(_get_enemy()->get_global_position() + dir * delta * 235);
+	_get_enemy()->set_global_position(_get_enemy()->get_global_position().move_toward(goal, delta * speed));
 	if (is_cheking)
 		return;
 
-	if ((abs(old_pos.distance_to(_get_enemy()->get_global_position()) - 32) <= 3
-		&& (dir == Vector2(0.5, 0) || dir == Vector2(-0.5, 0) || dir == Vector2(0, 0.5) || dir == Vector2(0, -0.5))
-		|| (abs(old_pos.distance_to(_get_enemy()->get_global_position()) - sqrt(32 * 32 + 32 * 32)) <= 4.5
-			&& (dir == Vector2(0.5, 0.5) || dir == Vector2(-0.5, 0.5) || dir == Vector2(0.5, -0.5) || dir == Vector2(-0.5, -0.5)))))
+	if (abs(old_pos.distance_to(_get_enemy()->get_global_position()) - 32) <= 3
+		&& (dir == Vector2::RIGHT || dir == Vector2::LEFT || dir == Vector2::DOWN || dir == Vector2::UP))
 	{
 		is_cheking = true;
 		_fight(_get_player1(), _get_player2());

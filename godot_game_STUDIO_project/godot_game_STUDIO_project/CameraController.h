@@ -35,8 +35,10 @@ namespace godot
 		void _move(String dir);
 		String _get_dir_on_index(int i);
 		bool _is_one_player_alive();
+		void hide_tutorial();
 	public:
 		static Node2D* current_room;
+		static bool show_tutorial;
 
 		static void _register_methods();
 		void _init();

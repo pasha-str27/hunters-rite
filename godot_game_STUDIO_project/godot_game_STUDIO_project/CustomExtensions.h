@@ -95,6 +95,7 @@ namespace godot
 					return children[i];
 			return nullptr;
 		}
+
 		static std::vector<Node2D*> GetChildrenByWordInName(Node2D* parent, String word)
 		{
 			std::vector<Node2D*> children = {};

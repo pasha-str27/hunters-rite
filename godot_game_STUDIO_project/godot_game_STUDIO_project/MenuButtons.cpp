@@ -48,7 +48,7 @@ void godot::MenuButtons::_ready()
 	// Set focus button in Menu and Notise scenes
 	set_focus_mode(true);
 
-	std::vector<String> name_buttons{ "Play", "Flower_button", "Back", "Resume", "Retry" };
+	std::vector<String> name_buttons{ "Play", "Flower_button","PlayerOne_button", "Back", "Resume", "Retry" };
 
 	if (get_name() == "Menu" && find_parent("root") != nullptr && !find_parent("root")->has_node("MenuBackMusic"))
 	{
@@ -130,6 +130,7 @@ void MenuButtons::_register_methods()
 
 void godot::MenuButtons::_start_game(int name)
 {
+	CameraController::show_tutorial = true;
 	player_name = name;
 	_play_effect();
 	add_child(fade->instance());
@@ -299,7 +300,7 @@ void godot::MenuButtons::_on_Flower_pressed(Variant)
 		change_scene(choose_player_scene);
 		return;
 	}
-	player_name = 3;
+	player_name = 0;
 	_start_game(player_name);
 }
 

@@ -14,6 +14,7 @@ void godot::BigStone::_register_methods()
 
 void godot::BigStone::_init()
 {
+	can_heal = true;
 }
 
 void godot::BigStone::_ready()
@@ -32,23 +33,21 @@ void godot::BigStone::_add_player(Node2D* node)
 {
 	if (node->is_in_group("player"))
 		++players_count;
-	
+
 	if(can_heal)
-		_hill_players();
+		_heal_players();
 }
 
-void godot::BigStone::_hill_players()
+void godot::BigStone::_heal_players()
 {
 	auto player_conteiner = PlayersContainer::_get_instance();
 
-	if (MenuButtons::player_name == 3 && (players_count == 2
-		|| player_conteiner->_get_player1() == nullptr || player_conteiner->_get_player2() == nullptr))
+	if (MenuButtons::player_name == 0 && players_count == 2)
 	{
-		if (player_conteiner->_get_player1() != nullptr)
-			player_conteiner->_get_player1()->call("_set_HP", (float)player_conteiner->_get_player1()->call("_get_max_HP"));
-
-		if (player_conteiner->_get_player2() != nullptr)
-			player_conteiner->_get_player2()->call("_set_HP", (float)player_conteiner->_get_player2()->call("_get_max_HP"));
+		if (player_conteiner->_get_player1_regular() != nullptr)
+			_heal_player(player_conteiner->_get_player1_regular());
+		if (player_conteiner->_get_player2_regular()->has_method("_heal"))
+			_heal_player(player_conteiner->_get_player2_regular());
 		
 		can_heal = false;
 		timer->connect("timeout", this, "_can_heal_true");
@@ -57,11 +56,11 @@ void godot::BigStone::_hill_players()
 
 	if ((MenuButtons::player_name == 1 || MenuButtons::player_name == 2) && players_count == 1)
 	{
-		if (player_conteiner->_get_player1() != nullptr)
-			player_conteiner->_get_player1()->call("_set_HP", (float)player_conteiner->_get_player1()->call("_get_max_HP"));
+		if (player_conteiner->_get_player1_regular() != nullptr)
+			_heal_player(player_conteiner->_get_player1_regular());
 
-		if (player_conteiner->_get_player2() != nullptr)
-			player_conteiner->_get_player2()->call("_set_HP", (float)player_conteiner->_get_player2()->call("_get_max_HP"));
+		if (player_conteiner->_get_player2_regular() != nullptr)
+			_heal_player(player_conteiner->_get_player2_regular());
 		
 		can_heal = false;
 		timer->connect("timeout", this, "_can_heal_true");
@@ -69,9 +68,31 @@ void godot::BigStone::_hill_players()
 	}
 }
 
+void godot::BigStone::_heal_player(Node2D* player)
+{
+	if (player->has_method("_heal"))
+	{
+		player->call_deferred("_heal");
+		return;
+	}
+
+	for (int i = 0; i < player->get_child_count(); ++i)
+		if (player->get_child(i)->has_method("_heal"))
+		{
+			player->get_child(i)->call_deferred("_heal");
+			return;
+		}
+}
+
+void godot::BigStone::_change_start_parameters()
+{
+	Vector2 cur_pos = (get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+	CameraController::current_room->call("_set_cell_value", cur_pos.y, cur_pos.x, 8);
+}
+
 void godot::BigStone::_can_heal_true()
 {
 	timer->disconnect("timeout", this, "_can_heal_true");
 	can_heal = true;
-	_hill_players();
+	_heal_players();
 }

@@ -51,6 +51,26 @@ void PlayersContainer::_set_player2(Node2D* player2)
 	}
 }
 
+void godot::PlayersContainer::_set_player1_regular(Node2D* player1)
+{
+	player1_regular = player1;
+}
+
+void godot::PlayersContainer::_set_player2_regular(Node2D* player2)
+{
+	player2_regular = player2;
+}
+
+Node2D* godot::PlayersContainer::_get_player1_regular()
+{
+	return player1_regular;
+}
+
+Node2D* godot::PlayersContainer::_get_player2_regular()
+{
+	return player2_regular;
+}
+
 Node2D* godot::PlayersContainer::_get_player1()
 {
 	return player1;
