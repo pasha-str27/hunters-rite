@@ -26,6 +26,10 @@ void godot::EnemyData::_remove_player(Node2D* player)
 {
 }
 
+void godot::EnemyData::_remove_taken_positions()
+{
+}
+
 Node2D* godot::EnemyData::_get_enemy()
 {
 	return enemy;

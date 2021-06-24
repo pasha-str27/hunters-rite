@@ -115,3 +115,8 @@ void godot::EnemyAIContext::_remove_player(Node2D* player)
 {
 	strategy->_remove_player(player);
 }
+
+void godot::EnemyAIContext::_remove_taken_positions()
+{
+	strategy->_remove_taken_positions();
+}
