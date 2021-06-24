@@ -2,12 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="GodotLibrary.cpp" />
-    <ClCompile Include="Player1.cpp">
-      <Filter>Players</Filter>
-    </ClCompile>
-    <ClCompile Include="Player2.cpp">
-      <Filter>Players</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerController.cpp">
       <Filter>Players</Filter>
     </ClCompile>
@@ -15,12 +9,6 @@
       <Filter>Players</Filter>
     </ClCompile>
     <ClCompile Include="PlayersContainer.cpp">
-      <Filter>Players</Filter>
-    </ClCompile>
-    <ClCompile Include="ProducePlayer1.cpp">
-      <Filter>Players</Filter>
-    </ClCompile>
-    <ClCompile Include="ProducePlayer2.cpp">
       <Filter>Players</Filter>
     </ClCompile>
     <ClCompile Include="BatAI.cpp">
@@ -116,6 +104,18 @@
     </ClCompile>
     <ClCompile Include="AudioController.cpp" />
     <ClCompile Include="BigStone.cpp" />
+    <ClCompile Include="EnemyPrice.cpp" />
+    <ClCompile Include="MiniMapController.cpp" />
+    <ClCompile Include="PlayerMelee.cpp" />
+    <ClCompile Include="PlayerMeleeDied.cpp" />
+    <ClCompile Include="PlayerMeleeGhost.cpp" />
+    <ClCompile Include="PlayerShoot.cpp" />
+    <ClCompile Include="PlayerShootDied.cpp" />
+    <ClCompile Include="PlayerShootGhost.cpp" />
+    <ClCompile Include="PlayerStrategyContext.cpp" />
+    <ClCompile Include="ProducePlayerMelee.cpp" />
+    <ClCompile Include="ProducePlayerShoot.cpp" />
+    <ClCompile Include="SlimeShootAI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
@@ -124,12 +124,6 @@
     <ClInclude Include="ParticlesDestroyer.h" />
     <ClInclude Include="ExitHandler.h" />
     <ClInclude Include="Preloader.h" />
-    <ClInclude Include="Player1.h">
-      <Filter>Players</Filter>
-    </ClInclude>
-    <ClInclude Include="Player2.h">
-      <Filter>Players</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerController.h">
       <Filter>Players</Filter>
     </ClInclude>
@@ -140,12 +134,6 @@
       <Filter>Players</Filter>
     </ClInclude>
     <ClInclude Include="PlayersContainer.h">
-      <Filter>Players</Filter>
-    </ClInclude>
-    <ClInclude Include="ProducePlayer1.h">
-      <Filter>Players</Filter>
-    </ClInclude>
-    <ClInclude Include="ProducePlayer2.h">
       <Filter>Players</Filter>
     </ClInclude>
     <ClInclude Include="IPlayer.h">
@@ -244,6 +232,20 @@
     </ClInclude>
     <ClInclude Include="AudioController.h" />
     <ClInclude Include="BigStone.h" />
+    <ClInclude Include="EnemyAIContext.h" />
+    <ClInclude Include="EnemyPrice.h" />
+    <ClInclude Include="IEnemyAI.h" />
+    <ClInclude Include="MiniMapController.h" />
+    <ClInclude Include="PlayerMelee.h" />
+    <ClInclude Include="PlayerMeleeDied.h" />
+    <ClInclude Include="PlayerMeleeGhost.h" />
+    <ClInclude Include="PlayerShoot.h" />
+    <ClInclude Include="PlayerShootDied.h" />
+    <ClInclude Include="PlayerShootGhost.h" />
+    <ClInclude Include="PlayerStrategyContext.h" />
+    <ClInclude Include="ProducePlayerMelee.h" />
+    <ClInclude Include="ProducePlayerShoot.h" />
+    <ClInclude Include="SlimeShootAI.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Players">

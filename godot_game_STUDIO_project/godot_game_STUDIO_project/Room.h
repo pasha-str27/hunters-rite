@@ -13,6 +13,9 @@ namespace godot
 		std::vector<std::vector<int>> room_map;
 		std::vector<Vector2> empty_pos_world_coordinates;
 		Array list_of_keys;
+		float room_difficulty=100;
+		String room_type="";
+		bool were_here = false;
 
 		bool is_special = false;
 
@@ -33,6 +36,11 @@ namespace godot
 		void print();
 		void _add_list(Array);
 		Array _get_list_of_keys();
+		float _get_room_difficulty();
+		String _get_room_type();
+		void _set_room_type(String type);
+		bool _get_were_here();
+		void _set_were_here(bool value);
 		void _set_is_special(bool value);
 		bool _get_is_special();
 	};

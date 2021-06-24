@@ -71,6 +71,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 click_effect = ExtResource( 6 )
+"menu back music" = null
+fade = null
+fade_in = null
 
 [node name="Background" type="TextureRect" parent="Option"]
 anchor_right = 1.0
