@@ -643,6 +643,7 @@ void godot::LevelGenerator::_create_item_room(std::vector<Node2D*>& cornered_roo
 	auto room_to_build = cornered_rooms[index];
 
 	Node2D* builded_room = _generate_room_to(room_to_build);
+	builded_room->call("_set_is_special", true);
 
 	_rebuild_doors(builded_room);
 	_rebuild_doors(room_to_build);
@@ -667,7 +668,6 @@ void godot::LevelGenerator::_create_item_room(std::vector<Node2D*>& cornered_roo
 	items_container->call("_spawn_random_item", builded_room->get_global_position() + left_item);
 	items_container->call("_spawn_random_item", builded_room->get_global_position() + right_item);
 
-	builded_room->call("_set_is_special", true);
 }
 
 Node2D* godot::LevelGenerator::_create_boss_room(std::vector<Node2D*>& cornered_rooms)
@@ -691,13 +691,14 @@ Node2D* godot::LevelGenerator::_create_boss_room(std::vector<Node2D*>& cornered_
 	add_child(sprite);
 	sprite->set_global_position(builded_room->get_global_position());
 
+	builded_room->call("_set_is_special", true);
+
 	_rebuild_doors(builded_room);
 	_rebuild_doors(room_to_build);
 
 	cornered_rooms.erase(cornered_rooms.begin() + index, cornered_rooms.begin() + index + 1);
 
 	builded_room->call("_set_room_type", "boss_room");
-	builded_room->call("_set_is_special", true);
 
 	return builded_room;
 }
@@ -821,7 +822,7 @@ void godot::LevelGenerator::_spawn_big_stone()
 	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
 
-	int rand = rng->randi_range(1, rooms.size() - 1);
+	int rand = 0;
 
 	Node* room = nullptr;
 
@@ -829,7 +830,9 @@ void godot::LevelGenerator::_spawn_big_stone()
 	{
 		rand = rng->randi_range(1, rooms.size() - 1);
 		room = rooms[rand];
-	} while (!(bool)room->call("_get_is_special"));
+	} while ((bool)room->call("_get_is_special"));
+
+	Godot::print((String)room->call("_get_room_type"));
 
 	auto stone = cast_to<Node2D>(big_stone->instance());
 	room->add_child(stone);
