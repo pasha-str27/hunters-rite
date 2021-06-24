@@ -14,11 +14,20 @@ void godot::SpawnEnemyController::_register_methods()
 	register_property<SpawnEnemyController, Ref<PackedScene>>("Altar prefab", &SpawnEnemyController::altar, nullptr);
 	//register_property<SpawnEnemyController, int>("Levels Count", &SpawnEnemyController::levels_count, 7);
 	register_property<SpawnEnemyController, Array>("enemy_list", &SpawnEnemyController::enemy_list_prefabs, {});
+	register_property<SpawnEnemyController, Ref<PackedScene>>("boss_prefab", &SpawnEnemyController::boss_prefab, nullptr);
 }
 
 void godot::SpawnEnemyController::SpawnEnemies()
 {
 	Enemies* enemies = Enemies::get_singleton();
+	if ((String)CameraController::current_room->call("_get_room_type") == "boss_room"
+		&& !(bool)CameraController::current_room->call("_get_were_here"))
+	{
+		enemies->set_spawning(true);
+		SpawnBoss();
+		return;
+	}
+
 	if ((String)CameraController::current_room->call("_get_room_type") != "game_room" 
 		|| (bool)CameraController::current_room->call("_get_were_here"))
 	{
@@ -30,7 +39,7 @@ void godot::SpawnEnemyController::SpawnEnemies()
 	rng->randomize();
 
 	/*float current_value = _calculate_room_difficulty();*/
-	float current_value = 9;
+	float current_value = 0;
 	std::vector<Vector2> taken_positions;
 
 	enemies->set_enemy_to_spawn_count(0);
@@ -75,11 +84,12 @@ void godot::SpawnEnemyController::SpawnEnemies()
 
 void godot::SpawnEnemyController::SpawnBoss()
 {
+	Godot::print("spawn boss");
 	get_parent()->call("_start_mute_volume");
-	auto boss = cast_to<Node2D>(cast_to<PackedScene>(enemies[0])->instance());
+	auto boss = cast_to<Node2D>(boss_prefab->instance());
 	boss->set_global_position(cast_to<Node2D>(get_parent())->get_global_position());
 	get_node("/root/Node2D/Node")->add_child(boss, true);
-	enemies.pop_front();
+	//enemies.pop_front();
 }
 
 void godot::SpawnEnemyController::SpawnItems()
@@ -136,13 +146,6 @@ void godot::SpawnEnemyController::_prepare_spawn()
 
 	if (PlayersContainer::_get_instance()->_get_player2() != nullptr)
 		PlayersContainer::_get_instance()->_get_player2()->call("_change_moving", true);
-
-
-	//if (enemies.size() == 0)
-	//{
-	//	get_parent()->call("_open_doors");
-	//	return;
-	//}
 
 	timer->connect("timeout", this, "_spawn");
 	timer->start(.3f);

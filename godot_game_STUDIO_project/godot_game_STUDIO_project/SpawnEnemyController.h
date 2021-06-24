@@ -7,6 +7,7 @@
 namespace godot 
 {
 	class ItemsContainer;
+
 	class SpawnEnemyController: public Node2D
 	{
 	private:
@@ -17,6 +18,7 @@ namespace godot
 		void SpawnKey();
 		ItemsContainer* i_container = nullptr;
 		Ref<PackedScene> altar = nullptr;
+		Ref<PackedScene> boss_prefab = nullptr;
 		Ref<PackedScene> pedestal = nullptr;
 		Timer* timer = nullptr;
 		int levels_count = 7;
