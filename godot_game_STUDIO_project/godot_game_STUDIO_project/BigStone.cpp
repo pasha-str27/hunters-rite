@@ -84,6 +84,12 @@ void godot::BigStone::_heal_player(Node2D* player)
 		}
 }
 
+void godot::BigStone::_change_start_parameters()
+{
+	Vector2 cur_pos = (get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+	CameraController::current_room->call("_set_cell_value", cur_pos.y, cur_pos.x, 8);
+}
+
 void godot::BigStone::_can_heal_true()
 {
 	timer->disconnect("timeout", this, "_can_heal_true");

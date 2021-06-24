@@ -23,6 +23,7 @@ void godot::SpawnEnemyController::SpawnEnemies()
 	if ((String)CameraController::current_room->call("_get_room_type") == "boss_room"
 		&& !(bool)CameraController::current_room->call("_get_were_here"))
 	{
+		enemies->set_enemy_to_spawn_count(0);
 		enemies->set_spawning(true);
 		SpawnBoss();
 		return;
@@ -69,8 +70,6 @@ void godot::SpawnEnemyController::SpawnEnemies()
 				+ CameraController::current_room->get_global_position()
 				- Vector2(896, 544) / 2 + Vector2(16, 16)));
 
-			enemy->get_node(NodePath(prefab->instance()->get_name()))->call("_change_start_parameters");
-
 			CameraController::current_room->call("_set_cell_value", pos_y, pos_x, 7);
 		}
 	}
@@ -80,15 +79,32 @@ void godot::SpawnEnemyController::SpawnEnemies()
 
 	for(int i=0;i< taken_positions.size();++i)
 		CameraController::current_room->call("_set_cell_value", taken_positions[i].y, taken_positions[i].x, 0);
+
+	Enemies::get_singleton()->_change_start_parameters();
 }
 
 void godot::SpawnEnemyController::SpawnBoss()
 {
 	Godot::print("spawn boss");
 	get_parent()->call("_start_mute_volume");
+	Enemies::get_singleton()->set_enemy_to_spawn_count(1);
 	auto boss = cast_to<Node2D>(boss_prefab->instance());
 	boss->set_global_position(cast_to<Node2D>(get_parent())->get_global_position());
 	get_node("/root/Node2D/Node")->add_child(boss, true);
+
+	if (boss->has_method("_change_start_parameters"))
+	{
+		boss->call("_change_start_parameters");
+		return;
+	}
+
+	for(int i=0;i<boss->get_child_count();++i)
+		if (boss->get_child(i)->has_method("_change_start_parameters"))
+		{
+			boss->get_child(i)->call("_change_start_parameters");
+			return;
+		}
+
 	//enemies.pop_front();
 }
 
