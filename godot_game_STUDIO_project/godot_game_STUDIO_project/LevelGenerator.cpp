@@ -22,6 +22,8 @@ void godot::LevelGenerator::_register_methods()
 	register_method("_ready", &LevelGenerator::_ready);
 	register_method("_get_next_room", &LevelGenerator::_get_next_room);
 	register_method("_get_keys_count", &LevelGenerator::_get_keys_count);
+	register_method("_clear", &LevelGenerator::_clear);
+	
 	
 	register_property<LevelGenerator, int>("map_size", &LevelGenerator::map_size, -1);
 	register_property<LevelGenerator, int>("keys_frequency", &LevelGenerator::keys_frequency, -1);
@@ -832,8 +834,6 @@ void godot::LevelGenerator::_spawn_big_stone()
 		room = rooms[rand];
 	} while ((bool)room->call("_get_is_special"));
 
-	Godot::print((String)room->call("_get_room_type"));
-
 	auto stone = cast_to<Node2D>(big_stone->instance());
 	room->add_child(stone);
 
@@ -844,4 +844,16 @@ void godot::LevelGenerator::_spawn_big_stone()
 int godot::LevelGenerator::_get_keys_count()
 {
 	return generated_keys.size();
+}
+
+void godot::LevelGenerator::_clear()
+{
+	for (int i = 0; i < this->get_child_count(); i++)
+		this->get_child(i)->queue_free();
+
+	this->positions.clear();
+	this->rooms.clear();
+	this->generated_keys.clear();
+	size = 0;
+	map_size += 2;
 }

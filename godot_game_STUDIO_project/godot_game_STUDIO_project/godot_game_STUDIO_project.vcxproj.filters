@@ -2,12 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="GodotLibrary.cpp" />
-    <ClCompile Include="PlayerShoot.cpp">
-      <Filter>Players</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerMelee.cpp">
-      <Filter>Players</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerController.cpp">
       <Filter>Players</Filter>
     </ClCompile>
@@ -15,12 +9,6 @@
       <Filter>Players</Filter>
     </ClCompile>
     <ClCompile Include="PlayersContainer.cpp">
-      <Filter>Players</Filter>
-    </ClCompile>
-    <ClCompile Include="ProducePlayerShoot.cpp">
-      <Filter>Players</Filter>
-    </ClCompile>
-    <ClCompile Include="ProducePlayerMelee.cpp">
       <Filter>Players</Filter>
     </ClCompile>
     <ClCompile Include="BatAI.cpp">
@@ -110,56 +98,58 @@
     <ClCompile Include="LevelGenerator.cpp">
       <Filter>Genetation</Filter>
     </ClCompile>
-    <ClCompile Include="AudioController.cpp">
-      <Filter>Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="BigStone.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="Key.cpp">
-      <Filter>Level</Filter>
+      <Filter>Items</Filter>
     </ClCompile>
     <ClCompile Include="EnemyPrice.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="MagnitZone.cpp">
+    <ClCompile Include="SlimeShootAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="BigStone.cpp">
-      <Filter>Ammo</Filter>
-    </ClCompile>
-    <ClCompile Include="AudioController.cpp">
-      <Filter>Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerMeleeDied.cpp">
+    <ClCompile Include="ProducePlayerMelee.cpp">
       <Filter>Players</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerMeleeGhost.cpp">
-      <Filter>Players</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerShootDied.cpp">
-      <Filter>Players</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerShootGhost.cpp">
+    <ClCompile Include="ProducePlayerShoot.cpp">
       <Filter>Players</Filter>
     </ClCompile>
     <ClCompile Include="PlayerStrategyContext.cpp">
       <Filter>Players</Filter>
     </ClCompile>
-    <ClCompile Include="SlimeShootAI.cpp">
+    <ClCompile Include="PlayerShootGhost.cpp">
+      <Filter>Players</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerShootDied.cpp">
+      <Filter>Players</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerShoot.cpp">
+      <Filter>Players</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMeleeGhost.cpp">
+      <Filter>Players</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMeleeDied.cpp">
+      <Filter>Players</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMelee.cpp">
+      <Filter>Players</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniMapController.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioController.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="BigStone.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="MagnitZone.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="MiniMapController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
     <ClInclude Include="headers.h" />
-    <ClInclude Include="PlayerShoot.h">
-      <Filter>Players</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerMelee.h">
-      <Filter>Players</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerController.h">
       <Filter>Players</Filter>
     </ClInclude>
@@ -170,12 +160,6 @@
       <Filter>Players</Filter>
     </ClInclude>
     <ClInclude Include="PlayersContainer.h">
-      <Filter>Players</Filter>
-    </ClInclude>
-    <ClInclude Include="ProducePlayerShoot.h">
-      <Filter>Players</Filter>
-    </ClInclude>
-    <ClInclude Include="ProducePlayerMelee.h">
       <Filter>Players</Filter>
     </ClInclude>
     <ClInclude Include="IPlayer.h">
@@ -268,64 +252,72 @@
     <ClInclude Include="AudioEffect.h">
       <Filter>Audio</Filter>
     </ClInclude>
-    <ClInclude Include="AudioController.h">
-      <Filter>Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="BigStone.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="Key.h">
-      <Filter>Level</Filter>
+      <Filter>Items</Filter>
     </ClInclude>
     <ClInclude Include="EnemyPrice.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="MagnitZone.h">
+    <ClInclude Include="SlimeShootAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="BigStone.h">
-      <Filter>Ammo</Filter>
-    </ClInclude>
-    <ClInclude Include="AudioController.h">
-      <Filter>Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="ExitHandler.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuButtons.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Preloader.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticlesDestroyer.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerMeleeDied.h">
+    <ClInclude Include="ProducePlayerMelee.h">
       <Filter>Players</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerMeleeGhost.h">
-      <Filter>Players</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerShootDied.h">
-      <Filter>Players</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerShootGhost.h">
+    <ClInclude Include="ProducePlayerShoot.h">
       <Filter>Players</Filter>
     </ClInclude>
     <ClInclude Include="PlayerStrategyContext.h">
       <Filter>Players</Filter>
     </ClInclude>
-    <ClInclude Include="SlimeShootAI.h">
-      <Filter>Enemies</Filter>
+    <ClInclude Include="PlayerShootGhost.h">
+      <Filter>Players</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyAIContext.h">
+    <ClInclude Include="PlayerShootDied.h">
+      <Filter>Players</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerShoot.h">
+      <Filter>Players</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMeleeGhost.h">
+      <Filter>Players</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMeleeDied.h">
+      <Filter>Players</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMelee.h">
+      <Filter>Players</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniMapController.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Preloader.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioController.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="BigStone.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuButtons.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MagnitZone.h">
       <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="IEnemyAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="MiniMapController.h" />
+    <ClInclude Include="EnemyAIContext.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="ExitHandler.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticlesDestroyer.h">
+      <Filter>Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Players">

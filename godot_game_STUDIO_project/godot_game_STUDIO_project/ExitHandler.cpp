@@ -69,14 +69,10 @@ void godot::ExitHandler::_load_menu_scene()
 	timer_audio->start(0.01);
 
 	auto camera = get_node("/root/Node2D/Node/Camera2D");
+	auto generation = get_node("/root/Node2D/Node/Generation");
 	Enemies::get_singleton()->_clear();
+	generation->call("_clear");
 	camera->call("_go_to_start");
-	
-	auto enemy_spawner = camera->find_node("EnemySpawner");
-	auto current_level = get_node((NodePath)("/root/Node2D/Node/" + (String)enemy_spawner->call("_get_current_level_name")));
-	current_level->set_name("to_delete");
-	enemy_spawner->call("_stand_random_level");
-	current_level->queue_free();
 
 	if (PlayersContainer::_get_instance()->_get_player1() != nullptr)
 		PlayersContainer::_get_instance()->_get_player1()->call("_change_moving", true);
@@ -88,6 +84,7 @@ void godot::ExitHandler::_load_menu_scene()
 	for (int i = 0; i < children_item.size(); i++)
 		cast_to<Node2D>(children_item[i])->queue_free();
 
+	generation->call("_ready");
 	queue_free();
 
 }
