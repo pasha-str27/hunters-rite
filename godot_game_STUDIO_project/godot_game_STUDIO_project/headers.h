@@ -8,6 +8,7 @@
 #include <map>
 
 //Godot includes
+#include <RigidBody2D.hpp>
 #include <TextureRect.hpp>
 #include <ResourceLoader.hpp>
 #include <Godot.hpp>
@@ -112,3 +113,4 @@ using namespace godot;
 #include "PlayerShootDied.h"
 #include "PlayerShootGhost.h"
 #include "SlimeShootAI.h"
+#include "Ball.h"

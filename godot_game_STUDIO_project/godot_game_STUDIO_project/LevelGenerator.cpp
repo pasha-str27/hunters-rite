@@ -68,7 +68,9 @@ void godot::LevelGenerator::_ready()
 	rng->randomize();
 	int rand_value;
 
-	/*for (int i = 1; i < rooms.size(); ++i)
+	_spawn_big_stone();
+
+	for (int i = 1; i < rooms.size(); ++i)
 	{
 		rand_value = rng->randi_range(0, 1);
 		if (rand_value == 0)
@@ -91,7 +93,7 @@ void godot::LevelGenerator::_ready()
 				_buid_stones_second_step(rooms[i]);
 
 		}
-	}*/
+	}
 
 	CameraController::current_room = rooms[0];
 	std::vector<Node2D*> cornered_rooms = this->_get_corner_rooms();
@@ -117,8 +119,6 @@ void godot::LevelGenerator::_ready()
 		node->call("_fill_empty_positions");
 		
 	_set_keys(boss_room, generated_keys);
-
-	_spawn_big_stone();
 }
 
 void godot::LevelGenerator::_connect_rooms(Node2D* prev, Node2D* next, Vector2 dir)
@@ -836,6 +836,9 @@ void godot::LevelGenerator::_spawn_big_stone()
 
 	auto stone = cast_to<Node2D>(big_stone->instance());
 	room->add_child(stone);
+
+	stone->set_global_position(stone->get_global_position() + Vector2(16, 2));
+	stone->call("_change_start_parameters");
 
 	room->call("_set_room_type", "heal_room");
 	room->call("_set_is_special", true);
