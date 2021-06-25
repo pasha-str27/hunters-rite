@@ -97,26 +97,6 @@ void godot::PlayerShoot::_process_input()
 		_fight();
 	}
 
-	//fight	left
-	if (input_controller->is_action_pressed(fight_left))
-	{
-		bullet_dir = Vector2::LEFT;
-		sprite->set_flip_h(true);
-		sprite->set_offset(Vector2(-35, 0));
-		shoot_particles->set_position(Vector2(-11, 0));
-		_fight();
-	}
-
-	//fight	right
-	if (input_controller->is_action_pressed(fight_right))
-	{
-		bullet_dir = Vector2::RIGHT;
-		sprite->set_flip_h(false);
-		sprite->set_offset(Vector2(35, 0));
-		shoot_particles->set_position(Vector2(11, 0));
-		_fight();
-	}
-
 	//move up
 	if (input_controller->is_action_pressed(move_up))
 		dir.y -= _get_speed();
@@ -146,6 +126,26 @@ void godot::PlayerShoot::_process_input()
 	//dash
 	if (input_controller->is_action_just_pressed(special))
 		_get_object()->call("_start_special_timer");
+
+	//fight	left
+	if (input_controller->is_action_pressed(fight_left))
+	{
+		bullet_dir = Vector2::LEFT;
+		sprite->set_flip_h(true);
+		sprite->set_offset(Vector2(-35, 0));
+		shoot_particles->set_position(Vector2(-11, 0));
+		_fight();
+	}
+
+	//fight	right
+	if (input_controller->is_action_pressed(fight_right))
+	{
+		bullet_dir = Vector2::RIGHT;
+		sprite->set_flip_h(false);
+		sprite->set_offset(Vector2(35, 0));
+		shoot_particles->set_position(Vector2(11, 0));
+		_fight();
+	}
 
 	PlayerData::_set_dir(dir);
 }
