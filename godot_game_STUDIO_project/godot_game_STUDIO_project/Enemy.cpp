@@ -104,6 +104,9 @@ void godot::Enemy::_ready()
 	if (is_in_group("slime_shoot"))
 		ai->_set_strategy(new SlimeShootAI(bullet, this));
 
+	if (is_in_group("slime_boss"))
+		ai->_set_strategy(new SlimeBossAI(bullet, this));
+
 	spawn_particles->set_emitting(true);
 	timer_particles->connect("timeout", this, "_on_spawn_end");
 	timer_particles->start(0.2f);
