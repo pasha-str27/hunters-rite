@@ -38,9 +38,6 @@ void godot::CameraController::_move(String dir)
 	auto fade = cast_to<Node2D>(fadeIn->instance());
 	add_child(fade);
 
-	float vertical_offset = 390;
-	float horizontal_offset = 250;
-
 	auto generation_node = get_parent()->get_node("Generation");
 
 	if (dir == "top")
@@ -56,10 +53,10 @@ void godot::CameraController::_move(String dir)
 		current_room = next_room;
 
 		if (has_node("/root/Node2D/Node/Player1"))
-			cast_to<Node2D>(player1->get_node("Player1"))->set_global_position(move_point->get_global_position());
+			PlayersContainer::_get_instance()->_get_player1()->set_global_position(move_point->get_global_position());
 
 		if (has_node("/root/Node2D/Node/Player2"))
-			player2->set_global_position(move_point->get_global_position());
+			PlayersContainer::_get_instance()->_get_player2()->set_global_position(move_point->get_global_position());
 	}
 
 	if (dir == "bottom")
@@ -75,10 +72,10 @@ void godot::CameraController::_move(String dir)
 		current_room = next_room;
 
 		if (has_node("/root/Node2D/Node/Player1"))
-			cast_to<Node2D>(player1->get_node("Player1"))->set_global_position(move_point->get_global_position());
+			PlayersContainer::_get_instance()->_get_player1()->set_global_position(move_point->get_global_position());
 
 		if (has_node("/root/Node2D/Node/Player2"))
-			player2->set_global_position(move_point->get_global_position());
+			PlayersContainer::_get_instance()->_get_player2()->set_global_position(move_point->get_global_position());
 	}
 
 	if (dir == "left")
@@ -94,10 +91,10 @@ void godot::CameraController::_move(String dir)
 		current_room = next_room;
 
 		if (has_node("/root/Node2D/Node/Player1"))
-			cast_to<Node2D>(player1->get_node("Player1"))->set_global_position(move_point->get_global_position());
+			PlayersContainer::_get_instance()->_get_player1()->set_global_position(move_point->get_global_position());
 
 		if (has_node("/root/Node2D/Node/Player2"))
-			player2->set_global_position(move_point->get_global_position());
+			PlayersContainer::_get_instance()->_get_player2()->set_global_position(move_point->get_global_position());
 	}
 
 	if (dir == "right")
@@ -113,10 +110,10 @@ void godot::CameraController::_move(String dir)
 		current_room = next_room;
 
 		if (has_node("/root/Node2D/Node/Player1"))
-			cast_to<Node2D>(player1->get_node("Player1"))->set_global_position(move_point->get_global_position());
+			PlayersContainer::_get_instance()->_get_player1()->set_global_position(move_point->get_global_position());
 
 		if (has_node("/root/Node2D/Node/Player2"))
-			player2->set_global_position(move_point->get_global_position());
+			PlayersContainer::_get_instance()->_get_player2()->set_global_position(move_point->get_global_position());
 	}
 }
 

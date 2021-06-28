@@ -21,7 +21,7 @@ void godot::PlayerController::_register_methods()
 	register_method("_on_Area2D_area_exited", &PlayerController::_on_Area2D_area_exited);
 	register_method("_take_damage", &PlayerController::_take_damage);
 	register_method("_change_can_moving", &PlayerController::_change_can_moving);
-	register_method("_change_moving", &PlayerController::_change_moving);	
+	register_method("_change_moving", &PlayerController::_change_moving);
 	register_method("change_can_moving_timeout", &PlayerController::change_can_moving_timeout);
 	register_method("_decrease_attack_radius", &PlayerController::_decrease_attack_radius);
 	register_method("_encrease_attack_radius", &PlayerController::_encrease_attack_radius);
@@ -53,6 +53,9 @@ void godot::PlayerController::_register_methods()
 	register_method("_heal", &PlayerController::_heal);
 	register_method("_ghost_to_player", &PlayerController::_ghost_to_player);
 	register_method("_is_ghost_mode", &PlayerController::_is_ghost_mode);
+	register_method("_continue_moving", &PlayerController::_continue_moving);
+	register_method("_stop_moving", &PlayerController::_stop_moving);
+	
 	
 	register_property<PlayerController, float>("hp", &PlayerController::_hp, 0);
 	register_property<PlayerController, float>("damage", &PlayerController::_damage, 0);
@@ -76,6 +79,7 @@ godot::PlayerController::PlayerController()
 	is_alive = true;
 	is_special = false;
 	speed = 250;
+	_saved_speed = speed;
 	door = nullptr;
 }
 
@@ -575,4 +579,16 @@ bool godot::PlayerController::_is_ghost_mode()
 void godot::PlayerController::_set_controll_buttons(String move_up, String move_down, String move_left, String move_right, String fight_up, String fight_down, String fight_left, String fight_right, String special)
 {
 	current_player_strategy->_set_controll_buttons(move_up, move_down, move_left, move_right, fight_up, fight_down, fight_left, fight_right, special);
+}
+
+void godot::PlayerController::_stop_moving()
+{
+	_saved_speed = speed;
+	current_player_strategy->_set_speed(0);
+}
+
+void godot::PlayerController::_continue_moving()
+{
+	speed = _saved_speed;
+	current_player_strategy->_set_speed(speed);
 }

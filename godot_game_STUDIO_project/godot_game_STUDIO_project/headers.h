@@ -114,3 +114,4 @@ using namespace godot;
 #include "PlayerShootGhost.h"
 #include "SlimeShootAI.h"
 #include "Ball.h"
+#include "SlimeBossAI.h"
