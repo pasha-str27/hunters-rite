@@ -109,7 +109,7 @@ void godot::SlimeBossAI::_jump()
 	is_jumping = true;
 	jumping_up = true;
 	goal = _get_enemy()->get_global_position() - Vector2(0, 720);
-	cast_to<Node2D>(_get_enemy()->get_node("CollisionShape2D"))->hide();
+	_disable_collisions();
 }
 
 void godot::SlimeBossAI::_jumping(float delta)
@@ -127,7 +127,7 @@ void godot::SlimeBossAI::_jumping(float delta)
 		}
 		else
 		{
-			cast_to<Node2D>(_get_enemy()->get_node("CollisionShape2D"))->show();
+			_enable_collisions();
 			jump_zone->set_visible(false);
 			_wait(.5f);
 		}
@@ -180,6 +180,22 @@ void godot::SlimeBossAI::_set_target()
 		else if (MenuButtons::player_name == 2)
 			target_player = _get_player2()->get_global_position();
 	}
+}
+
+void godot::SlimeBossAI::_disable_collisions()
+{
+	cast_to<Area2D>(_get_enemy()->get_node("Area2D"))->set_collision_layer_bit(0, false);
+	cast_to<Area2D>(_get_enemy()->get_node("Area2D"))->set_collision_mask_bit(0, false);
+	cast_to<KinematicBody2D>(_get_enemy())->set_collision_mask_bit(9, false);
+	cast_to<KinematicBody2D>(_get_enemy())->set_collision_layer_bit(2, false);
+}
+
+void godot::SlimeBossAI::_enable_collisions()
+{
+	cast_to<Area2D>(_get_enemy()->get_node("Area2D"))->set_collision_layer_bit(0, true);
+	cast_to<Area2D>(_get_enemy()->get_node("Area2D"))->set_collision_mask_bit(0, true);
+	cast_to<KinematicBody2D>(_get_enemy())->set_collision_mask_bit(9, true);
+	cast_to<KinematicBody2D>(_get_enemy())->set_collision_layer_bit(2, true);
 }
 
 void godot::SlimeBossAI::change_can_fight(bool value)
