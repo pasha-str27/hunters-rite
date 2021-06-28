@@ -89,7 +89,6 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 		item_box = cast_to<VBoxContainer>(get_node("/root/Node2D/Node/Camera2D/ItemHolder/P1Items"));
 
 	//creating new sprite for item in item box
-
 	auto item_sprite = TextureRect::_new();
 	item_sprite->set_texture(cast_to<Sprite>(get_child(0))->get_texture());
 	item_sprite->set_position(Vector2(-15,-15));
