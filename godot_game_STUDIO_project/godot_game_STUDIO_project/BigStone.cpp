@@ -43,7 +43,7 @@ void godot::BigStone::_heal_players()
 {
 	auto player_conteiner = PlayersContainer::_get_instance();
 
-	if (MenuButtons::player_name == 0 && players_count == 2)
+	if (MenuButtons::game_mode == COOP && players_count == 2)
 	{
 		if (player_conteiner->_get_player1_regular() != nullptr)
 			_heal_player(player_conteiner->_get_player1_regular());
@@ -55,7 +55,7 @@ void godot::BigStone::_heal_players()
 		timer->start(heal_cooldown);
 	}
 
-	if ((MenuButtons::player_name == 1 || MenuButtons::player_name == 2) && players_count == 1)
+	if ((MenuButtons::game_mode == SHOOTER || MenuButtons::game_mode == MELEE) && players_count == 1)
 	{
 		if (player_conteiner->_get_player1_regular() != nullptr)
 			_heal_player(player_conteiner->_get_player1_regular());

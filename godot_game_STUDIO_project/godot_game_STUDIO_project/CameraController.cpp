@@ -148,7 +148,7 @@ void godot::CameraController::_init()
 void godot::CameraController::_spawn_players()
 {
 	ResourceLoader* loader = ResourceLoader::get_singleton();
-	if (MenuButtons::player_name == 2)
+	if (MenuButtons::game_mode == SHOOTER)
 	{
 		Ref<PackedScene> pl1 = loader->load("res://Assets/Prefabs/Players/Player1.tscn");
 		Node2D* player = cast_to<Node2D>(pl1->instance());
@@ -163,7 +163,7 @@ void godot::CameraController::_spawn_players()
 	}
 	else
 	{
-		if (MenuButtons::player_name == 1)
+		if (MenuButtons::game_mode == MELEE)
 		{
 			Ref<PackedScene> pl2 = loader->load("res://Assets/Prefabs/Players/Player2.tscn");
 			Node2D* player = cast_to<Node2D>(pl2->instance());
@@ -442,7 +442,7 @@ void godot::CameraController::_go_to_start()
 		player1->set_global_position(Vector2(0, -50));
 	else
 	{
-		if (MenuButtons::player_name == 3)
+		if (MenuButtons::game_mode == COOP)
 		{
 			ResourceLoader* rld = ResourceLoader::get_singleton();
 			Ref<PackedScene> _player1 = rld->load("res://Assets/Prefabs/Players/Player1.tscn");
@@ -460,7 +460,7 @@ void godot::CameraController::_go_to_start()
 		player2->set_global_position(Vector2(0, -50));
 	else
 	{
-		if (MenuButtons::player_name == 3)
+		if (MenuButtons::game_mode == COOP)
 		{
 			ResourceLoader* rld = ResourceLoader::get_singleton();
 			Ref<PackedScene> _player2 = rld->load("res://Assets/Prefabs/Players/Player2.tscn");
