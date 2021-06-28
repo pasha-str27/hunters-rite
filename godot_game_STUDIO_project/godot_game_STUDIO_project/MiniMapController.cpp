@@ -14,6 +14,7 @@ godot::MiniMapController::~MiniMapController()
 	disc_room = nullptr;
 
 	grid = nullptr;
+	all_rooms.clear();
 }
 
 void godot::MiniMapController::_register_methods()
@@ -21,7 +22,9 @@ void godot::MiniMapController::_register_methods()
 	register_method("_init", &MiniMapController::_init);
 	register_method("_ready", &MiniMapController::_ready);
 	register_method("_load_resources", &MiniMapController::_load_resources);
-	register_method("_updateMinimap", &MiniMapController::_update_minimap);
+	register_method("_update_minimap", &MiniMapController::_update_minimap);
+	register_method("_get_players_pos", &MiniMapController::_get_players_pos);
+	register_method("_normalize_room_pos", &MiniMapController::_normalize_room_pos);
 	
 	register_property<MiniMapController, Ref<PackedScene>>("current_room", &MiniMapController::curr_room, nullptr);
 	register_property<MiniMapController, Ref<PackedScene>>("discovered_room", &MiniMapController::disc_room, nullptr);
@@ -73,9 +76,9 @@ void godot::MiniMapController::_ready()
 
 	std::vector<Vector2> fixed_rooms_positions;
 
-	for (auto room : rooms_positions)
+	for (auto old_pos : rooms_positions)
 	{
-		auto room_pos = (room - players_pos) * grid_scale + grid_rect_size / 2;
+		auto room_pos = _normalize_room_pos(old_pos);
 		fixed_rooms_positions.push_back(room_pos);
 	}
 
@@ -98,6 +101,10 @@ void godot::MiniMapController::_ready()
 	Godot::print("Added sprites");
 
 	all_rooms = grid->get_children();
+
+	Godot::print(_get_players_pos());
+
+	_update_minimap();
 }
 
 void godot::MiniMapController::_process()
@@ -128,5 +135,36 @@ void godot::MiniMapController::_update_minimap()
 	{
 		room = cast_to<Node2D>(all_rooms[i]);
 
+		if (room->get_position() == _normalize_room_pos(players_pos))
+		{
+			room->queue_free();
+			auto room = cast_to<Node2D>(curr_room->instance());
+			room->set_position(players_pos);
+			room->set_scale(Vector2(4, 4));
+			grid->add_child(room);
+		}
 	}
+}
+
+Vector2 godot::MiniMapController::_get_players_pos()
+{
+	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
+	rng->randomize();
+
+	int random_x = rng->randi_range(-2 * step_x, 2 * step_x);
+	int random_y = rng->randi_range(-2 * step_y, 2 * step_y);
+
+	Godot::print(Vector2(random_x, random_y));
+
+	int fixed_random_x = (int)(random_x / step_x) * step_x;
+	int fixed_random_y = (int)(random_y / step_y) * step_y;
+
+	rng = nullptr;
+
+	return Vector2(fixed_random_x, fixed_random_y);
+}
+
+Vector2 godot::MiniMapController::_normalize_room_pos(Vector2 old_pos)
+{
+	return (old_pos - players_pos) * grid_scale + grid_rect_size / 2;
 }

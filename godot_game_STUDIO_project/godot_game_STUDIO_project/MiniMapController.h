@@ -39,6 +39,7 @@ namespace godot
 		bool _load_resources();
 		void _update_minimap();
 		Vector2 _get_players_pos();
+		Vector2 _normalize_room_pos(Vector2 old_pos);
 
 		MiniMapController();
 		~MiniMapController();
