@@ -24,8 +24,11 @@ namespace godot
 		float step_y = 720;
 
 		Vector2 grid_scale = Vector2::ZERO;
-		Vector2 curr_room_pos = Vector2::ZERO;
+		Vector2 curr_room_marker_pos = Vector2::ZERO;
 		Vector2 grid_rect_size = Vector2::ZERO;
+		Vector2 players_pos = Vector2::ZERO;
+
+		Array all_rooms = {};
 
 	public:
 		static void _register_methods();
@@ -33,7 +36,9 @@ namespace godot
 		void _ready();
 		void _process();
 
-		bool _loadResources();
+		bool _load_resources();
+		void _update_minimap();
+		Vector2 _get_players_pos();
 
 		MiniMapController();
 		~MiniMapController();
