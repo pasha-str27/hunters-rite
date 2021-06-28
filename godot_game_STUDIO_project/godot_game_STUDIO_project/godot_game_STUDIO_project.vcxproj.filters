@@ -149,6 +149,18 @@
     <ClCompile Include="SlimeBossAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="ISlimeAttackState.cpp">
+      <Filter>Enemies\SlimeBossStates</Filter>
+    </ClCompile>
+    <ClCompile Include="SlimeAttackJumpState.cpp">
+      <Filter>Enemies\SlimeBossStates</Filter>
+    </ClCompile>
+    <ClCompile Include="SlimeAttackShootState.cpp">
+      <Filter>Enemies\SlimeBossStates</Filter>
+    </ClCompile>
+    <ClCompile Include="SlimeAttackSpawnState.cpp">
+      <Filter>Enemies\SlimeBossStates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
@@ -324,6 +336,18 @@
     <ClInclude Include="SlimeBossAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="ISlimeAttackState.h">
+      <Filter>Enemies\SlimeBossStates</Filter>
+    </ClInclude>
+    <ClInclude Include="SlimeAttackJumpState.h">
+      <Filter>Enemies\SlimeBossStates</Filter>
+    </ClInclude>
+    <ClInclude Include="SlimeAttackShootState.h">
+      <Filter>Enemies\SlimeBossStates</Filter>
+    </ClInclude>
+    <ClInclude Include="SlimeAttackSpawnState.h">
+      <Filter>Enemies\SlimeBossStates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Players">
@@ -352,6 +376,9 @@
     </Filter>
     <Filter Include="Genetation">
       <UniqueIdentifier>{599ab0d3-6352-475c-8a1c-15d8323a3b93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemies\SlimeBossStates">
+      <UniqueIdentifier>{389c46b8-632f-41f9-b4bb-cbfc879951d1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
