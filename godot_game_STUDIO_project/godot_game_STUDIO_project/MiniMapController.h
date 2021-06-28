@@ -18,6 +18,7 @@ namespace godot
 		TextureRect* grid = nullptr;
 
 		std::vector<Vector2> rooms_positions;
+		std::vector<Vector2> disc_rooms_positions;
 
 		float zoom = 1.5;
 		float step_x = 1024;
@@ -40,6 +41,8 @@ namespace godot
 		void _update_minimap();
 		Vector2 _get_players_pos();
 		Vector2 _normalize_room_pos(Vector2 old_pos);
+		void _clear_map();
+		std::vector<Vector2> _normalize_all_rooms();
 
 		MiniMapController();
 		~MiniMapController();
