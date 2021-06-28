@@ -187,6 +187,7 @@ void godot::PlayerData::_start_special()
 
 void godot::PlayerData::_set_controll_buttons(String move_up, String move_down, String move_left, String move_right, String fight_up, String fight_down, String fight_left, String fight_right, String special)
 {
+	Godot::print("setting");
 	this->move_up = move_up;
 	this->move_down = move_down;
 	this->move_left = move_left;

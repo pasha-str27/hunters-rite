@@ -110,15 +110,12 @@ void godot::PlayerController::_ready()
 	{
 		player_producer = new ProducePlayerShoot;
 		PlayersContainer::_get_instance()->_set_player1(this);
-
-		call_deferred("_set_controll_buttons", "Player1_up", "Player1_down", "Player1_left", "Player1_right", "Player1_fight_up", "Player1_fight_down", "Player1_fight_left", "Player1_fight_right", "Player1_special");
 	}
 
 	if (is_in_group("player2"))
 	{
 		player_producer = new ProducePlayerMelee;
 		PlayersContainer::_get_instance()->_set_player2(this);
-		call_deferred("_set_controll_buttons", "Player2_up", "Player2_down", "Player2_left", "Player2_right", "Player2_fight_up", "Player2_fight_down", "Player2_fight_left", "Player2_fight_right", "Player2_special");
 	}
 
 	current_player_strategy->_set_strategy(player_producer->_get_player(this, bullet_prefab));

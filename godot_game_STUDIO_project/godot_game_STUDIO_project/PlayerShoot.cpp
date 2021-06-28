@@ -242,8 +242,3 @@ void godot::PlayerShoot::_start_special()
 {
 	_set_speed(_get_speed() * speed_delta);
 }
-
-void godot::PlayerShoot::_set_controll_buttons(String move_up, String move_down, String move_left, String move_right, String fight_up, String fight_down, String fight_left, String fight_right, String special)
-{
-	PlayerData::_set_controll_buttons(move_up, move_down, move_left, move_right, fight_up, fight_down, fight_left, fight_right, special);
-}
