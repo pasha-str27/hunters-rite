@@ -149,9 +149,6 @@
     <ClCompile Include="SlimeBossAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="ISlimeAttackState.cpp">
-      <Filter>Enemies\SlimeBossStates</Filter>
-    </ClCompile>
     <ClCompile Include="SlimeAttackJumpState.cpp">
       <Filter>Enemies\SlimeBossStates</Filter>
     </ClCompile>
@@ -335,9 +332,6 @@
     </ClInclude>
     <ClInclude Include="SlimeBossAI.h">
       <Filter>Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="ISlimeAttackState.h">
-      <Filter>Enemies\SlimeBossStates</Filter>
     </ClInclude>
     <ClInclude Include="SlimeAttackJumpState.h">
       <Filter>Enemies\SlimeBossStates</Filter>

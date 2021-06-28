@@ -67,24 +67,13 @@ void godot::SlimeBossAI::_shoot()
 		return;
 
 	Vector2 bullet_dir = target_player;
-	float angle = M_PI / 9;
 
 	if (available_bullets.size() > 0)
 	{
 		for (int i = 0; i < 3; i++)
 		{
-			available_bullets[available_bullets.size() - 1]->set_global_position(_get_enemy()->get_global_position());
-
-			available_bullets[available_bullets.size() - 1]->set_visible(true);
-
-			available_bullets[available_bullets.size() - 1]->call("_set_dir",
-				(bullet_dir - available_bullets[available_bullets.size() - 1]->get_global_position()).normalized());
-
-			bullet_dir = target_player;
-			bullet_dir.x = bullet_dir.x * cos(angle / 3) - bullet_dir.y * sin(angle / 3);
-			bullet_dir.y = bullet_dir.x * sin(angle / 3) + bullet_dir.y * cos(angle / 3);
-			angle = -(M_PI / 9);
-
+			available_bullets[available_bullets.size() - i - 1]->set_global_position(_get_enemy()->get_global_position());
+			
 			if (available_bullets.size() == 1)
 			{
 				auto node = _get_enemy()->get_parent()->get_child(0);
@@ -92,11 +81,28 @@ void godot::SlimeBossAI::_shoot()
 				node->add_child(new_obj);
 				available_bullets.push_back(cast_to<Node2D>(new_obj));
 			}
+		}
 
+		float angle = M_PI / 18;
+		Vector2 bullet_directions[3];
+		bullet_directions[0] = (bullet_dir - available_bullets[available_bullets.size() - 1]->get_global_position()).normalized();
+		bullet_directions[1] = Vector2::ZERO;
+		bullet_directions[2] = Vector2::ZERO;
+
+		bullet_directions[1].x = bullet_directions[0].x * cos(angle) - bullet_directions[0].y * sin(angle);
+		bullet_directions[1].y = bullet_directions[0].x * sin(angle) + bullet_directions[0].y * cos(angle);
+
+		bullet_directions[2].x = bullet_directions[0].x * cos(-angle) - bullet_directions[0].y * sin(-angle);
+		bullet_directions[2].y = bullet_directions[0].x * sin(-angle) + bullet_directions[0].y * cos(-angle);
+
+		for (int i = 0; i < 3; i++)
+		{
+			available_bullets[available_bullets.size() - 1]->set_visible(true);
+			available_bullets[available_bullets.size() - 1]->call("_set_dir", bullet_directions[i]);
 			available_bullets.pop_back();
-
 		}		
 	}
+
 	_wait(1.5f);
 }
 
