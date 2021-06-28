@@ -233,7 +233,7 @@ void godot::PlayerController::_add_bullet(Node* node)
 
 void godot::PlayerController::_process(float delta)
 {
-	if (can_move && is_alive || is_ghost_mode)
+	if (can_move && (is_alive || is_ghost_mode))
 	{
 		current_player_strategy->_process_input();
 		current_player_strategy->_move();
@@ -417,6 +417,7 @@ void godot::PlayerController::_die()
 		
 		if (get_name() == "Player1")
 			PlayersContainer::_get_instance()->_set_player1_regular(cast_to<Node2D>(get_parent()));
+
 		if (get_name() == "Player2")
 			PlayersContainer::_get_instance()->_set_player2_regular(this);
 

@@ -691,6 +691,7 @@ Node2D* godot::LevelGenerator::_create_boss_room(std::vector<Node2D*>& cornered_
 
 	auto sprite = cast_to<Node2D>(boss_room_sprite->instance());
 	add_child(sprite);
+	sprite->set_scale(Vector2(0.3, 0.3));
 	sprite->set_global_position(builded_room->get_global_position());
 
 	builded_room->call("_set_is_special", true);
