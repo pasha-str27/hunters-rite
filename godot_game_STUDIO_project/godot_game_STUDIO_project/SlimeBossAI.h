@@ -47,5 +47,7 @@ namespace godot {
 		void _show_jump_zone();
 		void _start_falling();
 		void _set_target();
+		void _disable_collisions();
+		void _enable_collisions();
 	};
 }
