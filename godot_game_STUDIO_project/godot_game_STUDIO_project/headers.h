@@ -43,6 +43,8 @@
 #include <SpriteFrames.hpp>
 #include <SceneTree.hpp>
 #include <VBoxContainer.hpp>
+#include <HBoxContainer.hpp>
+#include <CenterContainer.hpp>
 #include <SceneTree.hpp>
 #include <Texture.hpp>
 #include <AudioServer.hpp>
