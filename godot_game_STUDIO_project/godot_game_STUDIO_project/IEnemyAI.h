@@ -5,12 +5,14 @@
 
 namespace godot
 {
+	class ISlimeAttackState;
 	class IEnemyAI
 	{
 	public:
 		virtual void _process(float delta) = 0;
 		virtual void _add_bullet(Node* bullet = nullptr) = 0;
 		virtual void change_can_fight(bool value) = 0;
+		virtual void change_can_fight(bool value, ISlimeAttackState* state) = 0;
 		virtual void _change_dir_after_time() = 0;
 		virtual void _delete_player1() = 0;
 		virtual void _delete_player2() = 0;

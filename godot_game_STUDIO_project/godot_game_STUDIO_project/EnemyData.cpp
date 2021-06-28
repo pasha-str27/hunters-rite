@@ -26,6 +26,10 @@ void godot::EnemyData::_remove_player(Node2D* player)
 {
 }
 
+void godot::EnemyData::change_can_fight(bool value, ISlimeAttackState* state)
+{
+}
+
 Node2D* godot::EnemyData::_get_enemy()
 {
 	return enemy;

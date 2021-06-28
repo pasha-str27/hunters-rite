@@ -148,7 +148,7 @@ void godot::CameraController::_init()
 void godot::CameraController::_spawn_players()
 {
 	ResourceLoader* loader = ResourceLoader::get_singleton();
-	if (MenuButtons::player_name == 2)
+	if (MenuButtons::player_name == 1)
 	{
 		Ref<PackedScene> pl1 = loader->load("res://Assets/Prefabs/Players/Player1.tscn");
 		Node2D* player = cast_to<Node2D>(pl1->instance());
@@ -163,7 +163,7 @@ void godot::CameraController::_spawn_players()
 	}
 	else
 	{
-		if (MenuButtons::player_name == 1)
+		if (MenuButtons::player_name == 2)
 		{
 			Ref<PackedScene> pl2 = loader->load("res://Assets/Prefabs/Players/Player2.tscn");
 			Node2D* player = cast_to<Node2D>(pl2->instance());
