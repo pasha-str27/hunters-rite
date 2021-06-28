@@ -68,7 +68,7 @@ void godot::LevelGenerator::_ready()
 	rng->randomize();
 	int rand_value;
 
-	/*for (int i = 1; i < rooms.size(); ++i)
+	for (int i = 1; i < rooms.size(); ++i)
 	{
 		rand_value = rng->randi_range(0, 1);
 		if (rand_value == 0)
@@ -91,7 +91,7 @@ void godot::LevelGenerator::_ready()
 				_buid_stones_second_step(rooms[i]);
 
 		}
-	}*/
+	}
 
 	CameraController::current_room = rooms[0];
 	std::vector<Node2D*> cornered_rooms = this->_get_corner_rooms();

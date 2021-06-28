@@ -146,6 +146,9 @@
     <ClCompile Include="MagnitZone.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="SlimeBossAI.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
@@ -317,6 +320,9 @@
     </ClInclude>
     <ClInclude Include="ParticlesDestroyer.h">
       <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="SlimeBossAI.h">
+      <Filter>Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
