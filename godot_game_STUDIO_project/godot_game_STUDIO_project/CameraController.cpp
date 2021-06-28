@@ -52,11 +52,11 @@ void godot::CameraController::_move(String dir)
 
 		current_room = next_room;
 
-		if (has_node("/root/Node2D/Node/Player1"))
-			PlayersContainer::_get_instance()->_get_player1()->set_global_position(move_point->get_global_position());
-
-		if (has_node("/root/Node2D/Node/Player2"))
-			PlayersContainer::_get_instance()->_get_player2()->set_global_position(move_point->get_global_position());
+		if(PlayersContainer::_get_instance()->_get_player1_regular()!=nullptr)
+			cast_to<Node2D>(PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1))->set_global_position(move_point->get_global_position());
+		
+		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
+			PlayersContainer::_get_instance()->_get_player2_regular()->set_global_position(move_point->get_global_position());
 	}
 
 	if (dir == "bottom")
@@ -71,11 +71,11 @@ void godot::CameraController::_move(String dir)
 
 		current_room = next_room;
 
-		if (has_node("/root/Node2D/Node/Player1"))
-			PlayersContainer::_get_instance()->_get_player1()->set_global_position(move_point->get_global_position());
+		if (PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
+			cast_to<Node2D>(PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1))->set_global_position(move_point->get_global_position());
 
-		if (has_node("/root/Node2D/Node/Player2"))
-			PlayersContainer::_get_instance()->_get_player2()->set_global_position(move_point->get_global_position());
+		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
+			PlayersContainer::_get_instance()->_get_player2_regular()->set_global_position(move_point->get_global_position());
 	}
 
 	if (dir == "left")
@@ -90,11 +90,11 @@ void godot::CameraController::_move(String dir)
 
 		current_room = next_room;
 
-		if (has_node("/root/Node2D/Node/Player1"))
-			PlayersContainer::_get_instance()->_get_player1()->set_global_position(move_point->get_global_position());
+		if (PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
+			cast_to<Node2D>(PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1))->set_global_position(move_point->get_global_position());
 
-		if (has_node("/root/Node2D/Node/Player2"))
-			PlayersContainer::_get_instance()->_get_player2()->set_global_position(move_point->get_global_position());
+		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
+			PlayersContainer::_get_instance()->_get_player2_regular()->set_global_position(move_point->get_global_position());
 	}
 
 	if (dir == "right")
@@ -109,11 +109,11 @@ void godot::CameraController::_move(String dir)
 
 		current_room = next_room;
 
-		if (has_node("/root/Node2D/Node/Player1"))
-			PlayersContainer::_get_instance()->_get_player1()->set_global_position(move_point->get_global_position());
+		if (PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
+			cast_to<Node2D>(PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1))->set_global_position(move_point->get_global_position());
 
-		if (has_node("/root/Node2D/Node/Player2"))
-			PlayersContainer::_get_instance()->_get_player2()->set_global_position(move_point->get_global_position());
+		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
+			PlayersContainer::_get_instance()->_get_player2_regular()->set_global_position(move_point->get_global_position());
 	}
 }
 
@@ -336,7 +336,7 @@ void godot::CameraController::_door_collision(String door_dir)
 		Enemies::get_singleton()->set_spawning(true);
 
 		if(PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
-			PlayersContainer::_get_instance()->_get_player1_regular()->call("_change_moving", false);
+			PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1)->call("_change_moving", false);
 
 		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
 			PlayersContainer::_get_instance()->_get_player2_regular()->call("_change_moving", false);

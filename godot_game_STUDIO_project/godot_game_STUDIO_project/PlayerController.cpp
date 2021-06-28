@@ -416,7 +416,7 @@ void godot::PlayerController::_die()
 		current_player_strategy->_set_strategy(player_producer->_get_player_ghost(this, bullet_prefab));
 		
 		if (get_name() == "Player1")
-			PlayersContainer::_get_instance()->_set_player1_regular(this);
+			PlayersContainer::_get_instance()->_set_player1_regular(cast_to<Node2D>(get_parent()));
 		if (get_name() == "Player2")
 			PlayersContainer::_get_instance()->_set_player2_regular(this);
 

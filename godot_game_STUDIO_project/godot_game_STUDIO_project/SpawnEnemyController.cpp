@@ -157,11 +157,11 @@ void godot::SpawnEnemyController::_ready()
 
 void godot::SpawnEnemyController::_prepare_spawn()
 {
-	if (PlayersContainer::_get_instance()->_get_player1() != nullptr)
-		PlayersContainer::_get_instance()->_get_player1()->call("_change_moving", true);
+	if (PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
+		PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1)->call("_change_moving", true);
 
-	if (PlayersContainer::_get_instance()->_get_player2() != nullptr)
-		PlayersContainer::_get_instance()->_get_player2()->call("_change_moving", true);
+	if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
+		PlayersContainer::_get_instance()->_get_player2_regular()->call("_change_moving", true);
 
 	timer->connect("timeout", this, "_spawn");
 	timer->start(.3f);
