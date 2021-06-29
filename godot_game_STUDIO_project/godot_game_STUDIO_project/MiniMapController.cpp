@@ -22,6 +22,7 @@ void godot::MiniMapController::_register_methods()
 {
 	register_method("_init", &MiniMapController::_init);
 	register_method("_ready", &MiniMapController::_ready);
+	register_method("_process", &MiniMapController::_process);
 	register_method("_load_resources", &MiniMapController::_load_resources);
 	register_method("_update_minimap", &MiniMapController::_update_minimap);
 	register_method("_get_players_pos", &MiniMapController::_get_players_pos);
@@ -68,17 +69,14 @@ void godot::MiniMapController::_ready()
 	}
 
 	//test pos
-	rooms_positions =
-	{
-		Vector2(0, 0),
-		Vector2(0, -step_y),
-		Vector2(step_x, -step_y),
-		Vector2(2 * step_x, -step_y),
-		Vector2(-step_x, step_y),
-		Vector2(0, step_y),
-		Vector2(0, 2 * step_y),
-		Vector2(step_x, 2 * step_y)
-	};
+	rooms_positions.push_back(Vector2(0, 0));
+	rooms_positions.push_back(Vector2(0, -step_y));
+	rooms_positions.push_back(Vector2(step_x, -step_y));
+	rooms_positions.push_back(Vector2(2 * step_x, -step_y));
+	rooms_positions.push_back(Vector2(-step_x, step_y));
+	rooms_positions.push_back(Vector2(0, step_y));
+	rooms_positions.push_back(Vector2(0, 2 * step_y));
+	rooms_positions.push_back(Vector2(step_x, 2 * step_y));
 
 	Godot::print("Rooms pos setted");
 
@@ -86,30 +84,14 @@ void godot::MiniMapController::_ready()
 	Godot::print(players_pos);
 	Godot::print("Players pos setted");
 
-	Godot::print("Rooms pos fixed: ");
-
-	/*for (auto pos : _normalize_all_rooms(rooms_positions))
-	{
-		Godot::print(pos);
-
-		if (_is_on_grid(pos))
-		{
-			auto room = cast_to<Node2D>(undisc_room->instance());
-			room->set_position(pos);
-			room->set_scale(Vector2(4, 4));
-			grid->add_child(room);
-		}
-		else
-			Godot::print("Pos of room is out of range");
-	}
-	Godot::print("Added sprites");*/
 	all_rooms = grid->get_children();
 
 	_update_minimap();
 }
 
-void godot::MiniMapController::_process()
+void godot::MiniMapController::_process(float delta)
 {
+	//Here im changing players positions
 }
 
 bool godot::MiniMapController::_load_resources()
@@ -141,12 +123,15 @@ void godot::MiniMapController::_update_minimap()
 			//need func for this
 			if (rooms_positions[i] == players_pos)
 			{
+				Godot::print("Nice try");
+
 				_clear_map();
 
-				_load_disc_rooms(disc_rooms_positions);
+				if (disc_rooms_positions.size() > 0)
+					_load_disc_rooms(disc_rooms_positions);
 
 				disc_rooms_positions.push_back(rooms_positions[i]);
-				rooms_positions.erase(rooms_positions.begin() + i);
+				rooms_positions.remove(i);
 
 				_load_curr_room(players_pos);
 				_load_undisc_rooms(rooms_positions);
@@ -190,22 +175,24 @@ void godot::MiniMapController::_clear_map()
 		grid->get_child(i)->queue_free();
 }
 
-std::vector<Vector2> godot::MiniMapController::_normalize_all_rooms(std::vector<Vector2> rooms_pos_array)
+Array godot::MiniMapController::_normalize_all_rooms(Array rooms_pos_array)
 {
-	std::vector<Vector2> fixed_rooms_positions;
+	Array fixed_rooms_positions;
 
-	for (auto old_pos : rooms_pos_array)
+	for (int i = 0; i < rooms_pos_array.size(); ++i)
 	{
-		auto room_pos = _normalize_room_pos(old_pos);
+		auto room_pos = _normalize_room_pos(rooms_pos_array[i]);
 		fixed_rooms_positions.push_back(room_pos);
 	}
 
 	return fixed_rooms_positions;
 }
 
-void godot::MiniMapController::_load_disc_rooms(std::vector<Vector2> disc_rooms_pos)
+void godot::MiniMapController::_load_disc_rooms(Array disc_rooms_pos)
 {
-	for (auto pos : _normalize_all_rooms(disc_rooms_pos))
+	for (int i = 0; i < disc_rooms_pos.size(); ++i)
+	{
+		auto pos = _normalize_all_rooms(disc_rooms_pos)[i];
 		if (_is_on_grid(pos))
 		{
 			auto room = cast_to<Node2D>(disc_room->instance());
@@ -213,6 +200,7 @@ void godot::MiniMapController::_load_disc_rooms(std::vector<Vector2> disc_rooms_
 			room->set_scale(Vector2(4, 4));
 			grid->add_child(room);
 		}
+	}
 }
 
 void godot::MiniMapController::_load_curr_room(Vector2 curr_room_pos)
@@ -223,9 +211,11 @@ void godot::MiniMapController::_load_curr_room(Vector2 curr_room_pos)
 	grid->add_child(room);
 }
 
-void godot::MiniMapController::_load_undisc_rooms(std::vector<Vector2> undisc_rooms_pos)
+void godot::MiniMapController::_load_undisc_rooms(Array undisc_rooms_pos)
 {
-	for (auto pos : _normalize_all_rooms(undisc_rooms_pos))
+	for (int i = 0; i < undisc_rooms_pos.size(); ++i)
+	{
+		auto pos = _normalize_all_rooms(undisc_rooms_pos)[i];
 		if (_is_on_grid(pos))
 		{
 			auto room = cast_to<Node2D>(undisc_room->instance());
@@ -233,6 +223,7 @@ void godot::MiniMapController::_load_undisc_rooms(std::vector<Vector2> undisc_ro
 			room->set_scale(Vector2(4, 4));
 			grid->add_child(room);
 		}
+	}
 }
 
 bool godot::MiniMapController::_is_on_grid(Vector2 pos)

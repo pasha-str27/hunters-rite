@@ -17,8 +17,9 @@ namespace godot
 
 		TextureRect* grid = nullptr;
 
-		std::vector<Vector2> rooms_positions;
-		std::vector<Vector2> disc_rooms_positions;
+		Array all_rooms = {};
+		Array rooms_positions = {};
+		Array disc_rooms_positions = {};
 		Vector2 curr_room_position;
 
 		float zoom = 1.5;
@@ -29,23 +30,21 @@ namespace godot
 		Vector2 grid_rect_size = Vector2::ZERO;
 		Vector2 players_pos = Vector2::ZERO;
 
-		Array all_rooms = {};
-
 	public:
 		static void _register_methods();
 		void _init();
 		void _ready();
-		void _process();
+		void _process(float delta);
 
 		bool _load_resources();
 		void _update_minimap();
 		Vector2 _get_players_pos();
 		Vector2 _normalize_room_pos(Vector2 old_pos);
 		void _clear_map();
-		std::vector<Vector2> _normalize_all_rooms(std::vector<Vector2> rooms_pos_array);
-		void _load_disc_rooms(std::vector<Vector2> disc_rooms_pos);
+		Array _normalize_all_rooms(Array rooms_pos_array);
+		void _load_disc_rooms(Array  disc_rooms_pos);
 		void _load_curr_room(Vector2 curr_room_pos);
-		void _load_undisc_rooms(std::vector<Vector2> undisc_rooms_pos);
+		void _load_undisc_rooms(Array  undisc_rooms_pos);
 		bool _is_on_grid(Vector2 pos);
 
 		MiniMapController();
