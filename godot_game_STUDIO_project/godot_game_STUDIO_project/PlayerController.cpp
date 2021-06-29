@@ -21,7 +21,7 @@ void godot::PlayerController::_register_methods()
 	register_method("_on_Area2D_area_exited", &PlayerController::_on_Area2D_area_exited);
 	register_method("_take_damage", &PlayerController::_take_damage);
 	register_method("_change_can_moving", &PlayerController::_change_can_moving);
-	register_method("_change_moving", &PlayerController::_change_moving);	
+	register_method("_change_moving", &PlayerController::_change_moving);
 	register_method("change_can_moving_timeout", &PlayerController::change_can_moving_timeout);
 	register_method("_decrease_attack_radius", &PlayerController::_decrease_attack_radius);
 	register_method("_encrease_attack_radius", &PlayerController::_encrease_attack_radius);
@@ -52,6 +52,10 @@ void godot::PlayerController::_register_methods()
 	register_method("_stay_ghost", &PlayerController::_stay_ghost);
 	register_method("_heal", &PlayerController::_heal);
 	register_method("_ghost_to_player", &PlayerController::_ghost_to_player);
+	register_method("_is_ghost_mode", &PlayerController::_is_ghost_mode);
+	register_method("_continue_moving", &PlayerController::_continue_moving);
+	register_method("_stop_moving", &PlayerController::_stop_moving);
+	
 	
 	register_property<PlayerController, float>("hp", &PlayerController::_hp, 0);
 	register_property<PlayerController, float>("damage", &PlayerController::_damage, 0);
@@ -75,6 +79,7 @@ godot::PlayerController::PlayerController()
 	is_alive = true;
 	is_special = false;
 	speed = 250;
+	_saved_speed = speed;
 	door = nullptr;
 }
 
@@ -91,8 +96,6 @@ godot::PlayerController::~PlayerController()
 	buff_debuff_particles = nullptr;
 	dash_particles = nullptr;
 	revive_particles = nullptr;
-	//if(current_player)
-	//	delete current_player;
 }
 
 void godot::PlayerController::_init()
@@ -124,7 +127,8 @@ void godot::PlayerController::_ready()
 
 	_update_max_health_bar_size();
 
-	item_generator = CustomExtensions::GetChildByName(this, "ItemGenerator")->call("_get_instance");
+	if(has_node("ItemGenerator"))
+		item_generator = CustomExtensions::GetChildByName(this, "ItemGenerator")->call("_get_instance");
 
 	buff_debuff_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "BuffDebuffParticles"));
 	hurt_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"));
@@ -229,7 +233,7 @@ void godot::PlayerController::_add_bullet(Node* node)
 
 void godot::PlayerController::_process(float delta)
 {
-	if (can_move && is_alive || is_ghost_mode)
+	if (can_move && (is_alive || is_ghost_mode))
 	{
 		current_player_strategy->_process_input();
 		current_player_strategy->_move();
@@ -400,10 +404,23 @@ void godot::PlayerController::_die()
 	is_alive = false;
 
 	prev_state = current_player_strategy->_clone();
+
+	if(get_name() == "Player1")
+		Enemies::get_singleton()->_remove_player1();
+	if (get_name() == "Player2")
+		Enemies::get_singleton()->_remove_player2();
+
 	if (current_player_strategy->_was_revived())
 	{
 		is_ghost_mode = true;
 		current_player_strategy->_set_strategy(player_producer->_get_player_ghost(this, bullet_prefab));
+		
+		if (get_name() == "Player1")
+			PlayersContainer::_get_instance()->_set_player1_regular(cast_to<Node2D>(get_parent()));
+
+		if (get_name() == "Player2")
+			PlayersContainer::_get_instance()->_set_player2_regular(this);
+
 		_restore_data();
 		return;
 	}
@@ -517,10 +534,10 @@ void godot::PlayerController::_restore_data()
 void godot::PlayerController::_stay_ghost()
 {
 	is_alive = false;
-
 	prev_state = current_player_strategy->_clone();
 	if (current_player_strategy->_was_revived())
 	{
+		is_ghost_mode = true;
 		current_player_strategy->_set_strategy(player_producer->_get_player_ghost(this, bullet_prefab));
 		_restore_data();
 	}
@@ -533,15 +550,43 @@ void godot::PlayerController::_set_was_revived(bool value)
 
 void godot::PlayerController::_ghost_to_player()
 {
+	is_alive = true;
+	can_move = true;
+	is_ghost_mode = false;
+	is_special = false;
+	door = nullptr;
+
 	prev_state = current_player_strategy->_clone();
 	current_player_strategy->_set_strategy(player_producer->_get_player(this, bullet_prefab));
 	_restore_data();
 	_set_HP(_get_max_HP());
 	_update_health_bar();
 	current_player_strategy->_set_was_revived(false);
+	
+	if (get_name() == "Player1")
+		PlayersContainer::_get_instance()->_set_player1(this);
+	if (get_name() == "Player2")
+		PlayersContainer::_get_instance()->_set_player2(this);
+}
+
+bool godot::PlayerController::_is_ghost_mode()
+{
+	return is_ghost_mode;
 }
 
 void godot::PlayerController::_set_controll_buttons(String move_up, String move_down, String move_left, String move_right, String fight_up, String fight_down, String fight_left, String fight_right, String special)
 {
 	current_player_strategy->_set_controll_buttons(move_up, move_down, move_left, move_right, fight_up, fight_down, fight_left, fight_right, special);
+}
+
+void godot::PlayerController::_stop_moving()
+{
+	_saved_speed = speed;
+	current_player_strategy->_set_speed(0);
+}
+
+void godot::PlayerController::_continue_moving()
+{
+	speed = _saved_speed;
+	current_player_strategy->_set_speed(speed);
 }

@@ -8,7 +8,7 @@ bool MenuButtons::was_loaded = false;
 bool MenuButtons::is_full_screen = false;
 float MenuButtons::music_audio_level = -12.5;
 float MenuButtons::effect_audio_level = 6;
-int MenuButtons::player_name = 0;
+GameMode MenuButtons::game_mode = COOP;
 AudioStreamPlayer2D* MenuButtons::audio = nullptr;
 
 MenuButtons::MenuButtons()
@@ -131,7 +131,7 @@ void MenuButtons::_register_methods()
 void godot::MenuButtons::_start_game(int name)
 {
 	CameraController::show_tutorial = true;
-	player_name = name;
+	game_mode = GameMode(name);
 	_play_effect();
 	add_child(fade->instance());
 
@@ -300,8 +300,8 @@ void godot::MenuButtons::_on_Flower_pressed(Variant)
 		change_scene(choose_player_scene);
 		return;
 	}
-	//player_name = 3;
-	_start_game(player_name);
+	game_mode = COOP;
+	_start_game(game_mode);
 }
 
 // -------Option buttons-------

@@ -17,7 +17,7 @@ namespace godot
 
 		Timer* timer;
 
-		InputReviveManager *keys;
+		InputReviveManager* keys;
 
 		Sprite* arrow;
 

@@ -15,7 +15,6 @@ void godot::Enemy::_register_methods()
 	register_method("_destroy_enemy", &Enemy::_destroy_enemy);
 	register_method("_remove_player1", &Enemy::_remove_player1);
 	register_method("_remove_player2", &Enemy::_remove_player2);
-	register_method("_remove_side", &Enemy::_remove_side);
 	register_method("_change_dir_after_time", &Enemy::_change_dir_after_time);
 	register_method("_start_timer_for_dir_change", &Enemy::_start_timer_for_dir_change);
 	register_method("_on_Area2D_body_entered", &Enemy::_on_Area2D_body_entered);
@@ -34,6 +33,7 @@ void godot::Enemy::_register_methods()
 	register_method("_on_spawn_end", &Enemy::_on_spawn_end);
 	register_method("_on_Area2D_body_exited", &Enemy::_on_Area2D_body_exited);
 	register_method("_change_start_parameters", &Enemy::_change_start_parameters);
+	register_method("_remove_taken_positions", &Enemy::_remove_taken_positions);
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
@@ -101,6 +101,12 @@ void godot::Enemy::_ready()
 
 	if (is_in_group("statue_shoot"))
 		ai->_set_strategy(new StatueShootAI(bullet, this));
+
+	if (is_in_group("slime_shoot"))
+		ai->_set_strategy(new SlimeShootAI(bullet, this));
+
+	if (is_in_group("slime_boss"))
+		ai->_set_strategy(new SlimeBossAI(bullet, this));
 
 	spawn_particles->set_emitting(true);
 	timer_particles->connect("timeout", this, "_on_spawn_end");
@@ -239,16 +245,13 @@ void godot::Enemy::_destroy_enemy()
 void godot::Enemy::_remove_player1()
 {
 	ai->_delete_player1();
+	ai->_remove_player(PlayersContainer::_get_instance()->_get_player1_regular());
 }
 
 void godot::Enemy::_remove_player2()
 {
 	ai->_delete_player2();
-}
-
-void godot::Enemy::_remove_side(int side)
-{
-	ai->_remove_side(side);
+	ai->_remove_player(PlayersContainer::_get_instance()->_get_player2_regular());
 }
 
 void godot::Enemy::_start_timer_for_dir_change()
@@ -266,24 +269,20 @@ void godot::Enemy::_on_Area2D_body_entered(Node* node)
 	{
 		float damage = 20;
 
+		ai->_set_player(cast_to<Node2D>(node));
 		if (is_in_group("slime"))
 		{
-			if (node->is_in_group("player1"))
-				ai->_set_is_player1_onArea(true);
-			if(node->is_in_group("player2"))
-				ai->_set_is_player2_onArea(true);
-
 			damage = 33;
 
 			node->call("_take_damage", damage, false);
 			return;
 		}
-			
 
 		if (is_in_group("bat") && is_angry)
 			damage = 30;
 
-		node->call("_take_damage", damage, false);
+		if(!is_in_group("slime_shoot"))
+			node->call("_take_damage", damage, false);
 	}
 }
 
@@ -382,7 +381,6 @@ void godot::Enemy::_update_health_bar()
 
 void godot::Enemy::_change_animation(String _name = "", float speed_scale = 1)
 {
-	
 	if (_name == "" || sp == nullptr)
 		return;
 
@@ -407,11 +405,7 @@ void godot::Enemy::_set_current_player(Node* node)
 
 void godot::Enemy::_remove_current_player(Node* node)
 {
-	if (node->is_in_group("player1"))
-		ai->_delete_player1();
-
-	if (node->is_in_group("player2"))
-		ai->_delete_player2();
+	ai->_remove_player(cast_to<Node2D>(node));
 }
 
 void godot::Enemy::_check_angry()
@@ -447,14 +441,15 @@ void godot::Enemy::_on_spawn_end()
 
 void godot::Enemy::_on_Area2D_body_exited(Node* node)
 {
-	if (node->is_in_group("player1"))
-		ai->_set_is_player1_onArea(false);
-
-	if (node->is_in_group("player2"))
-		ai->_set_is_player2_onArea(false);
+	ai->_remove_player(cast_to<Node2D>(node));
 }
 
 void godot::Enemy::_change_start_parameters()
 {
 	ai->_change_start_parameters();
+}
+
+void godot::Enemy::_remove_taken_positions()
+{
+	ai->_remove_taken_positions();
 }

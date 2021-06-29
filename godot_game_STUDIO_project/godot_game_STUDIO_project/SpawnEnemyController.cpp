@@ -14,11 +14,21 @@ void godot::SpawnEnemyController::_register_methods()
 	register_property<SpawnEnemyController, Ref<PackedScene>>("Altar prefab", &SpawnEnemyController::altar, nullptr);
 	//register_property<SpawnEnemyController, int>("Levels Count", &SpawnEnemyController::levels_count, 7);
 	register_property<SpawnEnemyController, Array>("enemy_list", &SpawnEnemyController::enemy_list_prefabs, {});
+	register_property<SpawnEnemyController, Ref<PackedScene>>("boss_prefab", &SpawnEnemyController::boss_prefab, nullptr);
 }
 
 void godot::SpawnEnemyController::SpawnEnemies()
 {
 	Enemies* enemies = Enemies::get_singleton();
+	if ((String)CameraController::current_room->call("_get_room_type") == "boss_room"
+		&& !(bool)CameraController::current_room->call("_get_were_here"))
+	{
+		enemies->set_enemy_to_spawn_count(0);
+		enemies->set_spawning(true);
+		SpawnBoss();
+		return;
+	}
+
 	if ((String)CameraController::current_room->call("_get_room_type") != "game_room" 
 		|| (bool)CameraController::current_room->call("_get_were_here"))
 	{
@@ -30,7 +40,7 @@ void godot::SpawnEnemyController::SpawnEnemies()
 	rng->randomize();
 
 	/*float current_value = _calculate_room_difficulty();*/
-	float current_value = 10;
+	float current_value = 0;
 	std::vector<Vector2> taken_positions;
 
 	enemies->set_enemy_to_spawn_count(0);
@@ -60,8 +70,6 @@ void godot::SpawnEnemyController::SpawnEnemies()
 				+ CameraController::current_room->get_global_position()
 				- Vector2(896, 544) / 2 + Vector2(16, 16)));
 
-			enemy->get_node(NodePath(prefab->instance()->get_name()))->call("_change_start_parameters");
-
 			CameraController::current_room->call("_set_cell_value", pos_y, pos_x, 7);
 		}
 	}
@@ -71,15 +79,33 @@ void godot::SpawnEnemyController::SpawnEnemies()
 
 	for(int i=0;i< taken_positions.size();++i)
 		CameraController::current_room->call("_set_cell_value", taken_positions[i].y, taken_positions[i].x, 0);
+
+	Enemies::get_singleton()->_change_start_parameters();
 }
 
 void godot::SpawnEnemyController::SpawnBoss()
 {
+	Godot::print("spawn boss");
 	get_parent()->call("_start_mute_volume");
-	auto boss = cast_to<Node2D>(cast_to<PackedScene>(enemies[0])->instance());
+	Enemies::get_singleton()->set_enemy_to_spawn_count(1);
+	auto boss = cast_to<Node2D>(boss_prefab->instance());
 	boss->set_global_position(cast_to<Node2D>(get_parent())->get_global_position());
 	get_node("/root/Node2D/Node")->add_child(boss, true);
-	enemies.pop_front();
+
+	if (boss->has_method("_change_start_parameters"))
+	{
+		boss->call("_change_start_parameters");
+		return;
+	}
+
+	for(int i=0;i<boss->get_child_count();++i)
+		if (boss->get_child(i)->has_method("_change_start_parameters"))
+		{
+			boss->get_child(i)->call("_change_start_parameters");
+			return;
+		}
+
+	//enemies.pop_front();
 }
 
 void godot::SpawnEnemyController::SpawnItems()
@@ -94,7 +120,7 @@ void godot::SpawnEnemyController::SpawnItems()
 	auto spawned_altar = cast_to<Node2D>(altar->instance());
 	spawned_altar->set_global_position(this->get_global_position());
 
-	get_node("/root/Node2D/Node")->add_child(spawned_altar, true);
+	get_node("/root/Node2D/Node/Generation")->add_child(spawned_altar, true);
 
 	for (int i = 0; i < item_points.size(); i++)
 	{
@@ -105,6 +131,13 @@ void godot::SpawnEnemyController::SpawnItems()
 	}
 
 	rng = nullptr;
+}
+
+void godot::SpawnEnemyController::SpawnKey()
+{
+	auto spawned_pedestal = cast_to<Node2D>(pedestal->instance());
+	spawned_pedestal->set_global_position(cast_to<Node2D>(get_parent())->get_global_position());
+	get_node("/root/Node2D/Node/Generation")->add_child(spawned_pedestal, true);
 }
 
 void godot::SpawnEnemyController::_init()
@@ -124,18 +157,11 @@ void godot::SpawnEnemyController::_ready()
 
 void godot::SpawnEnemyController::_prepare_spawn()
 {
-	if (PlayersContainer::_get_instance()->_get_player1() != nullptr)
-		PlayersContainer::_get_instance()->_get_player1()->call("_change_moving", true);
+	if (PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
+		PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1)->call("_change_moving", true);
 
-	if (PlayersContainer::_get_instance()->_get_player2() != nullptr)
-		PlayersContainer::_get_instance()->_get_player2()->call("_change_moving", true);
-
-
-	//if (enemies.size() == 0)
-	//{
-	//	get_parent()->call("_open_doors");
-	//	return;
-	//}
+	if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
+		PlayersContainer::_get_instance()->_get_player2_regular()->call("_change_moving", true);
 
 	timer->connect("timeout", this, "_spawn");
 	timer->start(.3f);
@@ -175,6 +201,11 @@ void godot::SpawnEnemyController::_on_Area2D_area_entered(Node* other)
 					get_parent()->call("_close_doors");
 					SpawnItems();
 				}
+				else
+					if (room_type == "quest_room")
+					{
+						SpawnKey();
+					}
 
 		get_parent()->call("_set_current_room_type", room_type);
 

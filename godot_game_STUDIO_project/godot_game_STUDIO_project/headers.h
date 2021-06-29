@@ -8,6 +8,7 @@
 #include <map>
 
 //Godot includes
+#include <RigidBody2D.hpp>
 #include <TextureRect.hpp>
 #include <ResourceLoader.hpp>
 #include <Godot.hpp>
@@ -57,6 +58,7 @@
 #include <Dictionary.hpp>
 #include <ResourceSaver.hpp>
 #include <Control.hpp>
+#include <MarginContainer.hpp>
 
 using namespace godot;
 
@@ -67,8 +69,10 @@ using namespace godot;
 #include "PlayerMelee.h"
 #include "PlayerController.h"
 #include "Bullet.h"
-#include "Enemy.h"
+#include "IEnemyAI.h"
 #include "EnemyData.h"
+#include "EnemyAIContext.h"
+#include "Enemy.h"
 #include "PlayerProduce.h"
 #include "ProducePlayerShoot.h"
 #include "ProducePlayerMelee.h"
@@ -102,6 +106,7 @@ using namespace godot;
 #include "LevelGenerator.h"
 #include "BigStone.h"
 #include "AudioController.h"
+#include "MiniMapController.h"
 #include "Key.h"
 #include "EnemyPrice.h"
 #include "PlayerStrategyContext.h"
@@ -109,3 +114,6 @@ using namespace godot;
 #include "PlayerMeleeGhost.h"
 #include "PlayerShootDied.h"
 #include "PlayerShootGhost.h"
+#include "SlimeShootAI.h"
+#include "Ball.h"
+#include "SlimeBossAI.h"

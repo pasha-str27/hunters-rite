@@ -30,7 +30,6 @@ void godot::Room::_register_methods()
 	register_method("_set_were_here", &Room::_set_were_here);
 	register_method("_set_is_special", &Room::_set_is_special);
 	register_method("_get_is_special", &Room::_get_is_special);
-	
 }
 
 godot::Room::Room()

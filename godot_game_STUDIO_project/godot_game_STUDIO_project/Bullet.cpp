@@ -61,7 +61,8 @@ void godot::Bullet::_on_Area2D_body_entered(Node* node)
 			node->call("_take_damage", damage, false);
 	}
 
-	if (is_in_group("statue_bullet") || is_in_group("web_bullet") || is_in_group("player_bullet") || is_in_group("flower_bullet"))
+	if (is_in_group("statue_bullet") || is_in_group("web_bullet") || is_in_group("player_bullet")
+		|| is_in_group("flower_bullet") || is_in_group("slime_bullet"))
 		get_parent()->get_parent()->get_child(1)->call("_add_bullet", this);
 }
 

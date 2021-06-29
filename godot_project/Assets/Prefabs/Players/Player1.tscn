@@ -216,7 +216,7 @@ z_index = 100
 "player1",
 ]]
 collision_layer = 303105
-collision_mask = 270338
+collision_mask = 2
 script = ExtResource( 8 )
 hp = 80.0
 damage = 25.0
@@ -260,7 +260,7 @@ process_material = SubResource( 10 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 36 )
 animation = "idle"
-frame = 4
+frame = 3
 playing = true
 offset = Vector2( 35, 0 )
 
