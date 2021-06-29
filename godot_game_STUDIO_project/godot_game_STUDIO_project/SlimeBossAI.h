@@ -25,7 +25,8 @@ namespace godot {
 		Vector2 target_player = Vector2::ZERO;
 
 		Node2D* jump_zone = nullptr;
-		Ref<PackedScene> enemy_to_spawn = nullptr;
+		Array enemies_to_spawn = {};
+		Array places_to_spawn = {};
 
 	public:
 		SlimeBossAI(Ref<PackedScene>& bullet, Node2D* node);

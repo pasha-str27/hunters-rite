@@ -72,7 +72,7 @@ void godot::Bullet::_process(float delta)
 	{
 		move_and_slide(dir * speed);	
 
-		if (abs(dir.distance_to(get_global_position())) < 10)
+		if (abs(dir.distance_to(get_global_position())) <= 10)
 		{
 			cast_to<Node2D>(this)->set_visible(false);
 			if (is_in_group("statue_bullet") || is_in_group("web_bullet") || is_in_group("player_bullet")

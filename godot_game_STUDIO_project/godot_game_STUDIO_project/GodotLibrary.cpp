@@ -42,4 +42,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<Key>();
 	register_class<EnemyPrice>();
 	register_class<MiniMapController>();
+	register_class<SlimeEnemiesHolder>();
 }

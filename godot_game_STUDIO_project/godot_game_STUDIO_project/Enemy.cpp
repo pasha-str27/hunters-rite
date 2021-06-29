@@ -110,7 +110,6 @@ void godot::Enemy::_ready()
 	if (is_in_group("slime_boss"))
 	{
 		ai->_set_strategy(new SlimeBossAI(bullet, this));
-		//ai->_set_player(PlayersContainer::_get_instance()->_get_player2_regular());
 	}
 
 	spawn_particles->set_emitting(true);
@@ -156,8 +155,8 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/EnemyTakeDamage.tscn");
 	add_child(prefab->instance());
 
-	//if (is_in_group("slime_boss"))
-	//	ai->change_can_fight(false, new SlimeAttackSpawnState((SlimeBossAI*)ai->_get_strategy()));
+	if (is_in_group("slime_boss"))
+		ai->change_can_fight(false, new SlimeAttackSpawnState((SlimeBossAI*)ai->_get_strategy()));
 
 	if (HP <= 0)
 	{

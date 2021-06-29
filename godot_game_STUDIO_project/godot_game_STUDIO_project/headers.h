@@ -113,6 +113,7 @@ using namespace godot;
 #include "PlayerShootGhost.h"
 #include "SlimeShootAI.h"
 #include "SlimeBossAI.h"
+#include "SlimeEnemiesHolder.h"
 
 //	state
 #include "ISlimeAttackState.h"
