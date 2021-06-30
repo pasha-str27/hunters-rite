@@ -20,6 +20,8 @@ void godot::MiniMapController::_register_methods()
 {
 	register_method("_init", &MiniMapController::_init);
 	register_method("_ready", &MiniMapController::_ready);
+	register_method("_set_positions", &MiniMapController::_set_positions);
+	
 
 	register_property<MiniMapController, Texture*>("current_room", &MiniMapController::curr_room, nullptr);
 	register_property<MiniMapController, Sprite*>("discovered_room", &MiniMapController::disc_room, nullptr);
@@ -38,7 +40,7 @@ void godot::MiniMapController::_ready()
 	if (grid != nullptr)
 		Godot::print("now we have grid");
 
-	//rooms_positions = LevelGenerator::_get_rooms_positions();
+	//rooms_positions = get_node("/root/Node2D/Node/Generation")->call("_get_rooms_positions");
 
 	int offset = 16;
 
@@ -57,4 +59,17 @@ void godot::MiniMapController::_ready()
 
 void godot::MiniMapController::_process()
 {
+}
+
+void godot::MiniMapController::_set_positions()
+{
+	Node* generation = get_node("/root/Node2D/Node/Generation");
+	Array arr = CustomExtensions::GetRoomsByType(generation, "item_room");
+	items_positions = arr[0];
+	arr = CustomExtensions::GetRoomsByType(generation, "heal_room");
+	heal_positions = arr[0];
+	arr = CustomExtensions::GetRoomsByType(generation, "key_room");
+	keys_positions = arr[0];
+	arr = CustomExtensions::GetRoomsByType(generation, "boss_room");
+	boss_positions = arr[0];
 }
