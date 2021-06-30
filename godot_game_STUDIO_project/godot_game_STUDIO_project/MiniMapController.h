@@ -19,6 +19,11 @@ namespace godot
 
 		std::vector<Vector2> rooms_positions;
 
+		Array keys_positions = {};
+		Array items_positions = {};
+		Array heal_positions = {};
+		Array boss_positions = {};
+
 		float zoom = 1.5;
 		float step_x = 1024;
 		float step_y = 720;
@@ -28,7 +33,7 @@ namespace godot
 		void _init();
 		void _ready();
 		void _process();
-
+		void _set_positions();
 		
 
 		MiniMapController();
