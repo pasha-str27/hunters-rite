@@ -15,6 +15,7 @@ godot::MiniMapController::~MiniMapController()
 
 	grid = nullptr;
 	disc_rooms_positions.clear();
+	undisc_rooms_positions.clear();
 }
 
 void godot::MiniMapController::_register_methods()
@@ -121,19 +122,25 @@ void godot::MiniMapController::_update_minimap()
 			_clear_map();
 			_load_curr_room(players_pos);
 			_load_disc_rooms(disc_rooms_positions);
+
 			disc_rooms_positions.push_back(players_pos);
 			undisc_rooms_positions.remove(undisc_rooms_positions.find(players_pos));
+
 			_load_undisc_rooms(undisc_rooms_positions);
+
 			return;
 		}
 		if (disc_rooms_positions.find(players_pos) != -1)
 		{
 			_clear_map();
 			_load_curr_room(players_pos);
+
 			disc_rooms_positions.remove(disc_rooms_positions.find(players_pos));
 			_load_disc_rooms(disc_rooms_positions);
 			disc_rooms_positions.push_back(players_pos);
+
 			_load_undisc_rooms(undisc_rooms_positions);
+
 			return;
 		}
 		Godot::print("Players pos is out of range");
@@ -194,7 +201,7 @@ void godot::MiniMapController::_load_disc_rooms(Array disc_rooms_pos)
 		{
 			auto room = cast_to<Node2D>(disc_room->instance());
 			room->set_position(pos);
-			room->set_scale(Vector2(4, 4));
+			room->set_scale(room_icon_scale);
 			grid->add_child(room);
 		}
 	}
@@ -204,7 +211,7 @@ void godot::MiniMapController::_load_curr_room(Vector2 curr_room_pos)
 {
 	auto room = cast_to<Node2D>(curr_room->instance());
 	room->set_position(_normalize_room_pos(curr_room_pos));
-	room->set_scale(Vector2(4, 4));
+	room->set_scale(room_icon_scale);
 	grid->add_child(room);
 }
 
@@ -217,7 +224,7 @@ void godot::MiniMapController::_load_undisc_rooms(Array undisc_rooms_pos)
 		{
 			auto room = cast_to<Node2D>(undisc_room->instance());
 			room->set_position(pos);
-			room->set_scale(Vector2(4, 4));
+			room->set_scale(room_icon_scale);
 			grid->add_child(room);
 		}
 	}

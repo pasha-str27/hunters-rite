@@ -29,6 +29,8 @@ namespace godot
 		Vector2 grid_rect_size = Vector2::ZERO;
 		Vector2 players_pos = Vector2::ZERO;
 
+		Vector2 room_icon_scale = Vector2(4, 4);
+
 	public:
 		static void _register_methods();
 		void _init();
