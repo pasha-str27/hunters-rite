@@ -14,7 +14,6 @@ godot::MiniMapController::~MiniMapController()
 	disc_room = nullptr;
 
 	grid = nullptr;
-	all_rooms.clear();
 	disc_rooms_positions.clear();
 }
 
@@ -69,18 +68,18 @@ void godot::MiniMapController::_ready()
 	}
 
 	//test pos
-	rooms_positions.push_back(Vector2(0, 0));
-	rooms_positions.push_back(Vector2(0, -step_y));
-	rooms_positions.push_back(Vector2(step_x, -step_y));
-	rooms_positions.push_back(Vector2(2 * step_x, -step_y));
-	rooms_positions.push_back(Vector2(-step_x, step_y));
-	rooms_positions.push_back(Vector2(0, step_y));
-	rooms_positions.push_back(Vector2(0, 2 * step_y));
-	rooms_positions.push_back(Vector2(step_x, 2 * step_y));
+	undisc_rooms_positions.push_back(Vector2(0, 0));
+	undisc_rooms_positions.push_back(Vector2(0, -step_y));
+	undisc_rooms_positions.push_back(Vector2(step_x, -step_y));
+	undisc_rooms_positions.push_back(Vector2(2 * step_x, -step_y));
+	undisc_rooms_positions.push_back(Vector2(-step_x, step_y));
+	undisc_rooms_positions.push_back(Vector2(0, step_y));
+	undisc_rooms_positions.push_back(Vector2(0, 2 * step_y));
+	undisc_rooms_positions.push_back(Vector2(step_x, 2 * step_y));
 
 	Godot::print("Rooms pos setted");
 
-	_load_undisc_rooms(rooms_positions);
+	_load_undisc_rooms(undisc_rooms_positions);
 
 	_update_minimap();
 }
@@ -115,28 +114,26 @@ void godot::MiniMapController::_update_minimap()
 	Godot::print(players_pos);
 	Godot::print("Players pos setted");
 
-	if (rooms_positions.size() > 0 || disc_rooms_positions.size() > 0)
+	if (undisc_rooms_positions.size() > 0 || disc_rooms_positions.size() > 0)
 	{
-		if (rooms_positions.find(players_pos) != -1)
+		if (undisc_rooms_positions.find(players_pos) != -1)
 		{
 			_clear_map();
 			_load_curr_room(players_pos);
-			if (disc_rooms_positions.size() > 0)
-				_load_disc_rooms(disc_rooms_positions);
+			_load_disc_rooms(disc_rooms_positions);
 			disc_rooms_positions.push_back(players_pos);
-			rooms_positions.remove(rooms_positions.find(players_pos));
-			_load_undisc_rooms(rooms_positions);
+			undisc_rooms_positions.remove(undisc_rooms_positions.find(players_pos));
+			_load_undisc_rooms(undisc_rooms_positions);
 			return;
 		}
 		if (disc_rooms_positions.find(players_pos) != -1)
 		{
 			_clear_map();
 			_load_curr_room(players_pos);
-			rooms_positions.remove(disc_rooms_positions.find(players_pos));
-			if (disc_rooms_positions.size() > 0)
-				_load_disc_rooms(disc_rooms_positions);
+			disc_rooms_positions.remove(disc_rooms_positions.find(players_pos));
+			_load_disc_rooms(disc_rooms_positions);
 			disc_rooms_positions.push_back(players_pos);
-			_load_undisc_rooms(rooms_positions);
+			_load_undisc_rooms(undisc_rooms_positions);
 			return;
 		}
 		Godot::print("Players pos is out of range");

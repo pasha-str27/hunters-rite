@@ -17,8 +17,7 @@ namespace godot
 
 		TextureRect* grid = nullptr;
 
-		Array all_rooms = {};
-		Array rooms_positions = {};
+		Array undisc_rooms_positions = {};
 		Array disc_rooms_positions = {};
 		Vector2 curr_room_position;
 
