@@ -60,6 +60,8 @@ void godot::LevelGenerator::_init()
 void godot::LevelGenerator::_ready()
 {
 	_generate();
+	_buid_doors();
+
 
 	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
@@ -111,7 +113,6 @@ void godot::LevelGenerator::_ready()
 	_set_keys(boss_room, generated_keys);
 
 	_buid_roofs();
-	_buid_doors();
 	_buid_floors();
 	_buid_top_wall();
 	

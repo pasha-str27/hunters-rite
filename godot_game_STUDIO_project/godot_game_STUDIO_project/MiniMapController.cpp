@@ -24,9 +24,6 @@ void godot::MiniMapController::_register_methods()
 	register_method("_ready", &MiniMapController::_ready);
 	register_method("_set_positions", &MiniMapController::_set_positions);
 
-	register_property<MiniMapController, Ref<PackedScene>>("current_room", &MiniMapController::curr_room, nullptr);
-	register_property<MiniMapController, Ref<PackedScene>>("discovered_room", &MiniMapController::disc_room, nullptr);
-	register_property<MiniMapController, Ref<PackedScene>>("undiscovered_room", &MiniMapController::undisc_room, nullptr);
 	register_method("_process", &MiniMapController::_process);
 	register_method("_load_resources", &MiniMapController::_load_resources);
 	register_method("_update_minimap", &MiniMapController::_update_minimap);
