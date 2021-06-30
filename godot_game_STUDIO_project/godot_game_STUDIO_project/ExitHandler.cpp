@@ -40,11 +40,11 @@ void godot::ExitHandler::_on_Area2D_area_entered(Node* other)
 
 	if (((is_only_one_alive && players_count == 1) || players_count == 2) && is_spawned)
 	{
-		if (PlayersContainer::_get_instance()->_get_player1() != nullptr)
-			PlayersContainer::_get_instance()->_get_player1()->call("_change_moving", false);
+		if (PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
+			PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1)->call("_change_moving", false);
 
-		if (PlayersContainer::_get_instance()->_get_player2() != nullptr)
-			PlayersContainer::_get_instance()->_get_player2()->call("_change_moving", false);
+		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
+			PlayersContainer::_get_instance()->_get_player2_regular()->call("_change_moving", false);
 
 		//timer_audio->connect("timeout", this, "_mute_audio");
 		//timer_audio->start(0.01);

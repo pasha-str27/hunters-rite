@@ -8,7 +8,7 @@ bool MenuButtons::was_loaded = false;
 bool MenuButtons::is_full_screen = false;
 float MenuButtons::music_audio_level = -12.5;
 float MenuButtons::effect_audio_level = 6;
-int MenuButtons::player_name = 0;
+GameMode MenuButtons::game_mode = COOP;
 AudioStreamPlayer2D* MenuButtons::audio = nullptr;
 
 MenuButtons::MenuButtons()
@@ -131,7 +131,7 @@ void MenuButtons::_register_methods()
 void godot::MenuButtons::_start_game(int name)
 {
 	CameraController::show_tutorial = true;
-	player_name = name;
+	game_mode = GameMode(name);
 	_play_effect();
 	add_child(fade->instance());
 
@@ -300,8 +300,8 @@ void godot::MenuButtons::_on_Flower_pressed(Variant)
 		change_scene(choose_player_scene);
 		return;
 	}
-	player_name = 0;
-	_start_game(player_name);
+	game_mode = COOP;
+	_start_game(game_mode);
 }
 
 // -------Option buttons-------
@@ -453,10 +453,10 @@ void godot::MenuButtons::_reload_scene()
 	Ref<PackedScene> res = rld->load("res://main_scene.tscn");
 
 	get_node("/root/Node2D")->set_name("to_delete");
-	get_node("/root/to_delete")->queue_free();
 	get_tree()->set_pause(false);
 	Enemies::get_singleton()->_clear();
-	get_node("/root")->add_child(res->instance());
+	get_node("/root")->add_child(res->instance(), true);
+	get_node("/root/to_delete")->queue_free();
 }
 
 void godot::MenuButtons::_move_to_main_menu()
@@ -470,7 +470,8 @@ void godot::MenuButtons::_move_to_main_menu()
 	PlayersContainer::_get_instance()->_clear();
 }
 
-void  godot::MenuButtons::change_scene(Ref<PackedScene>& scene) {
+void  godot::MenuButtons::change_scene(Ref<PackedScene>& scene) 
+{
 	_play_effect();
 	get_node("/root")->add_child(scene->instance());
 	get_parent()->queue_free();

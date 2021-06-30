@@ -5,6 +5,13 @@
 
 namespace godot
 {
+	enum GameMode
+	{
+		COOP,
+		SHOOTER,
+		MELEE
+	};
+
 	class MenuButtons : public TextureRect
 	{
 		GODOT_CLASS(MenuButtons, TextureRect)
@@ -40,7 +47,7 @@ namespace godot
 		static bool was_focused;
 		static bool is_full_screen;
 		static float effect_audio_level;
-		static int player_name;
+		static GameMode game_mode;
 		bool was_quit_focused;	
 		bool was_mode_focused;	
 		bool single_mode;	

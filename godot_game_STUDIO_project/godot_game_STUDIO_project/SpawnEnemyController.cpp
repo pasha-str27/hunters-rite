@@ -40,7 +40,7 @@ void godot::SpawnEnemyController::SpawnEnemies()
 	rng->randomize();
 
 	/*float current_value = _calculate_room_difficulty();*/
-	float current_value = 10;
+	float current_value = 0;
 	std::vector<Vector2> taken_positions;
 
 	enemies->set_enemy_to_spawn_count(0);
@@ -157,11 +157,11 @@ void godot::SpawnEnemyController::_ready()
 
 void godot::SpawnEnemyController::_prepare_spawn()
 {
-	if (PlayersContainer::_get_instance()->_get_player1() != nullptr)
-		PlayersContainer::_get_instance()->_get_player1()->call("_change_moving", true);
+	if (PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
+		PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1)->call("_change_moving", true);
 
-	if (PlayersContainer::_get_instance()->_get_player2() != nullptr)
-		PlayersContainer::_get_instance()->_get_player2()->call("_change_moving", true);
+	if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
+		PlayersContainer::_get_instance()->_get_player2_regular()->call("_change_moving", true);
 
 	timer->connect("timeout", this, "_spawn");
 	timer->start(.3f);

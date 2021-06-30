@@ -556,7 +556,7 @@ tracks/0/keys = {
 ]]
 z_index = 100
 collision_layer = 303105
-collision_mask = 270338
+collision_mask = 2
 script = ExtResource( 9 )
 hp = 175.0
 damage = 40.0
@@ -568,7 +568,7 @@ dash_cooldown_delta = 3.0
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 42 )
 animation = "idle"
-frame = 2
+frame = 1
 playing = true
 
 [node name="SpiderWeb" parent="." instance=ExtResource( 13 )]

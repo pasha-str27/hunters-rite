@@ -27,6 +27,8 @@ void godot::Enemies::_add_enemy(Node2D* enemy)
 
 void godot::Enemies::_remove_enemy(Node2D* enemy)
 {
+	enemy->call("_remove_taken_positions");
+
 	for (int i = 0; i < enemies.size(); ++i)
 		if (enemies[i] == enemy)
 		{
@@ -41,7 +43,6 @@ void godot::Enemies::_remove_enemy(Node2D* enemy)
 		Ref<PackedScene> exit_prefab = nullptr;
 		exit_prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/exit.tscn");
 		Node2D *exit_node = Node::cast_to<Node2D>(exit_prefab->instance());
-		//exit_node->set_global_position(CameraController::current_room->get_global_position());
 		CameraController::current_room->add_child(exit_node);
 	}
 }

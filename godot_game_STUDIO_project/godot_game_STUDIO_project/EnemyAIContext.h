@@ -37,5 +37,6 @@ namespace godot
 		void _change_start_parameters();
 		void _set_player(Node2D* player);
 		void _remove_player(Node2D* player);
+		void _remove_taken_positions();
 	};
 }

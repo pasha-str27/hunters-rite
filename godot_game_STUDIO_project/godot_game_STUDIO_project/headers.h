@@ -8,6 +8,7 @@
 #include <map>
 
 //Godot includes
+#include <RigidBody2D.hpp>
 #include <TextureRect.hpp>
 #include <ResourceLoader.hpp>
 #include <Godot.hpp>
@@ -43,6 +44,8 @@
 #include <SpriteFrames.hpp>
 #include <SceneTree.hpp>
 #include <VBoxContainer.hpp>
+#include <HBoxContainer.hpp>
+#include <CenterContainer.hpp>
 #include <SceneTree.hpp>
 #include <Texture.hpp>
 #include <AudioServer.hpp>
@@ -112,6 +115,7 @@ using namespace godot;
 #include "PlayerShootDied.h"
 #include "PlayerShootGhost.h"
 #include "SlimeShootAI.h"
+#include "Ball.h"
 #include "SlimeBossAI.h"
 #include "SlimeEnemiesHolder.h"
 

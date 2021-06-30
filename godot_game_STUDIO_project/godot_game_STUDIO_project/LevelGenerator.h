@@ -57,10 +57,8 @@ namespace godot
 		void _buid_roofs();
 		void _buid_floors();
 		void _buid_top_wall();
-		void _buid_stones_first_step(Node2D* room);
-		void _buid_stones_second_step(Node2D* room);
-		void _buid_spikes_first_step(Node2D* room);
-		void _buid_spikes_second_step(Node2D* room);
+		void _buid_stones(Node2D* room);
+		void _buid_spikes(Node2D* room);
 		void _build_doors(int start_index, int end_index);
 		Node2D* _get_next_room(Vector2 current_room_position);
 		std::vector<Node2D*> _get_corner_rooms();

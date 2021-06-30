@@ -36,6 +36,7 @@ void godot::Enemy::_register_methods()
 	register_method("_on_spawn_end", &Enemy::_on_spawn_end);
 	register_method("_on_Area2D_body_exited", &Enemy::_on_Area2D_body_exited);
 	register_method("_change_start_parameters", &Enemy::_change_start_parameters);
+	register_method("_remove_taken_positions", &Enemy::_remove_taken_positions);
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
@@ -473,4 +474,9 @@ void godot::Enemy::_on_Area2D_body_exited(Node* node)
 void godot::Enemy::_change_start_parameters()
 {
 	ai->_change_start_parameters();
+}
+
+void godot::Enemy::_remove_taken_positions()
+{
+	ai->_remove_taken_positions();
 }

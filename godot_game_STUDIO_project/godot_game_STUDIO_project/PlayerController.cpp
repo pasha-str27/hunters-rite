@@ -127,7 +127,8 @@ void godot::PlayerController::_ready()
 
 	_update_max_health_bar_size();
 
-	item_generator = CustomExtensions::GetChildByName(this, "ItemGenerator")->call("_get_instance");
+	if(has_node("ItemGenerator"))
+		item_generator = CustomExtensions::GetChildByName(this, "ItemGenerator")->call("_get_instance");
 
 	buff_debuff_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "BuffDebuffParticles"));
 	hurt_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"));
@@ -232,7 +233,7 @@ void godot::PlayerController::_add_bullet(Node* node)
 
 void godot::PlayerController::_process(float delta)
 {
-	if (can_move && is_alive || is_ghost_mode)
+	if (can_move && (is_alive || is_ghost_mode))
 	{
 		current_player_strategy->_process_input();
 		current_player_strategy->_move();
@@ -415,7 +416,8 @@ void godot::PlayerController::_die()
 		current_player_strategy->_set_strategy(player_producer->_get_player_ghost(this, bullet_prefab));
 		
 		if (get_name() == "Player1")
-			PlayersContainer::_get_instance()->_set_player1_regular(this);
+			PlayersContainer::_get_instance()->_set_player1_regular(cast_to<Node2D>(get_parent()));
+
 		if (get_name() == "Player2")
 			PlayersContainer::_get_instance()->_set_player2_regular(this);
 

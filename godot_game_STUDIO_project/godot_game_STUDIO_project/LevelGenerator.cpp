@@ -60,37 +60,28 @@ void godot::LevelGenerator::_init()
 void godot::LevelGenerator::_ready()
 {
 	_generate();
-	_buid_roofs();
-	_buid_doors();
-	_buid_floors();
-	_buid_top_wall();
 
 	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
 	int rand_value;
 
+	_spawn_big_stone();
+
 	for (int i = 1; i < rooms.size(); ++i)
 	{
-		rand_value = rng->randi_range(0, 1);
-		if (rand_value == 0)
+		rand_value = rng->randi_range(0, 3);
+
+		if (rand_value >= 0 && rand_value <= 1)
 		{
-			_buid_stones_first_step(rooms[i]);
-			rand_value = rng->randi_range(0, 2);
-
-			if(rand_value > 0)
-				_buid_spikes_second_step(rooms[i]);
-
-			continue;
+			_buid_stones(rooms[i]);
+			if (rand_value == 0)
+				_buid_spikes(rooms[i]);
 		}
-
-		if (rand_value == 1)
+		else
 		{
-			_buid_spikes_first_step(rooms[i]);
-			rand_value = rng->randi_range(0, 2);
-
-			if (rand_value > 0)
-				_buid_stones_second_step(rooms[i]);
-
+			_buid_spikes(rooms[i]);
+			if (rand_value == 2)
+				_buid_stones(rooms[i]);
 		}
 	}
 
@@ -119,7 +110,10 @@ void godot::LevelGenerator::_ready()
 		
 	_set_keys(boss_room, generated_keys);
 
-	_spawn_big_stone();
+	_buid_roofs();
+	_buid_doors();
+	_buid_floors();
+	_buid_top_wall();
 	
 	//	call set positions
 
@@ -325,30 +319,7 @@ void godot::LevelGenerator::_buid_floors()
 	prefab = nullptr;
 }
 
-void godot::LevelGenerator::_buid_stones_first_step(Node2D* room)
-{
-	Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
-	ResourceLoader* loader = ResourceLoader::get_singleton();
-	Ref<PackedScene> prefab = nullptr;
-	random->randomize();
-	prefab = loader->load(NodePath("res://Assets/Prefabs/Rooms/Stones/stone" + String::num(random->randi_range(1, spike_count)) + ".tscn"));
-	TileMap* tile_map = cast_to<TileMap>(prefab->instance());
-	room->add_child(tile_map);
-
-	auto arr = tile_map->get_used_cells();
-
-	for (int i = 0; i < arr.size(); ++i)
-	{
-		Vector2 pos = (Vector2)arr[i];
-		room->call("_set_cell_value", pos.y + 8, pos.x + 14, 2);
-	}	
-
-	prefab = nullptr;
-	loader = nullptr;
-	tile_map = nullptr;
-}
-
-void godot::LevelGenerator::_buid_stones_second_step(Node2D* room)
+void godot::LevelGenerator::_buid_stones(Node2D* room)
 {
 	Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
 	ResourceLoader* loader = ResourceLoader::get_singleton();
@@ -396,31 +367,7 @@ void godot::LevelGenerator::_buid_stones_second_step(Node2D* room)
 	tile_map = nullptr;
 }
 
-void godot::LevelGenerator::_buid_spikes_first_step(Node2D* room)
-{
-	Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
-	ResourceLoader* loader = ResourceLoader::get_singleton();
-	Ref<PackedScene> prefab = nullptr;
-	random->randomize();
-	prefab = loader->load(NodePath("res://Assets/Prefabs/Rooms/Spikes/spike" + String::num(random->randi_range(1, spike_count)) + ".tscn"));
-	
-	TileMap* tile_map = cast_to<TileMap>(prefab->instance());
-	room->add_child(tile_map);
-
-	auto arr = tile_map->get_used_cells();
-
-	for (int i = 0; i < arr.size(); ++i)
-	{
-		Vector2 pos = (Vector2)arr[i];
-
-		room->call("_set_cell_value", pos.y + 8, pos.x + 14, 3);
-	}
-	prefab = nullptr;
-	loader = nullptr;
-	tile_map = nullptr;
-}
-
-void godot::LevelGenerator::_buid_spikes_second_step(Node2D* room)
+void godot::LevelGenerator::_buid_spikes(Node2D* room)
 {
 	Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
 	ResourceLoader* loader = ResourceLoader::get_singleton();
@@ -696,6 +643,7 @@ Node2D* godot::LevelGenerator::_create_boss_room(std::vector<Node2D*>& cornered_
 
 	auto sprite = cast_to<Node2D>(boss_room_sprite->instance());
 	add_child(sprite);
+	sprite->set_scale(Vector2(0.3, 0.3));
 	sprite->set_global_position(builded_room->get_global_position());
 
 	builded_room->call("_set_is_special", true);
@@ -785,9 +733,9 @@ void godot::LevelGenerator::_generate_key(Node2D* room)
 	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
 
-	auto sprite = cast_to<Node2D>(key_room_sprite->instance());
-	add_child(sprite);
-	sprite->set_global_position(pos);
+	//auto sprite = cast_to<Node2D>(key_room_sprite->instance());
+	//add_child(sprite);
+	//sprite->set_global_position(pos);
 
 	auto pedestal = cast_to<Node2D>(key_room_pedestal->instance());
 	add_child(pedestal);
@@ -841,6 +789,9 @@ void godot::LevelGenerator::_spawn_big_stone()
 
 	auto stone = cast_to<Node2D>(big_stone->instance());
 	room->add_child(stone);
+
+	stone->set_global_position(stone->get_global_position() + Vector2(16, 2));
+	stone->call("_change_start_parameters");
 
 	room->call("_set_room_type", "heal_room");
 	room->call("_set_is_special", true);
