@@ -173,7 +173,8 @@ void godot::SlimeBossAI::_start_falling()
 
 void godot::SlimeBossAI::_set_target()
 {
-	if (MenuButtons::player_name == 0)
+	//if (MenuButtons::player_name == 0)
+	if (MenuButtons::game_mode == COOP)
 	{
 		Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 		rng->randomize();
@@ -198,10 +199,12 @@ void godot::SlimeBossAI::_set_target()
 	}
 	else
 	{
-		if (MenuButtons::player_name == 1)
+		if (MenuButtons::game_mode == SHOOTER)
+		//if (MenuButtons::player_name == 1)
 			target_player = _get_player1()->get_global_position();
-		else if (MenuButtons::player_name == 2)
-			target_player = _get_player2()->get_global_position();
+		else //if (MenuButtons::player_name == 2)
+			if (MenuButtons::game_mode == MELEE)
+				target_player = _get_player2()->get_global_position();
 	}
 }
 
