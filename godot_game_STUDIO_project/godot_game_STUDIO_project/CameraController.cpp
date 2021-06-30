@@ -249,6 +249,41 @@ bool godot::CameraController::_is_player_have_need_keys(Array rooms_keys)
 
 void godot::CameraController::_ready()
 {
+	int keys_counter = 3;
+
+	HBoxContainer* key_box = nullptr;
+	ResourceLoader* rld = ResourceLoader::get_singleton();
+	
+	Ref<Texture> res = rld->load("res://Assets/Sprites/UI/BacksButtonsAndOther/backround_key.png");
+	Ref<Texture> key_texture = rld->load("res://Assets/Sprites/Items/key.png");
+
+	key_box = cast_to<HBoxContainer>(get_node("/root/Node2D/Node/Camera2D/KeyHolder/Keyses/Keys"));
+	std::vector<String> name_keys{ "key_A", "key_B","key_C", "key_D", "key_E", "key_F" };
+
+	for (int i = 0; i < keys_counter; i++) {
+		
+		auto key_sprite = TextureRect::_new();
+		key_sprite->set_texture(key_texture);
+		
+		auto item_bacground = TextureRect::_new();
+		item_bacground->set_texture(res);
+
+		auto control = Control::_new();
+		control->set_name("key_sprite");
+		control->add_child(key_sprite);
+		control->set_custom_minimum_size(Vector2(64,64));
+		control->set_visible(false);
+
+		auto container = CenterContainer::_new();
+		container->add_child(item_bacground);
+		container->add_child(control);
+		container->set_name(name_keys[i]);
+
+		key_box->add_child(container);
+	}
+
+
+
 	audio_server = AudioServer::get_singleton();
 	_set_current(true);
 
