@@ -101,19 +101,16 @@
     <ClCompile Include="Key.cpp">
       <Filter>Items</Filter>
     </ClCompile>
-    <ClCompile Include="SlimeShootAI.cpp">
-      <Filter>Enemies</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyPrice.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="MagnitZone.cpp">
+    <ClCompile Include="SlimeShootAI.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="ProducePlayerMelee.cpp">
       <Filter>Players</Filter>
     </ClCompile>
     <ClCompile Include="ProducePlayerShoot.cpp">
-      <Filter>Players</Filter>
-    </ClCompile>
-    <ClCompile Include="ProducePlayerMelee.cpp">
       <Filter>Players</Filter>
     </ClCompile>
     <ClCompile Include="PlayerStrategyContext.cpp">
@@ -135,19 +132,36 @@
       <Filter>Players</Filter>
     </ClCompile>
     <ClCompile Include="PlayerMelee.cpp">
-      <Filter>UI</Filter>
+      <Filter>Players</Filter>
     </ClCompile>
     <ClCompile Include="MiniMapController.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="BigStone.cpp">
-      <Filter>Ammo</Filter>
-    </ClCompile>
-    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="AudioController.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
+    <ClCompile Include="BigStone.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="MagnitZone.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
     <ClCompile Include="SlimeBossAI.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="SlimeAttackJumpState.cpp">
+      <Filter>Enemies\SlimeBossStates</Filter>
+    </ClCompile>
+    <ClCompile Include="SlimeAttackShootState.cpp">
+      <Filter>Enemies\SlimeBossStates</Filter>
+    </ClCompile>
+    <ClCompile Include="SlimeAttackSpawnState.cpp">
+      <Filter>Enemies\SlimeBossStates</Filter>
+    </ClCompile>
+    <ClCompile Include="ISlimeAttackState.cpp">
+      <Filter>Enemies\SlimeBossStates</Filter>
+    </ClCompile>
+    <ClCompile Include="SlimeEnemiesHolder.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
   </ItemGroup>
@@ -259,22 +273,16 @@
     <ClInclude Include="Key.h">
       <Filter>Items</Filter>
     </ClInclude>
-    <ClInclude Include="SlimeShootAI.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyPrice.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="IEnemyAI.h">
+    <ClInclude Include="SlimeShootAI.h">
       <Filter>Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="MagnitZone.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="ProducePlayerShoot.h">
-      <Filter>Players</Filter>
     </ClInclude>
     <ClInclude Include="ProducePlayerMelee.h">
+      <Filter>Players</Filter>
+    </ClInclude>
+    <ClInclude Include="ProducePlayerShoot.h">
       <Filter>Players</Filter>
     </ClInclude>
     <ClInclude Include="PlayerStrategyContext.h">
@@ -298,24 +306,29 @@
     <ClInclude Include="PlayerMelee.h">
       <Filter>Players</Filter>
     </ClInclude>
-    <ClInclude Include="MenuButtons.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="MiniMapController.h">
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="Preloader.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyAIContext.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="BigStone.h">
-      <Filter>Ammo</Filter>
-    </ClInclude>
-    <ClInclude Include="Ball.h" />
     <ClInclude Include="AudioController.h">
       <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="BigStone.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuButtons.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MagnitZone.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="IEnemyAI.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyAIContext.h">
+      <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="ExitHandler.h">
       <Filter>Level</Filter>
@@ -324,6 +337,21 @@
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="SlimeBossAI.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="SlimeAttackJumpState.h">
+      <Filter>Enemies\SlimeBossStates</Filter>
+    </ClInclude>
+    <ClInclude Include="SlimeAttackShootState.h">
+      <Filter>Enemies\SlimeBossStates</Filter>
+    </ClInclude>
+    <ClInclude Include="SlimeAttackSpawnState.h">
+      <Filter>Enemies\SlimeBossStates</Filter>
+    </ClInclude>
+    <ClInclude Include="ISlimeAttackState.h">
+      <Filter>Enemies\SlimeBossStates</Filter>
+    </ClInclude>
+    <ClInclude Include="SlimeEnemiesHolder.h">
       <Filter>Enemies</Filter>
     </ClInclude>
   </ItemGroup>
@@ -336,6 +364,9 @@
     </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{bc8ab710-a43a-4032-813e-d5c3c9089446}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ammo">
+      <UniqueIdentifier>{27c78630-821a-442c-8d51-b96d342f7370}</UniqueIdentifier>
     </Filter>
     <Filter Include="Items">
       <UniqueIdentifier>{4dc268e3-a1cf-4dca-8dff-566b39ac43d4}</UniqueIdentifier>
@@ -352,8 +383,8 @@
     <Filter Include="Genetation">
       <UniqueIdentifier>{599ab0d3-6352-475c-8a1c-15d8323a3b93}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Ammo">
-      <UniqueIdentifier>{27c78630-821a-442c-8d51-b96d342f7370}</UniqueIdentifier>
+    <Filter Include="Enemies\SlimeBossStates">
+      <UniqueIdentifier>{389c46b8-632f-41f9-b4bb-cbfc879951d1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

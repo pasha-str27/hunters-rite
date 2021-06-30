@@ -117,3 +117,10 @@ using namespace godot;
 #include "SlimeShootAI.h"
 #include "Ball.h"
 #include "SlimeBossAI.h"
+#include "SlimeEnemiesHolder.h"
+
+//	state
+#include "ISlimeAttackState.h"
+#include "SlimeAttackJumpState.h"
+#include "SlimeAttackShootState.h"
+#include "SlimeAttackSpawnState.h"

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/monster_slime_damage.png-ef001c350a6db6f8367bc94d8968e4da.stex"
+path="res://.import/Hedgehog Sprite Sheet.png-fb08b5c891bde10698c3c38bc1385580.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Monsters/Slime/monster_slime_damage.png"
-dest_files=[ "res://.import/monster_slime_damage.png-ef001c350a6db6f8367bc94d8968e4da.stex" ]
+source_file="res://Assets/Sprites/Monsters/Hedgehog/Hedgehog Sprite Sheet.png"
+dest_files=[ "res://.import/Hedgehog Sprite Sheet.png-fb08b5c891bde10698c3c38bc1385580.stex" ]
 
 [params]
 

@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-std::vector<Vector2> LevelGenerator::positions = {};
-
 godot::LevelGenerator::LevelGenerator()
 {
 }
@@ -23,6 +21,9 @@ void godot::LevelGenerator::_register_methods()
 	register_method("_get_next_room", &LevelGenerator::_get_next_room);
 	register_method("_get_keys_count", &LevelGenerator::_get_keys_count);
 	register_method("_clear", &LevelGenerator::_clear);
+	register_method("_get_rooms", &LevelGenerator::_get_rooms);
+	register_method("_get_rooms_positions", &LevelGenerator::_get_rooms_positions);
+	
 	
 	
 	register_property<LevelGenerator, int>("map_size", &LevelGenerator::map_size, -1);
@@ -113,6 +114,9 @@ void godot::LevelGenerator::_ready()
 	_buid_doors();
 	_buid_floors();
 	_buid_top_wall();
+	
+	//	call set positions
+
 }
 
 void godot::LevelGenerator::_connect_rooms(Node2D* prev, Node2D* next, Vector2 dir)
@@ -593,6 +597,7 @@ void godot::LevelGenerator::_create_item_room(std::vector<Node2D*>& cornered_roo
 
 	Node2D* builded_room = _generate_room_to(room_to_build);
 	builded_room->call("_set_is_special", true);
+	builded_room->call("_set_room_type", "item_room");
 
 	_rebuild_doors(builded_room);
 	_rebuild_doors(room_to_build);
@@ -747,7 +752,7 @@ void godot::LevelGenerator::_generate_key(Node2D* room)
 	if (!generated_keys.empty())
 		_set_keys(room, generated_keys);
 
-	room->call("_set_room_type", "item_room");
+	room->call("_set_room_type", "key_room");
 	room->call("_set_is_special", true);
 
 	generated_keys.push_back(key->call("_get_type"));	
@@ -807,4 +812,26 @@ void godot::LevelGenerator::_clear()
 	this->generated_keys.clear();
 	size = 0;
 	map_size += 2;
+}
+
+Array godot::LevelGenerator::_get_rooms()
+{
+	Array wrapper = {};
+	for (auto room : rooms)
+		wrapper.push_back(room);
+
+	Array arr = {};
+	arr.push_back(wrapper);
+	return arr;
+}
+
+Array godot::LevelGenerator::_get_rooms_positions()
+{
+	Array wrapper = {};
+	for (auto pos : positions)
+		wrapper.push_back(pos);
+
+	Array arr = {};
+	arr.push_back(wrapper);
+	return arr;
 }
