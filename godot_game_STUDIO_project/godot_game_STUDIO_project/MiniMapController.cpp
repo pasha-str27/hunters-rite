@@ -80,18 +80,15 @@ void godot::MiniMapController::_ready()
 
 	Godot::print("Rooms pos setted");
 
-	players_pos = _get_players_pos();
-	Godot::print(players_pos);
-	Godot::print("Players pos setted");
-
-	all_rooms = grid->get_children();
+	_load_undisc_rooms(rooms_positions);
 
 	_update_minimap();
 }
 
 void godot::MiniMapController::_process(float delta)
 {
-	//Here im changing players positions
+	if (Input::get_singleton()->is_action_just_pressed("minimap_test"))
+		_update_minimap();
 }
 
 bool godot::MiniMapController::_load_resources()
@@ -114,35 +111,38 @@ void godot::MiniMapController::_update_minimap()
 {
 	Node2D* room = nullptr;
 
-	if (all_rooms.size() > 0)
+	players_pos = _get_players_pos();
+	Godot::print(players_pos);
+	Godot::print("Players pos setted");
+
+	if (rooms_positions.size() > 0 || disc_rooms_positions.size() > 0)
 	{
-		for (int i = 0; i < all_rooms.size(); ++i)
+		if (rooms_positions.find(players_pos) != -1)
 		{
-			room = cast_to<Node2D>(all_rooms[i]);
-
-			//need func for this
-			if (rooms_positions[i] == players_pos)
-			{
-				Godot::print("Nice try");
-
-				_clear_map();
-
-				if (disc_rooms_positions.size() > 0)
-					_load_disc_rooms(disc_rooms_positions);
-
-				disc_rooms_positions.push_back(rooms_positions[i]);
-				rooms_positions.remove(i);
-
-				_load_curr_room(players_pos);
-				_load_undisc_rooms(rooms_positions);
-			}
+			_clear_map();
+			_load_curr_room(players_pos);
+			if (disc_rooms_positions.size() > 0)
+				_load_disc_rooms(disc_rooms_positions);
+			disc_rooms_positions.push_back(players_pos);
+			rooms_positions.remove(rooms_positions.find(players_pos));
+			_load_undisc_rooms(rooms_positions);
+			return;
 		}
+		if (disc_rooms_positions.find(players_pos) != -1)
+		{
+			_clear_map();
+			_load_curr_room(players_pos);
+			rooms_positions.remove(disc_rooms_positions.find(players_pos));
+			if (disc_rooms_positions.size() > 0)
+				_load_disc_rooms(disc_rooms_positions);
+			disc_rooms_positions.push_back(players_pos);
+			_load_undisc_rooms(rooms_positions);
+			return;
+		}
+		Godot::print("Players pos is out of range");
 	}
 	else
-	{
-		_load_undisc_rooms(rooms_positions);
-		Godot::print("Rooms were loaded by new function");
-	}
+		Godot::print("There are no rooms");
 }
 
 Vector2 godot::MiniMapController::_get_players_pos()
