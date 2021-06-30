@@ -59,10 +59,6 @@ void godot::LevelGenerator::_init()
 void godot::LevelGenerator::_ready()
 {
 	_generate();
-	_buid_roofs();
-	_buid_doors();
-	_buid_floors();
-	_buid_top_wall();
 
 	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
@@ -72,26 +68,19 @@ void godot::LevelGenerator::_ready()
 
 	for (int i = 1; i < rooms.size(); ++i)
 	{
-		rand_value = rng->randi_range(0, 1);
-		if (rand_value == 0)
+		rand_value = rng->randi_range(0, 3);
+
+		if (rand_value >= 0 && rand_value <= 1)
 		{
-			_buid_stones_first_step(rooms[i]);
-			rand_value = rng->randi_range(0, 2);
-
-			if(rand_value > 0)
-				_buid_spikes_second_step(rooms[i]);
-
-			continue;
+			_buid_stones(rooms[i]);
+			if (rand_value == 0)
+				_buid_spikes(rooms[i]);
 		}
-
-		if (rand_value == 1)
+		else
 		{
-			_buid_spikes_first_step(rooms[i]);
-			rand_value = rng->randi_range(0, 2);
-
-			if (rand_value > 0)
-				_buid_stones_second_step(rooms[i]);
-
+			_buid_spikes(rooms[i]);
+			if (rand_value == 2)
+				_buid_stones(rooms[i]);
 		}
 	}
 
@@ -119,6 +108,11 @@ void godot::LevelGenerator::_ready()
 		node->call("_fill_empty_positions");
 		
 	_set_keys(boss_room, generated_keys);
+
+	_buid_roofs();
+	_buid_doors();
+	_buid_floors();
+	_buid_top_wall();
 }
 
 void godot::LevelGenerator::_connect_rooms(Node2D* prev, Node2D* next, Vector2 dir)
@@ -321,30 +315,7 @@ void godot::LevelGenerator::_buid_floors()
 	prefab = nullptr;
 }
 
-void godot::LevelGenerator::_buid_stones_first_step(Node2D* room)
-{
-	Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
-	ResourceLoader* loader = ResourceLoader::get_singleton();
-	Ref<PackedScene> prefab = nullptr;
-	random->randomize();
-	prefab = loader->load(NodePath("res://Assets/Prefabs/Rooms/Stones/stone" + String::num(random->randi_range(1, spike_count)) + ".tscn"));
-	TileMap* tile_map = cast_to<TileMap>(prefab->instance());
-	room->add_child(tile_map);
-
-	auto arr = tile_map->get_used_cells();
-
-	for (int i = 0; i < arr.size(); ++i)
-	{
-		Vector2 pos = (Vector2)arr[i];
-		room->call("_set_cell_value", pos.y + 8, pos.x + 14, 2);
-	}	
-
-	prefab = nullptr;
-	loader = nullptr;
-	tile_map = nullptr;
-}
-
-void godot::LevelGenerator::_buid_stones_second_step(Node2D* room)
+void godot::LevelGenerator::_buid_stones(Node2D* room)
 {
 	Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
 	ResourceLoader* loader = ResourceLoader::get_singleton();
@@ -392,31 +363,7 @@ void godot::LevelGenerator::_buid_stones_second_step(Node2D* room)
 	tile_map = nullptr;
 }
 
-void godot::LevelGenerator::_buid_spikes_first_step(Node2D* room)
-{
-	Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
-	ResourceLoader* loader = ResourceLoader::get_singleton();
-	Ref<PackedScene> prefab = nullptr;
-	random->randomize();
-	prefab = loader->load(NodePath("res://Assets/Prefabs/Rooms/Spikes/spike" + String::num(random->randi_range(1, spike_count)) + ".tscn"));
-	
-	TileMap* tile_map = cast_to<TileMap>(prefab->instance());
-	room->add_child(tile_map);
-
-	auto arr = tile_map->get_used_cells();
-
-	for (int i = 0; i < arr.size(); ++i)
-	{
-		Vector2 pos = (Vector2)arr[i];
-
-		room->call("_set_cell_value", pos.y + 8, pos.x + 14, 3);
-	}
-	prefab = nullptr;
-	loader = nullptr;
-	tile_map = nullptr;
-}
-
-void godot::LevelGenerator::_buid_spikes_second_step(Node2D* room)
+void godot::LevelGenerator::_buid_spikes(Node2D* room)
 {
 	Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
 	ResourceLoader* loader = ResourceLoader::get_singleton();

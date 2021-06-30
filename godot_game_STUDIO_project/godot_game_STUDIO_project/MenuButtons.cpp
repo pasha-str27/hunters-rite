@@ -453,10 +453,10 @@ void godot::MenuButtons::_reload_scene()
 	Ref<PackedScene> res = rld->load("res://main_scene.tscn");
 
 	get_node("/root/Node2D")->set_name("to_delete");
-	get_node("/root/to_delete")->queue_free();
 	get_tree()->set_pause(false);
 	Enemies::get_singleton()->_clear();
-	get_node("/root")->add_child(res->instance());
+	get_node("/root")->add_child(res->instance(), true);
+	get_node("/root/to_delete")->queue_free();
 }
 
 void godot::MenuButtons::_move_to_main_menu()
@@ -470,7 +470,8 @@ void godot::MenuButtons::_move_to_main_menu()
 	PlayersContainer::_get_instance()->_clear();
 }
 
-void  godot::MenuButtons::change_scene(Ref<PackedScene>& scene) {
+void  godot::MenuButtons::change_scene(Ref<PackedScene>& scene) 
+{
 	_play_effect();
 	get_node("/root")->add_child(scene->instance());
 	get_parent()->queue_free();
