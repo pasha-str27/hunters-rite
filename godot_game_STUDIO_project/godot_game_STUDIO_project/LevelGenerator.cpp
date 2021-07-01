@@ -830,7 +830,10 @@ Array godot::LevelGenerator::_get_rooms_positions()
 {
 	Array wrapper = {};
 	for (auto pos : positions)
+	{
+		Godot::print(pos);
 		wrapper.push_back(pos);
+	}
 
 	Array arr = {};
 	arr.push_back(wrapper);
@@ -839,6 +842,6 @@ Array godot::LevelGenerator::_get_rooms_positions()
 
 void godot::LevelGenerator::_process(float delta)
 {
-	if (Input::get_singleton()->is_action_just_released("minimap_test"))
-		_ready();
+	//if (Input::get_singleton()->is_action_just_released("minimap_test"))
+		//_ready();
 }

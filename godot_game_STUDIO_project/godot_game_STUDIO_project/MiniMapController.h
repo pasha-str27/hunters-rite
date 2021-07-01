@@ -36,6 +36,8 @@ namespace godot
 
 		Vector2 room_icon_scale = Vector2(4, 4);
 
+		Timer* timer = Timer::_new();
+
 	public:
 		static void _register_methods();
 		void _init();
@@ -54,6 +56,9 @@ namespace godot
 		void _load_curr_room(Vector2 curr_room_pos);
 		void _load_undisc_rooms(Array  undisc_rooms_pos);
 		bool _is_on_grid(Vector2 pos);
+
+		void _start_timer();
+		void _on_timeout();
 
 		MiniMapController();
 		~MiniMapController();
