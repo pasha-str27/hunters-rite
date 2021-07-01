@@ -23,7 +23,7 @@ void godot::LevelGenerator::_register_methods()
 	register_method("_clear", &LevelGenerator::_clear);
 	register_method("_get_rooms", &LevelGenerator::_get_rooms);
 	register_method("_get_rooms_positions", &LevelGenerator::_get_rooms_positions);
-	
+	register_method("_process", &LevelGenerator::_process);
 	
 	
 	register_property<LevelGenerator, int>("map_size", &LevelGenerator::map_size, -1);
@@ -59,9 +59,13 @@ void godot::LevelGenerator::_init()
 
 void godot::LevelGenerator::_ready()
 {
+	_clear();
+	//PlayersContainer::_get_instance()->_clear();
+
+	keys_prefabs_local = keys_prefabs.duplicate();
+
 	_generate();
 	_buid_doors();
-
 
 	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
@@ -734,21 +738,17 @@ void godot::LevelGenerator::_generate_key(Node2D* room)
 	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
 
-	//auto sprite = cast_to<Node2D>(key_room_sprite->instance());
-	//add_child(sprite);
-	//sprite->set_global_position(pos);
-
 	auto pedestal = cast_to<Node2D>(key_room_pedestal->instance());
 	add_child(pedestal);
 	pedestal->set_global_position(pos);
 
-	int key_index = rng->randi_range(0, keys_prefabs.size() - 1);
-	Ref<PackedScene> key_prefab = keys_prefabs[key_index];
+	int key_index = rng->randi_range(0, keys_prefabs_local.size() - 1);
+	Ref<PackedScene> key_prefab = keys_prefabs_local[key_index];
 	auto key = cast_to<Node2D>(key_prefab->instance());
 	add_child(key);
 	key->set_global_position(pos);
 
-	keys_prefabs.remove(key_index);
+	keys_prefabs_local.remove(key_index);
 
 	if (!generated_keys.empty())
 		_set_keys(room, generated_keys);
@@ -806,13 +806,13 @@ int godot::LevelGenerator::_get_keys_count()
 void godot::LevelGenerator::_clear()
 {
 	for (int i = 0; i < this->get_child_count(); i++)
-		this->get_child(i)->queue_free();
+		this->get_child(i)-> queue_free();
 
 	this->positions.clear();
 	this->rooms.clear();
 	this->generated_keys.clear();
 	size = 0;
-	map_size += 2;
+	//map_size += 2;
 }
 
 Array godot::LevelGenerator::_get_rooms()
@@ -835,4 +835,10 @@ Array godot::LevelGenerator::_get_rooms_positions()
 	Array arr = {};
 	arr.push_back(wrapper);
 	return arr;
+}
+
+void godot::LevelGenerator::_process(float delta)
+{
+	if (Input::get_singleton()->is_action_just_released("minimap_test"))
+		_ready();
 }

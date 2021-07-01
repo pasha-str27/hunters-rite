@@ -224,6 +224,11 @@ void godot::SlimeAI::_change_dir_after_time()
 	goal = _get_enemy()->get_global_position() + dir * 32;
 
 	cur_pos += dir;
+
+	if (dir == Vector2::RIGHT)
+		cast_to<AnimatedSprite>(_get_enemy()->find_node("AnimatedSprite"))->set_flip_h(true);
+	if (dir == Vector2::LEFT)
+		cast_to<AnimatedSprite>(_get_enemy()->find_node("AnimatedSprite"))->set_flip_h(false);
 }
 
 void godot::SlimeAI::_fight(Node2D* player1, Node2D* player2)

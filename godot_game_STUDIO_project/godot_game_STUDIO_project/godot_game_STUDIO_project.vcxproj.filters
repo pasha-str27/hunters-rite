@@ -149,16 +149,14 @@
     <ClCompile Include="SlimeBossAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="SlimeAttackJumpState.cpp">
+    <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="SlimeAttackSpawnState.cpp">
       <Filter>Enemies\SlimeBossStates</Filter>
     </ClCompile>
     <ClCompile Include="SlimeAttackShootState.cpp">
       <Filter>Enemies\SlimeBossStates</Filter>
     </ClCompile>
-    <ClCompile Include="SlimeAttackSpawnState.cpp">
-      <Filter>Enemies\SlimeBossStates</Filter>
-    </ClCompile>
-    <ClCompile Include="ISlimeAttackState.cpp">
+    <ClCompile Include="SlimeAttackJumpState.cpp">
       <Filter>Enemies\SlimeBossStates</Filter>
     </ClCompile>
     <ClCompile Include="SlimeEnemiesHolder.cpp">
@@ -340,16 +338,14 @@
     <ClInclude Include="SlimeBossAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="SlimeAttackJumpState.h">
+    <ClInclude Include="Ball.h" />
+    <ClInclude Include="SlimeAttackSpawnState.h">
       <Filter>Enemies\SlimeBossStates</Filter>
     </ClInclude>
     <ClInclude Include="SlimeAttackShootState.h">
       <Filter>Enemies\SlimeBossStates</Filter>
     </ClInclude>
-    <ClInclude Include="SlimeAttackSpawnState.h">
-      <Filter>Enemies\SlimeBossStates</Filter>
-    </ClInclude>
-    <ClInclude Include="ISlimeAttackState.h">
+    <ClInclude Include="SlimeAttackJumpState.h">
       <Filter>Enemies\SlimeBossStates</Filter>
     </ClInclude>
     <ClInclude Include="SlimeEnemiesHolder.h">

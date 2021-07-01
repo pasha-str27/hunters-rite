@@ -39,6 +39,7 @@ namespace godot
 		Ref<PackedScene> key_room_pedestal = nullptr;
 
 		Array keys_prefabs = {};
+		Array keys_prefabs_local = {};
 		Array generated_keys = {};
 
 		Ref<PackedScene> big_stone = nullptr;
@@ -75,5 +76,6 @@ namespace godot
 		void _clear();
 		Array _get_rooms();
 		Array _get_rooms_positions();
+		void _process(float delta);
 	};
 }

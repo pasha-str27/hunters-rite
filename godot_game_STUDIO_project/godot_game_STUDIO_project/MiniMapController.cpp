@@ -57,7 +57,7 @@ void godot::MiniMapController::_ready()
 	{
 		Godot::print("now we have grid");
 
-	//rooms_positions = get_node("/root/Node2D/Node/Generation")->call("_get_rooms_positions");
+		//undisc_rooms_positions = get_node("/root/Node2D/Node/Generation")->call("_get_rooms_positions");
 
 		curr_room_position = grid_rect_size / 2;
 		grid_scale = grid_rect_size / (get_viewport_rect().size * zoom);
@@ -68,7 +68,6 @@ void godot::MiniMapController::_ready()
 		return;
 	}
 
-	//test pos
 	undisc_rooms_positions.push_back(Vector2(0, 0));
 	undisc_rooms_positions.push_back(Vector2(0, -step_y));
 	undisc_rooms_positions.push_back(Vector2(step_x, -step_y));
