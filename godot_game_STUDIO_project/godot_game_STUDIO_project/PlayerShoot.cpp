@@ -161,7 +161,9 @@ void godot::PlayerShoot::_fight(Node* node)
 
 	_change_can_fight(false);
 
-	available_bullets[available_bullets.size() - 1]->set_position(_get_object()->get_global_position());
+	Vector2 position_to_spawn = cast_to<Node2D>(_get_object()->get_node("AnimatedSprite")->get_child(0))->get_global_position();
+
+	available_bullets[available_bullets.size() - 1]->set_position(position_to_spawn);
 	available_bullets[available_bullets.size() - 1]->set_visible(true);
 
 

@@ -72,12 +72,13 @@ void godot::SlimeBossAI::_shoot()
 		return;
 
 	Vector2 bullet_dir = target_player;
+	Vector2 bullet_position = cast_to<Node2D>(_get_enemy()->get_node("Area2D")->get_child(0))->get_global_position();
 
 	if (available_bullets.size() > 0)
 	{
 		for (int i = 0; i < 3; i++)
 		{
-			available_bullets[available_bullets.size() - i - 1]->set_global_position(_get_enemy()->get_global_position());
+			available_bullets[available_bullets.size() - i - 1]->set_global_position(bullet_position);
 			
 			if (available_bullets.size() == 1)
 			{
