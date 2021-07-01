@@ -13,18 +13,19 @@ namespace godot {
 		float speed = 200;
 		bool is_jumping = false;
 		bool jumping_up = false;
-		bool is_attacking = false;
 
 		int max_bullet_count = 20;
 		std::vector<Node2D*> available_bullets;
 
 		ISlimeAttackState* _attack_state = nullptr;
-		ISlimeAttackState *_attack_state_next = nullptr;
-
+	
 		Vector2 goal = Vector2::ZERO;
 		Vector2 target_player = Vector2::ZERO;
+		Vector2 empty_pos = Vector2(-99999, -99999);
 
 		Node2D* jump_zone = nullptr;
+		Node2D* wave_node = nullptr;
+
 		Array enemies_to_spawn = {};
 		Array places_to_spawn = {};
 
@@ -50,5 +51,6 @@ namespace godot {
 		void _set_target();
 		void _disable_collisions();
 		void _enable_collisions();
+		void _make_wave();
 	};
 }

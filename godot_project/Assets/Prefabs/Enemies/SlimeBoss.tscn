@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Assets/Sprites/Monsters/Slime/monster_slime.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/slime_bullet.tscn" type="PackedScene" id=2]
@@ -7,10 +7,11 @@
 [ext_resource path="res://Assets/Sprites/Monsters/Slime/monster_slime_damage.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Prefabs/Particles/DeathParticles/DeathParticles.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Assets/Sprites/pedestal.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/jump_point.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Scripts/EnemiesHolder.gdns" type="Script" id=9]
 [ext_resource path="res://Assets/Prefabs/Enemies/SlimeShoot.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Prefabs/Enemies/Slime.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Sprites/wave_v2.png" type="Texture" id=12]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
@@ -106,7 +107,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0.5, 0.5 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 1, 1 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:visible")
@@ -120,6 +121,8 @@ tracks/1/keys = {
 "update": 1,
 "values": [ true ]
 }
+
+[sub_resource type="RayShape2D" id=21]
 
 [node name="SlimeBoss" type="Node2D"]
 script = ExtResource( 4 )
@@ -179,7 +182,7 @@ script = ExtResource( 9 )
 enemies_list = [ ExtResource( 11 ), ExtResource( 10 ) ]
 
 [node name="jump_zone" type="Node2D" parent="."]
-scale = Vector2( 3, 3 )
+z_index = 9
 
 [node name="Sprite" type="Sprite" parent="jump_zone"]
 scale = Vector2( 1e-05, 1e-05 )
@@ -187,6 +190,25 @@ texture = ExtResource( 8 )
 
 [node name="Animator" type="AnimationPlayer" parent="jump_zone"]
 anims/grow = SubResource( 20 )
+
+[node name="DamageWave" type="Node2D" parent="."]
+visible = false
+
+[node name="Area2D" type="Area2D" parent="DamageWave"]
+visible = false
+position = Vector2( -64.1835, 16.7538 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageWave/Area2D"]
+visible = false
+scale = Vector2( 10, 1 )
+shape = SubResource( 21 )
+
+[node name="Sprite" type="Sprite" parent="DamageWave/Area2D/CollisionShape2D"]
+visible = false
+modulate = Color( 0.145098, 0.321569, 0.0666667, 1 )
+position = Vector2( 0, 12.0344 )
+scale = Vector2( 0.1, 1 )
+texture = ExtResource( 12 )
 
 [connection signal="body_entered" from="SlimeBoss/Area2D" to="SlimeBoss" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="SlimeBoss/Area2D" to="SlimeBoss" method="_on_Area2D_body_exited"]
