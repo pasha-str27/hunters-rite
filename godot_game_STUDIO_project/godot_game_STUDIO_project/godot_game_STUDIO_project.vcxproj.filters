@@ -150,19 +150,19 @@
       <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Ball.cpp" />
-    <ClCompile Include="SlimeAttackSpawnState.cpp">
-      <Filter>Enemies\SlimeBossStates</Filter>
-    </ClCompile>
-    <ClCompile Include="SlimeAttackShootState.cpp">
+    <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="SlimeEnemiesHolder.cpp">
       <Filter>Enemies\SlimeBossStates</Filter>
     </ClCompile>
     <ClCompile Include="SlimeAttackJumpState.cpp">
       <Filter>Enemies\SlimeBossStates</Filter>
     </ClCompile>
-    <ClCompile Include="SlimeEnemiesHolder.cpp">
-      <Filter>Enemies</Filter>
+    <ClCompile Include="SlimeAttackShootState.cpp">
+      <Filter>Enemies\SlimeBossStates</Filter>
     </ClCompile>
-    <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="SlimeAttackSpawnState.cpp">
+      <Filter>Enemies\SlimeBossStates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
@@ -323,12 +323,6 @@
     <ClInclude Include="MagnitZone.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="IEnemyAI.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyAIContext.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="ExitHandler.h">
       <Filter>Level</Filter>
     </ClInclude>
@@ -339,19 +333,19 @@
       <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Ball.h" />
-    <ClInclude Include="SlimeAttackSpawnState.h">
-      <Filter>Enemies\SlimeBossStates</Filter>
-    </ClInclude>
-    <ClInclude Include="SlimeAttackShootState.h">
+    <ClInclude Include="Ball.h" />
+    <ClInclude Include="SlimeEnemiesHolder.h">
       <Filter>Enemies\SlimeBossStates</Filter>
     </ClInclude>
     <ClInclude Include="SlimeAttackJumpState.h">
       <Filter>Enemies\SlimeBossStates</Filter>
     </ClInclude>
-    <ClInclude Include="SlimeEnemiesHolder.h">
-      <Filter>Enemies</Filter>
+    <ClInclude Include="SlimeAttackShootState.h">
+      <Filter>Enemies\SlimeBossStates</Filter>
     </ClInclude>
-    <ClInclude Include="Ball.h" />
+    <ClInclude Include="SlimeAttackSpawnState.h">
+      <Filter>Enemies\SlimeBossStates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Players">
