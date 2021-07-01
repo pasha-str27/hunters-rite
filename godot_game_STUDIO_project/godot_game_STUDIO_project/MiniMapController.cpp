@@ -24,9 +24,6 @@ void godot::MiniMapController::_register_methods()
 	register_method("_ready", &MiniMapController::_ready);
 	register_method("_set_positions", &MiniMapController::_set_positions);
 
-	register_property<MiniMapController, Ref<PackedScene>>("current_room", &MiniMapController::curr_room, nullptr);
-	register_property<MiniMapController, Ref<PackedScene>>("discovered_room", &MiniMapController::disc_room, nullptr);
-	register_property<MiniMapController, Ref<PackedScene>>("undiscovered_room", &MiniMapController::undisc_room, nullptr);
 	register_method("_process", &MiniMapController::_process);
 	register_method("_load_resources", &MiniMapController::_load_resources);
 	register_method("_update_minimap", &MiniMapController::_update_minimap);
@@ -71,11 +68,26 @@ void godot::MiniMapController::_ready()
 		return;
 	}
 
+	undisc_rooms_positions.push_back(Vector2(0, 0));
+	undisc_rooms_positions.push_back(Vector2(0, -step_y));
+	undisc_rooms_positions.push_back(Vector2(step_x, -step_y));
+	undisc_rooms_positions.push_back(Vector2(2 * step_x, -step_y));
+	undisc_rooms_positions.push_back(Vector2(-step_x, step_y));
+	undisc_rooms_positions.push_back(Vector2(0, step_y));
+	undisc_rooms_positions.push_back(Vector2(0, 2 * step_y));
+	undisc_rooms_positions.push_back(Vector2(step_x, 2 * step_y));
+
 	Godot::print("Rooms pos setted");
 
 	_load_undisc_rooms(undisc_rooms_positions);
 
 	_update_minimap();
+}
+
+void godot::MiniMapController::_process(float delta)
+{
+	if (Input::get_singleton()->is_action_just_pressed("minimap_test"))
+		_update_minimap();
 }
 
 void godot::MiniMapController::_process(float delta)
