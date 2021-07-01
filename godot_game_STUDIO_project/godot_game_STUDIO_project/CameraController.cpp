@@ -447,10 +447,6 @@ void godot::CameraController::_input(Variant event)
 		add_child(pause_menu->instance());
 	}
 	if (Input::get_singleton()->is_action_just_pressed("ui_show_minimap"))
-	{
-		//Input::get_singleton()->action_release("ui_pause");
-		Godot::print("Showing minimap");
-
 		if (minimap != nullptr)
 		{
 			if (!is_showing_minimap)
@@ -460,9 +456,6 @@ void godot::CameraController::_input(Variant event)
 
 			is_showing_minimap = !is_showing_minimap;
 		}
-
-		Godot::print("Here");
-	}
 }
 
 void godot::CameraController::_audio_fade_to_main_menu()
