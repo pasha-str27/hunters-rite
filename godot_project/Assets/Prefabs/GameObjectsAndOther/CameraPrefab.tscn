@@ -229,5 +229,6 @@ __meta__ = {
 }
 
 [node name="MiniMap" parent="." instance=ExtResource( 11 )]
+visible = false
 
 [connection signal="area_entered" from="Area2D" to="EnemySpawner" method="_on_Area2D_area_entered"]

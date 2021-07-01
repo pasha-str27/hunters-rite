@@ -90,12 +90,6 @@ void godot::MiniMapController::_process(float delta)
 		_update_minimap();
 }
 
-void godot::MiniMapController::_process(float delta)
-{
-	if (Input::get_singleton()->is_action_just_pressed("minimap_test"))
-		_update_minimap();
-}
-
 bool godot::MiniMapController::_load_resources()
 {
 	ResourceLoader* rld = ResourceLoader::get_singleton();

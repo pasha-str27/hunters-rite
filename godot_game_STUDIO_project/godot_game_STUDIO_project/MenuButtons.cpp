@@ -448,6 +448,7 @@ void godot::MenuButtons::_on_animated_focus_exited(String button_name, String an
 // -------Work with scenes-------
 void godot::MenuButtons::_reload_scene()
 {
+	CameraController::show_tutorial = true;
 	timer->disconnect("timeout", this, "_reload_scene");
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	Ref<PackedScene> res = rld->load("res://main_scene.tscn");
