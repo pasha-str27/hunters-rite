@@ -32,6 +32,8 @@ namespace godot
 		float time_delta = 1.0 / 50;
 		float delta_step = -80.0 / 50.0;
 
+		Array generated_keys = {};
+
 		void _move(String dir);
 		String _get_dir_on_index(int i);
 		bool _is_one_player_alive();
@@ -56,6 +58,7 @@ namespace godot
 		void _set_current_room_type(String);
 		void _go_to_start();
 		void _spawn_players();
+		void _get_type_keys();
 		bool _is_player_have_need_keys(Array rooms_keys);
 		CameraController();
 		~CameraController();

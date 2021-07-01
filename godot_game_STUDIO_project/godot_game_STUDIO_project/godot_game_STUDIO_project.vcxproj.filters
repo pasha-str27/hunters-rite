@@ -101,9 +101,6 @@
     <ClCompile Include="Key.cpp">
       <Filter>Items</Filter>
     </ClCompile>
-    <ClCompile Include="SlimeShootAI.cpp">
-      <Filter>Enemies</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyPrice.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
@@ -137,18 +134,23 @@
     <ClCompile Include="PlayerMelee.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="MiniMapController.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="BigStone.cpp">
       <Filter>Ammo</Filter>
     </ClCompile>
-    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="AudioController.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
     <ClCompile Include="SlimeBossAI.cpp">
       <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="SlimeShootAI.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniMapController.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -259,13 +261,7 @@
     <ClInclude Include="Key.h">
       <Filter>Items</Filter>
     </ClInclude>
-    <ClInclude Include="SlimeShootAI.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyPrice.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="IEnemyAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="MagnitZone.h">
@@ -301,19 +297,12 @@
     <ClInclude Include="MenuButtons.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="MiniMapController.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="Preloader.h">
       <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyAIContext.h">
-      <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="BigStone.h">
       <Filter>Ammo</Filter>
     </ClInclude>
-    <ClInclude Include="Ball.h" />
     <ClInclude Include="AudioController.h">
       <Filter>Audio</Filter>
     </ClInclude>
@@ -325,6 +314,15 @@
     </ClInclude>
     <ClInclude Include="SlimeBossAI.h">
       <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="SlimeShootAI.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniMapController.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
