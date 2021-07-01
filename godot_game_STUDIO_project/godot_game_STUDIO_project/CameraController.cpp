@@ -131,7 +131,7 @@ String godot::CameraController::_get_dir_on_index(int i)
 
 bool godot::CameraController::_is_one_player_alive()
 {
-	return !has_node("/root/Node2D/Node/Player1") || !has_node("/root/Node2D/Node/Player2");
+	return !PlayersContainer::_get_instance()->_get_player1() || !PlayersContainer::_get_instance()->_get_player2();
 }
 
 void godot::CameraController::hide_tutorial()
@@ -281,8 +281,6 @@ void godot::CameraController::_ready()
 
 		key_box->add_child(container);
 	}
-
-
 
 	audio_server = AudioServer::get_singleton();
 	_set_current(true);
