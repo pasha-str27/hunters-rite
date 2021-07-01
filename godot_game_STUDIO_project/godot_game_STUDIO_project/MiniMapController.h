@@ -32,7 +32,7 @@ namespace godot
 
 		Vector2 grid_scale = Vector2::ZERO;
 		Vector2 grid_rect_size = Vector2::ZERO;
-		Vector2 players_pos = Vector2::ZERO;
+	    Vector2 players_pos = Vector2::ZERO;
 
 		Vector2 room_icon_scale = Vector2(4, 4);
 
@@ -42,10 +42,8 @@ namespace godot
 		static void _register_methods();
 		void _init();
 		void _ready();
-		void _set_positions();
-		
-		void _process(float delta);
 
+		void _set_positions();
 		bool _load_resources();
 		void _update_minimap();
 		Vector2 _get_players_pos();
@@ -56,6 +54,7 @@ namespace godot
 		void _load_curr_room(Vector2 curr_room_pos);
 		void _load_undisc_rooms(Array  undisc_rooms_pos);
 		bool _is_on_grid(Vector2 pos);
+		void _start_treking();
 
 		void _start_timer();
 		void _on_timeout();

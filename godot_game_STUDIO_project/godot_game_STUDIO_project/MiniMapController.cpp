@@ -22,9 +22,8 @@ void godot::MiniMapController::_register_methods()
 {
 	register_method("_init", &MiniMapController::_init);
 	register_method("_ready", &MiniMapController::_ready);
-	register_method("_set_positions", &MiniMapController::_set_positions);
 
-	register_method("_process", &MiniMapController::_process);
+	register_method("_set_positions", &MiniMapController::_set_positions);
 	register_method("_load_resources", &MiniMapController::_load_resources);
 	register_method("_update_minimap", &MiniMapController::_update_minimap);
 	register_method("_get_players_pos", &MiniMapController::_get_players_pos);
@@ -54,12 +53,6 @@ void godot::MiniMapController::_ready()
 	_start_timer();
 }
 
-void godot::MiniMapController::_process(float delta)
-{
-	if (Input::get_singleton()->is_action_just_pressed("minimap_test"))
-		_update_minimap();
-}
-
 bool godot::MiniMapController::_load_resources()
 {
 	ResourceLoader* rld = ResourceLoader::get_singleton();
@@ -70,6 +63,32 @@ bool godot::MiniMapController::_load_resources()
 		disc_room = rld->load("res://Assets/Prefabs/MiniMapUi/disc_room.tscn");
 	if (undisc_room == nullptr)
 		undisc_room = rld->load("res://Assets/Prefabs/MiniMapUi/undisc_room.tscn");
+
+	grid = cast_to<TextureRect>(find_node("Grid"));
+
+	if (grid != nullptr)
+	{
+		Godot::print("now we have grid");
+
+		grid_rect_size = grid->get_rect().get_size();
+
+		undisc_rooms_positions = get_node("/root/Node2D/Node/Generation")->call("_get_rooms_positions");
+		undisc_rooms_positions = undisc_rooms_positions[0];
+
+		Godot::print(undisc_rooms_positions.size());
+
+		curr_room_position = grid_rect_size / 2;
+		grid_scale = grid_rect_size / (get_viewport_rect().size * zoom);
+		Godot::print("grid_scale");
+		Godot::print(grid_scale);
+		Godot::print("grid_rect_size");
+		Godot::print(grid_rect_size);
+	}
+	else
+	{
+		Godot::print("Grid wasn't loaded");
+		return false;
+	}
 
 	rld = nullptr;
 
@@ -95,8 +114,6 @@ void godot::MiniMapController::_update_minimap()
 
 	Godot::print("Getting players pos");
 	players_pos = _get_players_pos();
-	Godot::print(players_pos);
-	Godot::print("Players pos getted");
 
 	if (undisc_rooms_positions.size() > 0 || disc_rooms_positions.size() > 0)
 	{
@@ -136,15 +153,16 @@ Vector2 godot::MiniMapController::_get_players_pos()
 {
 	auto player = CameraController::current_room->get_global_position();
 
-	int fixed_x = (int)(get_position().x / step_x) * step_x;
-	int fixed_y = (int)(get_position().y / step_y) * step_y;
+	int fixed_x = (int)(player.x / step_x) * step_x;
+	int fixed_y = (int)(player.y / step_y) * step_y;
+
+	Godot::print(Vector2(fixed_x, fixed_y));
 
 	return Vector2(fixed_x, fixed_y);
 }
 
 Vector2 godot::MiniMapController::_normalize_room_pos(Vector2 old_pos)
 {
-	Godot::print((old_pos - players_pos) * grid_scale + grid_rect_size / 2);
 	return (old_pos - players_pos) * grid_scale + grid_rect_size / 2;
 }
 
@@ -195,11 +213,6 @@ void godot::MiniMapController::_load_undisc_rooms(Array undisc_rooms_pos)
 	for (int i = 0; i < undisc_rooms_pos.size(); ++i)
 	{
 		Vector2 pos = _normalize_all_rooms(undisc_rooms_pos)[i];
-		Vector2 pos1 = undisc_rooms_pos[i];
-		Godot::print("------------------");
-		Godot::print(pos);
-		Godot::print(pos1);
-		Godot::print("------------------");
 		if (_is_on_grid(pos))
 		{
 			auto room = cast_to<Node2D>(undisc_room->instance());
@@ -213,6 +226,17 @@ void godot::MiniMapController::_load_undisc_rooms(Array undisc_rooms_pos)
 bool godot::MiniMapController::_is_on_grid(Vector2 pos)
 {
 	return grid->get_rect().has_point(pos + grid->get_rect().position);
+}
+
+void godot::MiniMapController::_start_treking()
+{
+	if (!_load_resources())
+		Godot::print("Something went wrong! Resources weren't loaded");
+
+	players_pos = _get_players_pos();
+	Godot::print(players_pos);
+	_load_undisc_rooms(undisc_rooms_positions);
+	_update_minimap();
 }
 
 void godot::MiniMapController::_start_timer()
@@ -230,42 +254,5 @@ void godot::MiniMapController::_on_timeout()
 {
 	timer->disconnect("timeout", this, "_on_timeout");
 
-	if (!_load_resources())
-		Godot::print("Something went wrong! Resources weren't loaded");
-
-	grid = cast_to<TextureRect>(find_node("Grid"));
-	grid_rect_size = grid->get_rect().get_size();
-
-	if (grid != nullptr)
-	{
-		Godot::print("now we have grid");
-
-		undisc_rooms_positions = get_node("/root/Node2D/Node/Generation")->call("_get_rooms_positions");
-		undisc_rooms_positions = undisc_rooms_positions[0];
-
-		Godot::print(undisc_rooms_positions.size());
-
-		curr_room_position = grid_rect_size / 2;
-		grid_scale = grid_rect_size / (get_viewport_rect().size * zoom);
-		Godot::print("grid_scale");
-		Godot::print(grid_scale);
-		Godot::print("grid_rect_size");
-		Godot::print(grid_rect_size);
-	}
-	else
-	{
-		Godot::print("Grid wasn't loaded");
-		return;
-	}
-
-	Godot::print("Rooms pos setted");
-
-	Godot::print("Getting players pos");
-	players_pos = _get_players_pos();
-	Godot::print(players_pos);
-	Godot::print("Players pos getted");
-
-	_load_undisc_rooms(undisc_rooms_positions);
-
-	_update_minimap();
+	_start_treking();
 }

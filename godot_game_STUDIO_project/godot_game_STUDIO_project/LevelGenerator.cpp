@@ -830,10 +830,7 @@ Array godot::LevelGenerator::_get_rooms_positions()
 {
 	Array wrapper = {};
 	for (auto pos : positions)
-	{
-		Godot::print(pos);
 		wrapper.push_back(pos);
-	}
 
 	Array arr = {};
 	arr.push_back(wrapper);
