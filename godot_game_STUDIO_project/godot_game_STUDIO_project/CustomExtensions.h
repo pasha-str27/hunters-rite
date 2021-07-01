@@ -119,5 +119,25 @@ namespace godot
 
 			return nullptr;
 		}
+
+		static Array GetRoomsByType(Node* generation_node, String type)
+		{
+			Array result = {};
+			Array r = generation_node->call("_get_rooms");
+			Array p = generation_node->call("_get_rooms_positions");
+			std::vector<int> ids = {};
+			Array rooms = r[0];
+			Array positions = p[0];
+			for (int i = 0; i < rooms.size(); i++)
+				if ((String)Object::cast_to<Node>(rooms[i])->call("_get_room_type") == type)
+					ids.push_back(i);
+
+			for(int i = 0; i < ids.size(); i++)
+				result.push_back(positions[ids[i]]);
+
+			Array wrapper = {};
+			wrapper.push_back(result);
+			return wrapper;
+		}
 	};
 }

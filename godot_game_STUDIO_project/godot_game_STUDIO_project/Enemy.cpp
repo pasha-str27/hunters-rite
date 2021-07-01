@@ -11,7 +11,10 @@ void godot::Enemy::_register_methods()
 	register_method("_take_damage", &Enemy::_take_damage);
 	register_method("_add_bullet", &Enemy::_add_bullet);
 	register_method("_on_timeout", &Enemy::_on_timeout);
+	register_method("_on_fixed_timeout", &Enemy::_on_fixed_timeout);
 	register_method("_start_timer", &Enemy::_start_timer);
+	register_method("_start_fixed_timer", &Enemy::_start_fixed_timer);
+	
 	register_method("_destroy_enemy", &Enemy::_destroy_enemy);
 	register_method("_remove_player1", &Enemy::_remove_player1);
 	register_method("_remove_player2", &Enemy::_remove_player2);
@@ -106,12 +109,14 @@ void godot::Enemy::_ready()
 		ai->_set_strategy(new SlimeShootAI(bullet, this));
 
 	if (is_in_group("slime_boss"))
+	{
 		ai->_set_strategy(new SlimeBossAI(bullet, this));
+	}
 
 	spawn_particles->set_emitting(true);
 	timer_particles->connect("timeout", this, "_on_spawn_end");
 	timer_particles->start(0.2f);
-	cast_to<Node2D>(get_node("CollisionShape2D"))->call_deferred("set_visible", false);
+	//cast_to<Node2D>(get_node("CollisionShape2D"))->call_deferred("set_visible", false);
 
 	if(is_in_group("flower"))
 		cast_to<ProgressBar>(get_parent()->get_node("BossHealthBar"))->set_visible(false);
@@ -150,6 +155,9 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 	Ref<PackedScene> prefab = nullptr;
 	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/EnemyTakeDamage.tscn");
 	add_child(prefab->instance());
+
+	if (is_in_group("slime_boss"))
+		ai->change_can_fight(false, new SlimeAttackSpawnState((SlimeBossAI*)ai->_get_strategy()));
 
 	if (HP <= 0)
 	{
@@ -232,6 +240,22 @@ void godot::Enemy::_on_timeout()
 		ai->change_can_fight(true);
 }
 
+void godot::Enemy::_start_fixed_timer(float time)
+{
+	if (!timer->is_connected("timeout", this, "_on_fixed_timeout"))
+	{
+		timer->connect("timeout", this, "_on_fixed_timeout");
+
+		timer->start(time);
+	}
+}
+
+void godot::Enemy::_on_fixed_timeout()
+{
+	timer->disconnect("timeout", this, "_on_fixed_timeout");
+	ai->change_can_fight(true);
+}
+
 void godot::Enemy::_destroy_enemy()
 {
 	_update_health_bar();
@@ -268,6 +292,9 @@ void godot::Enemy::_on_Area2D_body_entered(Node* node)
 	if (node->is_in_group("player") && !died)
 	{
 		float damage = 20;
+
+		//if (is_in_group("slime_boss"))
+		//	ai->change_can_fight(false, new SlimeAttackSpawnState((SlimeBossAI*)ai->_get_strategy()));
 
 		ai->_set_player(cast_to<Node2D>(node));
 		if (is_in_group("slime"))

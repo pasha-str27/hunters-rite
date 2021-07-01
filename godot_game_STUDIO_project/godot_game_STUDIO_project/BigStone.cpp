@@ -53,6 +53,9 @@ void godot::BigStone::_heal_players()
 		can_heal = false;
 		timer->connect("timeout", this, "_can_heal_true");
 		timer->start(heal_cooldown);
+
+		////////////
+		queue_free();
 	}
 
 	if ((MenuButtons::game_mode == SHOOTER || MenuButtons::game_mode == MELEE) && players_count == 1)
@@ -66,6 +69,9 @@ void godot::BigStone::_heal_players()
 		can_heal = false;
 		timer->connect("timeout", this, "_can_heal_true");
 		timer->start(heal_cooldown);
+
+		///////////////////////////////////
+		queue_free();
 	}
 }
 

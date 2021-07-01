@@ -30,6 +30,7 @@ void godot::Room::_register_methods()
 	register_method("_set_were_here", &Room::_set_were_here);
 	register_method("_set_is_special", &Room::_set_is_special);
 	register_method("_get_is_special", &Room::_get_is_special);
+	register_method("_get_enemy_spawn_positions", &Room::_get_enemy_spawn_positions);
 }
 
 godot::Room::Room()
@@ -161,6 +162,18 @@ void godot::Room::_set_is_special(bool value)
 bool godot::Room::_get_is_special()
 {
 	return is_special;
+}
+
+Array godot::Room::_get_enemy_spawn_positions()
+{
+	Array arr = {};
+	Array poses = {};
+
+	for (auto pos : empty_pos_world_coordinates)
+		poses.push_back(pos);
+
+	arr.push_back(poses);
+	return arr;
 }
 
 void godot::Room::_set_num_of_adjacent_rooms(int value)

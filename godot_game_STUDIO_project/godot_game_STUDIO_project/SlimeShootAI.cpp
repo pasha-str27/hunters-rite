@@ -27,7 +27,14 @@ void godot::SlimeShootAI::_fight(Node2D* player1, Node2D* player2)
 	if (first_player == nullptr)
 		return;
 
+	_get_enemy()->call("_change_animation", "attack", 5);
+
 	Vector2 bullet_dir = first_player->get_global_position();
+
+	if (bullet_dir.x > _get_enemy()->get_global_position().x)
+		cast_to<AnimatedSprite>(_get_enemy()->find_node("AnimatedSprite"))->set_flip_h(true);
+	else
+		cast_to<AnimatedSprite>(_get_enemy()->find_node("AnimatedSprite"))->set_flip_h(false);
 
 	if (available_bullets.size() > 0)
 	{

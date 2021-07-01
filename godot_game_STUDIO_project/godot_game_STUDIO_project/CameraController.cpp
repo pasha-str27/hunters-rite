@@ -132,7 +132,7 @@ String godot::CameraController::_get_dir_on_index(int i)
 
 bool godot::CameraController::_is_one_player_alive()
 {
-	return !has_node("/root/Node2D/Node/Player1") || !has_node("/root/Node2D/Node/Player2");
+	return !PlayersContainer::_get_instance()->_get_player1() || !PlayersContainer::_get_instance()->_get_player2();
 }
 
 void godot::CameraController::hide_tutorial()
@@ -250,9 +250,6 @@ bool godot::CameraController::_is_player_have_need_keys(Array rooms_keys)
 
 void godot::CameraController::_ready()
 {
-
-	//std::vector<String> name_keys{ "key_A", "key_B","key_C", "key_D", "key_E", "key_F" };
-
 	audio_server = AudioServer::get_singleton();
 	_set_current(true);
 
