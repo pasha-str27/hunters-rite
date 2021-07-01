@@ -222,3 +222,7 @@ void godot::PlayerData::_heal()
 {
 	_set_HP(_get_max_HP());
 }
+
+void godot::PlayerData::_set_is_attacking(bool value)
+{
+}
