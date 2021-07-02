@@ -95,11 +95,11 @@ void godot::PlayerMelee::_process_input()
 		{
 			cast_to<Node2D>(_get_object()->get_node("Area2D3"))->set_rotation_degrees(270);
 		}
-			if (_can_fight())
-			{
-				animator->play("attack");
-				is_attacking = true;
-			}
+		if (_can_fight())
+		{
+			animator->play("attack");
+			is_attacking = true;
+		}
 
 	}
 
@@ -110,11 +110,11 @@ void godot::PlayerMelee::_process_input()
 		{
 			cast_to<Node2D>(_get_object()->get_node("Area2D3"))->set_rotation_degrees(90);
 		}
-			if (_can_fight())
-			{
-				animator->play("attack");
-				is_attacking = true;
-			}
+		if (_can_fight())
+		{
+			animator->play("attack");
+			is_attacking = true;
+		}
 	}
 
 	//fight	left
@@ -124,12 +124,12 @@ void godot::PlayerMelee::_process_input()
 		{
 			cast_to<Node2D>(_get_object()->get_node("Area2D3"))->set_rotation_degrees(180);
 		}
-			sprite->set_flip_h(true);
-			if (_can_fight())
-			{
-				animator->play("attack");
-				is_attacking = true;
-			}
+		sprite->set_flip_h(true);
+		if (_can_fight())
+		{
+			animator->play("attack");
+			is_attacking = true;
+		}
 	}
 
 	//fight	right
@@ -139,7 +139,7 @@ void godot::PlayerMelee::_process_input()
 		{
 			cast_to<Node2D>(_get_object()->get_node("Area2D3"))->set_rotation_degrees(0);
 		}
-			sprite->set_flip_h(false);
+		sprite->set_flip_h(false);
 		if (_can_fight())
 		{
 			animator->play("attack");
