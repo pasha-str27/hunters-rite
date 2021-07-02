@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/Jertovnik.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Scripts/SpawnEnemyController.gdns" type="Script" id=2]
@@ -44,6 +44,20 @@ bg_color = Color( 0, 0.811765, 0.85098, 1 )
 
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.6, 0.6, 0.6, 0.117647 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.568627, 0.14902, 0.14902, 0.313726 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
 
 [node name="Camera2D" type="Camera2D"]
 z_index = 101
@@ -220,3 +234,20 @@ __meta__ = {
 
 [node name="MiniMap" parent="." instance=ExtResource( 11 )]
 visible = false
+
+[node name="BossHealthBar" type="ProgressBar" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -248.0
+margin_top = -264.0
+margin_right = 252.0
+margin_bottom = -248.0
+custom_styles/fg = SubResource( 7 )
+custom_styles/bg = SubResource( 8 )
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0.941176, 0.894118, 0.894118, 1 )
+max_value = 350.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
