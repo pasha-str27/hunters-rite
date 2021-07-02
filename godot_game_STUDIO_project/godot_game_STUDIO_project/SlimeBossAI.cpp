@@ -109,7 +109,7 @@ void godot::SlimeBossAI::_shoot()
 		}		
 	}
 
-	_wait(.5f);
+	_wait(1.5f);
 }
 
 void godot::SlimeBossAI::_spawn_enemy()
@@ -155,7 +155,7 @@ void godot::SlimeBossAI::_jumping(float delta)
 		{
 			_enable_collisions();
 			jump_zone->set_visible(false);
-			_wait(.5f);
+			_wait(1);
 		}
 	}
 }

@@ -157,7 +157,10 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 	add_child(prefab->instance());
 
 	if (is_in_group("slime_boss"))
+	{
+		ISlimeAttackState::taken_damage += 1;
 		ai->change_can_fight(false, new SlimeAttackSpawnState((SlimeBossAI*)ai->_get_strategy()));
+	}
 
 	if (HP <= 0)
 	{
