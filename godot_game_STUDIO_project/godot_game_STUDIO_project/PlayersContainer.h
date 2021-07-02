@@ -38,5 +38,6 @@ namespace godot
 		int _players_count();
 		void _add_key(String key_type);
 		Array _get_key_list();
+		void _clear_keys();
 	};
 }
