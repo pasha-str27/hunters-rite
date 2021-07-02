@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Sprites/UI/minimap_item_room.png" type="Texture" id=1]
+
+[node name="item_room" type="Sprite"]
+texture = ExtResource( 1 )

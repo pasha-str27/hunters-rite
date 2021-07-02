@@ -22,9 +22,7 @@ void godot::LevelGenerator::_register_methods()
 	register_method("_get_keys_count", &LevelGenerator::_get_keys_count);
 	register_method("_clear", &LevelGenerator::_clear);
 	register_method("_get_rooms", &LevelGenerator::_get_rooms);
-	register_method("_get_rooms_positions", &LevelGenerator::_get_rooms_positions);
-	register_method("_process", &LevelGenerator::_process);
-	
+	register_method("_get_rooms_positions", &LevelGenerator::_get_rooms_positions);	
 	
 	register_property<LevelGenerator, int>("map_size", &LevelGenerator::map_size, -1);
 	register_property<LevelGenerator, int>("keys_frequency", &LevelGenerator::keys_frequency, -1);
@@ -113,13 +111,16 @@ void godot::LevelGenerator::_ready()
 
 	for(auto node : rooms)
 		node->call("_fill_empty_positions");
-		
+
+	//create key holders
+	get_node("/root/Node2D/Node/Camera2D")->call("_get_type_keys");
+
 	_set_keys(boss_room, generated_keys);
 
 	_buid_roofs();
 	_buid_floors();
 	_buid_top_wall();
-	
+		
 	//	call set positions
 
 }
@@ -835,10 +836,4 @@ Array godot::LevelGenerator::_get_rooms_positions()
 	Array arr = {};
 	arr.push_back(wrapper);
 	return arr;
-}
-
-void godot::LevelGenerator::_process(float delta)
-{
-	if (Input::get_singleton()->is_action_just_released("minimap_test"))
-		_ready();
 }
