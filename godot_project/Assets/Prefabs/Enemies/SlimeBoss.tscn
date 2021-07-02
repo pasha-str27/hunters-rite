@@ -7,7 +7,7 @@
 [ext_resource path="res://Assets/Sprites/Monsters/Slime/monster_slime_damage.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Prefabs/Particles/DeathParticles/DeathParticles.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Assets/Sprites/jump_point.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/jump_poin_v2.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Scripts/EnemiesHolder.gdns" type="Script" id=9]
 [ext_resource path="res://Assets/Prefabs/Enemies/SlimeShoot.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Prefabs/Enemies/Slime.tscn" type="PackedScene" id=11]
@@ -101,7 +101,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0.5, 0.5 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:visible")
@@ -163,6 +163,7 @@ enemies_list = [ ExtResource( 11 ), ExtResource( 10 ) ]
 z_index = 9
 
 [node name="Sprite" type="Sprite" parent="jump_zone"]
+position = Vector2( 0, 18 )
 scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 8 )
 

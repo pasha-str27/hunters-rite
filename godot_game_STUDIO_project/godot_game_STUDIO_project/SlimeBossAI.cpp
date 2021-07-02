@@ -206,6 +206,12 @@ void godot::SlimeBossAI::_set_target()
 		else if (MenuButtons::game_mode == MELEE)
 				target_player = _get_player2()->get_global_position();
 	}
+
+
+	if (target_player.x > _get_enemy()->get_global_position().x)
+		cast_to<AnimatedSprite>(_get_enemy()->find_node("AnimatedSprite"))->set_flip_h(true);
+	else
+		cast_to<AnimatedSprite>(_get_enemy()->find_node("AnimatedSprite"))->set_flip_h(false);
 }
 
 void godot::SlimeBossAI::_disable_collisions()
