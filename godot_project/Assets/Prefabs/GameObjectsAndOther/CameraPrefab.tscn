@@ -234,10 +234,6 @@ __meta__ = {
 
 [node name="MiniMap" parent="." instance=ExtResource( 11 )]
 visible = false
-key_room = null
-item_room = null
-heal_room = null
-boss_room = null
 
 [node name="BossHealthBar" type="ProgressBar" parent="."]
 anchor_right = 1.0

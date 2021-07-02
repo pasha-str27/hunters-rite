@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/game_paveleon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Prefabs/Animations/FadeIn.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Prefabs/Enemies/SlimeBoss.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Prefabs/Items/Shield.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Prefabs/Items/Glass.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Prefabs/Items/Chicken.tscn" type="PackedScene" id=6]
 
 [node name="Node2D" type="Node2D"]
 
@@ -14,3 +17,12 @@
 
 [node name="SlimeBoss" parent="." instance=ExtResource( 3 )]
 position = Vector2( -293.155, 171.811 )
+
+[node name="Shield" parent="." instance=ExtResource( 4 )]
+position = Vector2( 219.024, 99.0183 )
+
+[node name="Glass" parent="." instance=ExtResource( 5 )]
+position = Vector2( -332.519, -149.883 )
+
+[node name="Chicken" parent="." instance=ExtResource( 6 )]
+position = Vector2( 258.622, -111.7 )

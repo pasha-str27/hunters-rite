@@ -147,10 +147,10 @@ float godot::PlayerData::_get_max_HP()
 
 void godot::PlayerData::_set_max_HP(float value)
 {
-	//float diff = value - max_HP;
+	float diff = value - max_HP;
 	max_HP = value;
-	/*float _hp = this->HP + diff;
-	_set_HP(_hp);*/
+	float _hp = this->HP + diff;
+	_set_HP(_hp);
 }
 
 void godot::PlayerData::_stop_animations()
