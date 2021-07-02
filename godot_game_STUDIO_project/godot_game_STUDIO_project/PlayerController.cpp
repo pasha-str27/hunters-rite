@@ -55,6 +55,8 @@ void godot::PlayerController::_register_methods()
 	register_method("_is_ghost_mode", &PlayerController::_is_ghost_mode);
 	register_method("_continue_moving", &PlayerController::_continue_moving);
 	register_method("_stop_moving", &PlayerController::_stop_moving);
+	register_method("_set_is_attacking", &PlayerController::_set_is_attacking);
+	
 	
 	
 	register_property<PlayerController, float>("hp", &PlayerController::_hp, 0);
@@ -589,4 +591,9 @@ void godot::PlayerController::_continue_moving()
 {
 	speed = _saved_speed;
 	current_player_strategy->_set_speed(speed);
+}
+
+void godot::PlayerController::_set_is_attacking(bool value)
+{
+	current_player_strategy->_set_is_attacking(value);
 }

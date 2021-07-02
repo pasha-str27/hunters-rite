@@ -69,6 +69,7 @@ namespace godot
 		std::map<String, String> _get_controll_buttons();
 		IPlayer* _clone();
 		void _heal();
+		void _set_is_attacking(bool value);
 		static Input* input_controller;
 	};
 }

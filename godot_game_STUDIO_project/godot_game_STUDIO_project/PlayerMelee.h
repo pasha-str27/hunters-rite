@@ -7,6 +7,7 @@ namespace godot
 {
 	class PlayerMelee : public PlayerData
 	{
+		bool is_attacking = false;
 		Node* current_enemy;
 
 		AnimatedSprite* sprite = nullptr;
@@ -28,5 +29,6 @@ namespace godot
 		void _stop_animations();
 		void _stop_special();
 		void _start_special();
+		void _set_is_attacking(bool value);
 	};
 }

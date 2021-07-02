@@ -71,6 +71,7 @@ void godot::ExitHandler::_load_menu_scene()
 	auto camera = get_node("/root/Node2D/Node/Camera2D");
 	auto generation = get_node("/root/Node2D/Node/Generation");
 	Enemies::get_singleton()->_clear();
+	PlayersContainer::_get_instance()->_clear_keys();
 	generation->call("_clear");
 	camera->call("_go_to_start");
 

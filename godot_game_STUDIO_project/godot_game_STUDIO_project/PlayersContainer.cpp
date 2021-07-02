@@ -98,3 +98,8 @@ Array godot::PlayersContainer::_get_key_list()
 {
 	return key_list;
 }
+
+void godot::PlayersContainer::_clear_keys()
+{
+	key_list.clear();
+}

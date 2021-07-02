@@ -7,6 +7,7 @@ godot::SlimeBossAI::SlimeBossAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : En
 {
 	can_move = true;
 	_attack_state = new SlimeAttackSpawnState(this);
+	target_player = empty_pos;
 
 	auto bullet_container = node_tmp->get_parent()->get_node("BulletContainer");
 	for (int i = 0; i < max_bullet_count; ++i)
@@ -16,6 +17,7 @@ godot::SlimeBossAI::SlimeBossAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : En
 		available_bullets.push_back(bullet_node);
 	}
 	jump_zone = cast_to<Node2D>(_get_enemy()->get_parent()->get_node("jump_zone"));
+	wave_node = cast_to<Node2D>(_get_enemy()->get_parent()->get_node("DamageWave"));
 	Array arr = CameraController::current_room->call("_get_enemy_spawn_positions");
 	places_to_spawn = arr[0];
 	enemies_to_spawn = _get_enemy()->get_node("EnemiesHolder")->call("_get_enemies_list");
@@ -66,16 +68,17 @@ void godot::SlimeBossAI::_shoot()
 {
 	change_can_fight(false);
 
-	if (target_player == Vector2::ZERO)
+	if (target_player == empty_pos)
 		return;
 
 	Vector2 bullet_dir = target_player;
+	Vector2 bullet_position = cast_to<Node2D>(_get_enemy()->get_node("Area2D")->get_child(0))->get_global_position();
 
 	if (available_bullets.size() > 0)
 	{
 		for (int i = 0; i < 3; i++)
 		{
-			available_bullets[available_bullets.size() - i - 1]->set_global_position(_get_enemy()->get_global_position());
+			available_bullets[available_bullets.size() - i - 1]->set_global_position(bullet_position);
 			
 			if (available_bullets.size() == 1)
 			{
@@ -173,7 +176,6 @@ void godot::SlimeBossAI::_start_falling()
 
 void godot::SlimeBossAI::_set_target()
 {
-	//if (MenuButtons::player_name == 0)
 	if (MenuButtons::game_mode == COOP)
 	{
 		Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
@@ -185,7 +187,7 @@ void godot::SlimeBossAI::_set_target()
 			else if (_get_player2() != nullptr)
 				target_player = _get_player2()->get_global_position();
 			else
-				target_player = Vector2::ZERO;
+				target_player = empty_pos;
 		}
 		else
 		{
@@ -194,16 +196,14 @@ void godot::SlimeBossAI::_set_target()
 			else if (_get_player1() != nullptr)
 				target_player = _get_player1()->get_global_position();
 			else
-				target_player = Vector2::ZERO;
+				target_player = empty_pos;
 		}
 	}
 	else
 	{
 		if (MenuButtons::game_mode == SHOOTER)
-		//if (MenuButtons::player_name == 1)
 			target_player = _get_player1()->get_global_position();
-		else //if (MenuButtons::player_name == 2)
-			if (MenuButtons::game_mode == MELEE)
+		else if (MenuButtons::game_mode == MELEE)
 				target_player = _get_player2()->get_global_position();
 	}
 }
@@ -224,6 +224,11 @@ void godot::SlimeBossAI::_enable_collisions()
 	cast_to<KinematicBody2D>(_get_enemy())->set_collision_layer_bit(2, true);
 }
 
+void godot::SlimeBossAI::_make_wave()
+{
+
+}
+
 void godot::SlimeBossAI::change_can_fight(bool value)
 {
 	can_move = value;
@@ -234,7 +239,6 @@ void godot::SlimeBossAI::_fight(Node2D* player1, Node2D* player2)
 	if (can_move)
 	{
 		can_move = false;
-		is_attacking = true;
 		_attack_state->_fight();
 	}
 
