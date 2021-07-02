@@ -46,6 +46,12 @@ void godot::ExitHandler::_on_Area2D_area_entered(Node* other)
 		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
 			PlayersContainer::_get_instance()->_get_player2_regular()->call("_change_moving", false);
 
+		if (CameraController::current_level == 5)
+		{
+			//load menu
+			return;
+		}
+
 		//timer_audio->connect("timeout", this, "_mute_audio");
 		//timer_audio->start(0.01);
 
@@ -54,6 +60,7 @@ void godot::ExitHandler::_on_Area2D_area_entered(Node* other)
 		fade->get_child(0)->get_child(0)->call("_set_is_exit_anim", true);
 
 		CameraController::show_tutorial = false;
+		CameraController::current_level++;
 	}
 }
 

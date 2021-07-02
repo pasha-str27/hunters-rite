@@ -20,6 +20,7 @@ namespace godot
 		Ref<PackedScene> altar = nullptr;
 		Ref<PackedScene> boss_prefab = nullptr;
 		Ref<PackedScene> pedestal = nullptr;
+		Ref<PackedScene> boss_slime_prefab = nullptr;
 		Timer* timer = nullptr;
 		int levels_count = 7;
 		String current_level = "";

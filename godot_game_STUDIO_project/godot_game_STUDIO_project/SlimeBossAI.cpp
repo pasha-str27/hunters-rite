@@ -114,7 +114,7 @@ void godot::SlimeBossAI::_shoot()
 
 void godot::SlimeBossAI::_spawn_enemy()
 {
-	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
+	/*Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
 
 	Vector2 pos = places_to_spawn[rng->randi_range(0, places_to_spawn.size() - 1)];
@@ -127,7 +127,7 @@ void godot::SlimeBossAI::_spawn_enemy()
 		{
 			enemy->get_child(i)->call_deferred("_change_start_parameters");
 			return;
-		}
+		}*/
 }
 
 void godot::SlimeBossAI::_jump()

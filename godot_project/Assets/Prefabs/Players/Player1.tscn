@@ -129,54 +129,54 @@ atlas = ExtResource( 10 )
 region = Rect2( 742, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=24]
-flags = 4
-atlas = ExtResource( 12 )
-region = Rect2( 0, 0, 106, 22 )
+atlas = ExtResource( 13 )
+region = Rect2( 424, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=25]
-flags = 4
-atlas = ExtResource( 12 )
-region = Rect2( 106, 0, 106, 22 )
+atlas = ExtResource( 13 )
+region = Rect2( 318, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=26]
 atlas = ExtResource( 13 )
-region = Rect2( 424, 0, 106, 22 )
+region = Rect2( 212, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=27]
 atlas = ExtResource( 13 )
-region = Rect2( 318, 0, 106, 22 )
+region = Rect2( 106, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=28]
 atlas = ExtResource( 13 )
-region = Rect2( 212, 0, 106, 22 )
+region = Rect2( 0, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 13 )
-region = Rect2( 106, 0, 106, 22 )
+region = Rect2( 0, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=30]
 atlas = ExtResource( 13 )
-region = Rect2( 0, 0, 106, 22 )
+region = Rect2( 106, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=31]
 atlas = ExtResource( 13 )
-region = Rect2( 0, 0, 106, 22 )
+region = Rect2( 212, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=32]
 atlas = ExtResource( 13 )
-region = Rect2( 106, 0, 106, 22 )
+region = Rect2( 318, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=33]
 atlas = ExtResource( 13 )
-region = Rect2( 212, 0, 106, 22 )
+region = Rect2( 424, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=34]
-atlas = ExtResource( 13 )
-region = Rect2( 318, 0, 106, 22 )
+flags = 4
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 106, 22 )
 
 [sub_resource type="AtlasTexture" id=35]
-atlas = ExtResource( 13 )
-region = Rect2( 424, 0, 106, 22 )
+flags = 4
+atlas = ExtResource( 12 )
+region = Rect2( 106, 0, 106, 22 )
 
 [sub_resource type="SpriteFrames" id=36]
 animations = [ {
@@ -190,19 +190,19 @@ animations = [ {
 "name": "run",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 24 ), SubResource( 25 ) ],
-"loop": false,
-"name": "damaged",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
+"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
 "loop": false,
 "name": "revive",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ) ],
+"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ) ],
 "loop": false,
 "name": "death",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 34 ), SubResource( 35 ) ],
+"loop": false,
+"name": "damaged",
 "speed": 10.0
 } ]
 
@@ -259,6 +259,7 @@ process_material = SubResource( 10 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 36 )
 animation = "idle"
+frame = 4
 playing = true
 offset = Vector2( 35, 0 )
 

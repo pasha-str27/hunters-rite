@@ -35,6 +35,7 @@ namespace godot
 
 		Array generated_keys = {};
 
+
 		void _move(String dir);
 		String _get_dir_on_index(int i);
 		bool _is_one_player_alive();
@@ -43,6 +44,7 @@ namespace godot
 	public:
 		static Node2D* current_room;
 		static bool show_tutorial;
+		static int current_level;
 
 		static void _register_methods();
 		void _init();

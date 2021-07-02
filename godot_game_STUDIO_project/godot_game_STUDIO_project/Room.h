@@ -16,6 +16,7 @@ namespace godot
 		float room_difficulty = 100;
 		String room_type = "";
 		bool were_here = false;
+		bool is_last_room = false;
 
 		bool is_special = false;
 
@@ -44,5 +45,7 @@ namespace godot
 		void _set_is_special(bool value);
 		bool _get_is_special();
 		Array _get_enemy_spawn_positions();
+		void _set_is_last_room(bool value);
+		bool _get_is_last_room();
 	};
 }

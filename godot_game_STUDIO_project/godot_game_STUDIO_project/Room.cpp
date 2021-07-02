@@ -31,6 +31,8 @@ void godot::Room::_register_methods()
 	register_method("_set_is_special", &Room::_set_is_special);
 	register_method("_get_is_special", &Room::_get_is_special);
 	register_method("_get_enemy_spawn_positions", &Room::_get_enemy_spawn_positions);
+	register_method("_set_is_last_room", &Room::_set_is_last_room);
+	register_method("_get_is_last_room", &Room::_get_is_last_room);
 }
 
 godot::Room::Room()
@@ -174,6 +176,16 @@ Array godot::Room::_get_enemy_spawn_positions()
 
 	arr.push_back(poses);
 	return arr;
+}
+
+void godot::Room::_set_is_last_room(bool value)
+{
+	is_last_room = value;
+}
+
+bool godot::Room::_get_is_last_room()
+{
+	return is_last_room;
 }
 
 void godot::Room::_set_num_of_adjacent_rooms(int value)

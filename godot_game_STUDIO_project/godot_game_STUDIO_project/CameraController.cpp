@@ -5,6 +5,7 @@
 
 Node2D* CameraController::current_room = nullptr;
 bool CameraController::show_tutorial = true;
+int CameraController::current_level = 1;
 
 void godot::CameraController::_register_methods()
 {
@@ -253,6 +254,7 @@ bool godot::CameraController::_is_player_have_need_keys(Array rooms_keys)
 
 void godot::CameraController::_ready()
 {
+	current_level = 1;
 	minimap = cast_to<CanvasItem>(get_node("MiniMap"));
 
 	audio_server = AudioServer::get_singleton();
