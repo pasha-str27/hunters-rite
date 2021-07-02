@@ -111,13 +111,16 @@ void godot::LevelGenerator::_ready()
 
 	for(auto node : rooms)
 		node->call("_fill_empty_positions");
-		
+
+	//create key holders
+	get_node("/root/Node2D/Node/Camera2D")->call("_get_type_keys");
+
 	_set_keys(boss_room, generated_keys);
 
 	_buid_roofs();
 	_buid_floors();
 	_buid_top_wall();
-	
+		
 	//	call set positions
 
 }
