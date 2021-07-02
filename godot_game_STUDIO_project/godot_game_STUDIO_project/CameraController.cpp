@@ -116,6 +116,9 @@ void godot::CameraController::_move(String dir)
 		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
 			PlayersContainer::_get_instance()->_get_player2_regular()->set_global_position(move_point->get_global_position());
 	}
+
+	if (minimap != nullptr)
+		minimap->call("_update_minimap");
 }
 
 String godot::CameraController::_get_dir_on_index(int i)
@@ -250,6 +253,8 @@ bool godot::CameraController::_is_player_have_need_keys(Array rooms_keys)
 
 void godot::CameraController::_ready()
 {
+	minimap = cast_to<CanvasItem>(get_node("MiniMap"));
+
 	audio_server = AudioServer::get_singleton();
 	_set_current(true);
 
@@ -409,6 +414,17 @@ void godot::CameraController::_input(Variant event)
 		get_tree()->set_pause(true);
 		add_child(pause_menu->instance());
 	}
+
+	if (Input::get_singleton()->is_action_just_pressed("ui_show_minimap"))
+		if (minimap != nullptr)
+		{
+			if (!is_showing_minimap)
+				minimap->show();
+			else
+				minimap->hide();
+
+			is_showing_minimap = !is_showing_minimap;
+		}
 }
 
 void godot::CameraController::_audio_fade_to_main_menu()
