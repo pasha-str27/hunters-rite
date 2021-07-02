@@ -839,6 +839,6 @@ Array godot::LevelGenerator::_get_rooms_positions()
 
 void godot::LevelGenerator::_process(float delta)
 {
-	if (Input::get_singleton()->is_action_just_released("minimap_test"))
-		_ready();
+	//if (Input::get_singleton()->is_action_just_released("minimap_test"))
+		//_ready();
 }

@@ -10,14 +10,14 @@
 [ext_resource path="res://Assets/Prefabs/SoundsEffects/BackMusic/BossBackMusic.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Prefabs/Scenes/Pause.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/exit.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Assets/Prefabs/Scenes/MiniMap.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Assets/Prefabs/Enemies/FlowerBoss.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Assets/Prefabs/Enemies/Bat.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Assets/Prefabs/Enemies/SlimeShoot.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Assets/Prefabs/Enemies/StatueShoot.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Assets/Prefabs/Enemies/StatueMelee.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Assets/Prefabs/Enemies/Slime.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Assets/Prefabs/Enemies/Spider.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Assets/Prefabs/Enemies/FlowerBoss.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Prefabs/Enemies/SlimeShoot.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Assets/Prefabs/Enemies/Slime.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Assets/Prefabs/Enemies/Bat.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/Prefabs/Enemies/StatueMelee.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Assets/Prefabs/Enemies/Spider.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Assets/Prefabs/Enemies/StatueShoot.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Assets/Prefabs/Scenes/MiniMap.tscn" type="PackedScene" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -61,8 +61,8 @@ Exit = ExtResource( 10 )
 [node name="EnemySpawner" type="Node2D" parent="."]
 script = ExtResource( 2 )
 "Altar prefab" = ExtResource( 1 )
-enemy_list = [ ExtResource( 13 ), ExtResource( 17 ), ExtResource( 14 ), ExtResource( 18 ), ExtResource( 16 ), ExtResource( 15 ) ]
-boss_prefab = ExtResource( 12 )
+enemy_list = [ ExtResource( 14 ), ExtResource( 13 ), ExtResource( 12 ), ExtResource( 16 ), ExtResource( 15 ), ExtResource( 17 ) ]
+boss_prefab = ExtResource( 11 )
 
 [node name="ItemPoints" type="Node2D" parent="EnemySpawner"]
 
@@ -228,7 +228,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MiniMap" parent="." instance=ExtResource( 11 )]
+[node name="MiniMap" parent="." instance=ExtResource( 18 )]
 visible = false
 
 [connection signal="area_entered" from="Area2D" to="EnemySpawner" method="_on_Area2D_area_entered"]

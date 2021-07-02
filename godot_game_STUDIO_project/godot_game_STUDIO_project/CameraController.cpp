@@ -52,7 +52,7 @@ void godot::CameraController::_move(String dir)
 
 		current_room = next_room;
 
-		if(PlayersContainer::_get_instance()->_get_player1_regular()!=nullptr)
+		if(PlayersContainer::_get_instance()->_get_player1_regular()!= nullptr)
 			cast_to<Node2D>(PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1))->set_global_position(move_point->get_global_position());
 		
 		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
@@ -115,6 +115,9 @@ void godot::CameraController::_move(String dir)
 		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
 			PlayersContainer::_get_instance()->_get_player2_regular()->set_global_position(move_point->get_global_position());
 	}
+
+	if (minimap != nullptr)
+		minimap->call("_update_minimap");
 }
 
 String godot::CameraController::_get_dir_on_index(int i)
@@ -241,7 +244,7 @@ bool godot::CameraController::_is_player_have_need_keys(Array rooms_keys)
 	{
 		String row = rooms_keys[i];
 		for (int k = 0; k < players_keys.size(); ++k)
-			check_result = row.find(players_keys[k])!=-1 ? true : false;
+			check_result = row.find(players_keys[k])!= -1 ? true : false;
 	}
 
 	return check_result;
@@ -250,6 +253,8 @@ bool godot::CameraController::_is_player_have_need_keys(Array rooms_keys)
 void godot::CameraController::_ready()
 {
 	int keys_counter = 3;
+
+	minimap = cast_to<CanvasItem>(get_node("MiniMap"));
 
 	HBoxContainer* key_box = nullptr;
 	ResourceLoader* rld = ResourceLoader::get_singleton();
@@ -441,6 +446,16 @@ void godot::CameraController::_input(Variant event)
 		get_tree()->set_pause(true);
 		add_child(pause_menu->instance());
 	}
+	if (Input::get_singleton()->is_action_just_pressed("ui_show_minimap"))
+		if (minimap != nullptr)
+		{
+			if (!is_showing_minimap)
+				minimap->show();
+			else
+				minimap->hide();
+
+			is_showing_minimap = !is_showing_minimap;
+		}
 }
 
 void godot::CameraController::_audio_fade_to_main_menu()
