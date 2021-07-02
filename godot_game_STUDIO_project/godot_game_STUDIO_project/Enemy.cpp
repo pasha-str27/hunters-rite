@@ -118,8 +118,8 @@ void godot::Enemy::_ready()
 	timer_particles->start(0.2f);
 	//cast_to<Node2D>(get_node("CollisionShape2D"))->call_deferred("set_visible", false);
 
-	if(is_in_group("flower"))
-		cast_to<ProgressBar>(get_parent()->get_node("BossHealthBar"))->set_visible(false);
+	if(is_in_group("flower") || is_in_group("slime_boss"))
+		cast_to<ProgressBar>(get_node("/root/Node2D/Node/Camera2D")->get_node("BossHealthBar"))->set_visible(false);
 	else
 		cast_to<ProgressBar>(get_node("HealthBar"))->set_visible(false);
 }
@@ -399,7 +399,7 @@ void godot::Enemy::_update_health_bar()
 	auto health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(this, "HealthBar"));
 
 	if (health_bar == nullptr)
-		health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(this->get_parent(), "BossHealthBar"));
+		health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(get_node("/root/Node2D/Node/Camera2D"), "BossHealthBar"));
 
 	if (health_bar != nullptr)
 		health_bar->call_deferred("set_value", HP);
@@ -455,8 +455,13 @@ void godot::Enemy::_on_spawn_end()
 	spawn_particles->set_emitting(false);
 	cast_to<Node2D>(get_node("CollisionShape2D"))->set_visible(true);
 
-	if (is_in_group("flower"))
-		cast_to<ProgressBar>(get_parent()->get_node("BossHealthBar"))->set_visible(true);
+	if (is_in_group("flower") || is_in_group("slime_boss"))
+	{
+		auto healthbar = cast_to<ProgressBar>(get_node("/root/Node2D/Node/Camera2D")->get_node("BossHealthBar"));
+		healthbar->set_max(HP);
+		healthbar->set_value(HP);
+		healthbar->set_visible(true);
+	}
 	else
 		cast_to<ProgressBar>(get_node("HealthBar"))->set_visible(true);
 
