@@ -54,6 +54,7 @@ void godot::ExitHandler::_on_Area2D_area_entered(Node* other)
 		fade->get_child(0)->get_child(0)->call("_set_is_exit_anim", true);
 
 		CameraController::show_tutorial = false;
+		CameraController::current_level++;
 	}
 }
 

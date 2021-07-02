@@ -58,7 +58,6 @@ void godot::LevelGenerator::_init()
 void godot::LevelGenerator::_ready()
 {
 	_clear();
-	//PlayersContainer::_get_instance()->_clear();
 
 	keys_prefabs_local = keys_prefabs.duplicate();
 
@@ -122,7 +121,7 @@ void godot::LevelGenerator::_ready()
 	_buid_top_wall();
 		
 	//	call set positions
-
+	get_node("/root/Node2D/Node/Camera2D/MiniMap")->call("_ready");
 }
 
 void godot::LevelGenerator::_connect_rooms(Node2D* prev, Node2D* next, Vector2 dir)
@@ -660,6 +659,7 @@ Node2D* godot::LevelGenerator::_create_boss_room(std::vector<Node2D*>& cornered_
 	cornered_rooms.erase(cornered_rooms.begin() + index, cornered_rooms.begin() + index + 1);
 
 	builded_room->call("_set_room_type", "boss_room");
+	builded_room->call("_set_is_last_room", true);
 
 	return builded_room;
 }

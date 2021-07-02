@@ -66,6 +66,18 @@ void godot::MiniMapController::_init()
 
 void godot::MiniMapController::_ready()
 {
+	//if(CameraController::current_level>=2)
+	//	_clear_map();
+	disc_rooms_positions.clear();
+	undisc_rooms_positions.clear();
+	key_rooms_positions.clear();
+	item_rooms_positions.clear();
+	boss_rooms_positions.clear();
+	heal_rooms_positions.clear();
+	keys_positions.clear();
+	items_positions.clear();
+	heal_positions.clear();
+	boss_positions.clear();
 	_start_timer();
 }
 
@@ -97,9 +109,6 @@ bool godot::MiniMapController::_load_resources()
 
 		grid_rect_size = grid->get_rect().get_size();
 
-		undisc_rooms_positions = get_node("/root/Node2D/Node/Generation")->call("_get_rooms_positions");
-		undisc_rooms_positions = undisc_rooms_positions[0];
-
 		_set_positions();
 
 		Godot::print(undisc_rooms_positions.size());
@@ -129,6 +138,8 @@ void godot::MiniMapController::_set_positions()
 	keys_positions = arr[0];
 	arr = CustomExtensions::GetRoomsByType(generation, "boss_room");
 	boss_positions = arr[0];
+	undisc_rooms_positions = get_node("/root/Node2D/Node/Generation")->call("_get_rooms_positions");
+	undisc_rooms_positions = undisc_rooms_positions[0];
 }
 
 void godot::MiniMapController::_update_minimap()

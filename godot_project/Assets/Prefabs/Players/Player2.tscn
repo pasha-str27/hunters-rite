@@ -603,13 +603,13 @@ dash_cooldown_delta = 3.0
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 42 )
 animation = "idle"
-frame = 3
 playing = true
 
 [node name="SpiderWeb" parent="." instance=ExtResource( 13 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 4.64338, 16.439 )
+position = Vector2( 4.64338, 13.1019 )
+scale = Vector2( 1.2, 1.2 )
 shape = SubResource( 43 )
 
 [node name="Area2D3" type="Area2D" parent="."]
@@ -639,7 +639,8 @@ offset = Vector2( 0, -10 )
 "player",
 "player2",
 ]]
-position = Vector2( 4.643, 16.439 )
+position = Vector2( 4.643, 13.1019 )
+scale = Vector2( 1.2, 1.2 )
 z_index = 27
 collision_layer = 524289
 collision_mask = 524289

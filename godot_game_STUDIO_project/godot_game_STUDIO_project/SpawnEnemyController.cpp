@@ -20,11 +20,24 @@ void godot::SpawnEnemyController::_register_methods()
 void godot::SpawnEnemyController::SpawnEnemies()
 {
 	Enemies* enemies = Enemies::get_singleton();
+
+	//if (CameraController::current_room->call("_get_is_last_room"))
+	//{
+	//	enemies->set_enemy_to_spawn_count(0);
+	//	enemies->set_spawning(false);
+	//	Ref<PackedScene> exit_prefab = nullptr;
+	//	exit_prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/exit.tscn");
+	//	Node2D* exit_node = Node::cast_to<Node2D>(exit_prefab->instance());
+	//	CameraController::current_room->add_child(exit_node);
+	//	return;
+	//}
+
 	if ((String)CameraController::current_room->call("_get_room_type") == "boss_room"
 		&& !(bool)CameraController::current_room->call("_get_were_here"))
 	{
 		enemies->set_enemy_to_spawn_count(0);
 		enemies->set_spawning(true);
+
 		SpawnBoss();
 		return;
 	}
@@ -85,25 +98,62 @@ void godot::SpawnEnemyController::SpawnEnemies()
 
 void godot::SpawnEnemyController::SpawnBoss()
 {
-	Godot::print("spawn boss");
-	get_parent()->call("_start_mute_volume");
-	Enemies::get_singleton()->set_enemy_to_spawn_count(1);
-	auto boss = cast_to<Node2D>(boss_prefab->instance());
-	boss->set_global_position(cast_to<Node2D>(get_parent())->get_global_position());
-	get_node("/root/Node2D/Node")->add_child(boss, true);
-
-	if (boss->has_method("_change_start_parameters"))
+	if (CameraController::current_level == 2)
 	{
-		boss->call("_change_start_parameters");
-		return;
-	}
+		get_parent()->call("_start_mute_volume");
+		Enemies::get_singleton()->set_enemy_to_spawn_count(1);
+		auto boss = cast_to<Node2D>(boss_prefab->instance());
+		boss->set_global_position(cast_to<Node2D>(get_parent())->get_global_position());
+		get_node("/root/Node2D/Node")->add_child(boss, true);
 
-	for(int i=0;i<boss->get_child_count();++i)
-		if (boss->get_child(i)->has_method("_change_start_parameters"))
+		if (boss->has_method("_change_start_parameters"))
 		{
-			boss->get_child(i)->call("_change_start_parameters");
+			boss->call("_change_start_parameters");
 			return;
 		}
+
+		for (int i = 0; i < boss->get_child_count(); ++i)
+			if (boss->get_child(i)->has_method("_change_start_parameters"))
+			{
+				boss->get_child(i)->call("_change_start_parameters");
+				return;
+			}
+	}
+	else
+	{
+		if (CameraController::current_level == 5)
+		{
+			Godot::print("spawn slime");
+			//get_parent()->call("_start_mute_volume");
+			//Enemies::get_singleton()->set_enemy_to_spawn_count(1);
+			//auto boss = cast_to<Node2D>(boss_prefab->instance());
+			//boss->set_global_position(cast_to<Node2D>(get_parent())->get_global_position());
+			//get_node("/root/Node2D/Node")->add_child(boss, true);
+
+			//if (boss->has_method("_change_start_parameters"))
+			//{
+			//	boss->call("_change_start_parameters");
+			//	return;
+			//}
+
+			//for (int i = 0; i < boss->get_child_count(); ++i)
+			//	if (boss->get_child(i)->has_method("_change_start_parameters"))
+			//	{
+			//		boss->get_child(i)->call("_change_start_parameters");
+			//		return;
+			//	}
+		}
+		else
+		{
+			if (!CameraController::current_room->has_node("exit"))
+			{
+				Ref<PackedScene> exit_prefab = nullptr;
+				exit_prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/exit.tscn");
+				Node2D* exit_node = Node::cast_to<Node2D>(exit_prefab->instance());
+				CameraController::current_room->add_child(exit_node, true);
+			}
+		}
+	}
 
 	//enemies.pop_front();
 }
