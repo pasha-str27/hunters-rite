@@ -236,6 +236,7 @@ __meta__ = {
 visible = false
 
 [node name="BossHealthBar" type="ProgressBar" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -248.0
