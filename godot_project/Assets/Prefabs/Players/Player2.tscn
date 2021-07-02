@@ -603,7 +603,6 @@ dash_cooldown_delta = 3.0
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 42 )
 animation = "idle"
-frame = 4
 playing = true
 
 [node name="SpiderWeb" parent="." instance=ExtResource( 13 )]

@@ -46,6 +46,12 @@ void godot::ExitHandler::_on_Area2D_area_entered(Node* other)
 		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
 			PlayersContainer::_get_instance()->_get_player2_regular()->call("_change_moving", false);
 
+		if (CameraController::current_level == 5)
+		{
+			//load menu
+			return;
+		}
+
 		//timer_audio->connect("timeout", this, "_mute_audio");
 		//timer_audio->start(0.01);
 

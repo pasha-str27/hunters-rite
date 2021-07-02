@@ -111,7 +111,7 @@ void godot::SpawnEnemyController::SpawnBoss()
 	}
 	else
 	{
-		if (CameraController::current_level == 1)
+		if (CameraController::current_level == 5)
 		{
 			get_parent()->call("_start_mute_volume");
 			Enemies::get_singleton()->set_enemy_to_spawn_count(1);
