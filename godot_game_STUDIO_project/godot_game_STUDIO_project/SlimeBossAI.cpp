@@ -114,20 +114,27 @@ void godot::SlimeBossAI::_shoot()
 
 void godot::SlimeBossAI::_spawn_enemy()
 {
-	/*Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
+	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
+
+	for (int i = 0; i < places_to_spawn.size(); i++)
+	{
+		Godot::print((Vector2)places_to_spawn[i]);
+	}
+	Godot::print("places_to_spawn: " + String::num(places_to_spawn.size()));
+	Godot::print("enemies_to_spawn: " + String::num(enemies_to_spawn.size()));
 
 	Vector2 pos = places_to_spawn[rng->randi_range(0, places_to_spawn.size() - 1)];
 	Ref<PackedScene> enemy_prefab = enemies_to_spawn[rng->randi_range(0, enemies_to_spawn.size() - 1)];
 	auto enemy = cast_to<Node2D>(enemy_prefab->instance());
 	_get_enemy()->get_node("/root/Node2D/Node")->call_deferred("add_child", enemy);
 	enemy->set_global_position(pos);
-	for (int i = 0; i < enemy->get_child_count(); ++i)
-		if (enemy->get_child(i)->has_method("_change_start_parameters"))
-		{
-			enemy->get_child(i)->call_deferred("_change_start_parameters");
-			return;
-		}*/
+	//for (int i = 0; i < enemy->get_child_count(); ++i)
+	//	if (enemy->get_child(i)->has_method("_change_start_parameters"))
+	//	{
+	//		enemy->get_child(i)->call_deferred("_change_start_parameters");
+	//		return;
+	//	}
 }
 
 void godot::SlimeBossAI::_jump()

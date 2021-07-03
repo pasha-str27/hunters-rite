@@ -346,13 +346,16 @@ void godot::MiniMapController::_start_treking()
 
 void godot::MiniMapController::_start_timer()
 {
-	timer->connect("timeout", this, "_on_timeout");
+	if (!timer->is_connected("timeout", this, "_on_timeout"))
+	{
+		timer->connect("timeout", this, "_on_timeout");
 
-	if (!has_node(NodePath(timer->get_name())))
-		add_child(timer);
+		if (!has_node(NodePath(timer->get_name())))
+			add_child(timer);
 
-	timer->set_wait_time(2);
-	timer->start();
+		timer->set_wait_time(2);
+		timer->start();
+	}
 }
 
 void godot::MiniMapController::_on_timeout()
