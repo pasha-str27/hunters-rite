@@ -38,6 +38,8 @@ namespace godot
 		void _set_next_pos();
 		void _enable_collisions();
 		void _disable_collisions();
+		void _on_hide();
+		void _on_show();
 	};
 }
 

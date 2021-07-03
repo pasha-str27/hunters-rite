@@ -45,33 +45,14 @@ void godot::WormAI::change_can_fight(bool value)
 		if (is_hided && !prepare_to_shoot && !shooted)
 		{
 			//	shows in other place
-			_set_next_pos();
-			_enable_collisions();
-			_get_enemy()->set_visible(true);
-			prepare_to_shoot = true;
-			is_hided = false;
-			ground_front->set_visible(false);
-			ground_back->play("action");
-			change_can_fight(false);
-			_get_enemy()->call("_start_fixed_timer", 1.5f);
-			_get_enemy()->call("_change_animation", "show", 1);
+			_on_show();
 			return;
 		}
 
 		if (shooted && !is_hided && !prepare_to_shoot)
 		{
 			//	hide
-			_disable_collisions();
-			prepare_to_shoot = false;
-			is_hided = true;
-			shooted = false;
-			change_can_fight(false);
-			ground_front->set_visible(true);
-			ground_back->set_visible(false);
-			ground_front->play("action");
-			finished_hide_anim = true;
-			_get_enemy()->call("_start_fixed_timer", .4f);
-			_get_enemy()->call("_change_animation", "hide", 1);
+			_on_hide();
 			return;
 		}
 	}
@@ -205,6 +186,35 @@ void godot::WormAI::_disable_collisions()
 	cast_to<Area2D>(_get_enemy()->get_node("Area2D"))->set_collision_mask_bit(0, false);
 	cast_to<KinematicBody2D>(_get_enemy())->set_collision_mask_bit(9, false);
 	cast_to<KinematicBody2D>(_get_enemy())->set_collision_layer_bit(2, false);
+}
+
+void godot::WormAI::_on_hide()
+{
+	_disable_collisions();
+	prepare_to_shoot = false;
+	is_hided = true;
+	shooted = false;
+	change_can_fight(false);
+	ground_front->set_visible(true);
+	ground_back->set_visible(false);
+	ground_front->play("action");
+	finished_hide_anim = true;
+	_get_enemy()->call("_start_fixed_timer", .4f);
+	_get_enemy()->call("_change_animation", "hide", 1);
+}
+
+void godot::WormAI::_on_show()
+{
+	_set_next_pos();
+	_enable_collisions();
+	_get_enemy()->set_visible(true);
+	prepare_to_shoot = true;
+	is_hided = false;
+	ground_front->set_visible(false);
+	ground_back->play("action");
+	change_can_fight(false);
+	_get_enemy()->call("_start_fixed_timer", 1.5f);
+	_get_enemy()->call("_change_animation", "show", 1);
 }
 
 void godot::WormAI::_enable_collisions()
