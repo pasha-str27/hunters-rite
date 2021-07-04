@@ -3,7 +3,7 @@
 [ext_resource path="res://Assets/Font/slider_vertical_area.tres" type="StyleBox" id=1]
 [ext_resource path="res://Assets/Font/slider_vertical_red_area.tres" type="StyleBox" id=2]
 
-[sub_resource type="StyleBoxTexture" id=33]
+[sub_resource type="StyleBoxTexture" id=1]
 
 [resource]
 VScrollBar/icons/decrement = null
@@ -11,7 +11,7 @@ VScrollBar/icons/decrement_highlight = null
 VScrollBar/icons/increment = null
 VScrollBar/icons/increment_highlight = null
 VScrollBar/styles/grabber = ExtResource( 2 )
-VScrollBar/styles/grabber_highlight = SubResource( 33 )
+VScrollBar/styles/grabber_highlight = SubResource( 1 )
 VScrollBar/styles/grabber_pressed = ExtResource( 2 )
 VScrollBar/styles/scroll = ExtResource( 1 )
 VScrollBar/styles/scroll_focus = ExtResource( 2 )

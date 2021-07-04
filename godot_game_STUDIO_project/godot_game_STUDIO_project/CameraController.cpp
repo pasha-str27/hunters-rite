@@ -141,8 +141,8 @@ bool godot::CameraController::_is_one_player_alive()
 
 void godot::CameraController::hide_tutorial()
 {
-	Godot::print("hiding");
 	cast_to<Node2D>(get_parent()->get_node("TutorialSprites"))->hide();
+	cast_to<Node2D>(get_parent()->get_node("TutorialSpritesSingle"))->hide();
 }
 
 void godot::CameraController::_init()
@@ -154,7 +154,7 @@ void godot::CameraController::_init()
 void  godot::CameraController::_hide_tutorial_sprites(String t_player_name) {
 
 	// clear coop tutorial 
-	get_node("/root/Node2D/Node/TutorialSprites")->queue_free();
+	cast_to<Node2D>(get_node("/root/Node2D/Node/TutorialSprites"))->hide();
 
 	Control* tutorial_control = nullptr;
 	tutorial_control = cast_to<Control>(get_node("/root/Node2D/Node/TutorialSpritesSingle/TutorialControl"));
@@ -223,7 +223,7 @@ void godot::CameraController::_spawn_players()
 			PlayersContainer::_get_instance()->_set_player1_regular(player1);
 			PlayersContainer::_get_instance()->_set_player2_regular(player2);
 
-			get_node("/root/Node2D/Node/TutorialSpritesSingle")->queue_free();
+			cast_to<Node2D>(get_node("/root/Node2D/Node/TutorialSpritesSingle"))->hide();
 
 			//player1->call("_set_controll_buttons", "Player1_up", "Player1_down", "Player1_left", "Player1_right", "Player1_fight_up", "Player1_fight_down", "Player1_fight_left", "Player1_fight_right", "Player1_special");
 			if(player2->has_method("_set_controll_buttons"))
