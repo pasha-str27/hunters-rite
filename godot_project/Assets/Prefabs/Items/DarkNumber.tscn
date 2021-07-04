@@ -38,6 +38,7 @@ tracks/1/keys = {
 [node name="DarkNumber" type="Node2D"]
 z_index = 5
 script = ExtResource( 3 )
+Name = "DarkNumber"
 speed = 0.0
 HP = 25.0
 damage = 10.0

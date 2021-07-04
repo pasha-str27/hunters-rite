@@ -38,6 +38,7 @@ tracks/1/keys = {
 [node name="Chicken" type="Node2D"]
 z_index = 5
 script = ExtResource( 3 )
+Name = "Chicken"
 speed = 0.0
 HP = 50.0
 damage = 0.0

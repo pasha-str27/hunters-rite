@@ -27,5 +27,7 @@ namespace godot
 		void _delete_player2();
 		void _set_player1(Node2D* player1);
 		void _set_player2(Node2D* player2);
+		void _change_start_parameters();
+		void _remove_taken_positions();
 	};
 }

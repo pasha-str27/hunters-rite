@@ -20,6 +20,17 @@ void godot::Room::_register_methods()
 	register_method("_set_cell_value", &Room::_set_cell_value);
 	register_method("_get_cell_value", &Room::_get_cell_value);
 	register_method("print", &Room::print);
+	register_method("_fill_empty_positions", &Room::_fill_empty_positions);
+	register_method("_add_list", &Room::_add_list);
+	register_method("_get_list_of_keys", &Room::_get_list_of_keys);
+	register_method("_get_room_difficulty", &Room::_get_room_difficulty);
+	register_method("_get_room_type", &Room::_get_room_type);
+	register_method("_set_room_type", &Room::_set_room_type);
+	register_method("_get_were_here", &Room::_get_were_here);
+	register_method("_set_were_here", &Room::_set_were_here);
+	register_method("_set_is_special", &Room::_set_is_special);
+	register_method("_get_is_special", &Room::_get_is_special);
+	register_method("_get_enemy_spawn_positions", &Room::_get_enemy_spawn_positions);
 }
 
 godot::Room::Room()
@@ -59,6 +70,8 @@ godot::Room::~Room()
 	for (auto row : room_map)
 		row.clear();
 	room_map.clear();
+	empty_pos_world_coordinates.clear();
+	adjacent_rooms.clear();
 }
 
 void godot::Room::_init()
@@ -80,6 +93,18 @@ void godot::Room::_set_cell_value(int i, int j, int value)
 	room_map[i][j] = value;
 }
 
+void godot::Room::_fill_empty_positions(Node2D* room)
+{
+	for (int i=3;i<room_map.size()-1;++i)
+		for (int j=1; j<room_map[i].size()-1;++j)
+			if (room_map[i][j] == 0)
+			{
+				empty_pos_world_coordinates.push_back((Vector2(j, i) * 32 
+					+ room->get_global_position()
+					- Vector2(896, 544) / 2 + Vector2(16, 16)));
+			}			
+}
+
 void godot::Room::print()
 {
 	for (int i = 0; i < room_map.size(); ++i)
@@ -89,6 +114,66 @@ void godot::Room::print()
 			tmp += String::num(room_map[i][j]);
 		Godot::print(tmp);
 	}
+}
+
+void godot::Room::_add_list(Array list)
+{	
+	Array lst = ((String)list[0]).split(", ");
+	for (int i = 0; i < lst.size(); ++i)
+		list_of_keys.push_back(lst[i]);
+	//list_of_keys.push_back(list);
+}
+
+Array godot::Room::_get_list_of_keys()
+{
+	return list_of_keys;
+}
+
+float godot::Room::_get_room_difficulty()
+{
+	return room_difficulty;
+}
+
+String godot::Room::_get_room_type()
+{
+	return room_type;
+}
+
+void godot::Room::_set_room_type(String type)
+{
+	room_type = type;
+}
+
+bool godot::Room::_get_were_here()
+{
+	return were_here;
+}
+
+void godot::Room::_set_were_here(bool value)
+{
+	were_here = value;
+}
+
+void godot::Room::_set_is_special(bool value)
+{
+	is_special = value;
+}
+
+bool godot::Room::_get_is_special()
+{
+	return is_special;
+}
+
+Array godot::Room::_get_enemy_spawn_positions()
+{
+	Array arr = {};
+	Array poses = {};
+
+	for (auto pos : empty_pos_world_coordinates)
+		poses.push_back(pos);
+
+	arr.push_back(poses);
+	return arr;
 }
 
 void godot::Room::_set_num_of_adjacent_rooms(int value)

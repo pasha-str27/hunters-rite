@@ -21,8 +21,7 @@
 [ext_resource path="res://Assets/Sprites/Items/boot.png" type="Texture" id=19]
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=20]
 [ext_resource path="res://Assets/Prefabs/SoundsEffects/Effects/ButtonClick.tscn" type="PackedScene" id=21]
-
-[sub_resource type="Theme" id=1]
+[ext_resource path="res://Assets/Font/Item_theme.tres" type="Theme" id=22]
 
 [sub_resource type="DynamicFont" id=2]
 size = 11
@@ -481,6 +480,7 @@ click_effect = ExtResource( 21 )
 [node name="Backgroung" type="TextureRect" parent="Items"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 0
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -489,19 +489,20 @@ __meta__ = {
 [node name="Items_grid" type="CenterContainer" parent="Items"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = 22.0
 margin_bottom = -77.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Items/Items_grid"]
-margin_left = 240.0
+margin_left = 251.0
 margin_top = 63.0
-margin_right = 1040.0
+margin_right = 1051.0
 margin_bottom = 579.0
 rect_min_size = Vector2( 800, 516 )
 focus_mode = 2
-theme = SubResource( 1 )
+theme = ExtResource( 22 )
 follow_focus = true
 scroll_deadzone = 256
 __meta__ = {
@@ -511,6 +512,7 @@ __meta__ = {
 [node name="GridContainer" type="GridContainer" parent="Items/Items_grid/ScrollContainer"]
 margin_right = 776.0
 margin_bottom = 1036.0
+mouse_filter = 0
 columns = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -550,6 +552,7 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="Items/Items_grid/ScrollContainer/GridContainer/LegendaryChiken"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -673,6 +676,7 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="Items/Items_grid/ScrollContainer/GridContainer/FastBoots"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -781,6 +785,7 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="Items/Items_grid/ScrollContainer/GridContainer/DragonsEye"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -889,6 +894,7 @@ margin_bottom = -3.698
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 128, 128 )
+mouse_filter = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource( 14 )
@@ -902,6 +908,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -28.0
+mouse_filter = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -915,6 +922,7 @@ rect_min_size = Vector2( 0, 45 )
 margin_top = 49.0
 margin_right = 256.0
 margin_bottom = 60.0
+mouse_filter = 0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 0.835294, 0.341176, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -939,6 +947,7 @@ margin_left = 80.0
 margin_right = 176.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 96, 96 )
+mouse_filter = 2
 texture = ExtResource( 16 )
 expand = true
 
@@ -946,6 +955,7 @@ expand = true
 margin_top = 164.0
 margin_right = 256.0
 margin_bottom = 183.0
+mouse_filter = 0
 custom_fonts/font = SubResource( 8 )
 text = "A cool blacksmith
 forged this sword"
@@ -960,6 +970,7 @@ modulate = Color( 0.592157, 0.815686, 0.560784, 1 )
 margin_top = 187.0
 margin_right = 256.0
 margin_bottom = 196.0
+mouse_filter = 0
 custom_fonts/font = SubResource( 5 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
 text = "+15 Damage"
@@ -1010,6 +1021,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 256, 256 )
+mouse_filter = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1121,6 +1133,7 @@ anchor_bottom = 1.0
 margin_right = -16.0
 margin_bottom = -34.0
 rect_min_size = Vector2( 256, 256 )
+mouse_filter = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1228,6 +1241,7 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="Items/Items_grid/ScrollContainer/GridContainer/CoreWithAChain"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1349,6 +1363,7 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="Items/Items_grid/ScrollContainer/GridContainer/VikingShield"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1469,6 +1484,7 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="Items/Items_grid/ScrollContainer/GridContainer/DarkGragonsTooth"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1589,6 +1605,7 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="Items/Items_grid/ScrollContainer/GridContainer/HolyDragonsTooth"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1696,6 +1713,7 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="Items/Items_grid/ScrollContainer/GridContainer/UnluckyNumber"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1818,6 +1836,7 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="Items/Items_grid/ScrollContainer/GridContainer/UkrainianGorilka"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1959,43 +1978,43 @@ __meta__ = {
 [node name="BackAnimated" type="AnimationPlayer" parent="Items/Back_button/Back"]
 anims/Focus_scale = SubResource( 25 )
 
-[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/LegendaryChiken" to="Items" method="_on_animated_focus_entered" binds= [ "LegendaryChiken", "LegendaryChikenAnimated" ]]
 [connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/LegendaryChiken" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/LegendaryChiken" to="Items" method="_on_animated_focus_entered" binds= [ "LegendaryChiken", "LegendaryChikenAnimated" ]]
 [connection signal="focus_exited" from="Items/Items_grid/ScrollContainer/GridContainer/LegendaryChiken" to="Items" method="_on_animated_focus_exited" binds= [ "LegendaryChiken", "LegendaryChikenAnimated" ]]
-[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/FastBoots" to="Items" method="_on_animated_focus_entered" binds= [ "FastBoots", "FastBootsrAnimated" ]]
 [connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/FastBoots" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/FastBoots" to="Items" method="_on_animated_focus_entered" binds= [ "FastBoots", "FastBootsrAnimated" ]]
 [connection signal="focus_exited" from="Items/Items_grid/ScrollContainer/GridContainer/FastBoots" to="Items" method="_on_animated_focus_exited" binds= [ "FastBoots", "FastBootsrAnimated" ]]
-[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/DragonsEye" to="Items" method="_on_animated_focus_entered" binds= [ "DragonsEye", "DragonsEyeAnimated" ]]
 [connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/DragonsEye" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/DragonsEye" to="Items" method="_on_animated_focus_entered" binds= [ "DragonsEye", "DragonsEyeAnimated" ]]
 [connection signal="focus_exited" from="Items/Items_grid/ScrollContainer/GridContainer/DragonsEye" to="Items" method="_on_animated_focus_exited" binds= [ "DragonsEye", "DragonsEyeAnimated" ]]
-[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/SwordOfRange" to="Items" method="_on_animated_focus_entered" binds= [ "SwordOfRange", "SwordOfRangeAnimated" ]]
 [connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/SwordOfRange" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/SwordOfRange" to="Items" method="_on_animated_focus_entered" binds= [ "SwordOfRange", "SwordOfRangeAnimated" ]]
 [connection signal="focus_exited" from="Items/Items_grid/ScrollContainer/GridContainer/SwordOfRange" to="Items" method="_on_animated_focus_exited" binds= [ "SwordOfRange", "SwordOfRangeAnimated" ]]
-[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/GlassesOfBillGates" to="Items" method="_on_animated_focus_entered" binds= [ "GlassesOfBillGates", "GlassesOfBillGatesAnimated" ]]
 [connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/GlassesOfBillGates" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/GlassesOfBillGates" to="Items" method="_on_animated_focus_entered" binds= [ "GlassesOfBillGates", "GlassesOfBillGatesAnimated" ]]
 [connection signal="focus_exited" from="Items/Items_grid/ScrollContainer/GridContainer/GlassesOfBillGates" to="Items" method="_on_animated_focus_exited" binds= [ "GlassesOfBillGates", "GlassesOfBillGatesAnimated" ]]
-[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/LuckyClever" to="Items" method="_on_animated_focus_entered" binds= [ "LuckyClever", "LuckyCleverAnimated" ]]
 [connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/LuckyClever" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/LuckyClever" to="Items" method="_on_animated_focus_entered" binds= [ "LuckyClever", "LuckyCleverAnimated" ]]
 [connection signal="focus_exited" from="Items/Items_grid/ScrollContainer/GridContainer/LuckyClever" to="Items" method="_on_animated_focus_exited" binds= [ "LuckyClever", "LuckyCleverAnimated" ]]
-[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/CoreWithAChain" to="Items" method="_on_animated_focus_entered" binds= [ "CoreWithAChain", "CoreWithAChainAnimated" ]]
 [connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/CoreWithAChain" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/CoreWithAChain" to="Items" method="_on_animated_focus_entered" binds= [ "CoreWithAChain", "CoreWithAChainAnimated" ]]
 [connection signal="focus_exited" from="Items/Items_grid/ScrollContainer/GridContainer/CoreWithAChain" to="Items" method="_on_animated_focus_exited" binds= [ "CoreWithAChain", "CoreWithAChainAnimated" ]]
-[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/VikingShield" to="Items" method="_on_animated_focus_entered" binds= [ "VikingShield", "VikingShieldAnimated" ]]
 [connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/VikingShield" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/VikingShield" to="Items" method="_on_animated_focus_entered" binds= [ "VikingShield", "VikingShieldAnimated" ]]
 [connection signal="focus_exited" from="Items/Items_grid/ScrollContainer/GridContainer/VikingShield" to="Items" method="_on_animated_focus_exited" binds= [ "VikingShield", "VikingShieldAnimated" ]]
-[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/DarkGragonsTooth" to="Items" method="_on_animated_focus_entered" binds= [ "DarkGragonsTooth", "DarkGragonsToothAnimated" ]]
 [connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/DarkGragonsTooth" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/DarkGragonsTooth" to="Items" method="_on_animated_focus_entered" binds= [ "DarkGragonsTooth", "DarkGragonsToothAnimated" ]]
 [connection signal="focus_exited" from="Items/Items_grid/ScrollContainer/GridContainer/DarkGragonsTooth" to="Items" method="_on_animated_focus_exited" binds= [ "DarkGragonsTooth", "DarkGragonsToothAnimated" ]]
-[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/HolyDragonsTooth" to="Items" method="_on_animated_focus_entered" binds= [ "HolyDragonsTooth", "HolyDragonsToothAnimated" ]]
 [connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/HolyDragonsTooth" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/HolyDragonsTooth" to="Items" method="_on_animated_focus_entered" binds= [ "HolyDragonsTooth", "HolyDragonsToothAnimated" ]]
 [connection signal="focus_exited" from="Items/Items_grid/ScrollContainer/GridContainer/HolyDragonsTooth" to="Items" method="_on_animated_focus_exited" binds= [ "HolyDragonsTooth", "HolyDragonsToothAnimated" ]]
-[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/UnluckyNumber" to="Items" method="_on_animated_focus_entered" binds= [ "UnluckyNumber", "UnluckyNumberAnimated" ]]
 [connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/UnluckyNumber" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/UnluckyNumber" to="Items" method="_on_animated_focus_entered" binds= [ "UnluckyNumber", "UnluckyNumberAnimated" ]]
 [connection signal="focus_exited" from="Items/Items_grid/ScrollContainer/GridContainer/UnluckyNumber" to="Items" method="_on_animated_focus_exited" binds= [ "UnluckyNumber", "UnluckyNumberAnimated" ]]
-[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/UkrainianGorilka" to="Items" method="_on_animated_focus_entered" binds= [ "UkrainianGorilka", "UkrainianGorilkaAnimated" ]]
 [connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/UkrainianGorilka" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Items_grid/ScrollContainer/GridContainer/UkrainianGorilka" to="Items" method="_on_animated_focus_entered" binds= [ "UkrainianGorilka", "UkrainianGorilkaAnimated" ]]
 [connection signal="focus_exited" from="Items/Items_grid/ScrollContainer/GridContainer/UkrainianGorilka" to="Items" method="_on_animated_focus_exited" binds= [ "UkrainianGorilka", "UkrainianGorilkaAnimated" ]]
-[connection signal="focus_entered" from="Items/Back_button/Back" to="Items" method="_on_animated_focus_entered" binds= [ "Back", "BackAnimated" ]]
 [connection signal="focus_entered" from="Items/Back_button/Back" to="Items" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Items/Back_button/Back" to="Items" method="_on_animated_focus_entered" binds= [ "Back", "BackAnimated" ]]
 [connection signal="focus_exited" from="Items/Back_button/Back" to="Items" method="_on_animated_focus_exited" binds= [ "Back", "BackAnimated" ]]
 [connection signal="pressed" from="Items/Back_button/Back" to="Items" method="_on_Back_pressed"]

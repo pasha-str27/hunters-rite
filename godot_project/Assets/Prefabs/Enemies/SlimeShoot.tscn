@@ -1,0 +1,248 @@
+[gd_scene load_steps=46 format=2]
+
+[ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/slime_bullet.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Prefabs/Particles/DeathParticles/DeathParticles.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Sprites/Monsters/Slime/monster_slime_range_attack.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/Monsters/Slime/monster_slime_damage.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/Monsters/Slime/monster_slime.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Scripts/EnemyPrice.gdns" type="Script" id=7]
+[ext_resource path="res://Assets/Scripts/Enemy.gdns" type="Script" id=8]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.568627, 0.14902, 0.14902, 0.313726 )
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 11.42
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 6 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 6 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 6 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 6 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 6 )
+region = Rect2( 160, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 6 )
+region = Rect2( 192, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 6 )
+region = Rect2( 224, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 6 )
+region = Rect2( 256, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 6 )
+region = Rect2( 288, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 6 )
+region = Rect2( 320, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 5 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 5 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=18]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=19]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 48, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=20]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 96, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=21]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 144, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 240, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=23]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 288, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=24]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 336, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=25]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 384, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=26]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 432, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 480, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 528, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=29]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 576, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=30]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 624, 0, 48, 48 )
+
+[sub_resource type="SpriteFrames" id=31]
+animations = [ {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
+"loop": true,
+"name": "idle",
+"speed": 7.0
+}, {
+"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"loop": false,
+"name": "damaged",
+"speed": 7.0
+}, {
+"frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
+"loop": false,
+"name": "attack",
+"speed": 7.0
+} ]
+
+[sub_resource type="CircleShape2D" id=32]
+radius = 164.201
+
+[sub_resource type="Gradient" id=33]
+offsets = PoolRealArray( 0.423237, 1 )
+colors = PoolColorArray( 0.520334, 0.683105, 0.561841, 1, 0, 1, 0.15918, 0 )
+
+[sub_resource type="GradientTexture" id=34]
+gradient = SubResource( 33 )
+
+[sub_resource type="Curve" id=35]
+_data = [ Vector2( 0, 0.578409 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0306818 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=36]
+curve = SubResource( 35 )
+
+[sub_resource type="ParticlesMaterial" id=37]
+emission_shape = 1
+emission_sphere_radius = 40.0
+flag_rotate_y = true
+flag_disable_z = true
+direction = Vector3( 500, 500, 0 )
+spread = 180.0
+flatness = 1.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 50.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 100.0
+linear_accel_random = 1.0
+radial_accel_random = 1.0
+tangential_accel_random = 1.0
+damping_random = 1.0
+scale = 5.0
+scale_random = 1.0
+scale_curve = SubResource( 36 )
+color_ramp = SubResource( 34 )
+
+[node name="SlimeShoot" type="Node2D"]
+script = ExtResource( 7 )
+enemy_price = 15.0
+
+[node name="BulletConteiner" type="Node" parent="."]
+
+[node name="SlimeShoot" type="KinematicBody2D" parent="." groups=[
+"enemy",
+"slime_shoot",
+]]
+z_index = 25
+collision_layer = 4
+collision_mask = 512
+script = ExtResource( 8 )
+bullet = ExtResource( 1 )
+"Death particles" = ExtResource( 3 )
+
+[node name="HealthBar" type="ProgressBar" parent="SlimeShoot"]
+margin_left = -20.0
+margin_top = -25.0
+margin_right = 20.0
+margin_bottom = -20.0
+rect_scale = Vector2( 1, 0.5 )
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+value = 50.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlimeShoot"]
+shape = SubResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="SlimeShoot/CollisionShape2D"]
+frames = SubResource( 31 )
+animation = "idle"
+frame = 10
+playing = true
+
+[node name="Area2D" type="Area2D" parent="SlimeShoot"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlimeShoot/Area2D"]
+shape = SubResource( 32 )
+
+[node name="SpawnParticles" parent="SlimeShoot" instance=ExtResource( 2 )]
+process_material = SubResource( 37 )
+
+[connection signal="body_entered" from="SlimeShoot/Area2D" to="SlimeShoot" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="SlimeShoot/Area2D" to="SlimeShoot" method="_on_Area2D_body_exited"]

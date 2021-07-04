@@ -1,0 +1,65 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Assets/Sprites/UI/MiniMapBorder.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Scripts/MiniMapController.gdns" type="Script" id=2]
+[ext_resource path="res://Assets/Sprites/UI/minimap_back.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Prefabs/MiniMapUi/heal_room.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Prefabs/MiniMapUi/item_room.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Prefabs/MiniMapUi/curr_room.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Prefabs/MiniMapUi/disc_room.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Prefabs/MiniMapUi/undisc_room.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Prefabs/MiniMapUi/key_room.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Prefabs/MiniMapUi/boss_room.tscn" type="PackedScene" id=10]
+
+[sub_resource type="ImageTexture" id=1]
+
+[node name="MiniMap" type="MarginContainer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -250.0
+margin_right = 250.0
+margin_bottom = 250.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+current_room = ExtResource( 6 )
+discovered_room = ExtResource( 7 )
+undiscovered_room = ExtResource( 8 )
+key_room = ExtResource( 9 )
+item_room = ExtResource( 5 )
+heal_room = ExtResource( 4 )
+boss_room = ExtResource( 10 )
+zoom = 5.5
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color( 0.647059, 0.647059, 0.647059, 1 )
+margin_right = 500.0
+margin_bottom = 500.0
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 2
+
+[node name="BorderTexture" type="NinePatchRect" parent="."]
+margin_right = 500.0
+margin_bottom = 500.0
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[node name="InnerFrame" type="MarginContainer" parent="."]
+margin_right = 500.0
+margin_bottom = 500.0
+custom_constants/margin_right = 55
+custom_constants/margin_top = 55
+custom_constants/margin_left = 55
+custom_constants/margin_bottom = 55
+
+[node name="Grid" type="TextureRect" parent="InnerFrame"]
+margin_left = 55.0
+margin_top = 55.0
+margin_right = 445.0
+margin_bottom = 445.0
+texture = SubResource( 1 )

@@ -5,51 +5,60 @@
 
 void godot::PlayerController::_register_methods()
 {
-	register_method((char*)"_process", &PlayerController::_process);
-	register_method((char*)"_ready", &PlayerController::_ready);
-	register_method((char*)"_input", &PlayerController::_input);
-	register_method((char*)"_add_bullet", &PlayerController::_add_bullet);
-	register_method((char*)"_start_timer", &PlayerController::_start_timer);
-	register_method((char*)"_on_timeout", &PlayerController::_on_timeout);
-	register_method((char*)"_start_special_timer", &PlayerController::_start_special_timer);
-	register_method((char*)"_on_special_timeout", &PlayerController::_on_special_timeout);
-	register_method((char*)"_start_dash_cooldow_timer", &PlayerController::_start_dash_cooldow_timer);
-	register_method((char*)"_on_dash_cooldown_timeout", &PlayerController::_on_dash_cooldown_timeout);
-	register_method((char*)"_can_fight", &PlayerController::_can_fight);
-	register_method((char*)"_set_enemy", &PlayerController::_set_enemy);
-	register_method((char*)"_on_Area2D_body_entered", &PlayerController::_on_Area2D_body_entered);
-	register_method((char*)"_on_Area2D_area_entered", &PlayerController::_on_Area2D_area_entered);
-	register_method((char*)"_on_Area2D_area_exited", &PlayerController::_on_Area2D_area_exited);
-	register_method((char*)"_take_damage", &PlayerController::_take_damage);
-	register_method((char*)"_change_can_moving", &PlayerController::_change_can_moving);
-	register_method((char*)"_change_moving", &PlayerController::_change_moving);	
-	register_method((char*)"change_can_moving_timeout", &PlayerController::change_can_moving_timeout);
-	register_method((char*)"_decrease_attack_radius", &PlayerController::_decrease_attack_radius);
-	register_method((char*)"_encrease_attack_radius", &PlayerController::_encrease_attack_radius);
-	register_method((char*)"_set_number_to_next_item", &PlayerController::_set_number_to_next_item);
-	register_method((char*)"_get_number_to_next_item", &PlayerController::_get_number_to_next_item);
-	register_method((char*)"_set_speed", &PlayerController::_set_speed);
-	register_method((char*)"_get_speed", &PlayerController::_get_speed);
-	register_method((char*)"_set_HP", &PlayerController::_set_HP);
-	register_method((char*)"_get_HP", &PlayerController::_get_HP);
-	register_method((char*)"_set_damage", &PlayerController::_set_damage);
-	register_method((char*)"_get_damage", &PlayerController::_get_damage);
-	register_method((char*)"_set_attack_speed_delta", &PlayerController::_set_attack_speed_delta);
-	register_method((char*)"_get_attack_speed_delta", &PlayerController::_get_attack_speed_delta);
-	register_method((char*)"_change_can_fight", &PlayerController::_change_can_fight);
-	register_method((char*)"_die", &PlayerController::_die);
-	register_method((char*)"_revive", &PlayerController::_revive);
-	register_method((char*)"_set_max_HP", &PlayerController::_set_max_HP);
-	register_method((char*)"_get_max_HP", &PlayerController::_get_max_HP);
-	register_method((char*)"_on_enemy_die", &PlayerController::_on_enemy_die);
-	register_method((char*)"_is_alive", &PlayerController::_is_alive);
-	register_method((char*)"_start_item_particles", &PlayerController::_start_item_particles);
-	register_method((char*)"_update_health_bar", &PlayerController::_update_health_bar);
-	register_method((char*)"_update_max_health_bar_size", &PlayerController::_update_max_health_bar_size);
-	register_method((char*)"_animate_spider_web", &PlayerController::_animate_spider_web);
-	register_method((char*)"_stop_animations", &PlayerController::_stop_animations);
-	register_method((char*)"_player_fight", &PlayerController::_player_fight);	
-
+	register_method("_process", &PlayerController::_process);
+	register_method("_ready", &PlayerController::_ready);
+	register_method("_add_bullet", &PlayerController::_add_bullet);
+	register_method("_start_timer", &PlayerController::_start_timer);
+	register_method("_on_timeout", &PlayerController::_on_timeout);
+	register_method("_start_special_timer", &PlayerController::_start_special_timer);
+	register_method("_on_special_timeout", &PlayerController::_on_special_timeout);
+	register_method("_start_dash_cooldow_timer", &PlayerController::_start_dash_cooldow_timer);
+	register_method("_on_dash_cooldown_timeout", &PlayerController::_on_dash_cooldown_timeout);
+	register_method("_can_fight", &PlayerController::_can_fight);
+	register_method("_set_enemy", &PlayerController::_set_enemy);
+	register_method("_on_Area2D_body_entered", &PlayerController::_on_Area2D_body_entered);
+	register_method("_on_Area2D_area_entered", &PlayerController::_on_Area2D_area_entered);
+	register_method("_on_Area2D_area_exited", &PlayerController::_on_Area2D_area_exited);
+	register_method("_take_damage", &PlayerController::_take_damage);
+	register_method("_change_can_moving", &PlayerController::_change_can_moving);
+	register_method("_change_moving", &PlayerController::_change_moving);
+	register_method("change_can_moving_timeout", &PlayerController::change_can_moving_timeout);
+	register_method("_decrease_attack_radius", &PlayerController::_decrease_attack_radius);
+	register_method("_encrease_attack_radius", &PlayerController::_encrease_attack_radius);
+	register_method("_set_number_to_next_item", &PlayerController::_set_number_to_next_item);
+	register_method("_get_number_to_next_item", &PlayerController::_get_number_to_next_item);
+	register_method("_set_speed", &PlayerController::_set_speed);
+	register_method("_get_speed", &PlayerController::_get_speed);
+	register_method("_set_HP", &PlayerController::_set_HP);
+	register_method("_get_HP", &PlayerController::_get_HP);
+	register_method("_set_damage", &PlayerController::_set_damage);
+	register_method("_get_damage", &PlayerController::_get_damage);
+	register_method("_set_attack_speed_delta", &PlayerController::_set_attack_speed_delta);
+	register_method("_get_attack_speed_delta", &PlayerController::_get_attack_speed_delta);
+	register_method("_change_can_fight", &PlayerController::_change_can_fight);
+	register_method("_die", &PlayerController::_die);
+	register_method("_revive", &PlayerController::_revive);
+	register_method("_set_max_HP", &PlayerController::_set_max_HP);
+	register_method("_get_max_HP", &PlayerController::_get_max_HP);
+	register_method("_on_enemy_die", &PlayerController::_on_enemy_die);
+	register_method("_is_alive", &PlayerController::_is_alive);
+	register_method("_start_item_particles", &PlayerController::_start_item_particles);
+	register_method("_update_health_bar", &PlayerController::_update_health_bar);
+	register_method("_update_max_health_bar_size", &PlayerController::_update_max_health_bar_size);
+	register_method("_animate_spider_web", &PlayerController::_animate_spider_web);
+	register_method("_stop_animations", &PlayerController::_stop_animations);
+	register_method("_player_fight", &PlayerController::_player_fight);	
+	register_method("_set_controll_buttons", &PlayerController::_set_controll_buttons);
+	register_method("_stay_ghost", &PlayerController::_stay_ghost);
+	register_method("_heal", &PlayerController::_heal);
+	register_method("_ghost_to_player", &PlayerController::_ghost_to_player);
+	register_method("_is_ghost_mode", &PlayerController::_is_ghost_mode);
+	register_method("_continue_moving", &PlayerController::_continue_moving);
+	register_method("_stop_moving", &PlayerController::_stop_moving);
+	register_method("_set_is_attacking", &PlayerController::_set_is_attacking);
+	
+	
+	
 	register_property<PlayerController, float>("hp", &PlayerController::_hp, 0);
 	register_property<PlayerController, float>("damage", &PlayerController::_damage, 0);
 	register_property<PlayerController, float>("speed", &PlayerController::speed, 400);
@@ -60,7 +69,8 @@ void godot::PlayerController::_register_methods()
 
 godot::PlayerController::PlayerController()
 {
-	current_player = nullptr;
+	current_player_strategy = new PlayerStrategyContext;
+	//current_player = nullptr;
 	timer = Timer::_new();
 	attack_speed_delta = 0.5;
 	dash_time_delta = 0.4;
@@ -71,14 +81,16 @@ godot::PlayerController::PlayerController()
 	is_alive = true;
 	is_special = false;
 	speed = 250;
+	_saved_speed = speed;
 	door = nullptr;
 }
 
 godot::PlayerController::~PlayerController()
 {
-	if(current_player!=nullptr)
-		delete current_player;
-	current_player = nullptr;
+	if(current_player_strategy != nullptr)
+		delete current_player_strategy;
+	delete player_producer;
+	current_player_strategy = nullptr;
 	door = nullptr;
 	item_generator = nullptr;
 	timer = nullptr;
@@ -86,8 +98,6 @@ godot::PlayerController::~PlayerController()
 	buff_debuff_particles = nullptr;
 	dash_particles = nullptr;
 	revive_particles = nullptr;
-	//if(current_player)
-	//	delete current_player;
 }
 
 void godot::PlayerController::_init()
@@ -96,48 +106,36 @@ void godot::PlayerController::_init()
 
 void godot::PlayerController::_ready()
 {
-	//if (is_in_group("player1") && (MenuButtons::player_name == 1))
-	//{
-	//	set_visible(false);
-	//		//current_player
-	//		//get_parent()->queue_free();
-	//}
-
-	//if (is_in_group("player2") && (MenuButtons::player_name == 2))
-	//{
-	//	set_visible(false);
-	//		//queue_free();
-	//}
-
-	PlayerProduce* player_producer = nullptr;
+	player_producer = nullptr;
 
 	if (is_in_group("player1"))
 	{
-		player_producer = new ProducePlayer1;
+		player_producer = new ProducePlayerShoot;
 		PlayersContainer::_get_instance()->_set_player1(this);
 	}
 
 	if (is_in_group("player2"))
 	{
-		player_producer = new ProducePlayer2;
+		player_producer = new ProducePlayerMelee;
 		PlayersContainer::_get_instance()->_set_player2(this);
 	}
 
-	current_player = player_producer->_get_player(this, bullet_prefab);
-	current_player->_set_speed(speed);
-	current_player->_set_max_HP(_hp);
-	current_player->_set_HP(_hp);
-	current_player->_set_damage(_damage);
+	current_player_strategy->_set_strategy(player_producer->_get_player(this, bullet_prefab));
+
+	current_player_strategy->_set_speed(speed);
+	current_player_strategy->_set_max_HP(_hp);
+	current_player_strategy->_set_HP(_hp);
+	current_player_strategy->_set_damage(_damage);
 
 	_update_max_health_bar_size();
 
-	item_generator = CustomExtensions::GetChildByName(this, "ItemGenerator")->call("_get_instance");
+	if(has_node("ItemGenerator"))
+		item_generator = CustomExtensions::GetChildByName(this, "ItemGenerator")->call("_get_instance");
 
 	buff_debuff_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "BuffDebuffParticles"));
 	hurt_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"));
 	dash_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "DashParticles"));
 	revive_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "ReviveParticles"));
-	delete player_producer;
 }
 
 void godot::PlayerController::_start_timer()
@@ -155,7 +153,7 @@ void godot::PlayerController::_on_timeout()
 {
 	timer->disconnect("timeout", this, "_on_timeout");
 
-	current_player->_change_can_fight(true);
+	current_player_strategy->_change_can_fight(true);
 }
 
 void godot::PlayerController::_start_special_timer()
@@ -167,11 +165,11 @@ void godot::PlayerController::_start_special_timer()
 		if (!has_node(NodePath(timer->get_name())))
 			add_child(timer);
 
-		current_player->_start_special();
+		current_player_strategy->_start_special();
 
 		_change_is_dashing_state();
 
-		timer->start(current_player->_get_special_time());
+		timer->start(current_player_strategy->_get_special_time());
 
 		if(is_in_group("player1"))
 			dash_particles->restart();
@@ -180,12 +178,10 @@ void godot::PlayerController::_start_special_timer()
 
 void godot::PlayerController::_on_special_timeout()
 {
-	current_player->_stop_special();
+	current_player_strategy->_stop_special();
 
-	current_player->_process_input();
 	if(is_in_group("player2"))
 		cast_to<AnimationPlayer>(get_node("Shield")->find_node("AnimationPlayer"))->play("shield_end");
-
 
 	timer->disconnect("timeout", this, "_on_special_timeout");
 	_start_dash_cooldow_timer();
@@ -219,42 +215,39 @@ void godot::PlayerController::_change_is_dashing_state()
 
 bool godot::PlayerController::_can_fight()
 {
-	return current_player->_can_fight();
+	return current_player_strategy->_can_fight();
 }
 
 void godot::PlayerController::_change_can_fight(bool value)
 {
-	return current_player->_change_can_fight(value);
+	return current_player_strategy->_change_can_fight(value);
 }
 
 void godot::PlayerController::_set_enemy(Node* enemy)
 {
-	current_player->_set_enemy(enemy);
+	current_player_strategy->_set_enemy(enemy);
 }
 
 void godot::PlayerController::_add_bullet(Node* node)
 {
-	current_player->_add_bullet(node);
-}
-
-void godot::PlayerController::_input(InputEventKey* event)
-{
-	if (can_move && is_alive)
-		current_player->_process_input();
+	current_player_strategy->_add_bullet(node);
 }
 
 void godot::PlayerController::_process(float delta)
 {
-	if (can_move && is_alive)
-		current_player->_move();
+	if (can_move && (is_alive || is_ghost_mode))
+	{
+		current_player_strategy->_process_input();
+		current_player_strategy->_move();
+	}
 }
 
 void godot::PlayerController::_take_damage(float damage, bool is_spike)
 {
-	if (current_player->_get_safe_mode())
+	if (current_player_strategy->_get_safe_mode())
 		return;
 
-	current_player->_take_damage(damage, is_spike);
+	current_player_strategy->_take_damage(damage, is_spike);
 	_update_health_bar();
 
 	if (is_alive)
@@ -276,7 +269,7 @@ void godot::PlayerController::_on_Area2D_area_entered(Node* node)
 {
 	auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
 
-	if (node->is_in_group("door_zone") && is_alive)
+	if (node->is_in_group("door_zone") && (is_alive || is_ghost_mode))
 	{
 		camera->call("_door_collision", node->get_name());
 		door = node;
@@ -318,8 +311,8 @@ void godot::PlayerController::_change_can_moving(bool value)
 void godot::PlayerController::_change_moving(bool value)
 {
 	can_move = value;
-	if (value == false && is_alive)
-		current_player->_stop_animations();
+	if (!value && is_alive)
+		current_player_strategy->_stop_animations();
 }
 
 void godot::PlayerController::change_can_moving_timeout()
@@ -354,7 +347,7 @@ int godot::PlayerController::_get_number_to_next_item()
 void godot::PlayerController::_set_speed(float value)
 {
 	speed = value;
-	current_player->_set_speed(speed);
+	current_player_strategy->_set_speed(speed);
 }
 
 float godot::PlayerController::_get_speed()
@@ -364,22 +357,29 @@ float godot::PlayerController::_get_speed()
 
 void godot::PlayerController::_set_HP(float value)
 {
-	current_player->_set_HP(value);
+	current_player_strategy->_set_HP(value);
+	_update_health_bar();
 }
 
 float godot::PlayerController::_get_HP()
 {
-	return current_player->_get_HP();
+	return current_player_strategy->_get_HP();
+}
+
+void godot::PlayerController::_heal()
+{
+	current_player_strategy->_heal();
+	_update_health_bar();
 }
 
 void godot::PlayerController::_set_damage(float value)
 {
-	current_player->_set_damage(value);
+	current_player_strategy->_set_damage(value);
 }
 
 float godot::PlayerController::_get_damage()
 {
-	return current_player->_get_damage();
+	return current_player_strategy->_get_damage();
 }
 
 void godot::PlayerController::_set_attack_speed_delta(float value)
@@ -399,30 +399,67 @@ void godot::PlayerController::_die()
 		auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
 		camera->call("_door_collision", "-" + door->get_name());
 	}
+
 	is_alive = false;
+
+	prev_state = current_player_strategy->_clone();
+
+	if(get_name() == "Player1")
+		Enemies::get_singleton()->_remove_player1();
+	if (get_name() == "Player2")
+		Enemies::get_singleton()->_remove_player2();
+
+	if (current_player_strategy->_was_revived())
+	{
+		is_ghost_mode = true;
+		current_player_strategy->_set_strategy(player_producer->_get_player_ghost(this, bullet_prefab));
+
+		if (get_name() == "Player1")
+			PlayersContainer::_get_instance()->_set_player1_regular(cast_to<Node2D>(get_parent()));
+
+		if (get_name() == "Player2")
+			PlayersContainer::_get_instance()->_set_player2_regular(this);
+
+		_restore_data();
+
+		current_player_strategy->_get_health_bar()->set_value(0);
+		//_set_HP(0);
+		return;
+	}
+
+	current_player_strategy->_set_was_revived(true);
 	add_child(revive_zone->instance());
+	current_player_strategy->_set_strategy(player_producer->_get_player_died(this, bullet_prefab));
+
+	_restore_data();
+
+	_update_health_bar();
+
+	//current_player_strategy->_get_health_bar()->set_value(0);
 }
 
 void godot::PlayerController::_revive()
 {
 	revive_particles->set_emitting(true);
-	current_player->_revive();
+	current_player_strategy->_revive();
 	is_alive = true;
 	Ref<PackedScene> prefab = nullptr;
 	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/PlayerRevive.tscn");
 	add_child(prefab->instance());
+	current_player_strategy->_set_strategy(player_producer->_get_player(this, bullet_prefab));
+	_restore_data();
+	_set_max_HP(prev_state->_get_max_HP());
 	_set_HP(_get_max_HP() * (float)0.15);
-	_update_health_bar();
 }
 
 float godot::PlayerController::_get_max_HP()
 {
-	return current_player->_get_max_HP();
+	return current_player_strategy->_get_max_HP();
 }
 
 void godot::PlayerController::_set_max_HP(float value)
 {
-	current_player->_set_max_HP(value);
+	current_player_strategy->_set_max_HP(value);
 }
 
 void godot::PlayerController::_on_enemy_die(Vector2 enemy_position)
@@ -449,13 +486,13 @@ void godot::PlayerController::_start_item_particles(bool is_buff)
 
 void godot::PlayerController::_update_health_bar()
 {
-	current_player->_update_health_bar();
+	current_player_strategy->_update_health_bar();
 }
 
 void godot::PlayerController::_update_max_health_bar_size()
 {
-	current_player->_get_health_bar()->set_max(current_player->_get_max_HP());
-	current_player->_update_health_bar();
+	current_player_strategy->_get_health_bar()->set_max(current_player_strategy->_get_max_HP());
+	current_player_strategy->_update_health_bar();
 }
 
 void godot::PlayerController::_animate_spider_web()
@@ -476,10 +513,97 @@ void godot::PlayerController::_hide_tutorial_message(Node* node)
 
 void godot::PlayerController::_stop_animations()
 {
-	current_player->_stop_animations();
+	current_player_strategy->_stop_animations();
 }
 
 void godot::PlayerController::_player_fight()
 {
-	current_player->_fight();
+	current_player_strategy->_fight();
+}
+
+void godot::PlayerController::_restore_data()
+{
+	std::map<String, String> controll_buttons = prev_state->_get_controll_buttons();
+	
+	_set_controll_buttons(controll_buttons["move_up"], controll_buttons["move_down"],
+		controll_buttons["move_left"], controll_buttons["move_right"], controll_buttons["fight_up"], controll_buttons["fight_down"],
+		controll_buttons["fight_left"], controll_buttons["fight_right"], controll_buttons["special"]);
+	
+	controll_buttons.clear();
+
+	_set_max_HP(prev_state->_get_max_HP());
+	_set_right_HP(prev_state->_get_HP());
+	_set_damage(prev_state->_get_damage());
+	_set_speed(prev_state->_get_speed());
+	_set_was_revived(prev_state->_was_revived());
+}
+
+void godot::PlayerController::_stay_ghost()
+{
+	is_alive = false;
+	prev_state = current_player_strategy->_clone();
+	if (current_player_strategy->_was_revived())
+	{
+		is_ghost_mode = true;
+		current_player_strategy->_set_strategy(player_producer->_get_player_ghost(this, bullet_prefab));
+		_restore_data();
+	}
+}
+
+void godot::PlayerController::_set_was_revived(bool value)
+{
+	current_player_strategy->_set_was_revived(value);
+}
+
+void godot::PlayerController::_ghost_to_player()
+{
+	is_alive = true;
+	can_move = true;
+	is_ghost_mode = false;
+	is_special = false;
+	door = nullptr;
+
+	prev_state = current_player_strategy->_clone();
+	current_player_strategy->_set_strategy(player_producer->_get_player(this, bullet_prefab));
+	_restore_data();
+	_set_HP(_get_max_HP());
+	_update_health_bar();
+	current_player_strategy->_set_was_revived(false);
+	
+	if (get_name() == "Player1")
+		PlayersContainer::_get_instance()->_set_player1(this);
+	if (get_name() == "Player2")
+		PlayersContainer::_get_instance()->_set_player2(this);
+}
+
+bool godot::PlayerController::_is_ghost_mode()
+{
+	return is_ghost_mode;
+}
+
+void godot::PlayerController::_set_controll_buttons(String move_up, String move_down, String move_left, String move_right, String fight_up, String fight_down, String fight_left, String fight_right, String special)
+{
+	current_player_strategy->_set_controll_buttons(move_up, move_down, move_left, move_right, fight_up, fight_down, fight_left, fight_right, special);
+}
+
+void godot::PlayerController::_stop_moving()
+{
+	_saved_speed = speed;
+	current_player_strategy->_set_speed(0);
+}
+
+void godot::PlayerController::_continue_moving()
+{
+	speed = _saved_speed;
+	current_player_strategy->_set_speed(speed);
+}
+
+void godot::PlayerController::_set_is_attacking(bool value)
+{
+	current_player_strategy->_set_is_attacking(value);
+}
+
+void godot::PlayerController::_set_right_HP(float value)
+{
+	current_player_strategy->_set_right_HP(value);
 }

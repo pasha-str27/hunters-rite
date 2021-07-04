@@ -38,6 +38,7 @@ tracks/1/keys = {
 [node name="Shield" type="Node2D"]
 z_index = 5
 script = ExtResource( 3 )
+Name = "Shield"
 speed = 0.0
 HP = 30.0
 damage = -10.0
