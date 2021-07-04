@@ -26,6 +26,9 @@ void godot::PlayerShootDied::_revive()
 void godot::PlayerShootDied::_update_health_bar()
 {
 	auto health_bar = _get_health_bar();
+
+	Godot::print(_get_HP());
+
 	if (health_bar != nullptr)
 		health_bar->set_value(_get_HP());
 }

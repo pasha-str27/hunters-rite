@@ -21,6 +21,11 @@ void EnemyAIContext::_set_strategy(IEnemyAI* strategy)
 	this->strategy = strategy;
 }
 
+IEnemyAI* godot::EnemyAIContext::_get_strategy()
+{
+	return this->strategy;
+}
+
 void EnemyAIContext::_process(float delta)
 {
 	strategy->_process(delta);
@@ -59,6 +64,11 @@ void godot::EnemyAIContext::_add_bullet(Node* bullet)
 void godot::EnemyAIContext::change_can_fight(bool value)
 {
 	strategy->change_can_fight(value);
+}
+
+void godot::EnemyAIContext::change_can_fight(bool value, ISlimeAttackState* state)
+{
+	strategy->change_can_fight(value, state);
 }
 
 void godot::EnemyAIContext::_delete_player1()
@@ -114,4 +124,9 @@ void godot::EnemyAIContext::_set_player(Node2D* player)
 void godot::EnemyAIContext::_remove_player(Node2D* player)
 {
 	strategy->_remove_player(player);
+}
+
+void godot::EnemyAIContext::_remove_taken_positions()
+{
+	strategy->_remove_taken_positions();
 }

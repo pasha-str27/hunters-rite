@@ -37,23 +37,23 @@ void godot::PlayerMelee::_move()
 	PlayerData::_move();
 
 	String animation_name = sprite->get_animation();
-	if (sprite->get_sprite_frames()->get_animation_loop(animation_name) == false 
-		&& sprite->get_frame() == sprite->get_sprite_frames()->get_frame_count(animation_name) - 1) 
+	if (sprite->get_sprite_frames()->get_animation_loop(animation_name) == false
+		&& sprite->get_frame() == sprite->get_sprite_frames()->get_frame_count(animation_name) - 1)
 	{
 		sprite->set_offset(Vector2::ZERO);
 		sprite->play("idle");
 	}
 
-	if (PlayerData::_get_dir() == Vector2::ZERO && animation_name != "revive" 
+	if (PlayerData::_get_dir() == Vector2::ZERO && animation_name != "revive"
 		&& animation_name != "damaged" && animation_name != "attack")
-			sprite->play("idle");
+		sprite->play("idle");
 
 	if (PlayerData::_get_dir() != Vector2::ZERO && sprite->get_animation() == "idle")
 		sprite->play("run");
 
 	if (sprite->is_flipped_h() && sprite->get_animation() == "attack")
 		sprite->set_offset(Vector2(-26, -4));
-	else 
+	else
 		if (!sprite->is_flipped_h() && sprite->get_animation() == "attack")
 			sprite->set_offset(Vector2(26, -4));
 }
@@ -91,35 +91,60 @@ void godot::PlayerMelee::_process_input()
 	//fight	up
 	if (input_controller->is_action_pressed(fight_up))
 	{
-		cast_to<Node2D>(_get_object()->get_node("Area2D3"))->set_rotation_degrees(270);
-		if(_can_fight())
+		if (!is_attacking)
+		{
+			cast_to<Node2D>(_get_object()->get_node("Area2D3"))->set_rotation_degrees(270);
+		}
+		if (_can_fight())
+		{
 			animator->play("attack");
+			is_attacking = true;
+		}
+
 	}
 
 	//fight	down
 	if (input_controller->is_action_pressed(fight_down))
 	{
-		cast_to<Node2D>(_get_object()->get_node("Area2D3"))->set_rotation_degrees(90);
-		if (_can_fight()) 
+		if (!is_attacking)
+		{
+			cast_to<Node2D>(_get_object()->get_node("Area2D3"))->set_rotation_degrees(90);
+		}
+		if (_can_fight())
+		{
 			animator->play("attack");
+			is_attacking = true;
+		}
 	}
 
 	//fight	left
 	if (input_controller->is_action_pressed(fight_left))
 	{
+		if (!is_attacking)
+		{
+			cast_to<Node2D>(_get_object()->get_node("Area2D3"))->set_rotation_degrees(180);
+		}
 		sprite->set_flip_h(true);
-		cast_to<Node2D>(_get_object()->get_node("Area2D3"))->set_rotation_degrees(180);
 		if (_can_fight())
+		{
 			animator->play("attack");
+			is_attacking = true;
+		}
 	}
 
 	//fight	right
 	if (input_controller->is_action_pressed(fight_right))
 	{
+		if (!is_attacking)
+		{
+			cast_to<Node2D>(_get_object()->get_node("Area2D3"))->set_rotation_degrees(0);
+		}
 		sprite->set_flip_h(false);
-		cast_to<Node2D>(_get_object()->get_node("Area2D3"))->set_rotation_degrees(0);
 		if (_can_fight())
+		{
 			animator->play("attack");
+			is_attacking = true;
+		}
 	}
 
 	PlayerData::_set_dir(dir);
@@ -185,7 +210,7 @@ void godot::PlayerMelee::_set_HP(float value)
 			_get_object()->queue_free();
 			return;
 		}
-		
+
 		_get_object()->call("_die");
 	}
 }
@@ -227,4 +252,9 @@ void godot::PlayerMelee::_start_special()
 
 	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_layer_bit(0, true);
 	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_mask_bit(0, true);
+}
+
+void godot::PlayerMelee::_set_is_attacking(bool value)
+{
+	is_attacking = value;
 }

@@ -41,6 +41,8 @@ namespace godot
 			void _add_bullet(Node*bullet);
 			void _start_timer();
 			void _on_timeout();
+			void _start_fixed_timer(float time);
+			void _on_fixed_timeout();
 			void _destroy_enemy();
 			void _remove_player1();
 			void _remove_player2();
@@ -62,5 +64,6 @@ namespace godot
 			void _on_spawn_end();
 			void _on_Area2D_body_exited(Node* node);
 			void _change_start_parameters();
+			void _remove_taken_positions();
 	};
 }

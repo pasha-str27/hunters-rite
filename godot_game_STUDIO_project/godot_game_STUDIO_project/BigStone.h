@@ -23,5 +23,6 @@ namespace godot
 		void _heal_players();
 		void _can_heal_true();
 		void _heal_player(Node2D* player);
+		void _change_start_parameters();
 	};
 }

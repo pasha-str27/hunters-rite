@@ -10,6 +10,7 @@ void godot::BigStone::_register_methods()
 	register_method("_add_player", &BigStone::_add_player);
 	register_method("_remove_player", &BigStone::_remove_player);
 	register_method("_can_heal_true", &BigStone::_can_heal_true);
+	register_method("_change_start_parameters", &BigStone::_change_start_parameters);
 }
 
 void godot::BigStone::_init()
@@ -42,7 +43,7 @@ void godot::BigStone::_heal_players()
 {
 	auto player_conteiner = PlayersContainer::_get_instance();
 
-	if (MenuButtons::player_name == 0 && players_count == 2)
+	if (MenuButtons::game_mode == COOP && players_count == 2)
 	{
 		if (player_conteiner->_get_player1_regular() != nullptr)
 			_heal_player(player_conteiner->_get_player1_regular());
@@ -52,9 +53,12 @@ void godot::BigStone::_heal_players()
 		can_heal = false;
 		timer->connect("timeout", this, "_can_heal_true");
 		timer->start(heal_cooldown);
+
+		////////////
+		queue_free();
 	}
 
-	if ((MenuButtons::player_name == 1 || MenuButtons::player_name == 2) && players_count == 1)
+	if ((MenuButtons::game_mode == SHOOTER || MenuButtons::game_mode == MELEE) && players_count == 1)
 	{
 		if (player_conteiner->_get_player1_regular() != nullptr)
 			_heal_player(player_conteiner->_get_player1_regular());
@@ -65,6 +69,9 @@ void godot::BigStone::_heal_players()
 		can_heal = false;
 		timer->connect("timeout", this, "_can_heal_true");
 		timer->start(heal_cooldown);
+
+		///////////////////////////////////
+		queue_free();
 	}
 }
 
@@ -82,6 +89,12 @@ void godot::BigStone::_heal_player(Node2D* player)
 			player->get_child(i)->call_deferred("_heal");
 			return;
 		}
+}
+
+void godot::BigStone::_change_start_parameters()
+{
+	Vector2 cur_pos = (get_global_position() - cast_to<Node2D>(get_parent())->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+	get_parent()->call("_set_cell_value", cur_pos.y, cur_pos.x, 7);
 }
 
 void godot::BigStone::_can_heal_true()

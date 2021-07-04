@@ -13,6 +13,7 @@ namespace godot
 		Node2D* player2;
 		Array dirs = {};	//	0 - left, 1 - right, 2 - top, 3 - bottom
 		bool is_open_door = true;
+		bool is_showing_minimap = false;
 		String current_room_type = "";
 
 		Ref<PackedScene> fadeIn = nullptr;
@@ -22,7 +23,7 @@ namespace godot
 		Ref<PackedScene> pause_menu = nullptr;
 		Ref<PackedScene> exit = nullptr;
 
-		//static Node2D* current_room;
+		CanvasItem* minimap = nullptr;
 
 		AudioStreamPlayer2D* audio = nullptr;
 		AudioStreamPlayer2D* audio_boss = nullptr;
@@ -32,13 +33,18 @@ namespace godot
 		float time_delta = 1.0 / 50;
 		float delta_step = -80.0 / 50.0;
 
+		Array generated_keys = {};
+
+
 		void _move(String dir);
 		String _get_dir_on_index(int i);
 		bool _is_one_player_alive();
 		void hide_tutorial();
+
 	public:
 		static Node2D* current_room;
 		static bool show_tutorial;
+		static int current_level;
 
 		static void _register_methods();
 		void _init();
@@ -56,6 +62,8 @@ namespace godot
 		void _set_current_room_type(String);
 		void _go_to_start();
 		void _spawn_players();
+		void _get_type_keys();
+		void _hide_tutorial_sprites(String t_player_name);
 		bool _is_player_have_need_keys(Array rooms_keys);
 		CameraController();
 		~CameraController();

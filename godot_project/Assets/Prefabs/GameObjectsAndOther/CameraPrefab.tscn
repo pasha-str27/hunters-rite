@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/Jertovnik.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Scripts/SpawnEnemyController.gdns" type="Script" id=2]
@@ -10,40 +10,56 @@
 [ext_resource path="res://Assets/Prefabs/SoundsEffects/BackMusic/BossBackMusic.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Prefabs/Scenes/Pause.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/exit.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Assets/Prefabs/Enemies/Slime.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Assets/Prefabs/Enemies/StatueShoot.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Assets/Prefabs/Enemies/Spider.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Assets/Prefabs/Enemies/StatueMelee.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Assets/Prefabs/Enemies/Bat.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Assets/Prefabs/Enemies/SlimeShoot.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Assets/Prefabs/Scenes/MiniMap.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Prefabs/Enemies/FlowerBoss.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Assets/Prefabs/Enemies/Bat.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Assets/Prefabs/Enemies/SlimeShoot.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/Prefabs/Enemies/StatueShoot.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Assets/Prefabs/Enemies/StatueMelee.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Assets/Prefabs/Enemies/Slime.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Assets/Prefabs/Enemies/Spider.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Assets/Prefabs/Enemies/SlimeBoss.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Assets/Prefabs/Enemies/Worm.tscn" type="PackedScene" id=20]
 
-[sub_resource type="RectangleShape2D" id=1]
-
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.6, 0.6, 0.6, 0.117647 )
 corner_radius_top_left = 60
 corner_radius_top_right = 30
 corner_radius_bottom_right = 60
 corner_radius_bottom_left = 30
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.215686, 1, 0.415686, 1 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.6, 0.6, 0.6, 0.117647 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.6, 0.6, 0.6, 0.117647 )
 corner_radius_top_left = 30
 corner_radius_top_right = 60
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 60
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0, 0.811765, 0.85098, 1 )
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.6, 0.6, 0.6, 0.117647 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.568627, 0.14902, 0.14902, 0.313726 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
 
 [node name="Camera2D" type="Camera2D"]
 z_index = 101
@@ -59,7 +75,9 @@ Exit = ExtResource( 10 )
 [node name="EnemySpawner" type="Node2D" parent="."]
 script = ExtResource( 2 )
 "Altar prefab" = ExtResource( 1 )
-enemy_list = [ ExtResource( 14 ), ExtResource( 12 ), ExtResource( 15 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 16 ) ]
+enemy_list = [ ExtResource( 13 ), ExtResource( 17 ), ExtResource( 14 ), ExtResource( 18 ), ExtResource( 16 ), ExtResource( 15 ), ExtResource( 20 ) ]
+boss_prefab = ExtResource( 12 )
+boss_slime_prefab = ExtResource( 19 )
 
 [node name="ItemPoints" type="Node2D" parent="EnemySpawner"]
 
@@ -68,14 +86,6 @@ position = Vector2( -80, 5 )
 
 [node name="Node2D2" type="Node2D" parent="EnemySpawner/ItemPoints"]
 position = Vector2( 80, 5 )
-
-[node name="Area2D" type="Area2D" parent="."]
-scale = Vector2( 2, 2 )
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 1 )
 
 [node name="P1HealthBarWrapper" type="Control" parent="."]
 margin_left = -478.0
@@ -94,7 +104,7 @@ anchor_bottom = 1.0
 margin_left = -1.17099
 margin_right = -0.460999
 margin_bottom = 1.0
-custom_styles/normal = SubResource( 2 )
+custom_styles/normal = SubResource( 1 )
 custom_fonts/font = ExtResource( 5 )
 custom_colors/font_color = Color( 0.215686, 1, 0.415686, 1 )
 text = "P1"
@@ -109,8 +119,8 @@ anchor_right = 1.0
 margin_left = 1.0
 margin_right = -69.0
 margin_bottom = 20.0
-custom_styles/fg = SubResource( 3 )
-custom_styles/bg = SubResource( 4 )
+custom_styles/fg = SubResource( 2 )
+custom_styles/bg = SubResource( 3 )
 max_value = 0.0
 percent_visible = false
 __meta__ = {
@@ -133,7 +143,7 @@ anchor_left = 0.888
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 0.0319519
-custom_styles/normal = SubResource( 5 )
+custom_styles/normal = SubResource( 4 )
 custom_fonts/font = ExtResource( 5 )
 custom_colors/font_color = Color( 0, 0.811765, 0.85098, 1 )
 text = "P2"
@@ -150,8 +160,8 @@ anchor_bottom = 1.0
 margin_top = -20.0
 margin_right = -66.0
 rect_min_size = Vector2( 0, 5 )
-custom_styles/fg = SubResource( 6 )
-custom_styles/bg = SubResource( 7 )
+custom_styles/fg = SubResource( 5 )
+custom_styles/bg = SubResource( 6 )
 max_value = 0.0
 percent_visible = false
 __meta__ = {
@@ -197,4 +207,51 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="area_entered" from="Area2D" to="EnemySpawner" method="_on_Area2D_area_entered"]
+[node name="KeyHolder" type="Control" parent="."]
+margin_left = -476.0
+margin_top = -269.0
+margin_right = 483.0
+margin_bottom = -210.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Keyses" type="CenterContainer" parent="KeyHolder"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 409.0
+margin_bottom = 42.0
+rect_scale = Vector2( 0.7, 0.7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Keys" type="HBoxContainer" parent="KeyHolder/Keyses"]
+margin_left = 684.0
+margin_top = 50.0
+margin_right = 684.0
+margin_bottom = 50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MiniMap" parent="." instance=ExtResource( 11 )]
+visible = false
+
+[node name="BossHealthBar" type="ProgressBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -248.0
+margin_top = -264.0
+margin_right = 252.0
+margin_bottom = -248.0
+custom_styles/fg = SubResource( 7 )
+custom_styles/bg = SubResource( 8 )
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0.941176, 0.894118, 0.894118, 1 )
+max_value = 350.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}

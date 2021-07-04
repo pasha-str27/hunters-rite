@@ -11,7 +11,10 @@ void godot::Enemy::_register_methods()
 	register_method("_take_damage", &Enemy::_take_damage);
 	register_method("_add_bullet", &Enemy::_add_bullet);
 	register_method("_on_timeout", &Enemy::_on_timeout);
+	register_method("_on_fixed_timeout", &Enemy::_on_fixed_timeout);
 	register_method("_start_timer", &Enemy::_start_timer);
+	register_method("_start_fixed_timer", &Enemy::_start_fixed_timer);
+	
 	register_method("_destroy_enemy", &Enemy::_destroy_enemy);
 	register_method("_remove_player1", &Enemy::_remove_player1);
 	register_method("_remove_player2", &Enemy::_remove_player2);
@@ -33,6 +36,7 @@ void godot::Enemy::_register_methods()
 	register_method("_on_spawn_end", &Enemy::_on_spawn_end);
 	register_method("_on_Area2D_body_exited", &Enemy::_on_Area2D_body_exited);
 	register_method("_change_start_parameters", &Enemy::_change_start_parameters);
+	register_method("_remove_taken_positions", &Enemy::_remove_taken_positions);
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
@@ -104,13 +108,20 @@ void godot::Enemy::_ready()
 	if (is_in_group("slime_shoot"))
 		ai->_set_strategy(new SlimeShootAI(bullet, this));
 
+	if (is_in_group("slime_boss"))
+		ai->_set_strategy(new SlimeBossAI(bullet, this));
+
+	if (is_in_group("worm"))
+		ai->_set_strategy(new WormAI(bullet, this));
+
+
 	spawn_particles->set_emitting(true);
 	timer_particles->connect("timeout", this, "_on_spawn_end");
 	timer_particles->start(0.2f);
-	cast_to<Node2D>(get_node("CollisionShape2D"))->call_deferred("set_visible", false);
+	//cast_to<Node2D>(get_node("CollisionShape2D"))->call_deferred("set_visible", false);
 
-	if(is_in_group("flower"))
-		cast_to<ProgressBar>(get_parent()->get_node("BossHealthBar"))->set_visible(false);
+	if(is_in_group("flower") || is_in_group("slime_boss"))
+		cast_to<ProgressBar>(get_node("/root/Node2D/Node/Camera2D")->get_node("BossHealthBar"))->set_visible(false);
 	else
 		cast_to<ProgressBar>(get_node("HealthBar"))->set_visible(false);
 }
@@ -147,6 +158,12 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/EnemyTakeDamage.tscn");
 	add_child(prefab->instance());
 
+	if (is_in_group("slime_boss"))
+	{
+		ISlimeAttackState::taken_damage += 1;
+		ai->change_can_fight(false, new SlimeAttackSpawnState((SlimeBossAI*)ai->_get_strategy()));
+	}
+
 	if (HP <= 0)
 	{
 		Node *player = nullptr;
@@ -171,10 +188,12 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 			CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->call("_open_doors");
 		}
 
-		if (is_in_group("flower"))
+		if (is_in_group("flower") || is_in_group("slime_boss"))
 		{
 			get_node("/root/Node2D/Node/ItemsContainer")->call("_spawn_random_item", get_global_position());
+			cast_to<ProgressBar>(CustomExtensions::GetChildByName(get_node("/root/Node2D/Node/Camera2D"), "BossHealthBar"))->set_visible(false);
 		}
+
 
 		set_collision_layer_bit(2, false);
 		set_collision_mask_bit(9, false);
@@ -228,6 +247,22 @@ void godot::Enemy::_on_timeout()
 		ai->change_can_fight(true);
 }
 
+void godot::Enemy::_start_fixed_timer(float time)
+{
+	if (!timer->is_connected("timeout", this, "_on_fixed_timeout"))
+	{
+		timer->connect("timeout", this, "_on_fixed_timeout");
+
+		timer->start(time);
+	}
+}
+
+void godot::Enemy::_on_fixed_timeout()
+{
+	timer->disconnect("timeout", this, "_on_fixed_timeout");
+	ai->change_can_fight(true);
+}
+
 void godot::Enemy::_destroy_enemy()
 {
 	_update_health_bar();
@@ -264,6 +299,9 @@ void godot::Enemy::_on_Area2D_body_entered(Node* node)
 	if (node->is_in_group("player") && !died)
 	{
 		float damage = 20;
+
+		//if (is_in_group("slime_boss"))
+		//	ai->change_can_fight(false, new SlimeAttackSpawnState((SlimeBossAI*)ai->_get_strategy()));
 
 		ai->_set_player(cast_to<Node2D>(node));
 		if (is_in_group("slime"))
@@ -368,7 +406,7 @@ void godot::Enemy::_update_health_bar()
 	auto health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(this, "HealthBar"));
 
 	if (health_bar == nullptr)
-		health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(this->get_parent(), "BossHealthBar"));
+		health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(get_node("/root/Node2D/Node/Camera2D"), "BossHealthBar"));
 
 	if (health_bar != nullptr)
 		health_bar->call_deferred("set_value", HP);
@@ -424,8 +462,13 @@ void godot::Enemy::_on_spawn_end()
 	spawn_particles->set_emitting(false);
 	cast_to<Node2D>(get_node("CollisionShape2D"))->set_visible(true);
 
-	if (is_in_group("flower"))
-		cast_to<ProgressBar>(get_parent()->get_node("BossHealthBar"))->set_visible(true);
+	if (is_in_group("flower") || is_in_group("slime_boss"))
+	{
+		auto healthbar = cast_to<ProgressBar>(get_node("/root/Node2D/Node/Camera2D")->get_node("BossHealthBar"));
+		healthbar->set_max(HP);
+		healthbar->set_value(HP);
+		healthbar->set_visible(true);
+	}
 	else
 		cast_to<ProgressBar>(get_node("HealthBar"))->set_visible(true);
 
@@ -443,4 +486,9 @@ void godot::Enemy::_on_Area2D_body_exited(Node* node)
 void godot::Enemy::_change_start_parameters()
 {
 	ai->_change_start_parameters();
+}
+
+void godot::Enemy::_remove_taken_positions()
+{
+	ai->_remove_taken_positions();
 }

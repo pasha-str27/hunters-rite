@@ -97,26 +97,6 @@ void godot::PlayerShoot::_process_input()
 		_fight();
 	}
 
-	//fight	left
-	if (input_controller->is_action_pressed(fight_left))
-	{
-		bullet_dir = Vector2::LEFT;
-		sprite->set_flip_h(true);
-		sprite->set_offset(Vector2(-35, 0));
-		shoot_particles->set_position(Vector2(-11, 0));
-		_fight();
-	}
-
-	//fight	right
-	if (input_controller->is_action_pressed(fight_right))
-	{
-		bullet_dir = Vector2::RIGHT;
-		sprite->set_flip_h(false);
-		sprite->set_offset(Vector2(35, 0));
-		shoot_particles->set_position(Vector2(11, 0));
-		_fight();
-	}
-
 	//move up
 	if (input_controller->is_action_pressed(move_up))
 		dir.y -= _get_speed();
@@ -147,6 +127,26 @@ void godot::PlayerShoot::_process_input()
 	if (input_controller->is_action_just_pressed(special))
 		_get_object()->call("_start_special_timer");
 
+	//fight	left
+	if (input_controller->is_action_pressed(fight_left))
+	{
+		bullet_dir = Vector2::LEFT;
+		sprite->set_flip_h(true);
+		sprite->set_offset(Vector2(-35, 0));
+		shoot_particles->set_position(Vector2(-11, 0));
+		_fight();
+	}
+
+	//fight	right
+	if (input_controller->is_action_pressed(fight_right))
+	{
+		bullet_dir = Vector2::RIGHT;
+		sprite->set_flip_h(false);
+		sprite->set_offset(Vector2(35, 0));
+		shoot_particles->set_position(Vector2(11, 0));
+		_fight();
+	}
+
 	PlayerData::_set_dir(dir);
 }
 
@@ -161,7 +161,9 @@ void godot::PlayerShoot::_fight(Node* node)
 
 	_change_can_fight(false);
 
-	available_bullets[available_bullets.size() - 1]->set_position(_get_object()->get_global_position());
+	Vector2 position_to_spawn = cast_to<Node2D>(_get_object()->get_node("AnimatedSprite")->get_child(0))->get_global_position();
+
+	available_bullets[available_bullets.size() - 1]->set_position(position_to_spawn);
 	available_bullets[available_bullets.size() - 1]->set_visible(true);
 
 
@@ -241,9 +243,4 @@ void godot::PlayerShoot::_stop_special()
 void godot::PlayerShoot::_start_special()
 {
 	_set_speed(_get_speed() * speed_delta);
-}
-
-void godot::PlayerShoot::_set_controll_buttons(String move_up, String move_down, String move_left, String move_right, String fight_up, String fight_down, String fight_left, String fight_right, String special)
-{
-	PlayerData::_set_controll_buttons(move_up, move_down, move_left, move_right, fight_up, fight_down, fight_left, fight_right, special);
 }

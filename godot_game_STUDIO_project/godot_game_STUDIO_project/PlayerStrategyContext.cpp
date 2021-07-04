@@ -8,6 +8,11 @@ void godot::PlayerStrategyContext::_set_controll_buttons(String move_up, String 
 	strategy->_set_controll_buttons(move_up, move_down, move_left, move_right, fight_up, fight_down, fight_left, fight_right, special);
 }
 
+void godot::PlayerStrategyContext::_set_is_attacking(bool value)
+{
+	strategy->_set_is_attacking(value);
+}
+
 bool godot::PlayerStrategyContext::_was_revived()
 {
 	return strategy->_was_revived();
@@ -146,6 +151,11 @@ float godot::PlayerStrategyContext::_get_HP()
 void godot::PlayerStrategyContext::_set_HP(float HP)
 {
 	strategy->_set_HP(HP);
+}
+
+void godot::PlayerStrategyContext::_set_right_HP(float HP)
+{
+	strategy->_set_right_HP(HP);
 }
 
 float godot::PlayerStrategyContext::_get_damage()

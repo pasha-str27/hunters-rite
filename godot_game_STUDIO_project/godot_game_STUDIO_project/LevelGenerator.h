@@ -21,7 +21,7 @@ namespace godot
 		float step_x = 1024;
 		float step_y = 720;
 
-		static std::vector<Vector2> positions;
+		std::vector<Vector2> positions;
 		std::vector<Node2D*> rooms;
 
 		int wall_top_count;
@@ -39,6 +39,7 @@ namespace godot
 		Ref<PackedScene> key_room_pedestal = nullptr;
 
 		Array keys_prefabs = {};
+		Array keys_prefabs_local = {};
 		Array generated_keys = {};
 
 		Ref<PackedScene> big_stone = nullptr;
@@ -57,10 +58,8 @@ namespace godot
 		void _buid_roofs();
 		void _buid_floors();
 		void _buid_top_wall();
-		void _buid_stones_first_step(Node2D* room);
-		void _buid_stones_second_step(Node2D* room);
-		void _buid_spikes_first_step(Node2D* room);
-		void _buid_spikes_second_step(Node2D* room);
+		void _buid_stones(Node2D* room);
+		void _buid_spikes(Node2D* room);
 		void _build_doors(int start_index, int end_index);
 		Node2D* _get_next_room(Vector2 current_room_position);
 		std::vector<Node2D*> _get_corner_rooms();
@@ -74,10 +73,9 @@ namespace godot
 		void _set_keys(Node2D* room, Array keys);
 		void _spawn_big_stone();
 		int _get_keys_count();
-
-		static std::vector<Vector2> _get_rooms_positions()
-		{
-			return positions;
-		}
+		void _clear();
+		Array _get_rooms();
+		Array _get_rooms_positions();
+		void _process(float delta);
 	};
 }

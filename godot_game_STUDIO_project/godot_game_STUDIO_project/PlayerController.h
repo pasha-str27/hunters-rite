@@ -28,6 +28,7 @@ namespace godot
 		float _hp;
 		float _damage;		
 		float speed;
+		float _saved_speed;
 		Timer* timer;
 		bool can_move;
 		bool is_alive;
@@ -103,5 +104,9 @@ namespace godot
 		bool _is_ghost_mode();
 		void _set_controll_buttons(String move_up, String move_down, String move_left, String move_right,
 			String fight_up, String fight_down, String fight_left, String fight_right, String special);
+		void _stop_moving();
+		void _continue_moving();
+		void _set_is_attacking(bool value);
+		void _set_right_HP(float value);
 	};
 }

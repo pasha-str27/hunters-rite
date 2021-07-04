@@ -115,6 +115,11 @@ void godot::PlayerData::_set_HP(float HP)
 	this->HP = HP > max_HP ? max_HP : this->HP;
 }
 
+void godot::PlayerData::_set_right_HP(float HP)
+{
+	this->HP = HP;
+}
+
 float godot::PlayerData::_get_damage()
 {
 	return damage;
@@ -147,10 +152,10 @@ float godot::PlayerData::_get_max_HP()
 
 void godot::PlayerData::_set_max_HP(float value)
 {
-	//float diff = value - max_HP;
+	float diff = value - max_HP;
 	max_HP = value;
-	/*float _hp = this->HP + diff;
-	_set_HP(_hp);*/
+	float _hp = this->HP + diff;
+	_set_HP(_hp);
 }
 
 void godot::PlayerData::_stop_animations()
@@ -221,4 +226,8 @@ IPlayer* godot::PlayerData::_clone()
 void godot::PlayerData::_heal()
 {
 	_set_HP(_get_max_HP());
+}
+
+void godot::PlayerData::_set_is_attacking(bool value)
+{
 }
