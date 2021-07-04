@@ -151,6 +151,27 @@ void godot::CameraController::_init()
 		dirs.push_back(0);
 }
 
+void  godot::CameraController::_hide_tutorial_sprites(String t_player_name) {
+
+	// clear coop tutorial 
+	get_node("/root/Node2D/Node/TutorialSprites")->queue_free();
+
+	Control* tutorial_control = nullptr;
+	tutorial_control = cast_to<Control>(get_node("/root/Node2D/Node/TutorialSpritesSingle/TutorialControl"));
+
+	// attack move special
+	Array tutorial_sprites = tutorial_control->get_children();
+
+	for (int child_index = 0; child_index < tutorial_sprites.size(); child_index++) {
+
+		//hide tutorial for other player
+		auto sprite_box = cast_to<Node2D>(tutorial_sprites[child_index])->get_child(2);
+		cast_to<TextureRect>(sprite_box->find_node(cast_to<Area2D>(tutorial_sprites[child_index])->get_name() + t_player_name))->set_visible(false);
+		cast_to<HBoxContainer>(get_node("/root/Node2D/Node/TutorialSpritesSingle/TutorialNextRoom"))->set_visible(false);
+		cast_to<CenterContainer>(sprite_box->find_node(t_player_name))->set_visible(false);
+	}
+}
+
 void godot::CameraController::_spawn_players()
 {
 	if (!show_tutorial)
@@ -167,6 +188,7 @@ void godot::CameraController::_spawn_players()
 		PlayersContainer::_get_instance()->_set_player1_regular(player1);
 		PlayersContainer::_get_instance()->_set_player2_regular(player2);
 		get_node("P2HealthBarWrapper")->queue_free();
+		_hide_tutorial_sprites("P2");
 		//	hiding label
 		//get_node("P1HealthBarWrapper/Label")->queue_free();
 	}
@@ -182,6 +204,7 @@ void godot::CameraController::_spawn_players()
 			PlayersContainer::_get_instance()->_set_player1_regular(player1);
 			PlayersContainer::_get_instance()->_set_player2_regular(player2);
 			get_node("P1HealthBarWrapper")->queue_free();
+			_hide_tutorial_sprites("P1");
 			//	hiding label
 			//get_node("P2HealthBarWrapper/Label")->queue_free();
 		}
@@ -199,6 +222,8 @@ void godot::CameraController::_spawn_players()
 
 			PlayersContainer::_get_instance()->_set_player1_regular(player1);
 			PlayersContainer::_get_instance()->_set_player2_regular(player2);
+
+			get_node("/root/Node2D/Node/TutorialSpritesSingle")->queue_free();
 
 			//player1->call("_set_controll_buttons", "Player1_up", "Player1_down", "Player1_left", "Player1_right", "Player1_fight_up", "Player1_fight_down", "Player1_fight_left", "Player1_fight_right", "Player1_special");
 			if(player2->has_method("_set_controll_buttons"))

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tutorial_move_p2_player_next_room.png-f72085437d2ab0c50924f454c2c139b1.stex"
+path="res://.import/tutorial_shield.png-c61facd6aff8b7811fadfa25b59a694d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/UI/Tutorial/tutorial_move_p2_player_next_room.png"
-dest_files=[ "res://.import/tutorial_move_p2_player_next_room.png-f72085437d2ab0c50924f454c2c139b1.stex" ]
+source_file="res://Assets/Sprites/UI/Tutorial/tutorial_shield.png"
+dest_files=[ "res://.import/tutorial_shield.png-c61facd6aff8b7811fadfa25b59a694d.stex" ]
 
 [params]
 
