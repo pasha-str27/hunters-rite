@@ -813,7 +813,9 @@ void godot::LevelGenerator::_clear()
 	this->rooms.clear();
 	this->generated_keys.clear();
 	size = 0;
-	//map_size += 2;
+
+	//if(CameraController::current_level>1)
+	//	map_size += 2;
 }
 
 Array godot::LevelGenerator::_get_rooms()

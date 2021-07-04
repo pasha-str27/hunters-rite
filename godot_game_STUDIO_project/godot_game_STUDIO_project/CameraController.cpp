@@ -225,7 +225,6 @@ void godot::CameraController::_spawn_players()
 
 			cast_to<Node2D>(get_node("/root/Node2D/Node/TutorialSpritesSingle"))->hide();
 
-			//player1->call("_set_controll_buttons", "Player1_up", "Player1_down", "Player1_left", "Player1_right", "Player1_fight_up", "Player1_fight_down", "Player1_fight_left", "Player1_fight_right", "Player1_special");
 			if(player2->has_method("_set_controll_buttons"))
 				player2->call_deferred("_set_controll_buttons", "Player2_up", "Player2_down", "Player2_left", "Player2_right", "Player2_fight_up", "Player2_fight_down", "Player2_fight_left", "Player2_fight_right", "Player2_special");
 			else
@@ -367,7 +366,7 @@ void godot::CameraController::_door_collision(String door_dir)
 	if (!_is_player_have_need_keys((Array)next_room->call("_get_list_of_keys")))
 		return;
 
-	if (((int)dirs[index] == 2 && !_is_one_player_alive()) || (_is_one_player_alive() && (int)dirs[index] == 1))
+	if (((int)dirs[index] == 2 && MenuButtons::game_mode==COOP) || ((MenuButtons::game_mode == SHOOTER|| MenuButtons::game_mode == MELEE) && (int)dirs[index] == 1))
 	{
 		Enemies::get_singleton()->set_spawning(true);
 
