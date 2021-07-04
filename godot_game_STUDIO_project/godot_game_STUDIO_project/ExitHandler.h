@@ -15,6 +15,7 @@ namespace godot
 		int players_count = 0;
 		Timer* timer = nullptr;
 		Timer* timer_audio = nullptr;
+		Timer* timer_music_out = nullptr;
 		AudioServer* audio_server = nullptr;
 		bool is_spawned = false;
 	public:
@@ -27,6 +28,8 @@ namespace godot
 		void _load_menu_scene();
 		void _show_exit();
 		void _mute_audio();
+		void _audio_fade_to_main_menu();
+		void _move_to_main_menu();
 		ExitHandler();
 		~ExitHandler();
 	};

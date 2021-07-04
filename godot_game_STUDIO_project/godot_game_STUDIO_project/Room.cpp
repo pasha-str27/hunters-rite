@@ -31,8 +31,6 @@ void godot::Room::_register_methods()
 	register_method("_set_is_special", &Room::_set_is_special);
 	register_method("_get_is_special", &Room::_get_is_special);
 	register_method("_get_enemy_spawn_positions", &Room::_get_enemy_spawn_positions);
-	register_method("_set_is_last_room", &Room::_set_is_last_room);
-	register_method("_get_is_last_room", &Room::_get_is_last_room);
 }
 
 godot::Room::Room()
@@ -95,14 +93,14 @@ void godot::Room::_set_cell_value(int i, int j, int value)
 	room_map[i][j] = value;
 }
 
-void godot::Room::_fill_empty_positions()
+void godot::Room::_fill_empty_positions(Node2D* room)
 {
 	for (int i=3;i<room_map.size()-1;++i)
 		for (int j=1; j<room_map[i].size()-1;++j)
 			if (room_map[i][j] == 0)
 			{
 				empty_pos_world_coordinates.push_back((Vector2(j, i) * 32 
-					+ CameraController::current_room->get_global_position()
+					+ room->get_global_position()
 					- Vector2(896, 544) / 2 + Vector2(16, 16)));
 			}			
 }
@@ -176,16 +174,6 @@ Array godot::Room::_get_enemy_spawn_positions()
 
 	arr.push_back(poses);
 	return arr;
-}
-
-void godot::Room::_set_is_last_room(bool value)
-{
-	is_last_room = value;
-}
-
-bool godot::Room::_get_is_last_room()
-{
-	return is_last_room;
 }
 
 void godot::Room::_set_num_of_adjacent_rooms(int value)

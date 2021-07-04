@@ -115,6 +115,11 @@ void godot::PlayerData::_set_HP(float HP)
 	this->HP = HP > max_HP ? max_HP : this->HP;
 }
 
+void godot::PlayerData::_set_right_HP(float HP)
+{
+	this->HP = HP;
+}
+
 float godot::PlayerData::_get_damage()
 {
 	return damage;

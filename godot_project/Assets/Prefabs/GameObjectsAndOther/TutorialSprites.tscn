@@ -6,6 +6,9 @@
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_next.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_move_p1_player_next_room.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_move_p2_player_next_room.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_shield.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_atack_p2_player_v2.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_atack_p1_player_v2.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_attack_p2.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_dash_p1.png" type="Texture" id=13]
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_four_key.png" type="Texture" id=15]
@@ -14,10 +17,7 @@
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_atack_gamepad_V2.png" type="Texture" id=18]
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_four_gamepad_V2.png" type="Texture" id=19]
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_dash_gamepad_V2.png" type="Texture" id=20]
-[ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_atack_p1_player.png" type="Texture" id=21]
-[ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_dash_p2_player.png" type="Texture" id=22]
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_dash_p1_player.png" type="Texture" id=23]
-[ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_atack_p2_player.png" type="Texture" id=24]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 217.249, 381.316 )
@@ -26,15 +26,15 @@ extents = Vector2( 217.249, 381.316 )
 size = 48
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=6]
-size = 34
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=3]
 size = 34
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=4]
+size = 34
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
 size = 34
 font_data = ExtResource( 1 )
 
@@ -79,7 +79,6 @@ margin_bottom = 500.0
 rect_min_size = Vector2( 300, 0 )
 
 [node name="TextureRect" type="TextureRect" parent="FreeSpace2"]
-visible = false
 margin_top = 296.0
 margin_right = 300.0
 margin_bottom = 424.0
@@ -106,7 +105,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="right2" type="TextureRect" parent="TutorialNextRoom"]
+[node name="right2" type="TextureRect" parent="TutorialNextRoom/miniP2"]
 margin_left = 94.0
 margin_right = 154.0
 margin_bottom = 150.0
@@ -119,32 +118,32 @@ __meta__ = {
 }
 
 [node name="freespace" type="CenterContainer" parent="TutorialNextRoom"]
-margin_left = 158.0
-margin_right = 318.0
+margin_left = 94.0
+margin_right = 379.0
 margin_bottom = 150.0
-rect_min_size = Vector2( 160, 0 )
-
-[node name="left" type="TextureRect" parent="TutorialNextRoom"]
-margin_left = 322.0
-margin_right = 382.0
-margin_bottom = 150.0
-rect_min_size = Vector2( 60, 30 )
-texture = ExtResource( 4 )
-stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
+rect_min_size = Vector2( 285, 0 )
 
 [node name="miniP1" type="TextureRect" parent="TutorialNextRoom"]
 modulate = Color( 1, 1, 1, 0.741176 )
-margin_left = 386.0
-margin_right = 476.0
+margin_left = 383.0
+margin_right = 473.0
 margin_bottom = 150.0
 rect_min_size = Vector2( 90, 126 )
 texture = ExtResource( 5 )
 expand = true
 stretch_mode = 4
 flip_h = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="left" type="TextureRect" parent="TutorialNextRoom/miniP1"]
+margin_left = -64.0
+margin_right = -4.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 60, 30 )
+texture = ExtResource( 4 )
+stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -162,47 +161,49 @@ __meta__ = {
 position = Vector2( -729.313, -220 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="TutorialControl/Dash"]
+visible = false
 position = Vector2( 1287.52, 341.943 )
 shape = SubResource( 1 )
 
 [node name="Title" type="Label" parent="TutorialControl/Dash"]
 modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
 margin_left = 1177.0
-margin_right = 1393.0
-margin_bottom = 100.0
+margin_top = -1.0
+margin_right = 1513.0
+margin_bottom = 99.0
 rect_min_size = Vector2( 0, 100 )
 rect_pivot_offset = Vector2( -1713.93, 150 )
 custom_fonts/font = SubResource( 2 )
-text = "Dash"
+text = "Special"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Stuff" type="VBoxContainer" parent="TutorialControl/Dash"]
-visible = false
 margin_left = 1177.0
-margin_right = 1393.0
-margin_bottom = 720.0
+margin_right = 1509.0
+margin_bottom = 787.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TitlePlaceHolder" type="Label" parent="TutorialControl/Dash/Stuff"]
 modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
-margin_right = 216.0
+margin_right = 332.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
 rect_pivot_offset = Vector2( -1713.93, 150 )
 custom_fonts/font = SubResource( 2 )
 align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="DashP1" type="TextureRect" parent="TutorialControl/Dash/Stuff"]
 margin_top = 104.0
-margin_right = 216.0
+margin_right = 332.0
 margin_bottom = 158.0
 texture = ExtResource( 13 )
 stretch_mode = 4
@@ -218,7 +219,7 @@ margin_left = 1.48651
 margin_top = 1.48651
 margin_right = 1.48651
 margin_bottom = 2.48651
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 3 )
 text = "Q"
 align = 1
 valign = 1
@@ -228,12 +229,13 @@ __meta__ = {
 
 [node name="P1" type="CenterContainer" parent="TutorialControl/Dash/Stuff"]
 margin_top = 162.0
-margin_right = 216.0
+margin_right = 332.0
 margin_bottom = 313.0
 
 [node name="TextureRect" type="TextureRect" parent="TutorialControl/Dash/Stuff/P1"]
 modulate = Color( 1, 1, 1, 0.741176 )
-margin_right = 216.0
+margin_left = 58.0
+margin_right = 274.0
 margin_bottom = 151.0
 rect_min_size = Vector2( 216, 151 )
 texture = ExtResource( 23 )
@@ -245,7 +247,7 @@ __meta__ = {
 
 [node name="DashP2" type="TextureRect" parent="TutorialControl/Dash/Stuff"]
 margin_top = 317.0
-margin_right = 216.0
+margin_right = 332.0
 margin_bottom = 417.0
 rect_min_size = Vector2( 0, 100 )
 texture = ExtResource( 12 )
@@ -262,7 +264,7 @@ margin_left = 3.53554
 margin_top = 3.53554
 margin_right = 3.53552
 margin_bottom = 3.53552
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 3 )
 text = "Shift"
 align = 1
 valign = 1
@@ -272,15 +274,27 @@ __meta__ = {
 
 [node name="P2" type="CenterContainer" parent="TutorialControl/Dash/Stuff"]
 margin_top = 421.0
-margin_right = 216.0
+margin_right = 332.0
 margin_bottom = 571.0
+
+[node name="TextureRect2" type="TextureRect" parent="TutorialControl/Dash/Stuff/P2"]
+margin_left = 129.0
+margin_top = 34.0
+margin_right = 202.0
+margin_bottom = 115.0
+texture = ExtResource( 6 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureRect" type="TextureRect" parent="TutorialControl/Dash/Stuff/P2"]
 modulate = Color( 1, 1, 1, 0.878431 )
-margin_right = 216.0
+margin_left = 58.0
+margin_right = 274.0
 margin_bottom = 150.0
 rect_min_size = Vector2( 216, 150 )
-texture = ExtResource( 22 )
+texture = ExtResource( 7 )
 expand = true
 stretch_mode = 6
 __meta__ = {
@@ -289,7 +303,7 @@ __meta__ = {
 
 [node name="DashGamePad" type="TextureRect" parent="TutorialControl/Dash/Stuff"]
 margin_top = 575.0
-margin_right = 216.0
+margin_right = 332.0
 margin_bottom = 703.0
 rect_min_size = Vector2( 128, 128 )
 texture = ExtResource( 20 )
@@ -306,7 +320,7 @@ margin_left = 0.78743
 margin_top = 6.29961
 margin_right = 4.78743
 margin_bottom = 6.29961
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 3 )
 text = "R2"
 align = 1
 valign = 1
@@ -320,6 +334,7 @@ __meta__ = {
 position = Vector2( -729.313, -220 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="TutorialControl/Move"]
+visible = false
 position = Vector2( 729.965, 342.066 )
 shape = SubResource( 1 )
 
@@ -337,7 +352,6 @@ __meta__ = {
 }
 
 [node name="Stuff" type="VBoxContainer" parent="TutorialControl/Move"]
-visible = false
 margin_left = 596.0
 margin_right = 869.0
 margin_bottom = 720.0
@@ -374,7 +388,7 @@ margin_left = 15.5
 margin_top = 23.0
 margin_right = 49.5
 margin_bottom = 57.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "A"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -386,7 +400,7 @@ margin_left = 86.0
 margin_top = 23.0
 margin_right = 120.0
 margin_bottom = 57.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "W"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -398,7 +412,7 @@ margin_left = 158.0
 margin_top = 23.0
 margin_right = 192.0
 margin_bottom = 57.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "S"
 
 [node name="Key_D" type="Label" parent="TutorialControl/Move/Stuff/MoveP1"]
@@ -407,7 +421,7 @@ margin_left = 230.0
 margin_top = 23.0
 margin_right = 264.0
 margin_bottom = 57.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "D"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -483,6 +497,7 @@ __meta__ = {
 position = Vector2( -729.313, -220 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="TutorialControl/Attack"]
+visible = false
 position = Vector2( 136.635, 340.568 )
 shape = SubResource( 1 )
 
@@ -499,7 +514,6 @@ __meta__ = {
 }
 
 [node name="Stuff" type="VBoxContainer" parent="TutorialControl/Attack"]
-visible = false
 margin_right = 288.0
 margin_bottom = 720.0
 rect_pivot_offset = Vector2( -753.977, 100 )
@@ -518,7 +532,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AtackP1" type="TextureRect" parent="TutorialControl/Attack/Stuff"]
+[node name="AttackP1" type="TextureRect" parent="TutorialControl/Attack/Stuff"]
 margin_top = 104.0
 margin_right = 288.0
 margin_bottom = 184.0
@@ -529,50 +543,50 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key_H" type="Label" parent="TutorialControl/Attack/Stuff/AtackP1"]
+[node name="Key_H" type="Label" parent="TutorialControl/Attack/Stuff/AttackP1"]
 modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
 margin_left = 21.5
 margin_top = 23.0
 margin_right = 55.5
 margin_bottom = 57.0
-custom_fonts/font = SubResource( 4 )
-text = "H"
+custom_fonts/font = SubResource( 5 )
+text = "F"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key_U" type="Label" parent="TutorialControl/Attack/Stuff/AtackP1"]
+[node name="Key_U" type="Label" parent="TutorialControl/Attack/Stuff/AttackP1"]
 modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
 margin_left = 92.5
 margin_top = 23.0
 margin_right = 126.5
 margin_bottom = 57.0
-custom_fonts/font = SubResource( 4 )
-text = "U"
+custom_fonts/font = SubResource( 5 )
+text = "T"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key_J" type="Label" parent="TutorialControl/Attack/Stuff/AtackP1"]
+[node name="Key_J" type="Label" parent="TutorialControl/Attack/Stuff/AttackP1"]
 modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
 margin_left = 163.0
 margin_top = 23.0
 margin_right = 197.0
 margin_bottom = 57.0
-custom_fonts/font = SubResource( 4 )
-text = "J"
+custom_fonts/font = SubResource( 5 )
+text = "G"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key_K" type="Label" parent="TutorialControl/Attack/Stuff/AtackP1"]
+[node name="Key_K" type="Label" parent="TutorialControl/Attack/Stuff/AttackP1"]
 modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
 margin_left = 235.5
 margin_top = 23.0
 margin_right = 269.5
 margin_bottom = 57.0
-custom_fonts/font = SubResource( 4 )
-text = "K"
+custom_fonts/font = SubResource( 5 )
+text = "H"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -591,14 +605,14 @@ margin_left = 74.0
 margin_right = 214.0
 margin_bottom = 126.0
 rect_min_size = Vector2( 140, 126 )
-texture = ExtResource( 21 )
+texture = ExtResource( 9 )
 expand = true
 stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AtackP2" type="TextureRect" parent="TutorialControl/Attack/Stuff"]
+[node name="AttackP2" type="TextureRect" parent="TutorialControl/Attack/Stuff"]
 margin_top = 318.0
 margin_right = 288.0
 margin_bottom = 418.0
@@ -609,49 +623,49 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key_H" type="Label" parent="TutorialControl/Attack/Stuff/AtackP2"]
+[node name="Key_H" type="Label" parent="TutorialControl/Attack/Stuff/AttackP2"]
 modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
 margin_left = 21.5
 margin_top = 33.0
 margin_right = 55.5
 margin_bottom = 67.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "L"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key_U" type="Label" parent="TutorialControl/Attack/Stuff/AtackP2"]
+[node name="Key_U" type="Label" parent="TutorialControl/Attack/Stuff/AttackP2"]
 modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
 margin_left = 92.5
 margin_top = 33.0
 margin_right = 126.5
 margin_bottom = 67.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "P"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key_J" type="Label" parent="TutorialControl/Attack/Stuff/AtackP2"]
+[node name="Key_J" type="Label" parent="TutorialControl/Attack/Stuff/AttackP2"]
 modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
 margin_left = 163.0
 margin_top = 33.0
 margin_right = 197.0
 margin_bottom = 67.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = ";"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key_K" type="Label" parent="TutorialControl/Attack/Stuff/AtackP2"]
+[node name="Key_K" type="Label" parent="TutorialControl/Attack/Stuff/AttackP2"]
 modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
 margin_left = 235.5
 margin_top = 33.0
 margin_right = 269.5
 margin_bottom = 67.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "'"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -660,7 +674,7 @@ __meta__ = {
 [node name="P2" type="CenterContainer" parent="TutorialControl/Attack/Stuff"]
 margin_top = 422.0
 margin_right = 288.0
-margin_bottom = 572.0
+margin_bottom = 622.0
 rect_min_size = Vector2( 0, 150 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -670,9 +684,9 @@ __meta__ = {
 modulate = Color( 1, 1, 1, 0.878431 )
 margin_left = 9.0
 margin_right = 279.0
-margin_bottom = 150.0
-rect_min_size = Vector2( 270, 150 )
-texture = ExtResource( 24 )
+margin_bottom = 200.0
+rect_min_size = Vector2( 270, 200 )
+texture = ExtResource( 8 )
 expand = true
 stretch_mode = 6
 __meta__ = {
@@ -680,9 +694,9 @@ __meta__ = {
 }
 
 [node name="AttackGamePad" type="TextureRect" parent="TutorialControl/Attack/Stuff"]
-margin_top = 576.0
+margin_top = 626.0
 margin_right = 288.0
-margin_bottom = 704.0
+margin_bottom = 754.0
 rect_min_size = Vector2( 0, 128 )
 texture = ExtResource( 18 )
 stretch_mode = 6

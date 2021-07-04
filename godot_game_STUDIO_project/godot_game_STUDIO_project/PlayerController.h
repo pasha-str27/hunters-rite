@@ -107,5 +107,6 @@ namespace godot
 		void _stop_moving();
 		void _continue_moving();
 		void _set_is_attacking(bool value);
+		void _set_right_HP(float value);
 	};
 }

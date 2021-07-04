@@ -109,7 +109,7 @@ void godot::LevelGenerator::_ready()
 	}
 
 	for(auto node : rooms)
-		node->call("_fill_empty_positions");
+		node->call("_fill_empty_positions", node);
 
 	//create key holders
 	get_node("/root/Node2D/Node/Camera2D")->call("_get_type_keys");
@@ -607,9 +607,9 @@ void godot::LevelGenerator::_create_item_room(std::vector<Node2D*>& cornered_roo
 	_rebuild_doors(builded_room);
 	_rebuild_doors(room_to_build);
 
-	auto sprite = cast_to<Node2D>(item_room_sprite->instance());
-	add_child(sprite);
-	sprite->set_global_position(builded_room->get_global_position());
+	//auto sprite = cast_to<Node2D>(item_room_sprite->instance());
+	//add_child(sprite);
+	//sprite->set_global_position(builded_room->get_global_position());
 
 	cornered_rooms.erase(cornered_rooms.begin() + index, cornered_rooms.begin() + index + 1);
 
@@ -646,10 +646,10 @@ Node2D* godot::LevelGenerator::_create_boss_room(std::vector<Node2D*>& cornered_
 
 	Node2D* builded_room = _generate_room_to(room_to_build);
 
-	auto sprite = cast_to<Node2D>(boss_room_sprite->instance());
-	add_child(sprite);
-	sprite->set_scale(Vector2(0.3, 0.3));
-	sprite->set_global_position(builded_room->get_global_position());
+	//auto sprite = cast_to<Node2D>(boss_room_sprite->instance());
+	//add_child(sprite);
+	//sprite->set_scale(Vector2(0.3, 0.3));
+	//sprite->set_global_position(builded_room->get_global_position());
 
 	builded_room->call("_set_is_special", true);
 
@@ -813,7 +813,9 @@ void godot::LevelGenerator::_clear()
 	this->rooms.clear();
 	this->generated_keys.clear();
 	size = 0;
-	//map_size += 2;
+
+	if(CameraController::current_level>1)
+		map_size += 2;
 }
 
 Array godot::LevelGenerator::_get_rooms()

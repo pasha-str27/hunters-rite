@@ -24,6 +24,7 @@ namespace godot
 		void _take_damage(float damage, bool is_spike = false);
 		float _get_HP();
 		void _set_HP(float HP);
+		void _set_right_HP(float HP);
 		float _get_damage();
 		void _set_damage(float value);
 		void _revive();

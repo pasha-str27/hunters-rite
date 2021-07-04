@@ -153,6 +153,11 @@ void godot::PlayerStrategyContext::_set_HP(float HP)
 	strategy->_set_HP(HP);
 }
 
+void godot::PlayerStrategyContext::_set_right_HP(float HP)
+{
+	strategy->_set_right_HP(HP);
+}
+
 float godot::PlayerStrategyContext::_get_damage()
 {
 	return strategy->_get_damage();

@@ -16,7 +16,6 @@ namespace godot
 		float room_difficulty = 100;
 		String room_type = "";
 		bool were_here = false;
-		bool is_last_room = false;
 
 		bool is_special = false;
 
@@ -33,7 +32,7 @@ namespace godot
 		bool _is_empty_pos(int i, int j);
 		int _get_cell_value(int i, int j);
 		void _set_cell_value(int i, int j, int value);
-		void _fill_empty_positions();
+		void _fill_empty_positions(Node2D* room);
 		void print();
 		void _add_list(Array);
 		Array _get_list_of_keys();
@@ -45,7 +44,5 @@ namespace godot
 		void _set_is_special(bool value);
 		bool _get_is_special();
 		Array _get_enemy_spawn_positions();
-		void _set_is_last_room(bool value);
-		bool _get_is_last_room();
 	};
 }

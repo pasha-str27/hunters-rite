@@ -115,7 +115,7 @@ script = ExtResource( 7 )
 __meta__ = {
 "_editor_description_": ""
 }
-enemy_price = 20.0
+enemy_price = 18.0
 
 [node name="BulletConteinerStatue" type="Node" parent="."]
 

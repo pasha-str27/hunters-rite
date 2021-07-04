@@ -162,6 +162,7 @@ fade_in = ExtResource( 10 )
 light_mask = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 0
 texture = ExtResource( 6 )
 expand = true
 __meta__ = {
@@ -172,6 +173,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 1280, 720 )
+mouse_filter = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -180,11 +182,13 @@ __meta__ = {
 margin_right = 1280.0
 margin_bottom = 445.0
 rect_min_size = Vector2( 0, 445 )
+mouse_filter = 0
 
 [node name="CenterContainer" type="CenterContainer" parent="Menu/VBoxContainer/Top_text"]
 margin_right = 1280.0
 margin_bottom = 440.0
 rect_min_size = Vector2( 0, 440 )
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="Menu/VBoxContainer/Top_text/CenterContainer"]
 margin_left = 256.0
@@ -213,6 +217,7 @@ rect_min_size = Vector2( 0, 60 )
 focus_neighbour_top = NodePath("../QuitAndItems/Quit")
 focus_neighbour_right = NodePath("../QuitAndItems/Items")
 focus_neighbour_bottom = NodePath("../Option")
+mouse_filter = 2
 texture_normal = ExtResource( 5 )
 expand = true
 stretch_mode = 3
@@ -227,6 +232,7 @@ margin_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 640, 27 )
+mouse_filter = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource( 4 )
@@ -262,6 +268,7 @@ rect_min_size = Vector2( 0, 60 )
 focus_neighbour_top = NodePath("../Play")
 focus_neighbour_right = NodePath("../QuitAndItems/Items")
 focus_neighbour_bottom = NodePath("../QuitAndItems/Quit")
+mouse_filter = 2
 texture_normal = ExtResource( 5 )
 expand = true
 stretch_mode = 3
@@ -277,6 +284,7 @@ margin_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 640, 27 )
+mouse_filter = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource( 4 )
@@ -298,7 +306,7 @@ custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
 custom_constants/shadow_offset_y = 3
-text = "Option"
+text = "Options"
 align = 1
 valign = 1
 __meta__ = {
@@ -317,6 +325,7 @@ margin_bottom = 188.0
 margin_right = 496.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 496, 0 )
+mouse_filter = 2
 
 [node name="Quit" type="TextureButton" parent="Menu/VBoxContainer/Buttons/QuitAndItems"]
 margin_left = 500.0
@@ -326,20 +335,21 @@ rect_min_size = Vector2( 280, 60 )
 focus_neighbour_top = NodePath("../../Option")
 focus_neighbour_right = NodePath("../Items")
 focus_neighbour_bottom = NodePath("../../Play")
+mouse_filter = 2
 texture_normal = ExtResource( 5 )
 expand = true
 stretch_mode = 3
 
 [node name="Focus" type="TextureRect" parent="Menu/VBoxContainer/Buttons/QuitAndItems/Quit"]
 visible = false
-modulate = Color( 1, 1, 1, 0.510226 )
+modulate = Color( 1, 1, 1, 0.478431 )
 margin_left = 140.0
 margin_top = 30.0
 margin_right = 140.0
 margin_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_scale = Vector2( 1.00305, 1.00305 )
+mouse_filter = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource( 4 )
@@ -372,6 +382,7 @@ margin_left = 784.0
 margin_right = 1144.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 360, 0 )
+mouse_filter = 2
 
 [node name="Items" type="TextureButton" parent="Menu/VBoxContainer/Buttons/QuitAndItems"]
 margin_left = 1148.0
@@ -389,13 +400,13 @@ stretch_mode = 5
 
 [node name="Focus" type="TextureRect" parent="Menu/VBoxContainer/Buttons/QuitAndItems/Items"]
 visible = false
-modulate = Color( 1, 1, 1, 0.634732 )
+modulate = Color( 1, 1, 1, 0.478431 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_scale = Vector2( 1.01498, 1.01498 )
 rect_pivot_offset = Vector2( 30, 30 )
+mouse_filter = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource( 12 )
@@ -427,21 +438,21 @@ __meta__ = {
 [node name="ItemsAnimated" type="AnimationPlayer" parent="Menu/VBoxContainer/Buttons/QuitAndItems/Items"]
 anims/Focus_scale = SubResource( 6 )
 
-[connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/Play" to="Menu" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/Play" to="Menu" method="_on_animated_focus_entered" binds= [ "Play", "PlayAnimated" ]]
+[connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/Play" to="Menu" method="_play_change_cursor_effect"]
 [connection signal="focus_exited" from="Menu/VBoxContainer/Buttons/Play" to="Menu" method="_on_animated_focus_exited" binds= [ "Play", "PlayAnimated" ]]
 [connection signal="pressed" from="Menu/VBoxContainer/Buttons/Play" to="Menu" method="_on_Play_pressed"]
-[connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/Option" to="Menu" method="_play_change_cursor_effect" binds= [ "Option", "OptionAnimated" ]]
 [connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/Option" to="Menu" method="_on_animated_focus_entered" binds= [ "Option", "OptionAnimated" ]]
+[connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/Option" to="Menu" method="_play_change_cursor_effect" binds= [ "Option", "OptionAnimated" ]]
 [connection signal="focus_exited" from="Menu/VBoxContainer/Buttons/Option" to="Menu" method="_on_animated_focus_exited" binds= [ "Option", "OptionAnimated" ]]
 [connection signal="pressed" from="Menu/VBoxContainer/Buttons/Option" to="Menu" method="_on_Option_pressed"]
-[connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/QuitAndItems/Quit" to="Menu" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/QuitAndItems/Quit" to="Menu" method="_on_animated_focus_entered" binds= [ "Quit", "QuitAnimated" ]]
+[connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/QuitAndItems/Quit" to="Menu" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/QuitAndItems/Quit" to="Menu" method="_on_Quit_focus" binds= [ true ]]
-[connection signal="focus_exited" from="Menu/VBoxContainer/Buttons/QuitAndItems/Quit" to="Menu" method="_on_Quit_focus" binds= [ false ]]
 [connection signal="focus_exited" from="Menu/VBoxContainer/Buttons/QuitAndItems/Quit" to="Menu" method="_on_animated_focus_exited" binds= [ "Quit", "QuitAnimated" ]]
+[connection signal="focus_exited" from="Menu/VBoxContainer/Buttons/QuitAndItems/Quit" to="Menu" method="_on_Quit_focus" binds= [ false ]]
 [connection signal="pressed" from="Menu/VBoxContainer/Buttons/QuitAndItems/Quit" to="Menu" method="_on_Quit_pressed"]
-[connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/QuitAndItems/Items" to="Menu" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/QuitAndItems/Items" to="Menu" method="_on_animated_focus_entered" binds= [ "Items", "ItemsAnimated" ]]
+[connection signal="focus_entered" from="Menu/VBoxContainer/Buttons/QuitAndItems/Items" to="Menu" method="_play_change_cursor_effect"]
 [connection signal="focus_exited" from="Menu/VBoxContainer/Buttons/QuitAndItems/Items" to="Menu" method="_on_animated_focus_exited" binds= [ "Items", "ItemsAnimated" ]]
 [connection signal="pressed" from="Menu/VBoxContainer/Buttons/QuitAndItems/Items" to="Menu" method="_on_Items_pressed"]

@@ -10,12 +10,14 @@ godot::WormAI::WormAI(Ref<PackedScene>& bullet, Node2D* node) :EnemyData(node)
 	is_hided = false;
 	prepare_to_shoot = true;
 	auto bullet_container = node->get_parent()->get_node("BulletContainer");
+
 	for (int i = 0; i < max_bullet_count; ++i)
 	{
 		Node2D* bullet_node = cast_to<Node2D>(bullet->instance());
 		bullet_container->add_child(bullet_node);
 		available_bullets.push_back(bullet_node);
 	}
+
 	ground_front = cast_to<AnimatedSprite>(_get_enemy()->find_node("GroundFront"));
 	ground_back = cast_to<AnimatedSprite>(_get_enemy()->find_node("GroundBack"));
 	Array arr = CameraController::current_room->call("_get_enemy_spawn_positions");

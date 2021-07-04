@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Assets/Scripts/LevelGenerator.gdns" type="Script" id=1]
 [ext_resource path="res://Assets/Prefabs/Doors/UpDoor.tscn" type="PackedScene" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://Key.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Key3.tscn" type="PackedScene" id=29]
 [ext_resource path="res://Assets/Prefabs/Stone.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Assets/Prefabs/TutorialSpritesSingle.tscn" type="PackedScene" id=31]
 
 [node name="Node" type="Node"]
 
@@ -38,10 +39,13 @@ script = ExtResource( 7 )
 Items = [ ExtResource( 5 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 22 ), ExtResource( 19 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 13 ) ]
 
 [node name="Camera2D" parent="." instance=ExtResource( 10 )]
+zoom = Vector2( 3, 3 )
 
 [node name="TutorialSprites" parent="." instance=ExtResource( 9 )]
 scale = Vector2( 0.4, 0.4 )
 z_index = 25
+
+[node name="TutorialSpritesSingle" parent="." instance=ExtResource( 31 )]
 
 [node name="Generation" type="Node2D" parent="."]
 script = ExtResource( 1 )

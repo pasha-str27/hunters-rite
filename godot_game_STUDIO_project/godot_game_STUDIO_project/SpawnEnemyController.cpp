@@ -42,8 +42,7 @@ void godot::SpawnEnemyController::SpawnEnemies()
 	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
 
-	/*float current_value = _calculate_room_difficulty();*/
-	float current_value = 7;
+	float current_value = _calculate_room_difficulty();
 	std::vector<Vector2> taken_positions;
 
 	enemies->set_enemy_to_spawn_count(0);
@@ -111,7 +110,7 @@ void godot::SpawnEnemyController::SpawnBoss()
 	}
 	else
 	{
-		if (CameraController::current_level == 1)
+		if (CameraController::current_level == 5)
 		{
 			get_parent()->call("_start_mute_volume");
 			Enemies::get_singleton()->set_enemy_to_spawn_count(1);
@@ -291,7 +290,8 @@ float godot::SpawnEnemyController::_calculate_room_difficulty()
 	MK = get_parent()->get_parent()->get_node("Generation")->call("_get_keys_count");
 
 	player = nullptr;
-	return ((PH1 + PH2) * PH_k) / 2 + ((D1 * AS1 + D2 * AS2) / 2) * DPS_k - RFS + (MK - CK) * K_k-100;
+
+	return ((PH1 + PH2) * PH_k) / 2 + ((D1 * AS1 + D2 * AS2) / 2) * DPS_k - RFS + (MK - CK) * K_k;
 }
 
 godot::SpawnEnemyController::SpawnEnemyController()
