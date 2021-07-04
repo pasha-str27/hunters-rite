@@ -109,7 +109,7 @@ void godot::LevelGenerator::_ready()
 	}
 
 	for(auto node : rooms)
-		node->call("_fill_empty_positions");
+		node->call("_fill_empty_positions", node);
 
 	//create key holders
 	get_node("/root/Node2D/Node/Camera2D")->call("_get_type_keys");
