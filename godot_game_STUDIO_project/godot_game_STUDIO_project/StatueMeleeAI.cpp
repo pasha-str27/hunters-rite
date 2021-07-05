@@ -87,6 +87,15 @@ void godot::StatueMeleeAI::_delete_player2()
 		can_fight = false;
 }
 
+void godot::StatueMeleeAI::_remove_player(Node2D* player)
+{
+	if (player->is_in_group("player1"))
+		_delete_player1();
+
+	if (player->is_in_group("player2"))
+		_delete_player2();
+}
+
 void godot::StatueMeleeAI::_process(float delta)
 {
 	if (!(current_scale < max_scale && current_scale > min_scale))
