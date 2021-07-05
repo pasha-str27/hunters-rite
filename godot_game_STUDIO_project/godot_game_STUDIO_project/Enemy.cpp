@@ -37,6 +37,7 @@ void godot::Enemy::_register_methods()
 	register_method("_on_Area2D_body_exited", &Enemy::_on_Area2D_body_exited);
 	register_method("_change_start_parameters", &Enemy::_change_start_parameters);
 	register_method("_remove_taken_positions", &Enemy::_remove_taken_positions);
+	register_method("_set_direction", &Enemy::_set_direction);
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
@@ -114,6 +115,10 @@ void godot::Enemy::_ready()
 	if (is_in_group("worm"))
 		ai->_set_strategy(new WormAI(bullet, this));
 
+	if (is_in_group("silly_boy"))
+		ai->_set_strategy(new SillyBoyAI(bullet, this));
+
+	Godot::print(get_name());
 
 	spawn_particles->set_emitting(true);
 	timer_particles->connect("timeout", this, "_on_spawn_end");
@@ -491,4 +496,12 @@ void godot::Enemy::_change_start_parameters()
 void godot::Enemy::_remove_taken_positions()
 {
 	ai->_remove_taken_positions();
+}
+
+void godot::Enemy::_set_direction(Node* player, Vector2 direction)
+{
+	if (player->is_in_group("player"))
+	{
+		ai->_set_direction(direction);
+	}
 }

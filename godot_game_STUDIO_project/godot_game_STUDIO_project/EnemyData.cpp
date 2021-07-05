@@ -15,6 +15,7 @@ void godot::EnemyData::remove_vector_element(Vector2 element)
 
 void godot::EnemyData::reset_directions()
 {
+	_set_distance(32);
 	directions.clear();
 }
 
@@ -32,6 +33,20 @@ void godot::EnemyData::_remove_taken_positions()
 }
 
 void godot::EnemyData::change_can_fight(bool value, ISlimeAttackState* state)
+{
+}
+
+float godot::EnemyData::_get_distance()
+{
+	return distance;
+}
+
+void godot::EnemyData::_set_distance(float value)
+{
+	distance = value;
+}
+
+void godot::EnemyData::_set_direction(Vector2 dir)
 {
 }
 

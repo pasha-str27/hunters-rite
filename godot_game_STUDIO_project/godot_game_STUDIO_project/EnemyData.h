@@ -10,6 +10,7 @@ namespace godot
 	class EnemyData : public IEnemyAI
 	{
 		Node2D* enemy;
+		float distance = 32;
 
 	public:
 		std::vector<Vector2> directions;
@@ -38,5 +39,8 @@ namespace godot
 		void _remove_player(Node2D* player);
 		void _remove_taken_positions();
 		void change_can_fight(bool value, ISlimeAttackState* state);
+		float _get_distance();
+		void _set_distance(float value);
+		void _set_direction(Vector2 dir);
 	};
 }

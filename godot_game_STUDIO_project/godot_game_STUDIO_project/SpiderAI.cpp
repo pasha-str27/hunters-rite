@@ -44,7 +44,7 @@ bool godot::SpiderAI::_is_player_near(Node2D* player)
 {
 	Vector2 player_pos_index = (player->get_global_position()
 		- CameraController::current_room->get_global_position()
-		+ Vector2(896, 544) / 2) / 32;
+		+ Vector2(896, 544) / 2) / _get_distance();
 
 	bool is_player_ghost = (bool)player->call("_is_ghost_mode");
 
@@ -129,7 +129,7 @@ void godot::SpiderAI::_change_dir_after_time()
 	is_cheking = false;
 
 	dir = directions[rand->randi_range(0, directions.size() - 1)];
-	goal = _get_enemy()->get_global_position() + dir * 32;
+	goal = _get_enemy()->get_global_position() + dir * _get_distance();
 	cur_pos += dir;
 }
 
@@ -193,7 +193,7 @@ void godot::SpiderAI::_set_speed(float value)
 
 void godot::SpiderAI::_change_start_parameters()
 {
-	cur_pos = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+	cur_pos = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / _get_distance();
 	old_pos = _get_enemy()->get_global_position();
 
 	change_direction();
@@ -204,13 +204,11 @@ void godot::SpiderAI::_process(float delta)
 	if (!can_move)
 		return;
 
-	//_get_enemy()->set_global_position(_get_enemy()->get_global_position() + dir * delta * 235);
 	_get_enemy()->set_global_position(_get_enemy()->get_global_position().move_toward(goal, delta * speed));
 	if (is_cheking)
 		return;
 
-	if (abs(old_pos.distance_to(_get_enemy()->get_global_position()) - 32) <= 3
-		&& (dir == Vector2::RIGHT || dir == Vector2::LEFT || dir == Vector2::DOWN || dir == Vector2::UP))
+	if (abs(old_pos.distance_to(_get_enemy()->get_global_position()) - _get_distance()) <= 1)
 	{
 		is_cheking = true;
 		_fight(_get_player1(), _get_player2());

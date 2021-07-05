@@ -7,7 +7,7 @@ bool godot::SlimeAI::_is_player_near(Node2D* player)
 {
 	Vector2 player_pos_index = (player->get_global_position()
 		- CameraController::current_room->get_global_position()
-		+ Vector2(896, 544) / 2) / 32;
+		+ Vector2(896, 544) / 2) / _get_distance();
 
 	bool is_player_ghost = (bool)player->call("_is_ghost_mode");
 
@@ -92,7 +92,7 @@ void godot::SlimeAI::_set_is_player2_onArea(bool value)
 
 void godot::SlimeAI::_change_start_parameters()
 {
-	cur_pos = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+	cur_pos = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / _get_distance();
 
 	old_pos = _get_enemy()->get_global_position();
 
@@ -130,6 +130,7 @@ godot::SlimeAI::SlimeAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(
 	can_move = true;
 	is_cheking = false;
 	speed = 400;
+	_change_start_parameters();
 }
 
 godot::SlimeAI::~SlimeAI()
@@ -162,6 +163,7 @@ void godot::SlimeAI::change_direction()
 
 	PlayersContainer* players = PlayersContainer::_get_instance();
 
+	//перевірити
 	if (players->_get_player1() == nullptr && players->_get_player1_regular() != nullptr
 		&& (bool)players->_get_player1_regular()->call("_is_ghost_mode") 
 		&& _is_player_near(players->_get_player1_regular()));
@@ -221,7 +223,7 @@ void godot::SlimeAI::_change_dir_after_time()
 	is_cheking = false;
 
 	dir = directions[rand->randi_range(0, directions.size() - 1)];
-	goal = _get_enemy()->get_global_position() + dir * 32;
+	goal = _get_enemy()->get_global_position() + dir * _get_distance();
 
 	cur_pos += dir;
 
@@ -259,8 +261,7 @@ void godot::SlimeAI::_process(float delta)
 	if (is_cheking)
 		return;
 
-	if (abs(old_pos.distance_to(_get_enemy()->get_global_position())-32) <= 1
-		&& (dir==Vector2::RIGHT || dir == Vector2::LEFT || dir == Vector2::DOWN || dir == Vector2::UP))
+	if (abs(old_pos.distance_to(_get_enemy()->get_global_position()) - _get_distance()) <= 1)
 	{
 		is_cheking = true;
 		change_direction();

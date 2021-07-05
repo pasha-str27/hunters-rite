@@ -119,6 +119,7 @@ using namespace godot;
 #include "SlimeBossAI.h"
 #include "SlimeEnemiesHolder.h"
 #include "WormAI.h"
+#include "SillyBoyAI.h"
 
 //	state
 #include "ISlimeAttackState.h"

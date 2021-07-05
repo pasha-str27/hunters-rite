@@ -65,5 +65,6 @@ namespace godot
 			void _on_Area2D_body_exited(Node* node);
 			void _change_start_parameters();
 			void _remove_taken_positions();
+			void _set_direction(Node* player, Vector2 direction);
 	};
 }
