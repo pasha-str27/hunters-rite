@@ -173,7 +173,7 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		else if(player_id == 2)
 			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player2");
 
-		if(!is_in_group("flower"))
+		if(!is_in_group("flower") || is_in_group("slime_boss"))
 			player->call("_on_enemy_die", this->get_global_position());
 
 		died = true;
