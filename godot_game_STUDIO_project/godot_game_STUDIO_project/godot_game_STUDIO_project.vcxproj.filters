@@ -169,6 +169,9 @@
     <ClCompile Include="WormAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="MimicAI.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
@@ -362,6 +365,9 @@
       <Filter>Enemies\SlimeBossStates</Filter>
     </ClInclude>
     <ClInclude Include="WormAI.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="MimicAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
   </ItemGroup>

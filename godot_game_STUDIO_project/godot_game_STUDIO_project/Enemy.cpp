@@ -114,6 +114,9 @@ void godot::Enemy::_ready()
 	if (is_in_group("worm"))
 		ai->_set_strategy(new WormAI(bullet, this));
 
+	if (is_in_group("mimic"))
+		ai->_set_strategy(new MimicAI(bullet, this));
+
 
 	spawn_particles->set_emitting(true);
 	timer_particles->connect("timeout", this, "_on_spawn_end");
@@ -173,7 +176,7 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		else if(player_id == 2)
 			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player2");
 
-		if(!is_in_group("flower") || is_in_group("slime_boss"))
+		if(!is_in_group("flower") || is_in_group("slime_boss") || is_in_group("mimic"))
 			player->call("_on_enemy_die", this->get_global_position());
 
 		died = true;
@@ -188,7 +191,7 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 			CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->call("_open_doors");
 		}
 
-		if (is_in_group("flower") || is_in_group("slime_boss"))
+		if (is_in_group("flower") || is_in_group("slime_boss") || is_in_group("mimic"))
 		{
 			get_node("/root/Node2D/Node/ItemsContainer")->call("_spawn_random_item", get_global_position());
 			cast_to<ProgressBar>(CustomExtensions::GetChildByName(get_node("/root/Node2D/Node/Camera2D"), "BossHealthBar"))->set_visible(false);
@@ -315,7 +318,7 @@ void godot::Enemy::_on_Area2D_body_entered(Node* node)
 		if (is_in_group("bat") && is_angry)
 			damage = 30;
 
-		if(!is_in_group("slime_shoot"))
+		if(!is_in_group("slime_shoot") && !is_in_group("mimic"))
 			node->call("_take_damage", damage, false);
 	}
 }
