@@ -1,12 +1,11 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_background_v2.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_focus_v2.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/notice_background_v2.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/shoot_player_choose.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/melee.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Scripts/MenuButtons.gdns" type="Script" id=5]
 [ext_resource path="res://Assets/Sprites/UI/item_menu_background.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Sprites/UI/WantedLabel/wanted_focus_v2.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/melee_player_choose.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Prefabs/SoundsEffects/Effects/ButtonClick.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Prefabs/Animations/FadeOut.tscn" type="PackedScene" id=10]
@@ -19,11 +18,45 @@
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/stormhead.png" type="Texture" id=17]
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/droid.png" type="Texture" id=18]
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/Guardian.png" type="Texture" id=19]
-[ext_resource path="res://Assets/Sprites/UI/background_item_focus.png" type="Texture" id=20]
-[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/bg_Item.png" type="Texture" id=21]
-[ext_resource path="res://Assets/Sprites/UI/arrow_left.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/shooter.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/choose_chapter_background.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/choose_chapter_chain.png" type="Texture" id=22]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="DynamicFont" id=1]
+size = 13
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 11 )
+
+[sub_resource type="Animation" id=2]
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Focus:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Focus:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1.10957, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
+}
+
+[sub_resource type="Animation" id=3]
 resource_name = "Focus_scale"
 length = 1.5
 loop = true
@@ -47,22 +80,13 @@ tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.8, 1.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"transitions": PoolRealArray( 1.10957, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
 
-[sub_resource type="DynamicFont" id=2]
-size = 17
-font_data = ExtResource( 11 )
-
-[sub_resource type="DynamicFont" id=3]
-size = 13
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 11 )
-
 [sub_resource type="Animation" id=4]
+resource_name = "Focus_scale"
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -85,29 +109,157 @@ tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.8, 1.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"transitions": PoolRealArray( 1.10957, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
 
-[sub_resource type="DynamicFont" id=5]
-size = 27
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
-use_filter = true
-font_data = ExtResource( 11 )
+[sub_resource type="Animation" id=5]
+resource_name = "Focus_scale"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Focus:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Focus:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1.10957, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
+}
 
-[sub_resource type="DynamicFont" id=6]
-size = 8
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 11 )
+[sub_resource type="Animation" id=6]
+resource_name = "Focus_scale"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Focus:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Focus:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1.10957, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
+}
 
-[sub_resource type="Theme" id=7]
-default_font = SubResource( 6 )
-Label/fonts/font = SubResource( 5 )
+[sub_resource type="Animation" id=7]
+resource_name = "Focus_scale"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Focus:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Focus:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1.10957, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
+}
 
 [sub_resource type="Animation" id=8]
+resource_name = "Focus_scale"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Focus:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Focus:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1.10957, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "Focus_scale"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Focus:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Focus:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1.10957, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
+}
+
+[sub_resource type="Animation" id=10]
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -177,273 +329,198 @@ margin_right = 1280.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
 
-[node name="Skins" type="CenterContainer" parent="ChoosePlayer/VBoxContainer"]
-visible = false
-margin_top = 104.0
-margin_right = 1280.0
-margin_bottom = 204.0
-rect_min_size = Vector2( 0, 100 )
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ChoosePlayer/VBoxContainer/Skins"]
-margin_left = 122.0
-margin_top = 5.0
-margin_right = 1158.0
-margin_bottom = 95.0
-
-[node name="TextureRect2" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer"]
-margin_right = 32.0
-margin_bottom = 90.0
-texture = ExtResource( 22 )
-stretch_mode = 6
-
-[node name="CenterContainer5" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer"]
-modulate = Color( 1, 1, 1, 0.682353 )
-margin_left = 36.0
-margin_right = 96.0
-margin_bottom = 90.0
-
-[node name="Skin6" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer5"]
-margin_top = 15.0
-margin_right = 60.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 60, 60 )
-texture = ExtResource( 21 )
-expand = true
-stretch_mode = 6
-
-[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer5"]
-modulate = Color( 0.960784, 0.152941, 0.152941, 1 )
-margin_left = 8.0
-margin_top = 21.0
-margin_right = 52.0
-margin_bottom = 69.0
-rect_min_size = Vector2( 40, 40 )
-texture = ExtResource( 8 )
-stretch_mode = 6
-
-[node name="CenterContainer6" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer"]
-margin_left = 100.0
-margin_right = 190.0
-margin_bottom = 90.0
-
-[node name="Skin5" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer6"]
-margin_right = 90.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 90, 90 )
-texture = ExtResource( 21 )
-expand = true
-stretch_mode = 6
-
-[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer6"]
-margin_left = 15.0
-margin_top = 15.0
-margin_right = 75.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 60, 60 )
-texture = ExtResource( 8 )
-stretch_mode = 6
-
-[node name="CenterContainer7" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer"]
-modulate = Color( 1, 1, 1, 0.682353 )
-margin_left = 194.0
-margin_right = 254.0
-margin_bottom = 90.0
-
-[node name="Skin6" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer7"]
-margin_top = 15.0
-margin_right = 60.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 60, 60 )
-texture = ExtResource( 21 )
-expand = true
-stretch_mode = 6
-
-[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer7"]
-modulate = Color( 0.898039, 0.905882, 0.0941176, 1 )
-margin_left = 8.0
-margin_top = 21.0
-margin_right = 52.0
-margin_bottom = 69.0
-rect_min_size = Vector2( 40, 40 )
-texture = ExtResource( 8 )
-stretch_mode = 6
-
-[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer"]
-margin_left = 258.0
-margin_right = 290.0
-margin_bottom = 90.0
-texture = ExtResource( 22 )
-stretch_mode = 6
-flip_h = true
-
-[node name="Free" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer"]
-margin_left = 294.0
-margin_right = 814.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 520, 0 )
-
-[node name="CenterContainer4" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer"]
-modulate = Color( 1, 1, 1, 0.682353 )
-margin_left = 818.0
-margin_right = 878.0
-margin_bottom = 90.0
-
-[node name="Skin6" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer4"]
-margin_top = 15.0
-margin_right = 60.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 60, 60 )
-texture = ExtResource( 21 )
-expand = true
-stretch_mode = 6
-
-[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer4"]
-modulate = Color( 0, 0.486275, 1, 1 )
-margin_left = 14.0
-margin_top = 30.0
-margin_right = 46.0
-margin_bottom = 60.0
-texture = ExtResource( 4 )
-
-[node name="CenterContainer3" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer"]
-margin_left = 882.0
-margin_right = 972.0
-margin_bottom = 90.0
-
-[node name="Skin5" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer3"]
-margin_right = 90.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 90, 90 )
-texture = ExtResource( 21 )
-expand = true
-stretch_mode = 6
-
-[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer3"]
-margin_left = 15.0
-margin_top = 15.0
-margin_right = 75.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 60, 60 )
-texture = ExtResource( 4 )
-stretch_mode = 6
-
-[node name="CenterContainer2" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer"]
-modulate = Color( 1, 1, 1, 0.682353 )
-margin_left = 976.0
-margin_right = 1036.0
-margin_bottom = 90.0
-
-[node name="Skin6" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer2"]
-margin_top = 15.0
-margin_right = 60.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 60, 60 )
-texture = ExtResource( 21 )
-expand = true
-stretch_mode = 6
-
-[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Skins/HBoxContainer/CenterContainer2"]
-modulate = Color( 1, 0.164706, 0.164706, 1 )
-margin_left = 14.0
-margin_top = 30.0
-margin_right = 46.0
-margin_bottom = 60.0
-texture = ExtResource( 4 )
-
 [node name="Players_animations" type="CenterContainer" parent="ChoosePlayer/VBoxContainer"]
 margin_top = 104.0
 margin_right = 1280.0
-margin_bottom = 394.0
+margin_bottom = 360.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ChoosePlayer/VBoxContainer/Players_animations"]
 margin_right = 1280.0
-margin_bottom = 290.0
+margin_bottom = 256.0
 rect_min_size = Vector2( 1280, 256 )
 alignment = 1
 
-[node name="PlayerOne" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer"]
-margin_left = 122.0
-margin_right = 412.0
-margin_bottom = 290.0
-rect_min_size = Vector2( 256, 256 )
-mouse_filter = 2
+[node name="Background_and_chapters" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer"]
+margin_left = 360.0
+margin_right = 616.0
+margin_bottom = 256.0
+rect_pivot_offset = Vector2( -138.782, 96 )
+texture = ExtResource( 6 )
+stretch_mode = 6
 
-[node name="PlayerOne_button" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerOne"]
-margin_right = 290.0
-margin_bottom = 290.0
-rect_min_size = Vector2( 290, 290 )
-focus_neighbour_left = NodePath("../../PlayerTwo/PlayerTwo_button")
-focus_neighbour_top = NodePath("../../../../CenterContainer/Back")
-focus_neighbour_right = NodePath("../../PlayerTwo/PlayerTwo_button")
-focus_neighbour_bottom = NodePath("../../../../CenterContainer/Back")
-mouse_filter = 2
-texture_normal = ExtResource( 6 )
-expand = true
-
-[node name="Focus" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerOne/PlayerOne_button"]
+[node name="Melee_sprite" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters"]
 visible = false
-modulate = Color( 1, 1, 1, 0.869608 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -2.00854
-margin_top = -1.33903
-margin_right = -2.00854
-margin_bottom = -1.33902
-grow_horizontal = 2
-grow_vertical = 2
-rect_scale = Vector2( 1.0375, 1.0375 )
-rect_pivot_offset = Vector2( 160, 160 )
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource( 7 )
-expand = true
-stretch_mode = 5
+rect_min_size = Vector2( 256, 256 )
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayerOneAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerOne/PlayerOne_button"]
-anims/Focus_scale = SubResource( 1 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerOne"]
-margin_left = 60.0
-margin_top = 69.0
-margin_right = 230.0
-margin_bottom = 221.0
-
-[node name="PlayerOne_sprite" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerOne/VBoxContainer"]
-margin_right = 170.0
-margin_bottom = 128.0
-rect_min_size = Vector2( 128, 128 )
-mouse_filter = 2
-texture = ExtResource( 8 )
+[node name="Chapret_sprite" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters/Melee_sprite"]
+margin_left = 68.0
+margin_top = 68.0
+margin_right = 188.0
+margin_bottom = 188.0
+rect_min_size = Vector2( 120, 120 )
+texture = ExtResource( 4 )
 expand = true
 stretch_mode = 6
 
-[node name="Description" type="Label" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerOne/VBoxContainer"]
-margin_top = 132.0
-margin_right = 170.0
-margin_bottom = 152.0
-rect_min_size = Vector2( 0, 20 )
-custom_fonts/font = SubResource( 2 )
-text = "BLUE FANKA"
-align = 1
+[node name="Shoot_sprite" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 256, 256 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="CenterContainer" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer"]
-margin_left = 416.0
-margin_right = 864.0
-margin_bottom = 290.0
-rect_min_size = Vector2( 440, 0 )
+[node name="Chapret_sprite" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters/Shoot_sprite"]
+margin_left = 68.0
+margin_top = 68.0
+margin_right = 188.0
+margin_bottom = 188.0
+rect_min_size = Vector2( 120, 120 )
+texture = ExtResource( 20 )
+expand = true
+stretch_mode = 6
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/CenterContainer"]
-margin_top = 74.0
-margin_right = 448.0
-margin_bottom = 215.0
+[node name="Wheel_sprite" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 256, 256 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" type="Label" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/CenterContainer/HBoxContainer"]
-margin_right = 195.0
-margin_bottom = 141.0
-custom_fonts/font = SubResource( 3 )
+[node name="Chapret_sprite" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters/Wheel_sprite"]
+margin_left = 68.0
+margin_top = 68.0
+margin_right = 188.0
+margin_bottom = 188.0
+rect_min_size = Vector2( 120, 120 )
+texture = ExtResource( 16 )
+expand = true
+stretch_mode = 6
+
+[node name="Guardian_sprite" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 256, 256 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Chapret_sprite" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters/Guardian_sprite"]
+margin_left = 68.0
+margin_top = 53.0
+margin_right = 188.0
+margin_bottom = 203.0
+rect_min_size = Vector2( 120, 150 )
+texture = ExtResource( 19 )
+expand = true
+stretch_mode = 6
+
+[node name="Droid_sprite" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 256, 256 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Chapret_sprite" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters/Droid_sprite"]
+margin_left = 68.0
+margin_top = 68.0
+margin_right = 188.0
+margin_bottom = 188.0
+rect_min_size = Vector2( 120, 120 )
+texture = ExtResource( 18 )
+expand = true
+stretch_mode = 6
+
+[node name="Druid_sprite" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 256, 256 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Chapret_sprite" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters/Druid_sprite"]
+margin_left = 68.0
+margin_top = 48.0
+margin_right = 188.0
+margin_bottom = 208.0
+rect_min_size = Vector2( 120, 160 )
+texture = ExtResource( 15 )
+expand = true
+stretch_mode = 6
+
+[node name="Mudguard_sprite" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 256, 256 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Chapret_sprite" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters/Mudguard_sprite"]
+margin_left = 53.0
+margin_top = 68.0
+margin_right = 203.0
+margin_bottom = 188.0
+rect_min_size = Vector2( 150, 120 )
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 6
+
+[node name="Stormhead_sprite" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 256, 256 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Chapret_sprite" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters/Stormhead_sprite"]
+margin_left = 68.0
+margin_top = 53.0
+margin_right = 188.0
+margin_bottom = 203.0
+rect_min_size = Vector2( 120, 150 )
+texture = ExtResource( 17 )
+expand = true
+stretch_mode = 6
+
+[node name="Description" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer"]
+margin_left = 620.0
+margin_right = 920.0
+margin_bottom = 256.0
+rect_min_size = Vector2( 300, 0 )
+
+[node name="Melee_description" type="Label" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Description"]
+visible = false
+margin_left = 52.0
+margin_top = 57.0
+margin_right = 247.0
+margin_bottom = 198.0
+custom_fonts/font = SubResource( 1 )
 text = "BLUE FANKA
 
 HP:100
@@ -454,17 +531,13 @@ SPEED:200
 
 Special: Shield"
 
-[node name="CenterContainer" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/CenterContainer/HBoxContainer"]
-margin_left = 199.0
-margin_right = 249.0
-margin_bottom = 141.0
-rect_min_size = Vector2( 50, 0 )
-
-[node name="Label2" type="Label" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/CenterContainer/HBoxContainer"]
-margin_left = 253.0
-margin_right = 448.0
-margin_bottom = 141.0
-custom_fonts/font = SubResource( 3 )
+[node name="Shoot_description" type="Label" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Description"]
+visible = false
+margin_left = 52.0
+margin_top = 57.0
+margin_right = 247.0
+margin_bottom = 198.0
+custom_fonts/font = SubResource( 1 )
 text = "SPROTE
 
 HP:100
@@ -474,515 +547,564 @@ DMG:20
 SPEED:200
 
 Special: Shield"
-align = 2
 
-[node name="PlayerTwo" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer"]
-margin_left = 868.0
-margin_right = 1158.0
-margin_bottom = 290.0
-rect_min_size = Vector2( 256, 256 )
-mouse_filter = 2
-
-[node name="PlayerTwo_button" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerTwo"]
-margin_right = 290.0
-margin_bottom = 290.0
-rect_min_size = Vector2( 290, 290 )
-focus_neighbour_left = NodePath("../../PlayerOne/PlayerOne_button")
-focus_neighbour_top = NodePath("../../../../CenterContainer/Back")
-focus_neighbour_right = NodePath("../../PlayerOne/PlayerOne_button")
-focus_neighbour_bottom = NodePath("../../../../CenterContainer/Back")
-mouse_filter = 2
-texture_normal = ExtResource( 6 )
-expand = true
-
-[node name="Focus" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerTwo/PlayerTwo_button"]
+[node name="Wheel_description" type="Label" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Description"]
 visible = false
-modulate = Color( 1, 1, 1, 0.869608 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -2.00854
-margin_top = -1.33903
-margin_right = -2.00854
-margin_bottom = -1.33902
-grow_horizontal = 2
-grow_vertical = 2
-rect_scale = Vector2( 1.0375, 1.0375 )
-rect_pivot_offset = Vector2( 160, 160 )
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource( 7 )
-expand = true
-stretch_mode = 5
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_left = 52.0
+margin_top = 57.0
+margin_right = 247.0
+margin_bottom = 198.0
+custom_fonts/font = SubResource( 1 )
+text = "WHEEL
 
-[node name="PlayerTwoAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerTwo/PlayerTwo_button"]
-anims/Focus_scale = SubResource( 4 )
+HP:100
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerTwo"]
-margin_left = 81.0
-margin_top = 69.0
-margin_right = 209.0
-margin_bottom = 221.0
+DMG:20
 
-[node name="PlayerTwo_sprite" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerTwo/VBoxContainer"]
-margin_right = 128.0
-margin_bottom = 128.0
-rect_min_size = Vector2( 128, 128 )
-mouse_filter = 2
-texture = ExtResource( 4 )
-expand = true
+SPEED:200
 
-[node name="Description" type="Label" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerTwo/VBoxContainer"]
-margin_top = 132.0
-margin_right = 128.0
-margin_bottom = 152.0
-rect_min_size = Vector2( 0, 20 )
-custom_fonts/font = SubResource( 2 )
-text = "SPROTE"
-align = 1
+Special: Shield"
+
+[node name="Guardian_description" type="Label" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Description"]
+visible = false
+margin_left = 52.0
+margin_top = 57.0
+margin_right = 247.0
+margin_bottom = 198.0
+custom_fonts/font = SubResource( 1 )
+text = "GUARDIAN
+
+HP:100
+
+DMG:20
+
+SPEED:200
+
+Special: Shield"
+
+[node name="Droid_description" type="Label" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Description"]
+visible = false
+margin_left = 52.0
+margin_top = 57.0
+margin_right = 247.0
+margin_bottom = 198.0
+custom_fonts/font = SubResource( 1 )
+text = "BLUE FANKA
+
+HP:100
+
+DMG:20
+
+SPEED:200
+
+Special: Shield"
+
+[node name="Druid_description" type="Label" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Description"]
+visible = false
+margin_left = 52.0
+margin_top = 57.0
+margin_right = 247.0
+margin_bottom = 198.0
+custom_fonts/font = SubResource( 1 )
+text = "DRUID
+
+HP:100
+
+DMG:20
+
+SPEED:200
+
+Special: Shield"
+
+[node name="Mudguard_description" type="Label" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Description"]
+visible = false
+margin_left = 52.0
+margin_top = 57.0
+margin_right = 247.0
+margin_bottom = 198.0
+custom_fonts/font = SubResource( 1 )
+text = "MUDGUARD
+
+HP:100
+
+DMG:20
+
+SPEED:200
+
+Special: Shield"
+
+[node name="Stormhead_description" type="Label" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Description"]
+visible = false
+margin_left = 52.0
+margin_top = 57.0
+margin_right = 247.0
+margin_bottom = 198.0
+custom_fonts/font = SubResource( 1 )
+text = "STORMHEAD
+
+HP:100
+
+DMG:20
+
+SPEED:200
+
+Special: Shield"
 
 [node name="Free_space_bottom" type="CenterContainer" parent="ChoosePlayer/VBoxContainer"]
-margin_top = 398.0
+margin_top = 364.0
 margin_right = 1280.0
-margin_bottom = 438.0
+margin_bottom = 404.0
 rect_min_size = Vector2( 0, 40 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ChoosePlayer/VBoxContainer/Free_space_bottom"]
-margin_left = 232.0
-margin_top = 6.0
-margin_right = 1048.0
-margin_bottom = 33.0
-
-[node name="Label" type="Label" parent="ChoosePlayer/VBoxContainer/Free_space_bottom/HBoxContainer"]
-margin_right = 54.0
-margin_bottom = 27.0
-theme = SubResource( 7 )
-text = "P1"
-
-[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Free_space_bottom/HBoxContainer"]
-margin_left = 58.0
-margin_right = 758.0
-margin_bottom = 27.0
-rect_min_size = Vector2( 700, 0 )
-
-[node name="Label2" type="Label" parent="ChoosePlayer/VBoxContainer/Free_space_bottom/HBoxContainer"]
-margin_left = 762.0
-margin_right = 816.0
-margin_bottom = 27.0
-theme = SubResource( 7 )
-text = "P2"
-
 [node name="Chapters" type="CenterContainer" parent="ChoosePlayer/VBoxContainer"]
-margin_top = 442.0
+margin_top = 408.0
 margin_right = 1280.0
-margin_bottom = 542.0
+margin_bottom = 508.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ChoosePlayer/VBoxContainer/Chapters"]
 margin_left = 226.0
 margin_right = 1054.0
 margin_bottom = 100.0
 
-[node name="CenterContainer7" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
+[node name="Melee" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
 margin_right = 100.0
 margin_bottom = 100.0
+focus_neighbour_left = NodePath("../Stormhead")
+focus_neighbour_top = NodePath("../../../Back_button/Back")
+focus_neighbour_right = NodePath("../Shoot")
+focus_neighbour_bottom = NodePath("../../../Back_button/Back")
+texture_normal = ExtResource( 21 )
 
-[node name="Backgr" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer7"]
-margin_right = 100.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-texture = ExtResource( 6 )
+[node name="Focus" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Melee"]
+modulate = Color( 1, 1, 1, 0.551588 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 1.00701, 1.00701 )
+rect_pivot_offset = Vector2( 50, 50 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 13 )
 expand = true
-stretch_mode = 6
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer7"]
-margin_left = 25.0
-margin_top = 25.0
-margin_right = 75.0
-margin_bottom = 75.0
+[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Melee"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -8.0
+margin_bottom = -16.0
 rect_min_size = Vector2( 50, 50 )
-texture = ExtResource( 4 )
-stretch_mode = 6
+rect_scale = Vector2( 1.15, 1.15 )
+texture = ExtResource( 8 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer7"]
-modulate = Color( 0.4, 0.74902, 0.160784, 1 )
-margin_right = 100.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-texture = ExtResource( 20 )
-expand = true
+[node name="MeleeAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Melee"]
+anims/Focus_scale = SubResource( 2 )
 
-[node name="CenterContainer8" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
+[node name="Shoot" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
 margin_left = 104.0
 margin_right = 204.0
 margin_bottom = 100.0
+focus_neighbour_left = NodePath("../Melee")
+focus_neighbour_top = NodePath("../../../Back_button/Back")
+focus_neighbour_right = NodePath("../Wheel")
+focus_neighbour_bottom = NodePath("../../../Back_button/Back")
+texture_normal = ExtResource( 21 )
 
-[node name="TextureButton" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer8"]
-margin_right = 100.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-action_mode = 0
-texture_normal = ExtResource( 6 )
-texture_pressed = ExtResource( 13 )
-texture_focused = ExtResource( 13 )
+[node name="Focus" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Shoot"]
+visible = false
+modulate = Color( 1, 1, 1, 0.86769 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 1.03841, 1.03841 )
+rect_pivot_offset = Vector2( 50, 50 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 13 )
 expand = true
 stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer8"]
-margin_left = 25.0
-margin_top = 25.0
-margin_right = 75.0
-margin_bottom = 75.0
+[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Shoot"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = -2.0
+margin_right = -33.0
+margin_bottom = -33.0
 rect_min_size = Vector2( 50, 50 )
-texture = ExtResource( 8 )
-stretch_mode = 6
-
-[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer8"]
-modulate = Color( 0.0705882, 0.823529, 0.858824, 1 )
-margin_right = 100.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
+rect_scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 20 )
-expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="CenterContainer" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
+[node name="ShootAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Shoot"]
+anims/Focus_scale = SubResource( 3 )
+
+[node name="Wheel" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
 margin_left = 208.0
 margin_right = 308.0
 margin_bottom = 100.0
+focus_neighbour_left = NodePath("../Shoot")
+focus_neighbour_top = NodePath("../../../Back_button/Back")
+focus_neighbour_right = NodePath("../Guardian")
+focus_neighbour_bottom = NodePath("../../../Back_button/Back")
+texture_normal = ExtResource( 21 )
 
-[node name="Backgr" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer"]
-margin_right = 100.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-texture = ExtResource( 6 )
+[node name="Focus" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Wheel"]
+visible = false
+modulate = Color( 1, 1, 1, 0.628547 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 1.01627, 1.01627 )
+rect_pivot_offset = Vector2( 50, 50 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 13 )
 expand = true
-stretch_mode = 6
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer"]
-margin_left = 25.0
-margin_top = 25.0
-margin_right = 75.0
-margin_bottom = 75.0
+[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Wheel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 31.1452
+margin_top = 24.4444
+margin_right = -18.8548
+margin_bottom = -25.5556
 rect_min_size = Vector2( 50, 50 )
 texture = ExtResource( 16 )
 stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="CenterContainer2" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
+[node name="Chain" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Wheel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 50, 50 )
+texture = ExtResource( 22 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WheelAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Wheel"]
+anims/Focus_scale = SubResource( 4 )
+
+[node name="Guardian" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
 margin_left = 312.0
 margin_right = 412.0
 margin_bottom = 100.0
+focus_neighbour_left = NodePath("../Wheel")
+focus_neighbour_top = NodePath("../../../Back_button/Back")
+focus_neighbour_right = NodePath("../Droid")
+focus_neighbour_bottom = NodePath("../../../Back_button/Back")
+texture_normal = ExtResource( 21 )
 
-[node name="Backgr" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer2"]
-margin_right = 100.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-texture = ExtResource( 6 )
+[node name="Focus" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Guardian"]
+visible = false
+modulate = Color( 1, 1, 1, 0.720556 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 1.02504, 1.02504 )
+rect_pivot_offset = Vector2( 50, 50 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 13 )
 expand = true
-stretch_mode = 6
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer2"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 80.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 60, 60 )
+[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Guardian"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 19.6674
+margin_top = 17.3348
+margin_right = -25.3326
+margin_bottom = -18.6652
+rect_min_size = Vector2( 50, 50 )
 texture = ExtResource( 19 )
 stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="CenterContainer3" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
+[node name="Chain" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Guardian"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 50, 50 )
+texture = ExtResource( 22 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GuardianAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Guardian"]
+anims/Focus_scale = SubResource( 5 )
+
+[node name="Droid" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
 margin_left = 416.0
 margin_right = 516.0
 margin_bottom = 100.0
+focus_neighbour_left = NodePath("../Guardian")
+focus_neighbour_top = NodePath("../../../Back_button/Back")
+focus_neighbour_right = NodePath("../Druid")
+focus_neighbour_bottom = NodePath("../../../Back_button/Back")
+texture_normal = ExtResource( 21 )
 
-[node name="Backgr" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer3"]
-margin_right = 100.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-texture = ExtResource( 6 )
+[node name="Focus" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Droid"]
+visible = false
+modulate = Color( 1, 1, 1, 0.628868 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 1.01442, 1.01442 )
+rect_pivot_offset = Vector2( 50, 50 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 13 )
 expand = true
-stretch_mode = 6
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer3"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 80.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 60, 60 )
+[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Droid"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 23.3382
+margin_top = 17.3348
+margin_right = -21.6618
+margin_bottom = -18.6652
+rect_min_size = Vector2( 50, 50 )
 texture = ExtResource( 18 )
 stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="CenterContainer4" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
+[node name="Chain" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Droid"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 50, 50 )
+texture = ExtResource( 22 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DroidAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Droid"]
+anims/Focus_scale = SubResource( 6 )
+
+[node name="Druid" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
 margin_left = 520.0
 margin_right = 620.0
 margin_bottom = 100.0
+focus_neighbour_left = NodePath("../Droid")
+focus_neighbour_top = NodePath("../../../Back_button/Back")
+focus_neighbour_right = NodePath("../Mudguard")
+focus_neighbour_bottom = NodePath("../../../Back_button/Back")
+texture_normal = ExtResource( 21 )
 
-[node name="Backgr" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer4"]
-margin_right = 100.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-texture = ExtResource( 6 )
+[node name="Focus" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Druid"]
+visible = false
+modulate = Color( 1, 1, 1, 0.540882 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 1.00599, 1.00599 )
+rect_pivot_offset = Vector2( 50, 50 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 13 )
 expand = true
-stretch_mode = 6
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer4"]
-margin_left = 15.0
-margin_top = 15.0
-margin_right = 85.0
-margin_bottom = 85.0
-rect_min_size = Vector2( 70, 70 )
+[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Druid"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 14.2453
+margin_top = 13.7079
+margin_right = -17.7547
+margin_bottom = -15.2921
+rect_min_size = Vector2( 50, 50 )
 texture = ExtResource( 15 )
 stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="CenterContainer5" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
+[node name="Chain" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Druid"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 50, 50 )
+texture = ExtResource( 22 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DruidAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Druid"]
+anims/Focus_scale = SubResource( 7 )
+
+[node name="Mudguard" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
 margin_left = 624.0
 margin_right = 724.0
 margin_bottom = 100.0
+focus_neighbour_left = NodePath("../Druid")
+focus_neighbour_top = NodePath("../../../Back_button/Back")
+focus_neighbour_right = NodePath("../Stormhead")
+focus_neighbour_bottom = NodePath("../../../Back_button/Back")
+texture_normal = ExtResource( 21 )
 
-[node name="Backgr" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer5"]
-margin_right = 100.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-texture = ExtResource( 6 )
+[node name="Focus" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Mudguard"]
+visible = false
+modulate = Color( 1, 1, 1, 0.544476 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 1.00633, 1.00633 )
+rect_pivot_offset = Vector2( 50, 50 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 13 )
 expand = true
-stretch_mode = 6
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer5"]
-margin_left = 17.0
-margin_top = 17.0
-margin_right = 82.0
-margin_bottom = 82.0
-rect_min_size = Vector2( 65, 65 )
+[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Mudguard"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 14.2453
+margin_top = 13.7079
+margin_right = -17.7547
+margin_bottom = -15.2921
+rect_min_size = Vector2( 50, 50 )
 texture = ExtResource( 14 )
 stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="CenterContainer6" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
+[node name="Chain" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Mudguard"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 50, 50 )
+texture = ExtResource( 22 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MudguardAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Mudguard"]
+anims/Focus_scale = SubResource( 8 )
+
+[node name="Stormhead" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
 margin_left = 728.0
 margin_right = 828.0
 margin_bottom = 100.0
+focus_neighbour_left = NodePath("../Mudguard")
+focus_neighbour_top = NodePath("../../../Back_button/Back")
+focus_neighbour_right = NodePath("../Melee")
+focus_neighbour_bottom = NodePath("../../../Back_button/Back")
+texture_normal = ExtResource( 21 )
 
-[node name="Backgr" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer6"]
-margin_right = 100.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-texture = ExtResource( 6 )
+[node name="Focus" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Stormhead"]
+visible = false
+modulate = Color( 1, 1, 1, 0.485346 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 1.00066, 1.00066 )
+rect_pivot_offset = Vector2( 50, 50 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 13 )
 expand = true
-stretch_mode = 6
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/CenterContainer6"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 80.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 60, 60 )
+[node name="Chapter" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Stormhead"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 14.2453
+margin_top = 13.7079
+margin_right = -17.7547
+margin_bottom = -15.2921
+rect_min_size = Vector2( 50, 50 )
 texture = ExtResource( 17 )
 stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="CenterContainer2" type="CenterContainer" parent="ChoosePlayer/VBoxContainer"]
-visible = false
-margin_top = 442.0
+[node name="Chain" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Stormhead"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 50, 50 )
+texture = ExtResource( 22 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StormheadAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Stormhead"]
+anims/Focus_scale = SubResource( 9 )
+
+[node name="Back_button" type="CenterContainer" parent="ChoosePlayer/VBoxContainer"]
+margin_top = 512.0
 margin_right = 1280.0
-margin_bottom = 532.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ChoosePlayer/VBoxContainer/CenterContainer2"]
-margin_left = 121.0
-margin_right = 1159.0
-margin_bottom = 90.0
-
-[node name="TextureRect2" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer"]
-margin_right = 32.0
-margin_bottom = 90.0
-texture = ExtResource( 22 )
-stretch_mode = 6
-
-[node name="CenterContainer5" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer"]
-modulate = Color( 1, 1, 1, 0.682353 )
-margin_left = 36.0
-margin_right = 96.0
-margin_bottom = 90.0
-
-[node name="Skin6" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer5"]
-margin_top = 15.0
-margin_right = 60.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 60, 60 )
-texture = ExtResource( 21 )
-expand = true
-stretch_mode = 6
-
-[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer5"]
-margin_left = 10.0
-margin_top = 25.0
-margin_right = 50.0
-margin_bottom = 65.0
-rect_min_size = Vector2( 40, 40 )
-texture = ExtResource( 18 )
-stretch_mode = 6
-
-[node name="CenterContainer6" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer"]
-margin_left = 100.0
-margin_right = 190.0
-margin_bottom = 90.0
-
-[node name="Skin5" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer6"]
-margin_right = 90.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 90, 90 )
-texture = ExtResource( 21 )
-expand = true
-stretch_mode = 6
-
-[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer6"]
-margin_left = 15.0
-margin_top = 15.0
-margin_right = 75.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 60, 60 )
-texture = ExtResource( 8 )
-stretch_mode = 6
-
-[node name="CenterContainer7" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer"]
-modulate = Color( 1, 1, 1, 0.682353 )
-margin_left = 194.0
-margin_right = 254.0
-margin_bottom = 90.0
-
-[node name="Skin6" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer7"]
-margin_top = 15.0
-margin_right = 60.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 60, 60 )
-texture = ExtResource( 21 )
-expand = true
-stretch_mode = 6
-
-[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer7"]
-margin_left = 10.0
-margin_top = 25.0
-margin_right = 50.0
-margin_bottom = 65.0
-rect_min_size = Vector2( 40, 40 )
-texture = ExtResource( 14 )
-stretch_mode = 6
-
-[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer"]
-margin_left = 258.0
-margin_right = 290.0
-margin_bottom = 90.0
-texture = ExtResource( 22 )
-stretch_mode = 6
-flip_h = true
-
-[node name="CenterContainer" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer"]
-margin_left = 294.0
-margin_right = 744.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 450, 0 )
-
-[node name="TextureRect3" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer"]
-margin_left = 748.0
-margin_right = 780.0
-margin_bottom = 90.0
-texture = ExtResource( 22 )
-stretch_mode = 6
-
-[node name="CenterContainer8" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer"]
-modulate = Color( 1, 1, 1, 0.682353 )
-margin_left = 784.0
-margin_right = 844.0
-margin_bottom = 90.0
-
-[node name="Skin6" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer8"]
-margin_top = 15.0
-margin_right = 60.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 60, 60 )
-texture = ExtResource( 21 )
-expand = true
-stretch_mode = 6
-
-[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer8"]
-margin_left = 10.0
-margin_top = 25.0
-margin_right = 50.0
-margin_bottom = 65.0
-rect_min_size = Vector2( 40, 40 )
-texture = ExtResource( 18 )
-stretch_mode = 6
-
-[node name="CenterContainer9" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer"]
-margin_left = 848.0
-margin_right = 938.0
-margin_bottom = 90.0
-
-[node name="Skin5" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer9"]
-margin_right = 90.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 90, 90 )
-texture = ExtResource( 21 )
-expand = true
-stretch_mode = 6
-
-[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer9"]
-margin_left = 15.0
-margin_top = 15.0
-margin_right = 75.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 60, 60 )
-texture = ExtResource( 4 )
-stretch_mode = 6
-
-[node name="CenterContainer10" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer"]
-modulate = Color( 1, 1, 1, 0.682353 )
-margin_left = 942.0
-margin_right = 1002.0
-margin_bottom = 90.0
-
-[node name="Skin6" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer10"]
-margin_top = 15.0
-margin_right = 60.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 60, 60 )
-texture = ExtResource( 21 )
-expand = true
-stretch_mode = 6
-
-[node name="TextureRect" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer/CenterContainer10"]
-margin_left = 10.0
-margin_top = 25.0
-margin_right = 50.0
-margin_bottom = 65.0
-rect_min_size = Vector2( 40, 40 )
-texture = ExtResource( 14 )
-stretch_mode = 6
-
-[node name="TextureRect4" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer2/HBoxContainer"]
-margin_left = 1006.0
-margin_right = 1038.0
-margin_bottom = 90.0
-texture = ExtResource( 22 )
-stretch_mode = 6
-flip_h = true
-
-[node name="CenterContainer" type="CenterContainer" parent="ChoosePlayer/VBoxContainer"]
-margin_top = 546.0
-margin_right = 1280.0
-margin_bottom = 616.0
+margin_bottom = 582.0
 rect_min_size = Vector2( 0, 52 )
 
-[node name="Back" type="TextureButton" parent="ChoosePlayer/VBoxContainer/CenterContainer"]
+[node name="Back" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Back_button"]
 margin_left = 500.0
 margin_right = 780.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 280, 70 )
-focus_neighbour_top = NodePath("../../Tasks/HBoxContainer/PlayerOne/PlayerOne_button")
-focus_neighbour_bottom = NodePath("../../Tasks/HBoxContainer/PlayerOne/PlayerOne_button")
+focus_neighbour_left = NodePath("../../Chapters/HBoxContainer/Melee")
+focus_neighbour_top = NodePath("../../Chapters/HBoxContainer/Melee")
+focus_neighbour_right = NodePath("../../Chapters/HBoxContainer/Stormhead")
+focus_neighbour_bottom = NodePath("../../Chapters/HBoxContainer/Stormhead")
 mouse_filter = 2
 texture_normal = ExtResource( 1 )
 expand = true
 stretch_mode = 3
 
-[node name="Focus" type="TextureRect" parent="ChoosePlayer/VBoxContainer/CenterContainer/Back"]
+[node name="Focus" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Back_button/Back"]
 visible = false
 modulate = Color( 1, 1, 1, 0.780417 )
 anchor_right = 1.0
@@ -1000,7 +1122,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="ChoosePlayer/VBoxContainer/CenterContainer/Back"]
+[node name="Label" type="Label" parent="ChoosePlayer/VBoxContainer/Back_button/Back"]
 modulate = Color( 0.831373, 0.831373, 0.831373, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1017,18 +1139,52 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BackAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/CenterContainer/Back"]
-anims/Focus_scale = SubResource( 8 )
+[node name="BackAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Back_button/Back"]
+anims/Focus_scale = SubResource( 10 )
 
-[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerOne/PlayerOne_button" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "PlayerOne_button", "PlayerOneAnimated" ]]
-[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerOne/PlayerOne_button" to="ChoosePlayer" method="_play_change_cursor_effect"]
-[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerOne/PlayerOne_button" to="ChoosePlayer" method="_on_animated_focus_exited" binds= [ "PlayerOne_button", "PlayerTwoAnimated" ]]
-[connection signal="pressed" from="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerOne/PlayerOne_button" to="ChoosePlayer" method="_start_game" binds= [ 2 ]]
-[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerTwo/PlayerTwo_button" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "PlayerTwo_button", "PlayerTwoAnimated" ]]
-[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerTwo/PlayerTwo_button" to="ChoosePlayer" method="_play_change_cursor_effect"]
-[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerTwo/PlayerTwo_button" to="ChoosePlayer" method="_on_animated_focus_exited" binds= [ "PlayerTwo_button", "PlayerTwoAnimated" ]]
-[connection signal="pressed" from="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/PlayerTwo/PlayerTwo_button" to="ChoosePlayer" method="_start_game" binds= [ 1 ]]
-[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/CenterContainer/Back" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "Back", "BackAnimated" ]]
-[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/CenterContainer/Back" to="ChoosePlayer" method="_play_change_cursor_effect"]
-[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/CenterContainer/Back" to="ChoosePlayer" method="_on_animated_focus_exited" binds= [ "Back", "BackAnimated" ]]
-[connection signal="pressed" from="ChoosePlayer/VBoxContainer/CenterContainer/Back" to="ChoosePlayer" method="_on_Back_pressed"]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Melee" to="ChoosePlayer" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Melee" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "Melee", "MeleeAnimated" ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Melee" to="ChoosePlayer" method="_show_chapter_sprite" binds= [ "Melee_sprite", "Melee_description", true ]]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Melee" to="ChoosePlayer" method="_on_animated_focus_exited" binds= [ "Melee", "MeleeAnimated" ]]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Melee" to="ChoosePlayer" method="_show_chapter_sprite" binds= [ "Melee_sprite", "Melee_description", false ]]
+[connection signal="pressed" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Melee" to="ChoosePlayer" method="_start_game" binds= [ 2 ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Shoot" to="ChoosePlayer" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Shoot" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "Shoot", "ShootAnimated" ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Shoot" to="ChoosePlayer" method="_show_chapter_sprite" binds= [ "Shoot_sprite", "Shoot_description", true ]]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Shoot" to="ChoosePlayer" method="_on_animated_focus_exited" binds= [ "Shoot", "ShootAnimated" ]]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Shoot" to="ChoosePlayer" method="_show_chapter_sprite" binds= [ "Shoot_sprite", "Shoot_description", false ]]
+[connection signal="pressed" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Shoot" to="ChoosePlayer" method="_start_game" binds= [ 1 ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Wheel" to="ChoosePlayer" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Wheel" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "Wheel", "WheelAnimated" ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Wheel" to="ChoosePlayer" method="_show_chapter_sprite" binds= [ "Wheel_sprite", "Wheel_description", true ]]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Wheel" to="ChoosePlayer" method="_on_animated_focus_exited" binds= [ "Wheel", "WheelAnimated" ]]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Wheel" to="ChoosePlayer" method="_show_chapter_sprite" binds= [ "Wheel_sprite", "Wheel_description", false ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Guardian" to="ChoosePlayer" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Guardian" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "Guardian", "GuardianAnimated" ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Guardian" to="ChoosePlayer" method="_show_chapter_sprite" binds= [ "Guardian_sprite", "Guardian_description", true ]]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Guardian" to="ChoosePlayer" method="_on_animated_focus_exited" binds= [ "Guardian", "GuardianAnimated" ]]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Guardian" to="ChoosePlayer" method="_show_chapter_sprite" binds= [ "Guardian_sprite", "Guardian_description", false ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Droid" to="ChoosePlayer" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Droid" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "Droid", "DroidAnimated" ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Droid" to="ChoosePlayer" method="_show_chapter_sprite" binds= [ "Droid_sprite", "Droid_description", true ]]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Droid" to="ChoosePlayer" method="_on_animated_focus_exited" binds= [ "Droid", "DroidAnimated" ]]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Droid" to="ChoosePlayer" method="_show_chapter_sprite" binds= [ "Droid_sprite", "Droid_description", false ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Druid" to="ChoosePlayer" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Druid" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "Druid", "DruidAnimated" ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Druid" to="ChoosePlayer" method="_show_chapter_sprite" binds= [ "Druid_sprite", "Druid_description", true ]]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Druid" to="ChoosePlayer" method="_on_animated_focus_exited" binds= [ "Druid", "DruidAnimated" ]]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Druid" to="ChoosePlayer" method="_show_chapter_sprite" binds= [ "Druid_sprite", "Druid_description", false ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Mudguard" to="ChoosePlayer" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Mudguard" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "Mudguard", "MudguardAnimated" ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Mudguard" to="ChoosePlayer" method="_show_chapter_sprite" binds= [ "Mudguard_sprite", "Mudguard_description", true ]]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Mudguard" to="ChoosePlayer" method="_on_animated_focus_exited" binds= [ "Mudguard", "MudguardAnimated" ]]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Mudguard" to="ChoosePlayer" method="_show_chapter_sprite" binds= [ "Mudguard_sprite", "Mudguard_description", false ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Stormhead" to="ChoosePlayer" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Stormhead" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "Stormhead", "StormheadAnimated" ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Stormhead" to="ChoosePlayer" method="_show_chapter_sprite" binds= [ "Stormhead_sprite", "Stormhead_description", true ]]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Stormhead" to="ChoosePlayer" method="_on_animated_focus_exited" binds= [ "Stormhead", "StormheadAnimated" ]]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Stormhead" to="ChoosePlayer" method="_show_chapter_sprite" binds= [ "Stormhead_sprite", "Stormhead_description", false ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Back_button/Back" to="ChoosePlayer" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Back_button/Back" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "Back", "BackAnimated" ]]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Back_button/Back" to="ChoosePlayer" method="_on_animated_focus_exited" binds= [ "Back", "BackAnimated" ]]
+[connection signal="pressed" from="ChoosePlayer/VBoxContainer/Back_button/Back" to="ChoosePlayer" method="_on_Back_pressed"]

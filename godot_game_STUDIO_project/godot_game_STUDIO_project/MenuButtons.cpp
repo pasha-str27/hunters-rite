@@ -48,7 +48,7 @@ void godot::MenuButtons::_ready()
 	// Set focus button in Menu and Notise scenes
 	set_focus_mode(true);
 
-	std::vector<String> name_buttons{ "Play", "Flower_button","PlayerOne_button", "Back", "Resume", "Retry" };
+	std::vector<String> name_buttons{ "Play", "Flower_button","Melee", "Back", "Resume", "Retry" };
 
 	if (get_name() == "Menu" && find_parent("root") != nullptr && !find_parent("root")->has_node("MenuBackMusic"))
 	{
@@ -108,6 +108,7 @@ void MenuButtons::_register_methods()
 	register_method((char*)"_set_vertical_scroll", &MenuButtons::_set_vertical_scroll);
 	register_method((char*)"_on_animated_focus_entered", &MenuButtons::_on_animated_focus_entered);
 	register_method((char*)"_on_animated_focus_exited", &MenuButtons::_on_animated_focus_exited);
+	register_method((char*)"_show_chapter_sprite", &MenuButtons::_show_chapter_sprite);
 	register_method((char*)"_on_effects_value_changed", &MenuButtons::_on_effects_value_changed);
 	register_method((char*)"_on_music_value_changed", &MenuButtons::_on_music_value_changed);
 	register_method((char*)"_timeout", &MenuButtons::_timeout);
@@ -302,6 +303,14 @@ void godot::MenuButtons::_on_Flower_pressed(Variant)
 	}
 	game_mode = COOP;
 	_start_game(game_mode);
+}
+
+// -------Choose chapter-------
+void godot::MenuButtons::_show_chapter_sprite(String sprite_name, String description_name, bool mode)
+{
+	cast_to<CenterContainer>(this->find_node(sprite_name))->set_visible(mode);
+	cast_to<Label>(this->find_node(description_name))->set_visible(mode);
+
 }
 
 // -------Option buttons-------
