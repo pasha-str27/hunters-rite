@@ -1,11 +1,12 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_background_v2.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_focus_v2.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/notice_background_v2.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/melee.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/p1/p5.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Scripts/MenuButtons.gdns" type="Script" id=5]
 [ext_resource path="res://Assets/Sprites/UI/item_menu_background.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/p2/idle2.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/melee_player_choose.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Prefabs/SoundsEffects/Effects/ButtonClick.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Prefabs/Animations/FadeOut.tscn" type="PackedScene" id=10]
@@ -21,72 +22,56 @@
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/shooter.png" type="Texture" id=20]
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/choose_chapter_background.png" type="Texture" id=21]
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/choose_chapter_chain.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/p2/idle5.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/p2/idle1.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/p2/idle3.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/p2/idle4.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/p1/p4.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/p1/p3.png" type="Texture" id=28]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/p1/p2.png" type="Texture" id=29]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/p1/p1.png" type="Texture" id=30]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="Animation" id=1]
+resource_name = "idle"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 24 ), ExtResource( 7 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 23 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "idle"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 30 ), ExtResource( 29 ), ExtResource( 28 ), ExtResource( 27 ), ExtResource( 4 ) ]
+}
+
+[sub_resource type="DynamicFont" id=3]
 size = 13
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 11 )
 
-[sub_resource type="Animation" id=2]
-length = 1.5
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Focus:rect_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.8, 1.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Focus:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.8, 1.5 ),
-"transitions": PoolRealArray( 1.10957, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
-}
-
-[sub_resource type="Animation" id=3]
-resource_name = "Focus_scale"
-length = 1.5
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Focus:rect_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.8, 1.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Focus:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.8, 1.5 ),
-"transitions": PoolRealArray( 1.10957, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
-}
-
 [sub_resource type="Animation" id=4]
-resource_name = "Focus_scale"
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -115,7 +100,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=5]
-resource_name = "Focus_scale"
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -144,7 +128,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=6]
-resource_name = "Focus_scale"
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -173,7 +156,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=7]
-resource_name = "Focus_scale"
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -202,7 +184,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=8]
-resource_name = "Focus_scale"
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -231,7 +212,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=9]
-resource_name = "Focus_scale"
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -260,6 +240,62 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=10]
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Focus:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Focus:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1.10957, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Focus:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Focus:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1.10957, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
+}
+
+[sub_resource type="Animation" id=12]
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -349,7 +385,6 @@ texture = ExtResource( 6 )
 stretch_mode = 6
 
 [node name="Melee_sprite" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 256, 256 )
@@ -364,9 +399,12 @@ margin_top = 68.0
 margin_right = 188.0
 margin_bottom = 188.0
 rect_min_size = Vector2( 120, 120 )
-texture = ExtResource( 4 )
+texture = ExtResource( 7 )
 expand = true
 stretch_mode = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters/Melee_sprite/Chapret_sprite"]
+anims/idle = SubResource( 1 )
 
 [node name="Shoot_sprite" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters"]
 visible = false
@@ -384,9 +422,12 @@ margin_top = 68.0
 margin_right = 188.0
 margin_bottom = 188.0
 rect_min_size = Vector2( 120, 120 )
-texture = ExtResource( 20 )
+texture = ExtResource( 27 )
 expand = true
 stretch_mode = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters/Shoot_sprite/Chapret_sprite"]
+anims/idle = SubResource( 2 )
 
 [node name="Wheel_sprite" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters"]
 visible = false
@@ -520,7 +561,7 @@ margin_left = 52.0
 margin_top = 57.0
 margin_right = 247.0
 margin_bottom = 198.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "BLUE FANKA
 
 HP:100
@@ -537,7 +578,7 @@ margin_left = 52.0
 margin_top = 57.0
 margin_right = 247.0
 margin_bottom = 198.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "SPROTE
 
 HP:100
@@ -554,7 +595,7 @@ margin_left = 52.0
 margin_top = 57.0
 margin_right = 247.0
 margin_bottom = 198.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "WHEEL
 
 HP:100
@@ -571,7 +612,7 @@ margin_left = 52.0
 margin_top = 57.0
 margin_right = 247.0
 margin_bottom = 198.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "GUARDIAN
 
 HP:100
@@ -588,7 +629,7 @@ margin_left = 52.0
 margin_top = 57.0
 margin_right = 247.0
 margin_bottom = 198.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "BLUE FANKA
 
 HP:100
@@ -605,7 +646,7 @@ margin_left = 52.0
 margin_top = 57.0
 margin_right = 247.0
 margin_bottom = 198.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "DRUID
 
 HP:100
@@ -622,7 +663,7 @@ margin_left = 52.0
 margin_top = 57.0
 margin_right = 247.0
 margin_bottom = 198.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "MUDGUARD
 
 HP:100
@@ -639,7 +680,7 @@ margin_left = 52.0
 margin_top = 57.0
 margin_right = 247.0
 margin_bottom = 198.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "STORMHEAD
 
 HP:100
@@ -706,7 +747,7 @@ __meta__ = {
 }
 
 [node name="MeleeAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Melee"]
-anims/Focus_scale = SubResource( 2 )
+anims/Focus_scale = SubResource( 4 )
 
 [node name="Shoot" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
 margin_left = 104.0
@@ -752,7 +793,7 @@ __meta__ = {
 }
 
 [node name="ShootAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Shoot"]
-anims/Focus_scale = SubResource( 3 )
+anims/Focus_scale = SubResource( 5 )
 
 [node name="Wheel" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
 margin_left = 208.0
@@ -807,7 +848,7 @@ __meta__ = {
 }
 
 [node name="WheelAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Wheel"]
-anims/Focus_scale = SubResource( 4 )
+anims/Focus_scale = SubResource( 6 )
 
 [node name="Guardian" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
 margin_left = 312.0
@@ -862,7 +903,7 @@ __meta__ = {
 }
 
 [node name="GuardianAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Guardian"]
-anims/Focus_scale = SubResource( 5 )
+anims/Focus_scale = SubResource( 7 )
 
 [node name="Droid" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
 margin_left = 416.0
@@ -917,7 +958,7 @@ __meta__ = {
 }
 
 [node name="DroidAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Droid"]
-anims/Focus_scale = SubResource( 6 )
+anims/Focus_scale = SubResource( 8 )
 
 [node name="Druid" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
 margin_left = 520.0
@@ -972,7 +1013,7 @@ __meta__ = {
 }
 
 [node name="DruidAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Druid"]
-anims/Focus_scale = SubResource( 7 )
+anims/Focus_scale = SubResource( 9 )
 
 [node name="Mudguard" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
 margin_left = 624.0
@@ -1027,7 +1068,7 @@ __meta__ = {
 }
 
 [node name="MudguardAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Mudguard"]
-anims/Focus_scale = SubResource( 8 )
+anims/Focus_scale = SubResource( 10 )
 
 [node name="Stormhead" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
 margin_left = 728.0
@@ -1082,7 +1123,7 @@ __meta__ = {
 }
 
 [node name="StormheadAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Stormhead"]
-anims/Focus_scale = SubResource( 9 )
+anims/Focus_scale = SubResource( 11 )
 
 [node name="Back_button" type="CenterContainer" parent="ChoosePlayer/VBoxContainer"]
 margin_top = 512.0
@@ -1140,7 +1181,7 @@ __meta__ = {
 }
 
 [node name="BackAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Back_button/Back"]
-anims/Focus_scale = SubResource( 10 )
+anims/Focus_scale = SubResource( 12 )
 
 [connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Melee" to="ChoosePlayer" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Melee" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "Melee", "MeleeAnimated" ]]
