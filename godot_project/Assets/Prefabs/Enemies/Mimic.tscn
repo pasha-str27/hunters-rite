@@ -156,7 +156,7 @@ shape = SubResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Mimic/CollisionShape2D"]
 frames = SubResource( 22 )
 animation = "idle"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Area2D" type="Area2D" parent="Mimic"]
