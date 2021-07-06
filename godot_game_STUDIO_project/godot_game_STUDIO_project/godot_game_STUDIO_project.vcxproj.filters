@@ -178,7 +178,9 @@
     <ClCompile Include="MimicAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="BulletPull.cpp" />
+    <ClCompile Include="BulletPull.cpp">
+      <Filter>Ammo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
@@ -383,7 +385,9 @@
     <ClInclude Include="MimicAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="BulletPull.h" />
+    <ClInclude Include="BulletPull.h">
+      <Filter>Ammo</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Players">

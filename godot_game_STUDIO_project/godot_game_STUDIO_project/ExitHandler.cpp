@@ -33,6 +33,7 @@ void godot::ExitHandler::_ready()
 	timer->start(.5);
 	cast_to<Particles2D>(get_node("SpawnExitParticles"))->set_emitting(true);
 	cast_to<AnimationPlayer>(get_node("AnimationPlayer"))->play("show");
+	Enemies::get_singleton()->set_spawning(false);
 }
 
 void godot::ExitHandler::_on_Area2D_area_entered(Node* other)
