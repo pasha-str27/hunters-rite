@@ -96,7 +96,7 @@ radius = 18.2109
 
 [node name="SillyBoy" type="Node2D"]
 script = ExtResource( 4 )
-enemy_price = 1.0
+enemy_price = 36.0
 
 [node name="SillyBoy" type="KinematicBody2D" parent="." groups=[
 "enemy",
