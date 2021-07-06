@@ -172,6 +172,9 @@
     <ClCompile Include="SillyBoyAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="SillyBoyDiedAI.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
@@ -368,6 +371,9 @@
       <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="SillyBoyAI.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="SillyBoyDiedAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
   </ItemGroup>

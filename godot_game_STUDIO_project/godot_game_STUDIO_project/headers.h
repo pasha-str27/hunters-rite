@@ -120,6 +120,7 @@ using namespace godot;
 #include "SlimeEnemiesHolder.h"
 #include "WormAI.h"
 #include "SillyBoyAI.h"
+#include "SillyBoyDiedAI.h"
 
 //	state
 #include "ISlimeAttackState.h"

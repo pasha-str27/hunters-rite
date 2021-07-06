@@ -17,6 +17,8 @@ namespace godot
 
 		EnemyData(Node2D* enemy);
 		~EnemyData();
+		void _process(float delta);
+		void _set_speed(float value);
 		void _add_bullet(Node* bullet = nullptr);
 		void _change_dir_after_time();
 		void _delete_player1();

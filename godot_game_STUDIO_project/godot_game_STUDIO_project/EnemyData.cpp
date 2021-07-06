@@ -105,6 +105,14 @@ godot::EnemyData::~EnemyData()
 	enemy = nullptr;
 }
 
+void godot::EnemyData::_process(float delta)
+{
+}
+
+void godot::EnemyData::_set_speed(float value)
+{
+}
+
 void godot::EnemyData::_add_bullet(Node* bullet)
 {
 }

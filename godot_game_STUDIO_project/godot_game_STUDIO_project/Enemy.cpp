@@ -38,6 +38,7 @@ void godot::Enemy::_register_methods()
 	register_method("_change_start_parameters", &Enemy::_change_start_parameters);
 	register_method("_remove_taken_positions", &Enemy::_remove_taken_positions);
 	register_method("_set_direction", &Enemy::_set_direction);
+	register_method("_revive", &Enemy::_revive);
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
@@ -118,8 +119,6 @@ void godot::Enemy::_ready()
 	if (is_in_group("silly_boy"))
 		ai->_set_strategy(new SillyBoyAI(bullet, this));
 
-	Godot::print(get_name());
-
 	spawn_particles->set_emitting(true);
 	timer_particles->connect("timeout", this, "_on_spawn_end");
 	timer_particles->start(0.2f);
@@ -129,6 +128,8 @@ void godot::Enemy::_ready()
 		cast_to<ProgressBar>(get_node("/root/Node2D/Node/Camera2D")->get_node("BossHealthBar"))->set_visible(false);
 	else
 		cast_to<ProgressBar>(get_node("HealthBar"))->set_visible(false);
+
+	max_HP = HP;
 }
 
 void godot::Enemy::_process(float delta)
@@ -181,6 +182,18 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		if(!is_in_group("flower"))
 			player->call("_on_enemy_die", this->get_global_position());
 
+		if (is_in_group("silly_boy") && !was_died)
+		{
+			was_died = true;
+			ai->_set_strategy(new SillyBoyDiedAI(bullet, this));
+			HP = max_HP;
+			_update_health_bar();
+			timer->connect("timeout", this, "_revive");
+
+			timer->start(time_to_revive);
+			return;
+		}
+
 		died = true;
 
 		Enemies::get_singleton()->_remove_enemy(this);
@@ -198,7 +211,6 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 			get_node("/root/Node2D/Node/ItemsContainer")->call("_spawn_random_item", get_global_position());
 			cast_to<ProgressBar>(CustomExtensions::GetChildByName(get_node("/root/Node2D/Node/Camera2D"), "BossHealthBar"))->set_visible(false);
 		}
-
 
 		set_collision_layer_bit(2, false);
 		set_collision_mask_bit(9, false);
@@ -273,6 +285,7 @@ void godot::Enemy::_destroy_enemy()
 	_update_health_bar();
 
 	timer->disconnect("timeout", this, "_destroy_enemy");
+
 	Enemies::get_singleton()->_remove_enemy(this);
 
 	get_parent()->queue_free();
@@ -504,4 +517,13 @@ void godot::Enemy::_set_direction(Node* player, Vector2 direction)
 	{
 		ai->_set_direction(direction);
 	}
+}
+
+void godot::Enemy::_revive()
+{
+	timer->disconnect("timeout", this, "_revive");
+	was_died = false;
+	ai->_set_strategy(new SillyBoyAI(bullet, this));
+	HP = max_HP;
+	_update_health_bar();
 }

@@ -18,7 +18,7 @@ namespace godot
 
 		bool was_setted = false;
 
-		Vector2 goal=Vector2::ZERO;
+		Vector2 goal = Vector2::ZERO;
 
 	public:
 		Vector2 old_pos;
@@ -38,7 +38,7 @@ namespace godot
 		void _change_start_parameters();
 		void _set_player(Node2D* player);
 		void _remove_player(Node2D* player);
-		void _set_direction(Vector2 dir);
+		void _set_direction(Vector2 direction);
 		float _find_max_distance(Vector2 dir);
 	};
 }

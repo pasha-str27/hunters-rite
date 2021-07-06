@@ -7,7 +7,7 @@ bool godot::SillyBoyAI::_is_player_near(Node2D* player)
 {
 	Vector2 player_pos_index = (player->get_global_position()
 		- CameraController::current_room->get_global_position()
-		+ Vector2(896, 544) / 2) / 32;
+		+ Vector2(896, 544) / 2) / _get_distance();
 
 	bool is_player_ghost = (bool)player->call("_is_ghost_mode");
 
@@ -15,56 +15,31 @@ bool godot::SillyBoyAI::_is_player_near(Node2D* player)
 
 	player_pos_index = Vector2((int)player_pos_index.y, (int)player_pos_index.x);
 
-	if (player_pos_index == Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::LEFT).x))
+	if (is_player_ghost)
 	{
-		if (!is_player_ghost)
+		if (player_pos_index == Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::LEFT).x))
 		{
-			directions.clear();
-			directions.push_back(Vector2::LEFT);
-			return true;
+			ghost_is_near = true;
+			remove_vector_element(Vector2::LEFT);
 		}
 
-		ghost_is_near = true;
-		remove_vector_element(Vector2::LEFT);
-	}
-
-	if (player_pos_index == Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::RIGHT).x))
-	{
-		if (!is_player_ghost)
+		if (player_pos_index == Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::RIGHT).x))
 		{
-			directions.clear();
-			directions.push_back(Vector2::RIGHT);
-			return true;
+			ghost_is_near = true;
+			remove_vector_element(Vector2::RIGHT);
 		}
 
-		ghost_is_near = true;
-		remove_vector_element(Vector2::RIGHT);
-	}
-
-	if (player_pos_index == Vector2((int)(cur_pos + Vector2::DOWN).y, (int)cur_pos.x))
-	{
-		if (!is_player_ghost)
+		if (player_pos_index == Vector2((int)(cur_pos + Vector2::DOWN).y, (int)cur_pos.x))
 		{
-			directions.clear();
-			directions.push_back(Vector2::DOWN);
-			return true;
+			ghost_is_near = true;
+			remove_vector_element(Vector2::DOWN);
 		}
 
-		ghost_is_near = true;
-		remove_vector_element(Vector2::DOWN);
-	}
-
-	if (player_pos_index == Vector2((int)(cur_pos + Vector2::UP).y, (int)cur_pos.x))
-	{
-		if (!is_player_ghost)
+		if (player_pos_index == Vector2((int)(cur_pos + Vector2::UP).y, (int)cur_pos.x))
 		{
-			directions.clear();
-			directions.push_back(Vector2::UP);
-			return true;
+			ghost_is_near = true;
+			remove_vector_element(Vector2::UP);
 		}
-
-		ghost_is_near = true;
-		remove_vector_element(Vector2::UP);
 	}
 
 	if (ghost_is_near)
@@ -123,14 +98,16 @@ void godot::SillyBoyAI::_remove_player(Node2D* player)
 		_set_is_player2_onArea(false);
 }
 
-void godot::SillyBoyAI::_set_direction(Vector2 dir)
+void godot::SillyBoyAI::_set_direction(Vector2 direction)
 {
 	if (was_setted)
 		return;
 
+	cur_pos -= dir;
+
 	was_setted = true;
 	old_pos = _get_enemy()->get_global_position();
-	_set_distance(_find_max_distance(dir));
+	_set_distance(_find_max_distance(direction));
 	speed = 300;
 
 	goal = cur_pos * 32 + CameraController::current_room->get_global_position() - Vector2(896, 544) / 2 + Vector2(16, 16);
