@@ -20,8 +20,6 @@ void godot::SpawnEnemyController::_register_methods()
 
 void godot::SpawnEnemyController::SpawnEnemies()
 {
-	Godot::print("size");
-	Godot::print(enemy_list_prefabs[0].operator godot::Array().size());
 	Enemies* enemies = Enemies::get_singleton();
 
 	if ((String)CameraController::current_room->call("_get_room_type") == "boss_room"
@@ -93,7 +91,7 @@ void godot::SpawnEnemyController::SpawnEnemies()
 
 void godot::SpawnEnemyController::SpawnBoss()
 {
-	if (CameraController::current_level == 2)
+	if (CameraController::current_level == 1)
 	{
 		get_parent()->call("_start_mute_volume");
 		Enemies::get_singleton()->set_enemy_to_spawn_count(1);
