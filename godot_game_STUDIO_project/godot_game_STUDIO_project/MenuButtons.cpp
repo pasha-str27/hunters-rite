@@ -308,6 +308,14 @@ void godot::MenuButtons::_on_Flower_pressed(Variant)
 // -------Choose chapter-------
 void godot::MenuButtons::_show_chapter_sprite(String sprite_name, String description_name, bool mode)
 {
+	if (this->find_node(sprite_name)->get_child(0)->has_node("AnimationPlayer"))
+	{
+		if (mode)
+			cast_to<AnimationPlayer>(this->find_node(sprite_name)->get_child(0)->get_child(0))->play("idle");
+		else
+			cast_to<AnimationPlayer>(this->find_node(sprite_name)->get_child(0)->get_child(0))->stop();
+	}	
+
 	cast_to<CenterContainer>(this->find_node(sprite_name))->set_visible(mode);
 	cast_to<Label>(this->find_node(description_name))->set_visible(mode);
 
