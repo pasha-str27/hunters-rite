@@ -18,7 +18,6 @@ namespace godot {
 	public:
 		MimicAI(Ref<PackedScene>& bullet, Node2D* node);
 		~MimicAI();
-		void _set_speed(float value);
 		void _process(float delta);
 		void change_can_fight(bool value);
 		void _fight(Node2D* player1 = nullptr, Node2D* player2 = nullptr);

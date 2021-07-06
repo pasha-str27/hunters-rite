@@ -50,6 +50,10 @@ void godot::EnemyData::_set_direction(Vector2 dir)
 {
 }
 
+void godot::EnemyData::change_can_fight(bool value)
+{
+}
+
 Node2D* godot::EnemyData::_get_enemy()
 {
 	return enemy;

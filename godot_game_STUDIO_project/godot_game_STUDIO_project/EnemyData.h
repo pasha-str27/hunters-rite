@@ -44,5 +44,6 @@ namespace godot
 		float _get_distance();
 		void _set_distance(float value);
 		void _set_direction(Vector2 dir);
+		void change_can_fight(bool value);
 	};
 }

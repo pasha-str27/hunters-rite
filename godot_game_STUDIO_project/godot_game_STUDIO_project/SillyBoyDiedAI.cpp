@@ -41,12 +41,6 @@ void godot::SillyBoyDiedAI::_remove_player(Node2D* player)
 
 godot::SillyBoyDiedAI::SillyBoyDiedAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
 {
-	dir = Vector2::ZERO;
-
-	can_move = true;
-	is_cheking = false;
-	speed = 200;
-	_set_distance(32);
 	_change_start_parameters();
 }
 
@@ -55,15 +49,8 @@ godot::SillyBoyDiedAI::~SillyBoyDiedAI()
 	directions.clear();
 }
 
-void godot::SillyBoyDiedAI::change_can_fight(bool value)
-{
-	can_move = value;
-}
-
 void godot::SillyBoyDiedAI::_fight(Node2D* player1, Node2D* player2)
 {
-	can_move = false;
-
 	if (!was_setted)
 	{
 		if (is_player1_onArea && player1 != nullptr)
