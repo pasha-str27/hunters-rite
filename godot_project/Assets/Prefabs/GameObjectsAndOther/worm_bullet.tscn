@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/Scripts/bullet.gdns" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 3.23369
+radius = 2.91801
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
@@ -29,7 +29,6 @@ radius = 1.23328
 [node name="slime_bullet" type="KinematicBody2D" groups=[
 "slime_bullet",
 ]]
-visible = false
 scale = Vector2( 5, 5 )
 collision_layer = 0
 collision_mask = 0
@@ -42,7 +41,7 @@ shape = SubResource( 1 )
 disabled = true
 
 [node name="Sprite" type="Sprite" parent="CollisionShape2D"]
-scale = Vector2( 0.2, 0.2 )
+scale = Vector2( 0.3, 0.3 )
 z_index = 55
 texture = ExtResource( 1 )
 region_rect = Rect2( 2, 66, 27, 27 )
