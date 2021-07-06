@@ -15,7 +15,9 @@ bool godot::SlimeAI::_is_player_near(Node2D* player)
 
 	player_pos_index = Vector2((int)player_pos_index.y, (int)player_pos_index.x);
 
-	if (player_pos_index == Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::LEFT).x))
+	Vector2 new_pos = Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::LEFT).x);
+
+	if (player_pos_index == new_pos && (bool)CameraController::current_room->call("_is_empty_pos", new_pos.x, new_pos.y))
 	{
 		if (!is_player_ghost)
 		{
@@ -28,7 +30,9 @@ bool godot::SlimeAI::_is_player_near(Node2D* player)
 		remove_vector_element(Vector2::LEFT);
 	}
 
-	if (player_pos_index == Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::RIGHT).x))
+	new_pos = Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::RIGHT).x);
+
+	if (player_pos_index == new_pos && (bool)CameraController::current_room->call("_is_empty_pos", new_pos.x, new_pos.y))
 	{
 		if (!is_player_ghost)
 		{
@@ -41,7 +45,9 @@ bool godot::SlimeAI::_is_player_near(Node2D* player)
 		remove_vector_element(Vector2::RIGHT);
 	}
 
-	if (player_pos_index == Vector2((int)(cur_pos + Vector2::DOWN).y, (int)cur_pos.x))
+	new_pos = Vector2((int)(cur_pos + Vector2::DOWN).y, (int)cur_pos.x);
+
+	if (player_pos_index == new_pos && (bool)CameraController::current_room->call("_is_empty_pos", new_pos.x, new_pos.y))
 	{
 		if (!is_player_ghost)
 		{
@@ -54,7 +60,9 @@ bool godot::SlimeAI::_is_player_near(Node2D* player)
 		remove_vector_element(Vector2::DOWN);
 	}
 
-	if (player_pos_index == Vector2((int)(cur_pos + Vector2::UP).y, (int)cur_pos.x))
+	new_pos = Vector2((int)(cur_pos + Vector2::UP).y, (int)cur_pos.x);
+
+	if (player_pos_index == new_pos && (bool)CameraController::current_room->call("_is_empty_pos", new_pos.x, new_pos.y))
 	{
 		if (!is_player_ghost)
 		{
