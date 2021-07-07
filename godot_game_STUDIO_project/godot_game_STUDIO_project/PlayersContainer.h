@@ -39,5 +39,6 @@ namespace godot
 		void _add_key(String key_type);
 		Array _get_key_list();
 		void _clear_keys();
+		void _show_game_over_screen();
 	};
 }

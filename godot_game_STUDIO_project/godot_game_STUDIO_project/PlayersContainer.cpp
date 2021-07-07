@@ -24,14 +24,7 @@ void PlayersContainer::_set_player1(Node2D* player1)
 	if (player1 != nullptr)
 		main_camera = player1->get_node("/root/Node2D/Node/Camera2D");
 
-	//game over
-	if (player1 == nullptr && player2 == nullptr)
-	{
-		ResourceLoader* rld = ResourceLoader::get_singleton();
-		Ref<PackedScene> game_over_screen = rld->load("res://Assets/Prefabs/Scenes/GameOver.tscn");
-		main_camera->add_child(game_over_screen->instance());
-		main_camera->get_tree()->set_pause(true);
-	}
+	_show_game_over_screen();
 }
 
 void PlayersContainer::_set_player2(Node2D* player2)
@@ -41,14 +34,7 @@ void PlayersContainer::_set_player2(Node2D* player2)
 	if (player2 != nullptr)
 		main_camera = player2->get_node("/root/Node2D/Node/Camera2D");
 
-	//game over
-	if (player1 == nullptr && player2 == nullptr)
-	{
-		ResourceLoader* rld = ResourceLoader::get_singleton();
-		Ref<PackedScene> game_over_screen = rld->load("res://Assets/Prefabs/Scenes/GameOver.tscn");
-		main_camera->add_child(game_over_screen->instance());
-		main_camera->get_tree()->set_pause(true);
-	}
+	_show_game_over_screen();
 }
 
 void godot::PlayersContainer::_set_player1_regular(Node2D* player1)
@@ -102,4 +88,25 @@ Array godot::PlayersContainer::_get_key_list()
 void godot::PlayersContainer::_clear_keys()
 {
 	key_list.clear();
+}
+
+void godot::PlayersContainer::_show_game_over_screen()
+{
+	//game over
+	if (player1 == nullptr && player2 == nullptr)
+	{
+		Timer* timer = nullptr;
+
+		if (!main_camera->has_node("main_camera"))
+		{
+			timer = Timer::_new();
+			main_camera->add_child(timer);
+			timer->set_name("game_over");
+		}
+		else
+			timer = main_camera->cast_to<Timer>(main_camera->get_node("game_over"));
+
+		timer->connect("timeout", main_camera, "_show_game_over_screen");
+		timer->start(0.75);
+	}
 }
