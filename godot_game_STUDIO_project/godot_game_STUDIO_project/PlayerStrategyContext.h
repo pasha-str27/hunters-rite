@@ -24,6 +24,7 @@ namespace godot
 		void _take_damage(float damage, bool is_spike = false);
 		float _get_HP();
 		void _set_HP(float HP);
+		void _set_right_HP(float HP);
 		float _get_damage();
 		void _set_damage(float value);
 		void _revive();
@@ -43,5 +44,6 @@ namespace godot
 		void _heal();
 		void _set_controll_buttons(String move_up, String move_down, String move_left, String move_right, String fight_up,
 			String fight_down, String fight_left, String fight_right, String special);
+		void _set_is_attacking(bool value);
 	};
 }

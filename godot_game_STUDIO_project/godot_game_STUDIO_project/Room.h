@@ -5,6 +5,13 @@
 
 namespace godot
 {
+	struct data_to_spawn_enemy
+	{
+		Node2D* enemy;
+		Vector2 new_pos;
+		Timer* timer;
+	};
+
 	class Room : public Node2D
 	{
 		GODOT_CLASS(Room, Node2D);
@@ -12,6 +19,7 @@ namespace godot
 		int num_of_adjacent_rooms = 0;
 		std::vector<std::vector<int>> room_map;
 		std::vector<Vector2> empty_pos_world_coordinates;
+		std::vector<data_to_spawn_enemy> enemies_to_spawn;
 		Array list_of_keys;
 		float room_difficulty = 100;
 		String room_type = "";
@@ -32,7 +40,7 @@ namespace godot
 		bool _is_empty_pos(int i, int j);
 		int _get_cell_value(int i, int j);
 		void _set_cell_value(int i, int j, int value);
-		void _fill_empty_positions();
+		void _fill_empty_positions(Node2D* room);
 		void print();
 		void _add_list(Array);
 		Array _get_list_of_keys();
@@ -44,5 +52,8 @@ namespace godot
 		void _set_is_special(bool value);
 		bool _get_is_special();
 		Array _get_enemy_spawn_positions();
+		void _add_new_enemy(Node2D* room, Vector2 position);
+		void _spawn_enemy(int number);
+		void _clear_enemy_to_spawn();
 	};
 }

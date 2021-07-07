@@ -14,23 +14,18 @@ godot::SpiderAI::SpiderAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyDat
 
 	auto node = _get_enemy()->get_parent()->get_child(0);
 
-	for (int i = 0; i < max_bullet_count; ++i)
-	{
-		auto new_obj = bullet->instance();
-		node->add_child(new_obj);
-		bullets.push_back(cast_to<Node2D>(new_obj));
-	}
+	bullet_pull = new BulletPull(max_bullet_count, bullet, node);
 }
 
 godot::SpiderAI::~SpiderAI()
 {
-	bullets.clear();
+	delete bullet_pull;
 	directions.clear();
 }
 
 void godot::SpiderAI::_add_bullet(Node* node)
 {
-	bullets.push_back(cast_to<Node2D>(node));
+	bullet_pull->_add_bullet(node->cast_to<Node2D>(node));
 }
 
 void godot::SpiderAI::change_can_fight(bool value)
@@ -44,7 +39,7 @@ bool godot::SpiderAI::_is_player_near(Node2D* player)
 {
 	Vector2 player_pos_index = (player->get_global_position()
 		- CameraController::current_room->get_global_position()
-		+ Vector2(896, 544) / 2) / 32;
+		+ Vector2(896, 544) / 2) / _get_distance();
 
 	bool is_player_ghost = (bool)player->call("_is_ghost_mode");
 
@@ -129,7 +124,7 @@ void godot::SpiderAI::_change_dir_after_time()
 	is_cheking = false;
 
 	dir = directions[rand->randi_range(0, directions.size() - 1)];
-	goal = _get_enemy()->get_global_position() + dir * 32;
+	goal = _get_enemy()->get_global_position() + dir * _get_distance();
 	cur_pos += dir;
 }
 
@@ -166,24 +161,13 @@ void godot::SpiderAI::_fight(Node2D* player1, Node2D* player2)
 		}
 	}
 
-	if (bullets.size() > 0)
-	{
-		bullets[bullets.size() - 1]->set_global_position(_get_enemy()->get_global_position());
+	Node2D* bullet = bullet_pull->_get_bullet();
 
-		bullets[bullets.size() - 1]->set_visible(true);
+	bullet->set_global_position(_get_enemy()->get_global_position());
 
-		bullets[bullets.size() - 1]->call("_set_dir", (bullet_dir - bullets[bullets.size() - 1]->get_global_position()).normalized());
+	bullet->set_visible(true);
 
-		if (bullets.size() == 1)
-		{
-			auto node = _get_enemy()->get_parent()->get_child(0);
-			auto new_obj = bullets[0]->duplicate(8);
-			node->add_child(new_obj);
-			bullets.push_back(cast_to<Node2D>(new_obj));
-		}
-
-		bullets.pop_back();
-	}
+	bullet->call("_set_dir", (bullet_dir - bullet->get_global_position()).normalized());
 }
 
 void godot::SpiderAI::_set_speed(float value)
@@ -193,7 +177,7 @@ void godot::SpiderAI::_set_speed(float value)
 
 void godot::SpiderAI::_change_start_parameters()
 {
-	cur_pos = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+	cur_pos = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / _get_distance();
 	old_pos = _get_enemy()->get_global_position();
 
 	change_direction();
@@ -204,13 +188,11 @@ void godot::SpiderAI::_process(float delta)
 	if (!can_move)
 		return;
 
-	//_get_enemy()->set_global_position(_get_enemy()->get_global_position() + dir * delta * 235);
 	_get_enemy()->set_global_position(_get_enemy()->get_global_position().move_toward(goal, delta * speed));
 	if (is_cheking)
 		return;
 
-	if (abs(old_pos.distance_to(_get_enemy()->get_global_position()) - 32) <= 3
-		&& (dir == Vector2::RIGHT || dir == Vector2::LEFT || dir == Vector2::DOWN || dir == Vector2::UP))
+	if (abs(old_pos.distance_to(_get_enemy()->get_global_position()) - _get_distance()) <= 1)
 	{
 		is_cheking = true;
 		_fight(_get_player1(), _get_player2());

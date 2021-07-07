@@ -46,6 +46,7 @@ void godot::MiniMapController::_register_methods()
 	register_method("_load_special_rooms", &MiniMapController::_load_special_rooms);
 	register_method(" _special_rooms_loader", &MiniMapController::_special_rooms_loader);
 	register_method("_update_special_rooms", &MiniMapController::_update_special_rooms);
+	register_method("_start_treking", &MiniMapController::_start_treking);
 
 	register_method("_start_timer", &MiniMapController::_start_timer);
 	register_method("_on_timeout", &MiniMapController::_on_timeout);
@@ -66,7 +67,19 @@ void godot::MiniMapController::_init()
 
 void godot::MiniMapController::_ready()
 {
-	_start_timer();
+	//if(CameraController::current_level>=2)
+	//	_clear_map();
+	disc_rooms_positions.clear();
+	undisc_rooms_positions.clear();
+	key_rooms_positions.clear();
+	item_rooms_positions.clear();
+	boss_rooms_positions.clear();
+	heal_rooms_positions.clear();
+	keys_positions.clear();
+	items_positions.clear();
+	heal_positions.clear();
+	boss_positions.clear();
+	//_start_treking();
 }
 
 bool godot::MiniMapController::_load_resources()
@@ -97,9 +110,6 @@ bool godot::MiniMapController::_load_resources()
 
 		grid_rect_size = grid->get_rect().get_size();
 
-		undisc_rooms_positions = get_node("/root/Node2D/Node/Generation")->call("_get_rooms_positions");
-		undisc_rooms_positions = undisc_rooms_positions[0];
-
 		_set_positions();
 
 		Godot::print(undisc_rooms_positions.size());
@@ -129,6 +139,8 @@ void godot::MiniMapController::_set_positions()
 	keys_positions = arr[0];
 	arr = CustomExtensions::GetRoomsByType(generation, "boss_room");
 	boss_positions = arr[0];
+	undisc_rooms_positions = get_node("/root/Node2D/Node/Generation")->call("_get_rooms_positions");
+	undisc_rooms_positions = undisc_rooms_positions[0];
 }
 
 void godot::MiniMapController::_update_minimap()
@@ -335,13 +347,16 @@ void godot::MiniMapController::_start_treking()
 
 void godot::MiniMapController::_start_timer()
 {
-	timer->connect("timeout", this, "_on_timeout");
+	if (!timer->is_connected("timeout", this, "_on_timeout"))
+	{
+		timer->connect("timeout", this, "_on_timeout");
 
-	if (!has_node(NodePath(timer->get_name())))
-		add_child(timer);
+		if (!has_node(NodePath(timer->get_name())))
+			add_child(timer);
 
-	timer->set_wait_time(2);
-	timer->start();
+		timer->set_wait_time(2);
+		timer->start();
+	}
 }
 
 void godot::MiniMapController::_on_timeout()

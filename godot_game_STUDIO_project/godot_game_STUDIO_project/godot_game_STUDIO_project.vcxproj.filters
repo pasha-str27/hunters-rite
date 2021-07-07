@@ -162,6 +162,28 @@
     <ClCompile Include="SlimeEnemiesHolder.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="ISlimeAttackState.cpp">
+      <Filter>Enemies\SlimeBossStates</Filter>
+    </ClCompile>
+    <ClCompile Include="WormAI.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="SillyBoyAI.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="SillyBoyDiedAI.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="MimicAI.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletPull.cpp">
+      <Filter>Ammo</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraShake.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
@@ -349,6 +371,28 @@
     </ClInclude>
     <ClInclude Include="SlimeEnemiesHolder.h">
       <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.h" />
+    <ClInclude Include="ISlimeAttackState.h">
+      <Filter>Enemies\SlimeBossStates</Filter>
+    </ClInclude>
+    <ClInclude Include="WormAI.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="SillyBoyAI.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="SillyBoyDiedAI.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="MimicAI.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletPull.h">
+      <Filter>Ammo</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraShake.h">
+      <Filter>Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

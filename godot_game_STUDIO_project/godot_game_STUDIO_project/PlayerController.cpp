@@ -55,6 +55,8 @@ void godot::PlayerController::_register_methods()
 	register_method("_is_ghost_mode", &PlayerController::_is_ghost_mode);
 	register_method("_continue_moving", &PlayerController::_continue_moving);
 	register_method("_stop_moving", &PlayerController::_stop_moving);
+	register_method("_set_is_attacking", &PlayerController::_set_is_attacking);
+	
 	
 	
 	register_property<PlayerController, float>("hp", &PlayerController::_hp, 0);
@@ -134,6 +136,8 @@ void godot::PlayerController::_ready()
 	hurt_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"));
 	dash_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "DashParticles"));
 	revive_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "ReviveParticles"));
+
+	camera_shake = get_node("/root/Node2D/Node/Camera2D")->get_node("CameraShake");
 }
 
 void godot::PlayerController::_start_timer()
@@ -245,6 +249,8 @@ void godot::PlayerController::_take_damage(float damage, bool is_spike)
 	if (current_player_strategy->_get_safe_mode())
 		return;
 
+	camera_shake->call("_start", 4, .2f);
+
 	current_player_strategy->_take_damage(damage, is_spike);
 	_update_health_bar();
 
@@ -281,7 +287,7 @@ void godot::PlayerController::_on_Area2D_area_exited(Node* node)
 {
 	auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
 
-	if (node->is_in_group("door_zone") && is_alive)
+	if (node->is_in_group("door_zone") && (is_alive || is_ghost_mode))
 	{
 		camera->call("_door_collision", "-" + node->get_name());
 		door = nullptr;
@@ -397,9 +403,6 @@ void godot::PlayerController::_die()
 		auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
 		camera->call("_door_collision", "-" + door->get_name());
 	}
-	is_alive = false;
-
-	prev_state = current_player_strategy->_clone();
 
 	is_alive = false;
 
@@ -414,7 +417,7 @@ void godot::PlayerController::_die()
 	{
 		is_ghost_mode = true;
 		current_player_strategy->_set_strategy(player_producer->_get_player_ghost(this, bullet_prefab));
-		
+
 		if (get_name() == "Player1")
 			PlayersContainer::_get_instance()->_set_player1_regular(cast_to<Node2D>(get_parent()));
 
@@ -422,14 +425,21 @@ void godot::PlayerController::_die()
 			PlayersContainer::_get_instance()->_set_player2_regular(this);
 
 		_restore_data();
+
+		current_player_strategy->_get_health_bar()->set_value(0);
+		//_set_HP(0);
 		return;
 	}
 
 	current_player_strategy->_set_was_revived(true);
 	add_child(revive_zone->instance());
 	current_player_strategy->_set_strategy(player_producer->_get_player_died(this, bullet_prefab));
+
 	_restore_data();
-	current_player_strategy->_get_health_bar()->set_value(0);
+
+	_update_health_bar();
+
+	//current_player_strategy->_get_health_bar()->set_value(0);
 }
 
 void godot::PlayerController::_revive()
@@ -526,6 +536,7 @@ void godot::PlayerController::_restore_data()
 	controll_buttons.clear();
 
 	_set_max_HP(prev_state->_get_max_HP());
+	_set_right_HP(prev_state->_get_HP());
 	_set_damage(prev_state->_get_damage());
 	_set_speed(prev_state->_get_speed());
 	_set_was_revived(prev_state->_was_revived());
@@ -589,4 +600,14 @@ void godot::PlayerController::_continue_moving()
 {
 	speed = _saved_speed;
 	current_player_strategy->_set_speed(speed);
+}
+
+void godot::PlayerController::_set_is_attacking(bool value)
+{
+	current_player_strategy->_set_is_attacking(value);
+}
+
+void godot::PlayerController::_set_right_HP(float value)
+{
+	current_player_strategy->_set_right_HP(value);
 }

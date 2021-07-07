@@ -130,3 +130,8 @@ void godot::EnemyAIContext::_remove_taken_positions()
 {
 	strategy->_remove_taken_positions();
 }
+
+void godot::EnemyAIContext::_set_direction(Vector2 dir)
+{
+	strategy->_set_direction(dir);
+}

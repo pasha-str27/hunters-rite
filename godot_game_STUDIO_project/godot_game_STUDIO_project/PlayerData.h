@@ -49,6 +49,7 @@ namespace godot
 		void _set_enemy(Node* enemy = nullptr);
 		float _get_HP();
 		void _set_HP(float HP);
+		void _set_right_HP(float HP);
 		float _get_damage();
 		void _set_damage(float value);
 		void _revive();
@@ -69,6 +70,7 @@ namespace godot
 		std::map<String, String> _get_controll_buttons();
 		IPlayer* _clone();
 		void _heal();
+		void _set_is_attacking(bool value);
 		static Input* input_controller;
 	};
 }

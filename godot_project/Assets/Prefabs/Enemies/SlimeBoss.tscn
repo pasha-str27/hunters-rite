@@ -7,93 +7,88 @@
 [ext_resource path="res://Assets/Sprites/Monsters/Slime/monster_slime_damage.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Prefabs/Particles/DeathParticles/DeathParticles.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Assets/Sprites/pedestal.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/jump_poin_v2.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Scripts/EnemiesHolder.gdns" type="Script" id=9]
 [ext_resource path="res://Assets/Prefabs/Enemies/SlimeShoot.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Prefabs/Enemies/Slime.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Sprites/wave_v2.png" type="Texture" id=12]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.933333, 0.247059, 0.247059, 1 )
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.568627, 0.14902, 0.14902, 0.313726 )
-
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=1]
 radius = 11.42
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 32, 32 )
+region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
-region = Rect2( 32, 0, 32, 32 )
+region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 0, 32, 32 )
+region = Rect2( 128, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 1 )
-region = Rect2( 96, 0, 32, 32 )
+region = Rect2( 160, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 0, 32, 32 )
+region = Rect2( 192, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 1 )
-region = Rect2( 160, 0, 32, 32 )
+region = Rect2( 224, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 32, 32 )
+region = Rect2( 256, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 1 )
-region = Rect2( 224, 0, 32, 32 )
+region = Rect2( 288, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 1 )
-region = Rect2( 256, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 1 )
 region = Rect2( 320, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=15]
+[sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 5 )
 region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=17]
+[sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 5 )
 region = Rect2( 64, 0, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=18]
+[sub_resource type="SpriteFrames" id=16]
 animations = [ {
-"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
 "name": "idle",
 "speed": 7.0
 }, {
-"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
 "loop": false,
 "name": "damaged",
 "speed": 10.0
 } ]
 
-[sub_resource type="CircleShape2D" id=19]
+[sub_resource type="CircleShape2D" id=17]
 radius = 7.26101
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=18]
 resource_name = "grow"
 length = 0.5
 tracks/0/type = "value"
@@ -121,6 +116,8 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="RayShape2D" id=19]
+
 [node name="SlimeBoss" type="Node2D"]
 script = ExtResource( 4 )
 enemy_price = 10.0
@@ -138,30 +135,14 @@ collision_layer = 4
 collision_mask = 512
 script = ExtResource( 3 )
 bullet = ExtResource( 2 )
-HP = 1500.0
+HP = 250.0
 "Death particles" = ExtResource( 7 )
 
-[node name="HealthBar" type="ProgressBar" parent="SlimeBoss"]
-margin_left = -20.0
-margin_top = -25.0
-margin_right = 20.0
-margin_bottom = -20.0
-rect_scale = Vector2( 1, 0.5 )
-custom_styles/fg = SubResource( 1 )
-custom_styles/bg = SubResource( 2 )
-max_value = 1500.0
-value = 1500.0
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
-}
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SlimeBoss"]
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="SlimeBoss/CollisionShape2D"]
-frames = SubResource( 18 )
+frames = SubResource( 16 )
 animation = "damaged"
 frame = 2
 playing = true
@@ -170,7 +151,7 @@ playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SlimeBoss/Area2D"]
 position = Vector2( 0, 6.83333 )
-shape = SubResource( 19 )
+shape = SubResource( 17 )
 
 [node name="SpawnParticles" parent="SlimeBoss" instance=ExtResource( 6 )]
 
@@ -179,14 +160,34 @@ script = ExtResource( 9 )
 enemies_list = [ ExtResource( 11 ), ExtResource( 10 ) ]
 
 [node name="jump_zone" type="Node2D" parent="."]
-scale = Vector2( 3, 3 )
+z_index = 9
 
 [node name="Sprite" type="Sprite" parent="jump_zone"]
+position = Vector2( 0, 18 )
 scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 8 )
 
 [node name="Animator" type="AnimationPlayer" parent="jump_zone"]
-anims/grow = SubResource( 20 )
+anims/grow = SubResource( 18 )
+
+[node name="DamageWave" type="Node2D" parent="."]
+visible = false
+
+[node name="Area2D" type="Area2D" parent="DamageWave"]
+visible = false
+position = Vector2( -64.1835, 16.7538 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageWave/Area2D"]
+visible = false
+scale = Vector2( 10, 1 )
+shape = SubResource( 19 )
+
+[node name="Sprite" type="Sprite" parent="DamageWave/Area2D/CollisionShape2D"]
+visible = false
+modulate = Color( 0.145098, 0.321569, 0.0666667, 1 )
+position = Vector2( 0, 12.0344 )
+scale = Vector2( 0.1, 1 )
+texture = ExtResource( 12 )
 
 [connection signal="body_entered" from="SlimeBoss/Area2D" to="SlimeBoss" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="SlimeBoss/Area2D" to="SlimeBoss" method="_on_Area2D_body_exited"]

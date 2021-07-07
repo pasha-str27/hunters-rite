@@ -45,6 +45,8 @@ namespace godot
 		Particles2D* dash_particles = nullptr;
 		Particles2D* revive_particles = nullptr;
 
+		Node* camera_shake = nullptr;
+
 	public:
 		static void _register_methods();
 		PlayerController();
@@ -106,5 +108,7 @@ namespace godot
 			String fight_up, String fight_down, String fight_left, String fight_right, String special);
 		void _stop_moving();
 		void _continue_moving();
+		void _set_is_attacking(bool value);
+		void _set_right_HP(float value);
 	};
 }

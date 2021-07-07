@@ -5,10 +5,12 @@
 
 namespace godot
 {
+	class BulletPull;
+
 	class SlimeShootAI : public SlimeAI
 	{
 		int max_bullet_count = 3;
-		std::vector<Node2D*> available_bullets;
+		BulletPull* bullet_pull = nullptr;
 		Node2D* first_player = nullptr;
 		Node2D* second_player = nullptr;
 	public:

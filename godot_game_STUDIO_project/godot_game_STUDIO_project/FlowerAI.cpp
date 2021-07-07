@@ -10,13 +10,7 @@ godot::FlowerAI::FlowerAI(Ref<PackedScene>& bullet, Node2D *node_tmp) : EnemyDat
 
 	auto node = _get_enemy()->get_parent()->get_child(0);
 
-	for (int i = 0; i < max_bullet_count; ++i)
-	{
-		auto new_obj = bullet->instance();
-		node->call_deferred("add_child", new_obj);
-
-		bullets.push_back(cast_to<Node2D>(new_obj));
-	}
+	bullet_pull = new BulletPull(max_bullet_count, bullet, node);
 
 	directions[0] = Vector2::UP;
 	directions[2] = Vector2::RIGHT;
@@ -31,12 +25,12 @@ godot::FlowerAI::FlowerAI(Ref<PackedScene>& bullet, Node2D *node_tmp) : EnemyDat
 
 godot::FlowerAI::~FlowerAI()
 {
-	bullets.clear();
+	delete bullet_pull;
 }
 
 void godot::FlowerAI::_add_bullet(Node* node)
 {
-	bullets.push_back(cast_to<Node2D>(node));
+	bullet_pull->_add_bullet(cast_to<Node2D>(node));
 }
 
 void godot::FlowerAI::change_can_fight(bool value)
@@ -79,23 +73,11 @@ void godot::FlowerAI::_process(float delta)
 		can_fight = false;
 		for (int i = 0; i < 8; ++i)
 		{
-			if (bullets.size() > 0)
-			{
-				bullets[bullets.size() - 1]->set_position(_get_enemy()->get_global_position());
-				bullets[bullets.size() - 1]->set_visible(true);
+			Node2D* bullet = bullet_pull->_get_bullet();
+			bullet->set_position(_get_enemy()->get_global_position());
+			bullet->set_visible(true);
 
-				bullets[bullets.size() - 1]->call("_set_dir", directions[i]);
-
-				if (bullets.size() == 1)
-				{
-					auto node = _get_enemy()->get_parent()->get_child(0);
-					auto new_obj = bullets[0]->duplicate(8);
-					node->add_child(new_obj);
-					bullets.push_back(cast_to<Node2D>(new_obj));
-				}
-
-				bullets.pop_back();
-			}
+			bullet->call("_set_dir", directions[i]);
 		}
 
 		_get_enemy()->call("_start_timer");
