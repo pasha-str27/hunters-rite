@@ -7,7 +7,7 @@
 
 [node name="RightDoor" type="Node2D"]
 scale = Vector2( 2, 2 )
-z_index = 25
+z_index = 11
 
 [node name="ui" type="TileMap" parent="."]
 position = Vector2( 0, -8 )
