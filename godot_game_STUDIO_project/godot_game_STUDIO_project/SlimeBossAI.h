@@ -32,6 +32,8 @@ namespace godot
 		Array enemies_to_spawn = {};
 		Array places_to_spawn = {};
 
+		Node* camera_shake = nullptr;
+
 	public:
 		SlimeBossAI(Ref<PackedScene>& bullet, Node2D* node);
 		~SlimeBossAI();

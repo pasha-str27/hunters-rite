@@ -107,7 +107,12 @@ void godot::PlayerShoot::_process_input()
 	{
 		sprite->set_flip_h(true);
 		sprite->set_offset(Vector2(-35, 0));
-		shoot_particles->set_position(Vector2(-11, 0));
+		if (bullet_dir == Vector2::RIGHT)
+			shoot_particles->set_position(Vector2(-11, 0));
+		else if (bullet_dir == Vector2::UP)
+			shoot_particles->set_position(Vector2(0, -9));
+		else if (bullet_dir == Vector2::DOWN)
+			shoot_particles->set_position(Vector2(0, 9));
 		dir.x -= _get_speed();
 	}
 
@@ -116,7 +121,13 @@ void godot::PlayerShoot::_process_input()
 	{
 		sprite->set_flip_h(false);
 		sprite->set_offset(Vector2(35, 0));
-		shoot_particles->set_position(Vector2(11, 0));
+		if(bullet_dir == Vector2::RIGHT)
+			shoot_particles->set_position(Vector2(11, 0));
+		else if(bullet_dir == Vector2::UP)
+			shoot_particles->set_position(Vector2(0, -9));
+		else if (bullet_dir == Vector2::DOWN)
+			shoot_particles->set_position(Vector2(0, 9));
+
 		dir.x += _get_speed();
 	}
 

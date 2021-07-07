@@ -45,6 +45,8 @@ namespace godot
 		Particles2D* dash_particles = nullptr;
 		Particles2D* revive_particles = nullptr;
 
+		Node* camera_shake = nullptr;
+
 	public:
 		static void _register_methods();
 		PlayerController();

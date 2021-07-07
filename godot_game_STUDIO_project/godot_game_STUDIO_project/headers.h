@@ -123,6 +123,7 @@ using namespace godot;
 #include "SillyBoyDiedAI.h"
 #include "MimicAI.h"
 #include "BulletPull.h"
+#include "CameraShake.h"
 
 //	state
 #include "ISlimeAttackState.h"
