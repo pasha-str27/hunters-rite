@@ -175,6 +175,7 @@
     <ClCompile Include="CameraShake.cpp">
       <Filter>Level</Filter>
     </ClCompile>
+    <ClCompile Include="ResourceContainer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
@@ -376,6 +377,7 @@
     <ClInclude Include="CameraShake.h">
       <Filter>Level</Filter>
     </ClInclude>
+    <ClInclude Include="ResourceContainer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Players">

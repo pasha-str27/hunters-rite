@@ -121,6 +121,7 @@ using namespace godot;
 #include "WormAI.h"
 #include "MimicAI.h"
 #include "CameraShake.h"
+#include "ResourceContainer.h"
 
 //	state
 #include "ISlimeAttackState.h"

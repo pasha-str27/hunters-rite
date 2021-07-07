@@ -7,6 +7,7 @@ namespace godot
 {
 	class IEnemyAI;
 	class EnemyAIContext;
+	class ResourceContainer;
 
 	class Enemy : public KinematicBody2D
 	{

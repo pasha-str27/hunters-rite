@@ -156,7 +156,7 @@ void godot::PlayerMelee::_fight(Node* node)
 		return;
 
 	Ref<PackedScene> prefab = nullptr;
-	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/Player2Fight.tscn");
+	prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->player2_fight());
 	_get_object()->add_child(prefab->instance());
 
 	_change_can_fight(false);

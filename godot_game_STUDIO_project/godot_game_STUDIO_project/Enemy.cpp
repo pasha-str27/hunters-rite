@@ -158,7 +158,7 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		sp->play("damaged");
 
 	Ref<PackedScene> prefab = nullptr;
-	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/EnemyTakeDamage.tscn");
+	prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->enemy_take_damage());
 	add_child(prefab->instance());
 
 	if (is_in_group("slime_boss"))
@@ -186,7 +186,7 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		if (Enemies::get_singleton()->_get_enemies_count() == 0)
 		{
 			Ref<PackedScene> prefab = nullptr;
-			prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/OpenDoors.tscn");
+			prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->open_door());
 			add_child(prefab->instance());
 			CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->call("_open_doors");
 		}
@@ -302,9 +302,6 @@ void godot::Enemy::_on_Area2D_body_entered(Node* node)
 	if (node->is_in_group("player") && !died)
 	{
 		float damage = 20;
-
-		//if (is_in_group("slime_boss"))
-		//	ai->change_can_fight(false, new SlimeAttackSpawnState((SlimeBossAI*)ai->_get_strategy()));
 
 		ai->_set_player(cast_to<Node2D>(node));
 		if (is_in_group("slime"))

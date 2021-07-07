@@ -10,47 +10,47 @@
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 240, 192 )
+region = Rect2( 0, 0, 120, 96 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
-region = Rect2( 240, 0, 240, 192 )
+region = Rect2( 120, 0, 120, 96 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 3 )
-region = Rect2( 480, 0, 240, 192 )
+region = Rect2( 240, 0, 120, 96 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 3 )
-region = Rect2( 720, 0, 240, 192 )
+region = Rect2( 360, 0, 120, 96 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 3 )
-region = Rect2( 960, 0, 240, 192 )
+region = Rect2( 480, 0, 120, 96 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 3 )
-region = Rect2( 1200, 0, 240, 192 )
+region = Rect2( 600, 0, 120, 96 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 3 )
-region = Rect2( 1440, 0, 240, 192 )
+region = Rect2( 720, 0, 120, 96 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 3 )
-region = Rect2( 1680, 0, 240, 192 )
+region = Rect2( 840, 0, 120, 96 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 3 )
-region = Rect2( 1920, 0, 240, 192 )
+region = Rect2( 960, 0, 120, 96 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 3 )
-region = Rect2( 2160, 0, 240, 192 )
+region = Rect2( 1080, 0, 120, 96 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 3 )
-region = Rect2( 2400, 0, 240, 192 )
+region = Rect2( 1200, 0, 120, 96 )
 
 [sub_resource type="SpriteFrames" id=12]
 animations = [ {
@@ -62,27 +62,27 @@ animations = [ {
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 160, 144 )
+region = Rect2( 0, 0, 80, 72 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 4 )
-region = Rect2( 160, 0, 160, 144 )
+region = Rect2( 80, 0, 80, 72 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 4 )
-region = Rect2( 320, 0, 160, 144 )
+region = Rect2( 160, 0, 80, 72 )
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 4 )
-region = Rect2( 480, 0, 160, 144 )
+region = Rect2( 240, 0, 80, 72 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 4 )
-region = Rect2( 640, 0, 160, 144 )
+region = Rect2( 320, 0, 80, 72 )
 
 [sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 4 )
-region = Rect2( 800, 0, 160, 144 )
+region = Rect2( 400, 0, 80, 72 )
 
 [sub_resource type="SpriteFrames" id=19]
 animations = [ {
@@ -190,20 +190,18 @@ visible = false
 [node name="Items" type="Node2D" parent="."]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-visible = false
 position = Vector2( -170.057, -28.541 )
-scale = Vector2( 2, 2 )
-z_index = 1
+scale = Vector2( 4, 4 )
+z_index = 679
 frames = SubResource( 12 )
 animation = "attack"
-frame = 7
+frame = 6
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
-visible = false
 position = Vector2( 271.139, -10.7029 )
-scale = Vector2( 2, 2 )
-z_index = 1
+scale = Vector2( 4, 4 )
+z_index = 679
 frames = SubResource( 19 )
 animation = "idle"
 playing = true
@@ -214,6 +212,7 @@ position = Vector2( 123.677, 161.732 )
 scale = Vector2( 3, 3 )
 z_index = 1
 frames = SubResource( 40 )
+frame = 1
 playing = true
 
 [node name="Mimic" parent="." instance=ExtResource( 6 )]
