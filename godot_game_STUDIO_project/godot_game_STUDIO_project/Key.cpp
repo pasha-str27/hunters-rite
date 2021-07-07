@@ -10,6 +10,7 @@ void godot::Key::_register_methods()
 	register_method("_on_Area2D_body_entered", &Key::_on_Area2D_body_entered);
 	
 	register_property<Key, String>("key_type", &Key::key_type, "");
+	register_property<Key, Color>("key_color", &Key::key_color, Color(0,0,0));
 }
 
 void godot::Key::_init()
