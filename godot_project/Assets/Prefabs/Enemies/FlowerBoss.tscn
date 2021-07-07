@@ -32,7 +32,7 @@ animations = [ {
 } ]
 
 [sub_resource type="CircleShape2D" id=5]
-radius = 55.8611
+radius = 45.5047
 
 [node name="FlowerBoss" type="Node2D"]
 z_index = 100
@@ -62,9 +62,9 @@ animation = "idle"
 
 [node name="SpawnParticles" parent="Flower" instance=ExtResource( 6 )]
 
-[node name="flower" type="KinematicBody2D" parent="."]
-collision_layer = 0
-collision_mask = 0
+[node name="Area2D" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="flower"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 5 )
+
+[connection signal="body_entered" from="Area2D" to="Flower" method="_on_Area2D_body_entered"]

@@ -123,7 +123,7 @@ radius = 20.139
 
 [node name="Mimic" type="Node2D"]
 script = ExtResource( 4 )
-enemy_price = 60.0
+enemy_price = 50.0
 
 [node name="Mimic" type="KinematicBody2D" parent="." groups=[
 "enemy",
@@ -156,7 +156,6 @@ shape = SubResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Mimic/CollisionShape2D"]
 frames = SubResource( 22 )
 animation = "idle"
-frame = 1
 playing = true
 
 [node name="Area2D" type="Area2D" parent="Mimic"]

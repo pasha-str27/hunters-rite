@@ -39,6 +39,7 @@ void godot::Enemy::_register_methods()
 	register_method("_remove_taken_positions", &Enemy::_remove_taken_positions);
 	register_method("_set_direction", &Enemy::_set_direction);
 	register_method("_revive", &Enemy::_revive);
+	register_method("_on_Area2D_body_entered_player_fight", &Enemy::_on_Area2D_body_entered_player_fight);
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
@@ -530,4 +531,13 @@ void godot::Enemy::_revive()
 	ai->_set_strategy(new SillyBoyAI(bullet, this));
 	HP = max_HP;
 	_update_health_bar();
+}
+
+void godot::Enemy::_on_Area2D_body_entered_player_fight(Node* node)
+{
+	if (node->is_in_group("player") && !died)
+	{
+		float damage = 20;
+		node->call("_take_damage", damage, false);
+	}
 }
