@@ -21,11 +21,13 @@ godot::SlimeBossAI::SlimeBossAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : En
 	Array arr = CameraController::current_room->call("_get_enemy_spawn_positions");
 	places_to_spawn = arr[0];
 	enemies_to_spawn = _get_enemy()->get_node("EnemiesHolder")->call("_get_enemies_list");
+	camera_shake = _get_enemy()->get_node("/root/Node2D/Node/Camera2D")->get_node("CameraShake");
 }
 
 godot::SlimeBossAI::~SlimeBossAI()
 {
 	available_bullets.clear();
+	camera_shake = nullptr;
 }
 
 void godot::SlimeBossAI::_set_player(Node2D* player)
@@ -153,6 +155,7 @@ void godot::SlimeBossAI::_jumping(float delta)
 		}
 		else
 		{
+			camera_shake->call("_start", 10, .35f);
 			_enable_collisions();
 			jump_zone->set_visible(false);
 			_wait(1);

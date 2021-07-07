@@ -136,6 +136,8 @@ void godot::PlayerController::_ready()
 	hurt_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"));
 	dash_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "DashParticles"));
 	revive_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "ReviveParticles"));
+
+	camera_shake = get_node("/root/Node2D/Node/Camera2D")->get_node("CameraShake");
 }
 
 void godot::PlayerController::_start_timer()
@@ -246,6 +248,8 @@ void godot::PlayerController::_take_damage(float damage, bool is_spike)
 {
 	if (current_player_strategy->_get_safe_mode())
 		return;
+
+	camera_shake->call("_start", 4, .2f);
 
 	current_player_strategy->_take_damage(damage, is_spike);
 	_update_health_bar();

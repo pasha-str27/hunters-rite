@@ -14,7 +14,7 @@ void godot::Enemy::_register_methods()
 	register_method("_on_fixed_timeout", &Enemy::_on_fixed_timeout);
 	register_method("_start_timer", &Enemy::_start_timer);
 	register_method("_start_fixed_timer", &Enemy::_start_fixed_timer);
-	
+
 	register_method("_destroy_enemy", &Enemy::_destroy_enemy);
 	register_method("_remove_player1", &Enemy::_remove_player1);
 	register_method("_remove_player2", &Enemy::_remove_player2);
@@ -37,7 +37,7 @@ void godot::Enemy::_register_methods()
 	register_method("_on_Area2D_body_exited", &Enemy::_on_Area2D_body_exited);
 	register_method("_change_start_parameters", &Enemy::_change_start_parameters);
 	register_method("_remove_taken_positions", &Enemy::_remove_taken_positions);
-	
+
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
 	register_property<Enemy, Ref<PackedScene>>("Death particles", &Enemy::death_particles, nullptr);
@@ -60,8 +60,8 @@ godot::Enemy::~Enemy()
 {
 	sp = nullptr;
 	spawn_particles = nullptr;
-	if(ai!=nullptr)
-		delete ai; 
+	if (ai != nullptr)
+		delete ai;
 	ai = nullptr;
 	timer = nullptr;
 	timer_change_dir = nullptr;
@@ -76,7 +76,7 @@ void godot::Enemy::_init()
 void godot::Enemy::_ready()
 {
 	Enemies::get_singleton()->_add_enemy(this);
-	
+
 	_update_health_bar();
 
 	add_child(timer_change_dir);
@@ -89,7 +89,7 @@ void godot::Enemy::_ready()
 
 	if (is_in_group("flower"))
 		ai->_set_strategy(new FlowerAI(bullet, this));
-		
+
 	if (is_in_group("spider"))
 		ai->_set_strategy(new SpiderAI(bullet, this));
 
@@ -123,7 +123,7 @@ void godot::Enemy::_ready()
 	timer_particles->start(0.2f);
 	//cast_to<Node2D>(get_node("CollisionShape2D"))->call_deferred("set_visible", false);
 
-	if(is_in_group("flower") || is_in_group("slime_boss"))
+	if (is_in_group("flower") || is_in_group("slime_boss"))
 		cast_to<ProgressBar>(get_node("/root/Node2D/Node/Camera2D")->get_node("BossHealthBar"))->set_visible(false);
 	else
 		cast_to<ProgressBar>(get_node("HealthBar"))->set_visible(false);
@@ -134,10 +134,10 @@ void godot::Enemy::_process(float delta)
 	if (!can_move)
 		return;
 
-	if(!died)
+	if (!died)
 		ai->_process(delta);
 
-	if (sp != nullptr && !died) 
+	if (sp != nullptr && !died)
 	{
 		String animation_name = sp->get_animation();
 
@@ -154,7 +154,7 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 	HP -= damage;
 	_update_health_bar();
 
-	if(sp != nullptr)
+	if (sp != nullptr)
 		sp->play("damaged");
 
 	Ref<PackedScene> prefab = nullptr;
@@ -169,14 +169,14 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 
 	if (HP <= 0)
 	{
-		Node *player = nullptr;
+		Node* player = nullptr;
 
 		if (player_id == 1)
 			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node/Player1"), "Player1");
-		else if(player_id == 2)
+		else if (player_id == 2)
 			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player2");
 
-		if(!is_in_group("flower") || is_in_group("slime_boss") || is_in_group("mimic"))
+		if (!is_in_group("flower") || is_in_group("slime_boss") || is_in_group("mimic"))
 			player->call("_on_enemy_die", this->get_global_position());
 
 		died = true;
@@ -204,7 +204,7 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		if (has_node("zone"))
 			get_node("zone")->queue_free();
 
-		if(is_in_group("statue_melee"))
+		if (is_in_group("statue_melee"))
 			get_node("MagnitZone")->queue_free();
 
 		get_child(0)->queue_free();
@@ -218,10 +218,10 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		timer->connect("timeout", this, "_destroy_enemy");
 
 		timer->start(1);
-	}		
+	}
 }
 
-void godot::Enemy::_add_bullet(Node *bullet)
+void godot::Enemy::_add_bullet(Node* bullet)
 {
 	ai->_add_bullet(bullet);
 }
@@ -237,7 +237,7 @@ void godot::Enemy::_start_timer()
 			timer->start(3.5);
 			return;
 		}
-		
+
 		timer->start(1);
 	}
 }
@@ -318,7 +318,7 @@ void godot::Enemy::_on_Area2D_body_entered(Node* node)
 		if (is_in_group("bat") && is_angry)
 			damage = 30;
 
-		if(!is_in_group("slime_shoot") && !is_in_group("mimic"))
+		if (!is_in_group("slime_shoot") && !is_in_group("mimic"))
 			node->call("_take_damage", damage, false);
 	}
 }
@@ -414,7 +414,7 @@ void godot::Enemy::_update_health_bar()
 	if (health_bar != nullptr)
 		health_bar->call_deferred("set_value", HP);
 
-}	
+}
 
 void godot::Enemy::_change_animation(String _name = "", float speed_scale = 1)
 {
@@ -476,7 +476,7 @@ void godot::Enemy::_on_spawn_end()
 		cast_to<ProgressBar>(get_node("HealthBar"))->set_visible(true);
 
 	Enemies* enemies = Enemies::get_singleton();
-	enemies->set_enemy_to_spawn_count(enemies->get_enemy_to_spawn_count()-1);
+	enemies->set_enemy_to_spawn_count(enemies->get_enemy_to_spawn_count() - 1);
 	if (enemies->get_enemy_to_spawn_count() == 0)
 		enemies->set_spawning(false);
 }
