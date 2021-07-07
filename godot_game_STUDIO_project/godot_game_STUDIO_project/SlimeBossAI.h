@@ -3,8 +3,11 @@
 #include "headers.h"
 #endif
 
-namespace godot {	
+namespace godot
+{	
 	class ISlimeAttackState;
+	class BulletPull;
+
 	class SlimeBossAI: public EnemyData, public KinematicBody2D
 	{
 	private:
@@ -15,7 +18,7 @@ namespace godot {
 		bool jumping_up = false;
 
 		int max_bullet_count = 20;
-		std::vector<Node2D*> available_bullets;
+		BulletPull* bullet_pull = nullptr;
 
 		ISlimeAttackState* _attack_state = nullptr;
 	

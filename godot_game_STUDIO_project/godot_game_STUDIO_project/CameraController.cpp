@@ -24,6 +24,7 @@ void godot::CameraController::_register_methods()
 	register_method("_set_current_room_type", &CameraController::_set_current_room_type);
 	register_method("_go_to_start", &CameraController::_go_to_start);
 	register_method("_get_type_keys", &CameraController::_get_type_keys);
+	register_method("_show_game_over_screen", &CameraController::_show_game_over_screen);
 
 	register_property<CameraController, Ref<PackedScene>>("Fade In Animation", &CameraController::fadeIn, nullptr);
 	register_property<CameraController, Ref<PackedScene>>("Fade Out Animation", &CameraController::fadeOut, nullptr);
@@ -604,4 +605,13 @@ godot::CameraController::~CameraController()
 	audio_server = nullptr;
 	player1 = nullptr;
 	player2 = nullptr;
+}
+
+void godot::CameraController::_show_game_over_screen()
+{
+	cast_to<Timer>(get_node("game_over"))->disconnect("timeout", this, "_show_game_over_screen");
+	ResourceLoader* rld = ResourceLoader::get_singleton();
+	Ref<PackedScene> game_over_screen = rld->load("res://Assets/Prefabs/Scenes/GameOver.tscn");
+	add_child(game_over_screen->instance());
+	get_tree()->set_pause(true);
 }

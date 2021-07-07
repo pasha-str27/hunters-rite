@@ -42,19 +42,22 @@ void godot::SpawnEnemyController::SpawnEnemies()
 	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
 
-	float current_value = _calculate_room_difficulty();
+	float current_value = 50; //_calculate_room_difficulty();
 	std::vector<Vector2> taken_positions;
 
 	enemies->set_enemy_to_spawn_count(0);
 	enemies->set_spawning(true);
 
+	Array enemy_list = enemy_list_prefabs[CameraController::current_level-1].operator godot::Array();
+
+	float min_enemy_price = _find_min_enemy_price();
+
 	while (current_value >= min_enemy_price)
 	{
-		Ref<PackedScene> prefab = enemy_list_prefabs[rng->randi_range(0, enemy_list_prefabs.size() - 1)];
+		Ref<PackedScene> prefab = enemy_list[rng->randi_range(0, enemy_list.size() - 1)];
 		if ((float)prefab->instance()->call("_get_enemy_price") <= current_value)
 		{
 			Node2D* enemy = cast_to<Node2D>(prefab->instance());
-			CameraController::current_room->add_child(enemy);
 			current_value -= (float)prefab->instance()->call("_get_enemy_price");
 			int pos_x;
 			int pos_y;
@@ -67,8 +70,7 @@ void godot::SpawnEnemyController::SpawnEnemies()
 			enemies->set_enemy_to_spawn_count(enemies->get_enemy_to_spawn_count() + 1);
 
 			taken_positions.push_back(Vector2(pos_x, pos_y));
-
-			enemy->set_global_position((Vector2(pos_x, pos_y) * 32
+			CameraController::current_room->call("_add_new_enemy", enemy, (Vector2(pos_x, pos_y) * 32
 				+ CameraController::current_room->get_global_position()
 				- Vector2(896, 544) / 2 + Vector2(16, 16)));
 
@@ -81,8 +83,6 @@ void godot::SpawnEnemyController::SpawnEnemies()
 
 	for(int i=0;i< taken_positions.size();++i)
 		CameraController::current_room->call("_set_cell_value", taken_positions[i].y, taken_positions[i].x, 0);
-
-	Enemies::get_singleton()->_change_start_parameters();
 }
 
 void godot::SpawnEnemyController::SpawnBoss()
@@ -142,8 +142,6 @@ void godot::SpawnEnemyController::SpawnBoss()
 			}
 		}
 	}
-
-	//enemies.pop_front();
 }
 
 void godot::SpawnEnemyController::SpawnItems()
@@ -185,11 +183,6 @@ void godot::SpawnEnemyController::_init()
 
 void godot::SpawnEnemyController::_ready()
 {
-	min_enemy_price = cast_to<PackedScene>(enemy_list_prefabs[0])->instance()->call("_get_enemy_price");
-	for (int i = 1; i < enemy_list_prefabs.size(); ++i)
-		if ((float)cast_to<PackedScene>(enemy_list_prefabs[i])->instance()->call("_get_enemy_price") < min_enemy_price)
-			min_enemy_price = cast_to<PackedScene>(enemy_list_prefabs[i])->instance()->call("_get_enemy_price");
-
 	add_child(timer);
 }
 
@@ -304,4 +297,16 @@ godot::SpawnEnemyController::~SpawnEnemyController()
 	enemies.clear();
 	timer = nullptr;
 	i_container = nullptr;
+}
+
+float godot::SpawnEnemyController::_find_min_enemy_price()
+{
+	Array enemy_list = enemy_list_prefabs[CameraController::current_level - 1].operator godot::Array();;
+	float min_enemy_price = cast_to<PackedScene>(enemy_list[0])->instance()->call("_get_enemy_price");
+
+	for (int i = 1; i < enemy_list.size(); ++i)
+		if ((float)cast_to<PackedScene>(enemy_list[i])->instance()->call("_get_enemy_price") < min_enemy_price)
+			min_enemy_price = cast_to<PackedScene>(enemy_list[i])->instance()->call("_get_enemy_price");
+	
+	return min_enemy_price;
 }

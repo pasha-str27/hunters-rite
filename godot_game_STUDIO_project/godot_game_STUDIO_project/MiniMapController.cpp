@@ -46,6 +46,7 @@ void godot::MiniMapController::_register_methods()
 	register_method("_load_special_rooms", &MiniMapController::_load_special_rooms);
 	register_method(" _special_rooms_loader", &MiniMapController::_special_rooms_loader);
 	register_method("_update_special_rooms", &MiniMapController::_update_special_rooms);
+	register_method("_start_treking", &MiniMapController::_start_treking);
 
 	register_method("_start_timer", &MiniMapController::_start_timer);
 	register_method("_on_timeout", &MiniMapController::_on_timeout);
@@ -78,7 +79,7 @@ void godot::MiniMapController::_ready()
 	items_positions.clear();
 	heal_positions.clear();
 	boss_positions.clear();
-	_start_timer();
+	//_start_treking();
 }
 
 bool godot::MiniMapController::_load_resources()

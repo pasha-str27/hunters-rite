@@ -5,10 +5,12 @@
 
 namespace godot
 {
+	class BulletPull;
+
 	class SpiderAI : public EnemyData, public KinematicBody2D
 	{
-		std::vector<Node2D*> bullets;
 		int max_bullet_count;
+		BulletPull* bullet_pull = nullptr;
 		bool can_move;
 
 		Vector2 dir;

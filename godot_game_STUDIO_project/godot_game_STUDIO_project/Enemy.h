@@ -20,11 +20,14 @@ namespace godot
 		Timer* timer_particles = nullptr;
 
 		float HP;
+		float max_HP;
 		Ref<PackedScene> bullet;
 		bool is_angry;
 		bool entered;
 		bool died;
 		bool can_move = false;
+		bool was_died = false;
+		float time_to_revive = 5;
 
 		AnimatedSprite* sp = nullptr;
 
@@ -66,5 +69,8 @@ namespace godot
 			void _on_Area2D_body_exited(Node* node);
 			void _change_start_parameters();
 			void _remove_taken_positions();
+			void _set_direction(Node* player, Vector2 direction);
+			void _revive();
+			void _on_Area2D_body_entered_player_fight(Node* node);
 	};
 }

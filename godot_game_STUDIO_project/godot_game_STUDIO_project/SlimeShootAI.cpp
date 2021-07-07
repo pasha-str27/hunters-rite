@@ -6,17 +6,13 @@
 godot::SlimeShootAI::SlimeShootAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : SlimeAI(bullet, node_tmp)
 {
 	auto bullet_container = node_tmp->get_parent()->get_node("BulletConteiner");
-	for (int i = 0; i < max_bullet_count; ++i)
-	{
-		Node2D* bullet_node = cast_to<Node2D>(bullet->instance());
-		bullet_container->add_child(bullet_node);
-		available_bullets.push_back(bullet_node);
-	}
+
+	bullet_pull = new BulletPull(max_bullet_count, bullet, bullet_container);
 }
 
 godot::SlimeShootAI::~SlimeShootAI()
 {
-	available_bullets.clear();
+	delete bullet_pull;
 }
 
 void godot::SlimeShootAI::_fight(Node2D* player1, Node2D* player2)
@@ -36,30 +32,18 @@ void godot::SlimeShootAI::_fight(Node2D* player1, Node2D* player2)
 	else
 		cast_to<AnimatedSprite>(_get_enemy()->find_node("AnimatedSprite"))->set_flip_h(false);
 
-	if (available_bullets.size() > 0)
-	{
-		available_bullets[available_bullets.size() - 1]->set_global_position(_get_enemy()->get_global_position());
+	Node2D* bullet = bullet_pull->_get_bullet();
 
-		available_bullets[available_bullets.size() - 1]->set_visible(true);
+	bullet->set_global_position(_get_enemy()->get_global_position());
 
-		available_bullets[available_bullets.size() - 1]->call("_set_dir",
-			(bullet_dir - available_bullets[available_bullets.size() - 1]->get_global_position()).normalized());
+	bullet->set_visible(true);
 
-		if (available_bullets.size() == 1)
-		{
-			auto node = _get_enemy()->get_parent()->get_child(0);
-			auto new_obj = available_bullets[0]->duplicate(8);
-			node->add_child(new_obj);
-			available_bullets.push_back(cast_to<Node2D>(new_obj));
-		}
-
-		available_bullets.pop_back();
-	}
+	bullet->call("_set_dir",(bullet_dir - bullet->get_global_position()).normalized());
 }
 
 void godot::SlimeShootAI::_add_bullet(Node* node)
 {
-	available_bullets.push_back(cast_to<Node2D>(node));
+	bullet_pull->_add_bullet(node->cast_to<Node2D>(node));
 }
 
 void godot::SlimeShootAI::change_direction()

@@ -61,13 +61,13 @@ void godot::StatueMeleeAI::_set_player2(Node2D* player2)
 
 void godot::StatueMeleeAI::_change_start_parameters()
 {
-	Vector2 cur_pos = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+	Vector2 cur_pos = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / _get_distance();
 	CameraController::current_room->call("_set_cell_value", cur_pos.y, cur_pos.x, 8);
 }
 
 void godot::StatueMeleeAI::_remove_taken_positions()
 {
-	Vector2 cur_pos = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+	Vector2 cur_pos = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / _get_distance();
 	CameraController::current_room->call("_set_cell_value", cur_pos.y, cur_pos.x, 0);
 }
 
@@ -85,6 +85,15 @@ void godot::StatueMeleeAI::_delete_player2()
 
 	if (player1 == nullptr && player2 == nullptr)
 		can_fight = false;
+}
+
+void godot::StatueMeleeAI::_remove_player(Node2D* player)
+{
+	if (player->is_in_group("player1"))
+		_delete_player1();
+
+	if (player->is_in_group("player2"))
+		_delete_player2();
 }
 
 void godot::StatueMeleeAI::_process(float delta)

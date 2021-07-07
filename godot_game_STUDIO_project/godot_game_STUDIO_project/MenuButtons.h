@@ -70,6 +70,7 @@ namespace godot
 		void _on_Mode_focus();
 		void _on_animated_focus_entered(String button_name, String animated_name);
 		void _on_animated_focus_exited(String button_name, String animated_name);
+		void _show_chapter_sprite(String sprite_name, String description_name, bool mode);
 		void _set_animated_focus(String button_name,String animated_name,bool mode);
 		void _on_Quit_focus(bool mode);
 		void _set_vertical_scroll(int scroll);

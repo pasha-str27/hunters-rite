@@ -12,34 +12,34 @@
       <Filter>Players</Filter>
     </ClCompile>
     <ClCompile Include="BatAI.cpp">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Enemies.cpp">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="EnemyAIContext.cpp">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="EnemyData.cpp">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="FlowerAI.cpp">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="SlimeAI.cpp">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="SpiderAI.cpp">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="StatueMeleeAI.cpp">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="StatueShootAI.cpp">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="FadeAnimation.cpp">
       <Filter>UI</Filter>
@@ -72,7 +72,7 @@
       <Filter>Revive</Filter>
     </ClCompile>
     <ClCompile Include="Spike.cpp">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="CameraController.cpp">
       <Filter>Level</Filter>
@@ -102,10 +102,10 @@
       <Filter>Items</Filter>
     </ClCompile>
     <ClCompile Include="EnemyPrice.cpp">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="SlimeShootAI.cpp">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="ProducePlayerMelee.cpp">
       <Filter>Players</Filter>
@@ -144,33 +144,42 @@
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="MagnitZone.cpp">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="SlimeBossAI.cpp">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="SlimeAttackSpawnState.cpp">
-      <Filter>Level\Enemies\SlimeBossStates</Filter>
+      <Filter>Enemies\SlimeBossStates</Filter>
     </ClCompile>
     <ClCompile Include="SlimeAttackShootState.cpp">
-      <Filter>Level\Enemies\SlimeBossStates</Filter>
+      <Filter>Enemies\SlimeBossStates</Filter>
     </ClCompile>
     <ClCompile Include="SlimeAttackJumpState.cpp">
-      <Filter>Level\Enemies\SlimeBossStates</Filter>
+      <Filter>Enemies\SlimeBossStates</Filter>
     </ClCompile>
     <ClCompile Include="SlimeEnemiesHolder.cpp">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="ISlimeAttackState.cpp">
-      <Filter>Level\Enemies\SlimeBossStates</Filter>
-    </ClCompile>
-    <ClCompile Include="MimicAI.cpp">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies\SlimeBossStates</Filter>
     </ClCompile>
     <ClCompile Include="WormAI.cpp">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="SillyBoyAI.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="SillyBoyDiedAI.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="MimicAI.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletPull.cpp">
+      <Filter>Ammo</Filter>
     </ClCompile>
     <ClCompile Include="CameraShake.cpp">
       <Filter>Level</Filter>
@@ -196,31 +205,31 @@
       <Filter>Players</Filter>
     </ClInclude>
     <ClInclude Include="BatAI.h">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Enemies.h">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="EnemyData.h">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="FlowerAI.h">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="SlimeAI.h">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="SpiderAI.h">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="StatueMeleeAI.h">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="StatueShootAI.h">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="FadeAnimation.h">
       <Filter>UI</Filter>
@@ -253,7 +262,7 @@
       <Filter>Revive</Filter>
     </ClInclude>
     <ClInclude Include="Spike.h">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="CameraController.h">
       <Filter>Level</Filter>
@@ -286,10 +295,10 @@
       <Filter>Items</Filter>
     </ClInclude>
     <ClInclude Include="EnemyPrice.h">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="SlimeShootAI.h">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="ProducePlayerMelee.h">
       <Filter>Players</Filter>
@@ -334,13 +343,13 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="MagnitZone.h">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="IEnemyAI.h">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="EnemyAIContext.h">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="ExitHandler.h">
       <Filter>Level</Filter>
@@ -349,30 +358,39 @@
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="SlimeBossAI.h">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="SlimeAttackSpawnState.h">
-      <Filter>Level\Enemies\SlimeBossStates</Filter>
+      <Filter>Enemies\SlimeBossStates</Filter>
     </ClInclude>
     <ClInclude Include="SlimeAttackShootState.h">
-      <Filter>Level\Enemies\SlimeBossStates</Filter>
+      <Filter>Enemies\SlimeBossStates</Filter>
     </ClInclude>
     <ClInclude Include="SlimeAttackJumpState.h">
-      <Filter>Level\Enemies\SlimeBossStates</Filter>
+      <Filter>Enemies\SlimeBossStates</Filter>
     </ClInclude>
     <ClInclude Include="SlimeEnemiesHolder.h">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="ISlimeAttackState.h">
-      <Filter>Level\Enemies\SlimeBossStates</Filter>
-    </ClInclude>
-    <ClInclude Include="MimicAI.h">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies\SlimeBossStates</Filter>
     </ClInclude>
     <ClInclude Include="WormAI.h">
-      <Filter>Level\Enemies</Filter>
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="SillyBoyAI.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="SillyBoyDiedAI.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="MimicAI.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletPull.h">
+      <Filter>Ammo</Filter>
     </ClInclude>
     <ClInclude Include="CameraShake.h">
       <Filter>Level</Filter>
@@ -382,6 +400,9 @@
   <ItemGroup>
     <Filter Include="Players">
       <UniqueIdentifier>{ea28035e-d84d-4f7e-882a-8df61ce380cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemies">
+      <UniqueIdentifier>{dc186e4b-462e-4ed5-a530-5de0bf36d476}</UniqueIdentifier>
     </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{bc8ab710-a43a-4032-813e-d5c3c9089446}</UniqueIdentifier>
@@ -404,10 +425,7 @@
     <Filter Include="Genetation">
       <UniqueIdentifier>{599ab0d3-6352-475c-8a1c-15d8323a3b93}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level\Enemies">
-      <UniqueIdentifier>{dc186e4b-462e-4ed5-a530-5de0bf36d476}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Enemies\SlimeBossStates">
+    <Filter Include="Enemies\SlimeBossStates">
       <UniqueIdentifier>{389c46b8-632f-41f9-b4bb-cbfc879951d1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

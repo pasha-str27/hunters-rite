@@ -287,7 +287,7 @@ void godot::PlayerController::_on_Area2D_area_exited(Node* node)
 {
 	auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
 
-	if (node->is_in_group("door_zone") && is_alive)
+	if (node->is_in_group("door_zone") && (is_alive || is_ghost_mode))
 	{
 		camera->call("_door_collision", "-" + node->get_name());
 		door = nullptr;

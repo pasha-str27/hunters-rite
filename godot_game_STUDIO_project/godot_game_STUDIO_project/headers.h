@@ -119,7 +119,10 @@ using namespace godot;
 #include "SlimeBossAI.h"
 #include "SlimeEnemiesHolder.h"
 #include "WormAI.h"
+#include "SillyBoyAI.h"
+#include "SillyBoyDiedAI.h"
 #include "MimicAI.h"
+#include "BulletPull.h"
 #include "CameraShake.h"
 #include "ResourceContainer.h"
 

@@ -14,10 +14,6 @@ godot::MimicAI::~MimicAI()
 
 }
 
-void godot::MimicAI::_set_speed(float value)
-{
-}
-
 void godot::MimicAI::_process(float delta)
 {
 	if(can_damage)

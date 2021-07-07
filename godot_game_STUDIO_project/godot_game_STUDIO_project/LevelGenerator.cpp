@@ -121,7 +121,7 @@ void godot::LevelGenerator::_ready()
 	_buid_top_wall();
 		
 	//	call set positions
-	get_node("/root/Node2D/Node/Camera2D/MiniMap")->call("_ready");
+	get_node("/root/Node2D/Node/Camera2D/MiniMap")->call_deferred("_start_treking");
 }
 
 void godot::LevelGenerator::_connect_rooms(Node2D* prev, Node2D* next, Vector2 dir)
