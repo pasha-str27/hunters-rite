@@ -58,7 +58,6 @@ void godot::SpawnEnemyController::SpawnEnemies()
 		if ((float)prefab->instance()->call("_get_enemy_price") <= current_value)
 		{
 			Node2D* enemy = cast_to<Node2D>(prefab->instance());
-			CameraController::current_room->add_child(enemy);
 			current_value -= (float)prefab->instance()->call("_get_enemy_price");
 			int pos_x;
 			int pos_y;
@@ -71,8 +70,7 @@ void godot::SpawnEnemyController::SpawnEnemies()
 			enemies->set_enemy_to_spawn_count(enemies->get_enemy_to_spawn_count() + 1);
 
 			taken_positions.push_back(Vector2(pos_x, pos_y));
-
-			enemy->set_global_position((Vector2(pos_x, pos_y) * 32
+			CameraController::current_room->call("_add_new_enemy", enemy, (Vector2(pos_x, pos_y) * 32
 				+ CameraController::current_room->get_global_position()
 				- Vector2(896, 544) / 2 + Vector2(16, 16)));
 
@@ -85,13 +83,11 @@ void godot::SpawnEnemyController::SpawnEnemies()
 
 	for(int i=0;i< taken_positions.size();++i)
 		CameraController::current_room->call("_set_cell_value", taken_positions[i].y, taken_positions[i].x, 0);
-
-	Enemies::get_singleton()->_change_start_parameters();
 }
 
 void godot::SpawnEnemyController::SpawnBoss()
 {
-	if (CameraController::current_level == 1)
+	if (CameraController::current_level == 2)
 	{
 		get_parent()->call("_start_mute_volume");
 		Enemies::get_singleton()->set_enemy_to_spawn_count(1);
@@ -146,8 +142,6 @@ void godot::SpawnEnemyController::SpawnBoss()
 			}
 		}
 	}
-
-	//enemies.pop_front();
 }
 
 void godot::SpawnEnemyController::SpawnItems()

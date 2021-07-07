@@ -79,7 +79,7 @@ void godot::Enemy::_init()
 void godot::Enemy::_ready()
 {
 	Enemies::get_singleton()->_add_enemy(this);
-	
+
 	_update_health_bar();
 
 	add_child(timer_change_dir);
@@ -92,7 +92,7 @@ void godot::Enemy::_ready()
 
 	if (is_in_group("flower"))
 		ai->_set_strategy(new FlowerAI(bullet, this));
-		
+
 	if (is_in_group("spider"))
 		ai->_set_strategy(new SpiderAI(bullet, this));
 
@@ -119,17 +119,16 @@ void godot::Enemy::_ready()
 
 	if (is_in_group("silly_boy"))
 		ai->_set_strategy(new SillyBoyAI(bullet, this));
-		
+
 	if (is_in_group("mimic"))
 		ai->_set_strategy(new MimicAI(bullet, this));
-
 
 	spawn_particles->set_emitting(true);
 	timer_particles->connect("timeout", this, "_on_spawn_end");
 	timer_particles->start(0.2f);
 	//cast_to<Node2D>(get_node("CollisionShape2D"))->call_deferred("set_visible", false);
 
-	if(is_in_group("flower") || is_in_group("slime_boss"))
+	if (is_in_group("flower") || is_in_group("slime_boss"))
 		cast_to<ProgressBar>(get_node("/root/Node2D/Node/Camera2D")->get_node("BossHealthBar"))->set_visible(false);
 	else
 		cast_to<ProgressBar>(get_node("HealthBar"))->set_visible(false);
@@ -497,8 +496,12 @@ void godot::Enemy::_on_spawn_end()
 
 	Enemies* enemies = Enemies::get_singleton();
 	enemies->set_enemy_to_spawn_count(enemies->get_enemy_to_spawn_count()-1);
+
 	if (enemies->get_enemy_to_spawn_count() == 0)
+	{
+		CameraController::current_room->call("_clear_enemy_to_spawn");
 		enemies->set_spawning(false);
+	}
 }
 
 void godot::Enemy::_on_Area2D_body_exited(Node* node)
