@@ -100,6 +100,7 @@ void godot::SillyBoyAI::_remove_player(Node2D* player)
 
 void godot::SillyBoyAI::_set_direction(Vector2 direction)
 {
+	//перевірити!!!!
 	if (was_setted)
 		return;
 

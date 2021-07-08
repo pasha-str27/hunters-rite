@@ -20,6 +20,7 @@ godot::PlayerMelee::PlayerMelee(Node2D* obj, Ref<PackedScene> bullet) : PlayerDa
 	cast_to<KinematicBody2D>(obj)->set_collision_layer_bit(15, true);
 	cast_to<Area2D>(obj->get_node("Area2D"))->set_collision_mask_bit(0, true);
 	cast_to<Area2D>(obj->get_node("Area2D"))->set_collision_layer_bit(0, true);
+	health_bar = _get_health_bar();
 }
 
 godot::PlayerMelee::~PlayerMelee()
@@ -217,14 +218,14 @@ void godot::PlayerMelee::_set_HP(float value)
 
 void godot::PlayerMelee::_update_health_bar()
 {
-	auto health_bar = _get_health_bar();
-
 	if (health_bar != nullptr)
 		health_bar->set_value(_get_HP());
 }
 
 ProgressBar* godot::PlayerMelee::_get_health_bar()
 {
+	if (health_bar != nullptr)
+		return health_bar;
 	return cast_to<ProgressBar>(_get_object()->get_node("/root/Node2D/Node/Camera2D/P2HealthBarWrapper/ProgressBar"));
 }
 

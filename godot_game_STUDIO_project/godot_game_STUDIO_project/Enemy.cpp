@@ -80,8 +80,6 @@ void godot::Enemy::_ready()
 {
 	Enemies::get_singleton()->_add_enemy(this);
 
-	_update_health_bar();
-
 	add_child(timer_change_dir);
 	add_child(timer);
 	add_child(timer_check_angry);
@@ -132,6 +130,13 @@ void godot::Enemy::_ready()
 		cast_to<ProgressBar>(get_node("/root/Node2D/Node/Camera2D")->get_node("BossHealthBar"))->set_visible(false);
 	else
 		cast_to<ProgressBar>(get_node("HealthBar"))->set_visible(false);
+
+	health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(this, "HealthBar"));
+
+	if (health_bar == nullptr)
+		health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(get_node("/root/Node2D/Node/Camera2D"), "BossHealthBar"));
+
+	_update_health_bar();
 
 	max_HP = HP;
 }
@@ -422,14 +427,8 @@ void godot::Enemy::_change_dir_after_time()
 
 void godot::Enemy::_update_health_bar()
 {
-	auto health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(this, "HealthBar"));
-
-	if (health_bar == nullptr)
-		health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(get_node("/root/Node2D/Node/Camera2D"), "BossHealthBar"));
-
 	if (health_bar != nullptr)
 		health_bar->call_deferred("set_value", HP);
-
 }
 
 void godot::Enemy::_change_animation(String _name = "", float speed_scale = 1)

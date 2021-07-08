@@ -33,6 +33,7 @@ namespace godot
 
 		Particles2D* spawn_particles = nullptr;
 		Ref<PackedScene> death_particles = nullptr;
+		ProgressBar* health_bar;
 
 		public:
 			static void _register_methods();
