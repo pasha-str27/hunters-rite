@@ -336,6 +336,21 @@ bool godot::MiniMapController::_is_on_grid(Vector2 pos)
 
 void godot::MiniMapController::_start_treking()
 {
+	if (CameraController::current_level >= 2)
+		//	_clear_map();
+	{
+		disc_rooms_positions.clear();
+		undisc_rooms_positions.clear();
+		key_rooms_positions.clear();
+		item_rooms_positions.clear();
+		boss_rooms_positions.clear();
+		heal_rooms_positions.clear();
+		keys_positions.clear();
+		items_positions.clear();
+		heal_positions.clear();
+		boss_positions.clear();
+	}
+
 	if (!_load_resources())
 		Godot::print("Something went wrong! Resources weren't loaded");
 

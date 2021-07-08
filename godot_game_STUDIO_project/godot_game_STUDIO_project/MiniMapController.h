@@ -50,7 +50,6 @@ namespace godot
 		static void _register_methods();
 		void _init();
 		void _ready();
-
 		
 		bool _load_resources();
 		bool _is_on_grid(Vector2 pos);
