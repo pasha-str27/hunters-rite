@@ -13,6 +13,8 @@ ResourceContainer::ResourceContainer() {
 	_player_take_damage = "res://Assets/Prefabs/SoundsEffects/Effects/PlayerTakeDamage.tscn";
 	_player_revive = "res://Assets/Prefabs/SoundsEffects/Effects/PlayerRevive.tscn";
 	_open_door = "res://Assets/Prefabs/SoundsEffects/Effects/OpenDoors.tscn";
+	_stone_action = "res://Assets/Prefabs/SoundsEffects/Effects/StoneAction.tscn";
+	_collect_key = "res://Assets/Prefabs/SoundsEffects/Effects/CollectKey.tscn";
 }
 
 String godot::ResourceContainer::player1_fight()
@@ -48,4 +50,14 @@ String godot::ResourceContainer::player_revive()
 String godot::ResourceContainer::open_door()
 {
 	return _open_door;
+}
+
+String godot::ResourceContainer::stone_action()
+{
+	return _stone_action;
+}
+
+String godot::ResourceContainer::collect_key()
+{
+	return _collect_key;
 }

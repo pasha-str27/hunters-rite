@@ -136,9 +136,9 @@ void godot::Enemy::_ready()
 	if (health_bar == nullptr)
 		health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(get_node("/root/Node2D/Node/Camera2D"), "BossHealthBar"));
 
-	_update_health_bar();
-
 	max_HP = HP;
+	health_bar->set_max(max_HP);
+	_update_health_bar();
 }
 
 void godot::Enemy::_process(float delta)
