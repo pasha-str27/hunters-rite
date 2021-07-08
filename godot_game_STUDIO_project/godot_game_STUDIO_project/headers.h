@@ -124,6 +124,7 @@ using namespace godot;
 #include "MimicAI.h"
 #include "BulletPull.h"
 #include "CameraShake.h"
+#include "ResourceContainer.h"
 
 //	state
 #include "ISlimeAttackState.h"

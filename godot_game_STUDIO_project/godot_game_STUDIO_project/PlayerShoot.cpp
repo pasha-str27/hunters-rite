@@ -164,7 +164,7 @@ void godot::PlayerShoot::_fight(Node* node)
 		return;
 
 	Ref<PackedScene> prefab = nullptr;
-	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/Player1Fight.tscn");
+	prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->player1_fight());
 	_get_object()->add_child(prefab->instance());
 
 	_change_can_fight(false);
@@ -205,7 +205,7 @@ void  godot::PlayerShoot::_take_damage(float damage, bool is_spike)
 	if (_get_HP() <= 0)
 	{
 		Ref<PackedScene> prefab = nullptr;
-		prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/PlayerDied.tscn");
+		prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->player_died());
 		_get_object()->get_parent()->add_child(prefab->instance());
 
 		sprite->play("death");
