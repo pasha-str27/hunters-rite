@@ -1,4 +1,4 @@
-[gd_scene load_steps=236 format=2]
+[gd_scene load_steps=237 format=2]
 
 [ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/game_paveleon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Prefabs/Animations/FadeIn.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Assets/Sprites/Monsters/Jopa Dimu/enemy05_sheet.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Sprites/Monsters/Jopa Dimu/enemy04_sheet.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Sprites/Monsters/Mecha-Stone/Character_sheet.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Prefabs/Enemies/SillyBoy.tscn" type="PackedScene" id=12]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -946,7 +947,7 @@ visible = false
 scale = Vector2( 2, 2 )
 z_index = 7
 frames = SubResource( 53 )
-frame = 48
+frame = 20
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
@@ -955,7 +956,7 @@ position = Vector2( -179.071, 6.2363 )
 scale = Vector2( 2, 2 )
 z_index = 7
 frames = SubResource( 83 )
-frame = 27
+frame = 22
 playing = true
 
 [node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
@@ -964,7 +965,6 @@ position = Vector2( 231.634, 5.3454 )
 scale = Vector2( 2, 2 )
 z_index = 7
 frames = SubResource( 102 )
-frame = 2
 playing = true
 
 [node name="AnimatedSprite4" type="AnimatedSprite" parent="."]
@@ -973,7 +973,7 @@ position = Vector2( 147.688, 95.58 )
 scale = Vector2( 3, 3 )
 z_index = 7
 frames = SubResource( 127 )
-frame = 17
+frame = 9
 playing = true
 
 [node name="AnimatedSprite5" type="AnimatedSprite" parent="."]
@@ -991,5 +991,8 @@ position = Vector2( -337.312, -71.42 )
 scale = Vector2( 3, 3 )
 z_index = 7
 frames = SubResource( 224 )
-frame = 18
+frame = 52
 playing = true
+
+[node name="SillyBoy" parent="." instance=ExtResource( 12 )]
+position = Vector2( -295, 107 )

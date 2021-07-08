@@ -40,6 +40,8 @@ void godot::Enemy::_register_methods()
 	register_method("_set_direction", &Enemy::_set_direction);
 	register_method("_revive", &Enemy::_revive);
 	register_method("_on_Area2D_body_entered_player_fight", &Enemy::_on_Area2D_body_entered_player_fight);
+	register_method("_get_animated_sprite", &Enemy::_get_animated_sprite);
+	
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
@@ -148,7 +150,9 @@ void godot::Enemy::_process(float delta)
 	{
 		String animation_name = sp->get_animation();
 
-		if (sp->get_sprite_frames()->get_animation_loop(animation_name) == false && sp->get_frame() == sp->get_sprite_frames()->get_frame_count(animation_name) - 1)
+		if (sp->get_sprite_frames()->get_animation_loop(animation_name) == false 
+			&& sp->get_frame() == sp->get_sprite_frames()->get_frame_count(animation_name) - 1 
+			&& animation_name != "death")
 			_change_animation("idle", 1);
 	}
 }
@@ -193,6 +197,8 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 			HP = max_HP;
 			_update_health_bar();
 			timer->connect("timeout", this, "_revive");
+
+			_change_animation("death", 1);
 
 			timer->start(time_to_revive);
 			return;
@@ -526,6 +532,7 @@ void godot::Enemy::_set_direction(Node* player, Vector2 direction)
 void godot::Enemy::_revive()
 {
 	timer->disconnect("timeout", this, "_revive");
+	_change_animation("revive", 1);
 	was_died = false;
 	ai->_set_strategy(new SillyBoyAI(bullet, this));
 	HP = max_HP;
@@ -539,4 +546,9 @@ void godot::Enemy::_on_Area2D_body_entered_player_fight(Node* node)
 		float damage = 20;
 		node->call("_take_damage", damage, false);
 	}
+}
+
+AnimatedSprite* godot::Enemy::_get_animated_sprite()
+{
+	return sp;
 }

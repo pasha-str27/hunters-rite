@@ -20,6 +20,9 @@ namespace godot
 
 		Vector2 goal = Vector2::ZERO;
 
+		bool is_attacking = false;
+		AnimatedSprite* sprite = nullptr;
+
 	public:
 		Vector2 old_pos;
 		Vector2 cur_pos;
