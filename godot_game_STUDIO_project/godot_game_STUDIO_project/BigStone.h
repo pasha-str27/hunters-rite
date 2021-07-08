@@ -13,6 +13,7 @@ namespace godot
 		Timer* timer = nullptr;
 		bool can_heal = true;
 		float heal_cooldown = 30;
+		Ref<PackedScene> use_particles = nullptr;
 
 	public:
 		static void _register_methods();
