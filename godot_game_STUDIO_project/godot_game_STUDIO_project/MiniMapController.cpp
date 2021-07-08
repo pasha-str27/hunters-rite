@@ -337,7 +337,6 @@ bool godot::MiniMapController::_is_on_grid(Vector2 pos)
 void godot::MiniMapController::_start_treking()
 {
 	if (CameraController::current_level >= 2)
-		//	_clear_map();
 	{
 		disc_rooms_positions.clear();
 		undisc_rooms_positions.clear();
