@@ -15,6 +15,7 @@ namespace godot {
 		void _init();
 		void _ready();
 		String _get_type();
+		Color _get_color();
 		void _on_Area2D_body_entered(Node* node);
 		Key();
 		~Key();

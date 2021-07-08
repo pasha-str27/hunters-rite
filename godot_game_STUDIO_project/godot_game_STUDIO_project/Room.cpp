@@ -23,7 +23,7 @@ void godot::Room::_register_methods()
 	register_method("_fill_empty_positions", &Room::_fill_empty_positions);
 	register_method("_add_list", &Room::_add_list);
 	register_method("_get_list_of_keys", &Room::_get_list_of_keys);
-	register_method("_get_room_difficulty", &Room::_get_room_difficulty);
+	register_method("_get_key_count", &Room::_get_key_count);
 	register_method("_get_room_type", &Room::_get_room_type);
 	register_method("_set_room_type", &Room::_set_room_type);
 	register_method("_get_were_here", &Room::_get_were_here);
@@ -34,6 +34,8 @@ void godot::Room::_register_methods()
 	register_method("_add_new_enemy", &Room::_add_new_enemy);
 	register_method("_spawn_enemy", &Room::_spawn_enemy);
 	register_method("_clear_enemy_to_spawn", &Room::_clear_enemy_to_spawn);
+	register_method("_get_last_key_color", &Room::_get_last_key_color);
+	register_method("_set_last_key_color", &Room::_set_last_key_color);
 }
 
 godot::Room::Room()
@@ -132,9 +134,9 @@ Array godot::Room::_get_list_of_keys()
 	return list_of_keys;
 }
 
-float godot::Room::_get_room_difficulty()
+int godot::Room::_get_key_count()
 {
-	return room_difficulty;
+	return list_of_keys.size();
 }
 
 String godot::Room::_get_room_type()
@@ -215,6 +217,16 @@ void godot::Room::_spawn_enemy(int number)
 void godot::Room::_clear_enemy_to_spawn()
 {
 	enemies_to_spawn.clear();
+}
+
+Color godot::Room::_get_last_key_color()
+{
+	return last_key_color;
+}
+
+void godot::Room::_set_last_key_color(Color color)
+{
+	last_key_color = color;
 }
 
 void godot::Room::_set_num_of_adjacent_rooms(int value)

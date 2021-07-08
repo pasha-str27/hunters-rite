@@ -6,7 +6,9 @@
 void godot::Key::_register_methods()
 {
 	register_method("_init", &Key::_init);
+	register_method("_ready", &Key::_ready);
 	register_method("_get_type", &Key::_get_type);
+	register_method("_get_color", &Key::_get_color);
 	register_method("_on_Area2D_body_entered", &Key::_on_Area2D_body_entered);
 	
 	register_property<Key, String>("key_type", &Key::key_type, "");
@@ -19,11 +21,17 @@ void godot::Key::_init()
 
 void godot::Key::_ready()
 {
+	key_color = cast_to<Sprite>(get_node("key"))->get_modulate();
 }
 
 String godot::Key::_get_type()
 {
 	return key_type;
+}
+
+Color godot::Key::_get_color()
+{
+	return key_color;
 }
 
 void godot::Key::_on_Area2D_body_entered(Node* node)
