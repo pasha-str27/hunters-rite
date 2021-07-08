@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Kelt_stone_with_flash.png-b9cdabae00c0f7a8230de30063794d09.stex"
+path="res://.import/HostileRunningReaper-Sheet.png-25b4027611410379e980e62b2e468e3a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Tilesets/Kelt_stone_with_flash.png"
-dest_files=[ "res://.import/Kelt_stone_with_flash.png-b9cdabae00c0f7a8230de30063794d09.stex" ]
+source_file="res://Assets/Sprites/Monsters/Hostile/HostileRunningReaper-Sheet.png"
+dest_files=[ "res://.import/HostileRunningReaper-Sheet.png-25b4027611410379e980e62b2e468e3a.stex" ]
 
 [params]
 

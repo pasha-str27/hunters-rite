@@ -11,6 +11,8 @@ void godot::BigStone::_register_methods()
 	register_method("_remove_player", &BigStone::_remove_player);
 	register_method("_can_heal_true", &BigStone::_can_heal_true);
 	register_method("_change_start_parameters", &BigStone::_change_start_parameters);
+
+	register_property<BigStone, Ref<PackedScene>>("particles for use", &BigStone::use_particles, nullptr);
 }
 
 void godot::BigStone::_init()
@@ -57,6 +59,10 @@ void godot::BigStone::_heal_players()
 		can_heal = false;
 		timer->connect("timeout", this, "_can_heal_true");
 		timer->start(heal_cooldown);
+
+		auto particles = cast_to<Node2D>(use_particles->instance());
+		particles->set_global_position(this->get_global_position());
+		get_node("/root/Node2D/Node")->add_child(particles);
 
 		////////////
 		queue_free();

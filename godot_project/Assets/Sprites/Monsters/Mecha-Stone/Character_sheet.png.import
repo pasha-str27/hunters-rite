@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Kelt_stone_with_flash.png-b9cdabae00c0f7a8230de30063794d09.stex"
+path="res://.import/Character_sheet.png-b1355d84b34909d909d99ce642d8bfd1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Tilesets/Kelt_stone_with_flash.png"
-dest_files=[ "res://.import/Kelt_stone_with_flash.png-b9cdabae00c0f7a8230de30063794d09.stex" ]
+source_file="res://Assets/Sprites/Monsters/Mecha-Stone/Character_sheet.png"
+dest_files=[ "res://.import/Character_sheet.png-b1355d84b34909d909d99ce642d8bfd1.stex" ]
 
 [params]
 
