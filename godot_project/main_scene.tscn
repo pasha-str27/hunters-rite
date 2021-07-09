@@ -2,6 +2,7 @@
 
 [ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/game_paveleon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Prefabs/Animations/FadeIn.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Prefabs/Enemies/StatueShoot.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Sprites/Monsters/Skeleton/Skeleton Idle.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Sprites/Monsters/Hostile/HostileRunningReaper-Sheet.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Sprites/Monsters/Hostile/HostileAttackReaper-Sheet.png" type="Texture" id=7]
@@ -9,7 +10,6 @@
 [ext_resource path="res://Assets/Sprites/Monsters/Jopa Dimu/enemy05_sheet.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Sprites/Monsters/Jopa Dimu/enemy04_sheet.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Sprites/Monsters/Mecha-Stone/Character_sheet.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Prefabs/Enemies/SillyBoy.tscn" type="PackedScene" id=12]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 5 )
@@ -716,7 +716,6 @@ animations = [ {
 } ]
 
 [node name="Node2D" type="Node2D"]
-position = Vector2( -192.869, 118.261 )
 
 [node name="FadeIn" parent="." instance=ExtResource( 2 )]
 visible = false
@@ -731,7 +730,7 @@ position = Vector2( -179.071, 6.2363 )
 scale = Vector2( 2, 2 )
 z_index = 7
 frames = SubResource( 30 )
-frame = 20
+frame = 15
 playing = true
 
 [node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
@@ -740,7 +739,7 @@ position = Vector2( 231.634, 5.3454 )
 scale = Vector2( 2, 2 )
 z_index = 7
 frames = SubResource( 49 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="AnimatedSprite4" type="AnimatedSprite" parent="."]
@@ -749,7 +748,7 @@ position = Vector2( 147.688, 95.58 )
 scale = Vector2( 3, 3 )
 z_index = 7
 frames = SubResource( 74 )
-frame = 22
+frame = 18
 playing = true
 
 [node name="AnimatedSprite5" type="AnimatedSprite" parent="."]
@@ -758,7 +757,7 @@ position = Vector2( -274.312, 88.58 )
 scale = Vector2( 3, 3 )
 z_index = 7
 frames = SubResource( 103 )
-frame = 11
+frame = 23
 playing = true
 
 [node name="AnimatedSprite6" type="AnimatedSprite" parent="."]
@@ -767,7 +766,8 @@ position = Vector2( -337.312, -71.42 )
 scale = Vector2( 3, 3 )
 z_index = 7
 frames = SubResource( 171 )
-frame = 11
+frame = 48
 playing = true
 
-[node name="SillyBoy" parent="." instance=ExtResource( 12 )]
+[node name="StatueShoot" parent="." instance=ExtResource( 3 )]
+position = Vector2( 115.481, -92.7367 )

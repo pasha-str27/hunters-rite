@@ -144,6 +144,15 @@ float godot::SillyBoyAI::_find_max_distance(Vector2 dir)
 	return distance;
 }
 
+Vector2 godot::SillyBoyAI::_get_goal()
+{
+	return Vector2();
+}
+
+void godot::SillyBoyAI::_set_goal(Vector2 goal)
+{
+}
+
 godot::SillyBoyAI::SillyBoyAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
 {
 	dir = Vector2::ZERO;

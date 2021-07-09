@@ -22,10 +22,12 @@ namespace godot
 
 		bool is_attacking = false;
 		AnimatedSprite* sprite = nullptr;
+		Vector2 old_position = Vector2::ZERO;
 
 	public:
 		Vector2 old_pos;
 		Vector2 cur_pos;
+		Vector2 tmp_cur_pos;
 
 		SillyBoyAI(Ref<PackedScene>& bullet, Node2D* node);
 		~SillyBoyAI();
@@ -43,5 +45,7 @@ namespace godot
 		void _remove_player(Node2D* player);
 		void _set_direction(Vector2 direction);
 		float _find_max_distance(Vector2 dir);
+		Vector2 _get_goal();
+		void _set_goal(Vector2 goal);
 	};
 }

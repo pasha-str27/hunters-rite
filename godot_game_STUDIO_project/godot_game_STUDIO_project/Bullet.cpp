@@ -48,6 +48,8 @@ void godot::Bullet::_on_Area2D_body_entered(Node* node)
 
 	if (node->is_in_group("player") && is_in_group("web_bullet")) 
 	{
+		Godot::print("here");
+
 		node->call("_change_can_moving", false);
 		node->call("_change_moving", false);		
 		node->call("_animate_spider_web");

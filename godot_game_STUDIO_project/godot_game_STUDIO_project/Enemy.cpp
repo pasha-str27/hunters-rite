@@ -118,7 +118,10 @@ void godot::Enemy::_ready()
 		ai->_set_strategy(new WormAI(bullet, this));
 
 	if (is_in_group("silly_boy"))
+	{
 		ai->_set_strategy(new SillyBoyAI(bullet, this));
+		//ai->_change_start_parameters();
+	}
 
 	if (is_in_group("mimic"))
 		ai->_set_strategy(new MimicAI(bullet, this));
@@ -211,6 +214,7 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		if (is_in_group("silly_boy") && !was_died)
 		{
 			was_died = true;
+			goal = ai->_get_goal();
 			ai->_set_strategy(new SillyBoyDiedAI(bullet, this));
 			HP = max_HP;
 			_update_health_bar();
@@ -538,7 +542,7 @@ void godot::Enemy::_remove_taken_positions()
 
 void godot::Enemy::_set_direction(Node* player, Vector2 direction)
 {
-	if (player->is_in_group("player"))
+	if (player->is_in_group("player") && (bool)player->get_parent()->call("_is_alive"))
 	{
 		ai->_set_direction(direction);
 	}
@@ -552,6 +556,7 @@ void godot::Enemy::_revive()
 	_change_animation("revive", 1);
 	HP = max_HP;
 	_update_health_bar();
+	//ai->_set_goal(goal);
 }
 
 void godot::Enemy::_on_Area2D_body_entered_player_fight(Node* node)
