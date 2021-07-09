@@ -135,3 +135,13 @@ void godot::EnemyAIContext::_set_direction(Vector2 dir)
 {
 	strategy->_set_direction(dir);
 }
+
+Vector2 godot::EnemyAIContext::_get_goal()
+{
+	return strategy->_get_goal();
+}
+
+void godot::EnemyAIContext::_set_goal(Vector2 goal)
+{
+	strategy->_set_goal(goal);
+}

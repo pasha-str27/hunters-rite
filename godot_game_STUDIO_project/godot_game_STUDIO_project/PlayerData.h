@@ -29,6 +29,7 @@ namespace godot
 			fight_right = "Player_fight_right",
 			special = "Player_special";
 
+	    ProgressBar* health_bar = nullptr;
 		PlayerData(Node2D* object, Ref<PackedScene>bullet = 0);
 		PlayerData();
 		~PlayerData();
@@ -58,6 +59,7 @@ namespace godot
 		float _get_max_HP();
 		void _set_max_HP(float value);
 		virtual void _update_health_bar() = 0;
+		virtual ProgressBar* _get_health_bar();
 		void _stop_animations();
 		float _get_special_time();
 		void _set_special_time(float value);

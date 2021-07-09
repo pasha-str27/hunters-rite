@@ -29,10 +29,13 @@ namespace godot
 		bool was_died = false;
 		float time_to_revive = 5;
 
+		Vector2 goal = Vector2::ZERO;
+
 		AnimatedSprite* sp = nullptr;
 
 		Particles2D* spawn_particles = nullptr;
 		Ref<PackedScene> death_particles = nullptr;
+		ProgressBar* health_bar;
 
 		public:
 			static void _register_methods();

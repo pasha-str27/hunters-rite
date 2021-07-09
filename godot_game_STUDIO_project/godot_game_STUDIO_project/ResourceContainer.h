@@ -16,6 +16,8 @@ namespace godot {
 		String _player_take_damage;
 		String _player_revive;
 		String _open_door;
+		String _stone_action;
+		String _collect_key;
 		ResourceContainer();
 	public:
 		static ResourceContainer* _get_instance()
@@ -32,8 +34,7 @@ namespace godot {
 		String player_take_damage();
 		String player_revive();
 		String open_door();
+		String stone_action();
+		String collect_key();
 	};
 }
-
-
-

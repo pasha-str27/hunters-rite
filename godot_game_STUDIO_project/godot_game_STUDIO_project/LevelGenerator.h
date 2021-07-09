@@ -41,8 +41,10 @@ namespace godot
 		Array keys_prefabs = {};
 		Array keys_prefabs_local = {};
 		Array generated_keys = {};
+		std::vector<Color> generated_colors_keys;
 
 		Ref<PackedScene> big_stone = nullptr;
+		Ref<PackedScene> lock_sprite = nullptr;
 
 	public:
 		LevelGenerator();
@@ -76,6 +78,7 @@ namespace godot
 		void _clear();
 		Array _get_rooms();
 		Array _get_rooms_positions();
-		void _process(float delta);
+		void _build_locks();
+		void _build_locks_in_room(Node2D* room, Vector2 door_dir, String door_name, int step);
 	};
 }

@@ -39,5 +39,7 @@ namespace godot
 		void _remove_player(Node2D* player);
 		void _remove_taken_positions();
 		void _set_direction(Vector2 dir);
+		Vector2 _get_goal();
+		void _set_goal(Vector2 goal);
 	};
 }

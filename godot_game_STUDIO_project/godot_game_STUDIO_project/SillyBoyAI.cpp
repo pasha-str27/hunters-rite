@@ -100,6 +100,7 @@ void godot::SillyBoyAI::_remove_player(Node2D* player)
 
 void godot::SillyBoyAI::_set_direction(Vector2 direction)
 {
+	//перевірити!!!!
 	if (was_setted)
 		return;
 
@@ -141,6 +142,15 @@ float godot::SillyBoyAI::_find_max_distance(Vector2 dir)
 	cur_pos -= dir;
 
 	return distance;
+}
+
+Vector2 godot::SillyBoyAI::_get_goal()
+{
+	return Vector2();
+}
+
+void godot::SillyBoyAI::_set_goal(Vector2 goal)
+{
 }
 
 godot::SillyBoyAI::SillyBoyAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)

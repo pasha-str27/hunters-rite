@@ -52,6 +52,10 @@ void godot::BigStone::_heal_players()
 		if (player_conteiner->_get_player2_regular()->has_method("_heal"))
 			_heal_player(player_conteiner->_get_player2_regular());
 		
+		Ref<PackedScene> prefab = nullptr;
+		prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->stone_action());
+		get_parent()->add_child(prefab->instance());
+
 		can_heal = false;
 		timer->connect("timeout", this, "_can_heal_true");
 		timer->start(heal_cooldown);

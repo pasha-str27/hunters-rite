@@ -9,11 +9,13 @@ namespace godot {
 	private:
 		GODOT_CLASS(Key, Node2D);
 		String key_type;
+		Color key_color;
 	public:
 		static void _register_methods();
 		void _init();
 		void _ready();
 		String _get_type();
+		Color _get_color();
 		void _on_Area2D_body_entered(Node* node);
 		Key();
 		~Key();
