@@ -29,6 +29,8 @@ namespace godot
 		bool was_died = false;
 		float time_to_revive = 5;
 
+		Vector2 goal = Vector2::ZERO;
+
 		AnimatedSprite* sp = nullptr;
 
 		Particles2D* spawn_particles = nullptr;
@@ -73,5 +75,6 @@ namespace godot
 			void _set_direction(Node* player, Vector2 direction);
 			void _revive();
 			void _on_Area2D_body_entered_player_fight(Node* node);
+			AnimatedSprite* _get_animated_sprite();
 	};
 }

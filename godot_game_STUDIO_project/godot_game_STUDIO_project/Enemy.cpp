@@ -40,6 +40,8 @@ void godot::Enemy::_register_methods()
 	register_method("_set_direction", &Enemy::_set_direction);
 	register_method("_revive", &Enemy::_revive);
 	register_method("_on_Area2D_body_entered_player_fight", &Enemy::_on_Area2D_body_entered_player_fight);
+	register_method("_get_animated_sprite", &Enemy::_get_animated_sprite);
+	
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
@@ -116,7 +118,10 @@ void godot::Enemy::_ready()
 		ai->_set_strategy(new WormAI(bullet, this));
 
 	if (is_in_group("silly_boy"))
+	{
 		ai->_set_strategy(new SillyBoyAI(bullet, this));
+		//ai->_change_start_parameters();
+	}
 
 	if (is_in_group("mimic"))
 		ai->_set_strategy(new MimicAI(bullet, this));
@@ -153,8 +158,20 @@ void godot::Enemy::_process(float delta)
 	{
 		String animation_name = sp->get_animation();
 
-		if (sp->get_sprite_frames()->get_animation_loop(animation_name) == false && sp->get_frame() == sp->get_sprite_frames()->get_frame_count(animation_name) - 1)
-			_change_animation("idle", 1);
+		if (sp->get_sprite_frames()->get_animation_loop(animation_name) == false
+			&& sp->get_frame() == sp->get_sprite_frames()->get_frame_count(animation_name) - 1)
+		{
+			if (was_died)
+			{
+				sp->set_animation("death");
+				//sp->stop();
+				sp->set_frame(sp->get_sprite_frames()->get_frame_count("death") - 1);
+			}
+			else
+			{
+				_change_animation("idle", 1);
+			}
+		}
 	}
 }
 
@@ -167,7 +184,12 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 	_update_health_bar();
 
 	if (sp != nullptr)
-		sp->play("damaged");
+	{
+		if(was_died)
+			sp->play("death_damaged");
+		else
+			sp->play("damaged");
+	}
 
 	Ref<PackedScene> prefab = nullptr;
 	prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->enemy_take_damage());
@@ -188,20 +210,24 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		else if (player_id == 2)
 			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player2");
 
-		if (!is_in_group("flower") || is_in_group("slime_boss") || is_in_group("mimic"))
-			player->call("_on_enemy_die", this->get_global_position());
 
 		if (is_in_group("silly_boy") && !was_died)
 		{
 			was_died = true;
+			goal = ai->_get_goal();
 			ai->_set_strategy(new SillyBoyDiedAI(bullet, this));
 			HP = max_HP;
 			_update_health_bar();
 			timer->connect("timeout", this, "_revive");
 
+			_change_animation("death", 1);
+
 			timer->start(time_to_revive);
 			return;
 		}
+
+		if (!is_in_group("flower") || is_in_group("slime_boss") || is_in_group("mimic"))
+			player->call("_on_enemy_die", this->get_global_position());
 
 		died = true;
 
@@ -516,7 +542,7 @@ void godot::Enemy::_remove_taken_positions()
 
 void godot::Enemy::_set_direction(Node* player, Vector2 direction)
 {
-	if (player->is_in_group("player"))
+	if (player->is_in_group("player") && (bool)player->get_parent()->call("_is_alive"))
 	{
 		ai->_set_direction(direction);
 	}
@@ -527,8 +553,10 @@ void godot::Enemy::_revive()
 	timer->disconnect("timeout", this, "_revive");
 	was_died = false;
 	ai->_set_strategy(new SillyBoyAI(bullet, this));
+	_change_animation("revive", 1);
 	HP = max_HP;
 	_update_health_bar();
+	ai->_set_goal(goal);
 }
 
 void godot::Enemy::_on_Area2D_body_entered_player_fight(Node* node)
@@ -538,4 +566,9 @@ void godot::Enemy::_on_Area2D_body_entered_player_fight(Node* node)
 		float damage = 20;
 		node->call("_take_damage", damage, false);
 	}
+}
+
+AnimatedSprite* godot::Enemy::_get_animated_sprite()
+{
+	return sp;
 }

@@ -54,6 +54,15 @@ void godot::EnemyData::change_can_fight(bool value)
 {
 }
 
+Vector2 godot::EnemyData::_get_goal()
+{
+	return Vector2();
+}
+
+void godot::EnemyData::_set_goal(Vector2 goal)
+{
+}
+
 Node2D* godot::EnemyData::_get_enemy()
 {
 	return enemy;
