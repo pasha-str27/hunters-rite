@@ -69,6 +69,7 @@ void godot::PlayerMeleeGhost::_process_input()
 	//move left
 	if (input_controller->is_action_pressed(move_left))
 	{
+		_get_object()->call("_flip_ghost", true);
 		sprite->set_flip_h(true);
 		dir.x -= _get_speed();
 	}
@@ -76,6 +77,7 @@ void godot::PlayerMeleeGhost::_process_input()
 	//move right	
 	if (input_controller->is_action_pressed(move_right))
 	{
+		_get_object()->call("_flip_ghost", false);
 		sprite->set_flip_h(false);
 		dir.x += _get_speed();
 	}
