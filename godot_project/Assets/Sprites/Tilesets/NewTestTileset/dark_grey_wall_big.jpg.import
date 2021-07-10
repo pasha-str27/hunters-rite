@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ghost.png-53ada261e5343de71f298bd1e37a71d8.stex"
+path="res://.import/dark_grey_wall_big.jpg-1e1cde9d923832ea9dcec0edf958b5ec.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Players/ghost.png"
-dest_files=[ "res://.import/ghost.png-53ada261e5343de71f298bd1e37a71d8.stex" ]
+source_file="res://Assets/Sprites/Tilesets/NewTestTileset/dark_grey_wall_big.jpg"
+dest_files=[ "res://.import/dark_grey_wall_big.jpg-1e1cde9d923832ea9dcec0edf958b5ec.stex" ]
 
 [params]
 
