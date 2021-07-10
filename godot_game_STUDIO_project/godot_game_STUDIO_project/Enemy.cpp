@@ -41,6 +41,8 @@ void godot::Enemy::_register_methods()
 	register_method("_revive", &Enemy::_revive);
 	register_method("_on_Area2D_body_entered_player_fight", &Enemy::_on_Area2D_body_entered_player_fight);
 	register_method("_get_animated_sprite", &Enemy::_get_animated_sprite);
+	register_method("_add_to_HP", &Enemy::_add_to_HP);
+	
 	
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
@@ -118,20 +120,20 @@ void godot::Enemy::_ready()
 		ai->_set_strategy(new WormAI(bullet, this));
 
 	if (is_in_group("silly_boy"))
-	{
 		ai->_set_strategy(new SillyBoyAI(bullet, this));
-		//ai->_change_start_parameters();
-	}
 
 	if (is_in_group("mimic"))
 		ai->_set_strategy(new MimicAI(bullet, this));
+
+	if (is_in_group("naga"))
+		ai->_set_strategy(new NagaAI(bullet, this));
 
 	spawn_particles->set_emitting(true);
 	timer_particles->connect("timeout", this, "_on_spawn_end");
 	timer_particles->start(0.2f);
 	//cast_to<Node2D>(get_node("CollisionShape2D"))->call_deferred("set_visible", false);
 
-	if (is_in_group("flower") || is_in_group("slime_boss"))
+	if (is_in_group("flower") || is_in_group("slime_boss") || is_in_group("naga"))
 		cast_to<ProgressBar>(get_node("/root/Node2D/Node/Camera2D")->get_node("BossHealthBar"))->set_visible(false);
 	else
 		cast_to<ProgressBar>(get_node("HealthBar"))->set_visible(false);
@@ -183,6 +185,7 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 
 	HP -= damage;
 	_update_health_bar();
+	ai->_take_damage(damage);
 
 	if (sp != nullptr)
 	{
@@ -227,7 +230,7 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 			return;
 		}
 
-		if (!is_in_group("flower") || is_in_group("slime_boss") || is_in_group("mimic"))
+		if (!is_in_group("flower") && is_in_group("slime_boss") && !is_in_group("mimic") && !is_in_group("naga"))
 			player->call("_on_enemy_die", this->get_global_position());
 
 		died = true;
@@ -242,7 +245,7 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 			CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->call("_open_doors");
 		}
 
-		if (is_in_group("flower") || is_in_group("slime_boss") || is_in_group("mimic"))
+		if (is_in_group("flower") || is_in_group("slime_boss") || is_in_group("mimic") || is_in_group("naga"))
 		{
 			get_node("/root/Node2D/Node/ItemsContainer")->call("_spawn_random_item", get_global_position());
 			cast_to<ProgressBar>(CustomExtensions::GetChildByName(get_node("/root/Node2D/Node/Camera2D"), "BossHealthBar"))->set_visible(false);
@@ -366,7 +369,7 @@ void godot::Enemy::_on_Area2D_body_entered(Node* node)
 		if (is_in_group("bat") && is_angry)
 			damage = 30;
 
-		if (!is_in_group("slime_shoot") && !is_in_group("mimic"))
+		if (!is_in_group("slime_shoot") && !is_in_group("mimic") && !is_in_group("naga"))
 			node->call("_take_damage", damage, false);
 	}
 }
@@ -507,7 +510,7 @@ void godot::Enemy::_on_spawn_end()
 	spawn_particles->set_emitting(false);
 	cast_to<Node2D>(get_node("CollisionShape2D"))->set_visible(true);
 
-	if (is_in_group("flower") || is_in_group("slime_boss"))
+	if (is_in_group("flower") || is_in_group("slime_boss") || is_in_group("naga"))
 	{
 		auto healthbar = cast_to<ProgressBar>(get_node("/root/Node2D/Node/Camera2D")->get_node("BossHealthBar"));
 		healthbar->set_max(HP);
@@ -572,4 +575,10 @@ void godot::Enemy::_on_Area2D_body_entered_player_fight(Node* node)
 AnimatedSprite* godot::Enemy::_get_animated_sprite()
 {
 	return sp;
+}
+
+void godot::Enemy::_add_to_HP(float value)
+{
+	this->HP = HP + value > max_HP ? max_HP : HP + value;
+	_update_health_bar();
 }
