@@ -124,8 +124,6 @@ void godot::SillyBoyAI::_set_direction(Vector2 direction)
 		if (goal.x < cur_pos.x)
 			sprite->set_flip_h(true);
 	}
-
-
 }
 
 float godot::SillyBoyAI::_find_max_distance(Vector2 dir)
@@ -146,11 +144,24 @@ float godot::SillyBoyAI::_find_max_distance(Vector2 dir)
 
 Vector2 godot::SillyBoyAI::_get_goal()
 {
-	return Vector2();
+	return old_position;
 }
 
 void godot::SillyBoyAI::_set_goal(Vector2 goal)
 {
+	//_get_enemy()->set_global_position(goal);
+
+	_set_distance(goal.distance_to(_get_enemy()->get_global_position()));
+
+	this->goal = goal;
+
+	cur_pos = (goal - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+
+	old_pos = _get_enemy()->get_global_position();
+	old_position = old_pos;
+	//change_direction();
+
+	//_change_start_parameters();
 }
 
 godot::SillyBoyAI::SillyBoyAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
@@ -160,6 +171,7 @@ godot::SillyBoyAI::SillyBoyAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : Enem
 	can_move = true;
 	is_cheking = false;
 	speed = 200;
+	old_position = _get_enemy()->get_global_position();
 	_set_distance(32);
 	_change_start_parameters();
 	sprite = _get_enemy()->call("_get_animated_sprite");
@@ -278,7 +290,6 @@ void godot::SillyBoyAI::_change_dir_after_time()
 		if (dir == Vector2::LEFT)
 			sprite->set_flip_h(true);
 	}
-	
 }
 
 void godot::SillyBoyAI::_fight(Node2D* player1, Node2D* player2)
@@ -322,6 +333,15 @@ void godot::SillyBoyAI::_process(float delta)
 			_get_enemy()->call("_change_animation", "run", 2);
 	}
 
+	float distance = 32 > _get_distance() ? _get_distance() : 32;
+
+	if (abs(old_position.distance_to(_get_enemy()->get_global_position()) - distance) <= 8)
+	{
+		Vector2 cur_pos_tmp = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+		cur_pos_tmp = Vector2((int)cur_pos_tmp.x, (int)cur_pos_tmp.y);
+		old_position = cur_pos_tmp * 32	+ CameraController::current_room->get_global_position()
+			- Vector2(896, 544) / 2 + Vector2(16, 16);
+	}
 
 	if (abs(old_pos.distance_to(_get_enemy()->get_global_position()) - _get_distance()) <= 1)
 	{
@@ -330,6 +350,10 @@ void godot::SillyBoyAI::_process(float delta)
 		speed = 200;
 		change_direction();
 		old_pos = _get_enemy()->get_global_position();
+		Vector2 cur_pos_tmp = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+		cur_pos_tmp = Vector2((int)cur_pos_tmp.x, (int)cur_pos_tmp.y);
+		old_position = cur_pos_tmp * 32 + CameraController::current_room->get_global_position()
+			- Vector2(896, 544) / 2 + Vector2(16, 16);
 		return;
 	}
 }

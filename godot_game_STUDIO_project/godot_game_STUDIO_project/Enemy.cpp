@@ -556,7 +556,7 @@ void godot::Enemy::_revive()
 	_change_animation("revive", 1);
 	HP = max_HP;
 	_update_health_bar();
-	//ai->_set_goal(goal);
+	ai->_set_goal(goal);
 }
 
 void godot::Enemy::_on_Area2D_body_entered_player_fight(Node* node)

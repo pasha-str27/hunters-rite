@@ -259,7 +259,7 @@ process_material = SubResource( 10 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 36 )
 animation = "idle"
-frame = 2
+frame = 3
 playing = true
 offset = Vector2( 35, 0 )
 
