@@ -32,6 +32,8 @@ godot::PlayerShoot::PlayerShoot(Node2D* object, Ref<PackedScene> bullet) : Playe
 	cast_to<KinematicBody2D>(object)->set_collision_layer_bit(15, true);
 	cast_to<Area2D>(object->get_node("Area2D"))->set_collision_mask_bit(0, true);
 	cast_to<Area2D>(object->get_node("Area2D"))->set_collision_layer_bit(0, true);
+
+	health_bar = _get_health_bar();
 }
 
 godot::PlayerShoot::~PlayerShoot()
@@ -164,7 +166,7 @@ void godot::PlayerShoot::_fight(Node* node)
 		return;
 
 	Ref<PackedScene> prefab = nullptr;
-	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/Player1Fight.tscn");
+	prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->player1_fight());
 	_get_object()->add_child(prefab->instance());
 
 	_change_can_fight(false);
@@ -205,7 +207,7 @@ void  godot::PlayerShoot::_take_damage(float damage, bool is_spike)
 	if (_get_HP() <= 0)
 	{
 		Ref<PackedScene> prefab = nullptr;
-		prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/PlayerDied.tscn");
+		prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->player_died());
 		_get_object()->get_parent()->add_child(prefab->instance());
 
 		sprite->play("death");
@@ -218,13 +220,14 @@ void  godot::PlayerShoot::_take_damage(float damage, bool is_spike)
 
 void godot::PlayerShoot::_update_health_bar()
 {
-	auto health_bar = _get_health_bar();
 	if (health_bar != nullptr)
 		health_bar->set_value(_get_HP());
 }
 
 ProgressBar* godot::PlayerShoot::_get_health_bar()
 {
+	if (health_bar != nullptr)
+		return health_bar;
 	return cast_to<ProgressBar>(_get_object()->get_node("/root/Node2D/Node/Camera2D/P1HealthBarWrapper/ProgressBar"));
 }
 

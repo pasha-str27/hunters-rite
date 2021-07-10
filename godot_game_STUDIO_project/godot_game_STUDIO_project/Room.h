@@ -26,6 +26,7 @@ namespace godot
 		bool were_here = false;
 
 		bool is_special = false;
+		Color last_key_color = Color(1, 1, 1, 1);
 
 	public:
 		Room();
@@ -44,7 +45,7 @@ namespace godot
 		void print();
 		void _add_list(Array);
 		Array _get_list_of_keys();
-		float _get_room_difficulty();
+		int _get_key_count();
 		String _get_room_type();
 		void _set_room_type(String type);
 		bool _get_were_here();
@@ -55,5 +56,7 @@ namespace godot
 		void _add_new_enemy(Node2D* room, Vector2 position);
 		void _spawn_enemy(int number);
 		void _clear_enemy_to_spawn();
+		Color _get_last_key_color();
+		void _set_last_key_color(Color color);
 	};
 }

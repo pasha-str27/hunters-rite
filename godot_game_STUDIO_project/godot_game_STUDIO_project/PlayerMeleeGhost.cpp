@@ -17,6 +17,7 @@ godot::PlayerMeleeGhost::PlayerMeleeGhost(Node2D* obj, Ref<PackedScene> bullet) 
 	vfx_sprite = cast_to<AnimatedSprite>(obj->get_node("Area2D3")->get_child(1));
 
 	animator = cast_to<AnimationPlayer>(_get_object()->get_node("AnimationPlayer"));
+	 health_bar = _get_health_bar();
 	//_set_special_time(1.5);
 }
 
@@ -82,30 +83,6 @@ void godot::PlayerMeleeGhost::_process_input()
 	PlayerData::_set_dir(dir);
 }
 
-//void godot::PlayerMeleeGhost::_take_damage(float damage, bool is_spike)
-//{
-//	if (_get_HP() <= 0)
-//		return;
-//
-//	sprite->play("damaged");
-//
-//	PlayerData::_take_damage(damage, is_spike);
-//
-//	if (_get_HP() <= 0)
-//	{
-//		Enemies::get_singleton()->_remove_player2();
-//
-//		sprite->play("death");
-//		if (_was_revived())
-//		{
-//			_get_object()->queue_free();
-//			return;
-//		}
-//
-//		_get_object()->call("_die");
-//	}
-//}
-
 void godot::PlayerMeleeGhost::_set_HP(float value)
 {
 	PlayerData::_set_HP(value);
@@ -132,13 +109,13 @@ void godot::PlayerMeleeGhost::_heal()
 
 void godot::PlayerMeleeGhost::_update_health_bar()
 {
-	auto health_bar = _get_health_bar();
-
 	if (health_bar != nullptr)
 		health_bar->set_value(_get_HP());
 }
 
 ProgressBar* godot::PlayerMeleeGhost::_get_health_bar()
 {
+	if (health_bar != nullptr)
+		return health_bar;
 	return cast_to<ProgressBar>(_get_object()->get_node("/root/Node2D/Node/Camera2D/P2HealthBarWrapper/ProgressBar"));
 }

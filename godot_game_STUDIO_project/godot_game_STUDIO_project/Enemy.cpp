@@ -40,6 +40,8 @@ void godot::Enemy::_register_methods()
 	register_method("_set_direction", &Enemy::_set_direction);
 	register_method("_revive", &Enemy::_revive);
 	register_method("_on_Area2D_body_entered_player_fight", &Enemy::_on_Area2D_body_entered_player_fight);
+	register_method("_get_animated_sprite", &Enemy::_get_animated_sprite);
+	
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
@@ -80,8 +82,6 @@ void godot::Enemy::_ready()
 {
 	Enemies::get_singleton()->_add_enemy(this);
 
-	_update_health_bar();
-
 	add_child(timer_change_dir);
 	add_child(timer);
 	add_child(timer_check_angry);
@@ -118,7 +118,10 @@ void godot::Enemy::_ready()
 		ai->_set_strategy(new WormAI(bullet, this));
 
 	if (is_in_group("silly_boy"))
+	{
 		ai->_set_strategy(new SillyBoyAI(bullet, this));
+		//ai->_change_start_parameters();
+	}
 
 	if (is_in_group("mimic"))
 		ai->_set_strategy(new MimicAI(bullet, this));
@@ -133,7 +136,14 @@ void godot::Enemy::_ready()
 	else
 		cast_to<ProgressBar>(get_node("HealthBar"))->set_visible(false);
 
+	health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(this, "HealthBar"));
+
+	if (health_bar == nullptr)
+		health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(get_node("/root/Node2D/Node/Camera2D"), "BossHealthBar"));
+
 	max_HP = HP;
+	health_bar->set_max(max_HP);
+	_update_health_bar();
 }
 
 void godot::Enemy::_process(float delta)
@@ -148,8 +158,20 @@ void godot::Enemy::_process(float delta)
 	{
 		String animation_name = sp->get_animation();
 
-		if (sp->get_sprite_frames()->get_animation_loop(animation_name) == false && sp->get_frame() == sp->get_sprite_frames()->get_frame_count(animation_name) - 1)
-			_change_animation("idle", 1);
+		if (sp->get_sprite_frames()->get_animation_loop(animation_name) == false
+			&& sp->get_frame() == sp->get_sprite_frames()->get_frame_count(animation_name) - 1)
+		{
+			if (was_died)
+			{
+				sp->set_animation("death");
+				//sp->stop();
+				sp->set_frame(sp->get_sprite_frames()->get_frame_count("death") - 1);
+			}
+			else
+			{
+				_change_animation("idle", 1);
+			}
+		}
 	}
 }
 
@@ -162,10 +184,15 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 	_update_health_bar();
 
 	if (sp != nullptr)
-		sp->play("damaged");
+	{
+		if(was_died)
+			sp->play("death_damaged");
+		else
+			sp->play("damaged");
+	}
 
 	Ref<PackedScene> prefab = nullptr;
-	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/EnemyTakeDamage.tscn");
+	prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->enemy_take_damage());
 	add_child(prefab->instance());
 
 	if (is_in_group("slime_boss"))
@@ -183,20 +210,24 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		else if (player_id == 2)
 			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player2");
 
-		if (!is_in_group("flower") || is_in_group("slime_boss") || is_in_group("mimic"))
-			player->call("_on_enemy_die", this->get_global_position());
 
 		if (is_in_group("silly_boy") && !was_died)
 		{
 			was_died = true;
+			goal = ai->_get_goal();
 			ai->_set_strategy(new SillyBoyDiedAI(bullet, this));
 			HP = max_HP;
 			_update_health_bar();
 			timer->connect("timeout", this, "_revive");
 
+			_change_animation("death", 1);
+
 			timer->start(time_to_revive);
 			return;
 		}
+
+		if (!is_in_group("flower") || is_in_group("slime_boss") || is_in_group("mimic"))
+			player->call("_on_enemy_die", this->get_global_position());
 
 		died = true;
 
@@ -205,7 +236,7 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		if (Enemies::get_singleton()->_get_enemies_count() == 0)
 		{
 			Ref<PackedScene> prefab = nullptr;
-			prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/OpenDoors.tscn");
+			prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->open_door());
 			add_child(prefab->instance());
 			CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->call("_open_doors");
 		}
@@ -322,9 +353,6 @@ void godot::Enemy::_on_Area2D_body_entered(Node* node)
 	{
 		float damage = 20;
 
-		//if (is_in_group("slime_boss"))
-		//	ai->change_can_fight(false, new SlimeAttackSpawnState((SlimeBossAI*)ai->_get_strategy()));
-
 		ai->_set_player(cast_to<Node2D>(node));
 		if (is_in_group("slime"))
 		{
@@ -425,14 +453,8 @@ void godot::Enemy::_change_dir_after_time()
 
 void godot::Enemy::_update_health_bar()
 {
-	auto health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(this, "HealthBar"));
-
-	if (health_bar == nullptr)
-		health_bar = cast_to<ProgressBar>(CustomExtensions::GetChildByName(get_node("/root/Node2D/Node/Camera2D"), "BossHealthBar"));
-
 	if (health_bar != nullptr)
 		health_bar->call_deferred("set_value", HP);
-
 }
 
 void godot::Enemy::_change_animation(String _name = "", float speed_scale = 1)
@@ -520,7 +542,7 @@ void godot::Enemy::_remove_taken_positions()
 
 void godot::Enemy::_set_direction(Node* player, Vector2 direction)
 {
-	if (player->is_in_group("player"))
+	if (player->is_in_group("player") && (bool)player->get_parent()->call("_is_alive"))
 	{
 		ai->_set_direction(direction);
 	}
@@ -531,8 +553,10 @@ void godot::Enemy::_revive()
 	timer->disconnect("timeout", this, "_revive");
 	was_died = false;
 	ai->_set_strategy(new SillyBoyAI(bullet, this));
+	_change_animation("revive", 1);
 	HP = max_HP;
 	_update_health_bar();
+	ai->_set_goal(goal);
 }
 
 void godot::Enemy::_on_Area2D_body_entered_player_fight(Node* node)
@@ -542,4 +566,9 @@ void godot::Enemy::_on_Area2D_body_entered_player_fight(Node* node)
 		float damage = 20;
 		node->call("_take_damage", damage, false);
 	}
+}
+
+AnimatedSprite* godot::Enemy::_get_animated_sprite()
+{
+	return sp;
 }

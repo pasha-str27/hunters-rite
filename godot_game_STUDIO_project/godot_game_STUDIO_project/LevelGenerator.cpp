@@ -49,6 +49,7 @@ void godot::LevelGenerator::_register_methods()
 	register_property<LevelGenerator, Array>("keys_prefabs", &LevelGenerator::keys_prefabs, {});
 
 	register_property<LevelGenerator, Ref<PackedScene>>("big_stone", &LevelGenerator::big_stone, nullptr);	
+	register_property<LevelGenerator, Ref<PackedScene>>("lock_sprite", &LevelGenerator::lock_sprite, nullptr);
 }
 
 void godot::LevelGenerator::_init()
@@ -58,7 +59,6 @@ void godot::LevelGenerator::_init()
 void godot::LevelGenerator::_ready()
 {
 	_clear();
-
 	keys_prefabs_local = keys_prefabs.duplicate();
 
 	_generate();
@@ -116,10 +116,13 @@ void godot::LevelGenerator::_ready()
 
 	_set_keys(boss_room, generated_keys);
 
+	if (generated_colors_keys.size() > 0)
+		boss_room->call("_set_last_key_color", generated_colors_keys[generated_colors_keys.size() - 1]);
+
 	_buid_roofs();
 	_buid_floors();
 	_buid_top_wall();
-		
+	_build_locks();
 	//	call set positions
 	get_node("/root/Node2D/Node/Camera2D/MiniMap")->call_deferred("_start_treking");
 }
@@ -247,16 +250,18 @@ void godot::LevelGenerator::_buid_doors()
 {
 	for (int i = 0; i < rooms.size(); ++i)
 	{
-		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2(0, 1)))
+		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::DOWN))
 			rooms[i]->add_child(down_door->instance());
 
-		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2(0, -1)))
+		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::UP))
 			rooms[i]->add_child(up_door->instance());
 
-		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2(1, 0)))
+
+		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::RIGHT))
 			rooms[i]->add_child(right_door->instance());
 
-		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2(-1, 0)))
+
+		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::LEFT))
 			rooms[i]->add_child(left_door->instance());
 	}
 }
@@ -646,11 +651,6 @@ Node2D* godot::LevelGenerator::_create_boss_room(std::vector<Node2D*>& cornered_
 
 	Node2D* builded_room = _generate_room_to(room_to_build);
 
-	//auto sprite = cast_to<Node2D>(boss_room_sprite->instance());
-	//add_child(sprite);
-	//sprite->set_scale(Vector2(0.3, 0.3));
-	//sprite->set_global_position(builded_room->get_global_position());
-
 	builded_room->call("_set_is_special", true);
 
 	_rebuild_doors(builded_room);
@@ -758,6 +758,10 @@ void godot::LevelGenerator::_generate_key(Node2D* room)
 	room->call("_set_is_special", true);
 
 	generated_keys.push_back(key->call("_get_type"));	
+	generated_colors_keys.push_back(key->call("_get_color"));
+
+	if (generated_colors_keys.size() > 1)
+		room->call("_set_last_key_color", generated_colors_keys[generated_colors_keys.size() - 2]);
 }
 
 void godot::LevelGenerator::_set_keys(Node2D* room, Array t_keys)
@@ -812,6 +816,7 @@ void godot::LevelGenerator::_clear()
 	this->positions.clear();
 	this->rooms.clear();
 	this->generated_keys.clear();
+	generated_colors_keys.clear();
 	size = 0;
 
 	if(CameraController::current_level>1)
@@ -838,4 +843,71 @@ Array godot::LevelGenerator::_get_rooms_positions()
 	Array arr = {};
 	arr.push_back(wrapper);
 	return arr;
+}
+
+void godot::LevelGenerator::_build_locks()
+{
+	Vector2 dir;
+	String door_name;
+	int step = 25;
+
+	for (int i = 0; i < rooms.size(); ++i)
+	{
+		dir = Vector2::DOWN;
+		door_name = "DownDoor";
+
+		_build_locks_in_room(rooms[i], dir, door_name, step);
+
+		dir = Vector2::UP;
+		door_name = "UpDoor";
+		step = 20;
+
+		_build_locks_in_room(rooms[i], dir, door_name, step);
+
+		dir = Vector2::LEFT;
+		door_name = "LeftDoor";
+		step = 23;
+
+		_build_locks_in_room(rooms[i], dir, door_name, step);
+
+		dir = Vector2::RIGHT;
+		door_name = "RightDoor";
+
+		_build_locks_in_room(rooms[i], dir, door_name, step);
+	}
+}
+
+void godot::LevelGenerator::_build_locks_in_room(Node2D* room, Vector2 door_dir, String door_name, int step)
+{
+	Vector2 delta_step;
+
+	if (door_dir == Vector2::UP)
+		delta_step = -Vector2(0, 720);
+
+	if (door_dir == Vector2::DOWN)
+		delta_step = Vector2(0, 720);
+
+	if (door_dir == Vector2::RIGHT)
+		delta_step = Vector2(1024, 0);
+
+	if (door_dir == Vector2::LEFT)
+		delta_step = -Vector2(1024, 0);
+
+	Vector2 next_room_pos = room->get_global_position() + delta_step;
+
+	if (!(bool)room->call("_adjacent_room_is_null", door_dir))
+		for (int j = 0; j < room->get_child_count(); ++j)
+			if (room->get_child(j)->get_name().find(door_name) != -1)
+			{
+				auto next_room = _get_next_room(next_room_pos);
+
+				if ((int)next_room->call("_get_key_count") > 0)
+				{
+					auto lock_node = lock_sprite->instance();
+					room->get_child(j)->get_node("SpawnPoint")->add_child(lock_node);
+					cast_to<Node2D>(lock_node)->set_position(door_dir * step);
+					Color col = next_room->call("_get_last_key_color");
+					cast_to<Sprite>(lock_node)->set_modulate(Color(col.r, col.g, col.b, 150.0/255.0));
+				}
+			}
 }

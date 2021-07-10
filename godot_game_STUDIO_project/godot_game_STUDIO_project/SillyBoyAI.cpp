@@ -79,7 +79,7 @@ void godot::SillyBoyAI::_set_player(Node2D* player)
 	if (player->is_in_group("player1"))
 		_set_is_player1_onArea(true);
 
-	if(player->is_in_group("player2"))
+	if (player->is_in_group("player2"))
 		_set_is_player2_onArea(true);
 }
 
@@ -100,8 +100,12 @@ void godot::SillyBoyAI::_remove_player(Node2D* player)
 
 void godot::SillyBoyAI::_set_direction(Vector2 direction)
 {
+	//перевірити!!!!
 	if (was_setted)
 		return;
+
+	is_attacking = true;
+	_get_enemy()->call("_change_animation", "attack_start", 1.5f);
 
 	cur_pos -= dir;
 
@@ -112,6 +116,14 @@ void godot::SillyBoyAI::_set_direction(Vector2 direction)
 
 	goal = cur_pos * 32 + CameraController::current_room->get_global_position() - Vector2(896, 544) / 2 + Vector2(16, 16);
 	_set_distance(goal.distance_to(_get_enemy()->get_global_position()));
+
+	if (sprite != nullptr)
+	{
+		if (goal.x >= cur_pos.x)
+			sprite->set_flip_h(false);
+		if (goal.x < cur_pos.x)
+			sprite->set_flip_h(true);
+	}
 }
 
 float godot::SillyBoyAI::_find_max_distance(Vector2 dir)
@@ -130,6 +142,28 @@ float godot::SillyBoyAI::_find_max_distance(Vector2 dir)
 	return distance;
 }
 
+Vector2 godot::SillyBoyAI::_get_goal()
+{
+	return old_position;
+}
+
+void godot::SillyBoyAI::_set_goal(Vector2 goal)
+{
+	//_get_enemy()->set_global_position(goal);
+
+	_set_distance(goal.distance_to(_get_enemy()->get_global_position()));
+
+	this->goal = goal;
+
+	cur_pos = (goal - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+
+	old_pos = _get_enemy()->get_global_position();
+	old_position = old_pos;
+	//change_direction();
+
+	//_change_start_parameters();
+}
+
 godot::SillyBoyAI::SillyBoyAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
 {
 	dir = Vector2::ZERO;
@@ -137,8 +171,10 @@ godot::SillyBoyAI::SillyBoyAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : Enem
 	can_move = true;
 	is_cheking = false;
 	speed = 200;
+	old_position = _get_enemy()->get_global_position();
 	_set_distance(32);
 	_change_start_parameters();
+	sprite = _get_enemy()->call("_get_animated_sprite");
 }
 
 godot::SillyBoyAI::~SillyBoyAI()
@@ -172,7 +208,7 @@ void godot::SillyBoyAI::change_direction()
 	PlayersContainer* players = PlayersContainer::_get_instance();
 
 	if (players->_get_player1() == nullptr && players->_get_player1_regular() != nullptr
-		&& (bool)players->_get_player1_regular()->call("_is_ghost_mode") 
+		&& (bool)players->_get_player1_regular()->call("_is_ghost_mode")
 		&& _is_player_near(players->_get_player1_regular()));
 
 	if (players->_get_player2() == nullptr && players->_get_player2_regular() != nullptr
@@ -192,7 +228,7 @@ void godot::SillyBoyAI::change_direction()
 			if (random->randi_range(0, 1))
 			{
 				is_player_near = _is_player_near(players->_get_player2());
-				if(!is_player_near)
+				if (!is_player_near)
 					is_player_near = _is_player_near(players->_get_player1());
 			}
 			else
@@ -216,13 +252,26 @@ void godot::SillyBoyAI::change_direction()
 
 void godot::SillyBoyAI::_change_dir_after_time()
 {
+	if (sprite != nullptr)
+	{
+		if (is_attacking)
+		{
+			is_attacking = false;
+			_get_enemy()->call("_change_animation", "attack_end", 2);
+		}
+		else
+		{
+			_get_enemy()->call("_change_animation", "idle", 1);
+		}
+	}
+
 	if (directions.size() == 0)
 	{
 		goal = _get_enemy()->get_global_position();
 
 		dir = Vector2::ZERO;
 		return;
-	}	
+	}
 
 	Ref<RandomNumberGenerator> rand = RandomNumberGenerator::_new();
 	rand->randomize();
@@ -234,16 +283,18 @@ void godot::SillyBoyAI::_change_dir_after_time()
 
 	cur_pos += dir;
 
-	if (dir == Vector2::RIGHT)
-		cast_to<AnimatedSprite>(_get_enemy()->find_node("AnimatedSprite"))->set_flip_h(true);
-	if (dir == Vector2::LEFT)
-		cast_to<AnimatedSprite>(_get_enemy()->find_node("AnimatedSprite"))->set_flip_h(false);
+	if (sprite != nullptr)
+	{
+		if (dir == Vector2::RIGHT)
+			sprite->set_flip_h(false);
+		if (dir == Vector2::LEFT)
+			sprite->set_flip_h(true);
+	}
 }
 
 void godot::SillyBoyAI::_fight(Node2D* player1, Node2D* player2)
 {
 	can_move = false;
-
 	if (!was_setted)
 	{
 		if (is_player1_onArea && player1 != nullptr)
@@ -263,10 +314,34 @@ void godot::SillyBoyAI::_process(float delta)
 	if (!can_move)
 		return;
 
-	_get_enemy()->set_global_position(_get_enemy()->get_global_position().move_toward(goal, delta*speed));
+	if (sprite != nullptr)
+	{
+		if (sprite->get_animation() == "attack_start"
+			&& sprite->get_frame() == sprite->get_sprite_frames()->get_frame_count("attack_start") - 1
+			|| is_attacking)
+			sprite->play("attack_cycle");
+	}
+
+
+	_get_enemy()->set_global_position(_get_enemy()->get_global_position().move_toward(goal, delta * speed));
 
 	if (is_cheking)
 		return;
+	if (sprite != nullptr)
+	{
+		if (!is_attacking && sprite->get_animation() != "damaged")
+			_get_enemy()->call("_change_animation", "run", 2);
+	}
+
+	float distance = 32 > _get_distance() ? _get_distance() : 32;
+
+	if (abs(old_position.distance_to(_get_enemy()->get_global_position()) - distance) <= 8)
+	{
+		Vector2 cur_pos_tmp = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+		cur_pos_tmp = Vector2((int)cur_pos_tmp.x, (int)cur_pos_tmp.y);
+		old_position = cur_pos_tmp * 32	+ CameraController::current_room->get_global_position()
+			- Vector2(896, 544) / 2 + Vector2(16, 16);
+	}
 
 	if (abs(old_pos.distance_to(_get_enemy()->get_global_position()) - _get_distance()) <= 1)
 	{
@@ -275,6 +350,10 @@ void godot::SillyBoyAI::_process(float delta)
 		speed = 200;
 		change_direction();
 		old_pos = _get_enemy()->get_global_position();
+		Vector2 cur_pos_tmp = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+		cur_pos_tmp = Vector2((int)cur_pos_tmp.x, (int)cur_pos_tmp.y);
+		old_position = cur_pos_tmp * 32 + CameraController::current_room->get_global_position()
+			- Vector2(896, 544) / 2 + Vector2(16, 16);
 		return;
 	}
 }

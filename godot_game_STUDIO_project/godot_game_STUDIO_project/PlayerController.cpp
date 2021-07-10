@@ -257,7 +257,7 @@ void godot::PlayerController::_take_damage(float damage, bool is_spike)
 	if (is_alive)
 	{
 		Ref<PackedScene> prefab = nullptr;
-		prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/PlayerTakeDamage.tscn");
+		prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->player_take_damage());
 		add_child(prefab->instance());
 		hurt_particles->restart();
 	}
@@ -448,7 +448,7 @@ void godot::PlayerController::_revive()
 	current_player_strategy->_revive();
 	is_alive = true;
 	Ref<PackedScene> prefab = nullptr;
-	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/PlayerRevive.tscn");
+	prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->player_revive());
 	add_child(prefab->instance());
 	current_player_strategy->_set_strategy(player_producer->_get_player(this, bullet_prefab));
 	_restore_data();

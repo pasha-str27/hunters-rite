@@ -20,6 +20,7 @@ godot::PlayerMelee::PlayerMelee(Node2D* obj, Ref<PackedScene> bullet) : PlayerDa
 	cast_to<KinematicBody2D>(obj)->set_collision_layer_bit(15, true);
 	cast_to<Area2D>(obj->get_node("Area2D"))->set_collision_mask_bit(0, true);
 	cast_to<Area2D>(obj->get_node("Area2D"))->set_collision_layer_bit(0, true);
+	health_bar = _get_health_bar();
 }
 
 godot::PlayerMelee::~PlayerMelee()
@@ -100,7 +101,6 @@ void godot::PlayerMelee::_process_input()
 			animator->play("attack");
 			is_attacking = true;
 		}
-
 	}
 
 	//fight	down
@@ -156,7 +156,7 @@ void godot::PlayerMelee::_fight(Node* node)
 		return;
 
 	Ref<PackedScene> prefab = nullptr;
-	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/Player2Fight.tscn");
+	prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->player2_fight());
 	_get_object()->add_child(prefab->instance());
 
 	_change_can_fight(false);
@@ -217,14 +217,14 @@ void godot::PlayerMelee::_set_HP(float value)
 
 void godot::PlayerMelee::_update_health_bar()
 {
-	auto health_bar = _get_health_bar();
-
 	if (health_bar != nullptr)
 		health_bar->set_value(_get_HP());
 }
 
 ProgressBar* godot::PlayerMelee::_get_health_bar()
 {
+	if (health_bar != nullptr)
+		return health_bar;
 	return cast_to<ProgressBar>(_get_object()->get_node("/root/Node2D/Node/Camera2D/P2HealthBarWrapper/ProgressBar"));
 }
 
@@ -240,8 +240,10 @@ void godot::PlayerMelee::_stop_animations()
 void godot::PlayerMelee::_stop_special()
 {
 	_set_safe_mode(false);
-	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_layer_bit(0, false);
-	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_mask_bit(0, false);
+	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_layer_bit(1, false);
+	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_mask_bit(1, false);
+	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_layer_bit(15, false);
+	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_mask_bit(15, false);
 	cast_to<AnimationPlayer>(_get_object()->get_node("Shield")->find_node("AnimationPlayer"))->play("shield_end");
 }
 
@@ -250,8 +252,10 @@ void godot::PlayerMelee::_start_special()
 	_set_safe_mode(true);
 	cast_to<AnimationPlayer>(_get_object()->get_node("Shield")->find_node("AnimationPlayer"))->play("shield_start");
 
-	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_layer_bit(0, true);
-	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_mask_bit(0, true);
+	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_layer_bit(1, true);
+	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_mask_bit(1, true);
+	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_layer_bit(15, true);
+	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_mask_bit(15, true);
 }
 
 void godot::PlayerMelee::_set_is_attacking(bool value)

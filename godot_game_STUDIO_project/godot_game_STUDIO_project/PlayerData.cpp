@@ -158,6 +158,11 @@ void godot::PlayerData::_set_max_HP(float value)
 	_set_HP(_hp);
 }
 
+ProgressBar* godot::PlayerData::_get_health_bar()
+{
+	return nullptr;
+}
+
 void godot::PlayerData::_stop_animations()
 {
 }

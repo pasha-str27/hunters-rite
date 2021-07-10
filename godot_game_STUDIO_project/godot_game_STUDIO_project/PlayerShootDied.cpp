@@ -5,6 +5,7 @@
 
 godot::PlayerShootDied::PlayerShootDied(Node2D* object, Ref<PackedScene> bullet) : PlayerData(object)
 {
+	health_bar = _get_health_bar();
 	auto node = _get_object()->get_parent()->get_child(0);
 	
 	sprite = cast_to<AnimatedSprite>(_get_object()->get_node("AnimatedSprite"));
@@ -25,15 +26,13 @@ void godot::PlayerShootDied::_revive()
 
 void godot::PlayerShootDied::_update_health_bar()
 {
-	auto health_bar = _get_health_bar();
-
-	Godot::print(_get_HP());
-
 	if (health_bar != nullptr)
 		health_bar->set_value(_get_HP());
 }
 
 ProgressBar* godot::PlayerShootDied::_get_health_bar()
 {
+	if (health_bar != nullptr)
+		return health_bar;
 	return cast_to<ProgressBar>(_get_object()->get_node("/root/Node2D/Node/Camera2D/P1HealthBarWrapper/ProgressBar"));
 }
