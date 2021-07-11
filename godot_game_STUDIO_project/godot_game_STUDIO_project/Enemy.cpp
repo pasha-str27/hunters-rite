@@ -230,7 +230,7 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 			return;
 		}
 
-		if (!is_in_group("flower") && is_in_group("slime_boss") && !is_in_group("mimic") && !is_in_group("naga"))
+		if (!is_in_group("flower") && !is_in_group("slime_boss") && !is_in_group("mimic") && !is_in_group("naga"))
 			player->call("_on_enemy_die", this->get_global_position());
 
 		died = true;

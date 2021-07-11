@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/game_paveleon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Prefabs/Animations/FadeIn.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Prefabs/Enemies/SlimeBoss.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Prefabs/Enemies/Worm.tscn" type="PackedScene" id=5]
 
 [node name="Node2D" type="Node2D"]
 
@@ -15,7 +14,4 @@ visible = false
 [node name="Items" type="Node2D" parent="."]
 
 [node name="SlimeBoss" parent="." instance=ExtResource( 4 )]
-position = Vector2( -302.4, 151.043 )
-
-[node name="Worm" parent="." instance=ExtResource( 5 )]
-position = Vector2( -193.276, -128.655 )
+position = Vector2( -167.848, 119.259 )
