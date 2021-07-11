@@ -729,7 +729,7 @@ position = Vector2( -179.071, 6.2363 )
 scale = Vector2( 2, 2 )
 z_index = 7
 frames = SubResource( 30 )
-frame = 15
+frame = 1
 playing = true
 
 [node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
@@ -738,7 +738,7 @@ position = Vector2( 231.634, 5.3454 )
 scale = Vector2( 2, 2 )
 z_index = 7
 frames = SubResource( 49 )
-frame = 15
+frame = 8
 playing = true
 
 [node name="AnimatedSprite4" type="AnimatedSprite" parent="."]
@@ -747,6 +747,7 @@ position = Vector2( 147.688, 95.58 )
 scale = Vector2( 3, 3 )
 z_index = 7
 frames = SubResource( 74 )
+frame = 23
 playing = true
 
 [node name="AnimatedSprite5" type="AnimatedSprite" parent="."]
@@ -755,7 +756,7 @@ position = Vector2( -274.312, 88.58 )
 scale = Vector2( 3, 3 )
 z_index = 7
 frames = SubResource( 103 )
-frame = 13
+frame = 20
 playing = true
 
 [node name="AnimatedSprite6" type="AnimatedSprite" parent="."]
@@ -764,5 +765,5 @@ position = Vector2( -337.312, -71.42 )
 scale = Vector2( 3, 3 )
 z_index = 7
 frames = SubResource( 171 )
-frame = 40
+frame = 15
 playing = true

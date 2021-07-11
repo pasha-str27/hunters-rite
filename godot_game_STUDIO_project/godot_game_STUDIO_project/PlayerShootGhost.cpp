@@ -56,6 +56,7 @@ void godot::PlayerShootGhost::_process_input()
 	//move left
 	if (input_controller->is_action_pressed(move_left))
 	{
+		_get_object()->call("_flip_ghost", true);
 		sprite->set_flip_h(true);
 		sprite->set_offset(Vector2(-35, 0));
 		//shoot_particles->set_position(Vector2(-11, 0));
@@ -65,6 +66,7 @@ void godot::PlayerShootGhost::_process_input()
 	//move right	
 	if (input_controller->is_action_pressed(move_right))
 	{
+		_get_object()->call("_flip_ghost", false);
 		sprite->set_flip_h(false);
 		sprite->set_offset(Vector2(35, 0));
 		//shoot_particles->set_position(Vector2(11, 0));

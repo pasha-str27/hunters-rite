@@ -20,9 +20,6 @@ namespace godot
 		int max_bullet_count = 5;
 		BulletPull* bullet_pull = nullptr;
 
-		AnimatedSprite* ground_front = nullptr;
-		AnimatedSprite* ground_back = nullptr;
-
 		Vector2 target = Vector2::ZERO;
 		Array free_cells = {};
 

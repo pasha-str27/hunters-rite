@@ -159,12 +159,13 @@ void godot::Enemy::_process(float delta)
 		String animation_name = sp->get_animation();
 
 		if (sp->get_sprite_frames()->get_animation_loop(animation_name) == false
-			&& sp->get_frame() == sp->get_sprite_frames()->get_frame_count(animation_name) - 1)
+			&& sp->get_frame() == sp->get_sprite_frames()->get_frame_count(animation_name) - 1
+			&& animation_name != "attack_start")
 		{
 			if (was_died)
 			{
 				sp->set_animation("death");
-				//sp->stop();
+				sp->stop();
 				sp->set_frame(sp->get_sprite_frames()->get_frame_count("death") - 1);
 			}
 			else
