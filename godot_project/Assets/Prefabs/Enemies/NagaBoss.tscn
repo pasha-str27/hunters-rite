@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Assets/Sprites/Monsters/Naga/naga/hit/hit03.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Sprites/Monsters/Naga/naga/attack/attack02.png" type="Texture" id=2]
@@ -29,7 +29,7 @@
 [ext_resource path="res://Assets/Sprites/Monsters/Naga/naga/idle/idle08.png" type="Texture" id=27]
 [ext_resource path="res://Assets/Sprites/Monsters/Naga/naga/walk/walk05.png" type="Texture" id=28]
 [ext_resource path="res://Assets/Sprites/Monsters/Naga/naga/teleport/naga-sheet.png" type="Texture" id=29]
-[ext_resource path="res://Assets/Sprites/Particles/star.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Prefabs/Particles/Vampirism.tscn" type="PackedScene" id=30]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.2789
@@ -142,29 +142,6 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=21]
 radius = 20.139
 
-[sub_resource type="Gradient" id=23]
-colors = PoolColorArray( 0.681815, 0.841797, 0.0690536, 1, 0.919922, 0.0539017, 0.0539017, 1 )
-
-[sub_resource type="GradientTexture" id=24]
-gradient = SubResource( 23 )
-
-[sub_resource type="Curve" id=25]
-_data = [ Vector2( 0, 0.5 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.163636 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=26]
-curve = SubResource( 25 )
-
-[sub_resource type="ParticlesMaterial" id=22]
-emission_shape = 2
-emission_box_extents = Vector3( 15, 15, 1 )
-flag_disable_z = true
-gravity = Vector3( 0, -100, 0 )
-initial_velocity = 7.04
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale_curve = SubResource( 26 )
-color_ramp = SubResource( 24 )
-
 [node name="NagaBoss" type="Node2D"]
 script = ExtResource( 4 )
 enemy_price = 50.0
@@ -198,14 +175,7 @@ shape = SubResource( 21 )
 
 [node name="SpawnParticles" parent="NagaBoss" instance=ExtResource( 6 )]
 
-[node name="Vampirism" type="Particles2D" parent="NagaBoss"]
-emitting = false
-amount = 35
-lifetime = 0.5
-one_shot = true
-explosiveness = 0.5
-process_material = SubResource( 22 )
-texture = ExtResource( 30 )
+[node name="Vampirism" parent="NagaBoss" instance=ExtResource( 30 )]
 
 [connection signal="body_entered" from="NagaBoss/Area2D" to="NagaBoss" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="NagaBoss/Area2D" to="NagaBoss" method="_on_Area2D_body_exited"]
