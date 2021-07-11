@@ -63,9 +63,6 @@ void godot::BigStone::_heal_players()
 		auto particles = cast_to<Node2D>(use_particles->instance());
 		particles->set_global_position(this->get_global_position());
 		get_node("/root/Node2D/Node")->add_child(particles);
-
-		////////////
-		queue_free();
 	}
 
 	if ((MenuButtons::game_mode == SHOOTER || MenuButtons::game_mode == MELEE) && players_count == 1)
@@ -79,9 +76,6 @@ void godot::BigStone::_heal_players()
 		can_heal = false;
 		timer->connect("timeout", this, "_can_heal_true");
 		timer->start(heal_cooldown);
-
-		///////////////////////////////////
-		queue_free();
 	}
 }
 
