@@ -57,7 +57,7 @@ void godot::FadeAnimation::_on_timeout()
 			if(!is_exit_anim)
 				camera->call("_start_move");
 			else
-				CameraController::current_room->get_node("exit")->call("_load_menu_scene");
+				GameManager::current_room->get_node("exit")->call("_load_menu_scene");
 		}
 	}
 	get_parent()->get_parent()->queue_free();

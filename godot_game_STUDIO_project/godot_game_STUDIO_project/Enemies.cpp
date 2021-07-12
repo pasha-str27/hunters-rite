@@ -34,16 +34,16 @@ void godot::Enemies::_remove_enemy(Node2D* enemy)
 		{
 			enemies.erase(enemies.begin() + i, enemies.begin() + i + 1);
 			if (enemies.size() == 0)
-				CameraController::current_room->call("_set_were_here", true);
+				GameManager::current_room->call("_set_were_here", true);
 			return;
 		}
 
-	if ((String)CameraController::current_room->call("_get_room_type") == "boss_room" && enemies.size() == 0)
+	if ((String)GameManager::current_room->call("_get_room_type") == "boss_room" && enemies.size() == 0)
 	{
 		Ref<PackedScene> exit_prefab = nullptr;
 		exit_prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/exit.tscn");
 		Node2D *exit_node = Node::cast_to<Node2D>(exit_prefab->instance());
-		CameraController::current_room->add_child(exit_node);
+		GameManager::current_room->add_child(exit_node);
 	}
 }
 

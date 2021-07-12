@@ -526,7 +526,7 @@ void godot::Enemy::_on_spawn_end()
 	enemies->set_enemy_to_spawn_count(enemies->get_enemy_to_spawn_count() - 1);
 	if (enemies->get_enemy_to_spawn_count() == 0)
 	{
-		CameraController::current_room->call("_clear_enemy_to_spawn");
+		GameManager::current_room->call("_clear_enemy_to_spawn");
 		enemies->set_spawning(false);
 	}
 }

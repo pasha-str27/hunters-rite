@@ -4,5 +4,6 @@
 
 [resource]
 resource_name = "CameraController"
-class_name = "CameraController"
+class_name = "GameManager"
 library = ExtResource( 1 )
+script_class_name = "GameManager"

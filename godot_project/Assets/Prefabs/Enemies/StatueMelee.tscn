@@ -150,7 +150,7 @@ script = ExtResource( 9 )
 __meta__ = {
 "_editor_description_": ""
 }
-enemy_price = 10.0
+enemy_price = 31.0
 
 [node name="StatueMelee" type="KinematicBody2D" parent="." groups=[
 "enemy",

@@ -3,38 +3,38 @@
 #include "headers.h"
 #endif
 
-Node2D* CameraController::current_room = nullptr;
-bool CameraController::show_tutorial = true;
-int CameraController::current_level = 1;
+Node2D* GameManager::current_room = nullptr;
+bool GameManager::show_tutorial = true;
+int GameManager::current_level = 1;
 
-void godot::CameraController::_register_methods()
+void godot::GameManager::_register_methods()
 {
-	register_method("_init", &CameraController::_init);
-	register_method("_ready", &CameraController::_ready);
-	register_method("_door_collision", &CameraController::_door_collision);
-	register_method("_close_doors", &CameraController::_close_doors);
-	register_method("_open_doors", &CameraController::_open_doors);
-	register_method("_start_move", &CameraController::_start_move);
-	register_method("_change_audio_volume", &CameraController::_change_audio_volume);
-	register_method("_mute_audio_volume", &CameraController::_mute_audio_volume);
-	register_method("_start_mute_volume", &CameraController::_start_mute_volume);
-	register_method("_input", &CameraController::_input);
-	register_method("_audio_fade_to_main_menu", &CameraController::_audio_fade_to_main_menu);
-	register_method("_spawn_exit", &CameraController::_spawn_exit);
-	register_method("_set_current_room_type", &CameraController::_set_current_room_type);
-	register_method("_go_to_start", &CameraController::_go_to_start);
-	register_method("_get_type_keys", &CameraController::_get_type_keys);
-	register_method("_show_game_over_screen", &CameraController::_show_game_over_screen);
+	register_method("_init", &GameManager::_init);
+	register_method("_ready", &GameManager::_ready);
+	register_method("_door_collision", &GameManager::_door_collision);
+	register_method("_close_doors", &GameManager::_close_doors);
+	register_method("_open_doors", &GameManager::_open_doors);
+	register_method("_start_move", &GameManager::_start_move);
+	register_method("_change_audio_volume", &GameManager::_change_audio_volume);
+	register_method("_mute_audio_volume", &GameManager::_mute_audio_volume);
+	register_method("_start_mute_volume", &GameManager::_start_mute_volume);
+	register_method("_input", &GameManager::_input);
+	register_method("_audio_fade_to_main_menu", &GameManager::_audio_fade_to_main_menu);
+	register_method("_spawn_exit", &GameManager::_spawn_exit);
+	register_method("_set_current_room_type", &GameManager::_set_current_room_type);
+	register_method("_go_to_start", &GameManager::_go_to_start);
+	register_method("_get_type_keys", &GameManager::_get_type_keys);
+	register_method("_show_game_over_screen", &GameManager::_show_game_over_screen);
 
-	register_property<CameraController, Ref<PackedScene>>("Fade In Animation", &CameraController::fadeIn, nullptr);
-	register_property<CameraController, Ref<PackedScene>>("Fade Out Animation", &CameraController::fadeOut, nullptr);
-	register_property<CameraController, Ref<PackedScene>>("game_back", &CameraController::game_back, nullptr);
-	register_property<CameraController, Ref<PackedScene>>("boss_back", &CameraController::boss_back, nullptr);
-	register_property<CameraController, Ref<PackedScene>>("pause_menu", &CameraController::pause_menu, nullptr);
-	register_property<CameraController, Ref<PackedScene>>("Exit", &CameraController::exit, nullptr);
+	register_property<GameManager, Ref<PackedScene>>("Fade In Animation", &GameManager::fadeIn, nullptr);
+	register_property<GameManager, Ref<PackedScene>>("Fade Out Animation", &GameManager::fadeOut, nullptr);
+	register_property<GameManager, Ref<PackedScene>>("game_back", &GameManager::game_back, nullptr);
+	register_property<GameManager, Ref<PackedScene>>("boss_back", &GameManager::boss_back, nullptr);
+	register_property<GameManager, Ref<PackedScene>>("pause_menu", &GameManager::pause_menu, nullptr);
+	register_property<GameManager, Ref<PackedScene>>("Exit", &GameManager::exit, nullptr);
 }
 
-void godot::CameraController::_move(String dir)
+void godot::GameManager::_move(String dir)
 {
 	_close_doors();
 
@@ -123,7 +123,7 @@ void godot::CameraController::_move(String dir)
 		minimap->call("_update_minimap");
 }
 
-String godot::CameraController::_get_dir_on_index(int i)
+String godot::GameManager::_get_dir_on_index(int i)
 {
 	if (i == 0)
 		return "left";
@@ -135,24 +135,24 @@ String godot::CameraController::_get_dir_on_index(int i)
 		return "bottom";
 }
 
-bool godot::CameraController::_is_one_player_alive()
+bool godot::GameManager::_is_one_player_alive()
 {
 	return !PlayersContainer::_get_instance()->_get_player1() || !PlayersContainer::_get_instance()->_get_player2();
 }
 
-void godot::CameraController::hide_tutorial()
+void godot::GameManager::hide_tutorial()
 {
 	cast_to<Node2D>(get_parent()->get_node("TutorialSprites"))->hide();
 	cast_to<Node2D>(get_parent()->get_node("TutorialSpritesSingle"))->hide();
 }
 
-void godot::CameraController::_init()
+void godot::GameManager::_init()
 {
 	for (int i = 0; i < 4; i++)
 		dirs.push_back(0);
 }
 
-void  godot::CameraController::_hide_tutorial_sprites(String t_player_name) {
+void  godot::GameManager::_hide_tutorial_sprites(String t_player_name) {
 
 	// clear coop tutorial 
 	cast_to<Node2D>(get_node("/root/Node2D/Node/TutorialSprites"))->hide();
@@ -173,7 +173,7 @@ void  godot::CameraController::_hide_tutorial_sprites(String t_player_name) {
 	}
 }
 
-void godot::CameraController::_spawn_players()
+void godot::GameManager::_spawn_players()
 {
 	if (!show_tutorial)
 		hide_tutorial();
@@ -256,7 +256,7 @@ void godot::CameraController::_spawn_players()
 	}
 }
 
-bool godot::CameraController::_is_player_have_need_keys(Array rooms_keys)
+bool godot::GameManager::_is_player_have_need_keys(Array rooms_keys)
 {
 	if (rooms_keys.size() == 0)
 		return true;
@@ -277,7 +277,7 @@ bool godot::CameraController::_is_player_have_need_keys(Array rooms_keys)
 	return check_result;
 }
 
-void godot::CameraController::_ready()
+void godot::GameManager::_ready()
 {
 	current_level = 1;
 	minimap = cast_to<CanvasItem>(get_node("MiniMap"));
@@ -305,7 +305,7 @@ void godot::CameraController::_ready()
 	timer_audio->start(time_delta);
 }
 
-void godot::CameraController::_door_collision(String door_dir)
+void godot::GameManager::_door_collision(String door_dir)
 {
 	if (Enemies::get_singleton()->_get_enemies_count() != 0 || Enemies::get_singleton()->spawning())
 		return;
@@ -382,7 +382,7 @@ void godot::CameraController::_door_collision(String door_dir)
 	}
 }
 
-void godot::CameraController::_open_doors()
+void godot::GameManager::_open_doors()
 {
 	if (current_room_type == "boss")
 	{
@@ -393,13 +393,13 @@ void godot::CameraController::_open_doors()
 	is_open_door = true;
 }
 
-void godot::CameraController::_close_doors()
+void godot::GameManager::_close_doors()
 {
 	//current_room->call("_spawn_enemies");
 	is_open_door = false;
 }
 
-void godot::CameraController::_start_move()
+void godot::GameManager::_start_move()
 {
 	for (int i = 0; i < 4; i++) 
 		if ((int)dirs[i] == 2 || (_is_one_player_alive() && (int)dirs[i] == 1))
@@ -410,25 +410,25 @@ void godot::CameraController::_start_move()
 		}
 }
 
-void godot::CameraController::_change_audio_volume()
+void godot::GameManager::_change_audio_volume()
 {
 	if (AudioController::get_singleton()->_change_audio_volume_camera_controller(timer_audio,this, audio, time_delta))
 		return;
 }
 
-void godot::CameraController::_mute_audio_volume()
+void godot::GameManager::_mute_audio_volume()
 {
 	if (AudioController::get_singleton()->_mute_audio_volume(timer_audio, this, audio, time_delta))
 		return;
 }
 
-void godot::CameraController::_start_mute_volume()
+void godot::GameManager::_start_mute_volume()
 {
 	timer_audio->connect("timeout", this, "_mute_audio_volume");
 	timer_audio->start(time_delta);
 }
 
-void godot::CameraController::_input(Variant event)
+void godot::GameManager::_input(Variant event)
 {
 	if (Input::get_singleton()->is_action_just_pressed("ui_pause"))
 	{
@@ -454,25 +454,25 @@ void godot::CameraController::_input(Variant event)
 		}
 }
 
-void godot::CameraController::_audio_fade_to_main_menu()
+void godot::GameManager::_audio_fade_to_main_menu()
 {
 	if (AudioController::get_singleton()->_audio_fade_to_main_menu(timer_audio, this, audio, time_delta))
 		return;
 }
 
-void godot::CameraController::_spawn_exit()
+void godot::GameManager::_spawn_exit()
 {
 	auto exit_node = cast_to<Node2D>(exit->instance());
 	exit_node->set_global_position(this->get_global_position());
 	get_node("/root/Node2D/Node/")->add_child(exit_node);
 }
 
-void godot::CameraController::_set_current_room_type(String type)
+void godot::GameManager::_set_current_room_type(String type)
 {
 	current_room_type = type;
 }
 
-void godot::CameraController::_get_type_keys() {
+void godot::GameManager::_get_type_keys() {
 
 	generated_keys.clear();
 
@@ -483,8 +483,6 @@ void godot::CameraController::_get_type_keys() {
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	Ref<Texture> res = rld->load("res://Assets/Sprites/UI/BacksButtonsAndOther/backround_key.png");
 	Ref<Texture> key_texture = rld->load("res://Assets/Sprites/Items/key.png");
-
-
 
 	//get new generated keys
 	std::vector<Node2D*> key_types = CustomExtensions::GetChildrenByWordInName(cast_to<Node2D>(get_node("/root/Node2D/Node/Generation")), "Key");
@@ -523,10 +521,9 @@ void godot::CameraController::_get_type_keys() {
 
 		key_box->add_child(container);
 	}
-
 }
 
-void godot::CameraController::_go_to_start()
+void godot::GameManager::_go_to_start()
 {
 	if (!show_tutorial)
 		hide_tutorial();
@@ -553,51 +550,15 @@ void godot::CameraController::_go_to_start()
 		player2->call("_ghost_to_player");
 		player2->set_global_position(Vector2(0, 50));
 	}
-
-	/*if (player1 != nullptr)
-		player1->set_global_position(Vector2(0, -50));
-	else
-	{
-		if (MenuButtons::game_mode == COOP)
-		{
-			ResourceLoader* rld = ResourceLoader::get_singleton();
-			Ref<PackedScene> _player1 = rld->load("res://Assets/Prefabs/Players/Player1.tscn");
-			Node2D* _player1_node = cast_to<Node2D>(_player1->instance());
-			get_parent()->add_child(_player1_node);
-			player1 = _player1_node;
-
-			Node* items = get_node("ItemHolder/P1Items");
-			for (int i = items->get_child_count() - 1; i >= 0; --i)
-				items->get_child(i)->queue_free();
-		}
-	}
-
-	if (player2 != nullptr)
-		player2->set_global_position(Vector2(0, -50));
-	else
-	{
-		if (MenuButtons::game_mode == COOP)
-		{
-			ResourceLoader* rld = ResourceLoader::get_singleton();
-			Ref<PackedScene> _player2 = rld->load("res://Assets/Prefabs/Players/Player2.tscn");
-			Node2D* _player2_node = cast_to<Node2D>(_player2->instance());
-			get_parent()->add_child(_player2_node);
-			player2 = _player2_node;
-
-			Node* items = get_node("ItemHolder/P2Items");
-			for (int i = items->get_child_count() - 1; i >= 0; --i)
-				items->get_child(i)->queue_free();
-		}
-	}*/
 }
 
-godot::CameraController::CameraController()
+godot::GameManager::GameManager()
 {
 	player1 = nullptr;
 	player2 = nullptr;
 }
 
-godot::CameraController::~CameraController()
+godot::GameManager::~GameManager()
 {
 	audio = nullptr;
 	audio_boss = nullptr;
@@ -607,7 +568,7 @@ godot::CameraController::~CameraController()
 	player2 = nullptr;
 }
 
-void godot::CameraController::_show_game_over_screen()
+void godot::GameManager::_show_game_over_screen()
 {
 	cast_to<Timer>(get_node("game_over"))->disconnect("timeout", this, "_show_game_over_screen");
 	ResourceLoader* rld = ResourceLoader::get_singleton();

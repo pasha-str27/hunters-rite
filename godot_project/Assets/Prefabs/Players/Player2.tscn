@@ -658,8 +658,8 @@ z_index = 100
 collision_layer = 303105
 collision_mask = 2
 script = ExtResource( 9 )
-hp = 50000.0
-damage = 4000.0
+hp = 175.0
+damage = 40.0
 speed = 250.0
 revive_zone = ExtResource( 6 )
 dash_cooldown_delta = 3.0
@@ -668,7 +668,6 @@ dash_cooldown_delta = 3.0
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 42 )
 animation = "idle"
-frame = 1
 playing = true
 
 [node name="SpiderWeb" parent="." instance=ExtResource( 13 )]

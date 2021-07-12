@@ -77,7 +77,7 @@ using namespace godot;
 #include "ProducePlayerShoot.h"
 #include "ProducePlayerMelee.h"
 #include "Sword.h"
-#include "CameraController.h"
+#include "GameManager.h"
 #include "Spike.h"
 #include "SlimeAI.h"
 #include "BatAI.h"

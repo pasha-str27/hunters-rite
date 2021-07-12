@@ -102,7 +102,7 @@ animations = [ {
 
 [node name="Spider" type="Node2D"]
 script = ExtResource( 4 )
-enemy_price = 10.0
+enemy_price = 15.0
 
 [node name="BulletConteinerSpider" type="Node" parent="."]
 
