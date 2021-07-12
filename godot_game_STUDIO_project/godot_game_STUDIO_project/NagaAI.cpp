@@ -7,6 +7,7 @@ godot::NagaAI::NagaAI(Ref<PackedScene>& bullet, Node2D* node) : EnemyData(node)
 {
 	can_move = true;
 	speed = 100;
+	damage = 75;
 
 	sprite = node->call("_get_animated_sprite");
 	vampirism_particles = cast_to<Particles2D>(node->get_node("Vampirism"));
@@ -195,7 +196,7 @@ void godot::NagaAI::_take_damage(float damage)
 	can_move = false;
 	is_angry = true;
 	is_disappearing = true;
-	_get_enemy()->call("_start_fixed_timer", .7f);
+	_get_enemy()->call("_start_fixed_timer", .3f);
 }
 
 void godot::NagaAI::_teleport_to_target()
