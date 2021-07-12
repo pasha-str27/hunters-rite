@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Sprites/Monsters/Naga/monster_naga_egg3.png" type="Texture" id=1]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 14.8596
+height = 2.25537
+
+[node name="Poison" type="Node2D"]
+
+[node name="Poison" type="Area2D" parent="." groups=[
+"poison",
+]]
+position = Vector2( 0, -14.8651 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Poison"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Poison/CollisionShape2D"]
+texture = ExtResource( 1 )

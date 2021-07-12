@@ -63,7 +63,7 @@ void godot::Key::_on_Area2D_body_entered(Node* node)
 		//Godot::print("-----------Key_type-----------");
 		
 		//find key and set key color/visible
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 6; i++)
 		{
 			if (_get_type() == name_keys[i])
 			{

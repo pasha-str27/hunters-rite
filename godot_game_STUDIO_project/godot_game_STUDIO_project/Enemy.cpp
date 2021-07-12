@@ -42,8 +42,8 @@ void godot::Enemy::_register_methods()
 	register_method("_on_Area2D_body_entered_player_fight", &Enemy::_on_Area2D_body_entered_player_fight);
 	register_method("_get_animated_sprite", &Enemy::_get_animated_sprite);
 	register_method("_add_to_HP", &Enemy::_add_to_HP);
-	
-	
+	register_method("_get_HP_percent", &Enemy::_get_HP_percent);
+
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
@@ -581,4 +581,9 @@ void godot::Enemy::_add_to_HP(float value)
 {
 	this->HP = HP + value > max_HP ? max_HP : HP + value;
 	_update_health_bar();
+}
+
+float godot::Enemy::_get_HP_percent()
+{
+	return (HP / max_HP) * 100;
 }

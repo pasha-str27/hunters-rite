@@ -31,8 +31,10 @@ namespace godot
 		void _set_player2(Node2D* player2);
 		void _set_player1_regular(Node2D* player1);
 		void _set_player2_regular(Node2D* player2);
+		//	never nullptr (in coop)
 		Node2D* _get_player1_regular();
 		Node2D* _get_player2_regular();
+		//	nullptr when die or ghost
 		Node2D* _get_player1();
 		Node2D* _get_player2();
 		int _players_count();
