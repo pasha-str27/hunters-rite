@@ -114,6 +114,15 @@ void godot::BigStone::_change_start_parameters()
 {
 	Vector2 cur_pos = (get_global_position() - cast_to<Node2D>(get_parent())->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
 	get_parent()->call("_set_cell_value", cur_pos.y, cur_pos.x, 7);
+
+	get_parent()->call("_set_cell_value", cur_pos.y + 1, cur_pos.x, 7);
+	get_parent()->call("_set_cell_value", cur_pos.y, cur_pos.x + 1, 7);
+	get_parent()->call("_set_cell_value", cur_pos.y + 1, cur_pos.x + 1, 7);
+	get_parent()->call("_set_cell_value", cur_pos.y - 1, cur_pos.x, 7);
+	get_parent()->call("_set_cell_value", cur_pos.y, cur_pos.x - 1, 7);
+	get_parent()->call("_set_cell_value", cur_pos.y - 1, cur_pos.x - 1, 7);
+	get_parent()->call("_set_cell_value", cur_pos.y - 1, cur_pos.x + 1, 7);
+	get_parent()->call("_set_cell_value", cur_pos.y + 1, cur_pos.x - 1, 7);
 }
 
 void godot::BigStone::_start_hide_animation()
