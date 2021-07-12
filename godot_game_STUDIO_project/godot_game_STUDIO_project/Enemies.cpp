@@ -38,8 +38,7 @@ void godot::Enemies::_remove_enemy(Node2D* enemy)
 			return;
 		}
 
-	if (((String)CameraController::current_room->call("_get_room_type") == "boss_room" 
-		|| CameraController::current_room->call("_get_is_last_room")) && enemies.size() == 0)
+	if ((String)CameraController::current_room->call("_get_room_type") == "boss_room" && enemies.size() == 0)
 	{
 		Ref<PackedScene> exit_prefab = nullptr;
 		exit_prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/exit.tscn");

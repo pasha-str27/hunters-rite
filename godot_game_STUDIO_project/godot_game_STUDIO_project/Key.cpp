@@ -57,11 +57,10 @@ void godot::Key::_on_Area2D_body_entered(Node* node)
 		//Godot::print("-----------Key_type-----------");
 		
 		//find key and set key color/visible
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < name_keys.size(); i++)
 		{
 			if (_get_type() == name_keys[i])
 			{
-
 				auto key_container = CustomExtensions::IsIncludedInChildrenWithName(key_box, _get_type());
 
 				if (key_container != nullptr) 

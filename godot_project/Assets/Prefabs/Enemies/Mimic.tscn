@@ -35,19 +35,19 @@ atlas = ExtResource( 8 )
 region = Rect2( 324, 0, 108, 108 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 108, 108 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 1 )
 region = Rect2( 108, 0, 108, 108 )
 
 [sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 1 )
 region = Rect2( 216, 0, 108, 108 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 1 )
 region = Rect2( 324, 0, 108, 108 )
 
 [sub_resource type="AtlasTexture" id=12]
@@ -59,19 +59,19 @@ atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 108, 108 )
 
 [sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 108, 108 )
 
 [sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 2 )
 region = Rect2( 108, 0, 108, 108 )
 
 [sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 2 )
 region = Rect2( 216, 0, 108, 108 )
 
 [sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 2 )
 region = Rect2( 324, 0, 108, 108 )
 
 [sub_resource type="AtlasTexture" id=18]
@@ -99,7 +99,7 @@ animations = [ {
 }, {
 "frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
 "loop": false,
-"name": "attack",
+"name": "death",
 "speed": 10.0
 }, {
 "frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 12 ) ],
@@ -109,7 +109,7 @@ animations = [ {
 }, {
 "frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
 "loop": false,
-"name": "death",
+"name": "attack",
 "speed": 10.0
 }, {
 "frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
@@ -123,7 +123,7 @@ radius = 20.139
 
 [node name="Mimic" type="Node2D"]
 script = ExtResource( 4 )
-enemy_price = 50.0
+enemy_price = 10.0
 
 [node name="Mimic" type="KinematicBody2D" parent="." groups=[
 "enemy",
@@ -156,6 +156,7 @@ shape = SubResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Mimic/CollisionShape2D"]
 frames = SubResource( 22 )
 animation = "idle"
+frame = 3
 playing = true
 
 [node name="Area2D" type="Area2D" parent="Mimic"]
