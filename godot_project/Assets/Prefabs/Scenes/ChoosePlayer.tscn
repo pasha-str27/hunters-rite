@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=93 format=2]
 
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_background_v2.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_focus_v2.png" type="Texture" id=2]
@@ -21,7 +21,6 @@
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/Guardian.png" type="Texture" id=19]
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/shooter.png" type="Texture" id=20]
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/choose_chapter_background.png" type="Texture" id=21]
-[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/choose_chapter_chain.png" type="Texture" id=22]
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/p2/idle5.png" type="Texture" id=23]
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/p2/idle1.png" type="Texture" id=24]
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/p2/idle3.png" type="Texture" id=25]
@@ -30,6 +29,51 @@
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/p1/p3.png" type="Texture" id=28]
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/p1/p2.png" type="Texture" id=29]
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/p1/p1.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/wheel/wheel1.png" type="Texture" id=31]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/wheel/wheel2.png" type="Texture" id=32]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/wheel/wheel4.png" type="Texture" id=33]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/wheel/wheel3.png" type="Texture" id=34]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/wheel/wheel5.png" type="Texture" id=35]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/wheel/wheel6.png" type="Texture" id=36]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/wheel/wheel7.png" type="Texture" id=37]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/wheel/wheel8.png" type="Texture" id=38]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/guardian/Guardiant11.png" type="Texture" id=39]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/guardian/Guardiant5.png" type="Texture" id=40]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/guardian/Guardiant9.png" type="Texture" id=41]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/guardian/Guardiant1.png" type="Texture" id=42]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/guardian/Guardiant3.png" type="Texture" id=43]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/guardian/Guardiant6.png" type="Texture" id=44]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/guardian/Guardiant10.png" type="Texture" id=45]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/guardian/Guardiant8.png" type="Texture" id=46]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/guardian/Guardiant7.png" type="Texture" id=47]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/guardian/Guardiant2.png" type="Texture" id=48]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/guardian/Guardiant4.png" type="Texture" id=49]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/droid/droid2.png" type="Texture" id=50]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/droid/droid6.png" type="Texture" id=51]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/droid/droid3.png" type="Texture" id=52]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/droid/droid4.png" type="Texture" id=53]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/droid/droid1.png" type="Texture" id=54]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/droid/droid5.png" type="Texture" id=55]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/druid/druid2.png" type="Texture" id=56]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/druid/druid3.png" type="Texture" id=57]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/druid/druid1.png" type="Texture" id=58]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/druid/druid4.png" type="Texture" id=59]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/druid/druid6.png" type="Texture" id=60]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/druid/druid5.png" type="Texture" id=61]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/mudguard/MudGuard3.png" type="Texture" id=62]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/mudguard/MudGuard1.png" type="Texture" id=63]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/mudguard/MudGuard4.png" type="Texture" id=64]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/mudguard/MudGuard5.png" type="Texture" id=65]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/mudguard/MudGuard2.png" type="Texture" id=66]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/stormhead/StormHead5.png" type="Texture" id=67]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/stormhead/StormHead1.png" type="Texture" id=68]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/stormhead/StormHead7.png" type="Texture" id=69]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/stormhead/StormHead2.png" type="Texture" id=70]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/stormhead/StormHead4.png" type="Texture" id=71]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/stormhead/StormHead9.png" type="Texture" id=72]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/stormhead/StormHead3.png" type="Texture" id=73]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/stormhead/StormHead6.png" type="Texture" id=74]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/stormhead/StormHead8.png" type="Texture" id=75]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -65,179 +109,113 @@ tracks/0/keys = {
 "values": [ ExtResource( 30 ), ExtResource( 29 ), ExtResource( 28 ), ExtResource( 27 ), ExtResource( 4 ) ]
 }
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="Animation" id=3]
+resource_name = "idle"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 31 ), ExtResource( 32 ), ExtResource( 34 ), ExtResource( 33 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 31 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+length = 1.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 42 ), ExtResource( 48 ), ExtResource( 43 ), ExtResource( 49 ), ExtResource( 40 ), ExtResource( 44 ), ExtResource( 47 ), ExtResource( 46 ), ExtResource( 41 ), ExtResource( 45 ), ExtResource( 39 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "idle"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 54 ), ExtResource( 50 ), ExtResource( 52 ), ExtResource( 53 ), ExtResource( 55 ), ExtResource( 51 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "idle"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 58 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 59 ), ExtResource( 61 ), ExtResource( 60 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "idle"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 63 ), ExtResource( 66 ), ExtResource( 62 ), ExtResource( 64 ), ExtResource( 65 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "idle"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 68 ), ExtResource( 70 ), ExtResource( 73 ), ExtResource( 71 ), ExtResource( 67 ), ExtResource( 74 ), ExtResource( 69 ), ExtResource( 75 ), ExtResource( 72 ) ]
+}
+
+[sub_resource type="DynamicFont" id=9]
 size = 13
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 11 )
-
-[sub_resource type="Animation" id=4]
-length = 1.5
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Focus:rect_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.8, 1.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Focus:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.8, 1.5 ),
-"transitions": PoolRealArray( 1.10957, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
-}
-
-[sub_resource type="Animation" id=5]
-length = 1.5
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Focus:rect_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.8, 1.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Focus:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.8, 1.5 ),
-"transitions": PoolRealArray( 1.10957, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
-}
-
-[sub_resource type="Animation" id=6]
-length = 1.5
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Focus:rect_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.8, 1.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Focus:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.8, 1.5 ),
-"transitions": PoolRealArray( 1.10957, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
-}
-
-[sub_resource type="Animation" id=7]
-length = 1.5
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Focus:rect_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.8, 1.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Focus:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.8, 1.5 ),
-"transitions": PoolRealArray( 1.10957, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
-}
-
-[sub_resource type="Animation" id=8]
-length = 1.5
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Focus:rect_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.8, 1.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Focus:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.8, 1.5 ),
-"transitions": PoolRealArray( 1.10957, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
-}
-
-[sub_resource type="Animation" id=9]
-length = 1.5
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Focus:rect_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.8, 1.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Focus:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.8, 1.5 ),
-"transitions": PoolRealArray( 1.10957, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
-}
 
 [sub_resource type="Animation" id=10]
 length = 1.5
@@ -296,6 +274,174 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=12]
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Focus:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Focus:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1.10957, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Focus:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Focus:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1.10957, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Focus:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Focus:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1.10957, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Focus:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Focus:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1.10957, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
+}
+
+[sub_resource type="Animation" id=16]
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Focus:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Focus:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1.10957, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
+}
+
+[sub_resource type="Animation" id=17]
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Focus:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Focus:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1.10957, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
+}
+
+[sub_resource type="Animation" id=18]
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -422,7 +568,7 @@ margin_top = 68.0
 margin_right = 188.0
 margin_bottom = 188.0
 rect_min_size = Vector2( 120, 120 )
-texture = ExtResource( 27 )
+texture = ExtResource( 30 )
 expand = true
 stretch_mode = 6
 
@@ -445,9 +591,12 @@ margin_top = 68.0
 margin_right = 188.0
 margin_bottom = 188.0
 rect_min_size = Vector2( 120, 120 )
-texture = ExtResource( 16 )
+texture = ExtResource( 31 )
 expand = true
 stretch_mode = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters/Wheel_sprite/Chapret_sprite"]
+anims/idle = SubResource( 3 )
 
 [node name="Guardian_sprite" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters"]
 visible = false
@@ -465,9 +614,12 @@ margin_top = 53.0
 margin_right = 188.0
 margin_bottom = 203.0
 rect_min_size = Vector2( 120, 150 )
-texture = ExtResource( 19 )
+texture = ExtResource( 31 )
 expand = true
 stretch_mode = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters/Guardian_sprite/Chapret_sprite"]
+anims/idle = SubResource( 4 )
 
 [node name="Droid_sprite" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters"]
 visible = false
@@ -489,6 +641,9 @@ texture = ExtResource( 18 )
 expand = true
 stretch_mode = 6
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters/Droid_sprite/Chapret_sprite"]
+anims/idle = SubResource( 5 )
+
 [node name="Druid_sprite" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters"]
 visible = false
 anchor_right = 1.0
@@ -509,6 +664,9 @@ texture = ExtResource( 15 )
 expand = true
 stretch_mode = 6
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters/Druid_sprite/Chapret_sprite"]
+anims/idle = SubResource( 6 )
+
 [node name="Mudguard_sprite" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters"]
 visible = false
 anchor_right = 1.0
@@ -525,9 +683,12 @@ margin_top = 68.0
 margin_right = 203.0
 margin_bottom = 188.0
 rect_min_size = Vector2( 150, 120 )
-texture = ExtResource( 14 )
+texture = ExtResource( 31 )
 expand = true
 stretch_mode = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters/Mudguard_sprite/Chapret_sprite"]
+anims/idle = SubResource( 7 )
 
 [node name="Stormhead_sprite" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters"]
 visible = false
@@ -545,9 +706,12 @@ margin_top = 53.0
 margin_right = 188.0
 margin_bottom = 203.0
 rect_min_size = Vector2( 120, 150 )
-texture = ExtResource( 17 )
+texture = ExtResource( 31 )
 expand = true
 stretch_mode = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Background_and_chapters/Stormhead_sprite/Chapret_sprite"]
+anims/idle = SubResource( 8 )
 
 [node name="Description" type="CenterContainer" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer"]
 margin_left = 620.0
@@ -561,14 +725,14 @@ margin_left = 52.0
 margin_top = 57.0
 margin_right = 247.0
 margin_bottom = 198.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 9 )
 text = "BLUE FANKA
 
-HP:100
+HP:175
 
-DMG:20
+DMG:40
 
-SPEED:200
+SPEED:250
 
 Special: Shield"
 
@@ -578,16 +742,16 @@ margin_left = 52.0
 margin_top = 57.0
 margin_right = 247.0
 margin_bottom = 198.0
-custom_fonts/font = SubResource( 3 )
-text = "SPROTE
+custom_fonts/font = SubResource( 9 )
+text = "SPROTE         
 
-HP:100
+HP:80
 
-DMG:20
+DMG:25
 
 SPEED:200
 
-Special: Shield"
+Special: Dash"
 
 [node name="Wheel_description" type="Label" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Description"]
 visible = false
@@ -595,16 +759,16 @@ margin_left = 52.0
 margin_top = 57.0
 margin_right = 247.0
 margin_bottom = 198.0
-custom_fonts/font = SubResource( 3 )
-text = "WHEEL
+custom_fonts/font = SubResource( 9 )
+text = "WHEEL          
 
-HP:100
+HP:???
 
-DMG:20
+DMG:???
 
-SPEED:200
+SPEED:???
 
-Special: Shield"
+Special:???"
 
 [node name="Guardian_description" type="Label" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Description"]
 visible = false
@@ -612,16 +776,16 @@ margin_left = 52.0
 margin_top = 57.0
 margin_right = 247.0
 margin_bottom = 198.0
-custom_fonts/font = SubResource( 3 )
-text = "GUARDIAN
+custom_fonts/font = SubResource( 9 )
+text = "GUARDIAN       
 
-HP:100
+HP:???
 
-DMG:20
+DMG:???
 
-SPEED:200
+SPEED:???
 
-Special: Shield"
+Special:???"
 
 [node name="Droid_description" type="Label" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Description"]
 visible = false
@@ -629,16 +793,16 @@ margin_left = 52.0
 margin_top = 57.0
 margin_right = 247.0
 margin_bottom = 198.0
-custom_fonts/font = SubResource( 3 )
-text = "BLUE FANKA
+custom_fonts/font = SubResource( 9 )
+text = "DROID          
 
-HP:100
+HP:???
 
-DMG:20
+DMG:???
 
-SPEED:200
+SPEED:???
 
-Special: Shield"
+Special:???"
 
 [node name="Druid_description" type="Label" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Description"]
 visible = false
@@ -646,16 +810,16 @@ margin_left = 52.0
 margin_top = 57.0
 margin_right = 247.0
 margin_bottom = 198.0
-custom_fonts/font = SubResource( 3 )
-text = "DRUID
+custom_fonts/font = SubResource( 9 )
+text = "DRUID          
 
-HP:100
+HP:???
 
-DMG:20
+DMG:???
 
-SPEED:200
+SPEED:???
 
-Special: Shield"
+Special:???"
 
 [node name="Mudguard_description" type="Label" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Description"]
 visible = false
@@ -663,16 +827,16 @@ margin_left = 52.0
 margin_top = 57.0
 margin_right = 247.0
 margin_bottom = 198.0
-custom_fonts/font = SubResource( 3 )
-text = "MUDGUARD
+custom_fonts/font = SubResource( 9 )
+text = "MUDGUARD       
 
-HP:100
+HP:???
 
-DMG:20
+DMG:???
 
-SPEED:200
+SPEED:???
 
-Special: Shield"
+Special:???"
 
 [node name="Stormhead_description" type="Label" parent="ChoosePlayer/VBoxContainer/Players_animations/HBoxContainer/Description"]
 visible = false
@@ -680,16 +844,16 @@ margin_left = 52.0
 margin_top = 57.0
 margin_right = 247.0
 margin_bottom = 198.0
-custom_fonts/font = SubResource( 3 )
-text = "STORMHEAD
+custom_fonts/font = SubResource( 9 )
+text = "STORMHEAD      
 
-HP:100
+HP:???
 
-DMG:20
+DMG:???
 
-SPEED:200
+SPEED:???
 
-Special: Shield"
+Special:???"
 
 [node name="Free_space_bottom" type="CenterContainer" parent="ChoosePlayer/VBoxContainer"]
 margin_top = 364.0
@@ -747,7 +911,7 @@ __meta__ = {
 }
 
 [node name="MeleeAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Melee"]
-anims/Focus_scale = SubResource( 4 )
+anims/Focus_scale = SubResource( 10 )
 
 [node name="Shoot" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
 margin_left = 104.0
@@ -793,9 +957,10 @@ __meta__ = {
 }
 
 [node name="ShootAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Shoot"]
-anims/Focus_scale = SubResource( 5 )
+anims/Focus_scale = SubResource( 11 )
 
 [node name="Wheel" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
 margin_left = 208.0
 margin_right = 308.0
 margin_bottom = 100.0
@@ -837,20 +1002,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Chain" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Wheel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_min_size = Vector2( 50, 50 )
-texture = ExtResource( 22 )
-stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="WheelAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Wheel"]
-anims/Focus_scale = SubResource( 6 )
+anims/Focus_scale = SubResource( 12 )
 
 [node name="Guardian" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
 margin_left = 312.0
 margin_right = 412.0
 margin_bottom = 100.0
@@ -892,20 +1048,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Chain" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Guardian"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_min_size = Vector2( 50, 50 )
-texture = ExtResource( 22 )
-stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="GuardianAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Guardian"]
-anims/Focus_scale = SubResource( 7 )
+anims/Focus_scale = SubResource( 13 )
 
 [node name="Droid" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
 margin_left = 416.0
 margin_right = 516.0
 margin_bottom = 100.0
@@ -947,20 +1094,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Chain" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Droid"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_min_size = Vector2( 50, 50 )
-texture = ExtResource( 22 )
-stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="DroidAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Droid"]
-anims/Focus_scale = SubResource( 8 )
+anims/Focus_scale = SubResource( 14 )
 
 [node name="Druid" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
 margin_left = 520.0
 margin_right = 620.0
 margin_bottom = 100.0
@@ -1002,20 +1140,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Chain" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Druid"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_min_size = Vector2( 50, 50 )
-texture = ExtResource( 22 )
-stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="DruidAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Druid"]
-anims/Focus_scale = SubResource( 9 )
+anims/Focus_scale = SubResource( 15 )
 
 [node name="Mudguard" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
 margin_left = 624.0
 margin_right = 724.0
 margin_bottom = 100.0
@@ -1057,20 +1186,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Chain" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Mudguard"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_min_size = Vector2( 50, 50 )
-texture = ExtResource( 22 )
-stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="MudguardAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Mudguard"]
-anims/Focus_scale = SubResource( 10 )
+anims/Focus_scale = SubResource( 16 )
 
 [node name="Stormhead" type="TextureButton" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
 margin_left = 728.0
 margin_right = 828.0
 margin_bottom = 100.0
@@ -1112,18 +1232,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Chain" type="TextureRect" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Stormhead"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_min_size = Vector2( 50, 50 )
-texture = ExtResource( 22 )
-stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="StormheadAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Stormhead"]
-anims/Focus_scale = SubResource( 11 )
+anims/Focus_scale = SubResource( 17 )
 
 [node name="Back_button" type="CenterContainer" parent="ChoosePlayer/VBoxContainer"]
 margin_top = 512.0
@@ -1181,7 +1291,7 @@ __meta__ = {
 }
 
 [node name="BackAnimated" type="AnimationPlayer" parent="ChoosePlayer/VBoxContainer/Back_button/Back"]
-anims/Focus_scale = SubResource( 12 )
+anims/Focus_scale = SubResource( 18 )
 
 [connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Melee" to="ChoosePlayer" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Melee" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "Melee", "MeleeAnimated" ]]
@@ -1227,5 +1337,7 @@ anims/Focus_scale = SubResource( 12 )
 [connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Chapters/HBoxContainer/Stormhead" to="ChoosePlayer" method="_show_chapter_sprite" binds= [ "Stormhead_sprite", "Stormhead_description", false ]]
 [connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Back_button/Back" to="ChoosePlayer" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Back_button/Back" to="ChoosePlayer" method="_on_animated_focus_entered" binds= [ "Back", "BackAnimated" ]]
+[connection signal="focus_entered" from="ChoosePlayer/VBoxContainer/Back_button/Back" to="ChoosePlayer" method="_show_chapter_sprite" binds= [ "Melee_sprite", "Melee_description", true ]]
 [connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Back_button/Back" to="ChoosePlayer" method="_on_animated_focus_exited" binds= [ "Back", "BackAnimated" ]]
+[connection signal="focus_exited" from="ChoosePlayer/VBoxContainer/Back_button/Back" to="ChoosePlayer" method="_show_chapter_sprite" binds= [ "Melee_sprite", "Melee_description", false ]]
 [connection signal="pressed" from="ChoosePlayer/VBoxContainer/Back_button/Back" to="ChoosePlayer" method="_on_Back_pressed"]

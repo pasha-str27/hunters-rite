@@ -21,6 +21,7 @@ namespace godot
 		Ref<PackedScene> boss_prefab = nullptr;
 		Ref<PackedScene> pedestal = nullptr;
 		Ref<PackedScene> boss_slime_prefab = nullptr;
+		Ref<PackedScene> spider_prefab = nullptr;
 		Timer* timer = nullptr;
 		int levels_count = 7;
 		String current_level = "";
@@ -42,5 +43,6 @@ namespace godot
 		SpawnEnemyController();
 		~SpawnEnemyController();
 		float _find_min_enemy_price();
+		void _spawn_boss(Ref<PackedScene> boss_prefab);
 	};
 }

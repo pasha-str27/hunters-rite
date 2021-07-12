@@ -163,28 +163,27 @@
       <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Ball.cpp" />
-    <ClCompile Include="ISlimeAttackState.cpp">
-      <Filter>Enemies\SlimeBossStates</Filter>
-    </ClCompile>
     <ClCompile Include="MimicAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="WormAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="CameraShake.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="ResourceContainer.cpp" />
-    <ClCompile Include="BulletPull.cpp" />
     <ClCompile Include="SillyBoyAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="SillyBoyDiedAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="NagaAI.cpp">
+    <ClCompile Include="BulletPull.cpp">
       <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraShake.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ISlimeAttackState.cpp">
+      <Filter>Enemies\SlimeBossStates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -346,12 +345,6 @@
     <ClInclude Include="MagnitZone.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="IEnemyAI.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyAIContext.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="ExitHandler.h">
       <Filter>Level</Filter>
     </ClInclude>
@@ -375,28 +368,27 @@
       <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Ball.h" />
-    <ClInclude Include="ISlimeAttackState.h">
-      <Filter>Enemies\SlimeBossStates</Filter>
-    </ClInclude>
     <ClInclude Include="MimicAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="WormAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="CameraShake.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="ResourceContainer.h" />
-    <ClInclude Include="BulletPull.h" />
     <ClInclude Include="SillyBoyAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="SillyBoyDiedAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="NagaAI.h">
+    <ClInclude Include="BulletPull.h">
       <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraShake.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ISlimeAttackState.h">
+      <Filter>Enemies\SlimeBossStates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
