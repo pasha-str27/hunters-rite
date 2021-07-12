@@ -12,7 +12,9 @@ void godot::Key::_register_methods()
 	register_method("_on_Area2D_body_entered", &Key::_on_Area2D_body_entered);
 	
 	register_property<Key, String>("key_type", &Key::key_type, "");
-	register_property<Key, Color>("key_color", &Key::key_color, Color(0,0,0));
+	register_property<Key, Color>("key_color", &Key::key_color, Color(0, 0, 0));
+	register_property<Key, Ref<PackedScene>>("particles", &Key::particles, nullptr);
+	
 }
 
 void godot::Key::_init()
@@ -41,6 +43,10 @@ void godot::Key::_on_Area2D_body_entered(Node* node)
 		Ref<PackedScene> prefab = nullptr;
 		prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->collect_key());
 		
+		auto spawned_particles = cast_to<Node2D>(particles->instance());
+		get_node("/root/Node2D/Node")->add_child(spawned_particles);
+		spawned_particles->set_global_position(this->get_global_position());
+
 		//key holder
 		HBoxContainer* key_box = nullptr;
 		key_box = cast_to<HBoxContainer>(get_node("/root/Node2D/Node/Camera2D/KeyHolder/Keyses/Keys"));

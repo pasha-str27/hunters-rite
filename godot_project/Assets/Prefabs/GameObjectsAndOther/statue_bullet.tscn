@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Scripts/bullet.gdns" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Monsters/Statue/monster_statue_pin.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Prefabs/Particles/Explosions/BoomStatueBulletParticles.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.23369
@@ -36,6 +37,7 @@ collision_mask = 0
 script = ExtResource( 1 )
 direction = Vector2( 8, 8 )
 speed = 500.0
+"Explosion Particles" = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

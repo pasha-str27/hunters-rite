@@ -15,6 +15,9 @@ namespace godot
 		float heal_cooldown = 30;
 		Ref<PackedScene> use_particles = nullptr;
 
+		Particles2D* idle_particles = nullptr;
+		AnimatedSprite* sprite = nullptr;
+
 	public:
 		static void _register_methods();
 		void _init();
@@ -25,5 +28,6 @@ namespace godot
 		void _can_heal_true();
 		void _heal_player(Node2D* player);
 		void _change_start_parameters();
+		void _start_hide_animation();
 	};
 }

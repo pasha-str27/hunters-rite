@@ -71,7 +71,7 @@ void godot::SlimeBossAI::_shoot()
 		return;
 
 	Vector2 bullet_dir = target_player;
-	Vector2 bullet_position = cast_to<Node2D>(_get_enemy()->get_node("Area2D")->get_child(0))->get_global_position();
+	Vector2 bullet_position = _get_enemy()->get_global_position();
 
 	std::vector<Node2D*> bullets;
 

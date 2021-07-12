@@ -22,6 +22,7 @@ namespace godot
 
 		Vector2 target = Vector2::ZERO;
 		Array free_cells = {};
+		Node2D* shoot_point = nullptr;
 
 	public:
 		WormAI(Ref<PackedScene>& bullet, Node2D* node);

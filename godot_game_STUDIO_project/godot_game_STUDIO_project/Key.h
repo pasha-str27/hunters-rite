@@ -10,6 +10,7 @@ namespace godot {
 		GODOT_CLASS(Key, Node2D);
 		String key_type;
 		Color key_color;
+		Ref<PackedScene> particles = nullptr;
 	public:
 		static void _register_methods();
 		void _init();
