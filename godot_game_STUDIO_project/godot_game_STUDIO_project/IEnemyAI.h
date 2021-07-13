@@ -13,6 +13,7 @@ namespace godot
 		virtual void _add_bullet(Node* bullet = nullptr) = 0;
 		virtual void change_can_fight(bool value) = 0;
 		virtual void change_can_fight(bool value, ISlimeAttackState* state) = 0;
+		virtual void _take_damage(float damage) = 0;
 		virtual void _change_dir_after_time() = 0;
 		virtual void _delete_player1() = 0;
 		virtual void _delete_player2() = 0;

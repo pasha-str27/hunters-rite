@@ -88,7 +88,7 @@ void godot::LevelGenerator::_ready()
 		}
 	}
 
-	CameraController::current_room = rooms[0];
+	GameManager::current_room = rooms[0];
 	std::vector<Node2D*> cornered_rooms = this->_get_corner_rooms();
 
 	auto boss_room = _create_boss_room(cornered_rooms);
@@ -819,7 +819,7 @@ void godot::LevelGenerator::_clear()
 	generated_colors_keys.clear();
 	size = 0;
 
-	if(CameraController::current_level>1)
+	if(GameManager::current_level > 1)
 		map_size += 2;
 }
 

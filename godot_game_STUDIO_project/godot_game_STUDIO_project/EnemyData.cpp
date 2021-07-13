@@ -63,6 +63,10 @@ void godot::EnemyData::_set_goal(Vector2 goal)
 {
 }
 
+void godot::EnemyData::_take_damage(float damage)
+{
+}
+
 Node2D* godot::EnemyData::_get_enemy()
 {
 	return enemy;

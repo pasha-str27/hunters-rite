@@ -13,5 +13,5 @@ void godot::SlimeAttackSpawnState::_fight()
 		ai->_spawn_enemy();
 		taken_damage = 0;
 	}
-	ai->change_can_fight(true, new SlimeAttackJumpState(ai));
+	ai->change_can_fight(true, new SlimeAttackShootState(ai));
 }
