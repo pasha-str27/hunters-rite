@@ -1,6 +1,6 @@
 <mxfile>
     <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-        <mxGraphModel dx="1967" dy="2679" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="3217" dy="4044" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="WIyWlLk6GJQsqaUBKTNV-0"/>
                 <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0"/>
@@ -655,7 +655,7 @@
                     <mxGeometry y="164" width="270" height="26" as="geometry"/>
                 </mxCell>
                 <mxCell id="232" value="«interface»&#10;IPlayer" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontFamily=Helvetica;labelBackgroundColor=none;labelBorderColor=none;fontColor=#F0F0F0;spacingTop=0;spacing=2;fontSize=12;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-                    <mxGeometry x="850" y="-1154" width="340" height="916" as="geometry">
+                    <mxGeometry x="780" y="210" width="340" height="916" as="geometry">
                         <mxRectangle x="1120" y="-980" width="100" height="40" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
@@ -1141,7 +1141,7 @@
                     <mxGeometry y="294" width="90" height="26" as="geometry"/>
                 </mxCell>
                 <mxCell id="454" value="PlayerController" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontFamily=Helvetica;labelBackgroundColor=none;labelBorderColor=none;fontColor=#F0F0F0;spacingTop=0;spacing=2;fontSize=12;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-                    <mxGeometry x="1220" y="-2060" width="380" height="2124" as="geometry">
+                    <mxGeometry x="1241" y="30" width="380" height="2124" as="geometry">
                         <mxRectangle x="1370" y="-1100" width="130" height="26" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
@@ -2400,7 +2400,7 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="1007" value="MiniMapController" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-                    <mxGeometry x="1020" y="94" width="420" height="1152" as="geometry"/>
+                    <mxGeometry x="-1465" y="1590" width="420" height="1152" as="geometry"/>
                 </mxCell>
                 <mxCell id="1008" value="- curr_room: Ref&lt;PackedScene&gt; = nullptr" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="1007">
                     <mxGeometry y="26" width="420" height="26" as="geometry"/>
