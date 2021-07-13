@@ -9,6 +9,7 @@ void godot::Bullet::_register_methods()
 	register_method("_ready", &Bullet::_ready);
 	register_method("_init", &Bullet::_init);
 	register_method("_on_Area2D_body_entered", &Bullet::_on_Area2D_body_entered);
+	register_method("_on_Area2D_area_entered", &Bullet::_on_Area2D_area_entered);	
 	register_method("_set_dir", &Bullet::_set_dir);
 	register_method("_set_damage", &Bullet::_set_damage);
 	
@@ -66,23 +67,29 @@ void godot::Bullet::_on_Area2D_body_entered(Node* node)
 	if (is_in_group("statue_bullet") || is_in_group("web_bullet") || is_in_group("player_bullet")
 		|| is_in_group("flower_bullet") || is_in_group("slime_bullet"))
 		get_parent()->get_parent()->get_child(1)->call("_add_bullet", this);
+
+	set_global_position(Vector2(99999999, 99999999));
+}
+
+void godot::Bullet::_on_Area2D_area_entered(Node* node)
+{
+	if (node->is_in_group("poison") && is_in_group("player_bullet"))
+	{
+		cast_to<Node2D>(this)->set_visible(false);
+		if (explosion_particles != nullptr)
+		{
+			auto particles = cast_to<Node2D>(explosion_particles->instance());
+			particles->set_global_position(cast_to<Node2D>(node)->get_global_position());
+			get_node("/root/Node2D/Node")->add_child(particles);
+		}
+		get_parent()->get_parent()->get_child(1)->call("_add_bullet", this);
+	}
 }
 
 void godot::Bullet::_process(float delta)
 {
 	if (is_visible())
-	{
 		move_and_slide(dir * speed);	
-
-		//if (abs(dir.distance_to(get_global_position())) <= 10)
-		//{
-		//	cast_to<Node2D>(this)->set_visible(false);
-		//	if (is_in_group("statue_bullet") || is_in_group("web_bullet") || is_in_group("player_bullet")
-		//		|| is_in_group("flower_bullet") || is_in_group("slime_bullet"))
-		//		get_parent()->get_parent()->get_child(1)->call("_add_bullet", this);
-		//}
-			
-	}
 }
 
 void godot::Bullet::_set_dir(Vector2 dir)

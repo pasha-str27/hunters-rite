@@ -149,7 +149,6 @@
     <ClCompile Include="SlimeBossAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="SlimeAttackSpawnState.cpp">
       <Filter>Enemies\SlimeBossStates</Filter>
     </ClCompile>
@@ -184,6 +183,15 @@
     </ClCompile>
     <ClCompile Include="ISlimeAttackState.cpp">
       <Filter>Enemies\SlimeBossStates</Filter>
+    </ClCompile>
+    <ClCompile Include="PoisonEgg.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="NagaAI.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>Football</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -354,7 +362,6 @@
     <ClInclude Include="SlimeBossAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Ball.h" />
     <ClInclude Include="SlimeAttackSpawnState.h">
       <Filter>Enemies\SlimeBossStates</Filter>
     </ClInclude>
@@ -390,6 +397,21 @@
     <ClInclude Include="ISlimeAttackState.h">
       <Filter>Enemies\SlimeBossStates</Filter>
     </ClInclude>
+    <ClInclude Include="PoisonEgg.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="NagaAI.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyAIContext.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="IEnemyAI.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>Football</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Players">
@@ -421,6 +443,9 @@
     </Filter>
     <Filter Include="Enemies\SlimeBossStates">
       <UniqueIdentifier>{389c46b8-632f-41f9-b4bb-cbfc879951d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Football">
+      <UniqueIdentifier>{9fb94395-33e5-417e-ba35-fdaecabaf46d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
