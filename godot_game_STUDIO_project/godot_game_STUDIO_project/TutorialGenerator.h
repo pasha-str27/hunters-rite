@@ -58,12 +58,7 @@ namespace godot
 		void _buid_stones(Node2D* room);
 		void _build_doors(int start_index, int end_index);
 		Node2D* _get_next_room(Vector2 current_room_position);
-		std::vector<Node2D*> _get_corner_rooms();
-		void _rebuild_doors(std::vector<Node2D*>);
-		void _rebuild_doors(Node2D*);
 		void _create_item_room(Node2D* room);
-		Node2D* _create_boss_room(std::vector<Node2D*>& cornered_rooms);
-		Node2D* _generate_room_to(Node2D* room);
 		void _generate_key(Node2D* room);
 		void _set_keys(Node2D* room, Array keys);
 		void _spawn_big_stone();
