@@ -129,6 +129,7 @@ using namespace godot;
 #include "TutorialGenerator.h"
 #include "TutorialManager.h"
 #include "CurrentRoom.h"
+#include "PoisonEgg.h"
 
 //	state
 #include "ISlimeAttackState.h"

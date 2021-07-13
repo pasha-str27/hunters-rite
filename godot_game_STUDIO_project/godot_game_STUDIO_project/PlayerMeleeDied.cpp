@@ -13,6 +13,12 @@ godot::PlayerMeleeDied::PlayerMeleeDied(Node2D* obj, Ref<PackedScene> bullet) : 
 
 	animator = cast_to<AnimationPlayer>(_get_object()->get_node("AnimationPlayer"));
 	health_bar = _get_health_bar();
+
+	cast_to<KinematicBody2D>(obj)->set_collision_mask_bit(1, false);
+	cast_to<KinematicBody2D>(obj)->set_collision_layer_bit(0, false);
+	cast_to<KinematicBody2D>(obj)->set_collision_layer_bit(15, false);
+	cast_to<Area2D>(obj->get_node("Area2D"))->set_collision_mask_bit(0, false);
+	cast_to<Area2D>(obj->get_node("Area2D"))->set_collision_layer_bit(0, false);
 }
 
 godot::PlayerMeleeDied::~PlayerMeleeDied()

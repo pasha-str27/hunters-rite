@@ -58,6 +58,7 @@ void godot::PlayerController::_register_methods()
 	register_method("_set_is_attacking", &PlayerController::_set_is_attacking);
 	register_method("_on_ghost_hide", &PlayerController::_on_ghost_hide);
 	register_method("_flip_ghost", &PlayerController::_flip_ghost);
+	register_method("_on_poison_end", &PlayerController::_on_poison_end);	
 	
 	
 	register_property<PlayerController, float>("hp", &PlayerController::_hp, 0);
@@ -84,6 +85,8 @@ godot::PlayerController::PlayerController()
 	speed = 250;
 	_saved_speed = speed;
 	door = nullptr;
+	timer_poison = Timer::_new();
+	diff = 0;
 }
 
 godot::PlayerController::~PlayerController()
@@ -95,6 +98,7 @@ godot::PlayerController::~PlayerController()
 	door = nullptr;
 	item_generator = nullptr;
 	timer = nullptr;
+	timer_poison = nullptr;
 	hurt_particles = nullptr;
 	buff_debuff_particles = nullptr;
 	dash_particles = nullptr;
@@ -145,6 +149,7 @@ void godot::PlayerController::_ready()
 
 	timer = Timer::_new();
 	add_child(timer);
+	add_child(timer_poison);
 }
 
 void godot::PlayerController::_start_timer()
@@ -300,6 +305,12 @@ void godot::PlayerController::_on_Area2D_area_entered(Node* node)
 
 	if (node->is_in_group("tutor"))
 		_show_tutorial_message(node);
+
+	if (node->is_in_group("poison"))
+	{
+		_take_poison();
+		node->queue_free();
+	}
 }
 
 void godot::PlayerController::_on_Area2D_area_exited(Node* node)
@@ -651,4 +662,28 @@ void godot::PlayerController::_on_ghost_hide()
 void godot::PlayerController::_flip_ghost(bool value)
 {
 	ghost_sprite->set_flip_h(value);
+}
+
+void godot::PlayerController::_take_poison()
+{
+	if (timer_poison->is_connected("timeout", this, "_on_poison_end"))
+		_on_poison_end();
+
+
+	Godot::print("Before: " + String::num(speed));
+	diff = speed * .6f;
+	speed -= diff;
+	Godot::print("After: " + String::num(speed));
+	timer_poison->connect("timeout", this, "_on_poison_end");
+	timer_poison->start(1.5f);
+	current_player_strategy->_set_speed(speed);
+
+}
+
+void godot::PlayerController::_on_poison_end()
+{
+	timer_poison->disconnect("timeout", this, "_on_poison_end");
+	speed += diff;
+	diff = 0;
+	current_player_strategy->_set_speed(speed);
 }

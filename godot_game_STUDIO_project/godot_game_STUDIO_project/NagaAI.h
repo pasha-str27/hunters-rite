@@ -17,12 +17,20 @@ namespace godot {
 		bool is_player1_onArea = false;
 		bool is_player2_onArea = false;
 
-		Array free_cells = {};
 		Node2D* target = nullptr;
+		int target_id = 0;
 
 		AnimatedSprite* sprite = nullptr;
 
 		Particles2D* vampirism_particles = nullptr;
+
+		Ref<PackedScene> poison = nullptr;
+
+		//	timings
+		float timing_to_attack;
+		float teleport_speed;
+		float attack_timing;
+		float hide_time;
 
 	public:
 		NagaAI(Ref<PackedScene>& bullet, Node2D* node);
@@ -43,6 +51,10 @@ namespace godot {
 		void _teleport_to_target();
 		bool _is_player_near();
 		void _make_vampirism();
+		void _check_target();
+		void _spawn_egg(Vector2 pos);
+		void _decrease_cooldowns();
+		void _increase_cooldowns();
 	};
 }
 
