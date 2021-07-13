@@ -186,6 +186,13 @@
     <ClCompile Include="NagaAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="TutorialGenerator.cpp">
+      <Filter>Genetation</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialManager.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="CurrentRoom.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
@@ -398,6 +405,13 @@
     <ClInclude Include="NagaAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="TutorialGenerator.h">
+      <Filter>Genetation</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialManager.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="CurrentRoom.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Players">

@@ -192,7 +192,7 @@ void godot::MiniMapController::_update_minimap()
 
 Vector2 godot::MiniMapController::_get_players_pos()
 {
-	auto player = GameManager::current_room->get_global_position();
+	Vector2 player = CurrentRoom::get_singleton()->_get_current_room()->get_global_position();
 
 	int fixed_x = (int)(player.x / step_x) * step_x;
 	int fixed_y = (int)(player.y / step_y) * step_y;

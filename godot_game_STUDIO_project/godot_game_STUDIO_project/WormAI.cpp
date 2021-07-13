@@ -13,7 +13,7 @@ godot::WormAI::WormAI(Ref<PackedScene>& bullet, Node2D* node) : EnemyData(node)
 
 	bullet_pull = new BulletPull(max_bullet_count, bullet, bullet_container);
 
-	Array arr = GameManager::current_room->call("_get_enemy_spawn_positions");
+	Array arr = CurrentRoom::get_singleton()->_get_current_room()->call("_get_enemy_spawn_positions");
 	free_cells = arr[0];
 
 	shoot_point = cast_to<Node2D>(node->get_node("ShootPoint"));
@@ -52,7 +52,6 @@ void godot::WormAI::change_can_fight(bool value)
 			return;
 		}
 	}
-	
 }
 
 void godot::WormAI::_fight(Node2D* player1, Node2D* player2)

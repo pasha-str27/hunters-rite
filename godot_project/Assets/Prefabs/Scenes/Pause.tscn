@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Assets/Scripts/MenuButtons.gdns" type="Script" id=4]
 [ext_resource path="res://Assets/Prefabs/SoundsEffects/Effects/ButtonClick.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/Prefabs/SoundsEffects/BackMusic/MenuBackMusic.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Prefabs/BackMusic/MenuBackMusic.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Prefabs/Animations/FadeOut.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Sprites/Items/vodka.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/game_over_backroungl.png" type="Texture" id=9]
@@ -24,6 +24,7 @@
 [ext_resource path="res://Assets/Sprites/UI/WantedLabel/wanted_focus_v3.png" type="Texture" id=22]
 [ext_resource path="res://Assets/Sprites/Items/glass.png" type="Texture" id=23]
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=24]
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "Focus_scale"

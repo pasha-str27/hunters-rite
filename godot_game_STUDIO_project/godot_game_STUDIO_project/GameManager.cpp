@@ -3,7 +3,6 @@
 #include "headers.h"
 #endif
 
-Node2D* GameManager::current_room = nullptr;
 bool GameManager::show_tutorial = true;
 int GameManager::current_level = 1;
 
@@ -53,7 +52,7 @@ void godot::GameManager::_move(String dir)
 		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "DownDoor");
 		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
 
-		current_room = next_room;
+		CurrentRoom::get_singleton()->_set_current_room(next_room);
 
 		if(PlayersContainer::_get_instance()->_get_player1_regular()!=nullptr)
 			cast_to<Node2D>(PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1))->set_global_position(move_point->get_global_position());
@@ -72,7 +71,7 @@ void godot::GameManager::_move(String dir)
 		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "UpDoor");
 		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
 
-		current_room = next_room;
+		CurrentRoom::get_singleton()->_set_current_room(next_room);
 
 		if (PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
 			cast_to<Node2D>(PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1))->set_global_position(move_point->get_global_position());
@@ -91,7 +90,7 @@ void godot::GameManager::_move(String dir)
 		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "RightDoor");
 		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
 
-		current_room = next_room;
+		CurrentRoom::get_singleton()->_set_current_room(next_room);
 
 		if (PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
 			cast_to<Node2D>(PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1))->set_global_position(move_point->get_global_position());
@@ -110,7 +109,7 @@ void godot::GameManager::_move(String dir)
 		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "LeftDoor");
 		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
 
-		current_room = next_room;
+		CurrentRoom::get_singleton()->_set_current_room(next_room);
 
 		if (PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
 			cast_to<Node2D>(PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1))->set_global_position(move_point->get_global_position());

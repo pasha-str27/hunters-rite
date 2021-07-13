@@ -42,7 +42,6 @@ namespace godot
 		void hide_tutorial();
 
 	public:
-		static Node2D* current_room;
 		static bool show_tutorial;
 		static int current_level;
 

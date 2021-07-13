@@ -38,11 +38,6 @@ void godot::LevelGenerator::_register_methods()
 	register_property<LevelGenerator, int>("spike_count", &LevelGenerator::spike_count, 0);
 	register_property<LevelGenerator, int>("roof_count", &LevelGenerator::roof_count, 0);
 
-
-	register_property<LevelGenerator, Ref<PackedScene>>("key_sprite", &LevelGenerator::key_room_sprite, nullptr);
-	register_property<LevelGenerator, Ref<PackedScene>>("item_sprite", &LevelGenerator::item_room_sprite, nullptr);
-	register_property<LevelGenerator, Ref<PackedScene>>("boss_sprite", &LevelGenerator::boss_room_sprite, nullptr);
-
 	register_property<LevelGenerator, Ref<PackedScene>>("jertovnik", &LevelGenerator::jertovnik, nullptr);
 	register_property<LevelGenerator, Ref<PackedScene>>("key_room_pedestal", &LevelGenerator::key_room_pedestal, nullptr);
 
@@ -87,8 +82,7 @@ void godot::LevelGenerator::_ready()
 				_buid_stones(rooms[i]);
 		}
 	}
-
-	GameManager::current_room = rooms[0];
+	CurrentRoom::get_singleton()->_set_current_room(rooms[0]);
 	std::vector<Node2D*> cornered_rooms = this->_get_corner_rooms();
 
 	auto boss_room = _create_boss_room(cornered_rooms);
@@ -611,10 +605,6 @@ void godot::LevelGenerator::_create_item_room(std::vector<Node2D*>& cornered_roo
 
 	_rebuild_doors(builded_room);
 	_rebuild_doors(room_to_build);
-
-	//auto sprite = cast_to<Node2D>(item_room_sprite->instance());
-	//add_child(sprite);
-	//sprite->set_global_position(builded_room->get_global_position());
 
 	cornered_rooms.erase(cornered_rooms.begin() + index, cornered_rooms.begin() + index + 1);
 

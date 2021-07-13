@@ -45,4 +45,6 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<Ball>();
 	register_class<SlimeEnemiesHolder>();
 	register_class<CameraShake>();
+	register_class<TutorialManager>();
+	register_class<TutotialGenerator>();
 }

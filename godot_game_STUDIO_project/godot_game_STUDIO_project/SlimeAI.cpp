@@ -6,7 +6,7 @@
 bool godot::SlimeAI::_is_player_near(Node2D* player)
 {
 	Vector2 player_pos_index = (player->get_global_position()
-		- GameManager::current_room->get_global_position()
+		- CurrentRoom::get_singleton()->_get_current_room()->get_global_position()
 		+ Vector2(896, 544) / 2) / _get_distance();
 
 	bool is_player_ghost = (bool)player->call("_is_ghost_mode");
@@ -17,7 +17,7 @@ bool godot::SlimeAI::_is_player_near(Node2D* player)
 
 	Vector2 new_pos = Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::LEFT).x);
 
-	if (player_pos_index == new_pos && (bool)GameManager::current_room->call("_is_empty_pos", new_pos.x, new_pos.y))
+	if (player_pos_index == new_pos && (bool)CurrentRoom::get_singleton()->_get_current_room()->call("_is_empty_pos", new_pos.x, new_pos.y))
 	{
 		if (!is_player_ghost)
 		{
@@ -32,7 +32,7 @@ bool godot::SlimeAI::_is_player_near(Node2D* player)
 
 	new_pos = Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::RIGHT).x);
 
-	if (player_pos_index == new_pos && (bool)GameManager::current_room->call("_is_empty_pos", new_pos.x, new_pos.y))
+	if (player_pos_index == new_pos && (bool)CurrentRoom::get_singleton()->_get_current_room()->call("_is_empty_pos", new_pos.x, new_pos.y))
 	{
 		if (!is_player_ghost)
 		{
@@ -47,7 +47,7 @@ bool godot::SlimeAI::_is_player_near(Node2D* player)
 
 	new_pos = Vector2((int)(cur_pos + Vector2::DOWN).y, (int)cur_pos.x);
 
-	if (player_pos_index == new_pos && (bool)GameManager::current_room->call("_is_empty_pos", new_pos.x, new_pos.y))
+	if (player_pos_index == new_pos && (bool)CurrentRoom::get_singleton()->_get_current_room()->call("_is_empty_pos", new_pos.x, new_pos.y))
 	{
 		if (!is_player_ghost)
 		{
@@ -62,7 +62,7 @@ bool godot::SlimeAI::_is_player_near(Node2D* player)
 
 	new_pos = Vector2((int)(cur_pos + Vector2::UP).y, (int)cur_pos.x);
 
-	if (player_pos_index == new_pos && (bool)GameManager::current_room->call("_is_empty_pos", new_pos.x, new_pos.y))
+	if (player_pos_index == new_pos && (bool)CurrentRoom::get_singleton()->_get_current_room()->call("_is_empty_pos", new_pos.x, new_pos.y))
 	{
 		if (!is_player_ghost)
 		{
@@ -100,7 +100,7 @@ void godot::SlimeAI::_set_is_player2_onArea(bool value)
 
 void godot::SlimeAI::_change_start_parameters()
 {
-	cur_pos = (_get_enemy()->get_global_position() - GameManager::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / _get_distance();
+	cur_pos = (_get_enemy()->get_global_position() - CurrentRoom::get_singleton()->_get_current_room()->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / _get_distance();
 
 	old_pos = _get_enemy()->get_global_position();
 
@@ -155,16 +155,16 @@ void godot::SlimeAI::change_direction()
 {
 	reset_directions();
 
-	if ((int)GameManager::current_room->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::LEFT).x) == 0)
+	if ((int)CurrentRoom::get_singleton()->_get_current_room()->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::LEFT).x) == 0)
 		directions.push_back(Vector2::LEFT);
 
-	if ((int)GameManager::current_room->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::RIGHT).x) == 0)
+	if ((int)CurrentRoom::get_singleton()->_get_current_room()->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::RIGHT).x) == 0)
 		directions.push_back(Vector2::RIGHT);
 
-	if ((int)GameManager::current_room->call("_get_cell_value", (cur_pos + Vector2::DOWN).y, cur_pos.x) == 0)
+	if ((int)CurrentRoom::get_singleton()->_get_current_room()->call("_get_cell_value", (cur_pos + Vector2::DOWN).y, cur_pos.x) == 0)
 		directions.push_back(Vector2::DOWN);
 
-	if ((int)GameManager::current_room->call("_get_cell_value", (cur_pos + Vector2::UP).y, cur_pos.x) == 0)
+	if ((int)CurrentRoom::get_singleton()->_get_current_room()->call("_get_cell_value", (cur_pos + Vector2::UP).y, cur_pos.x) == 0)
 		directions.push_back(Vector2::UP);
 
 	_fight(_get_player1(), _get_player2());
