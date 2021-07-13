@@ -9,6 +9,12 @@ godot::PlayerShootDied::PlayerShootDied(Node2D* object, Ref<PackedScene> bullet)
 	auto node = _get_object()->get_parent()->get_child(0);
 	
 	sprite = cast_to<AnimatedSprite>(_get_object()->get_node("AnimatedSprite"));
+
+	cast_to<KinematicBody2D>(object)->set_collision_mask_bit(1, false);
+	cast_to<KinematicBody2D>(object)->set_collision_layer_bit(0, false);
+	cast_to<KinematicBody2D>(object)->set_collision_layer_bit(15, false);
+	cast_to<Area2D>(object->get_node("Area2D"))->set_collision_mask_bit(0, false);
+	cast_to<Area2D>(object->get_node("Area2D"))->set_collision_layer_bit(0, false);
 }
 
 godot::PlayerShootDied::~PlayerShootDied()

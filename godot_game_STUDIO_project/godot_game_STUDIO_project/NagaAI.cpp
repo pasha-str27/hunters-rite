@@ -6,7 +6,7 @@
 godot::NagaAI::NagaAI(Ref<PackedScene>& bullet, Node2D* node) : EnemyData(node)
 {
 	can_move = true;
-	speed = 100;
+	speed = 80;
 	damage = 75;
 
 	poison = bullet;
@@ -18,6 +18,8 @@ godot::NagaAI::NagaAI(Ref<PackedScene>& bullet, Node2D* node) : EnemyData(node)
 	teleport_speed = 1;
 	attack_timing = 1;
 	hide_time = 1;
+
+	target_id = 0;
 }
 
 godot::NagaAI::~NagaAI()
@@ -33,7 +35,6 @@ void godot::NagaAI::_process(float delta)
 		if (can_attack && _is_player_near())
 			_fight(_get_player1(), _get_player2());
 	}
-
 }
 
 void godot::NagaAI::change_can_fight(bool value)
@@ -234,11 +235,11 @@ void godot::NagaAI::_follow_target(float delta)
 
 void godot::NagaAI::_take_damage(float damage)
 {
+	_spawn_egg(_get_enemy()->get_global_position());
 	can_move = false;
 	is_angry = true;
 	is_disappearing = true;
 	_get_enemy()->call("_start_fixed_timer", .3f);
-	_spawn_egg(_get_enemy()->get_global_position());
 
 	if ((float)_get_enemy()->call("_get_HP_percent") <= 75)
 		_decrease_cooldowns();
@@ -278,7 +279,7 @@ void godot::NagaAI::_spawn_egg(Vector2 pos)
 
 void godot::NagaAI::_decrease_cooldowns()
 {
-	timing_to_attack = .3f;
+	timing_to_attack = .35f;
 	teleport_speed = 1.5f;
 	attack_timing = .5f;
 	hide_time = .5f;
@@ -291,7 +292,7 @@ void godot::NagaAI::_increase_cooldowns()
 	teleport_speed = 1;
 	attack_timing = 1;
 	hide_time = 1;
-	speed = 100;
+	speed = 80;
 }
 
 void godot::NagaAI::_enable_collisions()

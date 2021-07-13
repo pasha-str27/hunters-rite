@@ -126,6 +126,7 @@ using namespace godot;
 #include "CameraShake.h"
 #include "ResourceContainer.h"
 #include "NagaAI.h"
+#include "PoisonEgg.h"
 
 //	state
 #include "ISlimeAttackState.h"
