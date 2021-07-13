@@ -113,7 +113,7 @@ bool godot::MiniMapController::_load_resources()
 		Godot::print(undisc_rooms_positions.size());
 
 		curr_room_position = grid_rect_size / 2;
-		grid_scale = grid_rect_size / (get_viewport_rect().size * zoom);
+		grid_scale = grid_rect_size / (Size2(Vector2(step_x, step_y)) * zoom);
 	}
 	else
 	{
