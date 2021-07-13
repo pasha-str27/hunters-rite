@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=2]
+[gd_scene load_steps=117 format=2]
 
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 [ext_resource path="res://Assets/Prefabs/Particles/DashParticles.tscn" type="PackedScene" id=2]
@@ -19,6 +19,9 @@
 [ext_resource path="res://Assets/Sprites/Players/MeleePlayer/attack_new.png" type="Texture" id=17]
 [ext_resource path="res://Assets/Sprites/Players/MeleePlayer/shield_full.png" type="Texture" id=18]
 [ext_resource path="res://Assets/Sprites/Players/MeleePlayer/fx_attack_fixed.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Sprites/Players/ghost/ghost_idle.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Sprites/Players/ghost/ghost_poof.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Sprites/Players/ghost/ghost_happy.png" type="Texture" id=22]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -585,6 +588,68 @@ tracks/0/keys = {
 "values": [ Rect2( 0, 0, 116, 128 ), Rect2( 116, 0, 116, 128 ), Rect2( 232, 0, 116, 128 ), Rect2( 348, 0, 116, 128 ) ]
 }
 
+[sub_resource type="AtlasTexture" id=83]
+atlas = ExtResource( 20 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=84]
+atlas = ExtResource( 20 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=85]
+atlas = ExtResource( 22 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=86]
+atlas = ExtResource( 22 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=87]
+atlas = ExtResource( 22 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=88]
+atlas = ExtResource( 22 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=89]
+atlas = ExtResource( 21 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=90]
+atlas = ExtResource( 21 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=91]
+atlas = ExtResource( 21 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=92]
+atlas = ExtResource( 21 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=93]
+atlas = ExtResource( 21 )
+region = Rect2( 64, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=94]
+animations = [ {
+"frames": [ SubResource( 83 ), SubResource( 84 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 85 ), SubResource( 86 ), SubResource( 87 ), SubResource( 88 ) ],
+"loop": false,
+"name": "hide",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 89 ), SubResource( 90 ), SubResource( 91 ), SubResource( 92 ), SubResource( 93 ) ],
+"loop": false,
+"name": "show",
+"speed": 10.0
+} ]
+
 [node name="Player2" type="KinematicBody2D" groups=[
 "player",
 "player2",
@@ -686,6 +751,12 @@ anims/idle = SubResource( 80 )
 anims/shield_end = SubResource( 81 )
 anims/shield_start = SubResource( 82 )
 next/shield_start = "idle"
+
+[node name="GhostSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 2, 2 )
+frames = SubResource( 94 )
+animation = "idle"
+playing = true
 
 [connection signal="body_entered" from="Area2D3" to="Area2D3" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D3" to="Area2D3" method="_on_Area2D_body_exited"]

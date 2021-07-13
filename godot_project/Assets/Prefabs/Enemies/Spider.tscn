@@ -138,7 +138,7 @@ shape = SubResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Spider/CollisionShape2D"]
 frames = SubResource( 18 )
 animation = "idle"
-frame = 3
+frame = 1
 playing = true
 
 [node name="SpawnParticles" parent="Spider" instance=ExtResource( 7 )]

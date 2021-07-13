@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Assets/Scripts/LevelGenerator.gdns" type="Script" id=1]
 [ext_resource path="res://Assets/Prefabs/Doors/UpDoor.tscn" type="PackedScene" id=2]
@@ -32,6 +32,9 @@
 [ext_resource path="res://Assets/Prefabs/Stone.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Assets/Prefabs/TutorialSpritesSingle.tscn" type="PackedScene" id=31]
 [ext_resource path="res://Assets/Prefabs/Lock.tscn" type="PackedScene" id=32]
+[ext_resource path="res://Assets/Prefabs/Items/Keys/Key4.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Assets/Prefabs/Items/Keys/Key5.tscn" type="PackedScene" id=34]
+[ext_resource path="res://Assets/Prefabs/Items/Keys/Key6.tscn" type="PackedScene" id=35]
 
 [node name="Node" type="Node"]
 
@@ -52,7 +55,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": ""
 }
-map_size = 4
+map_size = 3
 keys_frequency = 3
 room = ExtResource( 6 )
 down_door = ExtResource( 8 )
@@ -69,6 +72,6 @@ item_sprite = ExtResource( 24 )
 boss_sprite = ExtResource( 23 )
 jertovnik = ExtResource( 26 )
 key_room_pedestal = ExtResource( 25 )
-keys_prefabs = [ ExtResource( 28 ), ExtResource( 27 ), ExtResource( 29 ) ]
+keys_prefabs = [ ExtResource( 28 ), ExtResource( 27 ), ExtResource( 29 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ) ]
 big_stone = ExtResource( 30 )
 lock_sprite = ExtResource( 32 )

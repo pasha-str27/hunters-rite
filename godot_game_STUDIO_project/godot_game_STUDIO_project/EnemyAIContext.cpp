@@ -145,3 +145,8 @@ void godot::EnemyAIContext::_set_goal(Vector2 goal)
 {
 	strategy->_set_goal(goal);
 }
+
+void godot::EnemyAIContext::_take_damage(float damage)
+{
+	strategy->_take_damage(damage);
+}

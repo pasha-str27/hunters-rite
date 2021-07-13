@@ -47,5 +47,6 @@ namespace godot
 		void change_can_fight(bool value);
 		Vector2 _get_goal();
 		void _set_goal(Vector2 goal);
+		void _take_damage(float damage);
 	};
 }
