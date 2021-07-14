@@ -3,7 +3,8 @@
 #include "headers.h"
 #endif
 
-namespace godot {
+namespace godot 
+{
 	class ResourceContainer
 	{
 	private:
@@ -18,6 +19,14 @@ namespace godot {
 		String _open_door;
 		String _stone_action;
 		String _collect_key;
+		String _collect_bad_item;
+		String _collect_good_item;
+		String _show_next_level;
+		String _shield;
+		String _game_over;
+		String _player_to_ghost;
+		String _dash;
+
 		ResourceContainer();
 	public:
 		static ResourceContainer* _get_instance()
@@ -36,5 +45,12 @@ namespace godot {
 		String open_door();
 		String stone_action();
 		String collect_key();
+		String collect_bad_item();
+		String collect_good_item();
+		String show_next_level();
+		String shield();
+		String game_over();
+		String player_to_ghost();
+		String dash();
 	};
 }
