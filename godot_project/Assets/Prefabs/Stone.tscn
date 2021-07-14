@@ -180,7 +180,8 @@ animations = [ {
 
 [node name="Stone" type="KinematicBody2D"]
 position = Vector2( 0, 30 )
-z_index = 250
+z_index = 6
+z_as_relative = false
 collision_layer = 8192
 collision_mask = 532480
 script = ExtResource( 1 )
@@ -192,6 +193,8 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 1.5, -24 )
+z_index = 6
+z_as_relative = false
 frames = SubResource( 17 )
 animation = "idle"
 frame = 13
@@ -199,6 +202,8 @@ playing = true
 
 [node name="Sprite" type="Sprite" parent="."]
 visible = false
+z_index = 6
+z_as_relative = false
 position = Vector2( 1.40308, -24.9748 )
 texture = ExtResource( 2 )
 

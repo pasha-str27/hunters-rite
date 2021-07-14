@@ -138,6 +138,11 @@ animations = [ {
 "loop": false,
 "name": "appear",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 20 ), ExtResource( 1 ) ],
+"loop": false,
+"name": "damaged",
+"speed": 10.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=21]
@@ -153,7 +158,8 @@ enemy_price = 50.0
 "naga",
 ]]
 scale = Vector2( 2, 2 )
-z_index = 25
+z_index = 6
+z_as_relative = false
 collision_layer = 4
 collision_mask = 512
 script = ExtResource( 3 )

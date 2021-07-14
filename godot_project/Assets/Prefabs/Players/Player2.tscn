@@ -83,27 +83,27 @@ region = Rect2( 960, 64, 160, 64 )
 atlas = ExtResource( 17 )
 region = Rect2( 1120, 64, 160, 64 )
 
-[sub_resource type="AtlasTexture" id=104]
+[sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 11 )
 region = Rect2( 42, 0, 42, 39 )
 
-[sub_resource type="AtlasTexture" id=105]
+[sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 11 )
 region = Rect2( 42, 39, 42, 39 )
 
-[sub_resource type="AtlasTexture" id=106]
+[sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 11 )
 region = Rect2( 42, 78, 42, 39 )
 
-[sub_resource type="AtlasTexture" id=107]
+[sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 11 )
 region = Rect2( 42, 117, 42, 39 )
 
-[sub_resource type="AtlasTexture" id=108]
+[sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 11 )
 region = Rect2( 42, 156, 42, 39 )
 
-[sub_resource type="AtlasTexture" id=109]
+[sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 11 )
 region = Rect2( 42, 195, 42, 39 )
 
@@ -678,7 +678,8 @@ animations = [ {
 "player",
 "player2",
 ]]
-z_index = 100
+z_index = 7
+z_as_relative = false
 collision_layer = 303105
 collision_mask = 2
 script = ExtResource( 9 )
@@ -690,6 +691,8 @@ dash_cooldown_delta = 3.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 1.5, 1.5 )
+z_index = 7
+z_as_relative = false
 frames = SubResource( 130 )
 animation = "attack"
 frame = 7
@@ -722,7 +725,8 @@ shape = SubResource( 133 )
 position = Vector2( 45.4193, 6.45122 )
 rotation = 3.86159e-06
 scale = Vector2( 1, 0.8 )
-z_index = 4
+z_index = 8
+z_as_relative = false
 frames = SubResource( 154 )
 animation = "idle"
 offset = Vector2( 0, -10 )
@@ -782,9 +786,10 @@ next/shield_start = "idle"
 [node name="GhostSprite" type="AnimatedSprite" parent="."]
 visible = false
 scale = Vector2( 2, 2 )
+z_index = 8
+z_as_relative = false
 frames = SubResource( 179 )
 animation = "idle"
-frame = 1
 playing = true
 
 [connection signal="body_entered" from="Area2D3" to="Area2D3" method="_on_Area2D_body_entered"]

@@ -259,7 +259,7 @@ animations = [ {
 }, {
 "frames": [ SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ) ],
 "loop": false,
-"name": "attack_end",
+"name": "revive",
 "speed": 10.0
 }, {
 "frames": [ SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ) ],

@@ -243,7 +243,8 @@ enemy_price = 40.0
 "enemy",
 "worm",
 ]]
-z_index = 26
+z_index = 6
+z_as_relative = false
 collision_layer = 4
 collision_mask = 512
 script = ExtResource( 3 )
@@ -271,7 +272,8 @@ shape = SubResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Worm/CollisionShape2D"]
 position = Vector2( 4.01147, -7.43572 )
 scale = Vector2( 2, 2 )
-z_index = 1
+z_index = 6
+z_as_relative = false
 frames = SubResource( 48 )
 animation = "idle"
 frame = 7
