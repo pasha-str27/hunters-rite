@@ -101,6 +101,7 @@ void MenuButtons::_register_methods()
 	register_method((char*)"_on_Flower_pressed", &MenuButtons::_on_Flower_pressed);
 	register_method((char*)"_on_Items_pressed", &MenuButtons::_on_Items_pressed);
 	register_method((char*)"_on_Items_pause_pressed", &MenuButtons::_on_Items_pause_pressed);
+	register_method((char*)"_on_Options_pause_pressed", &MenuButtons::_on_Options_pause_pressed);
 	register_method((char*)"_on_FullScreen_pressed", &MenuButtons::_on_FullScreen_pressed);
 	register_method((char*)"_on_Back_pause_pressed", &MenuButtons::_on_Back_pause_pressed);
 	register_method((char*)"_play_change_cursor_effect", &MenuButtons::_play_change_cursor_effect);
@@ -396,6 +397,12 @@ void godot::MenuButtons::_on_Retry_pressed(Variant)
 	timer_music_out->start(0.01);
 	timer->start(1);
 }
+
+void godot::MenuButtons::_on_Options_pause_pressed(Input*)
+{
+	Godot::print("maybe next time");
+}
+
 
 void godot::MenuButtons::_on_Menu_pressed(Input*)
 {
