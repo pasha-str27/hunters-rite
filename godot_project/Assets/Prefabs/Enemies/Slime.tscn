@@ -90,6 +90,8 @@ animations = [ {
 radius = 18.2109
 
 [node name="Slime" type="Node2D"]
+z_index = 6
+z_as_relative = false
 script = ExtResource( 4 )
 enemy_price = 17.0
 
@@ -123,6 +125,8 @@ __meta__ = {
 shape = SubResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Slime/CollisionShape2D"]
+z_index = 6
+z_as_relative = false
 frames = SubResource( 18 )
 animation = "damaged"
 frame = 2
@@ -134,6 +138,7 @@ playing = true
 shape = SubResource( 19 )
 
 [node name="SpawnParticles" parent="Slime" instance=ExtResource( 6 )]
+z_as_relative = false
 
 [connection signal="body_entered" from="Slime/Area2D" to="Slime" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Slime/Area2D" to="Slime" method="_on_Area2D_body_exited"]

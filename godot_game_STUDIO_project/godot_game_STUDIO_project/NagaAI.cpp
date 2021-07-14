@@ -166,7 +166,6 @@ void godot::NagaAI::_set_target()
 			{
 				target = _get_player1();
 				target_id = 1;
-
 			}
 			else
 			{

@@ -43,7 +43,6 @@ void godot::Enemy::_register_methods()
 	register_method("_get_animated_sprite", &Enemy::_get_animated_sprite);
 	register_method("_add_to_HP", &Enemy::_add_to_HP);
 	register_method("_get_HP_percent", &Enemy::_get_HP_percent);
-
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);

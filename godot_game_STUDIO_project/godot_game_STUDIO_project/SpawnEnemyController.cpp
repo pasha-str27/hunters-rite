@@ -10,7 +10,7 @@ void godot::SpawnEnemyController::_register_methods()
 	register_method("_spawn", &SpawnEnemyController::_spawn);
 	register_method("_on_Area2D_area_entered", &SpawnEnemyController::_on_Area2D_area_entered);
 	register_method("_get_current_level_name", &SpawnEnemyController::_get_current_level_name);
-	
+
 	register_property<SpawnEnemyController, Ref<PackedScene>>("Altar prefab", &SpawnEnemyController::altar, nullptr);
 	register_property<SpawnEnemyController, Array>("enemy_list", &SpawnEnemyController::enemy_list_prefabs, {});
 	register_property<SpawnEnemyController, Ref<PackedScene>>("boss_prefab", &SpawnEnemyController::boss_prefab, nullptr);
@@ -79,7 +79,7 @@ void godot::SpawnEnemyController::SpawnEnemies()
 	enemies->set_enemy_to_spawn_count(0);
 	enemies->set_spawning(true);
 
-	Array enemy_list = enemy_list_prefabs[GameManager::current_level-1].operator godot::Array();
+	Array enemy_list = enemy_list_prefabs[GameManager::current_level - 1].operator godot::Array();
 
 	float min_enemy_price = _find_min_enemy_price();
 
@@ -97,7 +97,7 @@ void godot::SpawnEnemyController::SpawnEnemies()
 				pos_x = rng->randi_range(1, 26);
 				pos_y = rng->randi_range(4, 15);
 			} while (!(bool)CurrentRoom::get_singleton()->_get_current_room()->call("_is_empty_pos", pos_y, pos_x));
-			
+
 			enemies->set_enemy_to_spawn_count(enemies->get_enemy_to_spawn_count() + 1);
 
 			taken_positions.push_back(Vector2(pos_x, pos_y));
@@ -112,7 +112,7 @@ void godot::SpawnEnemyController::SpawnEnemies()
 	if (enemies->get_enemy_to_spawn_count() == 0)
 		enemies->set_spawning(false);
 
-	for(int i=0;i< taken_positions.size();++i)
+	for (int i = 0; i < taken_positions.size(); ++i)
 		CurrentRoom::get_singleton()->_get_current_room()->call("_set_cell_value", taken_positions[i].y, taken_positions[i].x, 0);
 }
 
@@ -248,24 +248,24 @@ void godot::SpawnEnemyController::_spawn()
 
 void godot::SpawnEnemyController::_on_Area2D_area_entered(Node* other)
 {
-	if (other->is_in_group("room")) 
+	if (other->is_in_group("room"))
 	{
 		String room_type = other->get_parent()->call("_get_type");
-		if (room_type == "room") 
+		if (room_type == "room")
 		{
 			get_parent()->call("_close_doors");
 			//spawn_points = other->get_parent()->get_node("SpawnPoints")->get_children();
 			enemies = other->get_parent()->call("_get_enemies");
 		}
-		else 
-			if (room_type == "boss") 
+		else
+			if (room_type == "boss")
 			{
 				//spawn_points = other->get_parent()->get_node("SpawnPoints")->get_children();
 				enemies = other->get_parent()->call("_get_enemies");
 				get_parent()->call("_close_doors");
 				SpawnBoss();
 			}
-			else 
+			else
 				if (room_type == "item_room")
 				{
 					//spawn_points = other->get_parent()->get_node("SpawnPoints")->get_children();
@@ -348,7 +348,7 @@ float godot::SpawnEnemyController::_find_min_enemy_price()
 	for (int i = 1; i < enemy_list.size(); ++i)
 		if ((float)cast_to<PackedScene>(enemy_list[i])->instance()->call("_get_enemy_price") < min_enemy_price)
 			min_enemy_price = cast_to<PackedScene>(enemy_list[i])->instance()->call("_get_enemy_price");
-	
+
 	return min_enemy_price;
 }
 

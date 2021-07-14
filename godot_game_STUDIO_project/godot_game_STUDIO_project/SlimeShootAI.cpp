@@ -38,7 +38,7 @@ void godot::SlimeShootAI::_fight(Node2D* player1, Node2D* player2)
 
 	bullet->set_visible(true);
 
-	bullet->call("_set_dir",(bullet_dir - bullet->get_global_position()).normalized());
+	bullet->call("_set_dir", (bullet_dir - bullet->get_global_position()).normalized());
 }
 
 void godot::SlimeShootAI::_add_bullet(Node* node)
@@ -136,7 +136,7 @@ void godot::SlimeShootAI::_set_player(Node2D* player)
 
 void godot::SlimeShootAI::_remove_player(Node2D* player)
 {
-	if (first_player!=nullptr && player->get_name() == first_player->get_name())
+	if (first_player != nullptr && player->get_name() == first_player->get_name())
 	{
 		first_player = second_player;
 		second_player = nullptr;

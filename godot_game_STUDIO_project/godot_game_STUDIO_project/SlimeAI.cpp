@@ -171,7 +171,7 @@ void godot::SlimeAI::change_direction()
 
 	PlayersContainer* players = PlayersContainer::_get_instance();
 
-	//перевірити
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	if (players->_get_player1() == nullptr && players->_get_player1_regular() != nullptr
 		&& (bool)players->_get_player1_regular()->call("_is_ghost_mode") 
 		&& _is_player_near(players->_get_player1_regular()));
