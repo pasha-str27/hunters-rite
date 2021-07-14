@@ -19,10 +19,11 @@ void godot::LocaledLabel::_init()
 
 void godot::LocaledLabel::_ready()
 {
-	//set_text(TranslationServer::get_singleton()->translate(text_key));
-
 	if (this->get_class() == "Label")
-		set_text(TranslationServer::get_singleton()->translate(text_key));
+	{
+		this->set_text(TranslationServer::get_singleton()->translate(text_key));
+		this->set_align(ALIGN_CENTER);
+	}
 	else if (this->get_class() == "CheckBox")
 		cast_to<CheckBox>(this)->set_text(TranslationServer::get_singleton()->translate(text_key));
 }

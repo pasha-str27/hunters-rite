@@ -18,3 +18,27 @@ KEY_MUSIC,Music,Музика
 KEY_FULLSCREEN,Fullscreen,Весь екран
 KEY_RESUME,Resume,Відновити
 KEY_ITEMS,Items,Предмети
+KEY_CHICKEN_TITLE,Legendary сhiken,Легендарне курча
+KEY_CHICKEN_DESCRIPTION,Super mega YUM YUM\nvery good,Супер круте НЯМ НЯМ\nдуже смачно
+KEY_BOOT_TITLE,Fast boots,Швидкі кросівки
+KEY_BOOT_DESCRIPTION,New Gucci sneakers \nlimited edition,Нові Гучі кросівки \nлімітована серія
+KEY_EYE_TITLE,Dragon's eye ,Око дракона
+KEY_EYE_DESCRIPTION,Do you see something \nfunny?,Ти бачиш щось куменде?
+KEY_SWORD_TITLE,Sword of rage,Лютий меч
+KEY_SWORD_DESCRIPTION,A cool blacksmith\nforged this sword,Лютий коваль \nвикував цей меч
+KEY_GLASSES_TITLE,Glasses of  \nBill Gates ,Окуляри \nБілла Гейтса
+KEY_GLASSES_DESCRIPTION,Glasses of a billionaire\nfrom the future,Окуляри мільярдера \nз майбутнього
+KEY_LUCKY_TITLE,Lucky clever,Щасливчик
+KEY_LUCKY_DESCRIPTION,"In fact, it does not \nbring good luck, \nit is fiction","Насправді це не приносить \nудачі, це вигадка"
+KEY_CORE_TITLE,Core with a chain,Ядро з ланцюгом
+KEY_CORE_DESCRIPTION,"A big piece of metal,\n for something.",Великий шматок металу
+KEY_SHIELD_TITLE,Viking shield,Щит вікінга
+KEY_SHIELD_DESCRIPTION,Old but reliable.,"Старий, проте надійний"
+KEY_DTOOTH_TITLE,Dark dragon's tooth,Тіньовий зуб дракона
+KEY_DTOOTH_DESCRIPTION,This dragon apparently \nate a lot of candy.,"Цей дракон, очевидно, \nз’їв багато цукерок."
+KEY_HTOOTH_TITLE,Holy dragon's tooth,Святий зуб дракона
+KEY_HTOOTH_DESCRIPTION,Be sure to pray before\nlifting this item!,"Обов’язково помоліться, \nперш ніж піднімати \nцей предмет!"
+KEY_NUMBER_TITLE,Unlucky number,Нещасливий номер
+KEY_NUMBER_DESCRIPTION,Do not try to \ncall this number.,Не намагайтесь \nтелефонувати за цим\nномером
+KEY_GORILKA_TITLE,Ukrainian Gorilka,Українська горілка
+KEY_GORILKA_DESCRIPTION,This is great. \nBecause it is Ukrainian!,Вона неперевершена.\nТому що Українська!
