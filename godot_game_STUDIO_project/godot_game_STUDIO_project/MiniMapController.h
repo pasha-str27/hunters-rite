@@ -42,7 +42,7 @@ namespace godot
 		Vector2 grid_rect_size = Vector2::ZERO;
 	    Vector2 players_pos = Vector2::ZERO;
 
-		Vector2 room_icon_scale = Vector2(4, 4);
+		Vector2 room_icon_scale = Vector2(1, 1);
 
 		Timer* timer = Timer::_new();
 

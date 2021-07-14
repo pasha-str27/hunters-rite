@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/MiniMapBorder.png-05b51feb2b3e3611e32464b65a8f474f.stex"
+path="res://.import/minimap_border.png-3479d9bc723a6a49a5de71d6c6849ee0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/UI/MiniMapBorder.png"
-dest_files=[ "res://.import/MiniMapBorder.png-05b51feb2b3e3611e32464b65a8f474f.stex" ]
+source_file="res://Assets/Sprites/UI/minimap_border.png"
+dest_files=[ "res://.import/minimap_border.png-3479d9bc723a6a49a5de71d6c6849ee0.stex" ]
 
 [params]
 
