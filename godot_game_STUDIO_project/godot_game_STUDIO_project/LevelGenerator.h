@@ -30,11 +30,6 @@ namespace godot
 		int spike_count;
 		int roof_count;
 
-		//	for tests
-		Ref<PackedScene> key_room_sprite = nullptr;
-		Ref<PackedScene> item_room_sprite = nullptr;
-		Ref<PackedScene> boss_room_sprite = nullptr;
-
 		Ref<PackedScene> jertovnik = nullptr;
 		Ref<PackedScene> key_room_pedestal = nullptr;
 

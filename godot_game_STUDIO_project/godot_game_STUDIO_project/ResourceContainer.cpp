@@ -5,16 +5,25 @@
 
 ResourceContainer* ResourceContainer::object = nullptr;
 
-ResourceContainer::ResourceContainer() {
-	_player1_fight = "res://Assets/Prefabs/SoundsEffects/Effects/Player1Fight.tscn";
-	_player2_fight = "res://Assets/Prefabs/SoundsEffects/Effects/Player2Fight.tscn";
-	_player_died = "res://Assets/Prefabs/SoundsEffects/Effects/PlayerDied.tscn";
-	_enemy_take_damage = "res://Assets/Prefabs/SoundsEffects/Effects/EnemyTakeDamage.tscn";
-	_player_take_damage = "res://Assets/Prefabs/SoundsEffects/Effects/PlayerTakeDamage.tscn";
-	_player_revive = "res://Assets/Prefabs/SoundsEffects/Effects/PlayerRevive.tscn";
-	_open_door = "res://Assets/Prefabs/SoundsEffects/Effects/OpenDoors.tscn";
-	_stone_action = "res://Assets/Prefabs/SoundsEffects/Effects/StoneAction.tscn";
-	_collect_key = "res://Assets/Prefabs/SoundsEffects/Effects/CollectKey.tscn";
+ResourceContainer::ResourceContainer() 
+{
+	String link = "res://Assets/Prefabs/SoundsEffects/Effects/";
+	_player1_fight = link + "Player1Fight.tscn";
+	_player2_fight = link + "Player2Fight.tscn";
+	_player_died = link + "PlayerDied.tscn";
+	_enemy_take_damage = link + "EnemyTakeDamage.tscn";
+	_player_take_damage = link + "PlayerTakeDamage.tscn";
+	_player_revive = link + "PlayerRevive.tscn";
+	_open_door = link + "OpenDoors.tscn";
+	_stone_action = link + "StoneAction.tscn";
+	_collect_key = link + "CollectKey.tscn";
+	_collect_bad_item = link + "CollectKey.tscn";
+	_collect_good_item = link + "CollectKey.tscn";
+	_show_next_level = link + "CollectKey.tscn";
+	_shield = link + "CollectKey.tscn";
+	_game_over = link + "CollectKey.tscn";
+	_player_to_ghost = link + "CollectKey.tscn";
+	_dash = link + "CollectKey.tscn";
 }
 
 String godot::ResourceContainer::player1_fight()
@@ -61,3 +70,39 @@ String godot::ResourceContainer::collect_key()
 {
 	return _collect_key;
 }
+
+String godot::ResourceContainer::collect_bad_item()
+{
+	return _collect_bad_item;
+}
+
+String godot::ResourceContainer::collect_good_item()
+{
+	return _collect_good_item;
+}
+
+String godot::ResourceContainer::show_next_level()
+{
+	return _show_next_level;
+}
+
+String godot::ResourceContainer::shield()
+{
+	return _shield;
+}
+
+String godot::ResourceContainer::game_over()
+{
+	return _game_over;
+}
+
+String godot::ResourceContainer::player_to_ghost()
+{
+	return _player_to_ghost;
+}
+
+String godot::ResourceContainer::dash()
+{
+	return _dash;
+}
+

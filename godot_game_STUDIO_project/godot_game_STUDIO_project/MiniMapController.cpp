@@ -59,6 +59,7 @@ void godot::MiniMapController::_register_methods()
 	register_property<MiniMapController, Ref<PackedScene>>("heal_room", &MiniMapController::heal_room, nullptr);
 	register_property<MiniMapController, Ref<PackedScene>>("boss_room", &MiniMapController::boss_room, nullptr);
 	register_property<MiniMapController, float>("zoom", &MiniMapController::zoom, 1.5f);
+	register_property<MiniMapController, Vector2>("icon_scale", &MiniMapController::room_icon_scale, Vector2(1,1));
 }
 
 void godot::MiniMapController::_init()
@@ -192,7 +193,7 @@ void godot::MiniMapController::_update_minimap()
 
 Vector2 godot::MiniMapController::_get_players_pos()
 {
-	auto player = GameManager::current_room->get_global_position();
+	Vector2 player = CurrentRoom::get_singleton()->_get_current_room()->get_global_position();
 
 	int fixed_x = (int)(player.x / step_x) * step_x;
 	int fixed_y = (int)(player.y / step_y) * step_y;

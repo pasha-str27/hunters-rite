@@ -5,6 +5,8 @@
 
 namespace godot
 {
+	class CurrentRoom;
+
 	class FadeAnimation : public AnimationPlayer
 	{
 		GODOT_CLASS(FadeAnimation, AnimationPlayer);

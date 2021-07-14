@@ -1,0 +1,80 @@
+[gd_scene load_steps=35 format=2]
+
+[ext_resource path="res://Assets/Scripts/ItemsContainer.gdns" type="Script" id=1]
+[ext_resource path="res://Assets/Prefabs/Animations/FadeIn.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Prefabs/Items/BadTusk.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/CameraPrefab.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Prefabs/Items/Tusk.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Prefabs/Items/Luck.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Prefabs/Items/MetalSphere.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Prefabs/Items/Glass.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/TutorialSprites.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Prefabs/Items/Chicken.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Prefabs/Items/BottleVine.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Prefabs/Items/DarkNumber.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Assets/Prefabs/Items/Boot.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Assets/Prefabs/Items/FireSword.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/Prefabs/Items/Eye.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Assets/Prefabs/Items/Shield.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Assets/Scripts/TutorialManager.gdns" type="Script" id=17]
+[ext_resource path="res://Assets/Scripts/TutotialGenerator.gdns" type="Script" id=18]
+[ext_resource path="res://Assets/Prefabs/TutorialSpritesSingle.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Assets/Prefabs/Rooms/base.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Assets/Prefabs/Doors/DownDoor.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/Jertovnik.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Assets/Prefabs/Doors/LeftDoor.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Assets/Prefabs/Doors/RightDoor.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Assets/Prefabs/Doors/UpDoor.tscn" type="PackedScene" id=27]
+[ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/pedestal.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Assets/Prefabs/Lock.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Assets/Prefabs/Items/Keys/Key.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Assets/Prefabs/Stone.tscn" type="PackedScene" id=31]
+[ext_resource path="res://Assets/Prefabs/Items/Keys/Key3.tscn" type="PackedScene" id=32]
+[ext_resource path="res://Assets/Prefabs/Items/Keys/Key5.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Assets/Prefabs/Items/Keys/Key2.tscn" type="PackedScene" id=34]
+[ext_resource path="res://Assets/Prefabs/Items/Keys/Key4.tscn" type="PackedScene" id=35]
+[ext_resource path="res://Assets/Prefabs/Items/Keys/Key6.tscn" type="PackedScene" id=36]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="FadeIn" parent="." instance=ExtResource( 2 )]
+
+[node name="Node" type="Node" parent="."]
+
+[node name="ItemsContainer" type="Node" parent="Node"]
+script = ExtResource( 1 )
+Items = [ ExtResource( 3 ), ExtResource( 13 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 12 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 16 ), ExtResource( 5 ) ]
+
+[node name="Camera2D" parent="Node" instance=ExtResource( 4 )]
+script = ExtResource( 17 )
+
+[node name="TutorialSprites" parent="Node" instance=ExtResource( 9 )]
+scale = Vector2( 0.4, 0.4 )
+z_index = 25
+
+[node name="TutorialSpritesSingle" parent="Node" instance=ExtResource( 19 )]
+
+[node name="Generation" type="Node2D" parent="Node"]
+script = ExtResource( 18 )
+__meta__ = {
+"_editor_description_": ""
+}
+map_size = 3
+keys_frequency = 3
+room = ExtResource( 20 )
+down_door = ExtResource( 21 )
+up_door = ExtResource( 27 )
+right_door = ExtResource( 26 )
+left_door = ExtResource( 25 )
+wall_top_count = 1
+floor_count = 1
+stone_count = 1
+spike_count = 1
+roof_count = 1
+jertovnik = ExtResource( 22 )
+key_room_pedestal = ExtResource( 28 )
+keys_prefabs = [ ExtResource( 30 ), ExtResource( 34 ), ExtResource( 32 ), ExtResource( 35 ), ExtResource( 33 ), ExtResource( 36 ) ]
+big_stone = ExtResource( 31 )
+lock_sprite = ExtResource( 29 )
+
+[node name="Items" type="Node2D" parent="."]

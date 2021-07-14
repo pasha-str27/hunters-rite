@@ -38,7 +38,7 @@ void godot::SlimeShootAI::_fight(Node2D* player1, Node2D* player2)
 
 	bullet->set_visible(true);
 
-	bullet->call("_set_dir",(bullet_dir - bullet->get_global_position()).normalized());
+	bullet->call("_set_dir", (bullet_dir - bullet->get_global_position()).normalized());
 }
 
 void godot::SlimeShootAI::_add_bullet(Node* node)
@@ -50,16 +50,16 @@ void godot::SlimeShootAI::change_direction()
 {
 	reset_directions();
 
-	if ((int)GameManager::current_room->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::LEFT).x) == 0)
+	if ((int)CurrentRoom::get_singleton()->_get_current_room()->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::LEFT).x) == 0)
 		directions.push_back(Vector2::LEFT);
 
-	if ((int)GameManager::current_room->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::RIGHT).x) == 0)
+	if ((int)CurrentRoom::get_singleton()->_get_current_room()->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::RIGHT).x) == 0)
 		directions.push_back(Vector2::RIGHT);
 
-	if ((int)GameManager::current_room->call("_get_cell_value", (cur_pos + Vector2::DOWN).y, cur_pos.x) == 0)
+	if ((int)CurrentRoom::get_singleton()->_get_current_room()->call("_get_cell_value", (cur_pos + Vector2::DOWN).y, cur_pos.x) == 0)
 		directions.push_back(Vector2::DOWN);
 
-	if ((int)GameManager::current_room->call("_get_cell_value", (cur_pos + Vector2::UP).y, cur_pos.x) == 0)
+	if ((int)CurrentRoom::get_singleton()->_get_current_room()->call("_get_cell_value", (cur_pos + Vector2::UP).y, cur_pos.x) == 0)
 		directions.push_back(Vector2::UP);
 
 	PlayersContainer* players = PlayersContainer::_get_instance();
@@ -79,7 +79,7 @@ void godot::SlimeShootAI::change_direction()
 bool godot::SlimeShootAI::_is_player_near(Node2D* player)
 {
 	Vector2 player_pos_index = (player->get_global_position()
-		- GameManager::current_room->get_global_position()
+		- CurrentRoom::get_singleton()->_get_current_room()->get_global_position()
 		+ Vector2(896, 544) / 2) / 32;
 
 	bool is_player_ghost = (bool)player->call("_is_ghost_mode");
@@ -136,7 +136,7 @@ void godot::SlimeShootAI::_set_player(Node2D* player)
 
 void godot::SlimeShootAI::_remove_player(Node2D* player)
 {
-	if (first_player!=nullptr && player->get_name() == first_player->get_name())
+	if (first_player != nullptr && player->get_name() == first_player->get_name())
 	{
 		first_player = second_player;
 		second_player = nullptr;

@@ -5,6 +5,8 @@
 
 namespace godot
 {
+	class CurrentRoom;
+
 	class Enemies
 	{
 		static Enemies* list;

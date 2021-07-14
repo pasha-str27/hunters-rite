@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/from player to ghost.wav-a5a2190d44b3e52b487bc6ee3820772e.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/from player to ghost.wav"
+dest_files=[ "res://.import/from player to ghost.wav-a5a2190d44b3e52b487bc6ee3820772e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -42,7 +42,7 @@ namespace godot
 		Vector2 grid_rect_size = Vector2::ZERO;
 	    Vector2 players_pos = Vector2::ZERO;
 
-		Vector2 room_icon_scale = Vector2(4, 4);
+		Vector2 room_icon_scale = Vector2(1, 1);
 
 		Timer* timer = Timer::_new();
 
@@ -58,7 +58,7 @@ namespace godot
 		void _clear_map();
 		void _start_treking();
 		void _load_curr_room(Vector2 curr_room_pos);
-		void _load_undisc_rooms(Array  undisc_rooms_pos);
+		void _load_undisc_rooms(Array undisc_rooms_pos);
 		void _load_special_rooms(Array rooms_pos, String type);
 		void _special_rooms_loader(Array dr, Array kr, Array ir, Array hr, Array br);
 		void _update_special_rooms();

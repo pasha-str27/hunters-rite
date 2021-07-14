@@ -74,6 +74,9 @@
     <ClCompile Include="Spike.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
     <ClCompile Include="ExitHandler.cpp">
       <Filter>Level</Filter>
     </ClCompile>
@@ -173,16 +176,29 @@
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="ResourceContainer.cpp" />
-    <ClCompile Include="BulletPull.cpp" />
     <ClCompile Include="SillyBoyAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="SillyBoyDiedAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="NagaAI.cpp">
       <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialGenerator.cpp">
+      <Filter>Genetation</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialManager.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="PoisonEgg.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="CurrentRoom.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletPull.cpp">
+      <Filter>Ammo</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -263,6 +279,9 @@
     <ClInclude Include="Spike.h">
       <Filter>Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Level</Filter>
+    </ClInclude>
     <ClInclude Include="ExitHandler.h">
       <Filter>Level</Filter>
     </ClInclude>
@@ -341,6 +360,12 @@
     <ClInclude Include="MagnitZone.h">
       <Filter>Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="IEnemyAI.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyAIContext.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
     <ClInclude Include="ExitHandler.h">
       <Filter>Level</Filter>
     </ClInclude>
@@ -377,16 +402,29 @@
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="ResourceContainer.h" />
-    <ClInclude Include="BulletPull.h" />
     <ClInclude Include="SillyBoyAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="SillyBoyDiedAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="GameManager.h" />
     <ClInclude Include="NagaAI.h">
       <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialGenerator.h">
+      <Filter>Genetation</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialManager.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="PoisonEgg.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="CurrentRoom.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletPull.h">
+      <Filter>Ammo</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

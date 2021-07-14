@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://Assets/Sprites/Monsters/Naga/naga/hit/hit03.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Sprites/Monsters/Naga/naga/attack/attack02.png" type="Texture" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://Assets/Sprites/Monsters/Naga/naga/walk/walk05.png" type="Texture" id=28]
 [ext_resource path="res://Assets/Sprites/Monsters/Naga/naga/teleport/naga-sheet.png" type="Texture" id=29]
 [ext_resource path="res://Assets/Prefabs/Particles/Vampirism.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/Poison.tscn" type="PackedScene" id=31]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.2789
@@ -113,14 +114,14 @@ animations = [ {
 "name": "idle",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 18 ) ],
-"loop": false,
-"name": "attack",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 17 ), ExtResource( 20 ), ExtResource( 1 ) ],
 "loop": false,
 "name": "damaged",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 18 ) ],
+"loop": false,
+"name": "attack",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 26 ), ExtResource( 11 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 28 ), ExtResource( 21 ) ],
@@ -139,12 +140,11 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="CircleShape2D" id=21]
-radius = 20.139
+[sub_resource type="CapsuleShape2D" id=21]
+radius = 19.261
+height = 8.74976
 
 [node name="NagaBoss" type="Node2D"]
-z_index = 6
-z_as_relative = false
 script = ExtResource( 4 )
 enemy_price = 50.0
 
@@ -157,7 +157,8 @@ z_index = 25
 collision_layer = 4
 collision_mask = 512
 script = ExtResource( 3 )
-HP = 750.0
+bullet = ExtResource( 31 )
+HP = 25.0
 "Death particles" = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NagaBoss"]
@@ -165,8 +166,6 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="NagaBoss/CollisionShape2D"]
 position = Vector2( 12.4388, -11.8355 )
-z_index = 6
-z_as_relative = false
 frames = SubResource( 20 )
 animation = "damaged"
 frame = 2
@@ -178,11 +177,8 @@ playing = true
 shape = SubResource( 21 )
 
 [node name="SpawnParticles" parent="NagaBoss" instance=ExtResource( 6 )]
-z_as_relative = false
 
 [node name="Vampirism" parent="NagaBoss" instance=ExtResource( 30 )]
-z_index = 10
-z_as_relative = false
 
 [connection signal="body_entered" from="NagaBoss/Area2D" to="NagaBoss" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="NagaBoss/Area2D" to="NagaBoss" method="_on_Area2D_body_exited"]

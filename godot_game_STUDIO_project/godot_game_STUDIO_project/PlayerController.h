@@ -30,9 +30,11 @@ namespace godot
 		float speed;
 		float _saved_speed;
 		Timer* timer;
+		Timer* timer_poison;
 		bool can_move;
 		bool is_alive;
 		bool is_special;
+		float diff;
 
 		int number_to_next_item;
 		float attack_speed_delta;
@@ -113,5 +115,7 @@ namespace godot
 		void _set_right_HP(float value);
 		void _on_ghost_hide();
 		void _flip_ghost(bool value);
+		void _take_poison();
+		void _on_poison_end();
 	};
 }
