@@ -159,7 +159,6 @@ position = Vector2( 0, 6.83333 )
 shape = SubResource( 17 )
 
 [node name="SpawnParticles" parent="SlimeBoss" instance=ExtResource( 6 )]
-z_as_relative = false
 
 [node name="EnemiesHolder" type="Node" parent="SlimeBoss"]
 script = ExtResource( 9 )

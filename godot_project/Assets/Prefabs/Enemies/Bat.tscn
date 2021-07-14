@@ -169,12 +169,10 @@ shape = SubResource( 22 )
 shape = SubResource( 23 )
 
 [node name="BatDashParticles" parent="Bat" instance=ExtResource( 6 )]
-z_as_relative = false
 amount = 100
 lifetime = 0.5
 
 [node name="SpawnParticles" parent="Bat" instance=ExtResource( 7 )]
-z_as_relative = false
 
 [connection signal="body_entered" from="Bat/Area2D" to="Bat" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Bat/angry_zone" to="Bat" method="_set_angry"]
