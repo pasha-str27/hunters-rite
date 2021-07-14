@@ -44,12 +44,17 @@ void godot::MenuButtons::_ready()
 	items_grid = rld->load("res://Assets/Prefabs/Scenes/ChoosePlayer.tscn");
 	game_scene = rld->load("res://main_scene.tscn");
 
-	cast_to<Camera2D>(get_parent())->_set_current(true);
+	if(get_parent()->has_method("_set_current"))
+		cast_to<Camera2D>(get_parent())->_set_current(true);
+
+	Godot::print("here");
 
 	// Set focus button in Menu and Notise scenes
 	set_focus_mode(true);
 
 	std::vector<String> name_buttons{ "Play", "Flower_button","Melee", "Back", "Resume", "Retry" };
+
+	Godot::print("here");
 
 	if (get_name() == "Menu" && find_parent("root") != nullptr && !find_parent("root")->has_node("MenuBackMusic"))
 	{
@@ -66,6 +71,7 @@ void godot::MenuButtons::_ready()
 
 	if (get_name() == "Option")
 	{
+		cast_to<Camera2D>(get_parent()->get_parent())->_set_current(true);
 		auto tmp_node = get_child(1)->get_child(0)->get_child(0);
 		cast_to<Button>(tmp_node->get_child(0))->set_pressed(is_full_screen);
 		cast_to<Slider>(tmp_node->get_child(2))->set_value(effect_audio_level);
@@ -280,6 +286,15 @@ void godot::MenuButtons::_on_Items_pressed(Variant)
 
 void godot::MenuButtons::_on_Back_pressed(Variant)
 {
+	if (get_parent()->get_parent()->get_name() == "Pause")
+	{
+		Node2D* node = cast_to<Node2D>(get_parent()->get_parent());
+
+		cast_to<TextureButton>(node->get_child(0)->find_node("Options"))->grab_focus();
+		get_parent()->queue_free();
+
+		return;
+	}
 	change_scene(menu_scene);
 }
 
@@ -370,7 +385,6 @@ void godot::MenuButtons::_on_Items_pause_pressed(Input*)
 	cast_to<Control>(get_parent()->find_node("Items_in_pause"))->set_visible(true);
 	this->set_visible(false);
 	cast_to<TextureButton>(get_parent()->find_node("Back_button")->get_child(0))->grab_focus();
-
 }
 
 void godot::MenuButtons::_on_Retry_pressed(Variant)
@@ -400,7 +414,11 @@ void godot::MenuButtons::_on_Retry_pressed(Variant)
 
 void godot::MenuButtons::_on_Options_pause_pressed(Input*)
 {
-	Godot::print("maybe next time");
+	ResourceLoader* rld = ResourceLoader::get_singleton();
+	Ref<PackedScene> res = rld->load("res://Assets/Prefabs/Scenes/OptionsNode.tscn");
+	Node2D* node = cast_to<Node2D>(res->instance());
+	get_parent()->add_child(node);
+	node->_edit_set_scale(Vector2(0.75, 0.75));
 }
 
 
