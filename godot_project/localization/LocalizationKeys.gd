@@ -1,0 +1,46 @@
+# Keys for LocalizationManger to use in source code: MIT License
+# @author Vladimir Petrenko
+tool
+class_name LocalizationKeys
+
+const KEY_NAME = "KEY_NAME"
+const KEY_PLAY = "KEY_PLAY"
+const KEY_SETTINGS = "KEY_SETTINGS"
+const KEY_LANGUAGE = "KEY_LANGUAGE"
+const KEY_BACK = "KEY_BACK"
+const KEY_QUIT = "KEY_QUIT"
+const KEY_TITLE = "KEY_TITLE"
+const KEY_SINGLE_MODE = "KEY_SINGLE_MODE"
+const KEY_COOPERATIVE_MODE = "KEY_COOPERATIVE_MODE"
+const KEY_AUTHORS = "KEY_AUTHORS"
+const KEY_RETRY = "KEY_RETRY"
+const KEY_GAME_OVER = "KEY_GAME_OVER"
+const KEY_MENU = "KEY_MENU"
+const KEY_MODE = "KEY_MODE"
+const KEY_EFFECTS = "KEY_EFFECTS"
+const KEY_MUSIC = "KEY_MUSIC"
+const KEY_FULLSCREEN = "KEY_FULLSCREEN"
+const KEY_RESUME = "KEY_RESUME"
+const KEY_ITEMS = "KEY_ITEMS"
+
+const KEYS = [
+ "KEY_NAME",
+ "KEY_PLAY",
+ "KEY_SETTINGS",
+ "KEY_LANGUAGE",
+ "KEY_BACK",
+ "KEY_QUIT",
+ "KEY_TITLE",
+ "KEY_SINGLE_MODE",
+ "KEY_COOPERATIVE_MODE",
+ "KEY_AUTHORS",
+ "KEY_RETRY",
+ "KEY_GAME_OVER",
+ "KEY_MENU",
+ "KEY_MODE",
+ "KEY_EFFECTS",
+ "KEY_MUSIC",
+ "KEY_FULLSCREEN",
+ "KEY_RESUME",
+ "KEY_ITEMS"
+]

@@ -161,7 +161,6 @@
     <ClCompile Include="SlimeEnemiesHolder.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="MimicAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
@@ -192,6 +191,12 @@
     </ClCompile>
     <ClCompile Include="Ball.cpp">
       <Filter>Football</Filter>
+    </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>Football</Filter>
+    </ClCompile>
+    <ClCompile Include="LocaledLabel.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -374,7 +379,6 @@
     <ClInclude Include="SlimeEnemiesHolder.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Ball.h" />
     <ClInclude Include="MimicAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
@@ -411,6 +415,12 @@
     </ClInclude>
     <ClInclude Include="Ball.h">
       <Filter>Football</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>Football</Filter>
+    </ClInclude>
+    <ClInclude Include="LocaledLabel.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

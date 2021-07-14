@@ -3,6 +3,8 @@
 #include "headers.h"
 #endif
 
+#include <TranslationServer.hpp>
+
 bool MenuButtons::was_focused = false;
 bool MenuButtons::was_loaded = false;
 bool MenuButtons::is_full_screen = false;
@@ -28,7 +30,9 @@ MenuButtons::~MenuButtons() {
 	timer_music = nullptr;
 }
 
-void godot::MenuButtons::_init() {}
+void godot::MenuButtons::_init() {
+	TranslationServer::get_singleton()->set_locale("uk");
+}
 
 void godot::MenuButtons::_ready()
 {
@@ -44,6 +48,7 @@ void godot::MenuButtons::_ready()
 	game_scene = rld->load("res://main_scene.tscn");
 
 	cast_to<Camera2D>(get_parent())->_set_current(true);
+
 
 	// Set focus button in Menu and Notise scenes
 	set_focus_mode(true);
@@ -200,9 +205,9 @@ void godot::MenuButtons::_change_button_name()
 	auto mode_label = cast_to<Label>(find_node("ModeText"));
 
 	if (single_mode)
-		mode_label->set_text("Single");
+		mode_label->set_text(tr("KEY_SINGLE_MODE"));
 	else
-		mode_label->set_text("Cooperative");
+		mode_label->set_text(tr("KEY_COOPERATIVE_MODE"));
 
 }
 
@@ -222,7 +227,7 @@ void godot::MenuButtons::_input(Input* event)
 		click_counter++;
 
 		if (click_counter > 7)
-			cast_to<Label>(find_node("QuitLabel"))->set_text("Authors");
+			cast_to<Label>(find_node("QuitLabel"))->set_text(tr("KEY_AUTHORS"));
 	}
 
 	// change coop/single mode
@@ -442,7 +447,7 @@ void godot::MenuButtons::_on_Quit_focus(bool mode)
 	}
 	was_quit_focused = mode;
 	click_counter = 0;
-	cast_to<Label>(find_node("QuitLabel"))->set_text("Quit");
+	cast_to<Label>(find_node("QuitLabel"))->set_text(tr("KEY_QUIT"));
 }
 
 void godot::MenuButtons::_on_Mode_focus()

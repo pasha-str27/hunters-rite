@@ -127,6 +127,7 @@ using namespace godot;
 #include "ResourceContainer.h"
 #include "NagaAI.h"
 #include "PoisonEgg.h"
+#include "LocaledLabel.h"
 
 //	state
 #include "ISlimeAttackState.h"
