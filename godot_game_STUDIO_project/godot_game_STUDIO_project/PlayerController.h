@@ -46,6 +46,7 @@ namespace godot
 		Particles2D* revive_particles = nullptr;
 
 		Node* camera_shake = nullptr;
+		AnimatedSprite* ghost_sprite = nullptr;
 
 	public:
 		static void _register_methods();
@@ -110,5 +111,7 @@ namespace godot
 		void _continue_moving();
 		void _set_is_attacking(bool value);
 		void _set_right_HP(float value);
+		void _on_ghost_hide();
+		void _flip_ghost(bool value);
 	};
 }

@@ -146,6 +146,8 @@ library = ExtResource( 8 )
 radius = 17.5739
 
 [node name="StatueMelee" type="Node2D"]
+z_index = 6
+z_as_relative = false
 script = ExtResource( 9 )
 __meta__ = {
 "_editor_description_": ""
@@ -157,7 +159,8 @@ enemy_price = 31.0
 "statue_melee",
 ]]
 position = Vector2( 0, -16 )
-z_index = 25
+z_index = 6
+z_as_relative = false
 collision_layer = 4
 collision_mask = 512
 script = ExtResource( 4 )
@@ -205,13 +208,15 @@ shape = SubResource( 26 )
 [node name="Sprite" type="Sprite" parent="StatueMelee/zone"]
 position = Vector2( -0.0371649, -0.0371628 )
 scale = Vector2( 0.171124, 0.171124 )
-z_index = 1
+z_index = 6
+z_as_relative = false
 texture = ExtResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StatueMelee/zone/Sprite"]
 anims/idle = SubResource( 27 )
 
 [node name="SpawnParticles" parent="StatueMelee" instance=ExtResource( 6 )]
+z_as_relative = false
 
 [node name="MagnitZone" type="Area2D" parent="StatueMelee"]
 position = Vector2( 0.198425, 19.6441 )

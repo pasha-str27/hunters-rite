@@ -122,6 +122,8 @@ animations = [ {
 radius = 20.139
 
 [node name="Mimic" type="Node2D"]
+z_index = 6
+z_as_relative = false
 script = ExtResource( 4 )
 enemy_price = 50.0
 
@@ -154,6 +156,8 @@ __meta__ = {
 shape = SubResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Mimic/CollisionShape2D"]
+z_index = 6
+z_as_relative = false
 frames = SubResource( 22 )
 animation = "idle"
 playing = true
@@ -164,6 +168,7 @@ playing = true
 shape = SubResource( 23 )
 
 [node name="SpawnParticles" parent="Mimic" instance=ExtResource( 6 )]
+z_as_relative = false
 
 [connection signal="body_entered" from="Mimic/Area2D" to="Mimic" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Mimic/Area2D" to="Mimic" method="_on_Area2D_body_exited"]

@@ -1,20 +1,26 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Sprites/Items/key.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Scripts/Key.gdns" type="Script" id=2]
+[ext_resource path="res://Assets/Prefabs/Particles/CollectKey.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 7.72328
 height = 15.5468
 
 [node name="Key" type="Node2D"]
+z_index = 9
+z_as_relative = false
 script = ExtResource( 2 )
-key_type = "key_A"
-key_color = Color( 0.843137, 0.835294, 0.427451, 1 )
+key_type = "key_D"
+key_color = Color( 0.427451, 0.796078, 0.843137, 1 )
+particles = ExtResource( 3 )
 
 [node name="key" type="Sprite" parent="."]
-modulate = Color( 0.843137, 0.835294, 0.427451, 1 )
+modulate = Color( 0.427451, 0.796078, 0.843137, 1 )
 scale = Vector2( 0.5, 0.5 )
+z_index = 9
+z_as_relative = false
 texture = ExtResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]

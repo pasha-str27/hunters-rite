@@ -18,6 +18,7 @@ namespace godot
 		Timer* timer_change_dir;
 		Timer* timer_check_angry;
 		Timer* timer_particles = nullptr;
+		Timer* death_timer = nullptr;
 
 		float HP;
 		float max_HP;
@@ -28,6 +29,8 @@ namespace godot
 		bool can_move = false;
 		bool was_died = false;
 		float time_to_revive = 5;
+
+		Vector2 goal = Vector2::ZERO;
 
 		AnimatedSprite* sp = nullptr;
 
@@ -73,5 +76,7 @@ namespace godot
 			void _set_direction(Node* player, Vector2 direction);
 			void _revive();
 			void _on_Area2D_body_entered_player_fight(Node* node);
+			AnimatedSprite* _get_animated_sprite();
+			void _add_to_HP(float);
 	};
 }

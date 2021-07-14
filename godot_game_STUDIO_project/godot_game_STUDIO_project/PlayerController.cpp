@@ -56,7 +56,8 @@ void godot::PlayerController::_register_methods()
 	register_method("_continue_moving", &PlayerController::_continue_moving);
 	register_method("_stop_moving", &PlayerController::_stop_moving);
 	register_method("_set_is_attacking", &PlayerController::_set_is_attacking);
-	
+	register_method("_on_ghost_hide", &PlayerController::_on_ghost_hide);
+	register_method("_flip_ghost", &PlayerController::_flip_ghost);
 	
 	
 	register_property<PlayerController, float>("hp", &PlayerController::_hp, 0);
@@ -137,7 +138,13 @@ void godot::PlayerController::_ready()
 	dash_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "DashParticles"));
 	revive_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "ReviveParticles"));
 
+	ghost_sprite = cast_to<AnimatedSprite>(get_node("GhostSprite"));
+	ghost_sprite->set_visible(false);
+
 	camera_shake = get_node("/root/Node2D/Node/Camera2D")->get_node("CameraShake");
+
+	timer = Timer::_new();
+	add_child(timer);
 }
 
 void godot::PlayerController::_start_timer()
@@ -237,6 +244,15 @@ void godot::PlayerController::_add_bullet(Node* node)
 
 void godot::PlayerController::_process(float delta)
 {
+
+	if (is_ghost_mode) 
+	{
+		String animation_name = ghost_sprite->get_animation();
+		if (!ghost_sprite->get_sprite_frames()->get_animation_loop(animation_name) 
+			&& ghost_sprite->get_sprite_frames()->get_frame_count(animation_name) - 1 == ghost_sprite->get_frame())
+			ghost_sprite->play("idle");
+	}
+
 	if (can_move && (is_alive || is_ghost_mode))
 	{
 		current_player_strategy->_process_input();
@@ -417,6 +433,9 @@ void godot::PlayerController::_die()
 	{
 		is_ghost_mode = true;
 		current_player_strategy->_set_strategy(player_producer->_get_player_ghost(this, bullet_prefab));
+		cast_to<AnimatedSprite>(get_node("AnimatedSprite"))->set_visible(false);
+		ghost_sprite->set_visible(true);
+		ghost_sprite->play("show");
 
 		if (get_name() == "Player1")
 			PlayersContainer::_get_instance()->_set_player1_regular(cast_to<Node2D>(get_parent()));
@@ -561,6 +580,7 @@ void godot::PlayerController::_set_was_revived(bool value)
 
 void godot::PlayerController::_ghost_to_player()
 {
+	ghost_sprite->play("hide");
 	is_alive = true;
 	can_move = true;
 	is_ghost_mode = false;
@@ -578,6 +598,11 @@ void godot::PlayerController::_ghost_to_player()
 		PlayersContainer::_get_instance()->_set_player1(this);
 	if (get_name() == "Player2")
 		PlayersContainer::_get_instance()->_set_player2(this);
+
+
+	timer->connect("timeout", this, "_on_ghost_hide");
+	timer->start(.5f);
+
 }
 
 bool godot::PlayerController::_is_ghost_mode()
@@ -610,4 +635,17 @@ void godot::PlayerController::_set_is_attacking(bool value)
 void godot::PlayerController::_set_right_HP(float value)
 {
 	current_player_strategy->_set_right_HP(value);
+}
+
+void godot::PlayerController::_on_ghost_hide()
+{
+	timer->disconnect("timeout", this, "_on_ghost_hide");
+
+	ghost_sprite->set_visible(false);
+	cast_to<AnimatedSprite>(get_node("AnimatedSprite"))->set_visible(true);
+}
+
+void godot::PlayerController::_flip_ghost(bool value)
+{
+	ghost_sprite->set_flip_h(value);
 }

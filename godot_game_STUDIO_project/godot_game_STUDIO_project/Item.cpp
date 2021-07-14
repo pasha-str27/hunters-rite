@@ -7,7 +7,6 @@ void godot::Item::_register_methods()
 {
 	register_method("_ready", &Item::_ready);
 	register_method("_init", &Item::_init);
-	register_method("_process", &Item::_process);
 	register_method("_on_Area2D_body_entered", &Item::_on_Area2D_body_entered);
 	register_method("_get_is_buff", &Item::_get_is_buff);
 
@@ -168,9 +167,5 @@ float godot::Item::_get_item_price()
 }
 
 void godot::Item::_init()
-{
-}
-
-void godot::Item::_process()
 {
 }

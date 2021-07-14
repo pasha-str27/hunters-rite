@@ -15,7 +15,7 @@ godot::SlimeBossAI::SlimeBossAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : En
 
 	jump_zone = cast_to<Node2D>(_get_enemy()->get_parent()->get_node("jump_zone"));
 	wave_node = cast_to<Node2D>(_get_enemy()->get_parent()->get_node("DamageWave"));
-	Array arr = CameraController::current_room->call("_get_enemy_spawn_positions");
+	Array arr = GameManager::current_room->call("_get_enemy_spawn_positions");
 	places_to_spawn = arr[0];
 	enemies_to_spawn = _get_enemy()->get_node("EnemiesHolder")->call("_get_enemies_list");
 	camera_shake = _get_enemy()->get_node("/root/Node2D/Node/Camera2D")->get_node("CameraShake");
@@ -71,7 +71,7 @@ void godot::SlimeBossAI::_shoot()
 		return;
 
 	Vector2 bullet_dir = target_player;
-	Vector2 bullet_position = cast_to<Node2D>(_get_enemy()->get_node("Area2D")->get_child(0))->get_global_position();
+	Vector2 bullet_position = _get_enemy()->get_global_position();
 
 	std::vector<Node2D*> bullets;
 

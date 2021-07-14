@@ -12,18 +12,18 @@ void godot::SpawnEnemyController::_register_methods()
 	register_method("_get_current_level_name", &SpawnEnemyController::_get_current_level_name);
 	
 	register_property<SpawnEnemyController, Ref<PackedScene>>("Altar prefab", &SpawnEnemyController::altar, nullptr);
-	//register_property<SpawnEnemyController, int>("Levels Count", &SpawnEnemyController::levels_count, 7);
 	register_property<SpawnEnemyController, Array>("enemy_list", &SpawnEnemyController::enemy_list_prefabs, {});
 	register_property<SpawnEnemyController, Ref<PackedScene>>("boss_prefab", &SpawnEnemyController::boss_prefab, nullptr);
 	register_property<SpawnEnemyController, Ref<PackedScene>>("boss_slime_prefab", &SpawnEnemyController::boss_slime_prefab, nullptr);
+	register_property<SpawnEnemyController, Ref<PackedScene>>("spider_prefab", &SpawnEnemyController::spider_prefab, nullptr);
 }
 
 void godot::SpawnEnemyController::SpawnEnemies()
 {
 	Enemies* enemies = Enemies::get_singleton();
 
-	if ((String)CameraController::current_room->call("_get_room_type") == "boss_room"
-		&& !(bool)CameraController::current_room->call("_get_were_here"))
+	if ((String)GameManager::current_room->call("_get_room_type") == "boss_room"
+		&& !(bool)GameManager::current_room->call("_get_were_here"))
 	{
 		enemies->set_enemy_to_spawn_count(0);
 		enemies->set_spawning(true);
@@ -32,8 +32,8 @@ void godot::SpawnEnemyController::SpawnEnemies()
 		return;
 	}
 
-	if ((String)CameraController::current_room->call("_get_room_type") != "game_room" 
-		|| (bool)CameraController::current_room->call("_get_were_here"))
+	if ((String)GameManager::current_room->call("_get_room_type") != "game_room"
+		|| (bool)GameManager::current_room->call("_get_were_here"))
 	{
 		enemies->set_spawning(false);
 		return;
@@ -42,13 +42,13 @@ void godot::SpawnEnemyController::SpawnEnemies()
 	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
 
-	float current_value = 50; //_calculate_room_difficulty();
+	float current_value = 100; //_calculate_room_difficulty();
 	std::vector<Vector2> taken_positions;
 
 	enemies->set_enemy_to_spawn_count(0);
 	enemies->set_spawning(true);
 
-	Array enemy_list = enemy_list_prefabs[CameraController::current_level-1].operator godot::Array();
+	Array enemy_list = enemy_list_prefabs[GameManager::current_level-1].operator godot::Array();
 
 	float min_enemy_price = _find_min_enemy_price();
 
@@ -65,16 +65,16 @@ void godot::SpawnEnemyController::SpawnEnemies()
 			{
 				pos_x = rng->randi_range(1, 26);
 				pos_y = rng->randi_range(4, 15);
-			} while (!(bool)CameraController::current_room->call("_is_empty_pos", pos_y, pos_x));
+			} while (!(bool)GameManager::current_room->call("_is_empty_pos", pos_y, pos_x));
 			
 			enemies->set_enemy_to_spawn_count(enemies->get_enemy_to_spawn_count() + 1);
 
 			taken_positions.push_back(Vector2(pos_x, pos_y));
-			CameraController::current_room->call("_add_new_enemy", enemy, (Vector2(pos_x, pos_y) * 32
-				+ CameraController::current_room->get_global_position()
+			GameManager::current_room->call("_add_new_enemy", enemy, (Vector2(pos_x, pos_y) * 32
+				+ GameManager::current_room->get_global_position()
 				- Vector2(896, 544) / 2 + Vector2(16, 16)));
 
-			CameraController::current_room->call("_set_cell_value", pos_y, pos_x, 7);
+			GameManager::current_room->call("_set_cell_value", pos_y, pos_x, 7);
 		}
 	}
 
@@ -82,63 +82,63 @@ void godot::SpawnEnemyController::SpawnEnemies()
 		enemies->set_spawning(false);
 
 	for(int i=0;i< taken_positions.size();++i)
-		CameraController::current_room->call("_set_cell_value", taken_positions[i].y, taken_positions[i].x, 0);
+		GameManager::current_room->call("_set_cell_value", taken_positions[i].y, taken_positions[i].x, 0);
 }
 
 void godot::SpawnEnemyController::SpawnBoss()
 {
-	if (CameraController::current_level == 2)
+	if (GameManager::current_level == 2)
 	{
-		get_parent()->call("_start_mute_volume");
-		Enemies::get_singleton()->set_enemy_to_spawn_count(1);
-		auto boss = cast_to<Node2D>(boss_prefab->instance());
-		boss->set_global_position(cast_to<Node2D>(get_parent())->get_global_position());
-		get_node("/root/Node2D/Node")->add_child(boss, true);
+		_spawn_boss(boss_prefab);
 
-		if (boss->has_method("_change_start_parameters"))
+		std::vector<Vector2> taken_positions;
+
+		auto enemies = Enemies::get_singleton();
+
+		enemies->set_spawning(true);
+
+		RandomNumberGenerator* rng = RandomNumberGenerator::_new();
+		rng->randomize();
+
+		int spider_count = 2;
+		for (int i = 0; i < spider_count; ++i)
 		{
-			boss->call("_change_start_parameters");
-			return;
+			Node2D* enemy = cast_to<Node2D>(spider_prefab->instance());
+			int pos_x;
+			int pos_y;
+			do
+			{
+				pos_x = rng->randi_range(1, 26);
+				pos_y = rng->randi_range(4, 15);
+			} while (!(bool)GameManager::current_room->call("_is_empty_pos", pos_y, pos_x));
+
+			enemies->set_enemy_to_spawn_count(enemies->get_enemy_to_spawn_count() + 1);
+
+			taken_positions.push_back(Vector2(pos_x, pos_y));
+			GameManager::current_room->call("_add_new_enemy", enemy, (Vector2(pos_x, pos_y) * 32
+				+ GameManager::current_room->get_global_position()
+				- Vector2(896, 544) / 2 + Vector2(16, 16)));
+
+			GameManager::current_room->call("_set_cell_value", pos_y, pos_x, 7);
 		}
 
-		for (int i = 0; i < boss->get_child_count(); ++i)
-			if (boss->get_child(i)->has_method("_change_start_parameters"))
-			{
-				boss->get_child(i)->call("_change_start_parameters");
-				return;
-			}
+		for (int i = 0; i < taken_positions.size(); ++i)
+			GameManager::current_room->call("_set_cell_value", taken_positions[i].y, taken_positions[i].x, 0);
+
+		taken_positions.clear();
 	}
 	else
 	{
-		if (CameraController::current_level == 5)
-		{
-			get_parent()->call("_start_mute_volume");
-			Enemies::get_singleton()->set_enemy_to_spawn_count(1);
-			auto boss = cast_to<Node2D>(boss_slime_prefab->instance());
-			boss->set_global_position(cast_to<Node2D>(get_parent())->get_global_position());
-			get_node("/root/Node2D/Node")->add_child(boss, true);
-
-			if (boss->has_method("_change_start_parameters"))
-			{
-				boss->call("_change_start_parameters");
-				return;
-			}
-
-			for (int i = 0; i < boss->get_child_count(); ++i)
-				if (boss->get_child(i)->has_method("_change_start_parameters"))
-				{
-					boss->get_child(i)->call("_change_start_parameters");
-					return;
-				}
-		}
+		if (GameManager::current_level == 5)
+			_spawn_boss(boss_slime_prefab);
 		else
 		{
-			if (!CameraController::current_room->has_node("exit"))
+			if (!GameManager::current_room->has_node("exit"))
 			{
 				Ref<PackedScene> exit_prefab = nullptr;
 				exit_prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/exit.tscn");
 				Node2D* exit_node = Node::cast_to<Node2D>(exit_prefab->instance());
-				CameraController::current_room->add_child(exit_node, true);
+				GameManager::current_room->add_child(exit_node, true);
 			}
 		}
 	}
@@ -301,7 +301,7 @@ godot::SpawnEnemyController::~SpawnEnemyController()
 
 float godot::SpawnEnemyController::_find_min_enemy_price()
 {
-	Array enemy_list = enemy_list_prefabs[CameraController::current_level - 1].operator godot::Array();;
+	Array enemy_list = enemy_list_prefabs[GameManager::current_level - 1].operator godot::Array();;
 	float min_enemy_price = cast_to<PackedScene>(enemy_list[0])->instance()->call("_get_enemy_price");
 
 	for (int i = 1; i < enemy_list.size(); ++i)
@@ -309,4 +309,26 @@ float godot::SpawnEnemyController::_find_min_enemy_price()
 			min_enemy_price = cast_to<PackedScene>(enemy_list[i])->instance()->call("_get_enemy_price");
 	
 	return min_enemy_price;
+}
+
+void godot::SpawnEnemyController::_spawn_boss(Ref<PackedScene> boss_prefab)
+{
+	get_parent()->call("_start_mute_volume");
+	Enemies::get_singleton()->set_enemy_to_spawn_count(1);
+	auto boss = cast_to<Node2D>(boss_prefab->instance());
+	boss->set_global_position(cast_to<Node2D>(get_parent())->get_global_position());
+	get_node("/root/Node2D/Node")->add_child(boss, true);
+
+	if (boss->has_method("_change_start_parameters"))
+	{
+		boss->call("_change_start_parameters");
+		return;
+	}
+
+	for (int i = 0; i < boss->get_child_count(); ++i)
+		if (boss->get_child(i)->has_method("_change_start_parameters"))
+		{
+			boss->get_child(i)->call("_change_start_parameters");
+			return;
+		}
 }

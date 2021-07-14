@@ -8,7 +8,7 @@ bool MenuButtons::was_loaded = false;
 bool MenuButtons::is_full_screen = false;
 float MenuButtons::music_audio_level = -12.5;
 float MenuButtons::effect_audio_level = 6;
-GameMode MenuButtons::game_mode = COOP;
+GameMode MenuButtons::game_mode = SHOOTER;
 AudioStreamPlayer2D* MenuButtons::audio = nullptr;
 
 MenuButtons::MenuButtons()
@@ -131,7 +131,7 @@ void MenuButtons::_register_methods()
 
 void godot::MenuButtons::_start_game(int name)
 {
-	CameraController::show_tutorial = true;
+	GameManager::show_tutorial = true;
 	game_mode = GameMode(name);
 	_play_effect();
 	add_child(fade->instance());
@@ -465,7 +465,7 @@ void godot::MenuButtons::_on_animated_focus_exited(String button_name, String an
 // -------Work with scenes-------
 void godot::MenuButtons::_reload_scene()
 {
-	CameraController::show_tutorial = true;
+	GameManager::show_tutorial = true;
 	timer->disconnect("timeout", this, "_reload_scene");
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	Ref<PackedScene> res = rld->load("res://main_scene.tscn");
