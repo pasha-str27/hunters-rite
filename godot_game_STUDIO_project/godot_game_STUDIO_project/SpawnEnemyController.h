@@ -21,6 +21,7 @@ namespace godot
 		Ref<PackedScene> boss_prefab = nullptr;
 		Ref<PackedScene> pedestal = nullptr;
 		Ref<PackedScene> boss_slime_prefab = nullptr;
+		Ref<PackedScene> naga_boss_prefab = nullptr;
 		Ref<PackedScene> spider_prefab = nullptr;
 		Ref<PackedScene> slime_prefab = nullptr;
 		Timer* timer = nullptr;

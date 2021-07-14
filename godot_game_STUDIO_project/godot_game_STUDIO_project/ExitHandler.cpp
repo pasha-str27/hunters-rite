@@ -51,7 +51,7 @@ void godot::ExitHandler::_on_Area2D_area_entered(Node* other)
 		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
 			PlayersContainer::_get_instance()->_get_player2_regular()->call("_change_moving", false);
 
-		if (GameManager::current_level == 5 || MenuButtons::game_type==TUTORIAL)
+		if (GameManager::current_level == 10 || MenuButtons::game_type==TUTORIAL)
 		{
 			MenuButtons::was_loaded = false;
 			add_child(fade_out->instance());

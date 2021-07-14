@@ -17,6 +17,7 @@ void godot::SpawnEnemyController::_register_methods()
 	register_property<SpawnEnemyController, Ref<PackedScene>>("boss_slime_prefab", &SpawnEnemyController::boss_slime_prefab, nullptr);
 	register_property<SpawnEnemyController, Ref<PackedScene>>("spider_prefab", &SpawnEnemyController::spider_prefab, nullptr);
 	register_property<SpawnEnemyController, Ref<PackedScene>>("slime_prefab", &SpawnEnemyController::slime_prefab, nullptr);
+	register_property<SpawnEnemyController, Ref<PackedScene>>("naga_boss_prefab", &SpawnEnemyController::naga_boss_prefab, nullptr);
 }
 
 void godot::SpawnEnemyController::SpawnEnemies()
@@ -117,7 +118,9 @@ void godot::SpawnEnemyController::SpawnEnemies()
 
 void godot::SpawnEnemyController::SpawnBoss()
 {
-	if (GameManager::current_level == 2)
+	switch (GameManager::current_level)
+	{
+	case 2:
 	{
 		_spawn_boss(boss_prefab);
 
@@ -156,21 +159,29 @@ void godot::SpawnEnemyController::SpawnBoss()
 			CurrentRoom::get_singleton()->_get_current_room()->call("_set_cell_value", taken_positions[i].y, taken_positions[i].x, 0);
 
 		taken_positions.clear();
+		break;
 	}
-	else
+	case 5:
 	{
-		if (GameManager::current_level == 5)
-			_spawn_boss(boss_slime_prefab);
-		else
+		_spawn_boss(boss_slime_prefab);
+		break;
+	}
+	case 10:
+	{
+		_spawn_boss(naga_boss_prefab);
+		break;
+	}
+	default:
+	{
+		if (!CurrentRoom::get_singleton()->_get_current_room()->has_node("exit"))
 		{
-			if (!CurrentRoom::get_singleton()->_get_current_room()->has_node("exit"))
-			{
-				Ref<PackedScene> exit_prefab = nullptr;
-				exit_prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/exit.tscn");
-				Node2D* exit_node = Node::cast_to<Node2D>(exit_prefab->instance());
-				CurrentRoom::get_singleton()->_get_current_room()->add_child(exit_node, true);
-			}
+			Ref<PackedScene> exit_prefab = nullptr;
+			exit_prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/exit.tscn");
+			Node2D* exit_node = Node::cast_to<Node2D>(exit_prefab->instance());
+			CurrentRoom::get_singleton()->_get_current_room()->add_child(exit_node, true);
 		}
+		break;
+	}
 	}
 }
 
