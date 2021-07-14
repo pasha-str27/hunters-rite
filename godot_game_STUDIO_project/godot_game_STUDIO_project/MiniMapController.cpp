@@ -59,6 +59,7 @@ void godot::MiniMapController::_register_methods()
 	register_property<MiniMapController, Ref<PackedScene>>("heal_room", &MiniMapController::heal_room, nullptr);
 	register_property<MiniMapController, Ref<PackedScene>>("boss_room", &MiniMapController::boss_room, nullptr);
 	register_property<MiniMapController, float>("zoom", &MiniMapController::zoom, 1.5f);
+	register_property<MiniMapController, Vector2>("icon_scale", &MiniMapController::room_icon_scale, Vector2(1,1));
 }
 
 void godot::MiniMapController::_init()
