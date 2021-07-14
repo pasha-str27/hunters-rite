@@ -251,7 +251,8 @@ void godot::PlayerMelee::_start_special()
 {
 	_set_safe_mode(true);
 	cast_to<AnimationPlayer>(_get_object()->get_node("Shield")->find_node("AnimationPlayer"))->play("shield_start");
-
+	Ref<PackedScene> prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->shield());
+	_get_object()->add_child(prefab->instance());
 	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_layer_bit(1, true);
 	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_mask_bit(1, true);
 	cast_to<Area2D>(_get_object()->get_node("Shield"))->set_collision_layer_bit(15, true);

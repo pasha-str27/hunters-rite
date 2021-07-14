@@ -9,4 +9,4 @@ stream = ExtResource( 1 )
 attenuation = 0.34151
 bus = "AudioEffects"
 script = ExtResource( 2 )
-duration = 2.0
+duration = 3.0
