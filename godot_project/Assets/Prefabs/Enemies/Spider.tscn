@@ -101,6 +101,8 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=19]
 
 [node name="Spider" type="Node2D"]
+z_index = 6
+z_as_relative = false
 script = ExtResource( 4 )
 enemy_price = 15.0
 
@@ -110,7 +112,8 @@ enemy_price = 15.0
 "enemy",
 "spider",
 ]]
-z_index = 25
+z_index = 6
+z_as_relative = false
 collision_layer = 4
 collision_mask = 512
 script = ExtResource( 3 )
@@ -136,12 +139,15 @@ __meta__ = {
 shape = SubResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Spider/CollisionShape2D"]
+z_index = 6
+z_as_relative = false
 frames = SubResource( 18 )
 animation = "idle"
-frame = 1
+frame = 2
 playing = true
 
 [node name="SpawnParticles" parent="Spider" instance=ExtResource( 7 )]
+z_as_relative = false
 
 [node name="Area2D" type="Area2D" parent="Spider"]
 

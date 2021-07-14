@@ -42,6 +42,8 @@ color_ramp = SubResource( 4 )
 
 [node name="UseStoneParticles" type="Particles2D"]
 position = Vector2( 0, -30 )
+z_index = 10
+z_as_relative = false
 emitting = false
 amount = 150
 lifetime = 0.7

@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=2]
+[gd_scene load_steps=94 format=2]
 
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_background_v2.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_focus_v2.png" type="Texture" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/Guardian.png" type="Texture" id=19]
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/shooter.png" type="Texture" id=20]
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/choose_chapter_background.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/melee.png" type="Texture" id=22]
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/p2/idle5.png" type="Texture" id=23]
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/p2/idle1.png" type="Texture" id=24]
 [ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/p2/idle3.png" type="Texture" id=25]
@@ -545,7 +546,7 @@ margin_top = 68.0
 margin_right = 188.0
 margin_bottom = 188.0
 rect_min_size = Vector2( 120, 120 )
-texture = ExtResource( 7 )
+texture = ExtResource( 22 )
 expand = true
 stretch_mode = 6
 

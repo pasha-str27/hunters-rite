@@ -199,6 +199,8 @@ color_ramp = SubResource( 34 )
 radius = 10.7616
 
 [node name="SlimeShoot" type="Node2D"]
+z_index = 6
+z_as_relative = false
 script = ExtResource( 7 )
 enemy_price = 26.0
 
@@ -208,7 +210,8 @@ enemy_price = 26.0
 "enemy",
 "slime_shoot",
 ]]
-z_index = 25
+z_index = 6
+z_as_relative = false
 collision_layer = 4
 collision_mask = 512
 script = ExtResource( 8 )
@@ -234,9 +237,11 @@ __meta__ = {
 shape = SubResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="SlimeShoot/CollisionShape2D"]
+z_index = 6
+z_as_relative = false
 frames = SubResource( 31 )
 animation = "idle"
-frame = 10
+frame = 4
 playing = true
 
 [node name="Area2D" type="Area2D" parent="SlimeShoot"]
@@ -245,6 +250,7 @@ playing = true
 shape = SubResource( 32 )
 
 [node name="SpawnParticles" parent="SlimeShoot" instance=ExtResource( 2 )]
+z_as_relative = false
 process_material = SubResource( 37 )
 
 [node name="Area2D2" type="Area2D" parent="SlimeShoot"]

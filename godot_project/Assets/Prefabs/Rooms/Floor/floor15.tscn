@@ -4,6 +4,8 @@
 
 [node name="floor" type="TileMap"]
 position = Vector2( 0, -16 )
+z_index = 1
+z_as_relative = false
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 format = 1

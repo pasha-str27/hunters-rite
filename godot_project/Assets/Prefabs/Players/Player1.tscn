@@ -272,7 +272,8 @@ animations = [ {
 } ]
 
 [node name="Player1" type="Node2D"]
-z_index = 100
+z_index = 7
+z_as_relative = false
 
 [node name="BulletConteiner" type="Node" parent="."]
 
@@ -280,6 +281,8 @@ z_index = 100
 "player",
 "player1",
 ]]
+z_index = 7
+z_as_relative = false
 collision_layer = 303105
 collision_mask = 2
 script = ExtResource( 8 )
@@ -322,9 +325,11 @@ process_material = SubResource( 10 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Player1"]
 scale = Vector2( 2, 2 )
+z_index = 7
+z_as_relative = false
 frames = SubResource( 36 )
 animation = "idle"
-frame = 3
+frame = 1
 playing = true
 offset = Vector2( 35, 0 )
 
@@ -333,12 +338,17 @@ position = Vector2( 11, 0 )
 scale = Vector2( 0.5, 0.5 )
 
 [node name="SpiderWeb" parent="Player1" instance=ExtResource( 14 )]
+z_index = 8
+z_as_relative = false
 
 [node name="GhostSprite" type="AnimatedSprite" parent="Player1"]
 visible = false
 scale = Vector2( 2, 2 )
+z_index = 8
+z_as_relative = false
 frames = SubResource( 48 )
 animation = "idle"
+frame = 1
 playing = true
 
 [connection signal="area_entered" from="Player1/Area2D" to="Player1" method="_on_Area2D_area_entered"]
