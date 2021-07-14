@@ -12,7 +12,6 @@ void godot::BigStone::_register_methods()
 	register_method("_can_heal_true", &BigStone::_can_heal_true);
 	register_method("_change_start_parameters", &BigStone::_change_start_parameters);
 	register_method("_start_hide_animation", &BigStone::_start_hide_animation);
-	
 
 	register_property<BigStone, Ref<PackedScene>>("particles for use", &BigStone::use_particles, nullptr);
 }
@@ -71,7 +70,6 @@ void godot::BigStone::_heal_players()
 		can_heal = false;
 		timer->connect("timeout", this, "_can_heal_true");
 		timer->start(heal_cooldown);
-
 	}
 
 	if ((MenuButtons::game_mode == SHOOTER || MenuButtons::game_mode == MELEE) && players_count == 1)
@@ -87,6 +85,10 @@ void godot::BigStone::_heal_players()
 		if (player_conteiner->_get_player2_regular() != nullptr)
 			_heal_player(player_conteiner->_get_player2_regular());
 		
+		Ref<PackedScene> prefab = nullptr;
+		prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->stone_action());
+		get_parent()->add_child(prefab->instance());
+
 		can_heal = false;
 		timer->connect("timeout", this, "_can_heal_true");
 		timer->start(heal_cooldown);

@@ -36,7 +36,8 @@ tracks/1/keys = {
 [sub_resource type="CircleShape2D" id=2]
 
 [node name="Eye" type="Node2D"]
-z_index = 5
+z_index = 9
+z_as_relative = false
 script = ExtResource( 3 )
 Name = "Eye"
 speed = 20.0
@@ -50,6 +51,8 @@ decrease_attack_radius = true
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -1.89171 )
 scale = Vector2( 1.03783, 1.03783 )
+z_index = 9
+z_as_relative = false
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" parent="Sprite" instance=ExtResource( 1 )]

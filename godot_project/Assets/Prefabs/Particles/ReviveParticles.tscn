@@ -33,7 +33,8 @@ hue_variation = 1.0
 
 [node name="ReviveParticles" type="Particles2D"]
 position = Vector2( 0, 24.4998 )
-z_index = -1
+z_index = 10
+z_as_relative = false
 emitting = false
 amount = 40
 lifetime = 0.8

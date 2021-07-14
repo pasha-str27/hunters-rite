@@ -9,11 +9,13 @@
 [node name="UpDoor" type="Node2D"]
 scale = Vector2( 2, 2 )
 z_index = 2
+z_as_relative = false
 
 [node name="wall" type="TileMap" parent="."]
 position = Vector2( 0, -8 )
 scale = Vector2( 0.5, 0.5 )
-z_index = 26
+z_index = 2
+z_as_relative = false
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 3
@@ -23,6 +25,8 @@ tile_data = PoolIntArray( -327681, 23, 0 )
 [node name="ui" type="TileMap" parent="."]
 position = Vector2( 0, -8 )
 scale = Vector2( 0.5, 0.5 )
+z_index = 2
+z_as_relative = false
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 0
@@ -50,4 +54,6 @@ modulate = Color( 0.890196, 0.94902, 0.352941, 0.745098 )
 self_modulate = Color( 0.890196, 0.94902, 0.352941, 0.745098 )
 position = Vector2( 0.000930786, -64.7276 )
 scale = Vector2( 0.4, 0.4 )
+z_index = 3
+z_as_relative = false
 texture = ExtResource( 3 )

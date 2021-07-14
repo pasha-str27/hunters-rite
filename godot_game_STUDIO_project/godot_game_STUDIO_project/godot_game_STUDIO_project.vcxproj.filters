@@ -176,7 +176,6 @@
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="ResourceContainer.cpp" />
-    <ClCompile Include="BulletPull.cpp" />
     <ClCompile Include="SillyBoyAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
@@ -185,6 +184,21 @@
     </ClCompile>
     <ClCompile Include="NagaAI.cpp">
       <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialGenerator.cpp">
+      <Filter>Genetation</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialManager.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="PoisonEgg.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="CurrentRoom.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletPull.cpp">
+      <Filter>Ammo</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -388,7 +402,6 @@
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="ResourceContainer.h" />
-    <ClInclude Include="BulletPull.h" />
     <ClInclude Include="SillyBoyAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
@@ -397,6 +410,21 @@
     </ClInclude>
     <ClInclude Include="NagaAI.h">
       <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialGenerator.h">
+      <Filter>Genetation</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialManager.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="PoisonEgg.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="CurrentRoom.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletPull.h">
+      <Filter>Ammo</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -114,7 +114,7 @@ bool godot::MiniMapController::_load_resources()
 		Godot::print(undisc_rooms_positions.size());
 
 		curr_room_position = grid_rect_size / 2;
-		grid_scale = grid_rect_size / (Size2(Vector2(step_x, step_y)) * zoom);
+		grid_scale = grid_rect_size / (get_viewport_rect().size * zoom);
 	}
 	else
 	{
@@ -193,7 +193,7 @@ void godot::MiniMapController::_update_minimap()
 
 Vector2 godot::MiniMapController::_get_players_pos()
 {
-	auto player = GameManager::current_room->get_global_position();
+	Vector2 player = CurrentRoom::get_singleton()->_get_current_room()->get_global_position();
 
 	int fixed_x = (int)(player.x / step_x) * step_x;
 	int fixed_y = (int)(player.y / step_y) * step_y;

@@ -112,6 +112,8 @@ radius = 35.5065
 radius = 37.2881
 
 [node name="Bat" type="Node2D"]
+z_index = 6
+z_as_relative = false
 script = ExtResource( 9 )
 enemy_price = 42.0
 
@@ -119,7 +121,8 @@ enemy_price = 42.0
 "bat",
 "enemy",
 ]]
-z_index = 25
+z_index = 6
+z_as_relative = false
 collision_layer = 4
 collision_mask = 512
 script = ExtResource( 3 )

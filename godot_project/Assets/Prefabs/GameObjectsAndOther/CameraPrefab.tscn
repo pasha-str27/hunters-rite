@@ -6,9 +6,9 @@
 [ext_resource path="res://Assets/Prefabs/Animations/FadeIn.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=5]
 [ext_resource path="res://Assets/Scripts/GameManager.gdns" type="Script" id=6]
-[ext_resource path="res://Assets/Prefabs/SoundsEffects/BackMusic/BossBackMusic.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Prefabs/BackMusic/BossBackMusic.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Prefabs/Scenes/Pause.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Assets/Prefabs/SoundsEffects/BackMusic/GameBackMusic.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Prefabs/BackMusic/GameBackMusic.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Prefabs/exit.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Prefabs/Scenes/MiniMap.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Assets/Prefabs/Enemies/FlowerBoss.tscn" type="PackedScene" id=12]
@@ -64,7 +64,8 @@ corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 
 [node name="Camera2D" type="Camera2D"]
-z_index = 101
+z_index = 103
+z_as_relative = false
 offset = Vector2( -1, 0.748054 )
 zoom = Vector2( 0.75, 0.75 )
 script = ExtResource( 6 )
@@ -175,22 +176,17 @@ __meta__ = {
 
 [node name="ItemHolder" type="Control" parent="."]
 margin_left = -439.0
-margin_top = -178.0
-margin_right = 433.0
-margin_bottom = 270.0
+margin_top = -197.0
+margin_right = 435.0
+margin_bottom = 256.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="P1Items" type="VBoxContainer" parent="ItemHolder"]
 anchor_bottom = 1.0
-margin_left = -16.0
-margin_top = -22.0
-margin_right = 34.0
-margin_bottom = 3.0
-rect_min_size = Vector2( 32, 70 )
+rect_min_size = Vector2( 32, 480 )
 rect_scale = Vector2( 0.9, 0.9 )
-rect_pivot_offset = Vector2( 16, 0 )
 custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false
@@ -200,12 +196,8 @@ __meta__ = {
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -2.0
-margin_right = 32.0
-margin_bottom = 1.0
-rect_min_size = Vector2( 32, 70 )
+rect_min_size = Vector2( 32, 480 )
 rect_scale = Vector2( 0.9, 0.9 )
-rect_pivot_offset = Vector2( 16, 0 )
 custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false

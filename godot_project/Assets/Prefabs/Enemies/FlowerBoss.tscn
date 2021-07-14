@@ -35,7 +35,8 @@ animations = [ {
 radius = 45.5047
 
 [node name="FlowerBoss" type="Node2D"]
-z_index = 100
+z_index = 6
+z_as_relative = false
 
 [node name="BulletConteinerFlower" type="Node" parent="."]
 
@@ -43,7 +44,8 @@ z_index = 100
 "enemy",
 "flower",
 ]]
-z_index = 25
+z_index = 6
+z_as_relative = false
 collision_layer = 4
 collision_mask = 512
 script = ExtResource( 3 )
@@ -52,11 +54,15 @@ HP = 350.0
 "Death particles" = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flower"]
+z_index = 6
+z_as_relative = false
 shape = SubResource( 1 )
 one_way_collision = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Flower/CollisionShape2D"]
 scale = Vector2( 0.23, 0.2 )
+z_index = 6
+z_as_relative = false
 frames = SubResource( 4 )
 animation = "idle"
 
