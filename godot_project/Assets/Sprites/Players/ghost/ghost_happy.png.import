@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ghost_happy.png-86e92331f11e65f899eaee1cac7753cb.stex"
+path="res://.import/ghost_happy.png-54888d7825eb8f6b40f2dbcce73278d1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Players/ghost/ghost_happy.png"
-dest_files=[ "res://.import/ghost_happy.png-86e92331f11e65f899eaee1cac7753cb.stex" ]
+source_file="res://Assets/Sprites/Players/Ghost/ghost_happy.png"
+dest_files=[ "res://.import/ghost_happy.png-54888d7825eb8f6b40f2dbcce73278d1.stex" ]
 
 [params]
 

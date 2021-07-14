@@ -58,7 +58,7 @@ namespace godot
 		void _clear_map();
 		void _start_treking();
 		void _load_curr_room(Vector2 curr_room_pos);
-		void _load_undisc_rooms(Array  undisc_rooms_pos);
+		void _load_undisc_rooms(Array undisc_rooms_pos);
 		void _load_special_rooms(Array rooms_pos, String type);
 		void _special_rooms_loader(Array dr, Array kr, Array ir, Array hr, Array br);
 		void _update_special_rooms();
