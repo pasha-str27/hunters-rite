@@ -3,9 +3,7 @@
 #include "headers.h"
 #endif
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 bool TutorialManager::show_tutorial = true;
-int TutorialManager::current_level = 1;
 
 void godot::TutorialManager::_register_methods()
 {
@@ -35,40 +33,6 @@ void godot::TutorialManager::_register_methods()
 }
 
 void godot::TutorialManager::_move(String dir)
-=======
-Node2D* GameManager::current_room = nullptr;
-bool GameManager::show_tutorial = true;
-int GameManager::current_level = 1;
-
-void godot::GameManager::_register_methods()
-{
-	register_method("_init", &GameManager::_init);
-	register_method("_ready", &GameManager::_ready);
-	register_method("_door_collision", &GameManager::_door_collision);
-	register_method("_close_doors", &GameManager::_close_doors);
-	register_method("_open_doors", &GameManager::_open_doors);
-	register_method("_start_move", &GameManager::_start_move);
-	register_method("_change_audio_volume", &GameManager::_change_audio_volume);
-	register_method("_mute_audio_volume", &GameManager::_mute_audio_volume);
-	register_method("_start_mute_volume", &GameManager::_start_mute_volume);
-	register_method("_input", &GameManager::_input);
-	register_method("_audio_fade_to_main_menu", &GameManager::_audio_fade_to_main_menu);
-	register_method("_spawn_exit", &GameManager::_spawn_exit);
-	register_method("_set_current_room_type", &GameManager::_set_current_room_type);
-	register_method("_go_to_start", &GameManager::_go_to_start);
-	register_method("_get_type_keys", &GameManager::_get_type_keys);
-	register_method("_show_game_over_screen", &GameManager::_show_game_over_screen);
-
-	register_property<GameManager, Ref<PackedScene>>("Fade In Animation", &GameManager::fadeIn, nullptr);
-	register_property<GameManager, Ref<PackedScene>>("Fade Out Animation", &GameManager::fadeOut, nullptr);
-	register_property<GameManager, Ref<PackedScene>>("game_back", &GameManager::game_back, nullptr);
-	register_property<GameManager, Ref<PackedScene>>("boss_back", &GameManager::boss_back, nullptr);
-	register_property<GameManager, Ref<PackedScene>>("pause_menu", &GameManager::pause_menu, nullptr);
-	register_property<GameManager, Ref<PackedScene>>("Exit", &GameManager::exit, nullptr);
-}
-
-void godot::GameManager::_move(String dir)
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
 	_close_doors();
 
@@ -89,9 +53,9 @@ void godot::GameManager::_move(String dir)
 
 		CurrentRoom::get_singleton()->_set_current_room(next_room);
 
-		if(PlayersContainer::_get_instance()->_get_player1_regular()!=nullptr)
+		if (PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
 			cast_to<Node2D>(PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1))->set_global_position(move_point->get_global_position());
-		
+
 		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
 			PlayersContainer::_get_instance()->_get_player2_regular()->set_global_position(move_point->get_global_position());
 	}
@@ -157,11 +121,7 @@ void godot::GameManager::_move(String dir)
 		minimap->call("_update_minimap");
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 String godot::TutorialManager::_get_dir_on_index(int i)
-=======
-String godot::GameManager::_get_dir_on_index(int i)
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
 	if (i == 0)
 		return "left";
@@ -173,40 +133,24 @@ String godot::GameManager::_get_dir_on_index(int i)
 		return "bottom";
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 bool godot::TutorialManager::_is_one_player_alive()
-=======
-bool godot::GameManager::_is_one_player_alive()
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
 	return !PlayersContainer::_get_instance()->_get_player1() || !PlayersContainer::_get_instance()->_get_player2();
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 void godot::TutorialManager::hide_tutorial()
-=======
-void godot::GameManager::hide_tutorial()
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
 	cast_to<Node2D>(get_parent()->get_node("TutorialSprites"))->hide();
 	cast_to<Node2D>(get_parent()->get_node("TutorialSpritesSingle"))->hide();
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 void godot::TutorialManager::_init()
-=======
-void godot::GameManager::_init()
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
 	for (int i = 0; i < 4; i++)
 		dirs.push_back(0);
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 void  godot::TutorialManager::_hide_tutorial_sprites(String t_player_name) {
-=======
-void  godot::GameManager::_hide_tutorial_sprites(String t_player_name) {
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 
 	// clear coop tutorial 
 	cast_to<Node2D>(get_node("/root/Node2D/Node/TutorialSprites"))->hide();
@@ -227,11 +171,7 @@ void  godot::GameManager::_hide_tutorial_sprites(String t_player_name) {
 	}
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 void godot::TutorialManager::_spawn_players()
-=======
-void godot::GameManager::_spawn_players()
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
 	if (!show_tutorial)
 		hide_tutorial();
@@ -284,14 +224,14 @@ void godot::GameManager::_spawn_players()
 
 			cast_to<Node2D>(get_node("/root/Node2D/Node/TutorialSpritesSingle"))->hide();
 
-			if(player2->has_method("_set_controll_buttons"))
+			if (player2->has_method("_set_controll_buttons"))
 				player2->call_deferred("_set_controll_buttons", "Player2_up", "Player2_down", "Player2_left", "Player2_right", "Player2_fight_up", "Player2_fight_down", "Player2_fight_left", "Player2_fight_right", "Player2_special");
 			else
 			{
-				for(int i=0;i<player2->get_child_count();++i)
+				for (int i = 0; i < player2->get_child_count(); ++i)
 					if (player2->get_child(i)->has_method("_set_controll_buttons"))
 					{
-						player2-> get_child(i)->call_deferred("_set_controll_buttons", "Player2_up", "Player2_down", "Player2_left", "Player2_right", "Player2_fight_up", "Player2_fight_down", "Player2_fight_left", "Player2_fight_right", "Player2_special");
+						player2->get_child(i)->call_deferred("_set_controll_buttons", "Player2_up", "Player2_down", "Player2_left", "Player2_right", "Player2_fight_up", "Player2_fight_down", "Player2_fight_left", "Player2_fight_right", "Player2_special");
 						break;
 					}
 			}
@@ -307,18 +247,14 @@ void godot::GameManager::_spawn_players()
 						break;
 					}
 			}
-			
+
 			//PlayersContainer::_get_instance()->_set_player1(player1);
 			//PlayersContainer::_get_instance()->_set_player2(player2);
 		}
 	}
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 bool godot::TutorialManager::_is_player_have_need_keys(Array rooms_keys)
-=======
-bool godot::GameManager::_is_player_have_need_keys(Array rooms_keys)
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
 	if (rooms_keys.size() == 0)
 		return true;
@@ -333,19 +269,14 @@ bool godot::GameManager::_is_player_have_need_keys(Array rooms_keys)
 	{
 		String row = rooms_keys[i];
 		for (int k = 0; k < players_keys.size(); ++k)
-			check_result = row.find(players_keys[k])!=-1 ? true : false;
+			check_result = row.find(players_keys[k]) != -1 ? true : false;
 	}
 
 	return check_result;
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 void godot::TutorialManager::_ready()
-=======
-void godot::GameManager::_ready()
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
-	current_level = 1;
 	minimap = cast_to<CanvasItem>(get_node("MiniMap"));
 
 	audio_server = AudioServer::get_singleton();
@@ -371,11 +302,7 @@ void godot::GameManager::_ready()
 	timer_audio->start(time_delta);
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 void godot::TutorialManager::_door_collision(String door_dir)
-=======
-void godot::GameManager::_door_collision(String door_dir)
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
 	if (Enemies::get_singleton()->_get_enemies_count() != 0 || Enemies::get_singleton()->spawning())
 		return;
@@ -392,7 +319,7 @@ void godot::GameManager::_door_collision(String door_dir)
 
 	if (door_dir[0] == '-')
 	{
-		if((int)dirs[index] > 0)
+		if ((int)dirs[index] > 0)
 			dirs[index] = (int)dirs[index] - 1;
 		return;
 	}
@@ -437,11 +364,11 @@ void godot::GameManager::_door_collision(String door_dir)
 	if (!_is_player_have_need_keys((Array)next_room->call("_get_list_of_keys")))
 		return;
 
-	if (((int)dirs[index] == 2 && MenuButtons::game_mode==COOP) || ((MenuButtons::game_mode == SHOOTER|| MenuButtons::game_mode == MELEE) && (int)dirs[index] == 1))
+	if (((int)dirs[index] == 2 && MenuButtons::game_mode == COOP) || ((MenuButtons::game_mode == SHOOTER || MenuButtons::game_mode == MELEE) && (int)dirs[index] == 1))
 	{
 		Enemies::get_singleton()->set_spawning(true);
 
-		if(PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
+		if (PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
 			PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1)->call("_change_moving", false);
 
 		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
@@ -452,11 +379,7 @@ void godot::GameManager::_door_collision(String door_dir)
 	}
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 void godot::TutorialManager::_open_doors()
-=======
-void godot::GameManager::_open_doors()
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
 	if (current_room_type == "boss")
 	{
@@ -467,23 +390,15 @@ void godot::GameManager::_open_doors()
 	is_open_door = true;
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 void godot::TutorialManager::_close_doors()
-=======
-void godot::GameManager::_close_doors()
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
 	//current_room->call("_spawn_enemies");
 	is_open_door = false;
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 void godot::TutorialManager::_start_move()
-=======
-void godot::GameManager::_start_move()
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
-	for (int i = 0; i < 4; i++) 
+	for (int i = 0; i < 4; i++)
 		if ((int)dirs[i] == 2 || (_is_one_player_alive() && (int)dirs[i] == 1))
 		{
 			_move(_get_dir_on_index(i));
@@ -492,41 +407,25 @@ void godot::GameManager::_start_move()
 		}
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 void godot::TutorialManager::_change_audio_volume()
-=======
-void godot::GameManager::_change_audio_volume()
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
-	if (AudioController::get_singleton()->_change_audio_volume_camera_controller(timer_audio,this, audio, time_delta))
+	if (AudioController::get_singleton()->_change_audio_volume_camera_controller(timer_audio, this, audio, time_delta))
 		return;
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 void godot::TutorialManager::_mute_audio_volume()
-=======
-void godot::GameManager::_mute_audio_volume()
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
 	if (AudioController::get_singleton()->_mute_audio_volume(timer_audio, this, audio, time_delta))
 		return;
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 void godot::TutorialManager::_start_mute_volume()
-=======
-void godot::GameManager::_start_mute_volume()
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
 	timer_audio->connect("timeout", this, "_mute_audio_volume");
 	timer_audio->start(time_delta);
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 void godot::TutorialManager::_input(Variant event)
-=======
-void godot::GameManager::_input(Variant event)
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
 	if (Input::get_singleton()->is_action_just_pressed("ui_pause"))
 	{
@@ -552,42 +451,26 @@ void godot::GameManager::_input(Variant event)
 		}
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 void godot::TutorialManager::_audio_fade_to_main_menu()
-=======
-void godot::GameManager::_audio_fade_to_main_menu()
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
 	if (AudioController::get_singleton()->_audio_fade_to_main_menu(timer_audio, this, audio, time_delta))
 		return;
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 void godot::TutorialManager::_spawn_exit()
-=======
-void godot::GameManager::_spawn_exit()
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
 	auto exit_node = cast_to<Node2D>(exit->instance());
 	exit_node->set_global_position(this->get_global_position());
 	get_node("/root/Node2D/Node/")->add_child(exit_node);
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 void godot::TutorialManager::_set_current_room_type(String type)
-=======
-void godot::GameManager::_set_current_room_type(String type)
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
 	current_room_type = type;
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
-void godot::TutorialManager::_get_type_keys() 
+void godot::TutorialManager::_get_type_keys()
 {
-=======
-void godot::GameManager::_get_type_keys() {
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 
 	generated_keys.clear();
 
@@ -638,11 +521,7 @@ void godot::GameManager::_get_type_keys() {
 	}
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 void godot::TutorialManager::_go_to_start()
-=======
-void godot::GameManager::_go_to_start()
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
 	if (!show_tutorial)
 		hide_tutorial();
@@ -671,21 +550,13 @@ void godot::GameManager::_go_to_start()
 	}
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 godot::TutorialManager::TutorialManager()
-=======
-godot::GameManager::GameManager()
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
 	player1 = nullptr;
 	player2 = nullptr;
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 godot::TutorialManager::~TutorialManager()
-=======
-godot::GameManager::~GameManager()
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
 	audio = nullptr;
 	audio_boss = nullptr;
@@ -695,11 +566,7 @@ godot::GameManager::~GameManager()
 	player2 = nullptr;
 }
 
-<<<<<<< HEAD:godot_game_STUDIO_project/godot_game_STUDIO_project/TutorialManager.cpp
 void godot::TutorialManager::_show_game_over_screen()
-=======
-void godot::GameManager::_show_game_over_screen()
->>>>>>> vit:godot_game_STUDIO_project/godot_game_STUDIO_project/GameManager.cpp
 {
 	cast_to<Timer>(get_node("game_over"))->disconnect("timeout", this, "_show_game_over_screen");
 	ResourceLoader* rld = ResourceLoader::get_singleton();
