@@ -204,6 +204,7 @@ __meta__ = {
 }
 
 [node name="KeyHolder" type="Control" parent="."]
+visible = false
 margin_left = -476.0
 margin_top = -269.0
 margin_right = 483.0
