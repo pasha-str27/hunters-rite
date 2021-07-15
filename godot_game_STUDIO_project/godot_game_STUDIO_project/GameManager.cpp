@@ -303,7 +303,10 @@ void godot::GameManager::_ready()
 void godot::GameManager::_door_collision(String door_dir)
 {
 	if (Enemies::get_singleton()->_get_enemies_count() != 0 || Enemies::get_singleton()->spawning())
+	{
+		Godot::print(String::num(Enemies::get_singleton()->_get_enemies_count()));
 		return;
+	}
 
 	int index = 0;
 	if (door_dir.find("left") != -1)
