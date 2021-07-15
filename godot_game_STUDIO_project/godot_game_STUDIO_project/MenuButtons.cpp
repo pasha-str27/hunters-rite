@@ -51,15 +51,10 @@ void godot::MenuButtons::_ready()
 	if(get_parent()->has_method("_set_current"))
 		cast_to<Camera2D>(get_parent())->_set_current(true);
 
-	Godot::print("here");
-
-
 	// Set focus button in Menu and Notise scenes
 	set_focus_mode(true);
 
 	std::vector<String> name_buttons{ "Play", "Flower_button","Melee", "Back", "Resume", "Retry" };
-
-	Godot::print("here");
 
 	if (get_name() == "Menu" && find_parent("root") != nullptr && !find_parent("root")->has_node("MenuBackMusic"))
 	{

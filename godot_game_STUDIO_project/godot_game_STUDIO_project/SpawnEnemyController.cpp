@@ -180,6 +180,7 @@ void godot::SpawnEnemyController::SpawnBoss()
 			Node2D* exit_node = Node::cast_to<Node2D>(exit_prefab->instance());
 			CurrentRoom::get_singleton()->_get_current_room()->add_child(exit_node, true);
 		}
+		Enemies::get_singleton()->set_spawning(false);
 		break;
 	}
 	}
