@@ -38,6 +38,7 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="FadeIn" parent="." instance=ExtResource( 2 )]
+position = Vector2( -337.907, -130.255 )
 
 [node name="Node" type="Node" parent="."]
 
@@ -59,22 +60,19 @@ script = ExtResource( 18 )
 __meta__ = {
 "_editor_description_": ""
 }
-map_size = 3
-keys_frequency = 3
 room = ExtResource( 20 )
 down_door = ExtResource( 21 )
 up_door = ExtResource( 27 )
 right_door = ExtResource( 26 )
 left_door = ExtResource( 25 )
 wall_top_count = 1
-floor_count = 1
-stone_count = 1
-spike_count = 1
 roof_count = 1
 jertovnik = ExtResource( 22 )
 key_room_pedestal = ExtResource( 28 )
 keys_prefabs = [ ExtResource( 30 ), ExtResource( 34 ), ExtResource( 32 ), ExtResource( 35 ), ExtResource( 33 ), ExtResource( 36 ) ]
 big_stone = ExtResource( 31 )
 lock_sprite = ExtResource( 29 )
+sword_item = ExtResource( 14 )
+task_item = ExtResource( 3 )
 
 [node name="Items" type="Node2D" parent="."]

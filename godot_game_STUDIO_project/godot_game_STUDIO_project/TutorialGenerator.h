@@ -8,15 +8,12 @@ namespace godot
 	class TutotialGenerator :	public Node
 	{
 		GODOT_CLASS(TutotialGenerator, Node);
-		int map_size = 10;
 		int size = 0;
 		Ref<PackedScene> room = nullptr;
 		Ref<PackedScene> up_door = nullptr;
 		Ref<PackedScene> right_door = nullptr;
 		Ref<PackedScene> down_door = nullptr;
 		Ref<PackedScene> left_door = nullptr;
-
-		int keys_frequency = 5;
 
 		float step_x = 1024;
 		float step_y = 720;
@@ -25,9 +22,6 @@ namespace godot
 		std::vector<Node2D*> rooms;
 
 		int wall_top_count;
-		int floor_count;
-		int stone_count;
-		int spike_count;
 		int roof_count;
 
 		Ref<PackedScene> jertovnik = nullptr;
@@ -40,6 +34,8 @@ namespace godot
 
 		Ref<PackedScene> big_stone = nullptr;
 		Ref<PackedScene> lock_sprite = nullptr;
+		Ref<PackedScene> sword_item = nullptr;
+		Ref<PackedScene> task_item = nullptr;
 
 	public:
 		TutotialGenerator();
@@ -53,9 +49,7 @@ namespace godot
 		Node2D* _buid_room(Vector2 dir);
 		void _buid_doors();
 		void _buid_roofs();
-		void _buid_floors();
 		void _buid_top_wall();
-		void _buid_stones(Node2D* room);
 		void _build_doors(int start_index, int end_index);
 		Node2D* _get_next_room(Vector2 current_room_position);
 		void _create_item_room(Node2D* room);

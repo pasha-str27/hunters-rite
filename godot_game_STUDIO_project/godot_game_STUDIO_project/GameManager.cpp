@@ -139,12 +139,6 @@ bool godot::GameManager::_is_one_player_alive()
 	return !PlayersContainer::_get_instance()->_get_player1() || !PlayersContainer::_get_instance()->_get_player2();
 }
 
-void godot::GameManager::hide_tutorial()
-{
-	cast_to<Node2D>(get_parent()->get_node("TutorialSprites"))->hide();
-	cast_to<Node2D>(get_parent()->get_node("TutorialSpritesSingle"))->hide();
-}
-
 void godot::GameManager::_init()
 {
 	for (int i = 0; i < 4; i++)
@@ -174,9 +168,6 @@ void  godot::GameManager::_hide_tutorial_sprites(String t_player_name) {
 
 void godot::GameManager::_spawn_players()
 {
-	if (!show_tutorial)
-		hide_tutorial();
-
 	ResourceLoader* loader = ResourceLoader::get_singleton();
 	if (MenuButtons::game_mode == SHOOTER)
 	{
@@ -527,9 +518,6 @@ void godot::GameManager::_get_type_keys() {
 
 void godot::GameManager::_go_to_start()
 {
-	if (!show_tutorial)
-		hide_tutorial();
-
 	auto fade = cast_to<Node2D>(fadeIn->instance());
 	add_child(fade);
 

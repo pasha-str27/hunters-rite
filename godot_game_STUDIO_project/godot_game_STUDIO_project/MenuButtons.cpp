@@ -11,7 +11,7 @@ bool MenuButtons::is_full_screen = false;
 float MenuButtons::music_audio_level = -12.5;
 float MenuButtons::effect_audio_level = 6;
 GameMode MenuButtons::game_mode = SHOOTER;
-GameType MenuButtons::game_type = DEFOLT;
+GameType MenuButtons::game_type = TUTORIAL;
 AudioStreamPlayer2D* MenuButtons::audio = nullptr;
 
 MenuButtons::MenuButtons()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/Jertovnik.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Scripts/SpawnEnemyController.gdns" type="Script" id=2]
@@ -16,12 +16,14 @@
 [ext_resource path="res://Assets/Prefabs/Enemies/SlimeShoot.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Assets/Prefabs/Enemies/StatueShoot.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Assets/Prefabs/Enemies/StatueMelee.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Assets/Prefabs/Enemies/NagaBoss.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Assets/Prefabs/Enemies/Spider.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Assets/Prefabs/Enemies/SlimeBoss.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Assets/Prefabs/Enemies/Worm.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Assets/Scripts/CameraShake.gdns" type="Script" id=21]
 [ext_resource path="res://Assets/Prefabs/Enemies/Mimic.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Assets/Prefabs/Enemies/SillyBoy.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Assets/Prefabs/Enemies/Slime.tscn" type="PackedScene" id=24]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.6, 0.6, 0.6, 0.117647 )
@@ -83,6 +85,8 @@ enemy_list = [ [ ExtResource( 15 ) ], [ ExtResource( 23 ) ], [ ExtResource( 22 )
 boss_prefab = ExtResource( 12 )
 boss_slime_prefab = ExtResource( 19 )
 spider_prefab = ExtResource( 18 )
+slime_prefab = ExtResource( 24 )
+naga_boss_prefab = ExtResource( 17 )
 
 [node name="ItemPoints" type="Node2D" parent="EnemySpawner"]
 
