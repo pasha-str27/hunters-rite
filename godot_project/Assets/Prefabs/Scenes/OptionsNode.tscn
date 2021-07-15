@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Assets/Scripts/MenuButtons.gdns" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/notice_background_v2.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Assets/Sprites/UI/SliderStyle.tres" type="Theme" id=8]
 [ext_resource path="res://Assets/Prefabs/SoundsEffects/Effects/ButtonClick.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://Assets/Scripts/LocaledLabel.gdns" type="Script" id=11]
 
 [sub_resource type="StyleBoxTexture" id=1]
 
@@ -204,6 +205,8 @@ custom_styles/focus = SubResource( 1 )
 custom_fonts/font = SubResource( 2 )
 text = "FullScreen"
 align = 1
+script = ExtResource( 11 )
+text_key = "KEY_FULLSCREEN"
 
 [node name="Focus" type="TextureRect" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer/FullScreen"]
 visible = false
@@ -242,6 +245,8 @@ custom_fonts/font = SubResource( 4 )
 text = "Effects"
 align = 1
 valign = 2
+script = ExtResource( 11 )
+text_key = "KEY_EFFECTS"
 
 [node name="effects" type="HSlider" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer"]
 margin_top = 208.0
@@ -291,6 +296,8 @@ custom_fonts/font = SubResource( 6 )
 text = "Music"
 align = 1
 valign = 2
+script = ExtResource( 11 )
+text_key = "KEY_MUSIC"
 
 [node name="music" type="HSlider" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer"]
 margin_top = 380.0
@@ -384,26 +391,28 @@ custom_constants/shadow_as_outline = 0
 text = "Back"
 align = 1
 valign = 1
+script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+text_key = "KEY_BACK"
 
 [node name="BackAnimated" type="AnimationPlayer" parent="Option/VBoxContainer/CenterContainer/Back"]
 anims/Focus_scale = SubResource( 8 )
 
-[connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/FullScreen" to="Option" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/FullScreen" to="Option" method="_on_animated_focus_entered" binds= [ "FullScreen", "FullScreenAnimated" ]]
+[connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/FullScreen" to="Option" method="_play_change_cursor_effect"]
 [connection signal="focus_exited" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/FullScreen" to="Option" method="_on_animated_focus_exited" binds= [ "FullScreen", "FullScreenAnimated" ]]
 [connection signal="pressed" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/FullScreen" to="Option" method="_on_FullScreen_pressed"]
-[connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/effects" to="Option" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/effects" to="Option" method="_on_animated_focus_entered" binds= [ "effects", "effectsAnimated" ]]
+[connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/effects" to="Option" method="_play_change_cursor_effect"]
 [connection signal="focus_exited" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/effects" to="Option" method="_on_animated_focus_exited" binds= [ "effects", "effectsAnimated" ]]
 [connection signal="value_changed" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/effects" to="Option" method="_on_effects_value_changed"]
-[connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/music" to="Option" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/music" to="Option" method="_on_animated_focus_entered" binds= [ "music", "musicAnimated" ]]
+[connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/music" to="Option" method="_play_change_cursor_effect"]
 [connection signal="focus_exited" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/music" to="Option" method="_on_animated_focus_exited" binds= [ "music", "musicAnimated" ]]
 [connection signal="value_changed" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/music" to="Option" method="_on_music_value_changed"]
-[connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer/Back" to="Option" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer/Back" to="Option" method="_on_animated_focus_entered" binds= [ "Back", "BackAnimated" ]]
+[connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer/Back" to="Option" method="_play_change_cursor_effect"]
 [connection signal="focus_exited" from="Option/VBoxContainer/CenterContainer/Back" to="Option" method="_on_animated_focus_exited" binds= [ "Back", "BackAnimated" ]]
 [connection signal="pressed" from="Option/VBoxContainer/CenterContainer/Back" to="Option" method="_on_Back_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Assets/Prefabs/SoundsEffects/Effects/ButtonClick.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Assets/Sprites/UI/WantedLabel/wanted_focus_v2.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Prefabs/Animations/FadeOut.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Assets/Scripts/LocaledLabel.gdns" type="Script" id=17]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Focus_scale"
@@ -480,6 +481,8 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Mode:"
 align = 1
 valign = 1
+script = ExtResource( 17 )
+text_key = "KEY_MODE"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Notice/VBoxContainer/VBoxContainer"]
 margin_top = 21.0
@@ -551,9 +554,11 @@ custom_constants/shadow_as_outline = 0
 text = "Single"
 align = 1
 valign = 1
+script = ExtResource( 17 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+text_key = "KEY_SINGLE_MODE"
 
 [node name="TextureRect" type="TextureRect" parent="Notice/VBoxContainer/VBoxContainer/HBoxContainer"]
 margin_left = 784.0
@@ -612,31 +617,33 @@ custom_constants/shadow_as_outline = 0
 text = "Back"
 align = 1
 valign = 1
+script = ExtResource( 17 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+text_key = "KEY_BACK"
 
 [node name="BackAnimated" type="AnimationPlayer" parent="Notice/VBoxContainer/CenterContainer/Back"]
 anims/Focus_scale = SubResource( 8 )
 
-[connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/Flower_button" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/Flower_button" to="Notice" method="_on_animated_focus_entered" binds= [ "Flower_button", "FlowerAnimated" ]]
+[connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/Flower_button" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_exited" from="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/Flower_button" to="Notice" method="_on_animated_focus_exited" binds= [ "Flower_button", "FlowerAnimated" ]]
 [connection signal="pressed" from="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/Flower_button" to="Notice" method="_on_Flower_pressed"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes" to="Notice" method="_play_change_cursor_effect"]
-[connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes/Slime_button" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes/Slime_button" to="Notice" method="_on_animated_focus_entered" binds= [ "Slime_button", "SlimeAnimated" ]]
+[connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes/Slime_button" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_exited" from="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes/Slime_button" to="Notice" method="_on_animated_focus_exited" binds= [ "Slime_button", "SlimeAnimated" ]]
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one" to="Notice" method="_play_change_cursor_effect"]
-[connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one/Coming_soon_button" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one/Coming_soon_button" to="Notice" method="_on_animated_focus_entered" binds= [ "Coming_soon_button", "SoonAnimated" ]]
+[connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one/Coming_soon_button" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_exited" from="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one/Coming_soon_button" to="Notice" method="_on_animated_focus_exited" binds= [ "Coming_soon_button", "SoonAnimated" ]]
-[connection signal="focus_entered" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_on_animated_focus_entered" binds= [ "Mode", "ModeAnimated" ]]
 [connection signal="focus_entered" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_on_Mode_focus"]
+[connection signal="focus_entered" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_exited" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_on_animated_focus_exited" binds= [ "Mode", "ModeAnimated" ]]
 [connection signal="focus_exited" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_on_Mode_focus"]
-[connection signal="focus_entered" from="Notice/VBoxContainer/CenterContainer/Back" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/CenterContainer/Back" to="Notice" method="_on_animated_focus_entered" binds= [ "Back", "BackAnimated" ]]
+[connection signal="focus_entered" from="Notice/VBoxContainer/CenterContainer/Back" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_exited" from="Notice/VBoxContainer/CenterContainer/Back" to="Notice" method="_on_animated_focus_exited" binds= [ "Back", "BackAnimated" ]]
 [connection signal="pressed" from="Notice/VBoxContainer/CenterContainer/Back" to="Notice" method="_on_Back_pressed"]
