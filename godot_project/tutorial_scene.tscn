@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Assets/Scripts/ItemsContainer.gdns" type="Script" id=1]
 [ext_resource path="res://Assets/Prefabs/Animations/FadeIn.tscn" type="PackedScene" id=2]
@@ -22,6 +22,8 @@
 [ext_resource path="res://Assets/Prefabs/Rooms/base.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Assets/Prefabs/Doors/DownDoor.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/Jertovnik.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Assets/Prefabs/Doors/right_door_fill.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Assets/Prefabs/Doors/left_door_fill.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Assets/Prefabs/Doors/LeftDoor.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Assets/Prefabs/Doors/RightDoor.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Assets/Prefabs/Doors/UpDoor.tscn" type="PackedScene" id=27]
@@ -34,10 +36,13 @@
 [ext_resource path="res://Assets/Prefabs/Items/Keys/Key2.tscn" type="PackedScene" id=34]
 [ext_resource path="res://Assets/Prefabs/Items/Keys/Key4.tscn" type="PackedScene" id=35]
 [ext_resource path="res://Assets/Prefabs/Items/Keys/Key6.tscn" type="PackedScene" id=36]
+[ext_resource path="res://Assets/Prefabs/Doors/down_door_fill.tscn" type="PackedScene" id=37]
+[ext_resource path="res://Assets/Prefabs/Doors/up_door_fill.tscn" type="PackedScene" id=38]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="FadeIn" parent="." instance=ExtResource( 2 )]
+position = Vector2( -337.907, -130.255 )
 
 [node name="Node" type="Node" parent="."]
 
@@ -59,22 +64,23 @@ script = ExtResource( 18 )
 __meta__ = {
 "_editor_description_": ""
 }
-map_size = 3
-keys_frequency = 3
 room = ExtResource( 20 )
 down_door = ExtResource( 21 )
 up_door = ExtResource( 27 )
 right_door = ExtResource( 26 )
 left_door = ExtResource( 25 )
+down_door_fill = ExtResource( 37 )
+up_door_fill = ExtResource( 38 )
+right_door_fill = ExtResource( 23 )
+left_door_fill = ExtResource( 24 )
 wall_top_count = 1
-floor_count = 1
-stone_count = 1
-spike_count = 1
 roof_count = 1
 jertovnik = ExtResource( 22 )
 key_room_pedestal = ExtResource( 28 )
 keys_prefabs = [ ExtResource( 30 ), ExtResource( 34 ), ExtResource( 32 ), ExtResource( 35 ), ExtResource( 33 ), ExtResource( 36 ) ]
 big_stone = ExtResource( 31 )
 lock_sprite = ExtResource( 29 )
+sword_item = ExtResource( 14 )
+task_item = ExtResource( 3 )
 
 [node name="Items" type="Node2D" parent="."]

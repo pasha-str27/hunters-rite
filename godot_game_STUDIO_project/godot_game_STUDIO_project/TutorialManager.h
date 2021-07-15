@@ -37,10 +37,8 @@ namespace godot
 		void _move(String dir);
 		String _get_dir_on_index(int i);
 		bool _is_one_player_alive();
-		void hide_tutorial();
 
 	public:
-		static bool show_tutorial;
 
 		static void _register_methods();
 		void _init();
@@ -60,7 +58,7 @@ namespace godot
 		void _spawn_players();
 		void _get_type_keys();
 		void _hide_tutorial_sprites(String t_player_name);
-		bool _is_player_have_need_keys(Array rooms_keys);
+		bool _is_player_have_need_keys(Color rooms_keys);
 		void _show_game_over_screen();
 		TutorialManager();
 		~TutorialManager();

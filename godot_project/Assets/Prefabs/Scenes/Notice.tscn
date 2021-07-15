@@ -16,7 +16,7 @@
 [ext_resource path="res://Assets/Prefabs/SoundsEffects/Effects/ButtonClick.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Assets/Sprites/UI/WantedLabel/wanted_focus_v2.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Prefabs/Animations/FadeOut.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Assets/Scripts/LocaledLabel.gdns" type="Script" id=17]
+[ext_resource path="res://Assets/Sprites/UI/ChoosePlayers/Shooter_and_melee.png" type="Texture" id=17]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Focus_scale"
@@ -247,7 +247,7 @@ margin_bottom = 320.0
 rect_min_size = Vector2( 320, 320 )
 focus_neighbour_left = NodePath("../../Coming_soon_one/Coming_soon_button")
 focus_neighbour_top = NodePath("../../../../CenterContainer/Back")
-focus_neighbour_right = NodePath("../../Slimes/Slime_button")
+focus_neighbour_right = NodePath("../../Tutorial/Tutorial_button")
 focus_neighbour_bottom = NodePath("../../../../VBoxContainer/HBoxContainer/CenterContainer2/Mode")
 mouse_filter = 2
 texture_normal = ExtResource( 9 )
@@ -314,12 +314,12 @@ text = "NAGA
 "
 align = 1
 
-[node name="Slimes" type="CenterContainer" parent="Notice/VBoxContainer/Tasks/HBoxContainer"]
+[node name="Tutorial" type="CenterContainer" parent="Notice/VBoxContainer/Tasks/HBoxContainer"]
 margin_left = 460.0
 margin_right = 780.0
 margin_bottom = 320.0
 
-[node name="Slime_button" type="TextureButton" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes"]
+[node name="Tutorial_button" type="TextureButton" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Tutorial"]
 margin_right = 320.0
 margin_bottom = 320.0
 rect_min_size = Vector2( 320, 320 )
@@ -331,9 +331,9 @@ mouse_filter = 2
 texture_normal = ExtResource( 7 )
 expand = true
 
-[node name="Focus" type="TextureRect" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes/Slime_button"]
+[node name="Focus" type="TextureRect" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Tutorial/Tutorial_button"]
 visible = false
-modulate = Color( 1, 1, 1, 0.869608 )
+modulate = Color( 1, 1, 1, 0.478431 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -2.00854
@@ -342,7 +342,6 @@ margin_right = -2.00854
 margin_bottom = -1.33902
 grow_horizontal = 2
 grow_vertical = 2
-rect_scale = Vector2( 1.0375, 1.0375 )
 rect_pivot_offset = Vector2( 160, 160 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -353,31 +352,46 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SlimeAnimated" type="AnimationPlayer" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes/Slime_button"]
+[node name="TutorialAnimated" type="AnimationPlayer" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Tutorial/Tutorial_button"]
 anims/Focus_scale = SubResource( 3 )
 
-[node name="Label" type="Label" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes/Slime_button"]
-margin_left = 94.8409
-margin_top = 124.841
-margin_right = 226.841
-margin_bottom = 196.841
+[node name="Label" type="Label" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Tutorial/Tutorial_button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 44.0
+margin_top = 33.0
+margin_right = -45.0
+margin_bottom = -191.0
 custom_fonts/font = SubResource( 4 )
-text = "Coming
-
-Soon"
+text = "Tutorial"
 align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes"]
+[node name="Players_sprite" type="TextureRect" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Tutorial/Tutorial_button"]
+margin_left = 97.0
+margin_top = 96.0
+margin_right = 231.0
+margin_bottom = 254.0
+rect_min_size = Vector2( 128, 155 )
+mouse_filter = 2
+texture = ExtResource( 17 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Tutorial"]
 visible = false
 margin_left = 96.0
 margin_top = 75.0
 margin_right = 224.0
 margin_bottom = 244.0
 
-[node name="TextureRect" type="TextureRect" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Tutorial/VBoxContainer"]
 margin_right = 128.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 128, 128 )
@@ -386,7 +400,7 @@ texture = ExtResource( 8 )
 expand = true
 stretch_mode = 2
 
-[node name="Label" type="Label" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes/VBoxContainer"]
+[node name="Label" type="Label" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Tutorial/VBoxContainer"]
 margin_top = 132.0
 margin_right = 128.0
 margin_bottom = 169.0
@@ -404,7 +418,7 @@ margin_bottom = 320.0
 margin_right = 320.0
 margin_bottom = 320.0
 rect_min_size = Vector2( 320, 320 )
-focus_neighbour_left = NodePath("../../Slimes/Slime_button")
+focus_neighbour_left = NodePath("../../Tutorial/Tutorial_button")
 focus_neighbour_top = NodePath("../../../../CenterContainer/Back")
 focus_neighbour_right = NodePath("../../Flower/Flower_button")
 focus_neighbour_bottom = NodePath("../../../../VBoxContainer/HBoxContainer/CenterContainer2/Mode")
@@ -479,8 +493,6 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Mode:"
 align = 1
 valign = 1
-script = ExtResource( 17 )
-text_key = "KEY_MODE"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Notice/VBoxContainer/VBoxContainer"]
 margin_top = 21.0
@@ -552,11 +564,9 @@ custom_constants/shadow_as_outline = 0
 text = "Single"
 align = 1
 valign = 1
-script = ExtResource( 17 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-text_key = "KEY_SINGLE_MODE"
 
 [node name="TextureRect" type="TextureRect" parent="Notice/VBoxContainer/VBoxContainer/HBoxContainer"]
 margin_left = 784.0
@@ -615,11 +625,9 @@ custom_constants/shadow_as_outline = 0
 text = "Back"
 align = 1
 valign = 1
-script = ExtResource( 17 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-text_key = "KEY_BACK"
 
 [node name="BackAnimated" type="AnimationPlayer" parent="Notice/VBoxContainer/CenterContainer/Back"]
 anims/Focus_scale = SubResource( 8 )
@@ -628,10 +636,11 @@ anims/Focus_scale = SubResource( 8 )
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/Flower_button" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_exited" from="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/Flower_button" to="Notice" method="_on_animated_focus_exited" binds= [ "Flower_button", "FlowerAnimated" ]]
 [connection signal="pressed" from="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/Flower_button" to="Notice" method="_on_Flower_pressed"]
-[connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes" to="Notice" method="_play_change_cursor_effect"]
-[connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes/Slime_button" to="Notice" method="_on_animated_focus_entered" binds= [ "Slime_button", "SlimeAnimated" ]]
-[connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes/Slime_button" to="Notice" method="_play_change_cursor_effect"]
-[connection signal="focus_exited" from="Notice/VBoxContainer/Tasks/HBoxContainer/Slimes/Slime_button" to="Notice" method="_on_animated_focus_exited" binds= [ "Slime_button", "SlimeAnimated" ]]
+[connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Tutorial" to="Notice" method="_play_change_cursor_effect"]
+[connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Tutorial/Tutorial_button" to="Notice" method="_on_animated_focus_entered" binds= [ "Tutorial_button", "TutorialAnimated" ]]
+[connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Tutorial/Tutorial_button" to="Notice" method="_play_change_cursor_effect"]
+[connection signal="focus_exited" from="Notice/VBoxContainer/Tasks/HBoxContainer/Tutorial/Tutorial_button" to="Notice" method="_on_animated_focus_exited" binds= [ "Tutorial_button", "TutorialAnimated" ]]
+[connection signal="pressed" from="Notice/VBoxContainer/Tasks/HBoxContainer/Tutorial/Tutorial_button" to="Notice" method="_on_Tutorial_button_pressed"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one/Coming_soon_button" to="Notice" method="_on_animated_focus_entered" binds= [ "Coming_soon_button", "SoonAnimated" ]]
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one/Coming_soon_button" to="Notice" method="_play_change_cursor_effect"]

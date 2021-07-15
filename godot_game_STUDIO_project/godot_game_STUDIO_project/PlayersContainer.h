@@ -38,7 +38,7 @@ namespace godot
 		Node2D* _get_player1();
 		Node2D* _get_player2();
 		int _players_count();
-		void _add_key(String key_type);
+		void _add_key(Color key_type);
 		Array _get_key_list();
 		void _clear_keys();
 		void _show_game_over_screen();

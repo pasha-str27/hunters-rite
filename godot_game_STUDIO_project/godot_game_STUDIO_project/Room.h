@@ -20,13 +20,13 @@ namespace godot
 		std::vector<std::vector<int>> room_map;
 		std::vector<Vector2> empty_pos_world_coordinates;
 		std::vector<data_to_spawn_enemy> enemies_to_spawn;
-		Array list_of_keys;
+		Array list_of_keys = {};
 		float room_difficulty = 100;
 		String room_type = "";
 		bool were_here = false;
 
 		bool is_special = false;
-		Color last_key_color = Color(1, 1, 1, 1);
+		Color last_key_color;
 
 	public:
 		Room();

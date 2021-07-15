@@ -41,7 +41,6 @@ void godot::SpawnEnemyController::SpawnEnemies()
 		return;
 	}
 
-
 	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
 
@@ -73,7 +72,7 @@ void godot::SpawnEnemyController::SpawnEnemies()
 		return;
 	}
 
-	float current_value = 100; //_calculate_room_difficulty();
+	float current_value = _calculate_room_difficulty();
 	std::vector<Vector2> taken_positions;
 
 	enemies->set_enemy_to_spawn_count(0);
@@ -180,6 +179,7 @@ void godot::SpawnEnemyController::SpawnBoss()
 			Node2D* exit_node = Node::cast_to<Node2D>(exit_prefab->instance());
 			CurrentRoom::get_singleton()->_get_current_room()->add_child(exit_node, true);
 		}
+		Enemies::get_singleton()->set_spawning(false);
 		break;
 	}
 	}
@@ -325,7 +325,12 @@ float godot::SpawnEnemyController::_calculate_room_difficulty()
 
 	player = nullptr;
 
-	return ((PH1 + PH2) * PH_k) / 2 + ((D1 * AS1 + D2 * AS2) / 2) * DPS_k - RFS + (MK - CK) * K_k;
+	float res = ((PH1 + PH2) * PH_k) / 2 + ((D1 * AS1 + D2 * AS2) / 2) * DPS_k - RFS + (MK - CK) * K_k;
+
+	res = res < 150 ? 150 : res;
+	res = res > 500 ? 500 : res;
+
+	return res;
 }
 
 godot::SpawnEnemyController::SpawnEnemyController()

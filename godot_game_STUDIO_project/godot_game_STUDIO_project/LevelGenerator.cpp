@@ -32,6 +32,11 @@ void godot::LevelGenerator::_register_methods()
 	register_property<LevelGenerator, Ref<PackedScene>>("right_door", &LevelGenerator::right_door, nullptr);
 	register_property<LevelGenerator, Ref<PackedScene>>("left_door", &LevelGenerator::left_door, nullptr);
 
+	register_property<LevelGenerator, Ref<PackedScene>>("down_door_fill", &LevelGenerator::down_door_fill, nullptr);
+	register_property<LevelGenerator, Ref<PackedScene>>("up_door_fill", &LevelGenerator::up_door_fill, nullptr);
+	register_property<LevelGenerator, Ref<PackedScene>>("right_door_fill", &LevelGenerator::right_door_fill, nullptr);
+	register_property<LevelGenerator, Ref<PackedScene>>("left_door_fill", &LevelGenerator::left_door_fill, nullptr);
+
 	register_property<LevelGenerator, int>("wall_top_count", &LevelGenerator::wall_top_count, 0);
 	register_property<LevelGenerator, int>("floor_count", &LevelGenerator::floor_count, 0);
 	register_property<LevelGenerator, int>("stone_count", &LevelGenerator::stone_count, 0);
@@ -117,6 +122,7 @@ void godot::LevelGenerator::_ready()
 	_buid_floors();
 	_buid_top_wall();
 	_build_locks();
+	_build_fill_doors();
 	//	call set positions
 	get_node("/root/Node2D/Node/Camera2D/MiniMap")->call_deferred("_start_treking");
 }
@@ -245,18 +251,16 @@ void godot::LevelGenerator::_buid_doors()
 	for (int i = 0; i < rooms.size(); ++i)
 	{
 		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::DOWN))
-			rooms[i]->add_child(down_door->instance());
+			rooms[i]->add_child(down_door->instance(), true);
 
 		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::UP))
-			rooms[i]->add_child(up_door->instance());
-
+			rooms[i]->add_child(up_door->instance(), true);
 
 		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::RIGHT))
-			rooms[i]->add_child(right_door->instance());
-
+			rooms[i]->add_child(right_door->instance(), true);
 
 		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::LEFT))
-			rooms[i]->add_child(left_door->instance());
+			rooms[i]->add_child(left_door->instance(), true);
 	}
 }
 
@@ -334,7 +338,7 @@ void godot::LevelGenerator::_buid_stones(Node2D* room)
 
 	for (int k = 0; k < 4; ++k)
 	{
-		prefab = loader->load(NodePath("res://Assets/Prefabs/Rooms/Stones/stone" + String::num(random->randi_range(1, spike_count)) + ".tscn"));
+		prefab = loader->load(NodePath("res://Assets/Prefabs/Rooms/Stones/stone" + String::num(random->randi_range(1, stone_count)) + ".tscn"));
 		tile_map = cast_to<TileMap>(prefab->instance());
 		room->add_child(tile_map);
 
@@ -378,7 +382,7 @@ void godot::LevelGenerator::_buid_spikes(Node2D* room)
 	Ref<PackedScene> prefab = nullptr;
 	random->randomize();
 
-	TileMap* tile_map;
+	TileMap* tile_map = nullptr;
 
 	for (int k = 0; k < 4; ++k)
 	{
@@ -561,7 +565,6 @@ void godot::LevelGenerator::_rebuild_doors(std::vector<Node2D*> rooms)
 
 		if (!(bool)room->call("_adjacent_room_is_null", Vector2(-1, 0)))
 			room->add_child(left_door->instance());
-
 	}
 }
 
@@ -858,7 +861,7 @@ void godot::LevelGenerator::_build_locks()
 
 		dir = Vector2::LEFT;
 		door_name = "LeftDoor";
-		step = 23;
+		step = 21;
 
 		_build_locks_in_room(rooms[i], dir, door_name, step);
 
@@ -902,4 +905,26 @@ void godot::LevelGenerator::_build_locks_in_room(Node2D* room, Vector2 door_dir,
 					cast_to<Sprite>(lock_node)->set_modulate(Color(col.r, col.g, col.b, 150.0/255.0));
 				}
 			}
+}
+
+void godot::LevelGenerator::_build_fill_doors()
+{
+	for (int i = 1; i < rooms.size(); ++i)
+	{
+		String room_type = rooms[i]->call("_get_room_type");
+		if (room_type == "boss_room" || room_type == "game_room" || room_type == "mob_room")
+		{
+			if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::DOWN))
+				rooms[i]->add_child(down_door_fill->instance(), true);
+
+			if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::UP))
+				rooms[i]->add_child(up_door_fill->instance(), true);
+
+			if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::RIGHT))
+				rooms[i]->add_child(right_door_fill->instance(), true);
+
+			if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::LEFT))
+				rooms[i]->add_child(left_door_fill->instance(), true);
+		}
+	}
 }

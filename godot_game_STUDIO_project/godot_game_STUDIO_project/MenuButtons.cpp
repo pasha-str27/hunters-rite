@@ -13,7 +13,7 @@ bool MenuButtons::is_full_screen = false;
 float MenuButtons::music_audio_level = -12.5;
 float MenuButtons::effect_audio_level = 6;
 GameMode MenuButtons::game_mode = SHOOTER;
-GameType MenuButtons::game_type = DEFOLT;
+GameType MenuButtons::game_type = TUTORIAL;
 AudioStreamPlayer2D* MenuButtons::audio = nullptr;
 
 MenuButtons::MenuButtons()
@@ -25,6 +25,7 @@ MenuButtons::MenuButtons()
 	was_focused = false;
 	delta_time = 1.0 / 50;
 	single_mode = true;
+	tutorial_mode = false;
 }
 
 MenuButtons::~MenuButtons() {
@@ -61,15 +62,10 @@ void godot::MenuButtons::_ready()
 	if(get_parent()->has_method("_set_current"))
 		cast_to<Camera2D>(get_parent())->_set_current(true);
 
-	Godot::print("here");
-
-
 	// Set focus button in Menu and Notise scenes
 	set_focus_mode(true);
 
 	std::vector<String> name_buttons{ "Play", "Flower_button","Melee", "Back", "Resume", "Retry" };
-
-	Godot::print("here");
 
 	if (get_name() == "Menu" && find_parent("root") != nullptr && !find_parent("root")->has_node("MenuBackMusic"))
 	{
@@ -120,6 +116,7 @@ void MenuButtons::_register_methods()
 	register_method((char*)"_on_Quit_pressed", &MenuButtons::_on_Quit_pressed);
 	register_method((char*)"_on_Back_pressed", &MenuButtons::_on_Back_pressed);
 	register_method((char*)"_on_Flower_pressed", &MenuButtons::_on_Flower_pressed);
+	register_method((char*)"_on_Tutorial_button_pressed", &MenuButtons::_on_Tutorial_button_pressed);
 	register_method((char*)"_on_Items_pressed", &MenuButtons::_on_Items_pressed);
 	register_method((char*)"_on_Items_pause_pressed", &MenuButtons::_on_Items_pause_pressed);
 	register_method((char*)"_on_Options_pause_pressed", &MenuButtons::_on_Options_pause_pressed);
@@ -156,7 +153,6 @@ void MenuButtons::_register_methods()
 
 void godot::MenuButtons::_start_game(int name)
 {
-	GameManager::show_tutorial = true;
 	game_mode = GameMode(name);
 	_play_effect();
 	add_child(fade->instance());
@@ -183,7 +179,6 @@ void godot::MenuButtons::_start_game(int name)
 
 void godot::MenuButtons::save_game()
 {
-
 	auto save_game = File::_new();
 	save_game->open("user://savegame_hunters.save", File::WRITE);
 
@@ -199,7 +194,8 @@ void godot::MenuButtons::_timeout()
 {
 	timer->disconnect("timeout", this, "_timeout");
 	ResourceLoader* rld = ResourceLoader::get_singleton();
-	Ref<PackedScene> res = rld->load("res://main_scene.tscn");
+
+	Ref<PackedScene> res = game_type==DEFOLT ? rld->load("res://main_scene.tscn") : rld->load("res://tutorial_scene.tscn");
 
 	find_parent("root")->add_child(res->instance());
 	get_node("/root/MenuBackMusic")->queue_free();
@@ -339,6 +335,7 @@ void godot::MenuButtons::_on_Quit_pressed(Variant)
 // -------Notice buttons-------
 void godot::MenuButtons::_on_Flower_pressed(Variant)
 {
+	game_type = DEFOLT;
 	if (single_mode)
 	{
 		change_scene(choose_player_scene);
@@ -347,6 +344,20 @@ void godot::MenuButtons::_on_Flower_pressed(Variant)
 	game_mode = COOP;
 	_start_game(game_mode);
 }
+
+
+void godot::MenuButtons::_on_Tutorial_button_pressed(Variant)
+{
+	game_type = TUTORIAL;
+	if (single_mode)
+	{
+		change_scene(choose_player_scene);
+		return;
+	}
+	game_mode = COOP;
+	_start_game(game_mode);
+}
+
 
 // -------Choose chapter-------
 void godot::MenuButtons::_show_chapter_sprite(String sprite_name, String description_name, bool mode)

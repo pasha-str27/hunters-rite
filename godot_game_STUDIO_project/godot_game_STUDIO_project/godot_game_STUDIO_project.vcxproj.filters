@@ -192,9 +192,6 @@
     <ClCompile Include="Ball.cpp">
       <Filter>Football</Filter>
     </ClCompile>
-    <ClCompile Include="LocaledLabel.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="GameManager.cpp">
       <Filter>Level</Filter>
     </ClCompile>
@@ -206,6 +203,9 @@
     </ClCompile>
     <ClCompile Include="TutorialGenerator.cpp">
       <Filter>Genetation</Filter>
+    </ClCompile>
+    <ClCompile Include="LocaledLabel.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -425,9 +425,6 @@
     <ClInclude Include="Ball.h">
       <Filter>Football</Filter>
     </ClInclude>
-    <ClInclude Include="LocaledLabel.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>Level</Filter>
     </ClInclude>
@@ -439,6 +436,9 @@
     </ClInclude>
     <ClInclude Include="TutorialGenerator.h">
       <Filter>Genetation</Filter>
+    </ClInclude>
+    <ClInclude Include="LocaledLabel.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

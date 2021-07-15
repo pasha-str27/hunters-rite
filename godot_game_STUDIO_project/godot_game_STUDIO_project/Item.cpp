@@ -58,19 +58,42 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 	// speed max 350 / min 100
 	// damage max 150 /  min 10
 	// max Hp 1000 / min 50
-
+	Godot::print("speed:");
+	Godot::print("     before: "+ String::num((float)node->call("_get_speed")));
 	if (((float)node->call("_get_speed") + speed <= 100) || ((float)node->call("_get_speed") + speed >= 380))
 		speed = 0;
+	
+	node->call("_set_speed", (float)node->call("_get_speed") + speed);
+	Godot::print("     after: " + String::num((float)node->call("_get_speed")));
+
+	Godot::print("damage:");
+	Godot::print("     before: " + String::num((float)node->call("_get_damage")));
+
 	if (((float)node->call("_get_damage") + damage <= 10) || ((float)node->call("_get_damage") + damage >= 200))
 		damage = 0;
+
+	node->call("_set_damage", (float)node->call("_get_damage") + damage);
+	Godot::print("     after: " + String::num((float)node->call("_get_damage")));
+
+	Godot::print("maxHP:");
+	Godot::print("     before: " + String::num((float)node->call("_get_max_HP")));
+
 	if (((float)node->call("_get_max_HP") + HP >= 1000) || ((float)node->call("_get_max_HP") + HP <= 50))
 		HP = 0;
 
 	node->call("_set_max_HP", (float)node->call("_get_max_HP") + HP);
-	node->call("_set_speed", (float)node->call("_get_speed") + speed);
-	node->call("_set_damage", (float)node->call("_get_damage") + damage);
+
+	Godot::print("     after: " + String::num((float)node->call("_get_max_HP")));
+
+	Godot::print("number_to_next_item:");
+	Godot::print("     before: " + String::num((int)node->call("_get_number_to_next_item")));
 	node->call("_set_number_to_next_item", (int)node->call("_get_number_to_next_item") + number_to_next_item);
+	Godot::print("     after: " + String::num((float)node->call("_get_number_to_next_item")));
+
+	Godot::print("number_to_next_item:");
+	Godot::print("     before: " + String::num((int)node->call("_get_number_to_next_item")));
 	node->call("_set_attack_speed_delta", (float)node->call("_get_attack_speed_delta") + attack_speed_delta);
+	Godot::print("     after: " + String::num((int)node->call("_get_number_to_next_item")));
 
 	if (node->is_in_group("player2"))
 	{

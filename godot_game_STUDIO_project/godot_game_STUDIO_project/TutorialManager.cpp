@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-bool TutorialManager::show_tutorial = true;
-
 void godot::TutorialManager::_register_methods()
 {
 	register_method("_init", &TutorialManager::_init);
@@ -138,12 +136,6 @@ bool godot::TutorialManager::_is_one_player_alive()
 	return !PlayersContainer::_get_instance()->_get_player1() || !PlayersContainer::_get_instance()->_get_player2();
 }
 
-void godot::TutorialManager::hide_tutorial()
-{
-	cast_to<Node2D>(get_parent()->get_node("TutorialSprites"))->hide();
-	cast_to<Node2D>(get_parent()->get_node("TutorialSpritesSingle"))->hide();
-}
-
 void godot::TutorialManager::_init()
 {
 	for (int i = 0; i < 4; i++)
@@ -173,9 +165,6 @@ void  godot::TutorialManager::_hide_tutorial_sprites(String t_player_name) {
 
 void godot::TutorialManager::_spawn_players()
 {
-	if (!show_tutorial)
-		hide_tutorial();
-
 	ResourceLoader* loader = ResourceLoader::get_singleton();
 	if (MenuButtons::game_mode == SHOOTER)
 	{
@@ -254,25 +243,18 @@ void godot::TutorialManager::_spawn_players()
 	}
 }
 
-bool godot::TutorialManager::_is_player_have_need_keys(Array rooms_keys)
+bool godot::TutorialManager::_is_player_have_need_keys(Color rooms_key)
 {
-	if (rooms_keys.size() == 0)
+	if (rooms_key==Color())
 		return true;
 
 	Array players_keys = PlayersContainer::_get_instance()->_get_key_list();
 
-	if (players_keys.size() == 0)
-		return false;
+	for (int i = 0; i < players_keys.size(); ++i)
+		if (players_keys[i] == rooms_key)
+			return true;
 
-	bool check_result = true;
-	for (int i = 0; i < rooms_keys.size(); ++i)
-	{
-		String row = rooms_keys[i];
-		for (int k = 0; k < players_keys.size(); ++k)
-			check_result = row.find(players_keys[k]) != -1 ? true : false;
-	}
-
-	return check_result;
+	return false;
 }
 
 void godot::TutorialManager::_ready()
@@ -283,8 +265,6 @@ void godot::TutorialManager::_ready()
 	_set_current(true);
 
 	_spawn_players();
-
-	show_tutorial = false;
 
 	if (find_parent("root") != nullptr && !find_parent("root")->has_node("MenuGameMusic"))
 	{
@@ -361,7 +341,7 @@ void godot::TutorialManager::_door_collision(String door_dir)
 	auto generation_node = get_parent()->get_node("Generation");
 	Node2D* next_room = generation_node->call("_get_next_room", new_pos);
 
-	if (!_is_player_have_need_keys((Array)next_room->call("_get_list_of_keys")))
+	if (!_is_player_have_need_keys((Color)next_room->call("_get_last_key_color")))
 		return;
 
 	if (((int)dirs[index] == 2 && MenuButtons::game_mode == COOP) || ((MenuButtons::game_mode == SHOOTER || MenuButtons::game_mode == MELEE) && (int)dirs[index] == 1))
@@ -523,9 +503,6 @@ void godot::TutorialManager::_get_type_keys()
 
 void godot::TutorialManager::_go_to_start()
 {
-	if (!show_tutorial)
-		hide_tutorial();
-
 	auto fade = cast_to<Node2D>(fadeIn->instance());
 	add_child(fade);
 

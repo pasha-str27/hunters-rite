@@ -42,13 +42,15 @@ void godot::GameManager::_move(String dir)
 
 	auto generation_node = get_parent()->get_node("Generation");
 
+	Node2D* next_room = nullptr;
+
 	if (dir == "top")
 	{
 		float delta = 720;
 
 		set_global_position(get_global_position() - Vector2(0, delta));
 
-		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
+		next_room = generation_node->call("_get_next_room", get_global_position());
 		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "DownDoor");
 		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
 
@@ -67,7 +69,7 @@ void godot::GameManager::_move(String dir)
 
 		set_global_position(get_global_position() + Vector2(0, delta));
 
-		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
+		next_room = generation_node->call("_get_next_room", get_global_position());
 		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "UpDoor");
 		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
 
@@ -86,7 +88,7 @@ void godot::GameManager::_move(String dir)
 
 		set_global_position(get_global_position() - Vector2(delta, 0));
 
-		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
+		next_room = generation_node->call("_get_next_room", get_global_position());
 		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "RightDoor");
 		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
 
@@ -105,7 +107,7 @@ void godot::GameManager::_move(String dir)
 
 		set_global_position(get_global_position() + Vector2(delta, 0));
 
-		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
+		next_room = generation_node->call("_get_next_room", get_global_position());
 		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "LeftDoor");
 		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
 
@@ -116,6 +118,13 @@ void godot::GameManager::_move(String dir)
 
 		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
 			PlayersContainer::_get_instance()->_get_player2_regular()->set_global_position(move_point->get_global_position());
+	}
+
+	if ((String)next_room->call("_get_room_type")=="boss_room" && (GameManager::current_level != 2 || GameManager::current_level != 5 || GameManager::current_level != 10))
+	{
+		for (int i = next_room->get_child_count() - 1; i >= 0; --i)
+			if (next_room->get_child(i)->get_name().find("fill_door") != -1)
+				next_room->get_child(i)->queue_free();
 	}
 
 	if (minimap != nullptr)
@@ -137,12 +146,6 @@ String godot::GameManager::_get_dir_on_index(int i)
 bool godot::GameManager::_is_one_player_alive()
 {
 	return !PlayersContainer::_get_instance()->_get_player1() || !PlayersContainer::_get_instance()->_get_player2();
-}
-
-void godot::GameManager::hide_tutorial()
-{
-	cast_to<Node2D>(get_parent()->get_node("TutorialSprites"))->hide();
-	cast_to<Node2D>(get_parent()->get_node("TutorialSpritesSingle"))->hide();
 }
 
 void godot::GameManager::_init()
@@ -174,9 +177,6 @@ void  godot::GameManager::_hide_tutorial_sprites(String t_player_name) {
 
 void godot::GameManager::_spawn_players()
 {
-	if (!show_tutorial)
-		hide_tutorial();
-
 	ResourceLoader* loader = ResourceLoader::get_singleton();
 	if (MenuButtons::game_mode == SHOOTER)
 	{
@@ -255,9 +255,9 @@ void godot::GameManager::_spawn_players()
 	}
 }
 
-bool godot::GameManager::_is_player_have_need_keys(Array rooms_keys)
+bool godot::GameManager::_is_player_have_need_keys(Color rooms_key)
 {
-	if (rooms_keys.size() == 0)
+	if (rooms_key==Color())
 		return true;
 
 	Array players_keys = PlayersContainer::_get_instance()->_get_key_list();
@@ -265,15 +265,11 @@ bool godot::GameManager::_is_player_have_need_keys(Array rooms_keys)
 	if (players_keys.size() == 0)
 		return false;
 
-	bool check_result = true;
-	for (int i = 0; i < rooms_keys.size(); ++i)
-	{
-		String row = rooms_keys[i];
-		for (int k = 0; k < players_keys.size(); ++k)
-			check_result = row.find(players_keys[k])!=-1 ? true : false;
-	}
+	for (int i = 0; i < players_keys.size(); ++i)
+		if (players_keys[i] == rooms_key)
+			return true;
 
-	return check_result;
+	return false;
 }
 
 void godot::GameManager::_ready()
@@ -363,7 +359,7 @@ void godot::GameManager::_door_collision(String door_dir)
 	auto generation_node = get_parent()->get_node("Generation");
 	Node2D* next_room = generation_node->call("_get_next_room", new_pos);
 
-	if (!_is_player_have_need_keys((Array)next_room->call("_get_list_of_keys")))
+	if (!_is_player_have_need_keys((Color)next_room->call("_get_last_key_color")))
 		return;
 
 	if (((int)dirs[index] == 2 && MenuButtons::game_mode==COOP) || ((MenuButtons::game_mode == SHOOTER|| MenuButtons::game_mode == MELEE) && (int)dirs[index] == 1))
@@ -524,9 +520,6 @@ void godot::GameManager::_get_type_keys() {
 
 void godot::GameManager::_go_to_start()
 {
-	if (!show_tutorial)
-		hide_tutorial();
-
 	auto fade = cast_to<Node2D>(fadeIn->instance());
 	add_child(fade);
 

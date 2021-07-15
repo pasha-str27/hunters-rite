@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ghost_idle.png-f1b4e904415914187dcbe7b03b288e2d.stex"
+path="res://.import/Shooter_and_melee.png-e4d219effe3825796a6820f34273dec2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Players/Ghost/ghost_idle.png"
-dest_files=[ "res://.import/ghost_idle.png-f1b4e904415914187dcbe7b03b288e2d.stex" ]
+source_file="res://Assets/Sprites/UI/ChoosePlayers/Shooter_and_melee.png"
+dest_files=[ "res://.import/Shooter_and_melee.png-e4d219effe3825796a6820f34273dec2.stex" ]
 
 [params]
 
