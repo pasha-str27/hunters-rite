@@ -245,6 +245,11 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 			prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->open_door());
 			add_child(prefab->instance());
 			CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->call("_open_doors");
+
+			auto cur_room = CurrentRoom::get_singleton()->_get_current_room();
+			for (int i = cur_room->get_child_count() - 1; i >= 0; --i)
+				if (cur_room->get_child(i)->get_name().find("fill_door") != -1)
+					cur_room->get_child(i)->queue_free();
 		}
 
 		if (is_in_group("flower") || is_in_group("slime_boss") || is_in_group("mimic") || is_in_group("naga"))

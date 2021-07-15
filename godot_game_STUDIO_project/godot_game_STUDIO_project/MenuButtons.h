@@ -58,6 +58,7 @@ namespace godot
 		bool was_quit_focused;	
 		bool was_mode_focused;	
 		bool single_mode;	
+		bool tutorial_mode;	
 
 		static void _register_methods();
 		void _init();
@@ -68,6 +69,7 @@ namespace godot
 		void _on_Quit_pressed(Variant body);
 		void _on_Back_pressed(Variant body);
 		void _on_Flower_pressed(Variant body);
+		void _on_Tutorial_button_pressed(Variant);
 		void _on_Back_pause_pressed(Input* event);
 		void _start_game(int name);
 		void _on_Items_pressed(Variant body);

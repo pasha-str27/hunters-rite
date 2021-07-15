@@ -16,6 +16,11 @@ namespace godot
 		Ref<PackedScene> down_door = nullptr;
 		Ref<PackedScene> left_door = nullptr;
 
+		Ref<PackedScene> up_door_fill = nullptr;
+		Ref<PackedScene> right_door_fill = nullptr;
+		Ref<PackedScene> down_door_fill = nullptr;
+		Ref<PackedScene> left_door_fill = nullptr;
+
 		int keys_frequency = 5;
 
 		float step_x = 1024;
@@ -75,5 +80,6 @@ namespace godot
 		Array _get_rooms_positions();
 		void _build_locks();
 		void _build_locks_in_room(Node2D* room, Vector2 door_dir, String door_name, int step);
+		void _build_fill_doors();
 	};
 }
