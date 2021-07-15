@@ -4,8 +4,8 @@
 [ext_resource path="res://Assets/Sprites/Particles/particles_v6.png" type="Texture" id=3]
 
 [sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0.42562, 1 )
-colors = PoolColorArray( 0.572754, 0.510109, 0.553606, 1, 0, 1, 0.15918, 0 )
+offsets = PoolRealArray( 0.409091, 1 )
+colors = PoolColorArray( 0.217556, 0.251748, 0.260254, 1, 0, 1, 0.15918, 0 )
 
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )
