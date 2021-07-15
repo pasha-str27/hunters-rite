@@ -43,7 +43,6 @@ void godot::Enemy::_register_methods()
 	register_method("_get_animated_sprite", &Enemy::_get_animated_sprite);
 	register_method("_add_to_HP", &Enemy::_add_to_HP);
 	register_method("_get_HP_percent", &Enemy::_get_HP_percent);
-
 	
 	register_property<Enemy, Ref<PackedScene>>("bullet", &Enemy::bullet, nullptr);
 	register_property<Enemy, float>("HP", &Enemy::HP, 99);
@@ -84,6 +83,9 @@ void godot::Enemy::_ready()
 {
 	Enemies::get_singleton()->_add_enemy(this);
 
+	death_timer = Timer::_new();
+
+	add_child(death_timer);
 	add_child(timer_change_dir);
 	add_child(timer);
 	add_child(timer_check_angry);
@@ -268,9 +270,8 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		particles->set_global_position(this->get_global_position());
 		get_node("/root/Node2D/Node")->add_child(particles, true);
 
-		timer->connect("timeout", this, "_destroy_enemy");
-
-		timer->start(1);
+		death_timer->connect("timeout", this, "_destroy_enemy");
+		death_timer->start(1);
 	}
 }
 
@@ -321,9 +322,9 @@ void godot::Enemy::_on_fixed_timeout()
 
 void godot::Enemy::_destroy_enemy()
 {
-	_update_health_bar();
+	//_update_health_bar();
 
-	timer->disconnect("timeout", this, "_destroy_enemy");
+	death_timer->disconnect("timeout", this, "_destroy_enemy");
 
 	Enemies::get_singleton()->_remove_enemy(this);
 
@@ -524,14 +525,15 @@ void godot::Enemy::_on_spawn_end()
 	enemies->set_enemy_to_spawn_count(enemies->get_enemy_to_spawn_count() - 1);
 	if (enemies->get_enemy_to_spawn_count() == 0)
 	{
-		CameraController::current_room->call("_clear_enemy_to_spawn");
+		CurrentRoom::get_singleton()->_get_current_room()->call("_clear_enemy_to_spawn");
 		enemies->set_spawning(false);
 	}
 }
 
 void godot::Enemy::_on_Area2D_body_exited(Node* node)
 {
-	ai->_remove_player(cast_to<Node2D>(node));
+	if(node->is_in_group("player"))
+		ai->_remove_player(cast_to<Node2D>(node));
 }
 
 void godot::Enemy::_change_start_parameters()

@@ -5,9 +5,9 @@
 
 namespace godot
 {
-	class CameraController : public Camera2D
+	class TutorialManager : public Camera2D
 	{
-		GODOT_CLASS(CameraController, Camera2D);
+		GODOT_CLASS(TutorialManager, Camera2D);
 
 		Node2D* player1;
 		Node2D* player2;
@@ -34,17 +34,13 @@ namespace godot
 		float delta_step = -80.0 / 50.0;
 
 		Array generated_keys = {};
-
-
 		void _move(String dir);
 		String _get_dir_on_index(int i);
 		bool _is_one_player_alive();
 		void hide_tutorial();
 
 	public:
-		static Node2D* current_room;
 		static bool show_tutorial;
-		static int current_level;
 
 		static void _register_methods();
 		void _init();
@@ -66,7 +62,7 @@ namespace godot
 		void _hide_tutorial_sprites(String t_player_name);
 		bool _is_player_have_need_keys(Array rooms_keys);
 		void _show_game_over_screen();
-		CameraController();
-		~CameraController();
+		TutorialManager();
+		~TutorialManager();
 	};
 }

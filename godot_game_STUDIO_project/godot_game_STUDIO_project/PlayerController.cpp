@@ -270,6 +270,9 @@ void godot::PlayerController::_take_damage(float damage, bool is_spike)
 	if (current_player_strategy->_get_safe_mode())
 		return;
 
+	if (MenuButtons::game_type == TUTORIAL)
+		damage = 0;
+
 	camera_shake->call("_start", 4, .2f);
 
 	current_player_strategy->_take_damage(damage, is_spike);
@@ -440,6 +443,9 @@ void godot::PlayerController::_die()
 	if (get_name() == "Player2")
 		Enemies::get_singleton()->_remove_player2();
 
+	Ref<PackedScene> prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->player_died());
+	add_child(prefab->instance());
+
 	if (current_player_strategy->_was_revived())
 	{
 		is_ghost_mode = true;
@@ -510,11 +516,20 @@ void godot::PlayerController::_start_item_particles(bool is_buff)
 {
 	_update_max_health_bar_size();
 
-	if (is_buff)
-		buff_debuff_particles->get_process_material()->set("hue_variation", .85);
-	else
-		buff_debuff_particles->get_process_material()->set("hue_variation", -.85);
+	Ref<PackedScene> prefab = nullptr;
 
+	if (is_buff)
+	{
+		prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->collect_good_item());
+		buff_debuff_particles->get_process_material()->set("hue_variation", .85);
+	}
+	else
+	{
+		prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->collect_bad_item());
+		buff_debuff_particles->get_process_material()->set("hue_variation", -.85);
+	}
+
+	get_parent()->add_child(prefab->instance());
 	buff_debuff_particles->restart();
 }
 

@@ -6,7 +6,7 @@
 godot::SpiderAI::SpiderAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
 {
 	dir = Vector2::ZERO;
-	
+
 	max_bullet_count = 5;
 	can_move = true;
 	is_cheking = false;
@@ -31,14 +31,14 @@ void godot::SpiderAI::_add_bullet(Node* node)
 void godot::SpiderAI::change_can_fight(bool value)
 {
 	can_move = value;
-	if(value)
+	if (value)
 		_get_enemy()->call("_change_animation", "run", 2);
 }
 
 bool godot::SpiderAI::_is_player_near(Node2D* player)
 {
 	Vector2 player_pos_index = (player->get_global_position()
-		- CameraController::current_room->get_global_position()
+		- CurrentRoom::get_singleton()->_get_current_room()->get_global_position()
 		+ Vector2(896, 544) / 2) / _get_distance();
 
 	bool is_player_ghost = (bool)player->call("_is_ghost_mode");
@@ -84,16 +84,16 @@ void godot::SpiderAI::change_direction()
 {
 	reset_directions();
 
-	if((int)CameraController::current_room->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::LEFT).x)==0)
+	if ((int)CurrentRoom::get_singleton()->_get_current_room()->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::LEFT).x) == 0)
 		directions.push_back(Vector2::LEFT);
 
-	if ((int)CameraController::current_room->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::RIGHT).x) == 0)
+	if ((int)CurrentRoom::get_singleton()->_get_current_room()->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::RIGHT).x) == 0)
 		directions.push_back(Vector2::RIGHT);
 
-	if ((int)CameraController::current_room->call("_get_cell_value", (cur_pos + Vector2::DOWN).y, cur_pos.x) == 0)
+	if ((int)CurrentRoom::get_singleton()->_get_current_room()->call("_get_cell_value", (cur_pos + Vector2::DOWN).y, cur_pos.x) == 0)
 		directions.push_back(Vector2::DOWN);
 
-	if ((int)CameraController::current_room->call("_get_cell_value", (cur_pos + Vector2::UP).y, cur_pos.x) == 0)
+	if ((int)CurrentRoom::get_singleton()->_get_current_room()->call("_get_cell_value", (cur_pos + Vector2::UP).y, cur_pos.x) == 0)
 		directions.push_back(Vector2::UP);
 
 	PlayersContainer* players = PlayersContainer::_get_instance();
@@ -116,7 +116,7 @@ void godot::SpiderAI::_change_dir_after_time()
 		dir = Vector2::ZERO;
 		goal = _get_enemy()->get_global_position();
 		return;
-	}	
+	}
 
 	Ref<RandomNumberGenerator> rand = RandomNumberGenerator::_new();
 	rand->randomize();
@@ -177,7 +177,7 @@ void godot::SpiderAI::_set_speed(float value)
 
 void godot::SpiderAI::_change_start_parameters()
 {
-	cur_pos = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / _get_distance();
+	cur_pos = (_get_enemy()->get_global_position() - CurrentRoom::get_singleton()->_get_current_room()->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / _get_distance();
 	old_pos = _get_enemy()->get_global_position();
 
 	change_direction();

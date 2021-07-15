@@ -18,6 +18,7 @@ namespace godot
 		Timer* timer_change_dir;
 		Timer* timer_check_angry;
 		Timer* timer_particles = nullptr;
+		Timer* death_timer = nullptr;
 
 		float HP;
 		float max_HP;

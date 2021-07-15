@@ -3,7 +3,7 @@
 [ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Assets/Scripts/MenuButtons.gdns" type="Script" id=3]
-[ext_resource path="res://Assets/Sprites/Monsters/Flower/monster_flower.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/UI/WantedLabel/naga_sprite.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_focus_v2.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_background_v2.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Sprites/UI/WantedLabel/wanted_backgroud_base_v3.png" type="Texture" id=7]
@@ -195,7 +195,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 click_effect = ExtResource( 14 )
+"menu back music" = null
 fade = ExtResource( 16 )
+fade_in = null
 
 [node name="BackGroung" type="TextureRect" parent="Notice"]
 anchor_right = 1.0
@@ -280,26 +282,38 @@ anims/Focus_scale = SubResource( 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Flower"]
 margin_left = 96.0
-margin_top = 75.0
+margin_top = 50.0
 margin_right = 224.0
-margin_bottom = 244.0
+margin_bottom = 270.0
+
+[node name="Wanted_text2" type="Label" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/VBoxContainer"]
+margin_right = 128.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Wanted"
+align = 1
+valign = 2
 
 [node name="Flower_sprite" type="TextureRect" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/VBoxContainer"]
+margin_top = 24.0
 margin_right = 128.0
-margin_bottom = 128.0
-rect_min_size = Vector2( 128, 128 )
+margin_bottom = 179.0
+rect_min_size = Vector2( 128, 155 )
 mouse_filter = 2
 texture = ExtResource( 4 )
 expand = true
+stretch_mode = 6
 
 [node name="Wanted_text" type="Label" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/VBoxContainer"]
-margin_top = 132.0
+margin_top = 183.0
 margin_right = 128.0
-margin_bottom = 169.0
+margin_bottom = 220.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Wanted
-1000$"
+text = "NAGA
+"
 align = 1
 
 [node name="Slimes" type="CenterContainer" parent="Notice/VBoxContainer/Tasks/HBoxContainer"]

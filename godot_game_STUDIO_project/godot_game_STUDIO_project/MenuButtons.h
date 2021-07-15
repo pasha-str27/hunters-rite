@@ -12,6 +12,12 @@ namespace godot
 		MELEE
 	};
 
+	enum GameType
+	{
+		TUTORIAL,
+		DEFOLT
+	};
+
 	class MenuButtons : public TextureRect
 	{
 		GODOT_CLASS(MenuButtons, TextureRect)
@@ -48,6 +54,7 @@ namespace godot
 		static bool is_full_screen;
 		static float effect_audio_level;
 		static GameMode game_mode;
+		static GameType game_type;
 		bool was_quit_focused;	
 		bool was_mode_focused;	
 		bool single_mode;	
@@ -82,6 +89,7 @@ namespace godot
 		void _change_audio_volume();
 		void _on_Resume_pressed(Input* event);
 		void _on_Items_pause_pressed(Input* event);
+		void _on_Options_pause_pressed(Input*);
 		void _on_Menu_pressed(Input* event);
 		void _on_Retry_pressed(Variant body);
 		void _move_to_main_menu();

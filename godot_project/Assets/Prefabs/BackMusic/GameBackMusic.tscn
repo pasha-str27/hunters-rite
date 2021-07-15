@@ -8,3 +8,4 @@ stream = ExtResource( 1 )
 autoplay = true
 attenuation = 0.0228763
 bus = "BackMusic"
+area_mask = 0

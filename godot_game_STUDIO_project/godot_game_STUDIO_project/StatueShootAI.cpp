@@ -35,14 +35,14 @@ void godot::StatueShootAI::change_can_fight(bool value)
 
 void godot::StatueShootAI::_change_start_parameters()
 {
-	Vector2 cur_pos = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
-	CameraController::current_room->call("_set_cell_value", cur_pos.y, cur_pos.x, 8);
+	Vector2 cur_pos = (_get_enemy()->get_global_position() - CurrentRoom::get_singleton()->_get_current_room()->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+	CurrentRoom::get_singleton()->_get_current_room()->call("_set_cell_value", cur_pos.y, cur_pos.x, 8);
 }
 
 void godot::StatueShootAI::_remove_taken_positions()
 {
-	Vector2 cur_pos = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
-	CameraController::current_room->call("_set_cell_value", cur_pos.y, cur_pos.x, 0);
+	Vector2 cur_pos = (_get_enemy()->get_global_position() - CurrentRoom::get_singleton()->_get_current_room()->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+	CurrentRoom::get_singleton()->_get_current_room()->call("_set_cell_value", cur_pos.y, cur_pos.x, 0);
 }
 
 void godot::StatueShootAI::_process(float delta)

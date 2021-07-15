@@ -128,17 +128,14 @@ atlas = ExtResource( 4 )
 region = Rect2( 624, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=28]
-flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=29]
-flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=30]
-flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 64, 0, 32, 32 )
 
@@ -239,7 +236,7 @@ shape = SubResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="SlimeShoot/CollisionShape2D"]
 frames = SubResource( 31 )
 animation = "idle"
-frame = 3
+frame = 4
 playing = true
 
 [node name="Area2D" type="Area2D" parent="SlimeShoot"]

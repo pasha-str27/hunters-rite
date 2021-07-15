@@ -44,18 +44,20 @@ void godot::FlowerAI::_set_speed(float value)
 
 void godot::FlowerAI::_change_start_parameters()
 {
-	Vector2 cur_pos = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+	Vector2 cur_pos = (_get_enemy()->get_global_position() - 
+		CurrentRoom::get_singleton()->_get_current_room()->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
 	for (int i = cur_pos.x - 1; i <= cur_pos.x + 1; ++i)
 		for (int j = cur_pos.y - 1; j <= cur_pos.y + 1; ++j)
-			CameraController::current_room->call("_set_cell_value", j, i, 8);
+			CurrentRoom::get_singleton()->_get_current_room()->call("_set_cell_value", j, i, 8);
 }
 
 void godot::FlowerAI::_remove_taken_positions()
 {
-	Vector2 cur_pos = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+	Vector2 cur_pos = (_get_enemy()->get_global_position() - 
+		CurrentRoom::get_singleton()->_get_current_room()->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
 	for (int i = cur_pos.x - 1; i <= cur_pos.x + 1; ++i)
 		for (int j = cur_pos.y - 1; j <= cur_pos.y + 1; ++j)
-			CameraController::current_room->call("_set_cell_value", j, i, 0);
+			CurrentRoom::get_singleton()->_get_current_room()->call("_set_cell_value", j, i, 0);
 }
 
 void godot::FlowerAI::_process(float delta)

@@ -32,6 +32,8 @@ radius = 1.23328
 ]]
 visible = false
 scale = Vector2( 5, 5 )
+z_index = 50
+z_as_relative = false
 collision_layer = 0
 collision_mask = 0
 script = ExtResource( 1 )
@@ -45,7 +47,8 @@ disabled = true
 
 [node name="Sprite" type="Sprite" parent="CollisionShape2D"]
 scale = Vector2( 0.15, 0.15 )
-z_index = 55
+z_index = 50
+z_as_relative = false
 texture = ExtResource( 2 )
 region_rect = Rect2( 100, 90, 21, 39 )
 

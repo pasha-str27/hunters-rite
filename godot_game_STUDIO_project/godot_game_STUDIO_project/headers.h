@@ -77,7 +77,7 @@ using namespace godot;
 #include "ProducePlayerShoot.h"
 #include "ProducePlayerMelee.h"
 #include "Sword.h"
-#include "CameraController.h"
+#include "GameManager.h"
 #include "Spike.h"
 #include "SlimeAI.h"
 #include "BatAI.h"
@@ -126,6 +126,9 @@ using namespace godot;
 #include "CameraShake.h"
 #include "ResourceContainer.h"
 #include "NagaAI.h"
+#include "TutorialGenerator.h"
+#include "TutorialManager.h"
+#include "CurrentRoom.h"
 #include "PoisonEgg.h"
 #include "LocaledLabel.h"
 

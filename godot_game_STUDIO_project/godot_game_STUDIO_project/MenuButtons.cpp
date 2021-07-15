@@ -11,6 +11,7 @@ bool MenuButtons::is_full_screen = false;
 float MenuButtons::music_audio_level = -12.5;
 float MenuButtons::effect_audio_level = 6;
 GameMode MenuButtons::game_mode = SHOOTER;
+GameType MenuButtons::game_type = DEFOLT;
 AudioStreamPlayer2D* MenuButtons::audio = nullptr;
 
 MenuButtons::MenuButtons()
@@ -47,13 +48,18 @@ void godot::MenuButtons::_ready()
 	items_grid = rld->load("res://Assets/Prefabs/Scenes/ChoosePlayer.tscn");
 	game_scene = rld->load("res://main_scene.tscn");
 
-	cast_to<Camera2D>(get_parent())->_set_current(true);
+	if(get_parent()->has_method("_set_current"))
+		cast_to<Camera2D>(get_parent())->_set_current(true);
+
+	Godot::print("here");
 
 
 	// Set focus button in Menu and Notise scenes
 	set_focus_mode(true);
 
 	std::vector<String> name_buttons{ "Play", "Flower_button","Melee", "Back", "Resume", "Retry" };
+
+	Godot::print("here");
 
 	if (get_name() == "Menu" && find_parent("root") != nullptr && !find_parent("root")->has_node("MenuBackMusic"))
 	{
@@ -70,6 +76,7 @@ void godot::MenuButtons::_ready()
 
 	if (get_name() == "Option")
 	{
+		cast_to<Camera2D>(get_parent()->get_parent())->_set_current(true);
 		auto tmp_node = get_child(1)->get_child(0)->get_child(0);
 		cast_to<Button>(tmp_node->get_child(0))->set_pressed(is_full_screen);
 		cast_to<Slider>(tmp_node->get_child(2))->set_value(effect_audio_level);
@@ -105,6 +112,7 @@ void MenuButtons::_register_methods()
 	register_method((char*)"_on_Flower_pressed", &MenuButtons::_on_Flower_pressed);
 	register_method((char*)"_on_Items_pressed", &MenuButtons::_on_Items_pressed);
 	register_method((char*)"_on_Items_pause_pressed", &MenuButtons::_on_Items_pause_pressed);
+	register_method((char*)"_on_Options_pause_pressed", &MenuButtons::_on_Options_pause_pressed);
 	register_method((char*)"_on_FullScreen_pressed", &MenuButtons::_on_FullScreen_pressed);
 	register_method((char*)"_on_Back_pause_pressed", &MenuButtons::_on_Back_pause_pressed);
 	register_method((char*)"_play_change_cursor_effect", &MenuButtons::_play_change_cursor_effect);
@@ -136,7 +144,7 @@ void MenuButtons::_register_methods()
 
 void godot::MenuButtons::_start_game(int name)
 {
-	CameraController::show_tutorial = true;
+	GameManager::show_tutorial = true;
 	game_mode = GameMode(name);
 	_play_effect();
 	add_child(fade->instance());
@@ -283,6 +291,15 @@ void godot::MenuButtons::_on_Items_pressed(Variant)
 
 void godot::MenuButtons::_on_Back_pressed(Variant)
 {
+	if (get_parent()->get_parent()->get_name() == "Pause")
+	{
+		Node2D* node = cast_to<Node2D>(get_parent()->get_parent());
+
+		cast_to<TextureButton>(node->get_child(0)->find_node("Options"))->grab_focus();
+		get_parent()->queue_free();
+
+		return;
+	}
 	change_scene(menu_scene);
 }
 
@@ -373,7 +390,6 @@ void godot::MenuButtons::_on_Items_pause_pressed(Input*)
 	cast_to<Control>(get_parent()->find_node("Items_in_pause"))->set_visible(true);
 	this->set_visible(false);
 	cast_to<TextureButton>(get_parent()->find_node("Back_button")->get_child(0))->grab_focus();
-
 }
 
 void godot::MenuButtons::_on_Retry_pressed(Variant)
@@ -400,6 +416,16 @@ void godot::MenuButtons::_on_Retry_pressed(Variant)
 	timer_music_out->start(0.01);
 	timer->start(1);
 }
+
+void godot::MenuButtons::_on_Options_pause_pressed(Input*)
+{
+	ResourceLoader* rld = ResourceLoader::get_singleton();
+	Ref<PackedScene> res = rld->load("res://Assets/Prefabs/Scenes/OptionsNode.tscn");
+	Node2D* node = cast_to<Node2D>(res->instance());
+	get_parent()->add_child(node);
+	node->_edit_set_scale(Vector2(0.75, 0.75));
+}
+
 
 void godot::MenuButtons::_on_Menu_pressed(Input*)
 {
@@ -470,7 +496,7 @@ void godot::MenuButtons::_on_animated_focus_exited(String button_name, String an
 // -------Work with scenes-------
 void godot::MenuButtons::_reload_scene()
 {
-	CameraController::show_tutorial = true;
+	GameManager::show_tutorial = true;
 	timer->disconnect("timeout", this, "_reload_scene");
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	Ref<PackedScene> res = rld->load("res://main_scene.tscn");

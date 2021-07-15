@@ -4,5 +4,6 @@
 
 [node name="Lock" type="Sprite"]
 scale = Vector2( 0.5, 0.5 )
-z_index = 100
+z_index = 7
+z_as_relative = false
 texture = ExtResource( 1 )

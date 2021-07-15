@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/take bad item.mp3-0459ecf2951a72021daed86b3fc7acaf.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/take bad item.mp3"
+dest_files=[ "res://.import/take bad item.mp3-0459ecf2951a72021daed86b3fc7acaf.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

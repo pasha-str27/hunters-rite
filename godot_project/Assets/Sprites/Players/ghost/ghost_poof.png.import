@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ghost_poof.png-f0af7313faf87e26a25de72fb89713fc.stex"
+path="res://.import/ghost_poof.png-eaee40a9cd4714bc113be27e253206e1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Players/ghost/ghost_poof.png"
-dest_files=[ "res://.import/ghost_poof.png-f0af7313faf87e26a25de72fb89713fc.stex" ]
+source_file="res://Assets/Sprites/Players/Ghost/ghost_poof.png"
+dest_files=[ "res://.import/ghost_poof.png-eaee40a9cd4714bc113be27e253206e1.stex" ]
 
 [params]
 
