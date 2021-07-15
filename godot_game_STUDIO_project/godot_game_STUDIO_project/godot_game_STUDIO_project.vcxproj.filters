@@ -74,9 +74,6 @@
     <ClCompile Include="Spike.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="ExitHandler.cpp">
       <Filter>Level</Filter>
     </ClCompile>
@@ -149,7 +146,6 @@
     <ClCompile Include="SlimeBossAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="SlimeAttackSpawnState.cpp">
       <Filter>Enemies\SlimeBossStates</Filter>
     </ClCompile>
@@ -162,18 +158,11 @@
     <ClCompile Include="SlimeEnemiesHolder.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Ball.cpp" />
-    <ClCompile Include="ISlimeAttackState.cpp">
-      <Filter>Enemies\SlimeBossStates</Filter>
-    </ClCompile>
     <ClCompile Include="MimicAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="WormAI.cpp">
       <Filter>Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraShake.cpp">
-      <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="ResourceContainer.cpp" />
     <ClCompile Include="SillyBoyAI.cpp">
@@ -182,23 +171,41 @@
     <ClCompile Include="SillyBoyDiedAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="NagaAI.cpp">
+    <ClCompile Include="BulletPull.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="TutorialGenerator.cpp">
-      <Filter>Genetation</Filter>
+    <ClCompile Include="CameraShake.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="TutorialManager.cpp">
-      <Filter>Level</Filter>
+    <ClCompile Include="ISlimeAttackState.cpp">
+      <Filter>Enemies\SlimeBossStates</Filter>
     </ClCompile>
     <ClCompile Include="PoisonEgg.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="NagaAI.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>Football</Filter>
+    </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>Football</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
     <ClCompile Include="CurrentRoom.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="BulletPull.cpp">
-      <Filter>Ammo</Filter>
+    <ClCompile Include="TutorialManager.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialGenerator.cpp">
+      <Filter>Genetation</Filter>
+    </ClCompile>
+    <ClCompile Include="LocaledLabel.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -279,9 +286,6 @@
     <ClInclude Include="Spike.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="ExitHandler.h">
       <Filter>Level</Filter>
     </ClInclude>
@@ -360,12 +364,6 @@
     <ClInclude Include="MagnitZone.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="IEnemyAI.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyAIContext.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="ExitHandler.h">
       <Filter>Level</Filter>
     </ClInclude>
@@ -375,7 +373,6 @@
     <ClInclude Include="SlimeBossAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Ball.h" />
     <ClInclude Include="SlimeAttackSpawnState.h">
       <Filter>Enemies\SlimeBossStates</Filter>
     </ClInclude>
@@ -388,18 +385,11 @@
     <ClInclude Include="SlimeEnemiesHolder.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Ball.h" />
-    <ClInclude Include="ISlimeAttackState.h">
-      <Filter>Enemies\SlimeBossStates</Filter>
-    </ClInclude>
     <ClInclude Include="MimicAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="WormAI.h">
       <Filter>Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraShake.h">
-      <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="ResourceContainer.h" />
     <ClInclude Include="SillyBoyAI.h">
@@ -408,23 +398,47 @@
     <ClInclude Include="SillyBoyDiedAI.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="NagaAI.h">
+    <ClInclude Include="BulletPull.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="TutorialGenerator.h">
-      <Filter>Genetation</Filter>
+    <ClInclude Include="CameraShake.h">
+      <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="TutorialManager.h">
-      <Filter>Level</Filter>
+    <ClInclude Include="ISlimeAttackState.h">
+      <Filter>Enemies\SlimeBossStates</Filter>
     </ClInclude>
     <ClInclude Include="PoisonEgg.h">
       <Filter>Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="NagaAI.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyAIContext.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="IEnemyAI.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>Football</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>Football</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Level</Filter>
+    </ClInclude>
     <ClInclude Include="CurrentRoom.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="BulletPull.h">
-      <Filter>Ammo</Filter>
+    <ClInclude Include="TutorialManager.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialGenerator.h">
+      <Filter>Genetation</Filter>
+    </ClInclude>
+    <ClInclude Include="LocaledLabel.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -457,6 +471,9 @@
     </Filter>
     <Filter Include="Enemies\SlimeBossStates">
       <UniqueIdentifier>{389c46b8-632f-41f9-b4bb-cbfc879951d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Football">
+      <UniqueIdentifier>{9fb94395-33e5-417e-ba35-fdaecabaf46d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

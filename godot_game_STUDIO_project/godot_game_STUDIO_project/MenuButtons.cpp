@@ -3,13 +3,15 @@
 #include "headers.h"
 #endif
 
+#include <TranslationServer.hpp>
+
 bool MenuButtons::was_focused = false;
 bool MenuButtons::was_loaded = false;
 bool MenuButtons::is_full_screen = false;
 float MenuButtons::music_audio_level = -12.5;
 float MenuButtons::effect_audio_level = 6;
 GameMode MenuButtons::game_mode = SHOOTER;
-GameType MenuButtons::game_type = DEFOLT;
+GameType MenuButtons::game_type = TUTORIAL;
 AudioStreamPlayer2D* MenuButtons::audio = nullptr;
 
 MenuButtons::MenuButtons()
@@ -29,7 +31,9 @@ MenuButtons::~MenuButtons() {
 	timer_music = nullptr;
 }
 
-void godot::MenuButtons::_init() {}
+void godot::MenuButtons::_init() {
+	TranslationServer::get_singleton()->set_locale("uk");
+}
 
 void godot::MenuButtons::_ready()
 {
@@ -44,7 +48,8 @@ void godot::MenuButtons::_ready()
 	items_grid = rld->load("res://Assets/Prefabs/Scenes/ChoosePlayer.tscn");
 	game_scene = rld->load("res://main_scene.tscn");
 
-	cast_to<Camera2D>(get_parent())->_set_current(true);
+	if(get_parent()->has_method("_set_current"))
+		cast_to<Camera2D>(get_parent())->_set_current(true);
 
 	// Set focus button in Menu and Notise scenes
 	set_focus_mode(true);
@@ -66,6 +71,7 @@ void godot::MenuButtons::_ready()
 
 	if (get_name() == "Option")
 	{
+		cast_to<Camera2D>(get_parent()->get_parent())->_set_current(true);
 		auto tmp_node = get_child(1)->get_child(0)->get_child(0);
 		cast_to<Button>(tmp_node->get_child(0))->set_pressed(is_full_screen);
 		cast_to<Slider>(tmp_node->get_child(2))->set_value(effect_audio_level);
@@ -101,6 +107,7 @@ void MenuButtons::_register_methods()
 	register_method((char*)"_on_Flower_pressed", &MenuButtons::_on_Flower_pressed);
 	register_method((char*)"_on_Items_pressed", &MenuButtons::_on_Items_pressed);
 	register_method((char*)"_on_Items_pause_pressed", &MenuButtons::_on_Items_pause_pressed);
+	register_method((char*)"_on_Options_pause_pressed", &MenuButtons::_on_Options_pause_pressed);
 	register_method((char*)"_on_FullScreen_pressed", &MenuButtons::_on_FullScreen_pressed);
 	register_method((char*)"_on_Back_pause_pressed", &MenuButtons::_on_Back_pause_pressed);
 	register_method((char*)"_play_change_cursor_effect", &MenuButtons::_play_change_cursor_effect);
@@ -201,9 +208,9 @@ void godot::MenuButtons::_change_button_name()
 	auto mode_label = cast_to<Label>(find_node("ModeText"));
 
 	if (single_mode)
-		mode_label->set_text("Single");
+		mode_label->set_text(tr("KEY_SINGLE_MODE"));
 	else
-		mode_label->set_text("Cooperative");
+		mode_label->set_text(tr("KEY_COOPERATIVE_MODE"));
 
 }
 
@@ -223,7 +230,7 @@ void godot::MenuButtons::_input(Input* event)
 		click_counter++;
 
 		if (click_counter > 7)
-			cast_to<Label>(find_node("QuitLabel"))->set_text("Authors");
+			cast_to<Label>(find_node("QuitLabel"))->set_text(tr("KEY_AUTHORS"));
 	}
 
 	// change coop/single mode
@@ -279,6 +286,15 @@ void godot::MenuButtons::_on_Items_pressed(Variant)
 
 void godot::MenuButtons::_on_Back_pressed(Variant)
 {
+	if (get_parent()->get_parent()->get_name() == "Pause")
+	{
+		Node2D* node = cast_to<Node2D>(get_parent()->get_parent());
+
+		cast_to<TextureButton>(node->get_child(0)->find_node("Options"))->grab_focus();
+		get_parent()->queue_free();
+
+		return;
+	}
 	change_scene(menu_scene);
 }
 
@@ -369,7 +385,6 @@ void godot::MenuButtons::_on_Items_pause_pressed(Input*)
 	cast_to<Control>(get_parent()->find_node("Items_in_pause"))->set_visible(true);
 	this->set_visible(false);
 	cast_to<TextureButton>(get_parent()->find_node("Back_button")->get_child(0))->grab_focus();
-
 }
 
 void godot::MenuButtons::_on_Retry_pressed(Variant)
@@ -396,6 +411,16 @@ void godot::MenuButtons::_on_Retry_pressed(Variant)
 	timer_music_out->start(0.01);
 	timer->start(1);
 }
+
+void godot::MenuButtons::_on_Options_pause_pressed(Input*)
+{
+	ResourceLoader* rld = ResourceLoader::get_singleton();
+	Ref<PackedScene> res = rld->load("res://Assets/Prefabs/Scenes/OptionsNode.tscn");
+	Node2D* node = cast_to<Node2D>(res->instance());
+	get_parent()->add_child(node);
+	node->_edit_set_scale(Vector2(0.75, 0.75));
+}
+
 
 void godot::MenuButtons::_on_Menu_pressed(Input*)
 {
@@ -443,7 +468,7 @@ void godot::MenuButtons::_on_Quit_focus(bool mode)
 	}
 	was_quit_focused = mode;
 	click_counter = 0;
-	cast_to<Label>(find_node("QuitLabel"))->set_text("Quit");
+	cast_to<Label>(find_node("QuitLabel"))->set_text(tr("KEY_QUIT"));
 }
 
 void godot::MenuButtons::_on_Mode_focus()

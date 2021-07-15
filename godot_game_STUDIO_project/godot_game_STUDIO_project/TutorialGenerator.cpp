@@ -24,8 +24,6 @@ void godot::TutotialGenerator::_register_methods()
 	register_method("_get_rooms", &TutotialGenerator::_get_rooms);
 	register_method("_get_rooms_positions", &TutotialGenerator::_get_rooms_positions);
 	
-	register_property<TutotialGenerator, int>("map_size", &TutotialGenerator::map_size, -1);
-	register_property<TutotialGenerator, int>("keys_frequency", &TutotialGenerator::keys_frequency, -1);
 	register_property<TutotialGenerator, Ref<PackedScene>>("room", &TutotialGenerator::room, nullptr);
 	register_property<TutotialGenerator, Ref<PackedScene>>("down_door", &TutotialGenerator::down_door, nullptr);
 	register_property<TutotialGenerator, Ref<PackedScene>>("up_door", &TutotialGenerator::up_door, nullptr);
@@ -33,9 +31,6 @@ void godot::TutotialGenerator::_register_methods()
 	register_property<TutotialGenerator, Ref<PackedScene>>("left_door", &TutotialGenerator::left_door, nullptr);
 
 	register_property<TutotialGenerator, int>("wall_top_count", &TutotialGenerator::wall_top_count, 0);
-	register_property<TutotialGenerator, int>("floor_count", &TutotialGenerator::floor_count, 0);
-	register_property<TutotialGenerator, int>("stone_count", &TutotialGenerator::stone_count, 0);
-	register_property<TutotialGenerator, int>("spike_count", &TutotialGenerator::spike_count, 0);
 	register_property<TutotialGenerator, int>("roof_count", &TutotialGenerator::roof_count, 0);
 
 	register_property<TutotialGenerator, Ref<PackedScene>>("jertovnik", &TutotialGenerator::jertovnik, nullptr);
@@ -45,6 +40,8 @@ void godot::TutotialGenerator::_register_methods()
 
 	register_property<TutotialGenerator, Ref<PackedScene>>("big_stone", &TutotialGenerator::big_stone, nullptr);
 	register_property<TutotialGenerator, Ref<PackedScene>>("lock_sprite", &TutotialGenerator::lock_sprite, nullptr);
+	register_property<TutotialGenerator, Ref<PackedScene>>("sword_item", &TutotialGenerator::sword_item, nullptr);
+	register_property<TutotialGenerator, Ref<PackedScene>>("task_item", &TutotialGenerator::task_item, nullptr);
 }
 
 void godot::TutotialGenerator::_init()
@@ -65,35 +62,7 @@ void godot::TutotialGenerator::_ready()
 
 	_spawn_big_stone();
 
-	for (int i = 1; i < rooms.size(); ++i)
-	{
-		rand_value = rng->randi_range(0, 3);
-
-		if (rand_value >= 0 && rand_value <= 1)
-			_buid_stones(rooms[i]);
-		else
-			if (rand_value == 2)
-				_buid_stones(rooms[i]);
-	}
-
 	CurrentRoom::get_singleton()->_set_current_room(rooms[0]);
-	//std::vector<Node2D*> cornered_rooms = this->_get_corner_rooms();
-
-	/*auto boss_room = _create_boss_room(cornered_rooms);
-
-	if (map_size / keys_frequency > cornered_rooms.size())
-	{
-		for (int i = 1; i < rooms.size(); i++)
-			if ((int)rooms[i]->call("_get_num_of_adjacent_rooms") > 1 && (int)rooms[i]->call("_get_num_of_adjacent_rooms") < 4)
-				cornered_rooms.push_back(rooms[i]);
-	}
-
-	std::vector<Node2D*> rebuild_doors = _create_keys_rooms(cornered_rooms);
-	if (!rebuild_doors.empty())
-	{
-		_build_doors(rooms.size() - (map_size / keys_frequency), rooms.size());
-		_rebuild_doors(rebuild_doors);
-	}*/
 
 	for(auto node : rooms)
 		node->call("_fill_empty_positions", node);
@@ -101,13 +70,12 @@ void godot::TutotialGenerator::_ready()
 	////create key holders
 	get_node("/root/Node2D/Node/Camera2D")->call("_get_type_keys");
 
-	_set_keys(rooms[rooms.size()-1], generated_keys);
+	_set_keys(rooms[rooms.size() - 2], generated_keys);
 
 	if (generated_colors_keys.size() > 0)
-		rooms[rooms.size() - 1]->call("_set_last_key_color", generated_colors_keys[generated_colors_keys.size() - 1]);
+		rooms[rooms.size() - 2]->call("_set_last_key_color", generated_colors_keys[generated_colors_keys.size() - 1]);
 
 	_buid_roofs();
-	_buid_floors();
 	_buid_top_wall();
 	_build_locks();
 	get_node("/root/Node2D/Node/Camera2D/MiniMap")->call_deferred("_start_treking");
@@ -141,6 +109,15 @@ void godot::TutotialGenerator::_generate()
 	{
 		_buid_room(new_room_position);
 		_connect_rooms(rooms[0], rooms[rooms.size() - 1], Vector2::DOWN);
+		rooms[rooms.size() - 1]->call("_set_room_type", "tut_room");
+	}
+
+	new_room_position += Vector2(0, step_y);
+	if (!_has_room(positions, new_room_position))
+	{
+		_buid_room(new_room_position);
+		_connect_rooms(rooms[rooms.size() - 2], rooms[rooms.size() - 1], Vector2::DOWN);
+		rooms[rooms.size() - 1]->call("_set_room_type", "heal_room");
 	}
 	
 	new_room_position += Vector2(0, step_y);
@@ -151,31 +128,37 @@ void godot::TutotialGenerator::_generate()
 		rooms[rooms.size() - 1]->call("_set_room_type", "revive_room");
 	}
 
-	new_room_position = Vector2(0, -step_y);
+	new_room_position = Vector2(0, step_y);
+	new_room_position += Vector2(step_x, 0);
+
 	if (!_has_room(positions, new_room_position))
 	{
 		_buid_room(new_room_position);
-		_connect_rooms(rooms[0], rooms[rooms.size() - 1], Vector2::UP);
+		_connect_rooms(rooms[1], rooms[rooms.size() - 1], Vector2::RIGHT);
 		rooms[rooms.size() - 1]->call("_set_room_type", "atack_room");
 	}
 
-	new_room_position -= Vector2(0, step_y);
+	new_room_position += Vector2(step_x, 0);
+
 	if (!_has_room(positions, new_room_position))
 	{
 		_buid_room(new_room_position);
-		_connect_rooms(rooms[rooms.size() - 2], rooms[rooms.size() - 1], Vector2::UP);
+		_connect_rooms(rooms[rooms.size() - 2], rooms[rooms.size() - 1], Vector2::RIGHT);
 		rooms[rooms.size() - 1]->call("_set_room_type", "game_room");
 	}
 
-	new_room_position = Vector2(-step_x, 0);
+	new_room_position = Vector2(0, step_y);
+	new_room_position -= Vector2(step_x, 0);
+
 	if (!_has_room(positions, new_room_position))
 	{
 		_buid_room(new_room_position);
-		_connect_rooms(rooms[0], rooms[rooms.size() - 1], Vector2::LEFT);
+		_connect_rooms(rooms[1], rooms[rooms.size() - 1], Vector2::LEFT);
 		_generate_key(rooms[rooms.size() - 1]);
 	}
 
 	new_room_position -= Vector2(step_x, 0);
+
 	if (!_has_room(positions, new_room_position))
 	{
 		_buid_room(new_room_position);
@@ -183,11 +166,13 @@ void godot::TutotialGenerator::_generate()
 		_create_item_room(rooms[rooms.size() - 1]);
 	}
 
-	new_room_position = Vector2(step_x, 0);
+
+	new_room_position = Vector2(0, -step_y);
+
 	if (!_has_room(positions, new_room_position))
 	{
 		_buid_room(new_room_position);
-		_connect_rooms(rooms[0], rooms[rooms.size() - 1], Vector2::RIGHT);
+		_connect_rooms(rooms[0], rooms[rooms.size() - 1], Vector2::UP);
 		rooms[rooms.size() - 1]->call("_set_room_type", "boss_room");
 	}
 }
@@ -281,68 +266,6 @@ void godot::TutotialGenerator::_buid_top_wall()
 	loader = nullptr;
 }
 
-void godot::TutotialGenerator::_buid_floors()
-{
-	Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
-	ResourceLoader* loader = ResourceLoader::get_singleton();
-	Ref<PackedScene> prefab = nullptr;
-	random->randomize();
-	for (int i = 1; i<rooms.size(); ++i)
-	{
-		prefab = loader->load(NodePath("res://Assets/Prefabs/Rooms/Floor/floor" + String::num(random->randi_range(1, floor_count)) + ".tscn"));
-		rooms[i]->add_child(prefab->instance());
-	}
-	loader = nullptr;
-	prefab = nullptr;
-}
-
-void godot::TutotialGenerator::_buid_stones(Node2D* room)
-{
-	Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
-	ResourceLoader* loader = ResourceLoader::get_singleton();
-	Ref<PackedScene> prefab = nullptr;
-	random->randomize();
-
-	TileMap* tile_map=nullptr;
-
-	for (int k = 0; k < 4; ++k)
-	{
-		prefab = loader->load(NodePath("res://Assets/Prefabs/Rooms/Stones/stone" + String::num(random->randi_range(1, spike_count)) + ".tscn"));
-		tile_map = cast_to<TileMap>(prefab->instance());
-		room->add_child(tile_map);
-
-		auto arr = tile_map->get_used_cells();
-
-		bool check_res = true;
-
-
-		for (int i = 0; i < arr.size(); ++i)
-		{
-			Vector2 pos = (Vector2)arr[i];
-			if ((int)room->call("_get_cell_value", pos.y + 8, pos.x + 14) != 0)		
-			{
-				check_res = false;
-				tile_map->queue_free();
-				break;
-			}
-		}
-
-		if (check_res)
-		{
-			for (int i = 0; i < arr.size(); ++i)
-			{
-				Vector2 pos = (Vector2)arr[i];
-				room->call("_set_cell_value", pos.y + 8, pos.x + 14, 2);
-			}
-			break;
-		}
-	}
-
-	prefab = nullptr;
-	loader = nullptr;
-	tile_map = nullptr;
-}
-
 Node2D* godot::TutotialGenerator::_get_next_room(Vector2 current_room_position)
 {
 	int index = 0;
@@ -373,8 +296,27 @@ void godot::TutotialGenerator::_create_item_room(Node2D* room)
 
 	auto items_container = get_parent()->get_node("ItemsContainer");
 
-	items_container->call("_spawn_random_item", room->get_global_position() + left_item);
-	items_container->call("_spawn_random_item", room->get_global_position() + right_item);
+	auto items = get_node("/root/Node2D/Items");
+
+	Node2D* sword_item_node = cast_to<Node2D>(sword_item->instance());
+	Node2D* task_item_node = cast_to<Node2D>(task_item->instance());
+
+	RandomNumberGenerator* rng = RandomNumberGenerator::_new();
+	rng->randomize();
+
+	if (rng->randi_range(0, 1))
+	{
+		sword_item_node->set_global_position(room->get_global_position() + left_item);
+		task_item_node->set_global_position(room->get_global_position() + right_item);
+	}
+	else
+	{
+		sword_item_node->set_global_position(room->get_global_position() + right_item);
+		task_item_node->set_global_position(room->get_global_position() + left_item);
+	}
+
+	items->add_child(sword_item_node);
+	items->add_child(task_item_node);
 }
 
 void godot::TutotialGenerator::_generate_key(Node2D* room)
@@ -426,7 +368,7 @@ void godot::TutotialGenerator::_set_keys(Node2D* room, Array t_keys)
 
 void godot::TutotialGenerator::_spawn_big_stone()
 {
-	Node* room = rooms[1];
+	Node* room = rooms[2];
 
 	auto stone = cast_to<Node2D>(big_stone->instance());
 	room->add_child(stone);
@@ -453,9 +395,6 @@ void godot::TutotialGenerator::_clear()
 	this->generated_keys.clear();
 	generated_colors_keys.clear();
 	size = 0;
-
-	if(GameManager::current_level > 1)
-		map_size += 2;
 }
 
 Array godot::TutotialGenerator::_get_rooms()

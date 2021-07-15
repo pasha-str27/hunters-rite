@@ -139,12 +139,6 @@ bool godot::GameManager::_is_one_player_alive()
 	return !PlayersContainer::_get_instance()->_get_player1() || !PlayersContainer::_get_instance()->_get_player2();
 }
 
-void godot::GameManager::hide_tutorial()
-{
-	cast_to<Node2D>(get_parent()->get_node("TutorialSprites"))->hide();
-	cast_to<Node2D>(get_parent()->get_node("TutorialSpritesSingle"))->hide();
-}
-
 void godot::GameManager::_init()
 {
 	for (int i = 0; i < 4; i++)
@@ -174,9 +168,6 @@ void  godot::GameManager::_hide_tutorial_sprites(String t_player_name) {
 
 void godot::GameManager::_spawn_players()
 {
-	if (!show_tutorial)
-		hide_tutorial();
-
 	ResourceLoader* loader = ResourceLoader::get_singleton();
 	if (MenuButtons::game_mode == SHOOTER)
 	{
@@ -307,7 +298,10 @@ void godot::GameManager::_ready()
 void godot::GameManager::_door_collision(String door_dir)
 {
 	if (Enemies::get_singleton()->_get_enemies_count() != 0 || Enemies::get_singleton()->spawning())
+	{
+		Godot::print(String::num(Enemies::get_singleton()->_get_enemies_count()));
 		return;
+	}
 
 	int index = 0;
 	if (door_dir.find("left") != -1)
@@ -444,11 +438,15 @@ void godot::GameManager::_input(Variant event)
 	if (Input::get_singleton()->is_action_just_pressed("ui_show_minimap"))
 		if (minimap != nullptr)
 		{
-			if (!is_showing_minimap)
+			Control* key_holder = cast_to<Control>(get_node("/root/Node2D/Node/Camera2D/KeyHolder"));
+			if (!is_showing_minimap) {
 				minimap->show();
-			else
+				key_holder->set_visible(true);
+			}
+			else {
 				minimap->hide();
-
+				key_holder->set_visible(false);
+			}
 			is_showing_minimap = !is_showing_minimap;
 		}
 }
@@ -485,13 +483,9 @@ void godot::GameManager::_get_type_keys() {
 
 	//get new generated keys
 	std::vector<Node2D*> key_types = CustomExtensions::GetChildrenByWordInName(cast_to<Node2D>(get_node("/root/Node2D/Node/Generation")), "Key");
-	Godot::print("------gen_key_v2------");
 	for (auto i : key_types) {
 		generated_keys.push_back(String(i->call("_get_type")));
-		Godot::print(String(i->call("_get_type")));
 	}
-	Godot::print("------gen_key_v2------");
-
 
 	//clear key holders
 	for (int i = 0; i < key_box->get_children().size(); i++) {
@@ -524,9 +518,6 @@ void godot::GameManager::_get_type_keys() {
 
 void godot::GameManager::_go_to_start()
 {
-	if (!show_tutorial)
-		hide_tutorial();
-
 	auto fade = cast_to<Node2D>(fadeIn->instance());
 	add_child(fade);
 
