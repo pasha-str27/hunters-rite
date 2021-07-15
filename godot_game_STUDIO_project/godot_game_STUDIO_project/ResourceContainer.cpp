@@ -17,13 +17,13 @@ ResourceContainer::ResourceContainer()
 	_open_door = link + "OpenDoors.tscn";
 	_stone_action = link + "StoneAction.tscn";
 	_collect_key = link + "CollectKey.tscn";
-	_collect_bad_item = link + "CollectKey.tscn";
-	_collect_good_item = link + "CollectKey.tscn";
-	_show_next_level = link + "CollectKey.tscn";
-	_shield = link + "CollectKey.tscn";
-	_game_over = link + "CollectKey.tscn";
-	_player_to_ghost = link + "CollectKey.tscn";
-	_dash = link + "CollectKey.tscn";
+	_collect_bad_item = link + "TakeBadItem.tscn";
+	_collect_good_item = link + "TakeGoodItem.tscn";
+	_show_next_level = link + "ShowNextLevel.tscn";
+	_shield = link + "Shield.tscn";
+	_game_over = link + "GameOver.tscn";
+	_player_to_ghost = link + "PlayerToGhost.tscn";
+	_dash = link + "Dash.tscn";
 }
 
 String godot::ResourceContainer::player1_fight()

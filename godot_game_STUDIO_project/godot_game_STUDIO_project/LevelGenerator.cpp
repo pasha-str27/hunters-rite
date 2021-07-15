@@ -334,7 +334,7 @@ void godot::LevelGenerator::_buid_stones(Node2D* room)
 
 	for (int k = 0; k < 4; ++k)
 	{
-		prefab = loader->load(NodePath("res://Assets/Prefabs/Rooms/Stones/stone" + String::num(random->randi_range(1, spike_count)) + ".tscn"));
+		prefab = loader->load(NodePath("res://Assets/Prefabs/Rooms/Stones/stone" + String::num(random->randi_range(1, stone_count)) + ".tscn"));
 		tile_map = cast_to<TileMap>(prefab->instance());
 		room->add_child(tile_map);
 
@@ -378,7 +378,7 @@ void godot::LevelGenerator::_buid_spikes(Node2D* room)
 	Ref<PackedScene> prefab = nullptr;
 	random->randomize();
 
-	TileMap* tile_map;
+	TileMap* tile_map = nullptr;
 
 	for (int k = 0; k < 4; ++k)
 	{
@@ -732,6 +732,8 @@ void godot::LevelGenerator::_generate_key(Node2D* room)
 	auto pedestal = cast_to<Node2D>(key_room_pedestal->instance());
 	add_child(pedestal);
 	pedestal->set_global_position(pos);
+	pedestal->set_z_as_relative(false);
+	pedestal->set_z_index(3);
 
 	int key_index = rng->randi_range(0, keys_prefabs_local.size() - 1);
 	Ref<PackedScene> key_prefab = keys_prefabs_local[key_index];

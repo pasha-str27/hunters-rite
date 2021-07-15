@@ -124,6 +124,11 @@ animations = [ {
 "name": "run",
 "speed": 10.0
 }, {
+"frames": [ ExtResource( 17 ), ExtResource( 20 ), ExtResource( 1 ) ],
+"loop": false,
+"name": "damaged",
+"speed": 10.0
+}, {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
 "loop": false,
 "name": "disappear",
@@ -133,11 +138,6 @@ animations = [ {
 "loop": false,
 "name": "appear",
 "speed": 10.0
-}, {
-"frames": [ ExtResource( 17 ), ExtResource( 20 ), ExtResource( 1 ) ],
-"loop": false,
-"name": "damaged",
-"speed": 10.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=21]
@@ -145,8 +145,6 @@ radius = 19.261
 height = 8.74976
 
 [node name="NagaBoss" type="Node2D"]
-z_index = 6
-z_as_relative = false
 script = ExtResource( 4 )
 enemy_price = 50.0
 
@@ -184,6 +182,8 @@ shape = SubResource( 21 )
 [node name="SpawnParticles" parent="NagaBoss" instance=ExtResource( 6 )]
 
 [node name="Vampirism" parent="NagaBoss" instance=ExtResource( 30 )]
+z_index = 10
+z_as_relative = false
 
 [connection signal="body_entered" from="NagaBoss/Area2D" to="NagaBoss" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="NagaBoss/Area2D" to="NagaBoss" method="_on_Area2D_body_exited"]

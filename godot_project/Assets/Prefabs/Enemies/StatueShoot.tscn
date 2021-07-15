@@ -165,7 +165,6 @@ frame = 1
 playing = true
 
 [node name="SpawnParticles" parent="StatueShoot" instance=ExtResource( 5 )]
-z_as_relative = false
 
 [node name="Area2D" type="Area2D" parent="StatueShoot"]
 

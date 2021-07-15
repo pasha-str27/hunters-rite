@@ -3,8 +3,6 @@
 #include "headers.h"
 #endif
 
-bool TutorialManager::show_tutorial = true;
-
 void godot::TutorialManager::_register_methods()
 {
 	register_method("_init", &TutorialManager::_init);
@@ -138,12 +136,6 @@ bool godot::TutorialManager::_is_one_player_alive()
 	return !PlayersContainer::_get_instance()->_get_player1() || !PlayersContainer::_get_instance()->_get_player2();
 }
 
-void godot::TutorialManager::hide_tutorial()
-{
-	cast_to<Node2D>(get_parent()->get_node("TutorialSprites"))->hide();
-	cast_to<Node2D>(get_parent()->get_node("TutorialSpritesSingle"))->hide();
-}
-
 void godot::TutorialManager::_init()
 {
 	for (int i = 0; i < 4; i++)
@@ -173,9 +165,6 @@ void  godot::TutorialManager::_hide_tutorial_sprites(String t_player_name) {
 
 void godot::TutorialManager::_spawn_players()
 {
-	if (!show_tutorial)
-		hide_tutorial();
-
 	ResourceLoader* loader = ResourceLoader::get_singleton();
 	if (MenuButtons::game_mode == SHOOTER)
 	{
@@ -283,8 +272,6 @@ void godot::TutorialManager::_ready()
 	_set_current(true);
 
 	_spawn_players();
-
-	show_tutorial = false;
 
 	if (find_parent("root") != nullptr && !find_parent("root")->has_node("MenuGameMusic"))
 	{
@@ -523,9 +510,6 @@ void godot::TutorialManager::_get_type_keys()
 
 void godot::TutorialManager::_go_to_start()
 {
-	if (!show_tutorial)
-		hide_tutorial();
-
 	auto fade = cast_to<Node2D>(fadeIn->instance());
 	add_child(fade);
 

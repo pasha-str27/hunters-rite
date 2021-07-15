@@ -29,8 +29,6 @@ scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
 
 [node name="CollectKey" type="Particles2D"]
-z_index = 10
-z_as_relative = false
 emitting = false
 amount = 35
 lifetime = 0.7

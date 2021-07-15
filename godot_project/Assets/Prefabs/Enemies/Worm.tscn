@@ -158,44 +158,44 @@ atlas = ExtResource( 1 )
 region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=38]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 10 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=39]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 10 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=40]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 10 )
 region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=41]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 10 )
 region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=42]
 atlas = ExtResource( 10 )
-region = Rect2( 0, 0, 32, 32 )
+region = Rect2( 128, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=43]
 atlas = ExtResource( 10 )
-region = Rect2( 32, 0, 32, 32 )
+region = Rect2( 160, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=44]
-atlas = ExtResource( 10 )
-region = Rect2( 64, 0, 32, 32 )
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=45]
-atlas = ExtResource( 10 )
-region = Rect2( 96, 0, 32, 32 )
+atlas = ExtResource( 5 )
+region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=46]
-atlas = ExtResource( 10 )
-region = Rect2( 128, 0, 32, 32 )
+atlas = ExtResource( 5 )
+region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=47]
-atlas = ExtResource( 10 )
-region = Rect2( 160, 0, 32, 32 )
+atlas = ExtResource( 5 )
+region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=48]
 animations = [ {
@@ -219,23 +219,21 @@ animations = [ {
 "name": "attack",
 "speed": 7.0
 }, {
-"frames": [ SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ) ],
-"loop": false,
-"name": "damaged",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ) ],
+"frames": [ SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ) ],
 "loop": false,
 "name": "death",
 "speed": 7.0
+}, {
+"frames": [ SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ) ],
+"loop": false,
+"name": "damaged",
+"speed": 10.0
 } ]
 
 [sub_resource type="CircleShape2D" id=49]
 radius = 18.2109
 
 [node name="Worm" type="Node2D"]
-z_index = 6
-z_as_relative = false
 script = ExtResource( 4 )
 enemy_price = 40.0
 
@@ -278,7 +276,7 @@ z_index = 6
 z_as_relative = false
 frames = SubResource( 48 )
 animation = "idle"
-frame = 5
+frame = 4
 playing = true
 
 [node name="Area2D" type="Area2D" parent="Worm"]

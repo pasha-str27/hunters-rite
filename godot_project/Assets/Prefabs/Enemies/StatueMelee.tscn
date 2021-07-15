@@ -216,7 +216,6 @@ texture = ExtResource( 1 )
 anims/idle = SubResource( 27 )
 
 [node name="SpawnParticles" parent="StatueMelee" instance=ExtResource( 6 )]
-z_as_relative = false
 
 [node name="MagnitZone" type="Area2D" parent="StatueMelee"]
 position = Vector2( 0.198425, 19.6441 )

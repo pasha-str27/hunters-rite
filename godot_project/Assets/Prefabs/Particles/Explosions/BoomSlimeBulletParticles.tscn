@@ -38,8 +38,7 @@ scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
 
 [node name="BoomSlimeBulletParticles" type="Particles2D"]
-z_index = 10
-z_as_relative = false
+z_index = 1
 emitting = false
 amount = 50
 lifetime = 0.4
