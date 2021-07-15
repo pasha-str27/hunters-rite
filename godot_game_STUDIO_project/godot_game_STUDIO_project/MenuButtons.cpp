@@ -567,7 +567,7 @@ void godot::MenuButtons::_on_Locale_change(int new_index)
 	locale_label->set_text(TranslationServer::get_singleton()->translate("KEY_NAME"));
 
 	save_game();
-	//_change_options_labels();
+	_change_options_labels();
 }
 
 void godot::MenuButtons::_on_Locale_focused()
