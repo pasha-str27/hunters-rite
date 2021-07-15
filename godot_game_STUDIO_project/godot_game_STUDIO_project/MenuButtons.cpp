@@ -141,7 +141,6 @@ void MenuButtons::_register_methods()
 
 void godot::MenuButtons::_start_game(int name)
 {
-	GameManager::show_tutorial = true;
 	game_mode = GameMode(name);
 	_play_effect();
 	add_child(fade->instance());
@@ -168,7 +167,6 @@ void godot::MenuButtons::_start_game(int name)
 
 void godot::MenuButtons::save_game()
 {
-
 	auto save_game = File::_new();
 	save_game->open("user://savegame_hunters.save", File::WRITE);
 
@@ -184,7 +182,8 @@ void godot::MenuButtons::_timeout()
 {
 	timer->disconnect("timeout", this, "_timeout");
 	ResourceLoader* rld = ResourceLoader::get_singleton();
-	Ref<PackedScene> res = rld->load("res://main_scene.tscn");
+
+	Ref<PackedScene> res = game_type==DEFOLT ? rld->load("res://main_scene.tscn") : rld->load("res://tutorial_scene.tscn");
 
 	find_parent("root")->add_child(res->instance());
 	get_node("/root/MenuBackMusic")->queue_free();
@@ -315,6 +314,7 @@ void godot::MenuButtons::_on_Quit_pressed(Variant)
 // -------Notice buttons-------
 void godot::MenuButtons::_on_Flower_pressed(Variant)
 {
+	game_type = DEFOLT;
 	if (single_mode)
 	{
 		change_scene(choose_player_scene);
@@ -334,9 +334,8 @@ void godot::MenuButtons::_on_Tutorial_button_pressed(Variant)
 		return;
 	}
 	game_mode = COOP;
-	//_start_game(game_mode);------ start tutorial
+	_start_game(game_mode);
 }
-
 
 
 // -------Choose chapter-------
