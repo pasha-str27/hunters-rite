@@ -30,6 +30,11 @@ void godot::TutotialGenerator::_register_methods()
 	register_property<TutotialGenerator, Ref<PackedScene>>("right_door", &TutotialGenerator::right_door, nullptr);
 	register_property<TutotialGenerator, Ref<PackedScene>>("left_door", &TutotialGenerator::left_door, nullptr);
 
+	register_property<TutotialGenerator, Ref<PackedScene>>("down_door_fill", &TutotialGenerator::down_door_fill, nullptr);
+	register_property<TutotialGenerator, Ref<PackedScene>>("up_door_fill", &TutotialGenerator::up_door_fill, nullptr);
+	register_property<TutotialGenerator, Ref<PackedScene>>("right_door_fill", &TutotialGenerator::right_door_fill, nullptr);
+	register_property<TutotialGenerator, Ref<PackedScene>>("left_door_fill", &TutotialGenerator::left_door_fill, nullptr);
+
 	register_property<TutotialGenerator, int>("wall_top_count", &TutotialGenerator::wall_top_count, 0);
 	register_property<TutotialGenerator, int>("roof_count", &TutotialGenerator::roof_count, 0);
 
@@ -78,6 +83,7 @@ void godot::TutotialGenerator::_ready()
 	_buid_roofs();
 	_buid_top_wall();
 	_build_locks();
+	_build_fill_doors();
 	get_node("/root/Node2D/Node/Camera2D/MiniMap")->call_deferred("_start_treking");
 }
 
@@ -208,10 +214,8 @@ void godot::TutotialGenerator::_buid_doors()
 		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::UP))
 			rooms[i]->add_child(up_door->instance());
 
-
 		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::RIGHT))
 			rooms[i]->add_child(right_door->instance());
-
 
 		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::LEFT))
 			rooms[i]->add_child(left_door->instance());
@@ -423,7 +427,7 @@ void godot::TutotialGenerator::_build_locks()
 {
 	Vector2 dir;
 	String door_name;
-	int step = 25;
+	int step = 30;
 
 	for (int i = 0; i < rooms.size(); ++i)
 	{
@@ -434,13 +438,13 @@ void godot::TutotialGenerator::_build_locks()
 
 		dir = Vector2::UP;
 		door_name = "UpDoor";
-		step = 20;
+		step = 23;
 
 		_build_locks_in_room(rooms[i], dir, door_name, step);
 
 		dir = Vector2::LEFT;
+		step = 21;
 		door_name = "LeftDoor";
-		step = 23;
 
 		_build_locks_in_room(rooms[i], dir, door_name, step);
 
@@ -484,4 +488,26 @@ void godot::TutotialGenerator::_build_locks_in_room(Node2D* room, Vector2 door_d
 					cast_to<Sprite>(lock_node)->set_modulate(Color(col.r, col.g, col.b, 150.0/255.0));
 				}
 			}
+}
+
+void godot::TutotialGenerator::_build_fill_doors()
+{
+	for (int i = 1; i < rooms.size(); ++i)
+	{
+		String room_type = rooms[i]->call("_get_room_type");
+		if (room_type == "boos_room" || room_type == "game_room" || room_type == "mob_room")
+		{
+			if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::DOWN))
+				rooms[i]->add_child(down_door_fill->instance(), true);
+
+			if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::UP))
+				rooms[i]->add_child(up_door_fill->instance(), true);
+
+			if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::RIGHT))
+				rooms[i]->add_child(right_door_fill->instance(), true);
+
+			if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::LEFT))
+				rooms[i]->add_child(left_door_fill->instance(), true);
+		}
+	}
 }

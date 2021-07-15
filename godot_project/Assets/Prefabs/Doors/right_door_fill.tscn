@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Assets/Sprites/Tilesets/level1_tileset.tres" type="TileSet" id=1]
 
-[node name="RightDoor" type="Node2D"]
+[node name="fill_door_right" type="Node2D"]
 scale = Vector2( 2, 2 )
 z_index = 11
 z_as_relative = false

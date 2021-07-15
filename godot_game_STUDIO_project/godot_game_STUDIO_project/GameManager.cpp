@@ -42,13 +42,15 @@ void godot::GameManager::_move(String dir)
 
 	auto generation_node = get_parent()->get_node("Generation");
 
+	Node2D* next_room = nullptr;
+
 	if (dir == "top")
 	{
 		float delta = 720;
 
 		set_global_position(get_global_position() - Vector2(0, delta));
 
-		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
+		next_room = generation_node->call("_get_next_room", get_global_position());
 		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "DownDoor");
 		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
 
@@ -67,7 +69,7 @@ void godot::GameManager::_move(String dir)
 
 		set_global_position(get_global_position() + Vector2(0, delta));
 
-		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
+		next_room = generation_node->call("_get_next_room", get_global_position());
 		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "UpDoor");
 		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
 
@@ -86,7 +88,7 @@ void godot::GameManager::_move(String dir)
 
 		set_global_position(get_global_position() - Vector2(delta, 0));
 
-		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
+		next_room = generation_node->call("_get_next_room", get_global_position());
 		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "RightDoor");
 		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
 
@@ -105,7 +107,7 @@ void godot::GameManager::_move(String dir)
 
 		set_global_position(get_global_position() + Vector2(delta, 0));
 
-		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
+		next_room = generation_node->call("_get_next_room", get_global_position());
 		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "LeftDoor");
 		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
 
@@ -116,6 +118,13 @@ void godot::GameManager::_move(String dir)
 
 		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
 			PlayersContainer::_get_instance()->_get_player2_regular()->set_global_position(move_point->get_global_position());
+	}
+
+	if (GameManager::current_level != 2 || GameManager::current_level != 5 || GameManager::current_level != 10)
+	{
+		for (int i = next_room->get_child_count() - 1; i >= 0; --i)
+			if (next_room->get_child(i)->get_name().find("fill_door") != -1)
+				next_room->get_child(i)->queue_free();
 	}
 
 	if (minimap != nullptr)

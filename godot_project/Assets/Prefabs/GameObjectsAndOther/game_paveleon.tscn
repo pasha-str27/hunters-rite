@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Assets/Scripts/LevelGenerator.gdns" type="Script" id=1]
 [ext_resource path="res://Assets/Prefabs/Doors/UpDoor.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Assets/Prefabs/Doors/DownDoor.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/TutorialSprites.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/CameraPrefab.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Prefabs/Doors/right_door_fill.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Assets/Prefabs/Items/Glass.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/Prefabs/Items/Tusk.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Assets/Prefabs/Items/Luck.tscn" type="PackedScene" id=14]
@@ -21,6 +22,8 @@
 [ext_resource path="res://Assets/Prefabs/Items/FireSword.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Assets/Prefabs/Items/Boot.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Assets/Prefabs/Items/Chicken.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Assets/Prefabs/Doors/left_door_fill.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Assets/Prefabs/Doors/down_door_fill.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Pedestal.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/Jertovnik.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Assets/Prefabs/Items/Keys/Key2.tscn" type="PackedScene" id=27]
@@ -32,6 +35,7 @@
 [ext_resource path="res://Assets/Prefabs/Items/Keys/Key4.tscn" type="PackedScene" id=33]
 [ext_resource path="res://Assets/Prefabs/Items/Keys/Key5.tscn" type="PackedScene" id=34]
 [ext_resource path="res://Assets/Prefabs/Items/Keys/Key6.tscn" type="PackedScene" id=35]
+[ext_resource path="res://Assets/Prefabs/Doors/up_door_fill.tscn" type="PackedScene" id=36]
 
 [node name="Node" type="Node"]
 
@@ -62,6 +66,10 @@ down_door = ExtResource( 8 )
 up_door = ExtResource( 2 )
 right_door = ExtResource( 4 )
 left_door = ExtResource( 3 )
+down_door_fill = ExtResource( 24 )
+up_door_fill = ExtResource( 36 )
+right_door_fill = ExtResource( 11 )
+left_door_fill = ExtResource( 23 )
 wall_top_count = 14
 floor_count = 15
 stone_count = 15
