@@ -195,9 +195,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 click_effect = ExtResource( 14 )
-"menu back music" = null
 fade = ExtResource( 16 )
-fade_in = null
 
 [node name="BackGroung" type="TextureRect" parent="Notice"]
 anchor_right = 1.0
@@ -638,11 +636,11 @@ anims/Focus_scale = SubResource( 8 )
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one/Coming_soon_button" to="Notice" method="_on_animated_focus_entered" binds= [ "Coming_soon_button", "SoonAnimated" ]]
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one/Coming_soon_button" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_exited" from="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one/Coming_soon_button" to="Notice" method="_on_animated_focus_exited" binds= [ "Coming_soon_button", "SoonAnimated" ]]
-[connection signal="focus_entered" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_on_animated_focus_entered" binds= [ "Mode", "ModeAnimated" ]]
 [connection signal="focus_entered" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_on_Mode_focus"]
+[connection signal="focus_entered" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_on_animated_focus_entered" binds= [ "Mode", "ModeAnimated" ]]
 [connection signal="focus_entered" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_play_change_cursor_effect"]
-[connection signal="focus_exited" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_on_animated_focus_exited" binds= [ "Mode", "ModeAnimated" ]]
 [connection signal="focus_exited" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_on_Mode_focus"]
+[connection signal="focus_exited" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_on_animated_focus_exited" binds= [ "Mode", "ModeAnimated" ]]
 [connection signal="focus_entered" from="Notice/VBoxContainer/CenterContainer/Back" to="Notice" method="_on_animated_focus_entered" binds= [ "Back", "BackAnimated" ]]
 [connection signal="focus_entered" from="Notice/VBoxContainer/CenterContainer/Back" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_exited" from="Notice/VBoxContainer/CenterContainer/Back" to="Notice" method="_on_animated_focus_exited" binds= [ "Back", "BackAnimated" ]]

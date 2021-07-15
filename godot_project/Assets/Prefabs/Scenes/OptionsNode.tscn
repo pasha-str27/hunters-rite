@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Assets/Scripts/MenuButtons.gdns" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/notice_background_v2.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Assets/Prefabs/SoundsEffects/Effects/ButtonClick.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://Assets/Scripts/LocaledLabel.gdns" type="Script" id=11]
+[ext_resource path="res://Assets/Sprites/UI/arrow_left.png" type="Texture" id=12]
 
 [sub_resource type="StyleBoxTexture" id=1]
 
@@ -120,6 +121,35 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=8]
+resource_name = "Focus_scale"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Focus:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Focus:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
+}
+
+[sub_resource type="Animation" id=9]
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -162,6 +192,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 click_effect = ExtResource( 9 )
+"menu back music" = null
+fade = null
+fade_in = null
 
 [node name="Background" type="TextureRect" parent="Option"]
 anchor_right = 1.0
@@ -187,13 +220,13 @@ margin_bottom = 568.0
 rect_min_size = Vector2( 1280, 568 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Option/VBoxContainer/CenterContainer2"]
-margin_left = 465.0
-margin_top = 62.0
-margin_right = 815.0
-margin_bottom = 506.0
+margin_left = 464.0
+margin_top = 30.0
+margin_right = 816.0
+margin_bottom = 538.0
 
 [node name="FullScreen" type="CheckBox" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer"]
-margin_right = 350.0
+margin_right = 352.0
 margin_bottom = 120.0
 rect_min_size = Vector2( 350, 120 )
 focus_neighbour_top = NodePath("../../../CenterContainer/Back")
@@ -238,7 +271,7 @@ anims/Focus_scale = SubResource( 3 )
 
 [node name="Effect_text" type="Label" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer"]
 margin_top = 124.0
-margin_right = 350.0
+margin_right = 352.0
 margin_bottom = 204.0
 rect_min_size = Vector2( 0, 80 )
 custom_fonts/font = SubResource( 4 )
@@ -250,7 +283,7 @@ text_key = "KEY_EFFECTS"
 
 [node name="effects" type="HSlider" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer"]
 margin_top = 208.0
-margin_right = 350.0
+margin_right = 352.0
 margin_bottom = 272.0
 focus_neighbour_top = NodePath("../FullScreen")
 focus_neighbour_bottom = NodePath("../music")
@@ -289,7 +322,7 @@ anims/Focus_scale = SubResource( 5 )
 
 [node name="Music_text" type="Label" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer"]
 margin_top = 276.0
-margin_right = 350.0
+margin_right = 352.0
 margin_bottom = 376.0
 rect_min_size = Vector2( 0, 100 )
 custom_fonts/font = SubResource( 6 )
@@ -301,10 +334,10 @@ text_key = "KEY_MUSIC"
 
 [node name="music" type="HSlider" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer"]
 margin_top = 380.0
-margin_right = 350.0
+margin_right = 352.0
 margin_bottom = 444.0
 focus_neighbour_top = NodePath("../effects")
-focus_neighbour_bottom = NodePath("../../../CenterContainer/Back")
+focus_neighbour_bottom = NodePath("../HBoxContainer/CenterContainer2/Locale")
 mouse_filter = 2
 theme = ExtResource( 8 )
 min_value = -35.0
@@ -338,6 +371,87 @@ __meta__ = {
 [node name="musicAnimated" type="AnimationPlayer" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer/music"]
 anims/Focus_scale = SubResource( 7 )
 
+[node name="HBoxContainer" type="HBoxContainer" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer"]
+margin_top = 448.0
+margin_right = 352.0
+margin_bottom = 508.0
+rect_min_size = Vector2( 0, 60 )
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer/HBoxContainer"]
+margin_right = 32.0
+margin_bottom = 60.0
+texture = ExtResource( 12 )
+stretch_mode = 6
+
+[node name="CenterContainer2" type="CenterContainer" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer/HBoxContainer"]
+margin_left = 36.0
+margin_right = 316.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 52 )
+
+[node name="Locale" type="TextureButton" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer/HBoxContainer/CenterContainer2"]
+margin_right = 280.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 280, 60 )
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../../../music")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../../../../../CenterContainer/Back")
+mouse_filter = 2
+texture_normal = ExtResource( 3 )
+expand = true
+stretch_mode = 3
+
+[node name="Focus" type="TextureRect" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer/HBoxContainer/CenterContainer2/Locale"]
+visible = false
+modulate = Color( 1, 1, 1, 0.478431 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 100, 30 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LocaleAnimated" type="AnimationPlayer" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer/HBoxContainer/CenterContainer2/Locale"]
+anims/Focus_scale = SubResource( 8 )
+
+[node name="LocaleText" type="Label" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer/HBoxContainer/CenterContainer2/Locale"]
+modulate = Color( 0.831373, 0.831373, 0.831373, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/line_spacing = 0
+custom_constants/shadow_offset_y = 3
+custom_constants/shadow_as_outline = 0
+align = 1
+valign = 1
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+text_key = "KEY_NAME"
+
+[node name="TextureRect" type="TextureRect" parent="Option/VBoxContainer/CenterContainer2/VBoxContainer/HBoxContainer"]
+margin_left = 320.0
+margin_right = 352.0
+margin_bottom = 60.0
+texture = ExtResource( 12 )
+stretch_mode = 6
+flip_h = true
+
 [node name="CenterContainer" type="CenterContainer" parent="Option/VBoxContainer"]
 margin_top = 572.0
 margin_right = 1280.0
@@ -349,7 +463,7 @@ margin_left = 500.0
 margin_right = 780.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 280, 70 )
-focus_neighbour_top = NodePath("../../CenterContainer2/VBoxContainer/music")
+focus_neighbour_top = NodePath("../../CenterContainer2/VBoxContainer/HBoxContainer/CenterContainer2/Locale")
 focus_neighbour_bottom = NodePath("../../CenterContainer2/VBoxContainer/FullScreen")
 mouse_filter = 2
 texture_normal = ExtResource( 3 )
@@ -398,7 +512,7 @@ __meta__ = {
 text_key = "KEY_BACK"
 
 [node name="BackAnimated" type="AnimationPlayer" parent="Option/VBoxContainer/CenterContainer/Back"]
-anims/Focus_scale = SubResource( 8 )
+anims/Focus_scale = SubResource( 9 )
 
 [connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/FullScreen" to="Option" method="_on_animated_focus_entered" binds= [ "FullScreen", "FullScreenAnimated" ]]
 [connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/FullScreen" to="Option" method="_play_change_cursor_effect"]
@@ -412,6 +526,11 @@ anims/Focus_scale = SubResource( 8 )
 [connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/music" to="Option" method="_play_change_cursor_effect"]
 [connection signal="focus_exited" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/music" to="Option" method="_on_animated_focus_exited" binds= [ "music", "musicAnimated" ]]
 [connection signal="value_changed" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/music" to="Option" method="_on_music_value_changed"]
+[connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/HBoxContainer/CenterContainer2/Locale" to="Option" method="_on_animated_focus_entered" binds= [ "Locale", "LocaleAnimated" ]]
+[connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/HBoxContainer/CenterContainer2/Locale" to="Option" method="_on_Locale_focused"]
+[connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/HBoxContainer/CenterContainer2/Locale" to="Option" method="_play_change_cursor_effect"]
+[connection signal="focus_exited" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/HBoxContainer/CenterContainer2/Locale" to="Option" method="_on_Locale_focused"]
+[connection signal="focus_exited" from="Option/VBoxContainer/CenterContainer2/VBoxContainer/HBoxContainer/CenterContainer2/Locale" to="Option" method="_on_animated_focus_exited" binds= [ "Locale", "LocaleAnimated" ]]
 [connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer/Back" to="Option" method="_on_animated_focus_entered" binds= [ "Back", "BackAnimated" ]]
 [connection signal="focus_entered" from="Option/VBoxContainer/CenterContainer/Back" to="Option" method="_play_change_cursor_effect"]
 [connection signal="focus_exited" from="Option/VBoxContainer/CenterContainer/Back" to="Option" method="_on_animated_focus_exited" binds= [ "Back", "BackAnimated" ]]
