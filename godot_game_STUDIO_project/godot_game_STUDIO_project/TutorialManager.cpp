@@ -243,25 +243,18 @@ void godot::TutorialManager::_spawn_players()
 	}
 }
 
-bool godot::TutorialManager::_is_player_have_need_keys(Array rooms_keys)
+bool godot::TutorialManager::_is_player_have_need_keys(Color rooms_key)
 {
-	if (rooms_keys.size() == 0)
+	if (rooms_key==Color())
 		return true;
 
 	Array players_keys = PlayersContainer::_get_instance()->_get_key_list();
 
-	if (players_keys.size() == 0)
-		return false;
+	for (int i = 0; i < players_keys.size(); ++i)
+		if (players_keys[i] == rooms_key)
+			return true;
 
-	bool check_result = true;
-	for (int i = 0; i < rooms_keys.size(); ++i)
-	{
-		String row = rooms_keys[i];
-		for (int k = 0; k < players_keys.size(); ++k)
-			check_result = row.find(players_keys[k]) != -1 ? true : false;
-	}
-
-	return check_result;
+	return false;
 }
 
 void godot::TutorialManager::_ready()
@@ -348,7 +341,7 @@ void godot::TutorialManager::_door_collision(String door_dir)
 	auto generation_node = get_parent()->get_node("Generation");
 	Node2D* next_room = generation_node->call("_get_next_room", new_pos);
 
-	if (!_is_player_have_need_keys((Array)next_room->call("_get_list_of_keys")))
+	if (!_is_player_have_need_keys((Color)next_room->call("_get_last_key_color")))
 		return;
 
 	if (((int)dirs[index] == 2 && MenuButtons::game_mode == COOP) || ((MenuButtons::game_mode == SHOOTER || MenuButtons::game_mode == MELEE) && (int)dirs[index] == 1))

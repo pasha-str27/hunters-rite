@@ -120,7 +120,7 @@ void godot::GameManager::_move(String dir)
 			PlayersContainer::_get_instance()->_get_player2_regular()->set_global_position(move_point->get_global_position());
 	}
 
-	if (GameManager::current_level != 2 || GameManager::current_level != 5 || GameManager::current_level != 10)
+	if ((String)next_room->call("_get_room_type")=="boss_room" && (GameManager::current_level != 2 || GameManager::current_level != 5 || GameManager::current_level != 10))
 	{
 		for (int i = next_room->get_child_count() - 1; i >= 0; --i)
 			if (next_room->get_child(i)->get_name().find("fill_door") != -1)
@@ -255,9 +255,9 @@ void godot::GameManager::_spawn_players()
 	}
 }
 
-bool godot::GameManager::_is_player_have_need_keys(Array rooms_keys)
+bool godot::GameManager::_is_player_have_need_keys(Color rooms_key)
 {
-	if (rooms_keys.size() == 0)
+	if (rooms_key==Color())
 		return true;
 
 	Array players_keys = PlayersContainer::_get_instance()->_get_key_list();
@@ -265,15 +265,11 @@ bool godot::GameManager::_is_player_have_need_keys(Array rooms_keys)
 	if (players_keys.size() == 0)
 		return false;
 
-	bool check_result = true;
-	for (int i = 0; i < rooms_keys.size(); ++i)
-	{
-		String row = rooms_keys[i];
-		for (int k = 0; k < players_keys.size(); ++k)
-			check_result = row.find(players_keys[k])!=-1 ? true : false;
-	}
+	for (int i = 0; i < players_keys.size(); ++i)
+		if (players_keys[i] == rooms_key)
+			return true;
 
-	return check_result;
+	return false;
 }
 
 void godot::GameManager::_ready()
@@ -307,10 +303,7 @@ void godot::GameManager::_ready()
 void godot::GameManager::_door_collision(String door_dir)
 {
 	if (Enemies::get_singleton()->_get_enemies_count() != 0 || Enemies::get_singleton()->spawning())
-	{
-		Godot::print(String::num(Enemies::get_singleton()->_get_enemies_count()));
 		return;
-	}
 
 	int index = 0;
 	if (door_dir.find("left") != -1)
@@ -366,7 +359,7 @@ void godot::GameManager::_door_collision(String door_dir)
 	auto generation_node = get_parent()->get_node("Generation");
 	Node2D* next_room = generation_node->call("_get_next_room", new_pos);
 
-	if (!_is_player_have_need_keys((Array)next_room->call("_get_list_of_keys")))
+	if (!_is_player_have_need_keys((Color)next_room->call("_get_last_key_color")))
 		return;
 
 	if (((int)dirs[index] == 2 && MenuButtons::game_mode==COOP) || ((MenuButtons::game_mode == SHOOTER|| MenuButtons::game_mode == MELEE) && (int)dirs[index] == 1))

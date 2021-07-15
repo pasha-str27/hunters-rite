@@ -59,8 +59,8 @@ script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": ""
 }
-map_size = 3
-keys_frequency = 3
+map_size = 5
+keys_frequency = 2
 room = ExtResource( 6 )
 down_door = ExtResource( 8 )
 up_door = ExtResource( 2 )

@@ -123,10 +123,11 @@ void godot::Room::print()
 
 void godot::Room::_add_list(Array list)
 {	
-	Array lst = ((String)list[0]).split(", ");
+	Array lst = list[0].operator godot::Array();
+	Godot::print("arr size " + String::num(lst.size()));
 	for (int i = 0; i < lst.size(); ++i)
 		list_of_keys.push_back(lst[i]);
-	//list_of_keys.push_back(list);
+	list_of_keys.push_back(list);
 }
 
 Array godot::Room::_get_list_of_keys()

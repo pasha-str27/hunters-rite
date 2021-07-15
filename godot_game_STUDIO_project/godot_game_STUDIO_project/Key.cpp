@@ -53,7 +53,7 @@ void godot::Key::_on_Area2D_body_entered(Node* node)
 		key_box->add_child(prefab->instance());
 
 		//open next key/boss room
-		PlayersContainer::_get_instance()->_add_key(_get_type());
+		PlayersContainer::_get_instance()->_add_key(key_color);
 
 		//key types and key color
 		std::vector<String> name_keys{ "key_A", "key_B","key_C", "key_D", "key_E", "key_F" };
