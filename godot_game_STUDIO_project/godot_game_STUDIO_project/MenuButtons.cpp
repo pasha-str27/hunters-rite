@@ -10,6 +10,7 @@ float MenuButtons::music_audio_level = -12.5;
 float MenuButtons::effect_audio_level = 6;
 GameMode MenuButtons::game_mode = SHOOTER;
 GameType MenuButtons::game_type = DEFOLT;
+
 AudioStreamPlayer2D* MenuButtons::audio = nullptr;
 
 MenuButtons::MenuButtons()
@@ -20,6 +21,7 @@ MenuButtons::MenuButtons()
 	was_focused = false;
 	delta_time = 1.0 / 50;
 	single_mode = true;
+	tutorial_mode = false;
 }
 
 MenuButtons::~MenuButtons() {
@@ -99,6 +101,7 @@ void MenuButtons::_register_methods()
 	register_method((char*)"_on_Quit_pressed", &MenuButtons::_on_Quit_pressed);
 	register_method((char*)"_on_Back_pressed", &MenuButtons::_on_Back_pressed);
 	register_method((char*)"_on_Flower_pressed", &MenuButtons::_on_Flower_pressed);
+	register_method((char*)"_on_Tutorial_button_pressed", &MenuButtons::_on_Tutorial_button_pressed);
 	register_method((char*)"_on_Items_pressed", &MenuButtons::_on_Items_pressed);
 	register_method((char*)"_on_Items_pause_pressed", &MenuButtons::_on_Items_pause_pressed);
 	register_method((char*)"_on_Options_pause_pressed", &MenuButtons::_on_Options_pause_pressed);
@@ -306,6 +309,21 @@ void godot::MenuButtons::_on_Flower_pressed(Variant)
 	game_mode = COOP;
 	_start_game(game_mode);
 }
+
+
+void godot::MenuButtons::_on_Tutorial_button_pressed(Variant)
+{
+	game_type = TUTORIAL;
+	if (single_mode)
+	{
+		change_scene(choose_player_scene);
+		return;
+	}
+	game_mode = COOP;
+	//_start_game(game_mode);------ start tutorial
+}
+
+
 
 // -------Choose chapter-------
 void godot::MenuButtons::_show_chapter_sprite(String sprite_name, String description_name, bool mode)
