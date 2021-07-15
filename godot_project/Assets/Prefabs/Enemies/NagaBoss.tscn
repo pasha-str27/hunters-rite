@@ -6,7 +6,7 @@
 [ext_resource path="res://Assets/Scripts/EnemyPrice.gdns" type="Script" id=4]
 [ext_resource path="res://Assets/Sprites/Monsters/Naga/naga/attack/attack01.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/Prefabs/Particles/DeathParticles/DeathParticles.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Prefabs/Particles/DeathParticles/DeathNagaParticles.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Sprites/Monsters/Naga/naga/walk/walk03.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Sprites/Monsters/Naga/naga/idle/idle06.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Sprites/Monsters/Naga/naga/idle/idle07.png" type="Texture" id=10]
@@ -114,19 +114,9 @@ animations = [ {
 "name": "idle",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 18 ) ],
-"loop": false,
-"name": "attack",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 26 ), ExtResource( 11 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 28 ), ExtResource( 21 ) ],
 "loop": true,
 "name": "run",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 17 ), ExtResource( 20 ), ExtResource( 1 ) ],
-"loop": false,
-"name": "damaged",
 "speed": 10.0
 }, {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
@@ -137,6 +127,16 @@ animations = [ {
 "frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
 "loop": false,
 "name": "appear",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 18 ) ],
+"loop": false,
+"name": "attack",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 20 ), ExtResource( 1 ) ],
+"loop": false,
+"name": "damaged",
 "speed": 10.0
 } ]
 

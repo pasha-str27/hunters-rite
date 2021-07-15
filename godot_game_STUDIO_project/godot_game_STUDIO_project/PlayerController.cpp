@@ -358,14 +358,21 @@ void godot::PlayerController::change_can_moving_timeout()
 
 void godot::PlayerController::_decrease_attack_radius()
 {
-	auto node = cast_to<Node2D>(get_child(1));
-	node->set_scale(Vector2(node->get_scale().x * (real_t)1.1111, 1));
+	if (is_in_group("player2"))
+	{
+		auto node = cast_to<Node2D>(get_node("Area2D3"));
+		node->set_scale(Vector2(node->get_scale().x * (real_t)1.1111, 1));
+	}
+
 }
 
 void godot::PlayerController::_encrease_attack_radius()
 {
-	auto node = cast_to<Node2D>(get_child(1));
-	node->set_scale(Vector2(node->get_scale().x * (real_t)0.9, 1));
+	if (is_in_group("player2"))
+	{
+		auto node = cast_to<Node2D>(get_node("Area2D3"));
+		node->set_scale(Vector2(node->get_scale().x * (real_t)0.9, 1));
+	}
 }
 
 void godot::PlayerController::_set_number_to_next_item(int value)
