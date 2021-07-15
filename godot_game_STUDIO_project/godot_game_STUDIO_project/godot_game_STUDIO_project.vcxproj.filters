@@ -74,9 +74,6 @@
     <ClCompile Include="Spike.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="CameraController.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="ExitHandler.cpp">
       <Filter>Level</Filter>
     </ClCompile>
@@ -198,6 +195,18 @@
     <ClCompile Include="LocaledLabel.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="CurrentRoom.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialManager.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialGenerator.cpp">
+      <Filter>Genetation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
@@ -276,9 +285,6 @@
     </ClInclude>
     <ClInclude Include="Spike.h">
       <Filter>Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraController.h">
-      <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="ExitHandler.h">
       <Filter>Level</Filter>
@@ -421,6 +427,18 @@
     </ClInclude>
     <ClInclude Include="LocaledLabel.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="CurrentRoom.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialManager.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialGenerator.h">
+      <Filter>Genetation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
