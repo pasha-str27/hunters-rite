@@ -26,7 +26,7 @@
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=24]
 [ext_resource path="res://Assets/Scripts/LocaledLabel.gdns" type="Script" id=25]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id=65]
 resource_name = "Focus_scale"
 length = 1.5
 loop = true
@@ -55,7 +55,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=66]
 resource_name = "Focus_scale"
 length = 1.5
 loop = true
@@ -84,7 +84,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=67]
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -112,7 +112,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=68]
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -140,36 +140,36 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
 
-[sub_resource type="DynamicFont" id=30]
+[sub_resource type="DynamicFont" id=69]
 size = 11
 font_data = ExtResource( 24 )
 
-[sub_resource type="DynamicFontData" id=31]
+[sub_resource type="DynamicFontData" id=70]
 font_path = "res://Assets/Font/PressStart2P-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=32]
+[sub_resource type="DynamicFont" id=71]
 size = 9
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 31 )
+font_data = SubResource( 70 )
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=72]
 size = 8
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 extra_spacing_top = 1
 font_data = ExtResource( 24 )
 
-[sub_resource type="DynamicFontData" id=6]
+[sub_resource type="DynamicFontData" id=73]
 font_path = "res://Assets/Font/PressStart2P-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=74]
 size = 8
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 6 )
+font_data = SubResource( 73 )
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=75]
 resource_name = "Focus_scale"
 length = 1.5
 loop = true
@@ -198,17 +198,17 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
 
-[sub_resource type="DynamicFont" id=33]
+[sub_resource type="DynamicFont" id=76]
 size = 11
 font_data = ExtResource( 24 )
 
-[sub_resource type="DynamicFont" id=34]
+[sub_resource type="DynamicFont" id=77]
 size = 8
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 31 )
+font_data = SubResource( 70 )
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=78]
 resource_name = "Focus_scale"
 length = 1.5
 loop = true
@@ -237,26 +237,26 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
 
-[sub_resource type="DynamicFont" id=35]
+[sub_resource type="DynamicFont" id=79]
 size = 11
 font_data = ExtResource( 24 )
 
-[sub_resource type="DynamicFontData" id=36]
+[sub_resource type="DynamicFontData" id=80]
 font_path = "res://Assets/Font/PressStart2P-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=37]
+[sub_resource type="DynamicFont" id=81]
 size = 8
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 36 )
+font_data = SubResource( 80 )
 
-[sub_resource type="DynamicFont" id=13]
+[sub_resource type="DynamicFont" id=82]
 size = 8
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 6 )
+font_data = SubResource( 73 )
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=83]
 resource_name = "Focus_scale"
 length = 1.5
 loop = true
@@ -285,20 +285,20 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
 
-[sub_resource type="DynamicFont" id=38]
+[sub_resource type="DynamicFont" id=84]
 size = 11
 font_data = ExtResource( 24 )
 
-[sub_resource type="DynamicFontData" id=39]
+[sub_resource type="DynamicFontData" id=85]
 font_path = "res://Assets/Font/PressStart2P-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=40]
+[sub_resource type="DynamicFont" id=86]
 size = 8
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 39 )
+font_data = SubResource( 85 )
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=87]
 resource_name = "Focus_scale"
 length = 1.5
 loop = true
@@ -327,20 +327,20 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
 
-[sub_resource type="DynamicFont" id=41]
+[sub_resource type="DynamicFont" id=88]
 size = 11
 font_data = ExtResource( 24 )
 
-[sub_resource type="DynamicFontData" id=42]
+[sub_resource type="DynamicFontData" id=89]
 font_path = "res://Assets/Font/PressStart2P-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=43]
+[sub_resource type="DynamicFont" id=90]
 size = 8
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 42 )
+font_data = SubResource( 89 )
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=91]
 resource_name = "Focus_scale"
 length = 1.5
 loop = true
@@ -369,20 +369,20 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
 
-[sub_resource type="DynamicFont" id=44]
+[sub_resource type="DynamicFont" id=92]
 size = 11
 font_data = ExtResource( 24 )
 
-[sub_resource type="DynamicFontData" id=45]
+[sub_resource type="DynamicFontData" id=93]
 font_path = "res://Assets/Font/PressStart2P-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=46]
+[sub_resource type="DynamicFont" id=94]
 size = 8
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 45 )
+font_data = SubResource( 93 )
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=95]
 resource_name = "Focus_scale"
 length = 1.5
 loop = true
@@ -411,26 +411,26 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
 
-[sub_resource type="DynamicFont" id=47]
+[sub_resource type="DynamicFont" id=96]
 size = 11
 font_data = ExtResource( 24 )
 
-[sub_resource type="DynamicFontData" id=48]
+[sub_resource type="DynamicFontData" id=97]
 font_path = "res://Assets/Font/PressStart2P-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=49]
+[sub_resource type="DynamicFont" id=98]
 size = 8
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 48 )
+font_data = SubResource( 97 )
 
-[sub_resource type="DynamicFont" id=18]
+[sub_resource type="DynamicFont" id=99]
 size = 8
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 6 )
+font_data = SubResource( 73 )
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=100]
 resource_name = "Focus_scale"
 length = 1.5
 loop = true
@@ -459,26 +459,26 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
 
-[sub_resource type="DynamicFont" id=50]
+[sub_resource type="DynamicFont" id=101]
 size = 11
 font_data = ExtResource( 24 )
 
-[sub_resource type="DynamicFontData" id=51]
+[sub_resource type="DynamicFontData" id=102]
 font_path = "res://Assets/Font/PressStart2P-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=52]
+[sub_resource type="DynamicFont" id=103]
 size = 8
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 51 )
+font_data = SubResource( 102 )
 
-[sub_resource type="DynamicFont" id=20]
+[sub_resource type="DynamicFont" id=104]
 size = 8
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 6 )
+font_data = SubResource( 73 )
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=105]
 resource_name = "Focus_scale"
 length = 1.5
 loop = true
@@ -507,26 +507,26 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
 
-[sub_resource type="DynamicFont" id=53]
+[sub_resource type="DynamicFont" id=106]
 size = 11
 font_data = ExtResource( 24 )
 
-[sub_resource type="DynamicFontData" id=54]
+[sub_resource type="DynamicFontData" id=107]
 font_path = "res://Assets/Font/PressStart2P-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=55]
+[sub_resource type="DynamicFont" id=108]
 size = 8
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 54 )
+font_data = SubResource( 107 )
 
-[sub_resource type="DynamicFont" id=22]
+[sub_resource type="DynamicFont" id=109]
 size = 8
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 6 )
+font_data = SubResource( 73 )
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=110]
 resource_name = "Focus_scale"
 length = 1.5
 loop = true
@@ -555,20 +555,20 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
 
-[sub_resource type="DynamicFont" id=56]
+[sub_resource type="DynamicFont" id=111]
 size = 11
 font_data = ExtResource( 24 )
 
-[sub_resource type="DynamicFontData" id=57]
+[sub_resource type="DynamicFontData" id=112]
 font_path = "res://Assets/Font/PressStart2P-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=58]
+[sub_resource type="DynamicFont" id=113]
 size = 8
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 57 )
+font_data = SubResource( 112 )
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=114]
 resource_name = "Focus_scale"
 length = 1.5
 loop = true
@@ -597,26 +597,26 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
 
-[sub_resource type="DynamicFont" id=59]
+[sub_resource type="DynamicFont" id=115]
 size = 11
 font_data = ExtResource( 24 )
 
-[sub_resource type="DynamicFontData" id=60]
+[sub_resource type="DynamicFontData" id=116]
 font_path = "res://Assets/Font/PressStart2P-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=61]
+[sub_resource type="DynamicFont" id=117]
 size = 8
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 60 )
+font_data = SubResource( 116 )
 
-[sub_resource type="DynamicFont" id=25]
+[sub_resource type="DynamicFont" id=118]
 size = 8
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 6 )
+font_data = SubResource( 73 )
 
-[sub_resource type="Animation" id=26]
+[sub_resource type="Animation" id=119]
 resource_name = "Focus_scale"
 length = 1.5
 loop = true
@@ -658,13 +658,13 @@ outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = SubResource( 63 )
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=120]
 size = 8
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 6 )
+font_data = SubResource( 73 )
 
-[sub_resource type="Animation" id=27]
+[sub_resource type="Animation" id=121]
 resource_name = "Focus_scale"
 length = 1.5
 loop = true
@@ -693,7 +693,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
 
-[sub_resource type="Animation" id=28]
+[sub_resource type="Animation" id=122]
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -835,7 +835,7 @@ __meta__ = {
 text_key = "KEY_RESUME"
 
 [node name="ResumeAnimated" type="AnimationPlayer" parent="Pause/CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer/Resume"]
-anims/Focus_scale = SubResource( 1 )
+anims/Focus_scale = SubResource( 65 )
 
 [node name="Items_pause" type="TextureButton" parent="Pause/CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer"]
 margin_top = 76.0
@@ -884,7 +884,7 @@ __meta__ = {
 text_key = "KEY_ITEMS"
 
 [node name="Items_pauseAnimated" type="AnimationPlayer" parent="Pause/CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer/Items_pause"]
-anims/Focus_scale = SubResource( 2 )
+anims/Focus_scale = SubResource( 66 )
 
 [node name="Options" type="TextureButton" parent="Pause/CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer"]
 margin_top = 152.0
@@ -933,7 +933,7 @@ __meta__ = {
 text_key = "KEY_SETTINGS"
 
 [node name="OptionsAnimated" type="AnimationPlayer" parent="Pause/CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer/Options"]
-anims/Focus_scale = SubResource( 3 )
+anims/Focus_scale = SubResource( 67 )
 
 [node name="Menu" type="TextureButton" parent="Pause/CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer"]
 margin_top = 228.0
@@ -982,7 +982,7 @@ __meta__ = {
 text_key = "KEY_MENU"
 
 [node name="MenuAnimated" type="AnimationPlayer" parent="Pause/CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer/Menu"]
-anims/Focus_scale = SubResource( 4 )
+anims/Focus_scale = SubResource( 68 )
 
 [node name="CenterContainer3" type="CenterContainer" parent="Pause/CenterContainer/HBoxContainer"]
 margin_left = 864.0
@@ -1099,7 +1099,7 @@ rect_min_size = Vector2( 0, 45 )
 margin_top = 49.0
 margin_right = 256.0
 margin_bottom = 60.0
-custom_fonts/font = SubResource( 30 )
+custom_fonts/font = SubResource( 69 )
 custom_colors/font_color = Color( 1, 0.835294, 0.341176, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -1133,7 +1133,7 @@ margin_top = 164.0
 margin_right = 256.0
 margin_bottom = 194.0
 rect_min_size = Vector2( 0, 30 )
-custom_fonts/font = SubResource( 32 )
+custom_fonts/font = SubResource( 71 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
 text = "Super mega YUM YUM
@@ -1151,7 +1151,7 @@ modulate = Color( 0.592157, 0.815686, 0.560784, 1 )
 margin_top = 198.0
 margin_right = 256.0
 margin_bottom = 207.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 72 )
 custom_colors/font_color_shadow = Color( 0.517647, 0.517647, 0.517647, 1 )
 text = "+20 Hp"
 align = 1
@@ -1165,7 +1165,7 @@ modulate = Color( 0.827451, 0.360784, 0.360784, 1 )
 margin_top = 211.0
 margin_right = 256.0
 margin_bottom = 219.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 74 )
 custom_colors/font_color_shadow = Color( 0.439216, 0.439216, 0.439216, 1 )
 text = "-5 Damage"
 align = 1
@@ -1175,7 +1175,7 @@ __meta__ = {
 }
 
 [node name="LegendaryChikenAnimated" type="AnimationPlayer" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer/LegendaryChiken"]
-anims/Focus_scale = SubResource( 10 )
+anims/Focus_scale = SubResource( 75 )
 
 [node name="FastBoots" type="TextureButton" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer"]
 margin_left = 260.0
@@ -1226,7 +1226,7 @@ rect_min_size = Vector2( 0, 45 )
 margin_top = 49.0
 margin_right = 256.0
 margin_bottom = 60.0
-custom_fonts/font = SubResource( 33 )
+custom_fonts/font = SubResource( 76 )
 custom_colors/font_color = Color( 1, 0.835294, 0.341176, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -1259,7 +1259,7 @@ expand = true
 margin_top = 164.0
 margin_right = 256.0
 margin_bottom = 183.0
-custom_fonts/font = SubResource( 34 )
+custom_fonts/font = SubResource( 77 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
 text = "New Gucci sneakers 
@@ -1277,7 +1277,7 @@ modulate = Color( 0.592157, 0.815686, 0.560784, 1 )
 margin_top = 187.0
 margin_right = 256.0
 margin_bottom = 196.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 72 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
 text = "+30 Speed"
 align = 1
@@ -1287,7 +1287,7 @@ __meta__ = {
 }
 
 [node name="FastBootsrAnimated" type="AnimationPlayer" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer/FastBoots"]
-anims/Focus_scale = SubResource( 12 )
+anims/Focus_scale = SubResource( 78 )
 
 [node name="DragonsEye" type="TextureButton" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer"]
 margin_left = 520.0
@@ -1339,7 +1339,7 @@ rect_min_size = Vector2( 0, 45 )
 margin_top = 49.0
 margin_right = 256.0
 margin_bottom = 60.0
-custom_fonts/font = SubResource( 35 )
+custom_fonts/font = SubResource( 79 )
 custom_colors/font_color = Color( 1, 0.835294, 0.341176, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -1372,7 +1372,7 @@ expand = true
 margin_top = 164.0
 margin_right = 256.0
 margin_bottom = 183.0
-custom_fonts/font = SubResource( 37 )
+custom_fonts/font = SubResource( 81 )
 text = "Do you see something
  funny?"
 align = 1
@@ -1388,7 +1388,7 @@ modulate = Color( 0.592157, 0.815686, 0.560784, 1 )
 margin_top = 187.0
 margin_right = 256.0
 margin_bottom = 196.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 72 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
 text = "+20 Damage"
 align = 1
@@ -1402,7 +1402,7 @@ modulate = Color( 0.780392, 0.4, 0.4, 1 )
 margin_top = 200.0
 margin_right = 256.0
 margin_bottom = 208.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 82 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
 text = "-Atack range"
 align = 1
@@ -1412,7 +1412,7 @@ __meta__ = {
 }
 
 [node name="DragonsEyeAnimated" type="AnimationPlayer" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer/DragonsEye"]
-anims/Focus_scale = SubResource( 14 )
+anims/Focus_scale = SubResource( 83 )
 
 [node name="SwordOfRange" type="TextureButton" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer"]
 margin_top = 260.0
@@ -1466,7 +1466,7 @@ margin_top = 49.0
 margin_right = 256.0
 margin_bottom = 60.0
 mouse_filter = 0
-custom_fonts/font = SubResource( 38 )
+custom_fonts/font = SubResource( 84 )
 custom_colors/font_color = Color( 1, 0.835294, 0.341176, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -1500,7 +1500,7 @@ margin_top = 164.0
 margin_right = 256.0
 margin_bottom = 183.0
 mouse_filter = 0
-custom_fonts/font = SubResource( 40 )
+custom_fonts/font = SubResource( 86 )
 text = "A cool blacksmith
 forged this sword"
 align = 1
@@ -1516,7 +1516,7 @@ modulate = Color( 0.592157, 0.815686, 0.560784, 1 )
 margin_top = 187.0
 margin_right = 256.0
 margin_bottom = 196.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 72 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
 text = "+15 Damage"
 align = 1
@@ -1526,7 +1526,7 @@ __meta__ = {
 }
 
 [node name="SwordOfRangeAnimated" type="AnimationPlayer" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer/SwordOfRange"]
-anims/Focus_scale = SubResource( 15 )
+anims/Focus_scale = SubResource( 87 )
 
 [node name="GlassesOfBillGates" type="TextureButton" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer"]
 margin_left = 260.0
@@ -1580,7 +1580,7 @@ rect_min_size = Vector2( 0, 45 )
 margin_top = 49.0
 margin_right = 256.0
 margin_bottom = 74.0
-custom_fonts/font = SubResource( 41 )
+custom_fonts/font = SubResource( 88 )
 custom_colors/font_color = Color( 1, 0.835294, 0.341176, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -1614,7 +1614,7 @@ expand = true
 margin_top = 178.0
 margin_right = 256.0
 margin_bottom = 197.0
-custom_fonts/font = SubResource( 43 )
+custom_fonts/font = SubResource( 90 )
 text = "Glasses of a billionaire
 from the future"
 align = 1
@@ -1630,7 +1630,7 @@ modulate = Color( 0.592157, 0.815686, 0.560784, 1 )
 margin_top = 201.0
 margin_right = 256.0
 margin_bottom = 210.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 72 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
 text = "+Attack range"
 align = 1
@@ -1640,7 +1640,7 @@ __meta__ = {
 }
 
 [node name="GlassesOfBillGatesAnimated" type="AnimationPlayer" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer/GlassesOfBillGates"]
-anims/Focus_scale = SubResource( 16 )
+anims/Focus_scale = SubResource( 91 )
 
 [node name="LuckyClever" type="TextureButton" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer"]
 margin_left = 520.0
@@ -1696,7 +1696,7 @@ rect_min_size = Vector2( 0, 45 )
 margin_top = 49.0
 margin_right = 256.0
 margin_bottom = 60.0
-custom_fonts/font = SubResource( 44 )
+custom_fonts/font = SubResource( 92 )
 custom_colors/font_color = Color( 1, 0.835294, 0.341176, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -1729,7 +1729,7 @@ expand = true
 margin_top = 164.0
 margin_right = 256.0
 margin_bottom = 194.0
-custom_fonts/font = SubResource( 46 )
+custom_fonts/font = SubResource( 94 )
 text = "In fact, it does not 
 bring good luck, 
 it is fiction"
@@ -1746,7 +1746,7 @@ modulate = Color( 0.592157, 0.815686, 0.560784, 1 )
 margin_top = 198.0
 margin_right = 256.0
 margin_bottom = 207.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 72 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
 text = "+5% loot"
 align = 1
@@ -1756,7 +1756,7 @@ __meta__ = {
 }
 
 [node name="LuckyCleverAnimated" type="AnimationPlayer" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer/LuckyClever"]
-anims/Focus_scale = SubResource( 17 )
+anims/Focus_scale = SubResource( 95 )
 
 [node name="CoreWithAChain" type="TextureButton" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer"]
 margin_top = 520.0
@@ -1808,7 +1808,7 @@ rect_min_size = Vector2( 0, 45 )
 margin_top = 49.0
 margin_right = 256.0
 margin_bottom = 60.0
-custom_fonts/font = SubResource( 47 )
+custom_fonts/font = SubResource( 96 )
 custom_colors/font_color = Color( 1, 0.835294, 0.341176, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -1841,7 +1841,7 @@ expand = true
 margin_top = 164.0
 margin_right = 256.0
 margin_bottom = 183.0
-custom_fonts/font = SubResource( 49 )
+custom_fonts/font = SubResource( 98 )
 text = "A big piece of metal,
  for something."
 align = 1
@@ -1857,7 +1857,7 @@ modulate = Color( 0.592157, 0.815686, 0.560784, 1 )
 margin_top = 187.0
 margin_right = 256.0
 margin_bottom = 196.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 72 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
 text = "+10 Damage"
 align = 1
@@ -1871,7 +1871,7 @@ modulate = Color( 0.780392, 0.4, 0.4, 1 )
 margin_top = 200.0
 margin_right = 256.0
 margin_bottom = 208.0
-custom_fonts/font = SubResource( 18 )
+custom_fonts/font = SubResource( 99 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
 text = "-50 Speed"
 align = 1
@@ -1881,7 +1881,7 @@ __meta__ = {
 }
 
 [node name="CoreWithAChainAnimated" type="AnimationPlayer" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer/CoreWithAChain"]
-anims/Focus_scale = SubResource( 19 )
+anims/Focus_scale = SubResource( 100 )
 
 [node name="VikingShield" type="TextureButton" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer"]
 margin_left = 260.0
@@ -1934,7 +1934,7 @@ rect_min_size = Vector2( 0, 45 )
 margin_top = 49.0
 margin_right = 256.0
 margin_bottom = 60.0
-custom_fonts/font = SubResource( 50 )
+custom_fonts/font = SubResource( 101 )
 custom_colors/font_color = Color( 1, 0.835294, 0.341176, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -1967,7 +1967,7 @@ expand = true
 margin_top = 164.0
 margin_right = 256.0
 margin_bottom = 172.0
-custom_fonts/font = SubResource( 52 )
+custom_fonts/font = SubResource( 103 )
 text = "Old but reliable."
 align = 1
 valign = 1
@@ -1982,7 +1982,7 @@ modulate = Color( 0.592157, 0.815686, 0.560784, 1 )
 margin_top = 176.0
 margin_right = 256.0
 margin_bottom = 185.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 72 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
 text = "+30 HP"
 align = 1
@@ -1996,7 +1996,7 @@ modulate = Color( 0.780392, 0.4, 0.4, 1 )
 margin_top = 189.0
 margin_right = 256.0
 margin_bottom = 197.0
-custom_fonts/font = SubResource( 20 )
+custom_fonts/font = SubResource( 104 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
 text = "-25 Damage"
 align = 1
@@ -2006,7 +2006,7 @@ __meta__ = {
 }
 
 [node name="VikingShieldAnimated" type="AnimationPlayer" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer/VikingShield"]
-anims/Focus_scale = SubResource( 21 )
+anims/Focus_scale = SubResource( 105 )
 
 [node name="DarkGragonsTooth" type="TextureButton" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer"]
 margin_left = 520.0
@@ -2059,7 +2059,7 @@ rect_min_size = Vector2( 0, 45 )
 margin_top = 49.0
 margin_right = 256.0
 margin_bottom = 60.0
-custom_fonts/font = SubResource( 53 )
+custom_fonts/font = SubResource( 106 )
 custom_colors/font_color = Color( 1, 0.835294, 0.341176, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -2092,7 +2092,7 @@ expand = true
 margin_top = 164.0
 margin_right = 256.0
 margin_bottom = 183.0
-custom_fonts/font = SubResource( 55 )
+custom_fonts/font = SubResource( 108 )
 text = "This dragon apparently 
 ate a lot of candy."
 align = 1
@@ -2108,7 +2108,7 @@ modulate = Color( 0.592157, 0.815686, 0.560784, 1 )
 margin_top = 187.0
 margin_right = 256.0
 margin_bottom = 196.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 72 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
 text = "+Attack range"
 align = 1
@@ -2122,7 +2122,7 @@ modulate = Color( 0.780392, 0.4, 0.4, 1 )
 margin_top = 200.0
 margin_right = 256.0
 margin_bottom = 208.0
-custom_fonts/font = SubResource( 22 )
+custom_fonts/font = SubResource( 109 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
 text = "-Attack speed"
 align = 1
@@ -2132,7 +2132,7 @@ __meta__ = {
 }
 
 [node name="DarkGragonsToothAnimated" type="AnimationPlayer" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer/DarkGragonsTooth"]
-anims/Focus_scale = SubResource( 23 )
+anims/Focus_scale = SubResource( 110 )
 
 [node name="HolyDragonsTooth" type="TextureButton" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer"]
 margin_top = 780.0
@@ -2184,7 +2184,7 @@ rect_min_size = Vector2( 0, 45 )
 margin_top = 49.0
 margin_right = 256.0
 margin_bottom = 60.0
-custom_fonts/font = SubResource( 56 )
+custom_fonts/font = SubResource( 111 )
 custom_colors/font_color = Color( 1, 0.835294, 0.341176, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -2217,7 +2217,7 @@ expand = true
 margin_top = 164.0
 margin_right = 256.0
 margin_bottom = 183.0
-custom_fonts/font = SubResource( 58 )
+custom_fonts/font = SubResource( 113 )
 text = "Be sure to pray before
 lifting this item!"
 align = 1
@@ -2233,7 +2233,7 @@ modulate = Color( 0.592157, 0.815686, 0.560784, 1 )
 margin_top = 187.0
 margin_right = 256.0
 margin_bottom = 196.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 72 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
 text = "+Attack speed"
 align = 1
@@ -2243,7 +2243,7 @@ __meta__ = {
 }
 
 [node name="HolyDragonsToothAnimated" type="AnimationPlayer" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer/HolyDragonsTooth"]
-anims/Focus_scale = SubResource( 24 )
+anims/Focus_scale = SubResource( 114 )
 
 [node name="UnluckyNumber" type="TextureButton" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer"]
 margin_left = 260.0
@@ -2296,7 +2296,7 @@ rect_min_size = Vector2( 0, 45 )
 margin_top = 49.0
 margin_right = 256.0
 margin_bottom = 60.0
-custom_fonts/font = SubResource( 59 )
+custom_fonts/font = SubResource( 115 )
 custom_colors/font_color = Color( 1, 0.835294, 0.341176, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -2329,7 +2329,7 @@ expand = true
 margin_top = 164.0
 margin_right = 256.0
 margin_bottom = 183.0
-custom_fonts/font = SubResource( 61 )
+custom_fonts/font = SubResource( 117 )
 text = "Do not try to 
 call this number."
 align = 1
@@ -2345,7 +2345,7 @@ modulate = Color( 0.592157, 0.815686, 0.560784, 1 )
 margin_top = 187.0
 margin_right = 256.0
 margin_bottom = 208.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 72 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
 text = "+25 HP
 +10 Damage"
@@ -2360,7 +2360,7 @@ modulate = Color( 0.780392, 0.4, 0.4, 1 )
 margin_top = 212.0
 margin_right = 256.0
 margin_bottom = 220.0
-custom_fonts/font = SubResource( 25 )
+custom_fonts/font = SubResource( 118 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
 text = "-10% loot"
 align = 1
@@ -2370,7 +2370,7 @@ __meta__ = {
 }
 
 [node name="UnluckyNumberAnimated" type="AnimationPlayer" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer/UnluckyNumber"]
-anims/Focus_scale = SubResource( 26 )
+anims/Focus_scale = SubResource( 119 )
 
 [node name="UkrainianGorilka" type="TextureButton" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer"]
 margin_left = 520.0
@@ -2472,7 +2472,7 @@ modulate = Color( 0.592157, 0.815686, 0.560784, 1 )
 margin_top = 187.0
 margin_right = 256.0
 margin_bottom = 196.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 72 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
 text = "+30 Damage"
 align = 1
@@ -2486,7 +2486,7 @@ modulate = Color( 0.780392, 0.4, 0.4, 1 )
 margin_top = 200.0
 margin_right = 256.0
 margin_bottom = 208.0
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 120 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
 text = "-50 HP"
 align = 1
@@ -2496,7 +2496,7 @@ __meta__ = {
 }
 
 [node name="UkrainianGorilkaAnimated" type="AnimationPlayer" parent="Items_in_pause/Items_grid/ScrollContainer/GridContainer/UkrainianGorilka"]
-anims/Focus_scale = SubResource( 27 )
+anims/Focus_scale = SubResource( 121 )
 
 [node name="Back_button" type="CenterContainer" parent="Items_in_pause"]
 margin_left = -164.967
@@ -2549,12 +2549,14 @@ custom_constants/shadow_as_outline = 0
 text = "Back"
 align = 1
 valign = 1
+script = ExtResource( 25 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+text_key = "KEY_BACK"
 
 [node name="BackAnimated" type="AnimationPlayer" parent="Items_in_pause/Back_button/Back"]
-anims/Focus_scale = SubResource( 28 )
+anims/Focus_scale = SubResource( 122 )
 
 [connection signal="focus_entered" from="Pause/CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer/Resume" to="Pause" method="_on_animated_focus_entered" binds= [ "Resume", "ResumeAnimated" ]]
 [connection signal="focus_entered" from="Pause/CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer/Resume" to="Pause" method="_play_change_cursor_effect"]
@@ -2572,53 +2574,53 @@ anims/Focus_scale = SubResource( 28 )
 [connection signal="focus_entered" from="Pause/CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer/Menu" to="Pause" method="_play_change_cursor_effect"]
 [connection signal="focus_exited" from="Pause/CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer/Menu" to="Pause" method="_on_animated_focus_exited" binds= [ "Menu", "MenuAnimated" ]]
 [connection signal="pressed" from="Pause/CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer/Menu" to="Pause" method="_on_Menu_pressed"]
+[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/LegendaryChiken" to="Pause" method="_set_vertical_scroll" binds= [ 0 ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/LegendaryChiken" to="Pause" method="_on_animated_focus_entered" binds= [ "LegendaryChiken", "LegendaryChikenAnimated" ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/LegendaryChiken" to="Pause" method="_play_change_cursor_effect"]
-[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/LegendaryChiken" to="Pause" method="_set_vertical_scroll" binds= [ 0 ]]
 [connection signal="focus_exited" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/LegendaryChiken" to="Pause" method="_on_animated_focus_exited" binds= [ "LegendaryChiken", "LegendaryChikenAnimated" ]]
+[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/FastBoots" to="Pause" method="_set_vertical_scroll" binds= [ 0 ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/FastBoots" to="Pause" method="_on_animated_focus_entered" binds= [ "FastBoots", "FastBootsrAnimated" ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/FastBoots" to="Pause" method="_play_change_cursor_effect"]
-[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/FastBoots" to="Pause" method="_set_vertical_scroll" binds= [ 0 ]]
 [connection signal="focus_exited" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/FastBoots" to="Pause" method="_on_animated_focus_exited" binds= [ "FastBoots", "FastBootsrAnimated" ]]
+[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/DragonsEye" to="Pause" method="_set_vertical_scroll" binds= [ 0 ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/DragonsEye" to="Pause" method="_on_animated_focus_entered" binds= [ "DragonsEye", "DragonsEyeAnimated" ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/DragonsEye" to="Pause" method="_play_change_cursor_effect"]
-[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/DragonsEye" to="Pause" method="_set_vertical_scroll" binds= [ 0 ]]
 [connection signal="focus_exited" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/DragonsEye" to="Pause" method="_on_animated_focus_exited" binds= [ "DragonsEye", "DragonsEyeAnimated" ]]
+[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/SwordOfRange" to="Pause" method="_set_vertical_scroll" binds= [ 0 ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/SwordOfRange" to="Pause" method="_on_animated_focus_entered" binds= [ "SwordOfRange", "SwordOfRangeAnimated" ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/SwordOfRange" to="Pause" method="_play_change_cursor_effect"]
-[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/SwordOfRange" to="Pause" method="_set_vertical_scroll" binds= [ 0 ]]
 [connection signal="focus_exited" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/SwordOfRange" to="Pause" method="_on_animated_focus_exited" binds= [ "SwordOfRange", "SwordOfRangeAnimated" ]]
+[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/GlassesOfBillGates" to="Pause" method="_set_vertical_scroll" binds= [ 0 ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/GlassesOfBillGates" to="Pause" method="_on_animated_focus_entered" binds= [ "GlassesOfBillGates", "GlassesOfBillGatesAnimated" ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/GlassesOfBillGates" to="Pause" method="_play_change_cursor_effect"]
-[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/GlassesOfBillGates" to="Pause" method="_set_vertical_scroll" binds= [ 0 ]]
 [connection signal="focus_exited" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/GlassesOfBillGates" to="Pause" method="_on_animated_focus_exited" binds= [ "GlassesOfBillGates", "GlassesOfBillGatesAnimated" ]]
+[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/LuckyClever" to="Pause" method="_set_vertical_scroll" binds= [ 0 ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/LuckyClever" to="Pause" method="_on_animated_focus_entered" binds= [ "LuckyClever", "LuckyCleverAnimated" ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/LuckyClever" to="Pause" method="_play_change_cursor_effect"]
-[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/LuckyClever" to="Pause" method="_set_vertical_scroll" binds= [ 0 ]]
 [connection signal="focus_exited" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/LuckyClever" to="Pause" method="_on_animated_focus_exited" binds= [ "LuckyClever", "LuckyCleverAnimated" ]]
+[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/CoreWithAChain" to="Pause" method="_set_vertical_scroll" binds= [ 260 ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/CoreWithAChain" to="Pause" method="_on_animated_focus_entered" binds= [ "CoreWithAChain", "CoreWithAChainAnimated" ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/CoreWithAChain" to="Pause" method="_play_change_cursor_effect"]
-[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/CoreWithAChain" to="Pause" method="_set_vertical_scroll" binds= [ 260 ]]
 [connection signal="focus_exited" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/CoreWithAChain" to="Pause" method="_on_animated_focus_exited" binds= [ "CoreWithAChain", "CoreWithAChainAnimated" ]]
+[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/VikingShield" to="Pause" method="_set_vertical_scroll" binds= [ 260 ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/VikingShield" to="Pause" method="_on_animated_focus_entered" binds= [ "VikingShield", "VikingShieldAnimated" ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/VikingShield" to="Pause" method="_play_change_cursor_effect"]
-[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/VikingShield" to="Pause" method="_set_vertical_scroll" binds= [ 260 ]]
 [connection signal="focus_exited" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/VikingShield" to="Pause" method="_on_animated_focus_exited" binds= [ "VikingShield", "VikingShieldAnimated" ]]
+[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/DarkGragonsTooth" to="Pause" method="_set_vertical_scroll" binds= [ 260 ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/DarkGragonsTooth" to="Pause" method="_on_animated_focus_entered" binds= [ "DarkGragonsTooth", "DarkGragonsToothAnimated" ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/DarkGragonsTooth" to="Pause" method="_play_change_cursor_effect"]
-[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/DarkGragonsTooth" to="Pause" method="_set_vertical_scroll" binds= [ 260 ]]
 [connection signal="focus_exited" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/DarkGragonsTooth" to="Pause" method="_on_animated_focus_exited" binds= [ "DarkGragonsTooth", "DarkGragonsToothAnimated" ]]
+[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/HolyDragonsTooth" to="Pause" method="_set_vertical_scroll" binds= [ 520 ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/HolyDragonsTooth" to="Pause" method="_on_animated_focus_entered" binds= [ "HolyDragonsTooth", "HolyDragonsToothAnimated" ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/HolyDragonsTooth" to="Pause" method="_play_change_cursor_effect"]
-[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/HolyDragonsTooth" to="Pause" method="_set_vertical_scroll" binds= [ 520 ]]
 [connection signal="focus_exited" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/HolyDragonsTooth" to="Pause" method="_on_animated_focus_exited" binds= [ "HolyDragonsTooth", "HolyDragonsToothAnimated" ]]
+[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/UnluckyNumber" to="Pause" method="_set_vertical_scroll" binds= [ 520 ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/UnluckyNumber" to="Pause" method="_on_animated_focus_entered" binds= [ "UnluckyNumber", "UnluckyNumberAnimated" ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/UnluckyNumber" to="Pause" method="_play_change_cursor_effect"]
-[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/UnluckyNumber" to="Pause" method="_set_vertical_scroll" binds= [ 520 ]]
 [connection signal="focus_exited" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/UnluckyNumber" to="Pause" method="_on_animated_focus_exited" binds= [ "UnluckyNumber", "UnluckyNumberAnimated" ]]
+[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/UkrainianGorilka" to="Pause" method="_set_vertical_scroll" binds= [ 520 ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/UkrainianGorilka" to="Pause" method="_on_animated_focus_entered" binds= [ "UkrainianGorilka", "UkrainianGorilkaAnimated" ]]
 [connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/UkrainianGorilka" to="Pause" method="_play_change_cursor_effect"]
-[connection signal="focus_entered" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/UkrainianGorilka" to="Pause" method="_set_vertical_scroll" binds= [ 520 ]]
 [connection signal="focus_exited" from="Items_in_pause/Items_grid/ScrollContainer/GridContainer/UkrainianGorilka" to="Pause" method="_on_animated_focus_exited" binds= [ "UkrainianGorilka", "UkrainianGorilkaAnimated" ]]
 [connection signal="focus_entered" from="Items_in_pause/Back_button/Back" to="Pause" method="_on_animated_focus_entered" binds= [ "Back", "BackAnimated" ]]
 [connection signal="focus_entered" from="Items_in_pause/Back_button/Back" to="Pause" method="_play_change_cursor_effect"]
