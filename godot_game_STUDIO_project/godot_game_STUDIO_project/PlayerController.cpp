@@ -73,7 +73,6 @@ void godot::PlayerController::_register_methods()
 godot::PlayerController::PlayerController()
 {
 	current_player_strategy = new PlayerStrategyContext;
-	//current_player = nullptr;
 	timer = Timer::_new();
 	attack_speed_delta = 0.5;
 	dash_time_delta = 0.4;

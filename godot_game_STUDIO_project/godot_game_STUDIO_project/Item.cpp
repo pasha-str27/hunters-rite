@@ -92,7 +92,7 @@ void godot::Item::_on_Area2D_body_entered(Node* node)
 
 	Godot::print("number_to_next_item:");
 	Godot::print("     before: " + String::num((int)node->call("_get_number_to_next_item")));
-	node->call("_set_attack_speed_delta", (float)node->call("_get_attack_speed_delta") + attack_speed_delta);
+	node->call("_set_attack_speed_delta", (float)node->call("_get_attack_speed_delta") * attack_speed_delta);
 	Godot::print("     after: " + String::num((int)node->call("_get_number_to_next_item")));
 
 	if (node->is_in_group("player2"))
