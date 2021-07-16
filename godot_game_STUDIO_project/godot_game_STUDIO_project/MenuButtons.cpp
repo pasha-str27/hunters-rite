@@ -581,7 +581,7 @@ void godot::MenuButtons::_on_Locale_change(int new_index)
 	_change_options_labels();
 
 	//	change locale in pause node
-	if (get_node("root")->has_node("Node2D"))
+	if (get_node("/root")->has_node("Node2D"))
 	{
 		Array locale_keys = {};
 		locale_keys.push_back("KEY_RESUME");

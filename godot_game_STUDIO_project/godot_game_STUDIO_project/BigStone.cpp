@@ -59,13 +59,21 @@ void godot::BigStone::_heal_players()
 		sprite->connect("animation_finished", this, "_start_hide_animation");
 
 		if (player_conteiner->_get_player1_regular() != nullptr)
+		{
 			_heal_player(player_conteiner->_get_player1_regular());
+			for (int i = 0; i < player_conteiner->_get_player1_regular()->get_child_count(); ++i)
+				if (player_conteiner->_get_player1_regular()->get_child(i)->has_method("_change_moving"))
+				{
+					player_conteiner->_get_player1_regular()->get_child(i)->call_deferred("_change_moving", false);
+					break;
+				}
+		}
+
+		if (player_conteiner->_get_player2_regular() != nullptr)
+			player_conteiner->_get_player2_regular()->call("_change_moving", false);
+
 		if (player_conteiner->_get_player2_regular()->has_method("_heal"))
 			_heal_player(player_conteiner->_get_player2_regular());
-		
-		Ref<PackedScene> prefab = nullptr;
-		prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->stone_action());
-		get_parent()->add_child(prefab->instance());
 
 		can_heal = false;
 		timer->connect("timeout", this, "_can_heal_true");
@@ -80,14 +88,21 @@ void godot::BigStone::_heal_players()
 		sprite->connect("animation_finished", this, "_start_hide_animation");
 
 		if (player_conteiner->_get_player1_regular() != nullptr)
+		{
 			_heal_player(player_conteiner->_get_player1_regular());
+			for (int i = 0; i < player_conteiner->_get_player1_regular()->get_child_count(); ++i)
+				if (player_conteiner->_get_player1_regular()->get_child(i)->has_method("_change_moving"))
+				{
+					player_conteiner->_get_player1_regular()->get_child(i)->call_deferred("_change_moving", false);
+					break;
+				}
+		}
 
 		if (player_conteiner->_get_player2_regular() != nullptr)
+		{
 			_heal_player(player_conteiner->_get_player2_regular());
-		
-		Ref<PackedScene> prefab = nullptr;
-		prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->stone_action());
-		get_parent()->add_child(prefab->instance());
+			player_conteiner->_get_player2_regular()->call("_change_moving", false);
+		}
 
 		can_heal = false;
 		timer->connect("timeout", this, "_can_heal_true");
@@ -131,6 +146,10 @@ void godot::BigStone::_start_hide_animation()
 {
 	sprite->disconnect("animation_finished", this, "_start_hide_animation");
 
+	Ref<PackedScene> prefab = nullptr;
+	prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->stone_action());
+	get_parent()->add_child(prefab->instance());
+
 	auto particles = cast_to<Node2D>(use_particles->instance());
 	particles->set_global_position(this->get_global_position());
 	get_node("/root/Node2D/Node")->add_child(particles);
@@ -139,6 +158,19 @@ void godot::BigStone::_start_hide_animation()
 	sprite->play("hide");
 
 	idle_particles->set_emitting(false);
+
+	auto player_conteiner = PlayersContainer::_get_instance();
+
+	if (player_conteiner->_get_player1_regular() != nullptr)
+		for (int i = 0; i < player_conteiner->_get_player1_regular()->get_child_count(); ++i)
+			if (player_conteiner->_get_player1_regular()->get_child(i)->has_method("_change_moving"))
+			{
+				player_conteiner->_get_player1_regular()->get_child(i)->call_deferred("_change_moving", true);
+				break;
+			}
+
+	if (player_conteiner->_get_player2_regular() != nullptr)
+		player_conteiner->_get_player2_regular()->call("_change_moving", true);
 }
 
 void godot::BigStone::_can_heal_true()
