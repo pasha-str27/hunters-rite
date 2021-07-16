@@ -43,6 +43,7 @@ void godot::NagaAI::change_can_fight(bool value)
 
 	if (!can_attack && !is_angry && !is_disappearing && _get_enemy()->is_visible() && is_teleported)
 	{
+		_enable_collisions();
 		can_attack = true;
 		is_teleported = false;
 		return;
@@ -81,7 +82,6 @@ void godot::NagaAI::change_can_fight(bool value)
 		can_move = false;
 		is_angry = false;
 		_get_enemy()->call("_start_fixed_timer", timing_to_attack);
-		_enable_collisions();
 	}
 }
 

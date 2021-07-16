@@ -75,7 +75,7 @@ int godot::PlayersContainer::_players_count()
 	return player_count;
 }
 
-void godot::PlayersContainer::_add_key(String key_type)
+void godot::PlayersContainer::_add_key(Color key_type)
 {
 	key_list.push_back(key_type);
 }

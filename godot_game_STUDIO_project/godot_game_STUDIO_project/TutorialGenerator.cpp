@@ -305,19 +305,8 @@ void godot::TutotialGenerator::_create_item_room(Node2D* room)
 	Node2D* sword_item_node = cast_to<Node2D>(sword_item->instance());
 	Node2D* task_item_node = cast_to<Node2D>(task_item->instance());
 
-	RandomNumberGenerator* rng = RandomNumberGenerator::_new();
-	rng->randomize();
-
-	if (rng->randi_range(0, 1))
-	{
-		sword_item_node->set_global_position(room->get_global_position() + left_item);
-		task_item_node->set_global_position(room->get_global_position() + right_item);
-	}
-	else
-	{
-		sword_item_node->set_global_position(room->get_global_position() + right_item);
-		task_item_node->set_global_position(room->get_global_position() + left_item);
-	}
+	sword_item_node->set_global_position(room->get_global_position() + left_item);
+	task_item_node->set_global_position(room->get_global_position() + right_item);
 
 	items->add_child(sword_item_node);
 	items->add_child(task_item_node);
@@ -329,17 +318,17 @@ void godot::TutotialGenerator::_generate_key(Node2D* room)
 	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
 
-	auto pedestal = cast_to<Node2D>(key_room_pedestal->instance());
-	add_child(pedestal);
-	pedestal->set_global_position(pos);
-	pedestal->set_z_as_relative(false);
-	pedestal->set_z_index(3);
-
 	int key_index = rng->randi_range(0, keys_prefabs_local.size() - 1);
 	Ref<PackedScene> key_prefab = keys_prefabs_local[key_index];
 	auto key = cast_to<Node2D>(key_prefab->instance());
 	add_child(key);
 	key->set_global_position(pos);
+
+	auto pedestal = cast_to<Node2D>(key_room_pedestal->instance());
+	add_child(pedestal);
+	pedestal->set_global_position(pos);
+	pedestal->set_z_as_relative(false);
+	pedestal->set_z_index(3);
 
 	keys_prefabs_local.remove(key_index);
 

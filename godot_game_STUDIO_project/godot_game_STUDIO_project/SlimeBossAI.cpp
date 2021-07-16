@@ -101,6 +101,9 @@ void godot::SlimeBossAI::_shoot()
 
 	bullets.clear();
 
+	Ref<PackedScene> prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->slime_action());
+	_get_enemy()->get_parent()->get_parent()->add_child(prefab->instance());
+
 	_wait(1.5f);
 }
 
@@ -114,6 +117,10 @@ void godot::SlimeBossAI::_spawn_enemy()
 	auto enemy = cast_to<Node2D>(enemy_prefab->instance());
 	_get_enemy()->get_node("/root/Node2D/Node")->call_deferred("add_child", enemy);
 	enemy->set_global_position(pos);
+
+	Ref<PackedScene> prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->slime_action());
+	_get_enemy()->get_parent()->get_parent()->add_child(prefab->instance());
+
 	for (int i = 0; i < enemy->get_child_count(); ++i)
 		if (enemy->get_child(i)->has_method("_change_start_parameters"))
 		{
@@ -145,6 +152,9 @@ void godot::SlimeBossAI::_jumping(float delta)
 		}
 		else
 		{
+			Ref<PackedScene> prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->slime_jump());
+			_get_enemy()->get_parent()->get_parent()->add_child(prefab->instance());
+
 			camera_shake->call("_start", 10, .35f);
 			_enable_collisions();
 			jump_zone->set_visible(false);

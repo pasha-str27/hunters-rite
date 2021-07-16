@@ -34,6 +34,9 @@ void godot::PoisonEgg::_ready()
 
 void godot::PoisonEgg::_on_timer_out()
 {
+	Ref<PackedScene> prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->egg_spawn());
+	get_parent()->add_child(prefab->instance());
+
 	timer->disconnect("timeout", this, "_on_timer_out");
 	start_particles->set_emitting(false);
 	cast_to<Node2D>(get_child(0))->set_visible(true);
@@ -53,6 +56,9 @@ void godot::PoisonEgg::_on_player_area_entered(Node* node)
 
 	if (node->is_in_group("player") || node->is_in_group("player_bullet") || node->is_in_group("sword"))
 	{
+		Ref<PackedScene> prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->egg_destroy());
+		get_parent()->add_child(prefab->instance());
+
 		_make_destroy_particles();
 		queue_free();
 	}

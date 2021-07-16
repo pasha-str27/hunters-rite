@@ -117,5 +117,6 @@ namespace godot
 		void _flip_ghost(bool value);
 		void _take_poison();
 		void _on_poison_end();
+		void _player_to_ghost();
 	};
 }

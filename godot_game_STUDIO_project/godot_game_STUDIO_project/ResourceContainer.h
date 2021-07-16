@@ -26,6 +26,10 @@ namespace godot
 		String _game_over;
 		String _player_to_ghost;
 		String _dash;
+		String _egg_destroy;
+		String _egg_spawn;
+		String _slime_jump;
+		String _slime_action;
 
 		ResourceContainer();
 	public:
@@ -52,5 +56,9 @@ namespace godot
 		String game_over();
 		String player_to_ghost();
 		String dash();
+		String egg_destroy();
+		String egg_spawn();
+		String slime_jump();
+		String slime_action();
 	};
 }

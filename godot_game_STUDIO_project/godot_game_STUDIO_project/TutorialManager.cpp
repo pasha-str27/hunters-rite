@@ -39,6 +39,8 @@ void godot::TutorialManager::_move(String dir)
 
 	auto generation_node = get_parent()->get_node("Generation");
 
+	auto prev_room = CurrentRoom::get_singleton()->_get_current_room();
+
 	if (dir == "top")
 	{
 		float delta = 720;
@@ -114,6 +116,48 @@ void godot::TutorialManager::_move(String dir)
 		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
 			PlayersContainer::_get_instance()->_get_player2_regular()->set_global_position(move_point->get_global_position());
 	}
+
+	auto cur_room = CurrentRoom::get_singleton()->_get_current_room();
+
+	if ((String)prev_room->call("_get_room_type") == "tut_room" && (String)cur_room->call("_get_room_type") == "heal_room")
+	{
+		auto player = PlayersContainer::_get_instance()->_get_player1_regular();
+		if (player != nullptr)
+			player->get_child(1)->call("_set_HP", (float)player->get_child(1)->call("_get_HP") / 2);
+
+		player = PlayersContainer::_get_instance()->_get_player2_regular();
+		if (player != nullptr)
+			player->call("_set_HP", (float)player->call("_get_HP") / 2);
+	}
+
+	if ((String)prev_room->call("_get_room_type") == "heal_room" && (String)cur_room->call("_get_room_type") == "tut_room")
+	{
+		auto player = PlayersContainer::_get_instance()->_get_player1_regular();
+		if (player != nullptr)
+			player->get_child(1)->call("_set_HP", (float)player->get_child(1)->call("_get_max_HP"));
+
+		player = PlayersContainer::_get_instance()->_get_player2_regular();
+		if (player != nullptr)
+			player->call("_set_HP", (float)player->call("_get_max_HP"));
+	}
+
+	if ((String)prev_room->call("_get_room_type") == "heal_room" && (String)cur_room->call("_get_room_type") == "revive_room")
+	{
+		auto player = PlayersContainer::_get_instance()->_get_player1_regular();
+		if (player != nullptr)
+			player->get_child(1)->call("_die");
+		cast_to<Node2D>(player->get_child(1))->set_global_position(prev_room->get_global_position()+Vector2(0,720));
+	}
+
+	if ((String)prev_room->call("_get_room_type") == "revive_room" && (String)cur_room->call("_get_room_type") == "heal_room")
+	{
+		auto player = PlayersContainer::_get_instance()->_get_player2_regular();
+		if (player != nullptr)
+			player->call_deferred("_player_to_ghost");
+	}
+
+	if ((String)cur_room->call("_get_room_type") == "heal_room")
+		cur_room->get_node("Stone")->call("_can_heal_true");
 
 	if (minimap != nullptr)
 		minimap->call("_update_minimap");
@@ -243,25 +287,18 @@ void godot::TutorialManager::_spawn_players()
 	}
 }
 
-bool godot::TutorialManager::_is_player_have_need_keys(Array rooms_keys)
+bool godot::TutorialManager::_is_player_have_need_keys(Color rooms_key)
 {
-	if (rooms_keys.size() == 0)
+	if (rooms_key==Color())
 		return true;
 
 	Array players_keys = PlayersContainer::_get_instance()->_get_key_list();
 
-	if (players_keys.size() == 0)
-		return false;
+	for (int i = 0; i < players_keys.size(); ++i)
+		if (players_keys[i] == rooms_key)
+			return true;
 
-	bool check_result = true;
-	for (int i = 0; i < rooms_keys.size(); ++i)
-	{
-		String row = rooms_keys[i];
-		for (int k = 0; k < players_keys.size(); ++k)
-			check_result = row.find(players_keys[k]) != -1 ? true : false;
-	}
-
-	return check_result;
+	return false;
 }
 
 void godot::TutorialManager::_ready()
@@ -292,6 +329,10 @@ void godot::TutorialManager::_ready()
 void godot::TutorialManager::_door_collision(String door_dir)
 {
 	if (Enemies::get_singleton()->_get_enemies_count() != 0 || Enemies::get_singleton()->spawning())
+		return;
+
+	if (MenuButtons::game_mode == COOP && (PlayersContainer::_get_instance()->_get_player1() == nullptr
+		|| PlayersContainer::_get_instance()->_get_player2() == nullptr))
 		return;
 
 	int index = 0;
@@ -348,7 +389,7 @@ void godot::TutorialManager::_door_collision(String door_dir)
 	auto generation_node = get_parent()->get_node("Generation");
 	Node2D* next_room = generation_node->call("_get_next_room", new_pos);
 
-	if (!_is_player_have_need_keys((Array)next_room->call("_get_list_of_keys")))
+	if (!_is_player_have_need_keys((Color)next_room->call("_get_last_key_color")))
 		return;
 
 	if (((int)dirs[index] == 2 && MenuButtons::game_mode == COOP) || ((MenuButtons::game_mode == SHOOTER || MenuButtons::game_mode == MELEE) && (int)dirs[index] == 1))

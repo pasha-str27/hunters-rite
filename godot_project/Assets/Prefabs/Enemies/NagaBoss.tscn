@@ -6,7 +6,7 @@
 [ext_resource path="res://Assets/Scripts/EnemyPrice.gdns" type="Script" id=4]
 [ext_resource path="res://Assets/Sprites/Monsters/Naga/naga/attack/attack01.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/Prefabs/Particles/DeathParticles/DeathParticles.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Prefabs/Particles/DeathParticles/DeathNagaParticles.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Sprites/Monsters/Naga/naga/walk/walk03.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Sprites/Monsters/Naga/naga/idle/idle06.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Sprites/Monsters/Naga/naga/idle/idle07.png" type="Texture" id=10]
@@ -114,9 +114,14 @@ animations = [ {
 "name": "idle",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 18 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
 "loop": false,
-"name": "attack",
+"name": "disappear",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
+"loop": false,
+"name": "appear",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 26 ), ExtResource( 11 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 28 ), ExtResource( 21 ) ],
@@ -129,14 +134,9 @@ animations = [ {
 "name": "damaged",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"frames": [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 18 ) ],
 "loop": false,
-"name": "disappear",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
-"loop": false,
-"name": "appear",
+"name": "attack",
 "speed": 10.0
 } ]
 
@@ -159,7 +159,7 @@ collision_layer = 4
 collision_mask = 512
 script = ExtResource( 3 )
 bullet = ExtResource( 31 )
-HP = 25.0
+HP = 3000.0
 "Death particles" = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NagaBoss"]
