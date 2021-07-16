@@ -137,12 +137,10 @@ void godot::TutotialGenerator::_generate()
 	new_room_position = Vector2(0, step_y);
 	new_room_position += Vector2(step_x, 0);
 
-
 	if (!_has_room(positions, new_room_position))
 	{
 		_buid_room(new_room_position);
 		_connect_rooms(rooms[1], rooms[rooms.size() - 1], Vector2::RIGHT);
-
 		rooms[rooms.size() - 1]->call("_set_room_type", "game_room");
 	}
 
@@ -300,6 +298,7 @@ void godot::TutotialGenerator::_create_item_room(Node2D* room)
 
 	sword_item_node->set_global_position(room->get_global_position() + left_item);
 	task_item_node->set_global_position(room->get_global_position() + right_item);
+
 	items->add_child(sword_item_node);
 	items->add_child(task_item_node);
 }
