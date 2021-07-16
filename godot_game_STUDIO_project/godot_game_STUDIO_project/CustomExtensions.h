@@ -139,5 +139,25 @@ namespace godot
 			wrapper.push_back(result);
 			return wrapper;
 		}
+
+		static void ChangeVisibleInNodes(Node* parent = nullptr, String player = "P1", bool visible = false) 
+		{
+			if (parent == nullptr)
+				return;
+
+			Array children = parent->get_children();
+
+			if (children.empty())
+				return;
+
+			for (int i = 0; i < children.size(); i++)
+			{
+				if (Object::cast_to<CanvasItem>(children[i])->get_name().find(player) != -1)
+					Object::cast_to<CanvasItem>(children[i])->set_visible(visible);
+
+				ChangeVisibleInNodes(children[i], player, visible);
+			}
+			
+		}
 	};
 }
