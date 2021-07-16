@@ -114,11 +114,6 @@ animations = [ {
 "name": "idle",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 26 ), ExtResource( 11 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 28 ), ExtResource( 21 ) ],
-"loop": true,
-"name": "run",
-"speed": 10.0
-}, {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
 "loop": false,
 "name": "disappear",
@@ -129,14 +124,19 @@ animations = [ {
 "name": "appear",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 18 ) ],
-"loop": false,
-"name": "attack",
+"frames": [ ExtResource( 26 ), ExtResource( 11 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 28 ), ExtResource( 21 ) ],
+"loop": true,
+"name": "run",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 17 ), ExtResource( 20 ), ExtResource( 1 ) ],
 "loop": false,
 "name": "damaged",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 18 ) ],
+"loop": false,
+"name": "attack",
 "speed": 10.0
 } ]
 
@@ -159,7 +159,7 @@ collision_layer = 4
 collision_mask = 512
 script = ExtResource( 3 )
 bullet = ExtResource( 31 )
-HP = 25.0
+HP = 3000.0
 "Death particles" = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NagaBoss"]

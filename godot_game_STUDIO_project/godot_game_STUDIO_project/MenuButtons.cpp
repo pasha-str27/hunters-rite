@@ -579,14 +579,29 @@ void godot::MenuButtons::_on_Locale_change(int new_index)
 
 	save_game();
 	_change_options_labels();
+
+	//	change locale in pause node
+	if (get_node("/root/Node2D") != nullptr)
+	{
+		Array locale_keys = {};
+		locale_keys.push_back("KEY_RESUME");
+		locale_keys.push_back("KEY_ITEMS");
+		locale_keys.push_back("KEY_SETTINGS");
+		locale_keys.push_back("KEY_MENU");
+		//	get buttons in pause
+		Array buttons = get_parent()->get_parent()->get_node("Pause")->find_node("VBoxContainer")->get_children();
+
+		for (int i = 0; i < buttons.size(); i++)
+			cast_to<Label>(cast_to<TextureButton>(buttons[i])->get_node("Label"))->set_text(tr(locale_keys[i]));
+	}
 }
 
-void godot::MenuButtons::_on_Locale_focused()
+void MenuButtons::_on_Locale_focused()
 {
 	was_locale_focused = !was_locale_focused;
 }
 
-void godot::MenuButtons::_change_options_labels()
+void MenuButtons::_change_options_labels()
 {
 	cast_to<CheckBox>(find_node("FullScreen"))->set_text(tr("KEY_FULLSCREEN"));
 	cast_to<Label>(find_node("Music_text"))->set_text(tr("KEY_MUSIC"));
