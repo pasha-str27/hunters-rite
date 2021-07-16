@@ -55,8 +55,11 @@ namespace godot
 		static float effect_audio_level;
 		static GameMode game_mode;
 		static GameType game_type;
+		static int current_locale_index;
+		Array locales;
 		bool was_quit_focused;	
 		bool was_mode_focused;	
+		bool was_locale_focused;
 		bool single_mode;	
 		bool tutorial_mode;	
 
@@ -100,5 +103,8 @@ namespace godot
 		void _input(Input* event);
 		void _reload_scene();
 		void change_scene(Ref<PackedScene>& scene);
+		void _on_Locale_change(int new_index);
+		void _on_Locale_focused();
+		void _change_options_labels();
 	};
 }
