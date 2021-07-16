@@ -4,9 +4,7 @@
 #endif
 
 #include <TranslationServer.hpp>
-#include <CheckBox.hpp>
 
-int MenuButtons::current_locale_index = 0;
 bool MenuButtons::was_focused = false;
 bool MenuButtons::was_loaded = false;
 bool MenuButtons::is_full_screen = false;
@@ -21,7 +19,6 @@ MenuButtons::MenuButtons()
 	click_counter = 0;
 	was_quit_focused = false;
 	was_mode_focused = false;
-	was_locale_focused = false;
 	was_focused = false;
 	delta_time = 1.0 / 50;
 	single_mode = true;
@@ -36,14 +33,7 @@ MenuButtons::~MenuButtons() {
 }
 
 void godot::MenuButtons::_init() {
-	locales = TranslationServer::get_singleton()->get_loaded_locales();
-	String current_locale = TranslationServer::get_singleton()->get_locale();
-	if (!locales.has(current_locale))
-	{
-		TranslationServer::get_singleton()->set_locale("en");
-		current_locale = "en";
-	}
-	current_locale_index = locales.find(current_locale);
+	TranslationServer::get_singleton()->set_locale("uk");
 }
 
 void godot::MenuButtons::_ready()
@@ -142,8 +132,6 @@ void MenuButtons::_register_methods()
 	register_method((char*)"_fade_audio", &MenuButtons::_fade_audio);
 	register_method((char*)"_input", &MenuButtons::_input);
 	register_method((char*)"_reload_scene", &MenuButtons::_reload_scene);
-	register_method((char*)"_on_Locale_focused", &MenuButtons::_on_Locale_focused);
-	
 
 	register_property<MenuButtons, Ref<PackedScene>>("click_effect", &MenuButtons::click_effect, nullptr);
 	register_property<MenuButtons, Ref<PackedScene>>("menu back music", &MenuButtons::menu_back, nullptr);
@@ -183,7 +171,7 @@ void godot::MenuButtons::save_game()
 	save_game->open("user://savegame_hunters.save", File::WRITE);
 
 	Dictionary save_dict;
-	save_dict = Dictionary::make("effect_level", effect_audio_level, "music_level", music_audio_level, "full_screen", is_full_screen, "locale", locales[current_locale_index]);
+	save_dict = Dictionary::make("effect_level", effect_audio_level, "music_level", music_audio_level, "full_screen", is_full_screen);
 	save_dict.to_json();
 
 	save_game->store_line(save_dict.to_json());
@@ -253,27 +241,10 @@ void godot::MenuButtons::_input(Input* event)
 		_change_button_name();
 	}
 
-	// change locale
-	if (was_locale_focused)
-	{
-		if (ui_left_press)
-			_on_Locale_change(current_locale_index - 1);
-		else if(ui_right_press)
-			_on_Locale_change(current_locale_index + 1);
-	}
-
 	// press buttons in pause
 	if (Input::get_singleton()->is_action_just_pressed("ui_pause"))
 	{
 		Input::get_singleton()->action_release("ui_pause");
-
-		if (get_parent()->get_parent()->get_name() == "Pause")
-		{
-			get_tree()->set_pause(false);
-			cast_to<Camera2D>(get_node("/root/Node2D/Node/Camera2D"))->_set_current(true);
-			get_parent()->get_parent()->queue_free();
-			return;
-		}
 
 		if (get_name() == "Pause")
 		{
@@ -564,57 +535,6 @@ void  godot::MenuButtons::change_scene(Ref<PackedScene>& scene)
 	_play_effect();
 	get_node("/root")->add_child(scene->instance());
 	get_parent()->queue_free();
-}
-
-void godot::MenuButtons::_on_Locale_change(int new_index)
-{
-	_play_effect();
-	Godot::print(locales.size());
-	Godot::print(new_index);
-
-	if (new_index < 0)
-		new_index = locales.size() - 1;
-	
-	if (new_index > locales.size() - 1)
-		new_index = 0;
-
-	current_locale_index = new_index;
-	auto locale_label = cast_to<Label>(find_node("LocaleText"));
-
-	TranslationServer::get_singleton()->set_locale(locales[current_locale_index]);
-
-	locale_label->set_text(TranslationServer::get_singleton()->translate("KEY_NAME"));
-
-	save_game();
-	_change_options_labels();
-
-	//	change locale in pause node
-	if (get_node("root")->has_node("Node2D"))
-	{
-		Array locale_keys = {};
-		locale_keys.push_back("KEY_RESUME");
-		locale_keys.push_back("KEY_ITEMS");
-		locale_keys.push_back("KEY_SETTINGS");
-		locale_keys.push_back("KEY_MENU");
-		//	get buttons in pause
-		Array buttons = get_parent()->get_parent()->get_node("Pause")->find_node("VBoxContainer")->get_children();
-
-		for (int i = 0; i < buttons.size(); i++)
-			cast_to<Label>(cast_to<TextureButton>(buttons[i])->get_node("Label"))->set_text(tr(locale_keys[i]));
-	}
-}
-
-void MenuButtons::_on_Locale_focused()
-{
-	was_locale_focused = !was_locale_focused;
-}
-
-void MenuButtons::_change_options_labels()
-{
-	cast_to<CheckBox>(find_node("FullScreen"))->set_text(tr("KEY_FULLSCREEN"));
-	cast_to<Label>(find_node("Music_text"))->set_text(tr("KEY_MUSIC"));
-	cast_to<Label>(find_node("Effect_text"))->set_text(tr("KEY_EFFECTS"));
-	cast_to<Label>(find_node("Back")->get_node("Label"))->set_text(tr("KEY_BACK"));
 }
 
 // -------Audio changes-------

@@ -1,11 +1,10 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Assets/Scripts/BigStone.gdns" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Kelt_stone.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Sprites/Tilesets/Kelt_stone_with_flash.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Prefabs/Particles/StoneIdleParticles.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Prefabs/Particles/UseStoneParticles.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/Sprites/Tilesets/UI_tileset.tres" type="TileSet" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 7.34978
@@ -190,7 +189,7 @@ z_index = 6
 z_as_relative = false
 frames = SubResource( 37 )
 animation = "idle"
-frame = 13
+frame = 6
 playing = true
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -210,16 +209,6 @@ scale = Vector2( 4.5, 4.5 )
 shape = SubResource( 38 )
 
 [node name="StoneIdleParticles" parent="." instance=ExtResource( 4 )]
-
-[node name="TileMap" type="TileMap" parent="."]
-position = Vector2( 16, -16 )
-z_index = 3
-z_as_relative = false
-tile_set = ExtResource( 6 )
-cell_size = Vector2( 32, 32 )
-cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
-format = 1
-tile_data = PoolIntArray( -2, 6, 0 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_add_player"]
 [connection signal="body_exited" from="Area2D" to="." method="_remove_player"]

@@ -16,7 +16,7 @@ KEY_MODE,Mode:,Режим гри:
 KEY_EFFECTS,Effects,Ефекти
 KEY_MUSIC,Music,Музика
 KEY_FULLSCREEN,Fullscreen,Весь екран
-KEY_RESUME,Resume,Продовжити
+KEY_RESUME,Resume,Відновити
 KEY_ITEMS,Items,Предмети
 KEY_CHICKEN_TITLE,Legendary сhiken,Легендарне курча
 KEY_CHICKEN_DESCRIPTION,Super mega YUM YUM\nvery good,Супер круте НЯМ НЯМ\nдуже смачно
@@ -42,4 +42,3 @@ KEY_NUMBER_TITLE,Unlucky number,Нещасливий номер
 KEY_NUMBER_DESCRIPTION,Do not try to \ncall this number.,Не намагайтесь \nтелефонувати за цим\nномером
 KEY_GORILKA_TITLE,Ukrainian Gorilka,Українська горілка
 KEY_GORILKA_DESCRIPTION,This is great. \nBecause it is Ukrainian!,Вона неперевершена.\nТому що Українська!
-KEY_TUTORIAL,Tutorial,Навчання

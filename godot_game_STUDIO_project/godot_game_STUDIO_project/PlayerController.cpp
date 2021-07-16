@@ -59,8 +59,7 @@ void godot::PlayerController::_register_methods()
 	register_method("_on_ghost_hide", &PlayerController::_on_ghost_hide);
 	register_method("_flip_ghost", &PlayerController::_flip_ghost);
 	register_method("_on_poison_end", &PlayerController::_on_poison_end);	
-	register_method("_set_was_revived", &PlayerController::_set_was_revived);
-	register_method("_player_to_ghost", &PlayerController::_player_to_ghost);
+	
 	
 	register_property<PlayerController, float>("hp", &PlayerController::_hp, 0);
 	register_property<PlayerController, float>("damage", &PlayerController::_damage, 0);
@@ -73,6 +72,7 @@ void godot::PlayerController::_register_methods()
 godot::PlayerController::PlayerController()
 {
 	current_player_strategy = new PlayerStrategyContext;
+	//current_player = nullptr;
 	timer = Timer::_new();
 	attack_speed_delta = 0.5;
 	dash_time_delta = 0.4;
@@ -358,21 +358,14 @@ void godot::PlayerController::change_can_moving_timeout()
 
 void godot::PlayerController::_decrease_attack_radius()
 {
-	if (is_in_group("player2"))
-	{
-		auto node = cast_to<Node2D>(get_node("Area2D3"));
-		node->set_scale(Vector2(node->get_scale().x * (real_t)1.1111, 1));
-	}
-
+	auto node = cast_to<Node2D>(get_child(1));
+	node->set_scale(Vector2(node->get_scale().x * (real_t)1.1111, 1));
 }
 
 void godot::PlayerController::_encrease_attack_radius()
 {
-	if (is_in_group("player2"))
-	{
-		auto node = cast_to<Node2D>(get_node("Area2D3"));
-		node->set_scale(Vector2(node->get_scale().x * (real_t)0.9, 1));
-	}
+	auto node = cast_to<Node2D>(get_child(1));
+	node->set_scale(Vector2(node->get_scale().x * (real_t)0.9, 1));
 }
 
 void godot::PlayerController::_set_number_to_next_item(int value)
@@ -453,11 +446,8 @@ void godot::PlayerController::_die()
 	Ref<PackedScene> prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->player_died());
 	add_child(prefab->instance());
 
-	cast_to<AnimatedSprite>(get_node("AnimatedSprite"))->play("death");
-
 	if (current_player_strategy->_was_revived())
 	{
-		Godot::print("here");
 		is_ghost_mode = true;
 		current_player_strategy->_set_strategy(player_producer->_get_player_ghost(this, bullet_prefab));
 		cast_to<AnimatedSprite>(get_node("AnimatedSprite"))->set_visible(false);
@@ -473,13 +463,11 @@ void godot::PlayerController::_die()
 		_restore_data();
 
 		current_player_strategy->_get_health_bar()->set_value(0);
-		
+		//_set_HP(0);
 		return;
 	}
 
-	if(MenuButtons::game_type!=TUTORIAL)
-		current_player_strategy->_set_was_revived(true);
-
+	current_player_strategy->_set_was_revived(true);
 	add_child(revive_zone->instance());
 	current_player_strategy->_set_strategy(player_producer->_get_player_died(this, bullet_prefab));
 
@@ -487,7 +475,7 @@ void godot::PlayerController::_die()
 
 	_update_health_bar();
 
-	current_player_strategy->_get_health_bar()->set_value(0);
+	//current_player_strategy->_get_health_bar()->set_value(0);
 }
 
 void godot::PlayerController::_revive()
@@ -710,40 +698,4 @@ void godot::PlayerController::_on_poison_end()
 	speed += diff;
 	diff = 0;
 	current_player_strategy->_set_speed(speed);
-}
-
-void godot::PlayerController::_player_to_ghost()
-{
-	is_alive = false;
-
-	prev_state = current_player_strategy->_clone();
-
-	if (get_name() == "Player1")
-		Enemies::get_singleton()->_remove_player1();
-	if (get_name() == "Player2")
-		Enemies::get_singleton()->_remove_player2();
-
-	Ref<PackedScene> prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->player_died());
-	add_child(prefab->instance());
-
-	cast_to<AnimatedSprite>(get_node("AnimatedSprite"))->play("death");
-
-
-	is_ghost_mode = true;
-	current_player_strategy->_set_strategy(player_producer->_get_player_ghost(this, bullet_prefab));
-	cast_to<AnimatedSprite>(get_node("AnimatedSprite"))->set_visible(false);
-	ghost_sprite->set_visible(true);
-	ghost_sprite->play("show");
-
-	if (get_name() == "Player1")
-		PlayersContainer::_get_instance()->_set_player1_regular(cast_to<Node2D>(get_parent()));
-
-	if (get_name() == "Player2")
-		PlayersContainer::_get_instance()->_set_player2_regular(this);
-
-	_restore_data();
-
-	current_player_strategy->_get_health_bar()->set_value(0);
-
-	return;
 }

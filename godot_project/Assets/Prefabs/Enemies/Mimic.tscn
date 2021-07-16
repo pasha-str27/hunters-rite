@@ -1,11 +1,11 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Assets/Sprites/Monsters/Mimic/Mimic_Death.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Sprites/Monsters/Mimic/Mimic_Attack.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Scripts/Enemy.gdns" type="Script" id=3]
 [ext_resource path="res://Assets/Scripts/EnemyPrice.gdns" type="Script" id=4]
-[ext_resource path="res://Assets/Prefabs/Particles/DeathParticles/DeathMimicParticles.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/Sprites/Players/ShootPlayer/power_ball.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Prefabs/Particles/DeathParticles/DeathParticles.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Sprites/Monsters/Mimic/Mimic_Idle_Hidden.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Sprites/Monsters/Mimic/Mimic_Crawl.png" type="Texture" id=9]
 
@@ -35,60 +35,60 @@ atlas = ExtResource( 8 )
 region = Rect2( 324, 0, 108, 108 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 9 )
 region = Rect2( 0, 0, 108, 108 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 9 )
 region = Rect2( 108, 0, 108, 108 )
 
 [sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 9 )
 region = Rect2( 216, 0, 108, 108 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 9 )
 region = Rect2( 324, 0, 108, 108 )
 
 [sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 8 )
+atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 108, 108 )
 
 [sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 108, 108 )
+atlas = ExtResource( 2 )
+region = Rect2( 108, 0, 108, 108 )
 
 [sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 108, 108 )
+atlas = ExtResource( 2 )
+region = Rect2( 216, 0, 108, 108 )
 
 [sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 1 )
-region = Rect2( 108, 0, 108, 108 )
+atlas = ExtResource( 2 )
+region = Rect2( 324, 0, 108, 108 )
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 1 )
-region = Rect2( 216, 0, 108, 108 )
+region = Rect2( 0, 0, 108, 108 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 1 )
-region = Rect2( 324, 0, 108, 108 )
-
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 9 )
-region = Rect2( 0, 0, 108, 108 )
-
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 9 )
 region = Rect2( 108, 0, 108, 108 )
 
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 9 )
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 1 )
 region = Rect2( 216, 0, 108, 108 )
 
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 9 )
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 1 )
 region = Rect2( 324, 0, 108, 108 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 108, 108 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 108, 108 )
 
 [sub_resource type="SpriteFrames" id=22]
 animations = [ {
@@ -99,63 +99,27 @@ animations = [ {
 }, {
 "frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
 "loop": false,
+"name": "lick",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
+"loop": false,
 "name": "attack",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 12 ) ],
-"loop": false,
-"name": "damaged",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
 "loop": false,
 "name": "death",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
+"frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 20 ) ],
 "loop": false,
-"name": "lick",
+"name": "damaged",
 "speed": 10.0
 } ]
 
 [sub_resource type="CircleShape2D" id=23]
 radius = 20.139
-
-[sub_resource type="Gradient" id=24]
-offsets = PoolRealArray( 0.423237, 1 )
-colors = PoolColorArray( 0.402344, 0.351412, 0.306473, 1, 0, 0, 0, 0 )
-
-[sub_resource type="GradientTexture" id=25]
-gradient = SubResource( 24 )
-
-[sub_resource type="Curve" id=26]
-_data = [ Vector2( 0, 0.578409 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0306818 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=27]
-curve = SubResource( 26 )
-
-[sub_resource type="ParticlesMaterial" id=28]
-resource_local_to_scene = true
-emission_shape = 1
-emission_sphere_radius = 40.0
-flag_rotate_y = true
-flag_disable_z = true
-direction = Vector3( 500, 500, 0 )
-spread = 180.0
-flatness = 1.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 50.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-linear_accel = 100.0
-linear_accel_random = 1.0
-radial_accel_random = 1.0
-tangential_accel_random = 1.0
-damping_random = 1.0
-scale = 5.0
-scale_random = 1.0
-scale_curve = SubResource( 27 )
-color_ramp = SubResource( 25 )
 
 [node name="Mimic" type="Node2D"]
 z_index = 6
@@ -171,7 +135,7 @@ z_index = 25
 collision_layer = 4
 collision_mask = 512
 script = ExtResource( 3 )
-"Death particles" = ExtResource( 5 )
+"Death particles" = ExtResource( 7 )
 
 [node name="HealthBar" type="ProgressBar" parent="Mimic"]
 margin_left = -20.0
@@ -204,18 +168,7 @@ playing = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mimic/Area2D"]
 shape = SubResource( 23 )
 
-[node name="SpawnParticles" type="Particles2D" parent="Mimic"]
-z_index = 10
-z_as_relative = false
-emitting = false
-amount = 50
-lifetime = 0.4
-speed_scale = 2.0
-randomness = 0.25
-visibility_rect = Rect2( 0, 0, 0, 0 )
-local_coords = false
-process_material = SubResource( 28 )
-texture = ExtResource( 6 )
+[node name="SpawnParticles" parent="Mimic" instance=ExtResource( 6 )]
 
 [connection signal="body_entered" from="Mimic/Area2D" to="Mimic" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Mimic/Area2D" to="Mimic" method="_on_Area2D_body_exited"]

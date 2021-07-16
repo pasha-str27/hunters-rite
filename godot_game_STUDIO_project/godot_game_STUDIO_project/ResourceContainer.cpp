@@ -24,10 +24,6 @@ ResourceContainer::ResourceContainer()
 	_game_over = link + "GameOver.tscn";
 	_player_to_ghost = link + "PlayerToGhost.tscn";
 	_dash = link + "Dash.tscn";
-	_egg_destroy = link + "EggDestroy.tscn";
-	_egg_spawn = link + "EggSpawn.tscn";
-	_slime_jump = link + "SlimeJump.tscn";
-	_slime_action = link + "SlimeAction.tscn";
 }
 
 String godot::ResourceContainer::player1_fight()
@@ -108,25 +104,5 @@ String godot::ResourceContainer::player_to_ghost()
 String godot::ResourceContainer::dash()
 {
 	return _dash;
-}
-
-String godot::ResourceContainer::egg_destroy()
-{
-	return _egg_destroy;
-}
-
-String godot::ResourceContainer::egg_spawn()
-{
-	return _egg_spawn;
-}
-
-String godot::ResourceContainer::slime_jump()
-{
-	return _slime_jump;
-}
-
-String godot::ResourceContainer::slime_action()
-{
-	return _slime_action;
 }
 
