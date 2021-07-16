@@ -66,7 +66,9 @@ void godot::PlayerShoot::_move()
 	PlayerData::_move();
 
 	String animation_name = sprite->get_animation();
-	if (sprite->get_sprite_frames()->get_animation_loop(animation_name) == false && sprite->get_frame() == sprite->get_sprite_frames()->get_frame_count(animation_name) - 1)
+	if (sprite->get_sprite_frames()->get_animation_loop(animation_name) == false 
+		&& sprite->get_frame() == sprite->get_sprite_frames()->get_frame_count(animation_name) - 1
+		)
 		sprite->play("idle");
 
 	if (PlayerData::_get_dir() == Vector2::ZERO && animation_name != "revive" && animation_name != "damaged")

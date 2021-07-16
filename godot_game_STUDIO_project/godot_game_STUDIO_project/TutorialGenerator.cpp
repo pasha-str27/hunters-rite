@@ -141,15 +141,6 @@ void godot::TutotialGenerator::_generate()
 	{
 		_buid_room(new_room_position);
 		_connect_rooms(rooms[1], rooms[rooms.size() - 1], Vector2::RIGHT);
-		rooms[rooms.size() - 1]->call("_set_room_type", "atack_room");
-	}
-
-	new_room_position += Vector2(step_x, 0);
-
-	if (!_has_room(positions, new_room_position))
-	{
-		_buid_room(new_room_position);
-		_connect_rooms(rooms[rooms.size() - 2], rooms[rooms.size() - 1], Vector2::RIGHT);
 		rooms[rooms.size() - 1]->call("_set_room_type", "game_room");
 	}
 

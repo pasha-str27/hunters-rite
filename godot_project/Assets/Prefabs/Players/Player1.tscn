@@ -310,7 +310,7 @@ shape = SubResource( 2 )
 
 [node name="ItemGenerator" type="Node" parent="Player1"]
 script = ExtResource( 9 )
-"Count Enemies to Spawn" = 1
+"Count Enemies to Spawn" = 5
 
 [node name="HurtParticles" parent="Player1" instance=ExtResource( 4 )]
 z_index = 7

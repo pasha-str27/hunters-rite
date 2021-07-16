@@ -12,12 +12,12 @@ height = 15.5468
 z_index = 9
 z_as_relative = false
 script = ExtResource( 2 )
-key_type = "key_F"
-key_color = Color( 0.262745, 0.666667, 0.545098, 1 )
+key_type = "key_G"
+key_color = Color( 0.356863, 0.686275, 0.980392, 1 )
 particles = ExtResource( 3 )
 
 [node name="key" type="Sprite" parent="."]
-modulate = Color( 0.262745, 0.666667, 0.545098, 1 )
+modulate = Color( 0.356863, 0.686275, 0.980392, 1 )
 scale = Vector2( 0.5, 0.5 )
 z_index = 9
 z_as_relative = false

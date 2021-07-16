@@ -267,6 +267,14 @@ void godot::MenuButtons::_input(Input* event)
 	{
 		Input::get_singleton()->action_release("ui_pause");
 
+		if (get_parent()->get_parent()->get_name() == "Pause")
+		{
+			get_tree()->set_pause(false);
+			cast_to<Camera2D>(get_node("/root/Node2D/Node/Camera2D"))->_set_current(true);
+			get_parent()->get_parent()->queue_free();
+			return;
+		}
+
 		if (get_name() == "Pause")
 		{
 			get_tree()->set_pause(false);

@@ -56,7 +56,7 @@ void godot::Key::_on_Area2D_body_entered(Node* node)
 		PlayersContainer::_get_instance()->_add_key(key_color);
 
 		//key types and key color
-		std::vector<String> name_keys{ "key_A", "key_B","key_C", "key_D", "key_E", "key_F" };
+		std::vector<String> name_keys{ "key_A", "key_B","key_C", "key_D", "key_E", "key_F", "key_G"};
 
 		//find key and set key color/visible
 		for (int i = 0; i < name_keys.size(); i++)
