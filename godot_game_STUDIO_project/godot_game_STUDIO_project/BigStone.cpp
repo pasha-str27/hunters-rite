@@ -143,7 +143,9 @@ void godot::BigStone::_start_hide_animation()
 
 void godot::BigStone::_can_heal_true()
 {
-	timer->disconnect("timeout", this, "_can_heal_true");
+	if(timer->is_connected("timeout", this, "_can_heal_true"))
+		timer->disconnect("timeout", this, "_can_heal_true");
+
 	can_heal = true;
 	sprite->set_speed_scale(1);
 	sprite->play("idle");
