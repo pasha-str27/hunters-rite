@@ -14,6 +14,8 @@ godot::NagaAI::NagaAI(Ref<PackedScene>& bullet, Node2D* node) : EnemyData(node)
 	sprite = node->call("_get_animated_sprite");
 	vampirism_particles = cast_to<Particles2D>(node->get_node("Vampirism"));
 
+	magnit_zone = cast_to<Area2D>(node->get_node("MagnitZone"));
+
 	timing_to_attack = .5f;
 	teleport_speed = 1;
 	attack_timing = 1;
@@ -46,6 +48,7 @@ void godot::NagaAI::change_can_fight(bool value)
 		_enable_collisions();
 		can_attack = true;
 		is_teleported = false;
+		magnit_zone->call("_set_active", true);
 		return;
 	}
 
@@ -58,6 +61,7 @@ void godot::NagaAI::change_can_fight(bool value)
 
 	if (is_disappearing)
 	{
+		magnit_zone->call("_set_active", false);
 		_disable_collisions();
 		_get_enemy()->call("_change_animation", "disappear", teleport_speed);
 		is_disappearing = false;

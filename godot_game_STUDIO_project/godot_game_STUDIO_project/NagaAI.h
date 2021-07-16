@@ -26,6 +26,8 @@ namespace godot {
 
 		Ref<PackedScene> poison = nullptr;
 
+		Area2D* magnit_zone = nullptr;
+
 		//	timings
 		float timing_to_attack;
 		float teleport_speed;
