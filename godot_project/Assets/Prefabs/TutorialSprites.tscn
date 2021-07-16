@@ -20,11 +20,11 @@
 [ext_resource path="res://Assets/Sprites/UI/tutorial_dash_p1_player.png" type="Texture" id=23]
 [ext_resource path="res://Assets/Sprites/UI/tutorial_atack_p2_player.png" type="Texture" id=24]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 size = 48
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 size = 34
 font_data = ExtResource( 1 )
 
@@ -116,7 +116,7 @@ modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
 margin_right = 288.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "Attack"
 align = 1
 __meta__ = {
@@ -139,7 +139,7 @@ margin_left = 12.0
 margin_top = 12.0
 margin_right = 46.0
 margin_bottom = 46.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "H"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -151,7 +151,7 @@ margin_left = 83.0
 margin_top = 12.0
 margin_right = 117.0
 margin_bottom = 46.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "U"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -163,7 +163,7 @@ margin_left = 154.0
 margin_top = 12.0
 margin_right = 188.0
 margin_bottom = 46.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "J"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -175,7 +175,7 @@ margin_left = 224.0
 margin_top = 12.0
 margin_right = 258.0
 margin_bottom = 46.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "K"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -216,7 +216,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 2.9496
 margin_bottom = 2.94958
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Ctrl"
 align = 1
 valign = 1
@@ -282,7 +282,7 @@ modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
 margin_right = 273.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "Move"
 align = 1
 __meta__ = {
@@ -305,7 +305,7 @@ margin_left = 12.0
 margin_top = 12.0
 margin_right = 46.0
 margin_bottom = 46.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "A"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -317,7 +317,7 @@ margin_left = 83.0
 margin_top = 12.0
 margin_right = 117.0
 margin_bottom = 46.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "W"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -329,7 +329,7 @@ margin_left = 155.0
 margin_top = 12.0
 margin_right = 189.0
 margin_bottom = 46.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "S"
 
 [node name="Key_D" type="Label" parent="TutorialMoveAttackDash/Move/MoveP1"]
@@ -338,7 +338,7 @@ margin_left = 227.0
 margin_top = 12.0
 margin_right = 261.0
 margin_bottom = 46.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "D"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -428,7 +428,7 @@ modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
 margin_right = 216.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "Dash"
 align = 1
 __meta__ = {
@@ -453,7 +453,7 @@ margin_left = 1.48651
 margin_top = 1.48651
 margin_right = 1.48651
 margin_bottom = 2.48651
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "F"
 align = 1
 valign = 1
@@ -497,7 +497,7 @@ margin_left = 3.53554
 margin_top = 3.53554
 margin_right = 3.53552
 margin_bottom = 3.53552
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Shift"
 align = 1
 valign = 1
@@ -541,7 +541,7 @@ margin_left = 0.78743
 margin_top = 6.29961
 margin_right = 4.78743
 margin_bottom = 6.29961
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "R2"
 align = 1
 valign = 1
