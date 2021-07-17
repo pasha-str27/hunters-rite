@@ -8,6 +8,7 @@ void godot::BigStone::_register_methods()
 	register_method("_init", &BigStone::_init);
 	register_method("_ready", &BigStone::_ready);
 	register_method("_add_player", &BigStone::_add_player);
+	register_method("_set_new_z_index_for_player", &BigStone::_set_new_z_index_for_player);
 	register_method("_remove_player", &BigStone::_remove_player);
 	register_method("_can_heal_true", &BigStone::_can_heal_true);
 	register_method("_change_start_parameters", &BigStone::_change_start_parameters);
@@ -31,6 +32,18 @@ void godot::BigStone::_ready()
 	sprite = cast_to<AnimatedSprite>(get_node("AnimatedSprite"));
 }
 
+void godot::BigStone::_set_new_z_index_for_player(Node2D* node, int index)
+{
+	if (node->is_in_group("player")) 
+	{
+		if (node->is_in_group("player1")) 
+		{
+			cast_to<AnimatedSprite>(node->get_node("AnimatedSprite"))->set_z_index(index);
+			return;
+		}
+		node->set_z_index(index);
+	}
+}
 
 void godot::BigStone::_remove_player(Node2D* node)
 {

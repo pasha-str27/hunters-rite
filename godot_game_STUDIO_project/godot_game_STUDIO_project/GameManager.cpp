@@ -155,24 +155,7 @@ void godot::GameManager::_init()
 }
 
 void  godot::GameManager::_hide_tutorial_sprites(String t_player_name) {
-
-	// clear coop tutorial 
-	cast_to<Node2D>(get_node("/root/Node2D/Node/TutorialSprites"))->hide();
-
-	Control* tutorial_control = nullptr;
-	tutorial_control = cast_to<Control>(get_node("/root/Node2D/Node/TutorialSpritesSingle/TutorialControl"));
-
-	// attack move special
-	Array tutorial_sprites = tutorial_control->get_children();
-
-	for (int child_index = 0; child_index < tutorial_sprites.size(); child_index++) {
-
-		//hide tutorial for other player
-		auto sprite_box = cast_to<Node2D>(tutorial_sprites[child_index])->get_child(2);
-		cast_to<TextureRect>(sprite_box->find_node(cast_to<Area2D>(tutorial_sprites[child_index])->get_name() + t_player_name))->set_visible(false);
-		cast_to<HBoxContainer>(get_node("/root/Node2D/Node/TutorialSpritesSingle/TutorialNextRoom"))->set_visible(false);
-		cast_to<CenterContainer>(sprite_box->find_node(t_player_name))->set_visible(false);
-	}
+	//lol
 }
 
 void godot::GameManager::_spawn_players()
@@ -188,7 +171,7 @@ void godot::GameManager::_spawn_players()
 		PlayersContainer::_get_instance()->_set_player1_regular(player1);
 		PlayersContainer::_get_instance()->_set_player2_regular(player2);
 		get_node("P2HealthBarWrapper")->queue_free();
-		_hide_tutorial_sprites("P2");
+		//_hide_tutorial_sprites("P2");
 		//	hiding label
 		//get_node("P1HealthBarWrapper/Label")->queue_free();
 	}
@@ -204,7 +187,7 @@ void godot::GameManager::_spawn_players()
 			PlayersContainer::_get_instance()->_set_player1_regular(player1);
 			PlayersContainer::_get_instance()->_set_player2_regular(player2);
 			get_node("P1HealthBarWrapper")->queue_free();
-			_hide_tutorial_sprites("P1");
+			//_hide_tutorial_sprites("P1");
 			//	hiding label
 			//get_node("P2HealthBarWrapper/Label")->queue_free();
 		}
@@ -222,8 +205,6 @@ void godot::GameManager::_spawn_players()
 
 			PlayersContainer::_get_instance()->_set_player1_regular(player1);
 			PlayersContainer::_get_instance()->_set_player2_regular(player2);
-
-			cast_to<Node2D>(get_node("/root/Node2D/Node/TutorialSpritesSingle"))->hide();
 
 			if(player2->has_method("_set_controll_buttons"))
 				player2->call_deferred("_set_controll_buttons", "Player2_up", "Player2_down", "Player2_left", "Player2_right", "Player2_fight_up", "Player2_fight_down", "Player2_fight_left", "Player2_fight_right", "Player2_special");

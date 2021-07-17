@@ -74,6 +74,7 @@ namespace godot
 		void _on_Flower_pressed(Variant body);
 		void _on_Tutorial_button_pressed(Variant);
 		void _on_Back_pause_pressed(Input* event);
+		void _on_Back_to_notice_button_pressed(Variant);
 		void _start_game(int name);
 		void _on_Items_pressed(Variant body);
 		void _on_FullScreen_pressed(Variant body);
