@@ -24,6 +24,7 @@ namespace godot
 		void _ready();
 		void _remove_player(Node2D* node);
 		void _add_player(Node2D* node);
+		void _set_new_z_index_for_player(Node2D* node,int index);
 		void _heal_players();
 		void _can_heal_true();
 		void _heal_player(Node2D* player);
