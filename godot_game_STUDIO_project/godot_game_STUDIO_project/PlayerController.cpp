@@ -533,12 +533,12 @@ void godot::PlayerController::_start_item_particles(bool is_buff)
 	if (is_buff)
 	{
 		prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->collect_good_item());
-		buff_debuff_particles->get_process_material()->set("hue_variation", .85);
+		buff_debuff_particles->get_process_material()->set("hue_variation", .85f);
 	}
 	else
 	{
 		prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->collect_bad_item());
-		buff_debuff_particles->get_process_material()->set("hue_variation", -.85);
+		buff_debuff_particles->get_process_material()->set("hue_variation", -.85f);
 	}
 
 	get_parent()->add_child(prefab->instance());
