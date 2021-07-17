@@ -745,5 +745,8 @@ void godot::PlayerController::_player_to_ghost()
 
 	current_player_strategy->_get_health_bar()->set_value(0);
 
+	Ref<PackedScene> ghost_sound = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->player_to_ghost());
+	add_child(ghost_sound->instance());
+
 	return;
 }
