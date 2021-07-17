@@ -12,10 +12,14 @@ void godot::MagnitZone::_register_methods()
 	register_method("_on_body_exited", &MagnitZone::_on_body_exited);
 	register_method("_set_player1", &MagnitZone::_set_player1);
 	register_method("_set_player2", &MagnitZone::_set_player2);
+	register_method("_set_active", &MagnitZone::_set_active);
+
+	register_property<MagnitZone, float>("force", &MagnitZone::force, 85);
 }
 
 godot::MagnitZone::MagnitZone()
 {
+	is_active = true;
 }
 
 godot::MagnitZone::~MagnitZone()
@@ -34,6 +38,9 @@ void godot::MagnitZone::_ready()
 
 void godot::MagnitZone::_process(float delta)
 {
+	if (!is_active)
+		return;
+
 	if (player1 != nullptr)
 		player1->set_global_position(player1->get_global_position().move_toward(get_global_position(), force * delta));
 	
@@ -67,4 +74,9 @@ void godot::MagnitZone::_set_player1()
 void godot::MagnitZone::_set_player2()
 {
 	player2 = nullptr;
+}
+
+void godot::MagnitZone::_set_active(bool active)
+{
+	is_active = active;
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Assets/Scripts/BigStone.gdns" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Kelt_stone.png" type="Texture" id=2]
@@ -171,6 +171,9 @@ animations = [ {
 
 [sub_resource type="RectangleShape2D" id=38]
 
+[sub_resource type="RectangleShape2D" id=39]
+extents = Vector2( 31.2532, 26.4454 )
+
 [node name="Stone" type="KinematicBody2D"]
 position = Vector2( 0, 30 )
 z_index = 6
@@ -190,7 +193,7 @@ z_index = 6
 z_as_relative = false
 frames = SubResource( 37 )
 animation = "idle"
-frame = 13
+frame = 2
 playing = true
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -221,5 +224,13 @@ cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 format = 1
 tile_data = PoolIntArray( -2, 6, 0 )
 
+[node name="Z_index2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Z_index2D"]
+position = Vector2( 0.0146217, -27.5163 )
+shape = SubResource( 39 )
+
 [connection signal="body_entered" from="Area2D" to="." method="_add_player"]
 [connection signal="body_exited" from="Area2D" to="." method="_remove_player"]
+[connection signal="body_entered" from="Z_index2D" to="." method="_set_new_z_index_for_player" binds= [ 5 ]]
+[connection signal="body_exited" from="Z_index2D" to="." method="_set_new_z_index_for_player" binds= [ 7 ]]

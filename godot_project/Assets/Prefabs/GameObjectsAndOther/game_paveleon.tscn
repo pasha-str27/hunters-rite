@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Assets/Scripts/LevelGenerator.gdns" type="Script" id=1]
 [ext_resource path="res://Assets/Prefabs/Doors/UpDoor.tscn" type="PackedScene" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://Assets/Prefabs/Rooms/base.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Scripts/ItemsContainer.gdns" type="Script" id=7]
 [ext_resource path="res://Assets/Prefabs/Doors/DownDoor.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/TutorialSprites.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/CameraPrefab.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Prefabs/Doors/right_door_fill.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Assets/Prefabs/Items/Glass.tscn" type="PackedScene" id=12]
@@ -30,7 +29,6 @@
 [ext_resource path="res://Assets/Prefabs/Items/Keys/Key.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Assets/Prefabs/Items/Keys/Key3.tscn" type="PackedScene" id=29]
 [ext_resource path="res://Assets/Prefabs/Stone.tscn" type="PackedScene" id=30]
-[ext_resource path="res://Assets/Prefabs/TutorialSpritesSingle.tscn" type="PackedScene" id=31]
 [ext_resource path="res://Assets/Prefabs/Lock.tscn" type="PackedScene" id=32]
 [ext_resource path="res://Assets/Prefabs/Items/Keys/Key4.tscn" type="PackedScene" id=33]
 [ext_resource path="res://Assets/Prefabs/Items/Keys/Key5.tscn" type="PackedScene" id=34]
@@ -45,15 +43,6 @@ script = ExtResource( 7 )
 Items = [ ExtResource( 5 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 22 ), ExtResource( 19 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 13 ) ]
 
 [node name="Camera2D" parent="." instance=ExtResource( 10 )]
-
-[node name="TutorialSprites" parent="." instance=ExtResource( 9 )]
-scale = Vector2( 0.4, 0.4 )
-z_index = 3
-z_as_relative = false
-
-[node name="TutorialSpritesSingle" parent="." instance=ExtResource( 31 )]
-z_index = 3
-z_as_relative = false
 
 [node name="Generation" type="Node2D" parent="."]
 script = ExtResource( 1 )

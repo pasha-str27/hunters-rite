@@ -122,6 +122,7 @@ void MenuButtons::_register_methods()
 	register_method((char*)"_on_Options_pause_pressed", &MenuButtons::_on_Options_pause_pressed);
 	register_method((char*)"_on_FullScreen_pressed", &MenuButtons::_on_FullScreen_pressed);
 	register_method((char*)"_on_Back_pause_pressed", &MenuButtons::_on_Back_pause_pressed);
+	register_method((char*)"_on_Back_to_notice_button_pressed", &MenuButtons::_on_Back_to_notice_button_pressed);
 	register_method((char*)"_play_change_cursor_effect", &MenuButtons::_play_change_cursor_effect);
 	register_method((char*)"_on_Quit_focus", &MenuButtons::_on_Quit_focus);
 	register_method((char*)"_on_Mode_focus", &MenuButtons::_on_Mode_focus);
@@ -267,6 +268,14 @@ void godot::MenuButtons::_input(Input* event)
 	{
 		Input::get_singleton()->action_release("ui_pause");
 
+		if (get_parent()->get_parent()->get_name() == "Pause")
+		{
+			get_tree()->set_pause(false);
+			cast_to<Camera2D>(get_node("/root/Node2D/Node/Camera2D"))->_set_current(true);
+			get_parent()->get_parent()->queue_free();
+			return;
+		}
+
 		if (get_name() == "Pause")
 		{
 			get_tree()->set_pause(false);
@@ -345,6 +354,10 @@ void godot::MenuButtons::_on_Flower_pressed(Variant)
 	_start_game(game_mode);
 }
 
+void godot::MenuButtons::_on_Back_to_notice_button_pressed(Variant)
+{
+	change_scene(notice_scene);
+}
 
 void godot::MenuButtons::_on_Tutorial_button_pressed(Variant)
 {
@@ -360,6 +373,9 @@ void godot::MenuButtons::_on_Tutorial_button_pressed(Variant)
 
 
 // -------Choose chapter-------
+
+
+
 void godot::MenuButtons::_show_chapter_sprite(String sprite_name, String description_name, bool mode)
 {
 	if (this->find_node(sprite_name)->get_child(0)->has_node("AnimationPlayer"))
@@ -581,7 +597,7 @@ void godot::MenuButtons::_on_Locale_change(int new_index)
 	_change_options_labels();
 
 	//	change locale in pause node
-	if (get_node("/root/Node2D") != nullptr)
+	if (get_node("/root")->has_node("Node2D"))
 	{
 		Array locale_keys = {};
 		locale_keys.push_back("KEY_RESUME");

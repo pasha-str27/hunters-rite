@@ -45,12 +45,11 @@ z_index = 9
 z_as_relative = false
 script = SubResource( 1 )
 Name = "BadTusk"
-speed = 50.0
-HP = 10.0
-damage = 4.0
-attack_speed_delta = 0.9
+speed = 10.0
+HP = 5.0
+damage = 3.0
+attack_speed_delta = 1.1
 number_to_next_item = 0
-encrease_attack_radius = true
 "Is Buff" = false
 
 [node name="Sprite" type="Sprite" parent="."]

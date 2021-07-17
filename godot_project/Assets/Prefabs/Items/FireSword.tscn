@@ -41,8 +41,8 @@ z_as_relative = false
 script = ExtResource( 3 )
 Name = "FireSword"
 speed = 0.0
-HP = 20.0
-damage = 20.0
+HP = 0.0
+damage = 6.5
 attack_speed_delta = 0.0
 number_to_next_item = 0
 
