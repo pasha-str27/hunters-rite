@@ -122,6 +122,7 @@ void MenuButtons::_register_methods()
 	register_method((char*)"_on_Options_pause_pressed", &MenuButtons::_on_Options_pause_pressed);
 	register_method((char*)"_on_FullScreen_pressed", &MenuButtons::_on_FullScreen_pressed);
 	register_method((char*)"_on_Back_pause_pressed", &MenuButtons::_on_Back_pause_pressed);
+	register_method((char*)"_on_Back_to_notice_button_pressed", &MenuButtons::_on_Back_to_notice_button_pressed);
 	register_method((char*)"_play_change_cursor_effect", &MenuButtons::_play_change_cursor_effect);
 	register_method((char*)"_on_Quit_focus", &MenuButtons::_on_Quit_focus);
 	register_method((char*)"_on_Mode_focus", &MenuButtons::_on_Mode_focus);
@@ -353,6 +354,10 @@ void godot::MenuButtons::_on_Flower_pressed(Variant)
 	_start_game(game_mode);
 }
 
+void godot::MenuButtons::_on_Back_to_notice_button_pressed(Variant)
+{
+	change_scene(notice_scene);
+}
 
 void godot::MenuButtons::_on_Tutorial_button_pressed(Variant)
 {
@@ -368,6 +373,9 @@ void godot::MenuButtons::_on_Tutorial_button_pressed(Variant)
 
 
 // -------Choose chapter-------
+
+
+
 void godot::MenuButtons::_show_chapter_sprite(String sprite_name, String description_name, bool mode)
 {
 	if (this->find_node(sprite_name)->get_child(0)->has_node("AnimationPlayer"))

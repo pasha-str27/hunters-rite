@@ -131,6 +131,7 @@ using namespace godot;
 #include "CurrentRoom.h"
 #include "PoisonEgg.h"
 #include "LocaledLabel.h"
+#include "TutorialEnemy.h"
 
 //	state
 #include "ISlimeAttackState.h"

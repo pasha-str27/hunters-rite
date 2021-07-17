@@ -143,6 +143,7 @@ void godot::TutorialManager::_move(String dir)
 
 	if ((String)prev_room->call("_get_room_type") == "heal_room" && (String)cur_room->call("_get_room_type") == "revive_room")
 	{
+		CustomExtensions::ChangeVisibleInNodes(cast_to<Node>(get_node("/root/Node2D/Node/TutorialSprites")), "GhostTutorial", true);
 		auto player = PlayersContainer::_get_instance()->_get_player1_regular();
 		if (player != nullptr)
 			player->get_child(1)->call("_die");
@@ -186,25 +187,9 @@ void godot::TutorialManager::_init()
 		dirs.push_back(0);
 }
 
-void  godot::TutorialManager::_hide_tutorial_sprites(String t_player_name) {
-
-	// clear coop tutorial 
-	cast_to<Node2D>(get_node("/root/Node2D/Node/TutorialSprites"))->hide();
-
-	Control* tutorial_control = nullptr;
-	tutorial_control = cast_to<Control>(get_node("/root/Node2D/Node/TutorialSpritesSingle/TutorialControl"));
-
-	// attack move special
-	Array tutorial_sprites = tutorial_control->get_children();
-
-	for (int child_index = 0; child_index < tutorial_sprites.size(); child_index++) {
-
-		//hide tutorial for other player
-		auto sprite_box = cast_to<Node2D>(tutorial_sprites[child_index])->get_child(2);
-		cast_to<TextureRect>(sprite_box->find_node(cast_to<Area2D>(tutorial_sprites[child_index])->get_name() + t_player_name))->set_visible(false);
-		cast_to<HBoxContainer>(get_node("/root/Node2D/Node/TutorialSpritesSingle/TutorialNextRoom"))->set_visible(false);
-		cast_to<CenterContainer>(sprite_box->find_node(t_player_name))->set_visible(false);
-	}
+void  godot::TutorialManager::_hide_tutorial_sprites(String t_player_name) 
+{
+	CustomExtensions::ChangeVisibleInNodes(cast_to<Node>(get_node("/root/Node2D/Node/TutorialSprites")), t_player_name);
 }
 
 void godot::TutorialManager::_spawn_players()
@@ -221,6 +206,8 @@ void godot::TutorialManager::_spawn_players()
 		PlayersContainer::_get_instance()->_set_player2_regular(player2);
 		get_node("P2HealthBarWrapper")->queue_free();
 		_hide_tutorial_sprites("P2");
+		_hide_tutorial_sprites("Coop");
+		_hide_tutorial_sprites("GhostTutorial");
 		//	hiding label
 		//get_node("P1HealthBarWrapper/Label")->queue_free();
 	}
@@ -237,6 +224,9 @@ void godot::TutorialManager::_spawn_players()
 			PlayersContainer::_get_instance()->_set_player2_regular(player2);
 			get_node("P1HealthBarWrapper")->queue_free();
 			_hide_tutorial_sprites("P1");
+			_hide_tutorial_sprites("Coop");
+			_hide_tutorial_sprites("GhostTutorial");
+
 			//	hiding label
 			//get_node("P2HealthBarWrapper/Label")->queue_free();
 		}
@@ -254,8 +244,8 @@ void godot::TutorialManager::_spawn_players()
 
 			PlayersContainer::_get_instance()->_set_player1_regular(player1);
 			PlayersContainer::_get_instance()->_set_player2_regular(player2);
-
-			cast_to<Node2D>(get_node("/root/Node2D/Node/TutorialSpritesSingle"))->hide();
+			_hide_tutorial_sprites("Solo");
+			_hide_tutorial_sprites("GhostTutorial");
 
 			if (player2->has_method("_set_controll_buttons"))
 				player2->call_deferred("_set_controll_buttons", "Player2_up", "Player2_down", "Player2_left", "Player2_right", "Player2_fight_up", "Player2_fight_down", "Player2_fight_left", "Player2_fight_right", "Player2_special");
@@ -470,14 +460,19 @@ void godot::TutorialManager::_input(Variant event)
 	if (Input::get_singleton()->is_action_just_pressed("ui_show_minimap"))
 		if (minimap != nullptr)
 		{
-			if (!is_showing_minimap)
+			Control* key_holder = cast_to<Control>(get_node("/root/Node2D/Node/Camera2D/KeyHolder"));
+			if (!is_showing_minimap) {
 				minimap->show();
-			else
+				key_holder->set_visible(true);
+			}
+			else {
 				minimap->hide();
-
+				key_holder->set_visible(false);
+			}
 			is_showing_minimap = !is_showing_minimap;
 		}
 }
+
 
 void godot::TutorialManager::_audio_fade_to_main_menu()
 {
@@ -512,13 +507,10 @@ void godot::TutorialManager::_get_type_keys()
 
 	//get new generated keys
 	std::vector<Node2D*> key_types = CustomExtensions::GetChildrenByWordInName(cast_to<Node2D>(get_node("/root/Node2D/Node/Generation")), "Key");
-	Godot::print("------gen_key_v2------");
+
 	for (auto i : key_types) {
 		generated_keys.push_back(String(i->call("_get_type")));
-		Godot::print(String(i->call("_get_type")));
 	}
-	Godot::print("------gen_key_v2------");
-
 
 	//clear key holders
 	for (int i = 0; i < key_box->get_children().size(); i++) {
