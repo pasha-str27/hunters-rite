@@ -360,6 +360,10 @@ void godot::GameManager::_door_collision(String door_dir)
 
 void godot::GameManager::_open_doors()
 {
+	Ref<PackedScene> prefab = nullptr;
+	prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->open_door());
+	add_child(prefab->instance());
+
 	if (current_room_type == "boss")
 	{
 		_spawn_exit();
