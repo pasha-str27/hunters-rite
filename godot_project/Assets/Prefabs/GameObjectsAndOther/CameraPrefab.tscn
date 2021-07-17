@@ -66,7 +66,7 @@ corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 
 [node name="Camera2D" type="Camera2D"]
-z_index = 103
+z_index = 101
 z_as_relative = false
 offset = Vector2( -1, 0.748054 )
 zoom = Vector2( 0.75, 0.75 )

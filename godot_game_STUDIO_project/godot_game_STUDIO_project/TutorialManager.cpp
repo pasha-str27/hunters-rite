@@ -189,7 +189,6 @@ void godot::TutorialManager::_init()
 
 void  godot::TutorialManager::_hide_tutorial_sprites(String t_player_name) 
 {
-	Godot::print("shheeeeeeeeeeeesh");
 	CustomExtensions::ChangeVisibleInNodes(cast_to<Node>(get_node("/root/Node2D/Node/TutorialSprites")), t_player_name);
 }
 
@@ -461,14 +460,19 @@ void godot::TutorialManager::_input(Variant event)
 	if (Input::get_singleton()->is_action_just_pressed("ui_show_minimap"))
 		if (minimap != nullptr)
 		{
-			if (!is_showing_minimap)
+			Control* key_holder = cast_to<Control>(get_node("/root/Node2D/Node/Camera2D/KeyHolder"));
+			if (!is_showing_minimap) {
 				minimap->show();
-			else
+				key_holder->set_visible(true);
+			}
+			else {
 				minimap->hide();
-
+				key_holder->set_visible(false);
+			}
 			is_showing_minimap = !is_showing_minimap;
 		}
 }
+
 
 void godot::TutorialManager::_audio_fade_to_main_menu()
 {
@@ -503,13 +507,10 @@ void godot::TutorialManager::_get_type_keys()
 
 	//get new generated keys
 	std::vector<Node2D*> key_types = CustomExtensions::GetChildrenByWordInName(cast_to<Node2D>(get_node("/root/Node2D/Node/Generation")), "Key");
-	Godot::print("------gen_key_v2------");
+
 	for (auto i : key_types) {
 		generated_keys.push_back(String(i->call("_get_type")));
-		Godot::print(String(i->call("_get_type")));
 	}
-	Godot::print("------gen_key_v2------");
-
 
 	//clear key holders
 	for (int i = 0; i < key_box->get_children().size(); i++) {
