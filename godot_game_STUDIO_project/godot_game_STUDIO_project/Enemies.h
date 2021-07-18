@@ -15,6 +15,8 @@ namespace godot
 		bool is_spawning = false;
 		int enemy_to_spawn_count = 0;
 
+		int size;
+
 		Enemies();
 
 	public:
@@ -39,5 +41,6 @@ namespace godot
 		void set_spawning(bool value);
 		int get_enemy_to_spawn_count();
 		void set_enemy_to_spawn_count(int count);
+		void _set_enemy_count(int count);
 	};
 }

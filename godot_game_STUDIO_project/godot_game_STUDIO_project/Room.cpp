@@ -211,8 +211,9 @@ void godot::Room::_spawn_enemy(int number)
 				return;
 			}
 	}
-
-	enemies_to_spawn[number].enemy->call_deferred("_change_start_parameters");
+	
+	if(MenuButtons::game_type==TUTORIAL)
+		Enemies::get_singleton()->_add_enemy(enemies_to_spawn[number].enemy);
 }
 
 void godot::Room::_clear_enemy_to_spawn()
