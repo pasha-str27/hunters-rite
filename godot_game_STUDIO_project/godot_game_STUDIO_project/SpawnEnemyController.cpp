@@ -16,7 +16,7 @@ void godot::SpawnEnemyController::_register_methods()
 	register_property<SpawnEnemyController, Ref<PackedScene>>("boss_prefab", &SpawnEnemyController::boss_prefab, nullptr);
 	register_property<SpawnEnemyController, Ref<PackedScene>>("boss_slime_prefab", &SpawnEnemyController::boss_slime_prefab, nullptr);
 	register_property<SpawnEnemyController, Ref<PackedScene>>("spider_prefab", &SpawnEnemyController::spider_prefab, nullptr);
-	register_property<SpawnEnemyController, Ref<PackedScene>>("slime_prefab", &SpawnEnemyController::slime_prefab, nullptr);
+	register_property<SpawnEnemyController, Ref<PackedScene>>("tutorial_enemy", &SpawnEnemyController::tutorial_enemy, nullptr);
 	register_property<SpawnEnemyController, Ref<PackedScene>>("naga_boss_prefab", &SpawnEnemyController::naga_boss_prefab, nullptr);
 }
 
@@ -41,36 +41,23 @@ void godot::SpawnEnemyController::SpawnEnemies()
 		return;
 	}
 
+	if (MenuButtons::game_type == TUTORIAL)
+	{
+		Node2D* enemy = cast_to<Node2D>(tutorial_enemy->instance());
+
+		CurrentRoom::get_singleton()->_get_current_room()->add_child(enemy, true);
+		enemy->set_position(Vector2(150, 25));
+
+		enemies->set_spawning(false);
+
+		Godot::print(enemy->get_name());
+
+		return;
+	}
+
 	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
 
-	if (MenuButtons::game_type == TUTORIAL)
-	{
-		Node2D* enemy = cast_to<Node2D>(slime_prefab->instance());
-		int pos_x;
-		int pos_y;
-		do
-		{
-			pos_x = rng->randi_range(1, 26);
-			pos_y = rng->randi_range(4, 15);
-		} while (!(bool)CurrentRoom::get_singleton()->_get_current_room()->call("_is_empty_pos", pos_y, pos_x));
-
-		enemies->set_enemy_to_spawn_count(enemies->get_enemy_to_spawn_count() + 1);
-		std::vector<Vector2> taken_positions;
-		taken_positions.push_back(Vector2(pos_x, pos_y));
-		CurrentRoom::get_singleton()->_get_current_room()->call("_add_new_enemy", enemy, (Vector2(pos_x, pos_y) * 32
-			+ CurrentRoom::get_singleton()->_get_current_room()->get_global_position()
-			- Vector2(896, 544) / 2 + Vector2(16, 16)));
-
-		CurrentRoom::get_singleton()->_get_current_room()->call("_set_cell_value", pos_y, pos_x, 7);
-
-		if (enemies->get_enemy_to_spawn_count() == 0)
-			enemies->set_spawning(false);
-
-		for (int i = 0; i < taken_positions.size(); ++i)
-			CurrentRoom::get_singleton()->_get_current_room()->call("_set_cell_value", taken_positions[i].y, taken_positions[i].x, 0);
-		return;
-	}
 
 	float current_value = _calculate_room_difficulty();
 	std::vector<Vector2> taken_positions;

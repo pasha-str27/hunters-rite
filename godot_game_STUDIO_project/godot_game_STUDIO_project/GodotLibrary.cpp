@@ -49,4 +49,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<TutotialGenerator>();
 	register_class<PoisonEgg>();
 	register_class<LocaledLabel>();
+	register_class<TutorialEnemy>();
 }

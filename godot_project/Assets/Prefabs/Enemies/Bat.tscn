@@ -188,9 +188,9 @@ frame = 1
 playing = true
 
 [node name="Area2D" type="Area2D" parent="Bat"]
+scale = Vector2( 2, 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bat/Area2D"]
-position = Vector2( -1.10243, -2.20486 )
 shape = SubResource( 21 )
 
 [node name="angry_zone" type="Area2D" parent="Bat"]
