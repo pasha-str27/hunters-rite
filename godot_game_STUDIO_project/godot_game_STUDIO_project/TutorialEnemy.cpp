@@ -8,6 +8,8 @@ void godot::TutorialEnemy::_register_methods()
 	register_method("_ready", &TutorialEnemy::_ready);
 	register_method("_take_damage", &TutorialEnemy::_take_damage);
 	register_method("_on_damage_animation_finished", &TutorialEnemy::_on_damage_animation_finished);
+	register_method("_on_spawn_end", &TutorialEnemy::_on_spawn_end);
+	
 
 	register_property<TutorialEnemy, float>("HP", &TutorialEnemy::_hp, 100);
 }
@@ -22,9 +24,10 @@ void godot::TutorialEnemy::_ready()
 	health_bar = cast_to<ProgressBar>(get_node("HealthBar"));
 	Enemies::get_singleton()->_set_enemy_count(1);
 
+	sprite->set_visible(false);
+	health_bar->set_visible(false);
 
 	//	set healthbar values
-	health_bar->set_visible(true);
 	health_bar->set_max(_hp);
 	health_bar->set_value(_hp);
 
@@ -32,6 +35,12 @@ void godot::TutorialEnemy::_ready()
 	cast_to<Area2D>(get_node("Area2D"))->set_collision_mask_bit(0, true);
 	this->set_collision_mask_bit(9, true);
 	this->set_collision_layer_bit(2, true);
+
+	cast_to<Particles2D>(get_node("SpawnParticles"))->set_emitting(true);
+	add_child(timer);
+
+	timer->connect("timeout", this, "_on_spawn_end");
+	timer->start(.15f);
 }
 
 void godot::TutorialEnemy::_take_damage(float damage, int player_id)
@@ -75,8 +84,6 @@ void godot::TutorialEnemy::_take_damage(float damage, int player_id)
 		cast_to<Area2D>(get_node("Area2D"))->set_collision_mask_bit(0, false);
 		this->set_collision_mask_bit(9, false);
 		this->set_collision_layer_bit(2, false);
-
-		//cast_to<Node2D>(CurrentRoom::get_singleton()->_get_current_room()->find_node(""))->hide();
 	}
 
 }
@@ -87,15 +94,25 @@ void godot::TutorialEnemy::_on_damage_animation_finished()
 	sprite->play("idle");
 }
 
+void godot::TutorialEnemy::_on_spawn_end()
+{
+	timer->disconnect("timeout", this, "_on_spawn_end");
+	health_bar->set_visible(true);
+	sprite->set_visible(true);
+	cast_to<Particles2D>(get_node("SpawnParticles"))->set_emitting(false);
+}
+
 godot::TutorialEnemy::TutorialEnemy()
 {
 	_hp = 100;
 	sprite = nullptr;
 	health_bar = nullptr;
+	timer = Timer::_new();
 }
 
 godot::TutorialEnemy::~TutorialEnemy()
 {
 	sprite = nullptr;
 	health_bar = nullptr;
+	timer = nullptr;
 }
