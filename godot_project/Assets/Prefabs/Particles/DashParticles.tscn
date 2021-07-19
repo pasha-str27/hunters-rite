@@ -30,7 +30,8 @@ color_ramp = SubResource( 2 )
 
 [node name="DashParticles" type="Particles2D"]
 scale = Vector2( 1, 3.08 )
-z_index = -1
+z_index = 10
+z_as_relative = false
 emitting = false
 amount = 60
 lifetime = 0.3

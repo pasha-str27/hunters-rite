@@ -15,6 +15,7 @@ void godot::EnemyData::remove_vector_element(Vector2 element)
 
 void godot::EnemyData::reset_directions()
 {
+	_set_distance(32);
 	directions.clear();
 }
 
@@ -32,6 +33,37 @@ void godot::EnemyData::_remove_taken_positions()
 }
 
 void godot::EnemyData::change_can_fight(bool value, ISlimeAttackState* state)
+{
+}
+
+float godot::EnemyData::_get_distance()
+{
+	return distance;
+}
+
+void godot::EnemyData::_set_distance(float value)
+{
+	distance = value;
+}
+
+void godot::EnemyData::_set_direction(Vector2 dir)
+{
+}
+
+void godot::EnemyData::change_can_fight(bool value)
+{
+}
+
+Vector2 godot::EnemyData::_get_goal()
+{
+	return Vector2();
+}
+
+void godot::EnemyData::_set_goal(Vector2 goal)
+{
+}
+
+void godot::EnemyData::_take_damage(float damage)
 {
 }
 
@@ -88,6 +120,14 @@ godot::EnemyData::EnemyData(Node2D* enemy)
 godot::EnemyData::~EnemyData()
 {
 	enemy = nullptr;
+}
+
+void godot::EnemyData::_process(float delta)
+{
+}
+
+void godot::EnemyData::_set_speed(float value)
+{
 }
 
 void godot::EnemyData::_add_bullet(Node* bullet)

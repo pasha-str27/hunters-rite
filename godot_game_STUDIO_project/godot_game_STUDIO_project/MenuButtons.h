@@ -12,6 +12,12 @@ namespace godot
 		MELEE
 	};
 
+	enum GameType
+	{
+		TUTORIAL,
+		DEFOLT
+	};
+
 	class MenuButtons : public TextureRect
 	{
 		GODOT_CLASS(MenuButtons, TextureRect)
@@ -48,9 +54,14 @@ namespace godot
 		static bool is_full_screen;
 		static float effect_audio_level;
 		static GameMode game_mode;
+		static GameType game_type;
+		static int current_locale_index;
+		Array locales;
 		bool was_quit_focused;	
 		bool was_mode_focused;	
+		bool was_locale_focused;
 		bool single_mode;	
+		bool tutorial_mode;	
 
 		static void _register_methods();
 		void _init();
@@ -61,7 +72,9 @@ namespace godot
 		void _on_Quit_pressed(Variant body);
 		void _on_Back_pressed(Variant body);
 		void _on_Flower_pressed(Variant body);
+		void _on_Tutorial_button_pressed(Variant);
 		void _on_Back_pause_pressed(Input* event);
+		void _on_Back_to_notice_button_pressed(Variant);
 		void _start_game(int name);
 		void _on_Items_pressed(Variant body);
 		void _on_FullScreen_pressed(Variant body);
@@ -70,6 +83,7 @@ namespace godot
 		void _on_Mode_focus();
 		void _on_animated_focus_entered(String button_name, String animated_name);
 		void _on_animated_focus_exited(String button_name, String animated_name);
+		void _show_chapter_sprite(String sprite_name, String description_name, bool mode);
 		void _set_animated_focus(String button_name,String animated_name,bool mode);
 		void _on_Quit_focus(bool mode);
 		void _set_vertical_scroll(int scroll);
@@ -81,6 +95,7 @@ namespace godot
 		void _change_audio_volume();
 		void _on_Resume_pressed(Input* event);
 		void _on_Items_pause_pressed(Input* event);
+		void _on_Options_pause_pressed(Input*);
 		void _on_Menu_pressed(Input* event);
 		void _on_Retry_pressed(Variant body);
 		void _move_to_main_menu();
@@ -89,5 +104,8 @@ namespace godot
 		void _input(Input* event);
 		void _reload_scene();
 		void change_scene(Ref<PackedScene>& scene);
+		void _on_Locale_change(int new_index);
+		void _on_Locale_focused();
+		void _change_options_labels();
 	};
 }

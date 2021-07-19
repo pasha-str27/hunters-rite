@@ -30,9 +30,11 @@ namespace godot
 		float speed;
 		float _saved_speed;
 		Timer* timer;
+		Timer* timer_poison;
 		bool can_move;
 		bool is_alive;
 		bool is_special;
+		float diff;
 
 		int number_to_next_item;
 		float attack_speed_delta;
@@ -44,6 +46,10 @@ namespace godot
 		Particles2D* buff_debuff_particles = nullptr;
 		Particles2D* dash_particles = nullptr;
 		Particles2D* revive_particles = nullptr;
+		Particles2D* ghost_end_particles = nullptr;
+
+		Node* camera_shake = nullptr;
+		AnimatedSprite* ghost_sprite = nullptr;
 
 	public:
 		static void _register_methods();
@@ -108,5 +114,10 @@ namespace godot
 		void _continue_moving();
 		void _set_is_attacking(bool value);
 		void _set_right_HP(float value);
+		void _on_ghost_hide();
+		void _flip_ghost(bool value);
+		void _take_poison();
+		void _on_poison_end();
+		void _player_to_ghost();
 	};
 }

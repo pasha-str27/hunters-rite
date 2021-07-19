@@ -36,18 +36,21 @@ tracks/1/keys = {
 [sub_resource type="CircleShape2D" id=2]
 
 [node name="Boot" type="Node2D"]
-z_index = 5
+z_index = 9
+z_as_relative = false
 script = ExtResource( 3 )
 Name = "Boot"
 speed = 20.0
 HP = 0.0
 damage = 0.0
-attack_speed_delta = 0.0
+attack_speed_delta = 1.0
 number_to_next_item = 0
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -1.89171 )
 scale = Vector2( 1.03783, 1.03783 )
+z_index = 9
+z_as_relative = false
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" parent="Sprite" instance=ExtResource( 1 )]

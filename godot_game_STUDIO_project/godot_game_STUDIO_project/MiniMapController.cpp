@@ -46,6 +46,7 @@ void godot::MiniMapController::_register_methods()
 	register_method("_load_special_rooms", &MiniMapController::_load_special_rooms);
 	register_method(" _special_rooms_loader", &MiniMapController::_special_rooms_loader);
 	register_method("_update_special_rooms", &MiniMapController::_update_special_rooms);
+	register_method("_start_treking", &MiniMapController::_start_treking);
 
 	register_method("_start_timer", &MiniMapController::_start_timer);
 	register_method("_on_timeout", &MiniMapController::_on_timeout);
@@ -58,6 +59,7 @@ void godot::MiniMapController::_register_methods()
 	register_property<MiniMapController, Ref<PackedScene>>("heal_room", &MiniMapController::heal_room, nullptr);
 	register_property<MiniMapController, Ref<PackedScene>>("boss_room", &MiniMapController::boss_room, nullptr);
 	register_property<MiniMapController, float>("zoom", &MiniMapController::zoom, 1.5f);
+	register_property<MiniMapController, Vector2>("icon_scale", &MiniMapController::room_icon_scale, Vector2(1,1));
 }
 
 void godot::MiniMapController::_init()
@@ -66,8 +68,6 @@ void godot::MiniMapController::_init()
 
 void godot::MiniMapController::_ready()
 {
-	//if(CameraController::current_level>=2)
-	//	_clear_map();
 	disc_rooms_positions.clear();
 	undisc_rooms_positions.clear();
 	key_rooms_positions.clear();
@@ -78,7 +78,7 @@ void godot::MiniMapController::_ready()
 	items_positions.clear();
 	heal_positions.clear();
 	boss_positions.clear();
-	_start_timer();
+	//_start_treking();
 }
 
 bool godot::MiniMapController::_load_resources()
@@ -114,7 +114,7 @@ bool godot::MiniMapController::_load_resources()
 		Godot::print(undisc_rooms_positions.size());
 
 		curr_room_position = grid_rect_size / 2;
-		grid_scale = grid_rect_size / (get_viewport_rect().size * zoom);
+		grid_scale = grid_rect_size / (Size2(Vector2(step_x, step_y)) * zoom);
 	}
 	else
 	{
@@ -193,12 +193,10 @@ void godot::MiniMapController::_update_minimap()
 
 Vector2 godot::MiniMapController::_get_players_pos()
 {
-	auto player = CameraController::current_room->get_global_position();
+	Vector2 player = CurrentRoom::get_singleton()->_get_current_room()->get_global_position();
 
 	int fixed_x = (int)(player.x / step_x) * step_x;
 	int fixed_y = (int)(player.y / step_y) * step_y;
-
-	Godot::print(Vector2(fixed_x, fixed_y));
 
 	return Vector2(fixed_x, fixed_y);
 }
@@ -335,6 +333,20 @@ bool godot::MiniMapController::_is_on_grid(Vector2 pos)
 
 void godot::MiniMapController::_start_treking()
 {
+	if (GameManager::current_level >= 2)
+	{
+		disc_rooms_positions.clear();
+		undisc_rooms_positions.clear();
+		key_rooms_positions.clear();
+		item_rooms_positions.clear();
+		boss_rooms_positions.clear();
+		heal_rooms_positions.clear();
+		keys_positions.clear();
+		items_positions.clear();
+		heal_positions.clear();
+		boss_positions.clear();
+	}
+
 	if (!_load_resources())
 		Godot::print("Something went wrong! Resources weren't loaded");
 

@@ -1,10 +1,10 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Assets/Sprites/Monsters/Statue/monster_statue_damage.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/statue_bullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Scripts/Enemy.gdns" type="Script" id=3]
 [ext_resource path="res://Assets/Sprites/Monsters/Statue/monster_statue_idle.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Prefabs/Particles/SpawnParticles.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Sprites/Players/ShootPlayer/power_ball.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Prefabs/Particles/DeathParticles/DeathStatueParticles.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Scripts/EnemyPrice.gdns" type="Script" id=7]
 
@@ -110,12 +110,53 @@ animations = [ {
 "speed": 10.0
 } ]
 
+[sub_resource type="Gradient" id=28]
+offsets = PoolRealArray( 0.136364, 0.797521 )
+colors = PoolColorArray( 0.205364, 0.270996, 0.222101, 1, 1, 0, 0, 0.352941 )
+
+[sub_resource type="GradientTexture" id=29]
+gradient = SubResource( 28 )
+
+[sub_resource type="Curve" id=30]
+_data = [ Vector2( 0, 0.578409 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0306818 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=31]
+curve = SubResource( 30 )
+
+[sub_resource type="ParticlesMaterial" id=32]
+emission_shape = 1
+emission_sphere_radius = 40.0
+flag_rotate_y = true
+flag_disable_z = true
+direction = Vector3( 500, 500, 0 )
+spread = 180.0
+flatness = 1.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 50.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 100.0
+linear_accel_random = 1.0
+radial_accel_random = 1.0
+tangential_accel_random = 1.0
+damping_random = 1.0
+scale = 5.0
+scale_random = 1.0
+scale_curve = SubResource( 31 )
+color_ramp = SubResource( 29 )
+
+[sub_resource type="CapsuleShape2D" id=33]
+radius = 4.41701
+height = 21.2333
+
 [node name="StatueShoot" type="Node2D"]
+z_index = 6
+z_as_relative = false
 script = ExtResource( 7 )
 __meta__ = {
 "_editor_description_": ""
 }
-enemy_price = 18.0
+enemy_price = 31.0
 
 [node name="BulletConteinerStatue" type="Node" parent="."]
 
@@ -124,7 +165,8 @@ enemy_price = 18.0
 "statue_shoot",
 ]]
 position = Vector2( 0, -16 )
-z_index = 25
+z_index = 6
+z_as_relative = false
 collision_layer = 4
 collision_mask = 512
 script = ExtResource( 3 )
@@ -150,9 +192,34 @@ __meta__ = {
 shape = SubResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="StatueShoot/CollisionShape2D"]
+z_index = 6
+z_as_relative = false
 frames = SubResource( 24 )
 animation = "damaged"
 frame = 1
 playing = true
 
-[node name="SpawnParticles" parent="StatueShoot" instance=ExtResource( 5 )]
+[node name="SpawnParticles" type="Particles2D" parent="StatueShoot"]
+z_index = 10
+z_as_relative = false
+emitting = false
+amount = 50
+lifetime = 0.4
+speed_scale = 2.0
+randomness = 0.25
+visibility_rect = Rect2( 0, 0, 0, 0 )
+local_coords = false
+process_material = SubResource( 32 )
+texture = ExtResource( 5 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Area2D" type="Area2D" parent="StatueShoot"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StatueShoot/Area2D"]
+position = Vector2( 0.0485992, 19.7577 )
+rotation = 1.5708
+shape = SubResource( 33 )
+
+[connection signal="body_entered" from="StatueShoot/Area2D" to="StatueShoot" method="_on_Area2D_body_entered"]

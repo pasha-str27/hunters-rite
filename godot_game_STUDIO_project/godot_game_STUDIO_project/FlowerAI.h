@@ -5,10 +5,12 @@
 
 namespace godot
 {
+	class BulletPull;
+
 	class FlowerAI : public EnemyData, public KinematicBody2D
 	{
 		Vector2 directions[8];
-		std::vector<Node2D*> bullets;
+		BulletPull* bullet_pull = nullptr;
 		int max_bullet_count;
 		bool can_fight;
 

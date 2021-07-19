@@ -90,8 +90,10 @@ animations = [ {
 radius = 18.2109
 
 [node name="Slime" type="Node2D"]
+z_index = 6
+z_as_relative = false
 script = ExtResource( 4 )
-enemy_price = 10.0
+enemy_price = 17.0
 
 [node name="Slime" type="KinematicBody2D" parent="." groups=[
 "enemy",
@@ -123,6 +125,8 @@ __meta__ = {
 shape = SubResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Slime/CollisionShape2D"]
+z_index = 6
+z_as_relative = false
 frames = SubResource( 18 )
 animation = "damaged"
 frame = 2

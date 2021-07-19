@@ -22,7 +22,7 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<Bullet>();
 	register_class<Enemy>();
 	register_class<Sword>();
-	register_class<CameraController>();
+	register_class<GameManager>();
 	register_class<Spike>();
 	register_class<Item>();
 	register_class<ReviveZone>();
@@ -44,4 +44,10 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<MiniMapController>();
 	register_class<Ball>();
 	register_class<SlimeEnemiesHolder>();
+	register_class<CameraShake>();
+	register_class<TutorialManager>();
+	register_class<TutotialGenerator>();
+	register_class<PoisonEgg>();
+	register_class<LocaledLabel>();
+	register_class<TutorialEnemy>();
 }

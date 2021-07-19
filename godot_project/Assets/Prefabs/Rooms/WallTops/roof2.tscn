@@ -4,7 +4,8 @@
 
 [node name="roof" type="TileMap"]
 position = Vector2( 0, -16 )
-z_index = 100
+z_index = 4
+z_as_relative = false
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 3

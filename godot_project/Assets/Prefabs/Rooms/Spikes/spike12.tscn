@@ -11,6 +11,8 @@ library = ExtResource( 1 )
 "spike",
 ]]
 position = Vector2( 0, -16 )
+z_index = 2
+z_as_relative = false
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 16

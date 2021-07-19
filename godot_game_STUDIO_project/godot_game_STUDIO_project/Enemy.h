@@ -7,6 +7,7 @@ namespace godot
 {
 	class IEnemyAI;
 	class EnemyAIContext;
+	class ResourceContainer;
 
 	class Enemy : public KinematicBody2D
 	{
@@ -17,18 +18,25 @@ namespace godot
 		Timer* timer_change_dir;
 		Timer* timer_check_angry;
 		Timer* timer_particles = nullptr;
+		Timer* death_timer = nullptr;
 
 		float HP;
+		float max_HP;
 		Ref<PackedScene> bullet;
 		bool is_angry;
 		bool entered;
 		bool died;
 		bool can_move = false;
+		bool was_died = false;
+		float time_to_revive = 5;
+
+		Vector2 goal = Vector2::ZERO;
 
 		AnimatedSprite* sp = nullptr;
 
 		Particles2D* spawn_particles = nullptr;
 		Ref<PackedScene> death_particles = nullptr;
+		ProgressBar* health_bar;
 
 		public:
 			static void _register_methods();
@@ -65,5 +73,11 @@ namespace godot
 			void _on_Area2D_body_exited(Node* node);
 			void _change_start_parameters();
 			void _remove_taken_positions();
+			void _set_direction(Node* player, Vector2 direction);
+			void _revive();
+			void _on_Area2D_body_entered_player_fight(Node* node);
+			AnimatedSprite* _get_animated_sprite();
+			void _add_to_HP(float);
+			float _get_HP_percent();
 	};
 }

@@ -56,8 +56,11 @@ void godot::PlayerController::_register_methods()
 	register_method("_continue_moving", &PlayerController::_continue_moving);
 	register_method("_stop_moving", &PlayerController::_stop_moving);
 	register_method("_set_is_attacking", &PlayerController::_set_is_attacking);
-	
-	
+	register_method("_on_ghost_hide", &PlayerController::_on_ghost_hide);
+	register_method("_flip_ghost", &PlayerController::_flip_ghost);
+	register_method("_on_poison_end", &PlayerController::_on_poison_end);	
+	register_method("_set_was_revived", &PlayerController::_set_was_revived);
+	register_method("_player_to_ghost", &PlayerController::_player_to_ghost);
 	
 	register_property<PlayerController, float>("hp", &PlayerController::_hp, 0);
 	register_property<PlayerController, float>("damage", &PlayerController::_damage, 0);
@@ -70,7 +73,6 @@ void godot::PlayerController::_register_methods()
 godot::PlayerController::PlayerController()
 {
 	current_player_strategy = new PlayerStrategyContext;
-	//current_player = nullptr;
 	timer = Timer::_new();
 	attack_speed_delta = 0.5;
 	dash_time_delta = 0.4;
@@ -83,6 +85,8 @@ godot::PlayerController::PlayerController()
 	speed = 250;
 	_saved_speed = speed;
 	door = nullptr;
+	timer_poison = Timer::_new();
+	diff = 0;
 }
 
 godot::PlayerController::~PlayerController()
@@ -94,6 +98,7 @@ godot::PlayerController::~PlayerController()
 	door = nullptr;
 	item_generator = nullptr;
 	timer = nullptr;
+	timer_poison = nullptr;
 	hurt_particles = nullptr;
 	buff_debuff_particles = nullptr;
 	dash_particles = nullptr;
@@ -136,6 +141,16 @@ void godot::PlayerController::_ready()
 	hurt_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"));
 	dash_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "DashParticles"));
 	revive_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "ReviveParticles"));
+	ghost_end_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "BoomGhostParticles"));
+
+	ghost_sprite = cast_to<AnimatedSprite>(get_node("GhostSprite"));
+	ghost_sprite->set_visible(false);
+
+	camera_shake = get_node("/root/Node2D/Node/Camera2D")->get_node("CameraShake");
+
+	timer = Timer::_new();
+	add_child(timer);
+	add_child(timer_poison);
 }
 
 void godot::PlayerController::_start_timer()
@@ -235,6 +250,14 @@ void godot::PlayerController::_add_bullet(Node* node)
 
 void godot::PlayerController::_process(float delta)
 {
+	if (is_ghost_mode) 
+	{
+		String animation_name = ghost_sprite->get_animation();
+		if (!ghost_sprite->get_sprite_frames()->get_animation_loop(animation_name) 
+			&& ghost_sprite->get_sprite_frames()->get_frame_count(animation_name) - 1 == ghost_sprite->get_frame())
+			ghost_sprite->play("idle");
+	}
+
 	if (can_move && (is_alive || is_ghost_mode))
 	{
 		current_player_strategy->_process_input();
@@ -247,13 +270,18 @@ void godot::PlayerController::_take_damage(float damage, bool is_spike)
 	if (current_player_strategy->_get_safe_mode())
 		return;
 
+	if (MenuButtons::game_type == TUTORIAL)
+		damage = 0;
+
+	camera_shake->call("_start", 4, .2f);
+
 	current_player_strategy->_take_damage(damage, is_spike);
 	_update_health_bar();
 
 	if (is_alive)
 	{
 		Ref<PackedScene> prefab = nullptr;
-		prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/PlayerTakeDamage.tscn");
+		prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->player_take_damage());
 		add_child(prefab->instance());
 		hurt_particles->restart();
 	}
@@ -277,13 +305,19 @@ void godot::PlayerController::_on_Area2D_area_entered(Node* node)
 
 	if (node->is_in_group("tutor"))
 		_show_tutorial_message(node);
+
+	if (node->is_in_group("poison"))
+	{
+		_take_poison();
+		node->queue_free();
+	}
 }
 
 void godot::PlayerController::_on_Area2D_area_exited(Node* node)
 {
 	auto camera = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D");
 
-	if (node->is_in_group("door_zone") && is_alive)
+	if (node->is_in_group("door_zone") && (is_alive || is_ghost_mode))
 	{
 		camera->call("_door_collision", "-" + node->get_name());
 		door = nullptr;
@@ -324,14 +358,21 @@ void godot::PlayerController::change_can_moving_timeout()
 
 void godot::PlayerController::_decrease_attack_radius()
 {
-	auto node = cast_to<Node2D>(get_child(1));
-	node->set_scale(Vector2(node->get_scale().x * (real_t)1.1111, 1));
+	if (is_in_group("player2"))
+	{
+		auto node = cast_to<Node2D>(get_node("Area2D3"));
+		node->set_scale(Vector2(node->get_scale().x * (real_t)1.1111, 1));
+	}
+
 }
 
 void godot::PlayerController::_encrease_attack_radius()
 {
-	auto node = cast_to<Node2D>(get_child(1));
-	node->set_scale(Vector2(node->get_scale().x * (real_t)0.9, 1));
+	if (is_in_group("player2"))
+	{
+		auto node = cast_to<Node2D>(get_node("Area2D3"));
+		node->set_scale(Vector2(node->get_scale().x * (real_t)0.9, 1));
+	}
 }
 
 void godot::PlayerController::_set_number_to_next_item(int value)
@@ -409,10 +450,19 @@ void godot::PlayerController::_die()
 	if (get_name() == "Player2")
 		Enemies::get_singleton()->_remove_player2();
 
+	Ref<PackedScene> prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->player_died());
+	add_child(prefab->instance());
+
+	cast_to<AnimatedSprite>(get_node("AnimatedSprite"))->play("death");
+
 	if (current_player_strategy->_was_revived())
 	{
+		Godot::print("here");
 		is_ghost_mode = true;
 		current_player_strategy->_set_strategy(player_producer->_get_player_ghost(this, bullet_prefab));
+		cast_to<AnimatedSprite>(get_node("AnimatedSprite"))->set_visible(false);
+		ghost_sprite->set_visible(true);
+		ghost_sprite->play("show");
 
 		if (get_name() == "Player1")
 			PlayersContainer::_get_instance()->_set_player1_regular(cast_to<Node2D>(get_parent()));
@@ -423,11 +473,13 @@ void godot::PlayerController::_die()
 		_restore_data();
 
 		current_player_strategy->_get_health_bar()->set_value(0);
-		//_set_HP(0);
+		
 		return;
 	}
 
-	current_player_strategy->_set_was_revived(true);
+	if(MenuButtons::game_type!=TUTORIAL)
+		current_player_strategy->_set_was_revived(true);
+
 	add_child(revive_zone->instance());
 	current_player_strategy->_set_strategy(player_producer->_get_player_died(this, bullet_prefab));
 
@@ -435,7 +487,7 @@ void godot::PlayerController::_die()
 
 	_update_health_bar();
 
-	//current_player_strategy->_get_health_bar()->set_value(0);
+	current_player_strategy->_get_health_bar()->set_value(0);
 }
 
 void godot::PlayerController::_revive()
@@ -444,7 +496,7 @@ void godot::PlayerController::_revive()
 	current_player_strategy->_revive();
 	is_alive = true;
 	Ref<PackedScene> prefab = nullptr;
-	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/PlayerRevive.tscn");
+	prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->player_revive());
 	add_child(prefab->instance());
 	current_player_strategy->_set_strategy(player_producer->_get_player(this, bullet_prefab));
 	_restore_data();
@@ -476,11 +528,20 @@ void godot::PlayerController::_start_item_particles(bool is_buff)
 {
 	_update_max_health_bar_size();
 
-	if (is_buff)
-		buff_debuff_particles->get_process_material()->set("hue_variation", .85);
-	else
-		buff_debuff_particles->get_process_material()->set("hue_variation", -.85);
+	Ref<PackedScene> prefab = nullptr;
 
+	if (is_buff)
+	{
+		prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->collect_good_item());
+		buff_debuff_particles->get_process_material()->set("hue_variation", .85f);
+	}
+	else
+	{
+		prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->collect_bad_item());
+		buff_debuff_particles->get_process_material()->set("hue_variation", -.85f);
+	}
+
+	get_parent()->add_child(prefab->instance());
 	buff_debuff_particles->restart();
 }
 
@@ -557,6 +618,7 @@ void godot::PlayerController::_set_was_revived(bool value)
 
 void godot::PlayerController::_ghost_to_player()
 {
+	ghost_sprite->play("hide");
 	is_alive = true;
 	can_move = true;
 	is_ghost_mode = false;
@@ -574,6 +636,13 @@ void godot::PlayerController::_ghost_to_player()
 		PlayersContainer::_get_instance()->_set_player1(this);
 	if (get_name() == "Player2")
 		PlayersContainer::_get_instance()->_set_player2(this);
+
+
+	timer->connect("timeout", this, "_on_ghost_hide");
+	timer->start(.5f);
+
+	ghost_end_particles->restart();
+
 }
 
 bool godot::PlayerController::_is_ghost_mode()
@@ -606,4 +675,77 @@ void godot::PlayerController::_set_is_attacking(bool value)
 void godot::PlayerController::_set_right_HP(float value)
 {
 	current_player_strategy->_set_right_HP(value);
+}
+
+void godot::PlayerController::_on_ghost_hide()
+{
+	timer->disconnect("timeout", this, "_on_ghost_hide");
+
+	ghost_sprite->set_visible(false);
+	cast_to<AnimatedSprite>(get_node("AnimatedSprite"))->set_visible(true);
+}
+
+void godot::PlayerController::_flip_ghost(bool value)
+{
+	ghost_sprite->set_flip_h(value);
+}
+
+void godot::PlayerController::_take_poison()
+{
+	if (timer_poison->is_connected("timeout", this, "_on_poison_end"))
+		_on_poison_end();
+
+	diff = speed * .6f;
+	speed -= diff;
+	timer_poison->connect("timeout", this, "_on_poison_end");
+	timer_poison->start(1.5f);
+	current_player_strategy->_set_speed(speed);
+
+}
+
+void godot::PlayerController::_on_poison_end()
+{
+	timer_poison->disconnect("timeout", this, "_on_poison_end");
+	speed += diff;
+	diff = 0;
+	current_player_strategy->_set_speed(speed);
+}
+
+void godot::PlayerController::_player_to_ghost()
+{
+	is_alive = false;
+
+	prev_state = current_player_strategy->_clone();
+
+	if (get_name() == "Player1")
+		Enemies::get_singleton()->_remove_player1();
+	if (get_name() == "Player2")
+		Enemies::get_singleton()->_remove_player2();
+
+	Ref<PackedScene> prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->player_died());
+	add_child(prefab->instance());
+
+	cast_to<AnimatedSprite>(get_node("AnimatedSprite"))->play("death");
+
+
+	is_ghost_mode = true;
+	current_player_strategy->_set_strategy(player_producer->_get_player_ghost(this, bullet_prefab));
+	cast_to<AnimatedSprite>(get_node("AnimatedSprite"))->set_visible(false);
+	ghost_sprite->set_visible(true);
+	ghost_sprite->play("show");
+
+	if (get_name() == "Player1")
+		PlayersContainer::_get_instance()->_set_player1_regular(cast_to<Node2D>(get_parent()));
+
+	if (get_name() == "Player2")
+		PlayersContainer::_get_instance()->_set_player2_regular(this);
+
+	_restore_data();
+
+	current_player_strategy->_get_health_bar()->set_value(0);
+
+	Ref<PackedScene> ghost_sound = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->player_to_ghost());
+	add_child(ghost_sound->instance());
+
+	return;
 }

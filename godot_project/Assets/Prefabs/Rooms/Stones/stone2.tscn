@@ -4,6 +4,7 @@
 
 [node name="stone" type="TileMap"]
 position = Vector2( 0, -16.0204 )
+z_as_relative = false
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 3

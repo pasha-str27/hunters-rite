@@ -24,6 +24,9 @@ void godot::ItemGenerator::_ready()
 
 void godot::ItemGenerator::_dead_enemy(Vector2 enemy_position)
 {
+	if (MenuButtons::game_type == TUTORIAL)
+		return;
+
 	current_count -= 1;
 	if (current_count <= 0) 
 	{

@@ -5,10 +5,12 @@
 
 namespace godot
 {
+	class BulletPull;
+
 	class PlayerShoot : public PlayerData
 	{
-		std::vector<Node2D*> available_bullets;
 		int max_bullet_count;
+		BulletPull* bullet_pull = nullptr;
 
 		Vector2 bullet_dir;
 		AnimatedSprite* sprite = nullptr;
