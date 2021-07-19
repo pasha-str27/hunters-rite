@@ -1,0 +1,45 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Assets/Prefabs/Rooms/1/R.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Prefabs/Rooms/3/LBR.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Prefabs/Rooms/2/LR.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Prefabs/Rooms/1/T.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Prefabs/Rooms/1/L.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Prefabs/Rooms/1/B.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Prefabs/Enemies/Slime.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Prefabs/Enemies/FlowerBoss.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Prefabs/Enemies/Bat.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Prefabs/Enemies/StatueMelee.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Prefabs/Enemies/StatueShoot.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Prefabs/Enemies/Spider.tscn" type="PackedScene" id=12]
+
+[node name="Level_6" type="Node2D"]
+
+[node name="Room" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, 720 )
+Enemies = [ ExtResource( 9 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 10 ), ExtResource( 7 ) ]
+
+[node name="Room2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 0, -720 )
+Enemies = [ ExtResource( 11 ) ]
+
+[node name="Room3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1024, 0 )
+
+[node name="Room4" parent="." instance=ExtResource( 3 )]
+position = Vector2( -1024, 0 )
+
+[node name="Room5" parent="." instance=ExtResource( 2 )]
+position = Vector2( -2048, 0 )
+Enemies = [ ExtResource( 12 ), ExtResource( 7 ), ExtResource( 9 ) ]
+
+[node name="ItemRoom" parent="." instance=ExtResource( 5 )]
+position = Vector2( 2048, 0 )
+
+[node name="Boss" parent="." instance=ExtResource( 4 )]
+position = Vector2( -2048, 720 )
+Enemies = [ ExtResource( 8 ), ExtResource( 7 ), ExtResource( 7 ), ExtResource( 7 ) ]
+
+[node name="Room6" parent="." instance=ExtResource( 1 )]
+position = Vector2( -3072, 0 )
+Enemies = [ ExtResource( 7 ), ExtResource( 7 ), ExtResource( 7 ), ExtResource( 7 ) ]
