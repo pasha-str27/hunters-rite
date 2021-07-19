@@ -112,7 +112,7 @@ void godot::SpawnEnemyController::SpawnBoss()
 {
 	switch (GameManager::current_level)
 	{
-		case 1:
+		case 2:
 		{
 			_spawn_boss(boss_prefab);
 

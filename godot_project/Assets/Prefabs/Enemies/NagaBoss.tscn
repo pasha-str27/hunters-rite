@@ -167,7 +167,7 @@ collision_layer = 4
 collision_mask = 512
 script = ExtResource( 3 )
 bullet = ExtResource( 31 )
-HP = 3000.0
+HP = 1800.0
 "Death particles" = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NagaBoss"]
@@ -196,7 +196,7 @@ z_as_relative = false
 [node name="MagnitZone" type="Area2D" parent="NagaBoss"]
 scale = Vector2( 10, 10 )
 script = SubResource( 22 )
-force = 120.0
+force = 80.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NagaBoss/MagnitZone"]
 shape = SubResource( 23 )
