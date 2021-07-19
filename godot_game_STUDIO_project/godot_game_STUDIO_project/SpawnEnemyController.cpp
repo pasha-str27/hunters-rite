@@ -112,69 +112,69 @@ void godot::SpawnEnemyController::SpawnBoss()
 {
 	switch (GameManager::current_level)
 	{
-	case 2:
-	{
-		_spawn_boss(boss_prefab);
-
-		std::vector<Vector2> taken_positions;
-
-		auto enemies = Enemies::get_singleton();
-
-		enemies->set_spawning(true);
-
-		RandomNumberGenerator* rng = RandomNumberGenerator::_new();
-		rng->randomize();
-
-		int spider_count = 2;
-		for (int i = 0; i < spider_count; ++i)
+		case 1:
 		{
-			Node2D* enemy = cast_to<Node2D>(spider_prefab->instance());
-			int pos_x;
-			int pos_y;
-			do
+			_spawn_boss(boss_prefab);
+
+			std::vector<Vector2> taken_positions;
+
+			auto enemies = Enemies::get_singleton();
+
+			enemies->set_spawning(true);
+
+			RandomNumberGenerator* rng = RandomNumberGenerator::_new();
+			rng->randomize();
+
+			int spider_count = 2;
+			for (int i = 0; i < spider_count; ++i)
 			{
-				pos_x = rng->randi_range(1, 26);
-				pos_y = rng->randi_range(4, 15);
-			} while (!(bool)CurrentRoom::get_singleton()->_get_current_room()->call("_is_empty_pos", pos_y, pos_x));
+				Node2D* enemy = cast_to<Node2D>(spider_prefab->instance());
+				int pos_x;
+				int pos_y;
+				do
+				{
+					pos_x = rng->randi_range(1, 26);
+					pos_y = rng->randi_range(4, 15);
+				} while (!(bool)CurrentRoom::get_singleton()->_get_current_room()->call("_is_empty_pos", pos_y, pos_x));
 
-			enemies->set_enemy_to_spawn_count(enemies->get_enemy_to_spawn_count() + 1);
+				enemies->set_enemy_to_spawn_count(enemies->get_enemy_to_spawn_count() + 1);
 
-			taken_positions.push_back(Vector2(pos_x, pos_y));
-			CurrentRoom::get_singleton()->_get_current_room()->call("_add_new_enemy", enemy, (Vector2(pos_x, pos_y) * 32
-				+ CurrentRoom::get_singleton()->_get_current_room()->get_global_position()
-				- Vector2(896, 544) / 2 + Vector2(16, 16)));
+				taken_positions.push_back(Vector2(pos_x, pos_y));
+				CurrentRoom::get_singleton()->_get_current_room()->call("_add_new_enemy", enemy, (Vector2(pos_x, pos_y) * 32
+					+ CurrentRoom::get_singleton()->_get_current_room()->get_global_position()
+					- Vector2(896, 544) / 2 + Vector2(16, 16)));
 
-			CurrentRoom::get_singleton()->_get_current_room()->call("_set_cell_value", pos_y, pos_x, 7);
+				CurrentRoom::get_singleton()->_get_current_room()->call("_set_cell_value", pos_y, pos_x, 7);
+			}
+
+			for (int i = 0; i < taken_positions.size(); ++i)
+				CurrentRoom::get_singleton()->_get_current_room()->call("_set_cell_value", taken_positions[i].y, taken_positions[i].x, 0);
+
+			taken_positions.clear();
+			break;
 		}
-
-		for (int i = 0; i < taken_positions.size(); ++i)
-			CurrentRoom::get_singleton()->_get_current_room()->call("_set_cell_value", taken_positions[i].y, taken_positions[i].x, 0);
-
-		taken_positions.clear();
-		break;
-	}
-	case 5:
-	{
-		_spawn_boss(boss_slime_prefab);
-		break;
-	}
-	case 10:
-	{
-		_spawn_boss(naga_boss_prefab);
-		break;
-	}
-	default:
-	{
-		if (!CurrentRoom::get_singleton()->_get_current_room()->has_node("exit"))
+		case 5:
 		{
-			Ref<PackedScene> exit_prefab = nullptr;
-			exit_prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/exit.tscn");
-			Node2D* exit_node = Node::cast_to<Node2D>(exit_prefab->instance());
-			CurrentRoom::get_singleton()->_get_current_room()->add_child(exit_node, true);
+			_spawn_boss(boss_slime_prefab);
+			break;
 		}
-		Enemies::get_singleton()->set_spawning(false);
-		break;
-	}
+		case 10:
+		{
+			_spawn_boss(naga_boss_prefab);
+			break;
+		}
+		default:
+		{
+			if (!CurrentRoom::get_singleton()->_get_current_room()->has_node("exit"))
+			{
+				Ref<PackedScene> exit_prefab = nullptr;
+				exit_prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/exit.tscn");
+				Node2D* exit_node = Node::cast_to<Node2D>(exit_prefab->instance());
+				CurrentRoom::get_singleton()->_get_current_room()->add_child(exit_node, true);
+			}
+			Enemies::get_singleton()->set_spawning(false);
+			break;
+		}
 	}
 }
 
@@ -320,7 +320,7 @@ float godot::SpawnEnemyController::_calculate_room_difficulty()
 
 	float res = ((PH1 + PH2) * PH_k) / 2 + ((D1 * AS1 + D2 * AS2) / 2) * DPS_k - RFS + (MK - CK) * K_k;
 
-	res = res < 150 ? 150 : res;
+	res = res < 15 ? 15 : res;
 	res = res > 500 ? 500 : res;
 
 	return res;

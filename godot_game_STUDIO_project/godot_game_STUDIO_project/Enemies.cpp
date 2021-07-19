@@ -49,7 +49,7 @@ void godot::Enemies::_remove_enemy(Node2D* enemy)
 				cur_room->call("_set_were_here", true);
 			}
 
-			break;
+			return;
 		}
 
 	if ((String)CurrentRoom::get_singleton()->_get_current_room()->call("_get_room_type") == "boss_room" && enemies.size() == 0)
