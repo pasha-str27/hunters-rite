@@ -621,7 +621,7 @@ margin_right = 256.0
 margin_bottom = 207.0
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0.517647, 0.517647, 0.517647, 1 )
-text = "+20 Hp"
+text = "+Hp"
 align = 1
 valign = 1
 __meta__ = {
@@ -629,13 +629,14 @@ __meta__ = {
 }
 
 [node name="DeBuff" type="Label" parent="Items/Items_grid/ScrollContainer/GridContainer/LegendaryChiken/VBoxContainer"]
+visible = false
 modulate = Color( 0.827451, 0.360784, 0.360784, 1 )
 margin_top = 211.0
 margin_right = 256.0
 margin_bottom = 219.0
 custom_fonts/font = SubResource( 5 )
 custom_colors/font_color_shadow = Color( 0.439216, 0.439216, 0.439216, 1 )
-text = "-5 Damage"
+text = "- Damage"
 align = 1
 valign = 1
 __meta__ = {
@@ -748,7 +749,7 @@ margin_right = 256.0
 margin_bottom = 196.0
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
-text = "+30 Speed"
+text = "+Speed"
 align = 1
 valign = 1
 __meta__ = {
@@ -856,10 +857,11 @@ text_key = "KEY_EYE_DESCRIPTION"
 modulate = Color( 0.592157, 0.815686, 0.560784, 1 )
 margin_top = 187.0
 margin_right = 256.0
-margin_bottom = 196.0
+margin_bottom = 208.0
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
-text = "+20 Damage"
+text = "+Damage
++Speed"
 align = 1
 valign = 1
 __meta__ = {
@@ -868,12 +870,13 @@ __meta__ = {
 
 [node name="DeBuff" type="Label" parent="Items/Items_grid/ScrollContainer/GridContainer/DragonsEye/VBoxContainer"]
 modulate = Color( 0.780392, 0.4, 0.4, 1 )
-margin_top = 200.0
+margin_top = 212.0
 margin_right = 256.0
-margin_bottom = 208.0
+margin_bottom = 231.0
 custom_fonts/font = SubResource( 9 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
-text = "-Attack range"
+text = "-Attack range
+-HP"
 align = 1
 valign = 1
 __meta__ = {
@@ -990,7 +993,7 @@ margin_bottom = 196.0
 mouse_filter = 0
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
-text = "+15 Damage"
+text = "+Damage"
 align = 1
 valign = 1
 __meta__ = {
@@ -1101,10 +1104,11 @@ text_key = "KEY_GLASSES_DESCRIPTION"
 modulate = Color( 0.592157, 0.815686, 0.560784, 1 )
 margin_top = 201.0
 margin_right = 256.0
-margin_bottom = 210.0
+margin_bottom = 222.0
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
-text = "+Attack range"
+text = "+Attack range
++Speed"
 align = 1
 valign = 1
 __meta__ = {
@@ -1217,10 +1221,12 @@ text_key = "KEY_LUCKY_DESCRIPTION"
 modulate = Color( 0.592157, 0.815686, 0.560784, 1 )
 margin_top = 198.0
 margin_right = 256.0
-margin_bottom = 207.0
+margin_bottom = 231.0
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
-text = "+5% loot"
+text = "+loot
++Damage
++Speed"
 align = 1
 valign = 1
 __meta__ = {
@@ -1328,10 +1334,11 @@ text_key = "KEY_CORE_DESCRIPTION"
 modulate = Color( 0.592157, 0.815686, 0.560784, 1 )
 margin_top = 187.0
 margin_right = 256.0
-margin_bottom = 196.0
+margin_bottom = 208.0
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
-text = "+10 Damage"
+text = "+Damage
++HP"
 align = 1
 valign = 1
 __meta__ = {
@@ -1340,12 +1347,12 @@ __meta__ = {
 
 [node name="DeBuff" type="Label" parent="Items/Items_grid/ScrollContainer/GridContainer/CoreWithAChain/VBoxContainer"]
 modulate = Color( 0.780392, 0.4, 0.4, 1 )
-margin_top = 200.0
+margin_top = 212.0
 margin_right = 256.0
-margin_bottom = 208.0
+margin_bottom = 220.0
 custom_fonts/font = SubResource( 14 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
-text = "-50 Speed"
+text = "-Speed"
 align = 1
 valign = 1
 __meta__ = {
@@ -1456,7 +1463,7 @@ margin_right = 256.0
 margin_bottom = 185.0
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
-text = "+30 HP"
+text = "+HP"
 align = 1
 valign = 1
 __meta__ = {
@@ -1467,10 +1474,11 @@ __meta__ = {
 modulate = Color( 0.780392, 0.4, 0.4, 1 )
 margin_top = 189.0
 margin_right = 256.0
-margin_bottom = 197.0
+margin_bottom = 208.0
 custom_fonts/font = SubResource( 16 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
-text = "-25 Damage"
+text = "-Damage
+-Speed"
 align = 1
 valign = 1
 __meta__ = {
@@ -1579,10 +1587,12 @@ text_key = "KEY_DTOOTH_DESCRIPTION"
 modulate = Color( 0.592157, 0.815686, 0.560784, 1 )
 margin_top = 187.0
 margin_right = 256.0
-margin_bottom = 196.0
+margin_bottom = 220.0
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
-text = "+Attack range"
+text = "+Speed
++HP
++Damage"
 align = 1
 valign = 1
 __meta__ = {
@@ -1591,9 +1601,9 @@ __meta__ = {
 
 [node name="DeBuff" type="Label" parent="Items/Items_grid/ScrollContainer/GridContainer/DarkGragonsTooth/VBoxContainer"]
 modulate = Color( 0.780392, 0.4, 0.4, 1 )
-margin_top = 200.0
+margin_top = 224.0
 margin_right = 256.0
-margin_bottom = 208.0
+margin_bottom = 232.0
 custom_fonts/font = SubResource( 18 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
 text = "-Attack speed"
@@ -1704,10 +1714,12 @@ text_key = "KEY_HTOOTH_DESCRIPTION"
 modulate = Color( 0.592157, 0.815686, 0.560784, 1 )
 margin_top = 187.0
 margin_right = 256.0
-margin_bottom = 196.0
+margin_bottom = 220.0
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
-text = "+Attack speed"
+text = "+Attack speed
++Damage
++Speed"
 align = 1
 valign = 1
 __meta__ = {
@@ -1798,7 +1810,7 @@ texture = ExtResource( 17 )
 expand = true
 
 [node name="Description" type="Label" parent="Items/Items_grid/ScrollContainer/GridContainer/UnluckyNumber/VBoxContainer"]
-margin_top = 150.0
+margin_top = 164.0
 margin_right = 256.0
 margin_bottom = 183.0
 custom_fonts/font = SubResource( 7 )
@@ -1816,11 +1828,10 @@ text_key = "KEY_NUMBER_DESCRIPTION"
 modulate = Color( 0.592157, 0.815686, 0.560784, 1 )
 margin_top = 187.0
 margin_right = 256.0
-margin_bottom = 208.0
+margin_bottom = 196.0
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
-text = "+25 HP
-+10 Damage"
+text = "+Damage"
 align = 1
 valign = 1
 __meta__ = {
@@ -1829,12 +1840,13 @@ __meta__ = {
 
 [node name="DeBuff" type="Label" parent="Items/Items_grid/ScrollContainer/GridContainer/UnluckyNumber/VBoxContainer"]
 modulate = Color( 0.780392, 0.4, 0.4, 1 )
-margin_top = 212.0
+margin_top = 200.0
 margin_right = 256.0
-margin_bottom = 220.0
+margin_bottom = 219.0
 custom_fonts/font = SubResource( 21 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
-text = "-10% loot"
+text = "-loot
+-Attack speed"
 align = 1
 valign = 1
 __meta__ = {
@@ -1943,10 +1955,11 @@ text_key = "KEY_GORILKA_DESCRIPTION"
 modulate = Color( 0.592157, 0.815686, 0.560784, 1 )
 margin_top = 187.0
 margin_right = 256.0
-margin_bottom = 196.0
+margin_bottom = 208.0
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
-text = "+30 Damage"
+text = "+Damage
++Speed"
 align = 1
 valign = 1
 __meta__ = {
@@ -1955,12 +1968,12 @@ __meta__ = {
 
 [node name="DeBuff" type="Label" parent="Items/Items_grid/ScrollContainer/GridContainer/UkrainianGorilka/VBoxContainer"]
 modulate = Color( 0.780392, 0.4, 0.4, 1 )
-margin_top = 200.0
+margin_top = 212.0
 margin_right = 256.0
-margin_bottom = 208.0
+margin_bottom = 220.0
 custom_fonts/font = SubResource( 7 )
 custom_colors/font_color_shadow = Color( 0.47451, 0.47451, 0.47451, 1 )
-text = "-50 HP"
+text = "-HP"
 align = 1
 valign = 1
 __meta__ = {
