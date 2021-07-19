@@ -2,15 +2,24 @@
 
 importer="texture"
 type="StreamTexture"
+<<<<<<< HEAD:godot_project/Assets/Sprites/UI/minimap_border.png.import
 path="res://.import/minimap_border.png-3479d9bc723a6a49a5de71d6c6849ee0.stex"
+=======
+path="res://.import/doors.png-30ed9d77e4b642c55e5ebc0d2ffe2e34.stex"
+>>>>>>> origin/endl:godot_project/Assets/Sprites/UI/BacksButtonsAndOther/doors.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
+<<<<<<< HEAD:godot_project/Assets/Sprites/UI/minimap_border.png.import
 source_file="res://Assets/Sprites/UI/minimap_border.png"
 dest_files=[ "res://.import/minimap_border.png-3479d9bc723a6a49a5de71d6c6849ee0.stex" ]
+=======
+source_file="res://Assets/Sprites/UI/BacksButtonsAndOther/doors.png"
+dest_files=[ "res://.import/doors.png-30ed9d77e4b642c55e5ebc0d2ffe2e34.stex" ]
+>>>>>>> origin/endl:godot_project/Assets/Sprites/UI/BacksButtonsAndOther/doors.png.import
 
 [params]
 
