@@ -23,9 +23,11 @@
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_atack_p2_player_v2.png" type="Texture" id=22]
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_dash_p1_player.png" type="Texture" id=23]
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_atack_p1_player_v2.png" type="Texture" id=24]
-[ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_player_p1_power_up.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_player_p2_power_up.png" type="Texture" id=25]
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_heal_fx.png" type="Texture" id=26]
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_ghost.png" type="Texture" id=27]
+
+
 
 [sub_resource type="DynamicFont" id=1]
 size = 60

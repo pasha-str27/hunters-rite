@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/Jertovnik.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Scripts/SpawnEnemyController.gdns" type="Script" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://Assets/Prefabs/Enemies/Mimic.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Assets/Prefabs/Enemies/SillyBoy.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Assets/Prefabs/Enemies/Slime.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Assets/Prefabs/Enemies/TutorialEnemy.tscn" type="PackedScene" id=25]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.6, 0.6, 0.6, 0.117647 )
@@ -85,7 +86,7 @@ enemy_list = [ [ ExtResource( 24 ), ExtResource( 13 ) ], [ ExtResource( 24 ), Ex
 boss_prefab = ExtResource( 12 )
 boss_slime_prefab = ExtResource( 19 )
 spider_prefab = ExtResource( 18 )
-slime_prefab = ExtResource( 24 )
+tutorial_enemy = ExtResource( 25 )
 naga_boss_prefab = ExtResource( 17 )
 
 [node name="ItemPoints" type="Node2D" parent="EnemySpawner"]

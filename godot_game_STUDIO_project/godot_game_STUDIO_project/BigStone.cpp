@@ -34,9 +34,11 @@ void godot::BigStone::_ready()
 
 void godot::BigStone::_set_new_z_index_for_player(Node2D* node, int index)
 {
-	if (node->is_in_group("player")) {
-		if (node->get_name() == "Player1") {
-			cast_to<KinematicBody2D>(node->get_child(1))->set_z_index(5);
+	if (node->is_in_group("player")) 
+	{
+		if (node->is_in_group("player1")) 
+		{
+			cast_to<AnimatedSprite>(node->get_node("AnimatedSprite"))->set_z_index(index);
 			return;
 		}
 		node->set_z_index(index);

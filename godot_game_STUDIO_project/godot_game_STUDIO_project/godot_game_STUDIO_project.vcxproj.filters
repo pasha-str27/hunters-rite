@@ -207,6 +207,9 @@
     <ClCompile Include="LocaledLabel.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="TutorialEnemy.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomExtensions.h" />
@@ -439,6 +442,9 @@
     </ClInclude>
     <ClInclude Include="LocaledLabel.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialEnemy.h">
+      <Filter>Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

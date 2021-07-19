@@ -533,12 +533,12 @@ void godot::PlayerController::_start_item_particles(bool is_buff)
 	if (is_buff)
 	{
 		prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->collect_good_item());
-		buff_debuff_particles->get_process_material()->set("hue_variation", .85);
+		buff_debuff_particles->get_process_material()->set("hue_variation", .85f);
 	}
 	else
 	{
 		prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->collect_bad_item());
-		buff_debuff_particles->get_process_material()->set("hue_variation", -.85);
+		buff_debuff_particles->get_process_material()->set("hue_variation", -.85f);
 	}
 
 	get_parent()->add_child(prefab->instance());
@@ -744,6 +744,9 @@ void godot::PlayerController::_player_to_ghost()
 	_restore_data();
 
 	current_player_strategy->_get_health_bar()->set_value(0);
+
+	Ref<PackedScene> ghost_sound = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->player_to_ghost());
+	add_child(ghost_sound->instance());
 
 	return;
 }

@@ -3,7 +3,7 @@
 [ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Assets/Scripts/MenuButtons.gdns" type="Script" id=3]
-[ext_resource path="res://Assets/Sprites/UI/WantedLabel/naga_sprite.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/doors.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_focus_v2.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_background_v2.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Sprites/UI/WantedLabel/wanted_backgroud_base_v3.png" type="Texture" id=7]
@@ -49,7 +49,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="DynamicFont" id=2]
-size = 17
+size = 22
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
@@ -280,40 +280,32 @@ __meta__ = {
 anims/Focus_scale = SubResource( 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Flower"]
-margin_left = 96.0
-margin_top = 50.0
-margin_right = 224.0
-margin_bottom = 270.0
+margin_left = 72.0
+margin_top = 69.0
+margin_right = 248.0
+margin_bottom = 251.0
 
 [node name="Wanted_text2" type="Label" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/VBoxContainer"]
-margin_right = 128.0
-margin_bottom = 20.0
+margin_right = 176.0
+margin_bottom = 22.0
 rect_min_size = Vector2( 0, 20 )
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Wanted"
+text = "Campaign"
 align = 1
 valign = 2
+script = ExtResource( 18 )
+text_key = "KEY_CAMPAIGN"
 
 [node name="Flower_sprite" type="TextureRect" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/VBoxContainer"]
-margin_top = 24.0
-margin_right = 128.0
-margin_bottom = 179.0
-rect_min_size = Vector2( 128, 155 )
+margin_top = 26.0
+margin_right = 176.0
+margin_bottom = 182.0
+rect_min_size = Vector2( 128, 156 )
 mouse_filter = 2
 texture = ExtResource( 4 )
 expand = true
 stretch_mode = 6
-
-[node name="Wanted_text" type="Label" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Flower/VBoxContainer"]
-margin_top = 183.0
-margin_right = 128.0
-margin_bottom = 220.0
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "NAGA
-"
-align = 1
 
 [node name="Tutorial" type="CenterContainer" parent="Notice/VBoxContainer/Tasks/HBoxContainer"]
 margin_left = 460.0
@@ -375,9 +367,9 @@ text_key = "KEY_TUTORIAL"
 
 [node name="Players_sprite" type="TextureRect" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Tutorial/Tutorial_button"]
 margin_left = 97.0
-margin_top = 96.0
+margin_top = 97.0595
 margin_right = 231.0
-margin_bottom = 254.0
+margin_bottom = 255.059
 rect_min_size = Vector2( 128, 155 )
 mouse_filter = 2
 texture = ExtResource( 17 )
@@ -389,10 +381,10 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Tutorial"]
 visible = false
-margin_left = 96.0
-margin_top = 75.0
-margin_right = 224.0
-margin_bottom = 244.0
+margin_left = 94.0
+margin_top = 70.0
+margin_right = 226.0
+margin_bottom = 249.0
 
 [node name="TextureRect" type="TextureRect" parent="Notice/VBoxContainer/Tasks/HBoxContainer/Tutorial/VBoxContainer"]
 margin_right = 128.0
@@ -654,9 +646,9 @@ anims/Focus_scale = SubResource( 8 )
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one/Coming_soon_button" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one/Coming_soon_button" to="Notice" method="_on_animated_focus_entered" binds= [ "Coming_soon_button", "SoonAnimated" ]]
 [connection signal="focus_exited" from="Notice/VBoxContainer/Tasks/HBoxContainer/Coming_soon_one/Coming_soon_button" to="Notice" method="_on_animated_focus_exited" binds= [ "Coming_soon_button", "SoonAnimated" ]]
+[connection signal="focus_entered" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_on_Mode_focus"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_play_change_cursor_effect"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_on_animated_focus_entered" binds= [ "Mode", "ModeAnimated" ]]
-[connection signal="focus_entered" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_on_Mode_focus"]
 [connection signal="focus_exited" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_on_animated_focus_exited" binds= [ "Mode", "ModeAnimated" ]]
 [connection signal="focus_exited" from="Notice/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer2/Mode" to="Notice" method="_on_Mode_focus"]
 [connection signal="focus_entered" from="Notice/VBoxContainer/CenterContainer/Back" to="Notice" method="_play_change_cursor_effect"]

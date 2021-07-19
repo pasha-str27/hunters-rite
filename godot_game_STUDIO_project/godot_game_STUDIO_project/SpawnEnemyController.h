@@ -23,7 +23,7 @@ namespace godot
 		Ref<PackedScene> boss_slime_prefab = nullptr;
 		Ref<PackedScene> naga_boss_prefab = nullptr;
 		Ref<PackedScene> spider_prefab = nullptr;
-		Ref<PackedScene> slime_prefab = nullptr;
+		Ref<PackedScene> tutorial_enemy = nullptr;
 		Timer* timer = nullptr;
 		int levels_count = 7;
 		String current_level = "";

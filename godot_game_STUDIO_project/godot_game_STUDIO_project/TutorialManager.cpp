@@ -143,7 +143,7 @@ void godot::TutorialManager::_move(String dir)
 
 	if ((String)prev_room->call("_get_room_type") == "heal_room" && (String)cur_room->call("_get_room_type") == "revive_room")
 	{
-		CustomExtensions::ChangeVisibleInNodes(cast_to<Node>(get_node("/root/Node2D/Node/TutorialSprites")), "GhostTutorial",true);
+		CustomExtensions::ChangeVisibleInNodes(cast_to<Node>(get_node("/root/Node2D/Node/TutorialSprites")), "GhostTutorial", true);
 		auto player = PlayersContainer::_get_instance()->_get_player1_regular();
 		if (player != nullptr)
 			player->get_child(1)->call("_die");
@@ -159,6 +159,17 @@ void godot::TutorialManager::_move(String dir)
 
 	if ((String)cur_room->call("_get_room_type") == "heal_room")
 		cur_room->get_node("Stone")->call("_can_heal_true");
+
+	if ((String)prev_room->call("_get_room_type") == "game_room")
+	{
+		prev_room->get_node("TutorialEnemy")->queue_free();
+
+		for (int i = prev_room->get_child_count() - 1; i >= 0; --i)
+			if (prev_room->get_child(i)->get_name().find("fill_door") != -1)
+				cast_to<Node2D>(prev_room->get_child(i))->show();
+
+		prev_room->call("_set_were_here", false);
+	}
 
 	if (minimap != nullptr)
 		minimap->call("_update_minimap");
@@ -399,6 +410,10 @@ void godot::TutorialManager::_door_collision(String door_dir)
 
 void godot::TutorialManager::_open_doors()
 {
+	Ref<PackedScene> prefab = nullptr;
+	prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->open_door());
+	add_child(prefab->instance());
+
 	if (current_room_type == "boss")
 	{
 		_spawn_exit();
