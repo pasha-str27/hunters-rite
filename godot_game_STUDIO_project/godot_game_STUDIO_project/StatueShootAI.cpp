@@ -45,18 +45,6 @@ void godot::StatueShootAI::_remove_taken_positions()
 	CurrentRoom::get_singleton()->_get_current_room()->call("_set_cell_value", cur_pos.y, cur_pos.x, 0);
 }
 
-void godot::StatueShootAI::_change_start_parameters()
-{
-	Vector2 cur_pos = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
-	CameraController::current_room->call("_set_cell_value", cur_pos.y, cur_pos.x, 8);
-}
-
-void godot::StatueShootAI::_remove_taken_positions()
-{
-	Vector2 cur_pos = (_get_enemy()->get_global_position() - CameraController::current_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
-	CameraController::current_room->call("_set_cell_value", cur_pos.y, cur_pos.x, 0);
-}
-
 void godot::StatueShootAI::_process(float delta)
 {
 	if (can_fight)
@@ -65,7 +53,7 @@ void godot::StatueShootAI::_process(float delta)
 		{
 			Vector2 point = directions[i];
 			directions[i].x = point.x * cos(M_PI / 4) - point.y * sin(M_PI / 4);
-			directions[i].y = point.x * sin(M_PI / 4) + point.y * cos(M_PI/4);
+			directions[i].y = point.x * sin(M_PI / 4) + point.y * cos(M_PI / 4);
 		}
 
 		can_fight = false;
