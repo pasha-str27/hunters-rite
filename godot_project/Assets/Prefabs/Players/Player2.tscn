@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=2]
+[gd_scene load_steps=116 format=2]
 
 [ext_resource path="res://scripts.gdnlib" type="GDNativeLibrary" id=1]
 [ext_resource path="res://Assets/Prefabs/Particles/DashParticles.tscn" type="PackedScene" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://Assets/Sprites/Players/ghost/ghost_idle.png" type="Texture" id=20]
 [ext_resource path="res://Assets/Sprites/Players/ghost/ghost_poof.png" type="Texture" id=21]
 [ext_resource path="res://Assets/Sprites/Players/ghost/ghost_happy.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Prefabs/Particles/Explosions/BoomGhostParticles.tscn" type="PackedScene" id=23]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -52,44 +53,44 @@ atlas = ExtResource( 16 )
 region = Rect2( 42, 0, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 15 )
-region = Rect2( 0, 64, 192, 64 )
+atlas = ExtResource( 11 )
+region = Rect2( 42, 0, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 15 )
-region = Rect2( 192, 64, 192, 64 )
+atlas = ExtResource( 11 )
+region = Rect2( 42, 39, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 15 )
-region = Rect2( 384, 64, 192, 64 )
+atlas = ExtResource( 11 )
+region = Rect2( 42, 78, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 15 )
-region = Rect2( 576, 64, 192, 64 )
+atlas = ExtResource( 11 )
+region = Rect2( 42, 117, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 15 )
-region = Rect2( 768, 64, 192, 64 )
+atlas = ExtResource( 11 )
+region = Rect2( 42, 156, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 15 )
-region = Rect2( 960, 64, 192, 64 )
+atlas = ExtResource( 11 )
+region = Rect2( 42, 195, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 15 )
-region = Rect2( 1152, 64, 192, 64 )
+atlas = ExtResource( 11 )
+region = Rect2( 42, 234, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 15 )
-region = Rect2( 1344, 64, 192, 64 )
+atlas = ExtResource( 11 )
+region = Rect2( 42, 273, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 12 )
-region = Rect2( 42, 0, 42, 39 )
+region = Rect2( 42, 156, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 12 )
-region = Rect2( 42, 39, 42, 39 )
+region = Rect2( 42, 117, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 12 )
@@ -97,95 +98,95 @@ region = Rect2( 42, 78, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 12 )
-region = Rect2( 42, 117, 42, 39 )
+region = Rect2( 42, 39, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 12 )
-region = Rect2( 42, 156, 42, 39 )
+region = Rect2( 42, 0, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 11 )
+atlas = ExtResource( 12 )
 region = Rect2( 42, 0, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 11 )
+atlas = ExtResource( 12 )
 region = Rect2( 42, 39, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 11 )
+atlas = ExtResource( 12 )
 region = Rect2( 42, 78, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 11 )
+atlas = ExtResource( 12 )
 region = Rect2( 42, 117, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 11 )
+atlas = ExtResource( 12 )
 region = Rect2( 42, 156, 42, 39 )
 
 [sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 11 )
-region = Rect2( 42, 195, 42, 39 )
-
-[sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 11 )
-region = Rect2( 42, 234, 42, 39 )
-
-[sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 11 )
-region = Rect2( 42, 273, 42, 39 )
-
-[sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 17 )
 region = Rect2( 0, 64, 160, 64 )
 
-[sub_resource type="AtlasTexture" id=30]
+[sub_resource type="AtlasTexture" id=27]
 atlas = ExtResource( 17 )
 region = Rect2( 160, 64, 160, 64 )
 
-[sub_resource type="AtlasTexture" id=31]
+[sub_resource type="AtlasTexture" id=28]
 atlas = ExtResource( 17 )
 region = Rect2( 320, 64, 160, 64 )
 
-[sub_resource type="AtlasTexture" id=32]
+[sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 17 )
 region = Rect2( 480, 64, 160, 64 )
 
-[sub_resource type="AtlasTexture" id=33]
+[sub_resource type="AtlasTexture" id=30]
 atlas = ExtResource( 17 )
 region = Rect2( 640, 64, 160, 64 )
 
-[sub_resource type="AtlasTexture" id=34]
+[sub_resource type="AtlasTexture" id=31]
 atlas = ExtResource( 17 )
 region = Rect2( 800, 64, 160, 64 )
 
-[sub_resource type="AtlasTexture" id=35]
+[sub_resource type="AtlasTexture" id=32]
 atlas = ExtResource( 17 )
 region = Rect2( 960, 64, 160, 64 )
 
-[sub_resource type="AtlasTexture" id=36]
+[sub_resource type="AtlasTexture" id=33]
 atlas = ExtResource( 17 )
 region = Rect2( 1120, 64, 160, 64 )
 
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 64, 192, 64 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 15 )
+region = Rect2( 192, 64, 192, 64 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 15 )
+region = Rect2( 384, 64, 192, 64 )
+
 [sub_resource type="AtlasTexture" id=37]
-atlas = ExtResource( 12 )
-region = Rect2( 42, 156, 42, 39 )
+atlas = ExtResource( 15 )
+region = Rect2( 576, 64, 192, 64 )
 
 [sub_resource type="AtlasTexture" id=38]
-atlas = ExtResource( 12 )
-region = Rect2( 42, 117, 42, 39 )
+atlas = ExtResource( 15 )
+region = Rect2( 768, 64, 192, 64 )
 
 [sub_resource type="AtlasTexture" id=39]
-atlas = ExtResource( 12 )
-region = Rect2( 42, 78, 42, 39 )
+atlas = ExtResource( 15 )
+region = Rect2( 960, 64, 192, 64 )
 
 [sub_resource type="AtlasTexture" id=40]
-atlas = ExtResource( 12 )
-region = Rect2( 42, 39, 42, 39 )
+atlas = ExtResource( 15 )
+region = Rect2( 1152, 64, 192, 64 )
 
 [sub_resource type="AtlasTexture" id=41]
-atlas = ExtResource( 12 )
-region = Rect2( 42, 0, 42, 39 )
+atlas = ExtResource( 15 )
+region = Rect2( 1344, 64, 192, 64 )
 
 [sub_resource type="SpriteFrames" id=42]
 animations = [ {
@@ -200,28 +201,28 @@ animations = [ {
 "speed": 10.0
 }, {
 "frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
-"loop": false,
-"name": "attack2",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
-"loop": false,
-"name": "death",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
 "loop": true,
 "name": "run",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
+"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"loop": false,
+"name": "revive",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ) ],
+"loop": false,
+"name": "death",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ) ],
 "loop": false,
 "name": "attack",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ) ],
+"frames": [ SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ) ],
 "loop": false,
-"name": "revive",
+"name": "attack2",
 "speed": 10.0
 } ]
 
@@ -683,6 +684,7 @@ dash_cooldown_delta = 3.0
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 42 )
 animation = "idle"
+frame = 3
 playing = true
 
 [node name="SpiderWeb" parent="." instance=ExtResource( 13 )]
@@ -779,6 +781,9 @@ frames = SubResource( 92 )
 animation = "idle"
 frame = 1
 playing = true
+
+[node name="BoomGhostParticles" parent="." instance=ExtResource( 23 )]
+position = Vector2( 0, 0.145275 )
 
 [connection signal="body_entered" from="Area2D3" to="Area2D3" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D3" to="Area2D3" method="_on_Area2D_body_exited"]

@@ -141,6 +141,7 @@ void godot::PlayerController::_ready()
 	hurt_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"));
 	dash_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "DashParticles"));
 	revive_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "ReviveParticles"));
+	ghost_end_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "BoomGhostParticles"));
 
 	ghost_sprite = cast_to<AnimatedSprite>(get_node("GhostSprite"));
 	ghost_sprite->set_visible(false);
@@ -639,6 +640,8 @@ void godot::PlayerController::_ghost_to_player()
 
 	timer->connect("timeout", this, "_on_ghost_hide");
 	timer->start(.5f);
+
+	ghost_end_particles->restart();
 
 }
 
