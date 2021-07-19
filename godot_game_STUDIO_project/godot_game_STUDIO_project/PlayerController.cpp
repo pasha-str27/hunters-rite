@@ -249,7 +249,6 @@ void godot::PlayerController::_add_bullet(Node* node)
 
 void godot::PlayerController::_process(float delta)
 {
-
 	if (is_ghost_mode) 
 	{
 		String animation_name = ghost_sprite->get_animation();
@@ -693,11 +692,8 @@ void godot::PlayerController::_take_poison()
 	if (timer_poison->is_connected("timeout", this, "_on_poison_end"))
 		_on_poison_end();
 
-
-	Godot::print("Before: " + String::num(speed));
 	diff = speed * .6f;
 	speed -= diff;
-	Godot::print("After: " + String::num(speed));
 	timer_poison->connect("timeout", this, "_on_poison_end");
 	timer_poison->start(1.5f);
 	current_player_strategy->_set_speed(speed);

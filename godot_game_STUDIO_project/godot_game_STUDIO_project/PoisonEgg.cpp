@@ -68,7 +68,7 @@ void godot::PoisonEgg::_make_destroy_particles()
 {
 	auto destroy = cast_to<Node2D>(destroy_particles->instance());
 	get_node("/root/Node2D/Node")->call_deferred("add_child", destroy);
-	destroy->set_global_position(this->get_global_position());
+	destroy->set_global_position(this->get_global_position() - Vector2(0, 20));
 }
 
 godot::PoisonEgg::PoisonEgg()
