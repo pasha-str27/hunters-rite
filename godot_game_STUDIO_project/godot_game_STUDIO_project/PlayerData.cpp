@@ -9,24 +9,24 @@ godot::PlayerData::PlayerData(Node2D* object, Ref<PackedScene> bullet)
 {
 	this->object = object;
 	dir = Vector2(0, 0);
-	HP = 100;
-	max_HP = 100;
+	HP = 0;
+	max_HP = 0;
 	damage = 25;
 	was_revived = false;
 	can_fight_value = true;
 	speed = 250;
 
-	if(input_controller==nullptr)
+	if(input_controller == nullptr)
 		input_controller = Input::get_singleton();
 }
 
 godot::PlayerData::PlayerData()
 {
 	object = nullptr;
-	HP = 100;
+	HP = 0;
 	dir = Vector2(0, 0);
 	was_revived = false;
-	max_HP = 100;
+	max_HP = 0;
 	damage = 25;
 	speed = 250;
 	can_fight_value = true;
@@ -37,17 +37,25 @@ godot::PlayerData::PlayerData()
 
 godot::PlayerData::~PlayerData()
 {
-	//delete object;
+	object = nullptr;
 }
 
 void godot::PlayerData::_move()
 {
-	cast_to<KinematicBody2D>(object)->move_and_slide(dir);
+	cast_to<KinematicBody2D>(object)->move_and_slide(dir.normalized()*speed);
 }
 
 void godot::PlayerData::_set_speed(float speed)
 {
 	this->speed = speed > 0 ? speed : 0;
+}
+
+void godot::PlayerData::_fight(Node* node)
+{
+}
+
+void godot::PlayerData::_add_bullet(Node* node)
+{
 }
 
 float godot::PlayerData::_get_speed()
@@ -88,6 +96,14 @@ bool godot::PlayerData::_can_fight()
 	return can_fight_value;
 }
 
+void godot::PlayerData::_process_input()
+{
+}
+
+void godot::PlayerData::_set_enemy(Node* enemy)
+{
+}
+
 float godot::PlayerData::_get_HP()
 {
 	return HP;
@@ -95,8 +111,13 @@ float godot::PlayerData::_get_HP()
 
 void godot::PlayerData::_set_HP(float HP)
 {
-	this->HP = HP > 10 ? HP : 10;
-	this->HP = HP > max_HP ? max_HP : HP;
+	this->HP = HP > 0 ? HP : 10;
+	this->HP = HP > max_HP ? max_HP : this->HP;
+}
+
+void godot::PlayerData::_set_right_HP(float HP)
+{
+	this->HP = HP;
 }
 
 float godot::PlayerData::_get_damage()
@@ -119,6 +140,11 @@ bool godot::PlayerData::_was_revived()
 	return was_revived;
 }
 
+void godot::PlayerData::_set_was_revived(bool value)
+{
+	was_revived = value;
+}
+
 float godot::PlayerData::_get_max_HP()
 {
 	return max_HP;
@@ -126,6 +152,87 @@ float godot::PlayerData::_get_max_HP()
 
 void godot::PlayerData::_set_max_HP(float value)
 {
-	max_HP += value > 0 ? value : 0;
-	this->HP += value;
+	float diff = value - max_HP;
+	max_HP = value;
+	float _hp = this->HP + diff;
+	_set_HP(_hp);
+}
+
+ProgressBar* godot::PlayerData::_get_health_bar()
+{
+	return nullptr;
+}
+
+void godot::PlayerData::_stop_animations()
+{
+}
+
+float godot::PlayerData::_get_special_time()
+{
+	return special_time;
+}
+
+void godot::PlayerData::_set_special_time(float value)
+{
+	special_time = value;
+}
+
+void godot::PlayerData::_set_safe_mode(bool value)
+{
+	is_safe_mode = value;
+}
+
+bool godot::PlayerData::_get_safe_mode()
+{
+	return is_safe_mode;
+}
+
+void godot::PlayerData::_stop_special()
+{
+}
+
+void godot::PlayerData::_start_special()
+{
+}
+
+void godot::PlayerData::_set_controll_buttons(String move_up, String move_down, String move_left, String move_right, String fight_up, String fight_down, String fight_left, String fight_right, String special)
+{
+	this->move_up = move_up;
+	this->move_down = move_down;
+	this->move_left = move_left;
+	this->move_right = move_right;
+	this->fight_up = fight_up;
+	this->fight_down = fight_down;
+	this->fight_left = fight_left;
+	this->fight_right = fight_right;
+	this->special = special;
+}
+
+std::map<String, String> godot::PlayerData::_get_controll_buttons()
+{
+	std::map<String, String> controlls;
+	controlls.insert(std::make_pair("move_up", move_up));
+	controlls.insert(std::make_pair("move_down", move_down));
+	controlls.insert(std::make_pair("move_left", move_left));
+	controlls.insert(std::make_pair("move_right", move_right));
+	controlls.insert(std::make_pair("fight_up", fight_up));
+	controlls.insert(std::make_pair("fight_down", fight_down));
+	controlls.insert(std::make_pair("fight_left", fight_left));
+	controlls.insert(std::make_pair("fight_right", fight_right));
+	controlls.insert(std::make_pair("special", special));
+	return controlls;
+}
+
+IPlayer* godot::PlayerData::_clone()
+{
+	return this;
+}
+
+void godot::PlayerData::_heal()
+{
+	_set_HP(_get_max_HP());
+}
+
+void godot::PlayerData::_set_is_attacking(bool value)
+{
 }

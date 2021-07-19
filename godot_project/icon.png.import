@@ -1,0 +1,43 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+<<<<<<< HEAD:godot_project/icon.png.import
+path="res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.stex"
+=======
+path="res://.import/light.png-027ead88609ed352a79fce0552f09ecb.stex"
+>>>>>>> dev:godot_project/Assets/Sprites/light.png.import
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+<<<<<<< HEAD:godot_project/icon.png.import
+source_file="res://icon.png"
+dest_files=[ "res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.stex" ]
+=======
+source_file="res://Assets/Sprites/light.png"
+dest_files=[ "res://.import/light.png-027ead88609ed352a79fce0552f09ecb.stex" ]
+>>>>>>> dev:godot_project/Assets/Sprites/light.png.import
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0

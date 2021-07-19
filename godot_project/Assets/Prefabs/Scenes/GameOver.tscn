@@ -1,21 +1,22 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Assets/Sprites/UI/button_focus_v2.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Sprites/UI/button_background_v2.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Sprites/UI/game_over_backroungl.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_focus_v2.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_background_v2.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/game_over_backroungl.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=5]
 [ext_resource path="res://Assets/Scripts/MenuButtons.gdns" type="Script" id=6]
 [ext_resource path="res://Assets/Prefabs/SoundsEffects/Effects/ButtonClick.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Prefabs/Animations/FadeOut.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Prefabs/Animations/FadeIn.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Scripts/LocaledLabel.gdns" type="Script" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 90
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "Focus_scale"
 length = 1.5
 loop = true
@@ -44,7 +45,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "Focus_scale"
 length = 1.5
 loop = true
@@ -130,9 +131,11 @@ custom_colors/font_color_shadow = Color( 0.298039, 0.109804, 0.109804, 1 )
 custom_constants/shadow_offset_x = 6
 custom_constants/shadow_offset_y = 6
 text = "GameOver"
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+text_key = "KEY_GAME_OVER"
 
 [node name="Buttons" type="CenterContainer" parent="GameOver/VBoxContainer"]
 margin_top = 454.0
@@ -198,12 +201,14 @@ custom_constants/shadow_as_outline = 0
 text = "Retry"
 align = 1
 valign = 1
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+text_key = "KEY_RETRY"
 
 [node name="RetryAnimated" type="AnimationPlayer" parent="GameOver/VBoxContainer/Buttons/HBoxContainer/RetryButton/Retry"]
-anims/Focus_scale = SubResource( 3 )
+anims/Focus_scale = SubResource( 2 )
 
 [node name="MenuNutton" type="CenterContainer" parent="GameOver/VBoxContainer/Buttons/HBoxContainer"]
 margin_left = 284.0
@@ -260,12 +265,14 @@ custom_constants/shadow_as_outline = 0
 text = "Menu"
 align = 1
 valign = 1
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+text_key = "KEY_MENU"
 
 [node name="MenuAnimated" type="AnimationPlayer" parent="GameOver/VBoxContainer/Buttons/HBoxContainer/MenuNutton/Menu"]
-anims/Focus_scale = SubResource( 4 )
+anims/Focus_scale = SubResource( 3 )
 
 [connection signal="focus_entered" from="GameOver/VBoxContainer/Buttons/HBoxContainer/RetryButton/Retry" to="GameOver" method="_on_animated_focus_entered" binds= [ "Retry", "RetryAnimated" ]]
 [connection signal="focus_entered" from="GameOver/VBoxContainer/Buttons/HBoxContainer/RetryButton/Retry" to="GameOver" method="_play_change_cursor_effect"]

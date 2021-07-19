@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Sprites/Tilesets/level1_tileset.tres" type="TileSet" id=1]
+
+[node name="stone" type="TileMap"]
+position = Vector2( 0, -16.0204 )
+z_as_relative = false
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 3
+format = 1
+tile_data = PoolIntArray( 65534, 29, 0, 65535, 30, 0, 0, 29, 0, 1, 30, 0, 131068, 29, 0, 131069, 30, 0, 131070, 30, 0, 65537, 29, 0, 65538, 30, 0, 196604, 29, 0, 131074, 29, 0, 131075, 30, 0, 131076, 29, 0, 262139, 29, 0, 262140, 30, 0, 196612, 29, 0, 196613, 30, 0, 327667, 29, 0, 393203, 30, 0, 393204, 29, 0, 458739, 29, 0, 458740, 30, 0, 458741, 29, 0, 524275, 30, 0, 524276, 29, 0, 524277, 30, 0, 524278, 29, 0, 524279, 30, 0 )
+__meta__ = {
+"_editor_description_": ""
+}

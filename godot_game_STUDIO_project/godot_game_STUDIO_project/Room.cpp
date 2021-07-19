@@ -1,585 +1,251 @@
-#include "Room.h"
-#include <Node.hpp>
+#ifndef HEADERFILE_H
+#define HEADERFILE_H
+#include "headers.h"
+#endif
 
-void godot::Room::Respawn()
+bool godot::Room::_adjacent_room_is_null(Vector2 pos)
 {
-	
-	//if (door_collisions.size() == 4) 
-	//	return;
-	
-	if (possible_rooms.size() == 0) {
-		Array new_possible_rooms = SetUpPossibleRooms();
-		CustomExtensions::AddRange(possible_rooms, new_possible_rooms);
-	}
-
-	if (possible_rooms.size() == 0)
-	{
-		auto spawned_c_r = cast_to<Node2D>(generation->closed_room->instance());
-		spawned_c_r->set_global_position(this->get_global_position());
-		get_node("/root/Node2D/Rooms")->add_child(spawned_c_r, true);
-		this->queue_free();
-		return;
-	}
-
-
-	//  respawn to random room
-	RandomNumberGenerator* randomizer = RandomNumberGenerator::_new();
-	randomizer->randomize();
-	int rand = randomizer->randi_range(0, possible_rooms.size() - 1);
-	randomizer = nullptr;
-
-	auto new_room = cast_to<Node2D>(cast_to<PackedScene>(possible_rooms[rand])->instance());
-	//  delete from list spawned
-	possible_rooms.remove(rand);
-
-	new_room->call("_set_possible_rooms", possible_rooms);
-	new_room->set_global_position(this->get_global_position());
-	get_node("/root/Node2D")->get_node("Rooms")->add_child(new_room, true);
-
-	//  delete this room
-	this->queue_free();
+	return adjacent_rooms[pos] == nullptr;
 }
 
 void godot::Room::_register_methods()
 {
+	register_method("_init", &Room::_init);
 	register_method("_ready", &Room::_ready);
-	register_method("_process", &Room::_process);
-	register_method("_add_door_collision", &Room::_add_door_collision);
-	register_method("_get_directions", &Room::_get_directions);
-	register_method("_get_instance", &Room::_get_instance);
-	register_method("_respawn", &Room::_respawn);
-	register_method("_set_possible_rooms", &Room::_set_possible_rooms);
-	register_method("CheckClosedRoom", &Room::CheckClosedRoom);
-	register_method("IsCorrectPlaced", &Room::IsCorrectPlaced);
-	
-	register_property<Room, Array>("doors", &Room::doors, {});
-	register_property<Room, bool>("Is Start Room", &Room::start_room, false);
-	register_property<Room, bool>("Is Closed Room", &Room::closed_room, false);
-}
-
-void godot::Room::_init()
-{
-
-}
-
-void godot::Room::_ready()
-{
-
-	if (start_room)
-		correct_placed = true;
-	generation = get_node("/root/Node2D")->call("_get_instance");
-
-	timer->connect("timeout", this, "IsCorrectPlaced");
-	add_child(timer, true);
-	timer->start(.5f);
-}
-
-void godot::Room::_process(float delta)
-{
-	if (need_to_spawn) {
-		if (current != nullptr)
-			current->SpawnRoom();
-		current = nullptr;
-		need_to_spawn = false;
-	}
-}
-
-godot::Room* godot::Room::_get_instance()
-{
-	return this;
-}
-
-godot::Array godot::Room::_get_directions()
-{
-	return this->doors;
-}
-
-void godot::Room::_add_door_collision(String dir)
-{
-	door_collisions.push_back(dir);
-	possible_rooms = CustomExtensions::FindAll(possible_rooms, [dir](Node* node) {
-		auto n = cast_to<Node2D>(cast_to<PackedScene>(node)->instance());
-		Array arr = n->call("_get_directions");
-		n = nullptr;
-		if (arr.size() == 0)
-			return true;
-		return !arr.has(dir);
-	});
-	if(correct_placed)
-		Respawn();
-}
-
-void godot::Room::_set_possible_rooms(Array a)
-{
-	this->possible_rooms = a;
-}
-
-void godot::Room::PrepareToRespawn(String dir) {
-	_respawn_dirs.push_back(dir);
-	if (!timer->is_connected("timeout", this, "_respawn")) {
-		timer->connect("timeout", this, "_respawn");
-		timer->start(.3f);
-	}
-}
-
-void godot::Room::_respawn()
-{
-	Ref<PackedScene> room = nullptr;
-	String dir = _respawn_dirs[0];
-
-	if (_respawn_dirs.size() == 2) {
-		if (_respawn_dirs.has("top"))
-			room = generation->LR_room;
-		else if(_respawn_dirs.has("left"))
-			room = generation->TB_room;
-	}
-	else {
-		if (doors.size() == 1)
-			this->queue_free();
-
-		if (dir == "left") {
-			if (doors.size() == 2) {
-				if (doors.has("right"))
-					room = generation->right_closed_room;
-				else if (doors.has("top"))
-					room = generation->top_closed_room;
-				else if (doors.has("bottom"))
-					room = generation->bottom_closed_room;
-			}
-			else if (doors.size() == 3) {
-				if (doors.has("right")) {
-					if (doors.has("top"))
-						room = generation->TR_room;
-					else if (doors.has("bottom"))
-						room = generation->RB_room;
-				}
-				else if (doors.has("top")) {
-					if (doors.has("right"))
-						room = generation->TR_room;
-					else if (doors.has("bottom"))
-						room = generation->TB_room;
-				}
-				else if (doors.has("bottom")) {
-					if (doors.has("right"))
-						room = generation->RB_room;
-					else if (doors.has("top"))
-						room = generation->TB_room;
-				}
-			}
-			else if (doors.size() == 4) {
-				room = generation->TRB_room;
-			}
-		}
-		else if (dir == "right") {
-			if (doors.size() == 2) {
-				if (doors.has("left"))
-					room = generation->left_closed_room;
-				else if (doors.has("top"))
-					room = generation->top_closed_room;
-				else if (doors.has("bottom"))
-					room = generation->bottom_closed_room;
-			}
-			else if (doors.size() == 3) {
-				if (doors.has("left")) {
-					if (doors.has("top"))
-						room = generation->TL_room;
-					else if (doors.has("bottom"))
-						room = generation->LB_room;
-				}
-				else if (doors.has("top")) {
-					if (doors.has("left"))
-						room = generation->TL_room;
-					else if (doors.has("bottom"))
-						room = generation->TB_room;
-				}
-				else if (doors.has("bottom")) {
-					if (doors.has("left"))
-						room = generation->LB_room;
-					else if (doors.has("top"))
-						room = generation->TB_room;
-				}
-			}
-			else if (doors.size() == 4) {
-				room = generation->TLB_room;
-			}
-		}
-		else if (dir == "top") {
-			if (doors.size() == 2) {
-				if (doors.has("left"))
-					room = generation->left_closed_room;
-				else if (doors.has("right"))
-					room = generation->right_closed_room;
-				else if (doors.has("bottom"))
-					room = generation->bottom_closed_room;
-			}
-			else if (doors.size() == 3) {
-				if (doors.has("left")) {
-					if (doors.has("right"))
-						room = generation->LR_room;
-					else if (doors.has("bottom"))
-						room = generation->LB_room;
-				}
-				else if (doors.has("right")) {
-					if (doors.has("left"))
-						room = generation->LR_room;
-					else if (doors.has("bottom"))
-						room = generation->RB_room;
-				}
-				else if (doors.has("bottom")) {
-					if (doors.has("left"))
-						room = generation->LB_room;
-					else if (doors.has("right"))
-						room = generation->RB_room;
-				}
-			}
-			else if (doors.size() == 4) {
-				room = generation->BLR_room;
-			}
-		}
-		else {
-			if (doors.size() == 2) {
-				if (doors.has("left"))
-					room = generation->left_closed_room;
-				else if (doors.has("right"))
-					room = generation->right_closed_room;
-				else if (doors.has("top"))
-					room = generation->top_closed_room;
-			}
-			else if (doors.size() == 3) {
-				if (doors.has("left")) {
-					if (doors.has("right"))
-						room = generation->LR_room;
-					else if (doors.has("top"))
-						room = generation->TL_room;
-				}
-				else if (doors.has("right")) {
-					if (doors.has("left"))
-						room = generation->LR_room;
-					else if (doors.has("top"))
-						room = generation->TR_room;
-				}
-				else if (doors.has("top")) {
-					if (doors.has("left"))
-						room = generation->TL_room;
-					else if (doors.has("right"))
-						room = generation->TR_room;
-				}
-			}
-			else if (doors.size() == 4) {
-				room = generation->TLR_room;
-			}
-		}
-	}
-
-
-
-
-	
-
-
-
-
-	//Array new_doors = CustomExtensions::FindAll(doors, [dir](String str) {return str != dir; });
-
-	//Godot::print("_respawn doors count: " + String::num(new_doors.size()));
-
-	//if (new_doors.size() == 1) {
-	//	String door_direction = new_doors[0];
-	//	if (door_direction == "left") {
-	//		created_node = cast_to<Node2D>(generation->left_closed_room->instance());
-	//	}
-	//	else if (door_direction == "right") {
-	//		created_node = cast_to<Node2D>(generation->right_closed_room->instance());
-	//	}
-	//	else if (door_direction == "top") {
-	//		created_node = cast_to<Node2D>(generation->top_closed_room->instance());
-	//	}
-	//	else if (door_direction == "bottom") {
-	//		created_node = cast_to<Node2D>(generation->bottom_closed_room->instance());
-	//	}
-	//}
-	//else {
-	//	created_node = cast_to<Node2D>(CustomExtensions::Find(generation->all_rooms, [this, new_doors](Node* node) {
-	//		auto n = cast_to<Node2D>(cast_to<PackedScene>(node)->instance());
-	//		Array arr = n->call("_get_directions");
-	//		n = nullptr;
-	//		Godot::print("_respawn count: " + String::num(arr.size()));
-	//		if (arr.hash() == new_doors.hash())
-	//			return true;
-	//		return false;
-	//	})->instance());
-	//}
-	
-	//auto created_node = cast_to<Node2D>(room->instance());
-	Godot::print("is room null: " + String::num(room == nullptr));
-	if (room == nullptr) {
-		Godot::print("dir: " + dir);
-		Godot::print("doors count: " + String::num(doors.size()));
-		if (dir == "bottom")
-			room = generation->LR_room;
-		else if (dir == "left")
-			room = generation->bottom_closed_room;
-		else if (dir == "right")
-			room = generation->LB_room;
-
-		if (room == nullptr) {
-			//this->queue_free();
-			return;
-
-		}
-	}
-	auto created_node = cast_to<Node2D>(room->instance());
-	created_node->set_global_position(this->get_global_position());
-	get_node("/root/Node2D/Rooms")->add_child(created_node);
-	this->queue_free();
+	register_method("_adjacent_room_is_null", &Room::_adjacent_room_is_null);
+	register_method("_set_num_of_adjacent_rooms", &Room::_set_num_of_adjacent_rooms);
+	register_method("_get_num_of_adjacent_rooms", &Room::_get_num_of_adjacent_rooms);
+	register_method("_set_adjacent_room", &Room::_set_adjacent_room);
+	register_method("_is_empty_pos", &Room::_is_empty_pos);
+	register_method("_set_cell_value", &Room::_set_cell_value);
+	register_method("_get_cell_value", &Room::_get_cell_value);
+	register_method("print", &Room::print);
+	register_method("_fill_empty_positions", &Room::_fill_empty_positions);
+	register_method("_add_list", &Room::_add_list);
+	register_method("_get_list_of_keys", &Room::_get_list_of_keys);
+	register_method("_get_key_count", &Room::_get_key_count);
+	register_method("_get_room_type", &Room::_get_room_type);
+	register_method("_set_room_type", &Room::_set_room_type);
+	register_method("_get_were_here", &Room::_get_were_here);
+	register_method("_set_were_here", &Room::_set_were_here);
+	register_method("_set_is_special", &Room::_set_is_special);
+	register_method("_get_is_special", &Room::_get_is_special);
+	register_method("_get_enemy_spawn_positions", &Room::_get_enemy_spawn_positions);
+	register_method("_add_new_enemy", &Room::_add_new_enemy);
+	register_method("_spawn_enemy", &Room::_spawn_enemy);
+	register_method("_clear_enemy_to_spawn", &Room::_clear_enemy_to_spawn);
+	register_method("_get_last_key_color", &Room::_get_last_key_color);
+	register_method("_set_last_key_color", &Room::_set_last_key_color);
 }
 
 godot::Room::Room()
 {
-	timer = Timer::_new();
+	adjacent_rooms.insert(std::make_pair(Vector2::RIGHT, nullptr));
+	adjacent_rooms.insert(std::make_pair(Vector2::LEFT, nullptr));
+	adjacent_rooms.insert(std::make_pair(Vector2::DOWN, nullptr));
+	adjacent_rooms.insert(std::make_pair(Vector2::UP, nullptr));
+
+	std::vector<int> tmp_vector;
+	for (int i = 0; i < 4; ++i)
+	{
+		tmp_vector.clear();
+		for (int j = 0; j < 28; ++j)
+			tmp_vector.push_back(1);
+		room_map.push_back(tmp_vector);
+	}
+
+	for (int i = 3; i < 15; ++i)
+	{
+		tmp_vector.clear();
+		tmp_vector.push_back(1);
+		for (int j = 1; j < 27; ++j)
+			tmp_vector.push_back(0);
+		tmp_vector.push_back(1);
+		room_map.push_back(tmp_vector);
+	}	
+
+	tmp_vector.clear();
+	for (int j = 0; j < 28; ++j)
+		tmp_vector.push_back(1);
+	room_map.push_back(tmp_vector);
 }
 
 godot::Room::~Room()
 {
-	generation = nullptr;
-	doors.clear();
+	for (auto row : room_map)
+		row.clear();
+	room_map.clear();
+	empty_pos_world_coordinates.clear();
+	adjacent_rooms.clear();
 }
 
-godot::Array godot::Room::SetUpPossibleRooms()
+void godot::Room::_init()
 {
-	Array new_doors = CustomExtensions::FindAll(doors, [this](String x) {
-		for (int i = 0; i < door_collisions.size(); i++)
-		{
-			if (x != door_collisions[i])
-				continue;
-
-			return false;
-		}
-		return true;
-	});
-
-	return CustomExtensions::FindAll(generation->GetListByDirections(new_doors), [this](Node* x) {
-		auto xx = cast_to<Node2D>(cast_to<PackedScene>(x)->instance());
-		Array dirs = xx->call("_get_directions");
-		xx = nullptr;
-		if (dirs.size() == 0)
-			return true;
-
-		for (int i = 0; i < door_collisions.size(); i++)
-		{
-			if (!dirs.has(door_collisions[i]))
-				continue;
-
-			return false;
-		}
-		return true;
-	}
-	);
 }
 
-void godot::Room::SpawnNeighborRooms()
+bool godot::Room::_is_empty_pos(int i, int j)
 {
-	Array arr = CustomExtensions::GetComponentsInChildren(this, "Spawners");
-
-	for (int i = 0; i < arr.size(); i++) {
-		if (arr[i] != nullptr) {
-			current = arr[i];
-			current->SpawnRoom();
-		}		
-	}
+	return !room_map[i][j];
 }
 
-void godot::Room::CheckClosedRoom()
+int godot::Room::_get_cell_value(int i, int j)
 {
-	timer->disconnect("timeout", this, "CheckClosedRoom");
-	bool cor_col = get_node("Doors")->get_child(0)->call("_get_correct_colliding");
-	if (!cor_col) {
-		this->queue_free();
-	}
+	return room_map[i][j];
 }
 
-void godot::Room::IsCorrectPlaced()
+void godot::Room::_set_cell_value(int i, int j, int value)
 {
-	timer->disconnect("timeout", this, "IsCorrectPlaced");
-	correct_placed = door_collisions.size() == 0;
-	while (!correct_placed)
+	room_map[i][j] = value;
+}
+
+void godot::Room::_fill_empty_positions(Node2D* room)
+{
+	for (int i=3;i<room_map.size()-1;++i)
+		for (int j=1; j<room_map[i].size()-1;++j)
+			if (room_map[i][j] == 0)
+			{
+				empty_pos_world_coordinates.push_back((Vector2(j, i) * 32 
+					+ room->get_global_position()
+					- Vector2(896, 544) / 2 + Vector2(16, 16)));
+			}			
+}
+
+void godot::Room::print()
+{
+	for (int i = 0; i < room_map.size(); ++i)
 	{
-		Respawn();
-		return;
+		String tmp = "";
+		for (int j = 0; j < room_map[i].size(); ++j)
+			tmp += String::num(room_map[i][j]);
+		Godot::print(tmp);
 	}
+}
 
+void godot::Room::_add_list(Array list)
+{	
+	Array lst = list[0].operator godot::Array();
+	Godot::print("arr size " + String::num(lst.size()));
+	for (int i = 0; i < lst.size(); ++i)
+		list_of_keys.push_back(lst[i]);
+	list_of_keys.push_back(list);
+}
 
-	if (closed_room)
+Array godot::Room::_get_list_of_keys()
+{
+	return list_of_keys;
+}
+
+int godot::Room::_get_key_count()
+{
+	return list_of_keys.size();
+}
+
+String godot::Room::_get_room_type()
+{
+	return room_type;
+}
+
+void godot::Room::_set_room_type(String type)
+{
+	room_type = type;
+}
+
+bool godot::Room::_get_were_here()
+{
+	return were_here;
+}
+
+void godot::Room::_set_were_here(bool value)
+{
+	were_here = value;
+}
+
+void godot::Room::_set_is_special(bool value)
+{
+	is_special = value;
+}
+
+bool godot::Room::_get_is_special()
+{
+	return is_special;
+}
+
+Array godot::Room::_get_enemy_spawn_positions()
+{
+	Array arr = {};
+	Array poses = {};
+
+	for (auto pos : empty_pos_world_coordinates)
+		poses.push_back(pos);
+
+	arr.push_back(poses);
+	return arr;
+}
+
+void godot::Room::_add_new_enemy(Node2D* enemy, Vector2 position)
+{
+	Timer* timer = Timer::_new();
+	add_child(timer);
+	enemies_to_spawn.push_back({ enemy, position, timer });
+	Array index = {};
+	index.push_back(enemies_to_spawn.size() - 1);
+	timer->connect("timeout", this, "_spawn_enemy", index);
+	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
+	rng->randomize();
+	timer->start(rng->randf_range(0.1f, 1.0f));
+
+}
+
+void godot::Room::_spawn_enemy(int number)
+{
+	add_child(enemies_to_spawn[number].enemy);
+	enemies_to_spawn[number].enemy->set_global_position(enemies_to_spawn[number].new_pos);
+	enemies_to_spawn[number].timer->queue_free();
+
+	if (!enemies_to_spawn[number].enemy->has_method("_change_start_parameters"))
 	{
-		timer->connect("timeout", this, "CheckClosedRoom");
-		timer->start(2);
-	}
-
-	SpawnNeighborRooms();
-
-	//	if room spawned correct
-	generation->AddSpawnedRoom(this);
-	if (!closed_room)
-		generation->doorsCount -= 1;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-void godot::RoomSpawner::SpawnRoom()
-{
-	timer->connect("timeout", this, "_spawn");
-	timer->set_wait_time(.5f);
-	add_child(timer, true);
-	timer->start();
-}
-
-godot::PackedScene* godot::RoomSpawner::GetRandomRoomFromArray(Array& list)
-{
-	RandomNumberGenerator* randomizer = RandomNumberGenerator::_new();
-	randomizer->randomize();
-
-	int rand = randomizer->randi_range(0, list.size() - 1);
-	randomizer = nullptr;
-	return cast_to<PackedScene>(list[rand]);
-}
-
-void godot::RoomSpawner::_register_methods()
-{
-	register_method("_ready", &RoomSpawner::_ready);
-	register_method("_spawn", &RoomSpawner::_spawn);
-	register_method("_get_spawned", &RoomSpawner::_get_spawned);
-	register_method("_get_spawn_direction", &RoomSpawner::_get_spawn_direction);
-	register_method("_get_instance", &RoomSpawner::_get_instance);
-	register_method("_on_Area2D_area_entered", &RoomSpawner::_on_Area2D_area_entered);
-
-	register_property<RoomSpawner, String>("Direction", &RoomSpawner::spawn_direction, "");
-
-}
-
-void godot::RoomSpawner::_init()
-{
-}
-
-void godot::RoomSpawner::_ready()
-{
-	generation_ref = get_node("/root/Node2D")->call("_get_instance");
-	room_ref = get_parent()->get_parent()->call("_get_instance");
-}
-
-void godot::RoomSpawner::_on_Area2D_area_entered(Node* node)
-{
-	if (node->get_name().find("Checker") != -1 || node->get_name().find("Destroyer") != -1)
-	{
-		spawned = true;
-		this->queue_free();
-		return;
-	}
-	//else if (node->get_parent()->get_name().find("Spawner") != -1)
-	//{
-	//	Godot::print("------------------------------");
-	//	bool b = node->call("_get_spawned");
-	//	if (b == false && spawned == false)
-	//	{
-	//		spawned = true;
-
-	//		auto spawned_room = cast_to<Node2D>(generation_ref->closed_room->instance());
-	//		spawned_room->set_global_position(this->get_global_position());
-	//		spawned_room->call_deferred("_add_door_direction", spawn_direction);
-	//		spawned_room->call_deferred("_add_door_direction", node->call("_get_spawn_direction"));
-	//		get_node("/root/Node2D/Rooms")->add_child(spawned_room, true);
-	//		node->queue_free();
-	//		this->queue_free();
-	//	}
-	//	spawned = true;
-	//}
-}
-
-void godot::RoomSpawner::_spawn()
-{
-	timer->disconnect("timeout", this, "_spawn");
-
-    if (spawned == false)
-    {
-        if (generation_ref->doorsCount <= 0)
-        {
-            //  spawn closed room
-            auto spawned_room = cast_to<Node2D>(generation_ref->GetClosedRoomByDirection(spawn_direction)->instance());
-
-            spawned_room->set_global_position(this->get_global_position());
-            get_node("/root/Node2D")->get_node("Rooms")->add_child(spawned_room, true);
-
-            queue_free();
-            spawned = true;
-            return;
-        }
-        else
-        {
-			Godot::print("11111111111111111111111111");
-            PackedScene *room_to_spawn = cast_to<PackedScene>(generation_ref->closed_room->instance());
-
-            Array list = generation_ref->crossed_room->GetListByDirection(spawn_direction);
-
-			if (room_ref->start_room) {
-
-                room_to_spawn = GetRandomRoomFromArray(list);
+		for (int i = 0; i < enemies_to_spawn[number].enemy->get_child_count(); ++i)
+			if (enemies_to_spawn[number].enemy->get_child(i)->has_method("_change_start_parameters"))
+			{
+				enemies_to_spawn[number].enemy->get_child(i)->call("_change_start_parameters");
+				return;
 			}
-
-            if (!room_ref->start_room)
-            {
-
-                auto spawned_closed_room = cast_to<Node2D>(generation_ref->closed_room->instance());
-                spawned_closed_room->set_global_position(this->get_global_position());
-                spawned_closed_room->call_deferred("_add_door_direction", spawn_direction);
-				get_node("/root/Node2D")->get_node("Rooms")->add_child(spawned_closed_room, true);
-
-            }
-            else
-            {
-
-                auto r = cast_to<Node2D>(room_to_spawn->instance());
-				r->set_global_position(this->get_global_position());
-                get_node("/root/Node2D")->get_node("Rooms")->add_child(r, true);
-
-            }
-
-            spawned = true;
-            queue_free();
-            return;
-        }
-    }
-
+	}
+	
+	if(MenuButtons::game_type==TUTORIAL)
+		Enemies::get_singleton()->_add_enemy(enemies_to_spawn[number].enemy);
 }
 
-bool godot::RoomSpawner::_get_spawned()
+void godot::Room::_clear_enemy_to_spawn()
 {
-	return this->spawned;
+	enemies_to_spawn.clear();
 }
 
-godot::String godot::RoomSpawner::_get_spawn_direction()
+Color godot::Room::_get_last_key_color()
 {
-	return this->spawn_direction;
+	return last_key_color;
 }
 
-godot::RoomSpawner* godot::RoomSpawner::_get_instance()
+void godot::Room::_set_last_key_color(Color color)
 {
-	return this;
+	last_key_color = color;
 }
 
-godot::RoomSpawner::RoomSpawner()
+void godot::Room::_set_num_of_adjacent_rooms(int value)
 {
-	timer = Timer::_new();
+	num_of_adjacent_rooms = value;
 }
 
-godot::RoomSpawner::~RoomSpawner()
+void godot::Room::_set_adjacent_room(Vector2 pos, Node2D* value)
+{
+	adjacent_rooms[pos] = value;
+}
+
+int godot::Room::_get_num_of_adjacent_rooms()
+{
+	return num_of_adjacent_rooms;
+}
+
+void godot::Room::_ready()
 {
 }

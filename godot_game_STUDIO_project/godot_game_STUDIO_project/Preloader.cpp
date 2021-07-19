@@ -3,6 +3,8 @@
 #include "headers.h"
 #endif
 
+#include <TranslationServer.hpp>
+
 void godot::Preloader::_register_methods()
 {
 	register_method("_ready", &Preloader::_ready);
@@ -60,12 +62,15 @@ void godot::Preloader::load()
 	save_game->open("user://savegame_hunters.save", File::READ);
 	Dictionary node_data = JSON::get_singleton()->parse(save_game->get_line())->get_result();
 
-	MenuButtons::is_full_screen = node_data.values()[1];
-	MenuButtons::music_audio_level = node_data.values()[2];
-	MenuButtons::effect_audio_level = node_data.values()[0];
+	MenuButtons::is_full_screen = node_data["full_screen"];
+	MenuButtons::music_audio_level = node_data["music_level"];
+	MenuButtons::effect_audio_level = node_data["effect_level"];
+	
+	TranslationServer::get_singleton()->set_locale(node_data["locale"]);
 
 	OS::get_singleton()->set_window_fullscreen(MenuButtons::is_full_screen);
 	AudioServer::get_singleton()->set_bus_volume_db(1, MenuButtons::effect_audio_level);
+
 	if (!MenuButtons::was_loaded)
 	{
 		AudioServer::get_singleton()->set_bus_volume_db(2, -80);
@@ -81,4 +86,5 @@ godot::Preloader::Preloader()
 
 godot::Preloader::~Preloader()
 {
+	audio = nullptr;
 }

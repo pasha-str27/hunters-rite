@@ -1,9 +1,9 @@
-[gd_resource type="Theme" load_steps=4 format=2]
+[gd_resource type="Theme" load_steps=5 format=2]
 
-[ext_resource path="res://Assets/Sprites/UI/scrol_focusl.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Sprites/UI/scroll.png" type="Texture" id=2]
-
-[sub_resource type="StyleBoxEmpty" id=1]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/slider_scroll.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/slider_scroll_focus.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Font/slider_area.tres" type="StyleBox" id=3]
+[ext_resource path="res://Assets/Font/slider_red_area.tres" type="StyleBox" id=4]
 
 [resource]
 BoxContainer/constants/separation = 3
@@ -915,10 +915,10 @@ HScrollBar/styles/scroll_focus = null
 HSeparator/styles/separator = null
 HSlider/icons/grabber = ExtResource( 2 )
 HSlider/icons/grabber_highlight = ExtResource( 1 )
-HSlider/styles/ScrollBar = SubResource( 1 )
-HSlider/styles/grabber_area = null
-HSlider/styles/grabber_area_highlight = null
-HSlider/styles/slider = null
+HSlider/styles/ScrollBar = ExtResource( 3 )
+HSlider/styles/grabber_area = ExtResource( 4 )
+HSlider/styles/grabber_area_highlight = ExtResource( 4 )
+HSlider/styles/slider = ExtResource( 3 )
 HSplitContainer/constants/separation = 6
 HSplitContainer/icons/grabber = null
 HSplitContainer/styles/bg = null

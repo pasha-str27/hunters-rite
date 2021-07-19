@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Scripts/bullet.gdns" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/Monsters/Statue/monster_statue_pin.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Prefabs/Particles/Explosions/BoomStatueBulletParticles.tscn" type="PackedScene" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 3.23369
+
+[sub_resource type="Animation" id=2]
+resource_name = "idle"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0, 0.0 ]
+}
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 1.23328
+
+[node name="bullet" type="KinematicBody2D" groups=[
+"statue_bullet",
+]]
+visible = false
+scale = Vector2( 5, 5 )
+z_index = 50
+z_as_relative = false
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 1 )
+direction = Vector2( 8, 8 )
+speed = 500.0
+"Explosion Particles" = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+disabled = true
+
+[node name="Sprite" type="Sprite" parent="CollisionShape2D"]
+scale = Vector2( 0.2, 0.2 )
+z_index = 50
+z_as_relative = false
+texture = ExtResource( 2 )
+region_rect = Rect2( 2, 66, 27, 27 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CollisionShape2D/Sprite"]
+anims/idle = SubResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32770
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 3 )
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

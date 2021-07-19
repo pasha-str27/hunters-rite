@@ -5,6 +5,8 @@
 
 namespace godot
 {
+	class CurrentRoom;
+
 	class FadeAnimation : public AnimationPlayer
 	{
 		GODOT_CLASS(FadeAnimation, AnimationPlayer);
@@ -19,6 +21,7 @@ namespace godot
 		void _ready();
 		void _set_is_exit_anim(bool);
 		FadeAnimation();
+		~FadeAnimation();
 		void _on_timeout();
 	};
 }

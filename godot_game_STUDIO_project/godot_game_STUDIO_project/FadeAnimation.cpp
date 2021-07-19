@@ -25,7 +25,6 @@ void godot::FadeAnimation::_ready()
 	add_child(timer);
 	timer->connect("timeout", this, "_on_timeout");
 	timer->start(animation_time);
-	Godot::print("anim started");
 }
 
 void godot::FadeAnimation::_set_is_exit_anim(bool value)
@@ -38,21 +37,29 @@ godot::FadeAnimation::FadeAnimation()
 {
 }
 
+godot::FadeAnimation::~FadeAnimation()
+{
+	timer = nullptr;
+}
+
 void godot::FadeAnimation::_on_timeout()
 {
 	timer->disconnect("timeout", this, "_on_timeout");
 
-	if (!get_node("/root")->has_node("Pause") && !get_node("/root")->has_node("Notice") && !get_node("/root")->has_node("Menu"))
+	if (!get_node("/root")->has_node("Pause") && !get_node("/root")->has_node("Notice") && !get_node("/root")->has_node("Menu") 
+		&& !get_node("/root")->has_node("ChoosePlayer"))
 	{
+		auto camera = get_node("/root/Node2D/Node/Camera2D");
 		if (animation_name == "fade_in")
-			CustomExtensions::GetChildByName(get_node("/root/Node2D/Node/Camera2D"), "EnemySpawner")->call("_prepare_spawn");
-		else if (animation_name == "fade_out")
-		{
-			if(!is_exit_anim)
-				CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->call("_start_move");
-			else
-				CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "exit")->call("_load_menu_scene");
-		}
+			CustomExtensions::GetChildByName(camera, "EnemySpawner")->call("_prepare_spawn");
+		else 
+			if (animation_name == "fade_out")
+			{
+				if(!is_exit_anim)
+					camera->call("_start_move");
+				else
+					CurrentRoom::get_singleton()->_get_current_room()->get_node("exit")->call("_load_menu_scene");
+			}
 	}
 	get_parent()->get_parent()->queue_free();
 }

@@ -18,13 +18,17 @@ namespace godot
 		Node2D* player2;
 	public:
 		StatueMeleeAI(Ref<PackedScene>& bullet, Node2D* node);
+		~StatueMeleeAI();
 		void _process(float delta);
 		void change_can_fight(bool value);
 		void _fight(Node2D* player1, Node2D* player2);
 		void _set_speed(float value);
 		void _delete_player1();
 		void _delete_player2();
+		void _remove_player(Node2D* player);
 		void _set_player1(Node2D* player1);
 		void _set_player2(Node2D* player2);
+		void _change_start_parameters();
+		void _remove_taken_positions();
 	};
 }

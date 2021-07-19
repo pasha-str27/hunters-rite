@@ -11,13 +11,13 @@ namespace godot
 	{
 		GODOT_CLASS(ReviveZone, Area2D);
 
-		RandomNumberGenerator *random;
+		Ref<RandomNumberGenerator> random;
 		
 		int current_key;
 
 		Timer* timer;
 
-		InputReviveManager *keys;
+		InputReviveManager* keys;
 
 		Sprite* arrow;
 
