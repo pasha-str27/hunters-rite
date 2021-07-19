@@ -60,6 +60,10 @@ void godot::SpawnEnemyController::SpawnEnemies()
 
 
 	float current_value = _calculate_room_difficulty();
+	
+	Godot::print("Room value: ");
+	Godot::print(String::num(current_value));
+
 	std::vector<Vector2> taken_positions;
 
 	enemies->set_enemy_to_spawn_count(0);
@@ -280,7 +284,7 @@ String godot::SpawnEnemyController::_get_current_level_name()
 
 float godot::SpawnEnemyController::_calculate_room_difficulty()
 {
-	float PH_k = 1,
+	float PH_k = 0.75,
 		AS1 = 1,
 		AS2 = 1,
 		DPS_k = 1,
@@ -314,7 +318,7 @@ float godot::SpawnEnemyController::_calculate_room_difficulty()
 
 	float res = ((PH1 + PH2) * PH_k) / 2 + ((D1 * AS1 + D2 * AS2) / 2) * DPS_k - RFS + (MK - CK) * K_k;
 
-	res = res < 150 ? 150 : res;
+	res = res < 15 ? 15 : res;
 	res = res > 500 ? 500 : res;
 
 	return res;
