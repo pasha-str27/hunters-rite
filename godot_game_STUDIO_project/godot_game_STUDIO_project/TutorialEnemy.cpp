@@ -22,7 +22,6 @@ void godot::TutorialEnemy::_ready()
 {
 	sprite = cast_to<AnimatedSprite>(find_node("Sprite"));
 	health_bar = cast_to<ProgressBar>(get_node("HealthBar"));
-	Enemies::get_singleton()->_set_enemy_count(1);
 
 	sprite->set_visible(false);
 	health_bar->set_visible(false);
@@ -60,13 +59,19 @@ void godot::TutorialEnemy::_take_damage(float damage, int player_id)
 
 	if (_hp <= 0)
 	{
-		Enemies::get_singleton()->_set_enemy_count(0);
-		CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->call("_open_doors");
+		auto enemies = Enemies::get_singleton();
+		enemies->_set_enemy_count(enemies->_get_enemies_count() - 1);
 
-		auto cur_room = CurrentRoom::get_singleton()->_get_current_room();
-		for (int i = cur_room->get_child_count() - 1; i >= 0; --i)
-			if (cur_room->get_child(i)->get_name().find("fill_door") != -1)
-				cast_to<Node2D>(cur_room->get_child(i))->hide();
+		if (enemies->_get_enemies_count() == 0)
+		{
+			Enemies::get_singleton()->_set_enemy_count(0);
+			CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->call("_open_doors");
+
+			auto cur_room = CurrentRoom::get_singleton()->_get_current_room();
+			for (int i = cur_room->get_child_count() - 1; i >= 0; --i)
+				if (cur_room->get_child(i)->get_name().find("fill_door") != -1)
+					cast_to<Node2D>(cur_room->get_child(i))->hide();
+		}
 
 		auto player = player_id == 1 ? PlayersContainer::_get_instance()->_get_player1()
 			: PlayersContainer::_get_instance()->_get_player2_regular();

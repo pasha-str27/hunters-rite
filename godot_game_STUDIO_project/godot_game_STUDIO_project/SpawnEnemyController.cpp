@@ -43,14 +43,20 @@ void godot::SpawnEnemyController::SpawnEnemies()
 
 	if (MenuButtons::game_type == TUTORIAL)
 	{
-		Node2D* enemy = cast_to<Node2D>(tutorial_enemy->instance());
+		Vector2 pos = Vector2(150, -75);
+		for (int i = 1; i <= 3; ++i)
+		{
+			Node2D* enemy = cast_to<Node2D>(tutorial_enemy->instance());
 
-		CurrentRoom::get_singleton()->_get_current_room()->add_child(enemy, true);
-		enemy->set_position(Vector2(150, 25));
+			CurrentRoom::get_singleton()->_get_current_room()->add_child(enemy, true);
+			enemy->set_position(pos);
+
+			Enemies::get_singleton()->_set_enemy_count(i);
+
+			pos += Vector2(0, 100);
+		}
 
 		enemies->set_spawning(false);
-
-		Godot::print(enemy->get_name());
 
 		return;
 	}
