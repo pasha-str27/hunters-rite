@@ -46,6 +46,7 @@ namespace godot
 		Particles2D* buff_debuff_particles = nullptr;
 		Particles2D* dash_particles = nullptr;
 		Particles2D* revive_particles = nullptr;
+		Particles2D* ghost_end_particles = nullptr;
 
 		Node* camera_shake = nullptr;
 		AnimatedSprite* ghost_sprite = nullptr;

@@ -56,6 +56,9 @@ void godot::TutorialEnemy::_take_damage(float damage, int player_id)
 		sprite->play("damaged");
 		if(!sprite->is_connected("animation_finished", this, "_on_damage_animation_finished"))
 			sprite->connect("animation_finished", this, "_on_damage_animation_finished");
+
+		Ref<PackedScene> sound = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->target_hit());
+		get_parent()->add_child(sound->instance());
 	}
 
 	if (_hp <= 0)
@@ -73,10 +76,18 @@ void godot::TutorialEnemy::_take_damage(float damage, int player_id)
 
 		if (player != nullptr)
 		{
-			if(player->get_global_position().x <= get_global_position().x)
+			if (player->get_global_position().x <= get_global_position().x)
+			{
 				sprite->play("fall");
+				Ref<PackedScene> sound = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->target_hit());
+				get_parent()->add_child(sound->instance());
+			}
 			else
+			{
 				sprite->play("crack");
+				Ref<PackedScene> sound = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->target_crack());
+				get_parent()->add_child(sound->instance());
+			}
 		}
 
 		health_bar->set_visible(false);
