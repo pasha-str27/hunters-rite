@@ -60,6 +60,39 @@ void godot::BigStone::_add_player(Node2D* node)
 		_heal_players();
 }
 
+bool godot::BigStone::player_is_ghost()
+{
+	auto player_conteiner = PlayersContainer::_get_instance();
+
+	bool check_res = false;
+
+	if (player_conteiner->_get_player1_regular() != nullptr)
+	{
+		if (player_conteiner->_get_player1_regular()->has_method("_is_ghost_mode"))
+			check_res = (bool)player_conteiner->_get_player1_regular()->call("_is_ghost_mode");
+		else
+		{
+			for (int i = 0; i < player_conteiner->_get_player1_regular()->get_child_count(); ++i)
+				if (player_conteiner->_get_player1_regular()->get_child(i)->has_method("_is_ghost_mode"))
+					check_res = (bool)player_conteiner->_get_player1_regular()->get_child(i)->call("_is_ghost_mode");
+		}
+	}
+
+	if (player_conteiner->_get_player2_regular() != nullptr)
+	{
+		if (player_conteiner->_get_player2_regular()->has_method("_is_ghost_mode"))
+			check_res = (bool)player_conteiner->_get_player2_regular()->call("_is_ghost_mode");
+		else
+		{
+			for (int i = 0; i < player_conteiner->_get_player2_regular()->get_child_count(); ++i)
+				if (player_conteiner->_get_player2_regular()->get_child(i)->has_method("_is_ghost_mode"))
+					check_res = (bool)player_conteiner->_get_player2_regular()->get_child(i)->call("_is_ghost_mode");
+		}
+	}
+
+	return check_res;
+}
+
 void godot::BigStone::_heal_players()
 {
 	auto player_conteiner = PlayersContainer::_get_instance();
@@ -89,8 +122,12 @@ void godot::BigStone::_heal_players()
 			_heal_player(player_conteiner->_get_player2_regular());
 
 		can_heal = false;
-		timer->connect("timeout", this, "_can_heal_true");
-		timer->start(heal_cooldown);
+
+		if (!player_is_ghost())
+		{
+			timer->connect("timeout", this, "_can_heal_true");
+			timer->start(heal_cooldown);
+		}
 	}
 
 	if ((MenuButtons::game_mode == SHOOTER || MenuButtons::game_mode == MELEE) && players_count == 1)
@@ -120,7 +157,6 @@ void godot::BigStone::_heal_players()
 		can_heal = false;
 		timer->connect("timeout", this, "_can_heal_true");
 		timer->start(heal_cooldown);
-
 	}
 }
 
