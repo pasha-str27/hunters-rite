@@ -11,12 +11,14 @@ namespace godot {
 		float _hp;
 		AnimatedSprite* sprite;
 		ProgressBar* health_bar;
+		Timer* timer;
 	public:
 		static void _register_methods();
 		void _init();
 		void _ready();
 		void _take_damage(float damage, int player_id);
 		void _on_damage_animation_finished();
+		void _on_spawn_end();
 		TutorialEnemy();
 		~TutorialEnemy();
 	};

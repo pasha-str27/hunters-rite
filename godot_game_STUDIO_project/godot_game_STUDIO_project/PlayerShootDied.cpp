@@ -25,7 +25,7 @@ godot::PlayerShootDied::~PlayerShootDied()
 void godot::PlayerShootDied::_revive()
 {
 	sprite->play("revive");
-	
+
 	PlayerData::_revive();
 	PlayersContainer::_get_instance()->_set_player1(_get_object());
 }
