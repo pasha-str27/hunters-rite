@@ -502,6 +502,8 @@ void godot::PlayerController::_revive()
 	_restore_data();
 	_set_max_HP(prev_state->_get_max_HP());
 	_set_HP(_get_max_HP() * (float)0.15);
+	cast_to<AnimatedSprite>(get_node("AnimatedSprite"))->play("revive");
+
 }
 
 float godot::PlayerController::_get_max_HP()
