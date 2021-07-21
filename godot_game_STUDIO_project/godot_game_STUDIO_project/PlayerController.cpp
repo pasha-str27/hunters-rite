@@ -541,7 +541,7 @@ void godot::PlayerController::_start_item_particles(bool is_buff)
 		buff_debuff_particles->get_process_material()->set("hue_variation", -.85f);
 	}
 
-	get_parent()->add_child(prefab->instance());
+	CurrentRoom::get_singleton()->_get_current_room()->add_child(prefab->instance());
 	buff_debuff_particles->restart();
 }
 
