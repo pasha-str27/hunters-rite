@@ -43,7 +43,7 @@ Name = "Glass"
 speed = 5.5
 HP = 0.0
 damage = 0.0
-attack_speed_delta = 0.0
+attack_speed_delta = 1.0
 number_to_next_item = 0
 encrease_attack_radius = true
 

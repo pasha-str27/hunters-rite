@@ -115,6 +115,21 @@ animations = [ {
 "name": "idle",
 "speed": 10.0
 }, {
+"frames": [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 18 ) ],
+"loop": false,
+"name": "attack",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 20 ), ExtResource( 1 ) ],
+"loop": false,
+"name": "damaged",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 26 ), ExtResource( 11 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 28 ), ExtResource( 21 ) ],
+"loop": true,
+"name": "run",
+"speed": 10.0
+}, {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
 "loop": false,
 "name": "disappear",
@@ -123,21 +138,6 @@ animations = [ {
 "frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
 "loop": false,
 "name": "appear",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 26 ), ExtResource( 11 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 28 ), ExtResource( 21 ) ],
-"loop": true,
-"name": "run",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 17 ), ExtResource( 20 ), ExtResource( 1 ) ],
-"loop": false,
-"name": "damaged",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 18 ) ],
-"loop": false,
-"name": "attack",
 "speed": 10.0
 } ]
 
@@ -167,7 +167,7 @@ collision_layer = 4
 collision_mask = 512
 script = ExtResource( 3 )
 bullet = ExtResource( 31 )
-HP = 3000.0
+HP = 1800.0
 "Death particles" = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NagaBoss"]
@@ -196,7 +196,7 @@ z_as_relative = false
 [node name="MagnitZone" type="Area2D" parent="NagaBoss"]
 scale = Vector2( 10, 10 )
 script = SubResource( 22 )
-force = 120.0
+force = 80.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NagaBoss/MagnitZone"]
 shape = SubResource( 23 )

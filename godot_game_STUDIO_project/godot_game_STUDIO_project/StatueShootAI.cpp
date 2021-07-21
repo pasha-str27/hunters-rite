@@ -53,7 +53,7 @@ void godot::StatueShootAI::_process(float delta)
 		{
 			Vector2 point = directions[i];
 			directions[i].x = point.x * cos(M_PI / 4) - point.y * sin(M_PI / 4);
-			directions[i].y = point.x * sin(M_PI / 4) + point.y * cos(M_PI/4);
+			directions[i].y = point.x * sin(M_PI / 4) + point.y * cos(M_PI / 4);
 		}
 
 		can_fight = false;

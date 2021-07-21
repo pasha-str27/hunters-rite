@@ -244,7 +244,7 @@ void godot::NagaAI::_take_damage(float damage)
 	is_disappearing = true;
 	_get_enemy()->call("_start_fixed_timer", .3f);
 
-	if ((float)_get_enemy()->call("_get_HP_percent") <= 75)
+	if ((float)_get_enemy()->call("_get_HP_percent") <= 25)
 		_decrease_cooldowns();
 }
 
@@ -262,7 +262,7 @@ void godot::NagaAI::_make_vampirism()
 {
 	_get_enemy()->call("_add_to_HP", damage);
 	vampirism_particles->restart();
-	if ((float)_get_enemy()->call("_get_HP_percent") > 75)
+	if ((float)_get_enemy()->call("_get_HP_percent") > 25)
 		_increase_cooldowns();
 }
 

@@ -181,7 +181,6 @@ __meta__ = {
 }
 
 [node name="Stuff" type="VBoxContainer" parent="TutorialControl/Dash"]
-visible = false
 margin_left = 1177.0
 margin_right = 1509.0
 margin_bottom = 787.0
@@ -353,7 +352,6 @@ __meta__ = {
 }
 
 [node name="Stuff" type="VBoxContainer" parent="TutorialControl/Move"]
-visible = false
 margin_left = 596.0
 margin_right = 869.0
 margin_bottom = 720.0
@@ -516,7 +514,6 @@ __meta__ = {
 }
 
 [node name="Stuff" type="VBoxContainer" parent="TutorialControl/Attack"]
-visible = false
 margin_right = 288.0
 margin_bottom = 720.0
 rect_pivot_offset = Vector2( -753.977, 100 )
