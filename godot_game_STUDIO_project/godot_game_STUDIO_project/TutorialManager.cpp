@@ -162,7 +162,9 @@ void godot::TutorialManager::_move(String dir)
 
 	if ((String)prev_room->call("_get_room_type") == "game_room")
 	{
-		prev_room->get_node("TutorialEnemy")->queue_free();
+		for (int i = prev_room->get_child_count() - 1; i >= 0; --i)
+			if (prev_room->get_child(i)->get_name().find("TutorialEnemy") != -1)
+				prev_room->get_child(i)->queue_free();
 
 		for (int i = prev_room->get_child_count() - 1; i >= 0; --i)
 			if (prev_room->get_child(i)->get_name().find("fill_door") != -1)

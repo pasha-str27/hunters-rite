@@ -74,7 +74,7 @@ void godot::PlayerShoot::_move()
 	if (PlayerData::_get_dir() == Vector2::ZERO && animation_name != "revive" && animation_name != "damaged")
 		sprite->play("idle");
 
-	if (PlayerData::_get_dir() != Vector2::ZERO && sprite->get_animation() == "idle")
+	if (PlayerData::_get_dir() != Vector2::ZERO && animation_name == "idle")
 		sprite->play("run");
 }
 

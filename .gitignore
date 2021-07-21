@@ -354,3 +354,16 @@ godot_game_STUDIO_project/godot_game_STUDIO_project/godot_game_STUDIO_project.vc
 godot_project/godot_game_STUDIO_project.dll
 godot_project/godot_game_STUDIO_project.dll
 !godot_project/.import
+
+# Godot-specific ignores
+godot_project/.import/
+godot_project/export.cfg
+godot_project/export_presets.cfg
+
+# Imported translations (automatically generated from CSV files)
+godot_project/*.translation
+
+# Mono-specific ignores
+godot_project/.mono/
+godot_project/data_*/
+

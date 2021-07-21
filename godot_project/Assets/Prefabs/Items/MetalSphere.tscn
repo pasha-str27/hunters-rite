@@ -43,9 +43,8 @@ Name = "MetalSphere"
 speed = -17.5
 HP = 7.8
 damage = 3.5
-attack_speed_delta = 0.0
+attack_speed_delta = 1.0
 number_to_next_item = 0
-decrease_attack_radius = true
 "Is Buff" = false
 
 [node name="Sprite" type="Sprite" parent="."]

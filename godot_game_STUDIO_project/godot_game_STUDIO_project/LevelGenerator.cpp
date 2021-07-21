@@ -318,7 +318,7 @@ void godot::LevelGenerator::_buid_floors()
 	ResourceLoader* loader = ResourceLoader::get_singleton();
 	Ref<PackedScene> prefab = nullptr;
 	random->randomize();
-	for (int i = 1; i<rooms.size(); ++i)
+	for (int i = 0; i<rooms.size(); ++i)
 	{
 		prefab = loader->load(NodePath("res://Assets/Prefabs/Rooms/Floor/floor" + String::num(random->randi_range(1, floor_count)) + ".tscn"));
 		rooms[i]->add_child(prefab->instance());
