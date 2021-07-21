@@ -5,6 +5,8 @@
 
 namespace godot
 {
+	class AudioController;
+
 	class GameManager : public Camera2D
 	{
 		GODOT_CLASS(GameManager, Camera2D);
@@ -28,12 +30,12 @@ namespace godot
 		AudioStreamPlayer2D* audio = nullptr;
 		AudioStreamPlayer2D* audio_boss = nullptr;
 		Timer* timer_audio;
-		AudioServer* audio_server = nullptr;
 
 		float time_delta = 1.0 / 50;
 		float delta_step = -80.0 / 50.0;
 
 		Array generated_keys = {};
+		AudioController* audio_controller = nullptr;
 
 		void _move(String dir);
 		String _get_dir_on_index(int i);

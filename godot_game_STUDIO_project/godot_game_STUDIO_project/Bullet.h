@@ -12,9 +12,7 @@ namespace godot
 
 		Vector2 dir;
 		float speed;
-		bool is_active;
 		float damage;
-		bool is_enemy_bullet;
 
 		Ref<PackedScene> explosion_particles = nullptr;
 
@@ -27,7 +25,6 @@ namespace godot
 		void _process(float delta);
 		void _set_dir(Vector2 dir);
 		void _set_damage(float value);
-		Bullet();
 		~Bullet();
 	};
 }

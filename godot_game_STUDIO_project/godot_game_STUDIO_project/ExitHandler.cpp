@@ -23,6 +23,8 @@ void godot::ExitHandler::_init()
 
 void godot::ExitHandler::_ready()
 {
+	audio_controller = AudioController::get_singleton();
+
 	ResourceLoader* resource_loader = ResourceLoader::get_singleton();
 	menu_scene = resource_loader->load("res://Assets/Prefabs/Scenes/Menu.tscn");
 	timer_music_out = Timer::_new();
@@ -130,14 +132,14 @@ void godot::ExitHandler::_show_exit()
 
 void godot::ExitHandler::_mute_audio()
 {
-	if (AudioController::get_singleton()->_mute_audio(timer_audio, this))
-		return;
+	if (audio_controller->_mute_audio(timer_audio, this))
+		timer_audio->disconnect("timeout", this, "_mute_audio");
 }
 
 void godot::ExitHandler::_audio_fade_to_main_menu()
 {
-	if (AudioController::get_singleton()->_audio_fade_to_main_menu(timer_music_out, this))
-		return;
+	if (audio_controller->_audio_fade_to_main_menu(timer_music_out, this))
+		timer_music_out->disconnect("timeout", this, "_audio_fade_to_main_menu");
 }
 
 void godot::ExitHandler::_move_to_main_menu()
