@@ -286,8 +286,8 @@ String godot::SpawnEnemyController::_get_current_level_name()
 
 float godot::SpawnEnemyController::_calculate_room_difficulty()
 {
-	float PH_k = 1,
-		AS1 = 1,
+	float PH_k = 0.75,
+		AS1 = 1.35,
 		AS2 = 1,
 		DPS_k = 1,
 		RFS = 0,

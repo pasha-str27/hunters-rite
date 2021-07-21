@@ -15,6 +15,7 @@ namespace godot
 		Vector2 bullet_dir;
 		AnimatedSprite* sprite = nullptr;
 		float speed_delta = 2.5;
+		float prev_speed;
 
 		Particles2D* shoot_particles = nullptr;
 

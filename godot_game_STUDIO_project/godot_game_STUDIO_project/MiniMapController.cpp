@@ -22,6 +22,10 @@ godot::MiniMapController::~MiniMapController()
 
 	disc_rooms_positions.clear();
 	undisc_rooms_positions.clear();
+	key_rooms_positions.clear();
+	item_rooms_positions.clear();
+	boss_rooms_positions.clear();
+	heal_rooms_positions.clear();
 	keys_positions.clear();
 	items_positions.clear();
 	heal_positions.clear();
@@ -46,10 +50,7 @@ void godot::MiniMapController::_register_methods()
 	register_method("_load_special_rooms", &MiniMapController::_load_special_rooms);
 	register_method(" _special_rooms_loader", &MiniMapController::_special_rooms_loader);
 	register_method("_update_special_rooms", &MiniMapController::_update_special_rooms);
-	register_method("_start_treking", &MiniMapController::_start_treking);
-
-	register_method("_start_timer", &MiniMapController::_start_timer);
-	register_method("_on_timeout", &MiniMapController::_on_timeout);
+	register_method("_start_treking", &MiniMapController::_start_traking);
 	
 	register_property<MiniMapController, Ref<PackedScene>>("current_room", &MiniMapController::curr_room, nullptr);
 	register_property<MiniMapController, Ref<PackedScene>>("discovered_room", &MiniMapController::disc_room, nullptr);
@@ -78,7 +79,6 @@ void godot::MiniMapController::_ready()
 	items_positions.clear();
 	heal_positions.clear();
 	boss_positions.clear();
-	//_start_treking();
 }
 
 bool godot::MiniMapController::_load_resources()
@@ -105,8 +105,6 @@ bool godot::MiniMapController::_load_resources()
 
 	if (grid != nullptr)
 	{
-		Godot::print("now we have grid");
-
 		grid_rect_size = grid->get_rect().get_size();
 
 		_set_positions();
@@ -146,7 +144,6 @@ void godot::MiniMapController::_update_minimap()
 {
 	Node2D* room = nullptr;
 
-	Godot::print("Getting players pos");
 	players_pos = _get_players_pos();
 
 	if (undisc_rooms_positions.size() > 0
@@ -185,7 +182,6 @@ void godot::MiniMapController::_update_minimap()
 		}
 		else
 			_update_special_rooms();
-		Godot::print("Players pos is out of range");
 	}
 	else
 		Godot::print("There are no rooms");
@@ -275,13 +271,13 @@ void godot::MiniMapController::_load_special_rooms(Array rooms_pos, String type)
 	}
 }
 
-void godot::MiniMapController::_special_rooms_loader(Array dr, Array kr, Array ir, Array hr, Array br)
+void godot::MiniMapController::_special_rooms_loader(Array disc_rooms, Array key_rooms, Array item_rooms, Array heal_rooms, Array boss_rooms)
 {
-	_load_special_rooms(dr, "disc");
-	_load_special_rooms(kr, "key");
-	_load_special_rooms(ir, "item");
-	_load_special_rooms(hr, "heal");
-	_load_special_rooms(br, "boss");
+	_load_special_rooms(disc_rooms, "disc");
+	_load_special_rooms(key_rooms, "key");
+	_load_special_rooms(item_rooms, "item");
+	_load_special_rooms(heal_rooms, "heal");
+	_load_special_rooms(boss_rooms, "boss");
 
 }
 
@@ -290,34 +286,45 @@ void godot::MiniMapController::_update_special_rooms()
 	_clear_map();
 	_load_curr_room(players_pos);
 
+	auto start_special_rooms_loader = [&]()
+	{
+		_special_rooms_loader(disc_rooms_positions,
+			key_rooms_positions,
+			item_rooms_positions,
+			heal_rooms_positions,
+			boss_rooms_positions);
+
+		return;
+	};
+
 	if (disc_rooms_positions.find(players_pos) != -1)
 	{
 		disc_rooms_positions.remove(disc_rooms_positions.find(players_pos));
-		_special_rooms_loader(disc_rooms_positions, key_rooms_positions, item_rooms_positions, heal_rooms_positions, boss_rooms_positions);
+		start_special_rooms_loader();
 		disc_rooms_positions.push_back(players_pos);
 	}
 	else if (key_rooms_positions.find(players_pos) != -1)
 	{
 		key_rooms_positions.remove(key_rooms_positions.find(players_pos));
-		_special_rooms_loader(disc_rooms_positions, key_rooms_positions, item_rooms_positions, heal_rooms_positions, boss_rooms_positions);
+		start_special_rooms_loader();
 		key_rooms_positions.push_back(players_pos);
 	}
 	else if (item_rooms_positions.find(players_pos) != -1)
 	{
 		item_rooms_positions.remove(item_rooms_positions.find(players_pos));
-		_special_rooms_loader(disc_rooms_positions, key_rooms_positions, item_rooms_positions, heal_rooms_positions, boss_rooms_positions);
+		start_special_rooms_loader();
 		item_rooms_positions.push_back(players_pos);
 	}
 	else if (heal_rooms_positions.find(players_pos) != -1)
 	{
 		heal_rooms_positions.remove(heal_rooms_positions.find(players_pos));
-		_special_rooms_loader(disc_rooms_positions, key_rooms_positions, item_rooms_positions, heal_rooms_positions, boss_rooms_positions);
+		start_special_rooms_loader();
 		heal_rooms_positions.push_back(players_pos);
 	}
 	else if (boss_rooms_positions.find(players_pos) != -1)
 	{
 		boss_rooms_positions.remove(boss_rooms_positions.find(players_pos));
-		_special_rooms_loader(disc_rooms_positions, key_rooms_positions, item_rooms_positions, heal_rooms_positions, boss_rooms_positions);
+		start_special_rooms_loader();
 		boss_rooms_positions.push_back(players_pos);
 	}
 
@@ -331,7 +338,7 @@ bool godot::MiniMapController::_is_on_grid(Vector2 pos)
 	return grid->get_rect().has_point(pos + grid->get_rect().position);
 }
 
-void godot::MiniMapController::_start_treking()
+void godot::MiniMapController::_start_traking()
 {
 	if (GameManager::current_level >= 2)
 	{
@@ -351,28 +358,9 @@ void godot::MiniMapController::_start_treking()
 		Godot::print("Something went wrong! Resources weren't loaded");
 
 	players_pos = _get_players_pos();
+
 	Godot::print(players_pos);
+	
 	_load_undisc_rooms(undisc_rooms_positions);
 	_update_minimap();
-}
-
-void godot::MiniMapController::_start_timer()
-{
-	if (!timer->is_connected("timeout", this, "_on_timeout"))
-	{
-		timer->connect("timeout", this, "_on_timeout");
-
-		if (!has_node(NodePath(timer->get_name())))
-			add_child(timer);
-
-		timer->set_wait_time(2);
-		timer->start();
-	}
-}
-
-void godot::MiniMapController::_on_timeout()
-{
-	timer->disconnect("timeout", this, "_on_timeout");
-
-	_start_treking();
 }
