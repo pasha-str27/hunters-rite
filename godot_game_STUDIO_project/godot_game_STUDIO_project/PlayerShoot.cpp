@@ -237,11 +237,17 @@ void godot::PlayerShoot::_stop_animations()
 
 void godot::PlayerShoot::_stop_special()
 {
-	_set_speed(_get_speed() / speed_delta);
+	float curr_speed = _get_speed() / speed_delta;
+
+	if (curr_speed != prev_speed)
+		_set_speed(curr_speed * speed_delta);
+	else
+		_set_speed(curr_speed);
 }
 
 void godot::PlayerShoot::_start_special()
 {
+	prev_speed = _get_speed();
 	_set_speed(_get_speed() * speed_delta);
 	Ref<PackedScene> prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->dash());
 	_get_object()->add_child(prefab->instance());
