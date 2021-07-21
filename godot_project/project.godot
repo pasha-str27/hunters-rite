@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Camera2D",
+"base": "",
 "class": "GameManager",
 "language": "NativeScript",
 "path": "res://Assets/Scripts/GameManager.gdns"
@@ -51,7 +51,7 @@ _global_script_class_icons={
 [application]
 
 config/name="hunters"
-run/main_scene="res://Assets/Prefabs/Scenes/Preloader.tscn"
+run/main_scene="res://Assets/Prefabs/Scenes/Menu.tscn"
 config/icon="res://Assets/Sprites/GameIcon.png"
 config/windows_native_icon="res://Assets/Sprites/player2.ico"
 
