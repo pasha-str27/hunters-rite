@@ -12,7 +12,6 @@ namespace godot
 		float current_scale;
 		float damage;
 		float dir;
-		float speed;
 		bool can_fight;
 		Node2D* player1;
 		Node2D* player2;
@@ -22,7 +21,6 @@ namespace godot
 		void _process(float delta);
 		void change_can_fight(bool value);
 		void _fight(Node2D* player1, Node2D* player2);
-		void _set_speed(float value);
 		void _delete_player1();
 		void _delete_player2();
 		void _remove_player(Node2D* player);

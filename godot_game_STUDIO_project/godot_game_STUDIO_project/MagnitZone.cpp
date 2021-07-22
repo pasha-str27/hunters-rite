@@ -6,7 +6,6 @@
 void godot::MagnitZone::_register_methods()
 {
 	register_method("_init", &MagnitZone::_init);
-	register_method("_ready", &MagnitZone::_ready);
 	register_method("_process", &MagnitZone::_process);
 	register_method("_on_body_entered", &MagnitZone::_on_body_entered);
 	register_method("_on_body_exited", &MagnitZone::_on_body_exited);
@@ -17,11 +16,6 @@ void godot::MagnitZone::_register_methods()
 	register_property<MagnitZone, float>("force", &MagnitZone::force, 85);
 }
 
-godot::MagnitZone::MagnitZone()
-{
-	is_active = true;
-}
-
 godot::MagnitZone::~MagnitZone()
 {
 	player1 = nullptr;
@@ -30,10 +24,7 @@ godot::MagnitZone::~MagnitZone()
 
 void godot::MagnitZone::_init()
 {
-}
-
-void godot::MagnitZone::_ready()
-{
+	is_active = true;
 }
 
 void godot::MagnitZone::_process(float delta)

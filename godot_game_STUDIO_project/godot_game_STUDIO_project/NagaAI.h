@@ -2,7 +2,8 @@
 #define HEADERFILE_H
 #include "headers.h"
 #endif
-namespace godot {
+namespace godot 
+{
 	class NagaAI: public EnemyData, public KinematicBody2D
 	{
 	private:

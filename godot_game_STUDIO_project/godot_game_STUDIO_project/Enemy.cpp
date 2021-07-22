@@ -133,7 +133,6 @@ void godot::Enemy::_ready()
 	spawn_particles->set_emitting(true);
 	timer_particles->connect("timeout", this, "_on_spawn_end");
 	timer_particles->start(0.2f);
-	//cast_to<Node2D>(get_node("CollisionShape2D"))->call_deferred("set_visible", false);
 
 	if (is_in_group("flower") || is_in_group("slime_boss") || is_in_group("naga"))
 		cast_to<ProgressBar>(get_node("/root/Node2D/Node/Camera2D")->get_node("BossHealthBar"))->set_visible(false);
@@ -173,9 +172,7 @@ void godot::Enemy::_process(float delta)
 				sp->set_frame(sp->get_sprite_frames()->get_frame_count("death") - 1);
 			}
 			else
-			{
 				_change_animation("idle", 1);
-			}
 		}
 	}
 }
@@ -211,11 +208,21 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 	{
 		Node* player = nullptr;
 
-		if (player_id == 1)
-			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node/Player1"), "Player1");
-		else if (player_id == 2)
-			player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player2");
-
+		switch (player_id)
+		{
+			case 1:
+			{
+				player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node/Player1"), "Player1");
+				break;
+			}
+			case 2:
+			{
+				player = CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Player2");
+				break;
+			}
+			default:
+				break;
+		}
 
 		if (is_in_group("silly_boy") && !was_died)
 		{
@@ -238,7 +245,6 @@ void godot::Enemy::_take_damage(float damage, int player_id)
 		died = true;
 
 		Enemies::get_singleton()->_remove_enemy(this);
-
 
 		if (is_in_group("flower") || is_in_group("slime_boss") || is_in_group("mimic") || is_in_group("naga"))
 		{
@@ -315,8 +321,6 @@ void godot::Enemy::_on_fixed_timeout()
 
 void godot::Enemy::_destroy_enemy()
 {
-	//_update_health_bar();
-
 	death_timer->disconnect("timeout", this, "_destroy_enemy");
 
 	Enemies::get_singleton()->_remove_enemy(this);
@@ -542,9 +546,7 @@ void godot::Enemy::_remove_taken_positions()
 void godot::Enemy::_set_direction(Node* player, Vector2 direction)
 {
 	if (player->is_in_group("player") && (bool)player->get_parent()->call("_is_alive"))
-	{
 		ai->_set_direction(direction);
-	}
 }
 
 void godot::Enemy::_revive()

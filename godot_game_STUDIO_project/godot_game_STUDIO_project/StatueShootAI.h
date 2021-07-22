@@ -11,7 +11,6 @@ namespace godot
 	{
 		Vector2 directions[4];
 		BulletPull* bullet_pull = nullptr;
-		int max_bullet_count;
 		bool can_fight;
 
 	public:
