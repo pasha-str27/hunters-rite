@@ -11,7 +11,6 @@ bool godot::Room::_adjacent_room_is_null(Vector2 pos)
 void godot::Room::_register_methods()
 {
 	register_method("_init", &Room::_init);
-	register_method("_ready", &Room::_ready);
 	register_method("_adjacent_room_is_null", &Room::_adjacent_room_is_null);
 	register_method("_set_num_of_adjacent_rooms", &Room::_set_num_of_adjacent_rooms);
 	register_method("_get_num_of_adjacent_rooms", &Room::_get_num_of_adjacent_rooms);
@@ -19,7 +18,6 @@ void godot::Room::_register_methods()
 	register_method("_is_empty_pos", &Room::_is_empty_pos);
 	register_method("_set_cell_value", &Room::_set_cell_value);
 	register_method("_get_cell_value", &Room::_get_cell_value);
-	register_method("print", &Room::print);
 	register_method("_fill_empty_positions", &Room::_fill_empty_positions);
 	register_method("_add_list", &Room::_add_list);
 	register_method("_get_list_of_keys", &Room::_get_list_of_keys);
@@ -110,21 +108,9 @@ void godot::Room::_fill_empty_positions(Node2D* room)
 			}			
 }
 
-void godot::Room::print()
-{
-	for (int i = 0; i < room_map.size(); ++i)
-	{
-		String tmp = "";
-		for (int j = 0; j < room_map[i].size(); ++j)
-			tmp += String::num(room_map[i][j]);
-		Godot::print(tmp);
-	}
-}
-
 void godot::Room::_add_list(Array list)
 {	
 	Array lst = list[0].operator godot::Array();
-	Godot::print("arr size " + String::num(lst.size()));
 	for (int i = 0; i < lst.size(); ++i)
 		list_of_keys.push_back(lst[i]);
 	list_of_keys.push_back(list);
@@ -211,9 +197,6 @@ void godot::Room::_spawn_enemy(int number)
 				return;
 			}
 	}
-	
-	if(MenuButtons::game_type==TUTORIAL)
-		Enemies::get_singleton()->_add_enemy(enemies_to_spawn[number].enemy);
 }
 
 void godot::Room::_clear_enemy_to_spawn()
@@ -244,8 +227,4 @@ void godot::Room::_set_adjacent_room(Vector2 pos, Node2D* value)
 int godot::Room::_get_num_of_adjacent_rooms()
 {
 	return num_of_adjacent_rooms;
-}
-
-void godot::Room::_ready()
-{
 }
