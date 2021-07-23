@@ -128,6 +128,12 @@ void godot::EnemyData::_process(float delta)
 
 void godot::EnemyData::_set_speed(float value)
 {
+	speed = value;
+}
+
+float godot::EnemyData::_get_speed()
+{
+	return speed;
 }
 
 void godot::EnemyData::_add_bullet(Node* bullet)

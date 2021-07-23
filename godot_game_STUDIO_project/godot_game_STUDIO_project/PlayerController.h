@@ -36,7 +36,6 @@ namespace godot
 		bool is_special;
 		float diff;
 
-		int number_to_next_item;
 		float attack_speed_delta;
 		float dash_time_delta;
 		float dash_cooldown_delta;

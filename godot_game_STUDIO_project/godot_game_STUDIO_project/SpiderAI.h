@@ -14,7 +14,6 @@ namespace godot
 		bool can_move;
 
 		Vector2 dir;
-		bool is_cheking;
 		float speed;
 		Vector2 old_pos;
 		Vector2 cur_pos;
@@ -31,6 +30,5 @@ namespace godot
 		void _fight(Node2D *player1, Node2D* player2);
 		void _set_speed(float value);
 		void _change_start_parameters();
-		bool _is_player_near(Node2D* player);
 	};
 }

@@ -29,7 +29,6 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<ItemsContainer>();
 	register_class<ItemGenerator>();
 	register_class<FadeAnimation>();
-	register_class<RoomStats>();
 	register_class<MenuButtons>();
 	register_class<AudioEffect>();
 	register_class<ParticlesDestroyer>();
@@ -42,7 +41,6 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<Key>();
 	register_class<EnemyPrice>();
 	register_class<MiniMapController>();
-	register_class<Ball>();
 	register_class<SlimeEnemiesHolder>();
 	register_class<CameraShake>();
 	register_class<TutorialManager>();

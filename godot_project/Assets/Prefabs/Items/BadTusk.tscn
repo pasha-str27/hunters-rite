@@ -50,7 +50,10 @@ HP = 5.0
 damage = 3.0
 attack_speed_delta = 1.1
 number_to_next_item = 0
+decrease_attack_radius = null
+encrease_attack_radius = null
 "Is Buff" = false
+item_price = null
 
 [node name="Sprite" type="Sprite" parent="."]
 z_index = 9

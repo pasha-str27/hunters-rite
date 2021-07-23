@@ -30,7 +30,8 @@ void godot::MimicAI::_fight(Node2D* player1, Node2D* player2)
 	can_damage = false;
 	if (was_setted)
 	{
-		if (is_player1_onArea && player1 != nullptr) {
+		if (is_player1_onArea && player1 != nullptr) 
+		{
 			_get_enemy()->call("_change_animation", "attack", 1.5f);
 			player1->call("_take_damage", damage, false);
 		}
@@ -40,7 +41,6 @@ void godot::MimicAI::_fight(Node2D* player1, Node2D* player2)
 			_get_enemy()->call("_change_animation", "attack", 1.5f);
 			player2->call("_take_damage", damage, false);
 		}
-
 	}
 
 	was_setted = false;

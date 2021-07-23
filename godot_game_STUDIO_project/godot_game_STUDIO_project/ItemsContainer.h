@@ -10,14 +10,14 @@ namespace godot
 	{
 	private:
 		GODOT_CLASS(ItemsContainer, Node);
-	public:
 		Array items = {};
-
+	public:
 		static void _register_methods();
 		void _init();
 		void _ready();
 		ItemsContainer* _get_instance();
 		void _spawn_random_item(Vector2 pos);
+		Array _get_items();
 		ItemsContainer();
 		~ItemsContainer();
 	};

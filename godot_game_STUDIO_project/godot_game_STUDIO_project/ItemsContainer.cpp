@@ -35,8 +35,14 @@ void godot::ItemsContainer::_spawn_random_item(Vector2 pos)
 	get_node("/root/Node2D/Items")->add_child(item);
 }
 
+Array godot::ItemsContainer::_get_items()
+{
+	return items;
+}
+
 godot::ItemsContainer::ItemsContainer()
 {
+	items = {};
 }
 
 godot::ItemsContainer::~ItemsContainer()

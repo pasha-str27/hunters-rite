@@ -306,9 +306,10 @@ bool godot::TutorialManager::_is_player_have_need_keys(Color rooms_key)
 
 void godot::TutorialManager::_ready()
 {
+	audio_controller = AudioController::get_singleton();
+
 	minimap = cast_to<CanvasItem>(get_node("MiniMap"));
 
-	audio_server = AudioServer::get_singleton();
 	_set_current(true);
 
 	_spawn_players();
@@ -319,6 +320,9 @@ void godot::TutorialManager::_ready()
 		audio_boss = cast_to<AudioStreamPlayer2D>(boss_back->instance());
 		add_child(audio);
 		add_child(audio_boss);
+
+		auto audio_server = audio_controller->_get_audio_server();
+
 		audio_server->set_bus_volume_db(audio_server->get_bus_index(audio->get_bus()), -80);
 		audio_server->set_bus_volume_db(audio_server->get_bus_index(audio->get_bus()) + 1, -80);
 	}
@@ -444,14 +448,14 @@ void godot::TutorialManager::_start_move()
 
 void godot::TutorialManager::_change_audio_volume()
 {
-	if (AudioController::get_singleton()->_change_audio_volume_camera_controller(timer_audio, this, audio, time_delta))
-		return;
+	if (audio_controller->_change_audio_volume_camera_controller(timer_audio, this, audio, time_delta))
+		timer_audio->disconnect("timeout", this, "_change_audio_volume");
 }
 
 void godot::TutorialManager::_mute_audio_volume()
 {
-	if (AudioController::get_singleton()->_mute_audio_volume(timer_audio, this, audio, time_delta))
-		return;
+	if (audio_controller->_mute_audio_volume(timer_audio, this, audio, time_delta))
+		timer_audio->disconnect("timeout", this, "_mute_audio_volume");
 }
 
 void godot::TutorialManager::_start_mute_volume()
@@ -493,8 +497,8 @@ void godot::TutorialManager::_input(Variant event)
 
 void godot::TutorialManager::_audio_fade_to_main_menu()
 {
-	if (AudioController::get_singleton()->_audio_fade_to_main_menu(timer_audio, this, audio, time_delta))
-		return;
+	if (audio_controller->_audio_fade_to_main_menu(timer_audio, this, audio, time_delta))
+		timer_audio->disconnect("timeout", this, "_audio_fade_to_main_menu");
 }
 
 void godot::TutorialManager::_spawn_exit()
@@ -595,7 +599,6 @@ godot::TutorialManager::~TutorialManager()
 	audio = nullptr;
 	audio_boss = nullptr;
 	timer_audio = nullptr;
-	audio_server = nullptr;
 	player1 = nullptr;
 	player2 = nullptr;
 }

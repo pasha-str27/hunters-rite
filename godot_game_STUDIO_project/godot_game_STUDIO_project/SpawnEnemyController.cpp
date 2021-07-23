@@ -8,7 +8,6 @@ void godot::SpawnEnemyController::_register_methods()
 	register_method("_ready", &SpawnEnemyController::_ready);
 	register_method("_prepare_spawn", &SpawnEnemyController::_prepare_spawn);
 	register_method("_spawn", &SpawnEnemyController::_spawn);
-	register_method("_on_Area2D_area_entered", &SpawnEnemyController::_on_Area2D_area_entered);
 	register_method("_get_current_level_name", &SpawnEnemyController::_get_current_level_name);
 
 	register_property<SpawnEnemyController, Ref<PackedScene>>("Altar prefab", &SpawnEnemyController::altar, nullptr);
@@ -178,38 +177,6 @@ void godot::SpawnEnemyController::SpawnBoss()
 	}
 }
 
-void godot::SpawnEnemyController::SpawnItems()
-{
-	i_container = get_node("/root/Node2D/Node/ItemsContainer")->call("_get_instance");
-
-	Array item_points = get_node("ItemPoints")->get_children();
-
-	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
-	rng->randomize();
-
-	auto spawned_altar = cast_to<Node2D>(altar->instance());
-	spawned_altar->set_global_position(this->get_global_position());
-
-	get_node("/root/Node2D/Node/Generation")->add_child(spawned_altar, true);
-
-	for (int i = 0; i < item_points.size(); i++)
-	{
-		int index = rng->randi_range(0, i_container->items.size() - 1);
-		auto item = cast_to<Node2D>(cast_to<PackedScene>(i_container->items[index])->instance());
-		item->set_global_position(cast_to<Node2D>(item_points[i])->get_global_position());
-		get_node("/root/Node2D/Items")->add_child(item, true);
-	}
-
-	rng = nullptr;
-}
-
-void godot::SpawnEnemyController::SpawnKey()
-{
-	auto spawned_pedestal = cast_to<Node2D>(pedestal->instance());
-	spawned_pedestal->set_global_position(cast_to<Node2D>(get_parent())->get_global_position());
-	get_node("/root/Node2D/Node/Generation")->add_child(spawned_pedestal, true);
-}
-
 void godot::SpawnEnemyController::_init()
 {
 	enemies_count = 5;
@@ -239,46 +206,6 @@ void godot::SpawnEnemyController::_spawn()
 	SpawnEnemies();
 }
 
-void godot::SpawnEnemyController::_on_Area2D_area_entered(Node* other)
-{
-	if (other->is_in_group("room"))
-	{
-		String room_type = other->get_parent()->call("_get_type");
-		if (room_type == "room")
-		{
-			get_parent()->call("_close_doors");
-			//spawn_points = other->get_parent()->get_node("SpawnPoints")->get_children();
-			enemies = other->get_parent()->call("_get_enemies");
-		}
-		else
-			if (room_type == "boss")
-			{
-				//spawn_points = other->get_parent()->get_node("SpawnPoints")->get_children();
-				enemies = other->get_parent()->call("_get_enemies");
-				get_parent()->call("_close_doors");
-				SpawnBoss();
-			}
-			else
-				if (room_type == "item_room")
-				{
-					//spawn_points = other->get_parent()->get_node("SpawnPoints")->get_children();
-					enemies = other->get_parent()->call("_get_enemies");
-					get_parent()->call("_close_doors");
-					SpawnItems();
-				}
-				else
-					if (room_type == "quest_room")
-					{
-						SpawnKey();
-					}
-
-		get_parent()->call("_set_current_room_type", room_type);
-
-		other->queue_free();
-		return;
-	}
-}
-
 String godot::SpawnEnemyController::_get_current_level_name()
 {
 	return this->current_level;
@@ -286,8 +213,8 @@ String godot::SpawnEnemyController::_get_current_level_name()
 
 float godot::SpawnEnemyController::_calculate_room_difficulty()
 {
-	float PH_k = 1,
-		AS1 = 1,
+	float PH_k = 0.75,
+		AS1 = 1.35,
 		AS2 = 1,
 		DPS_k = 1,
 		RFS = 0,

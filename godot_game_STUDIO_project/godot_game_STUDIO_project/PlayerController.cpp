@@ -78,7 +78,6 @@ godot::PlayerController::PlayerController()
 	dash_time_delta = 0.4;
 	dash_speed_multiplier = 1.5;
 	dash_cooldown_delta = dash_time_delta * 3;
-	number_to_next_item = 15;
 	can_move = true;
 	is_alive = true;
 	is_special = false;
@@ -377,12 +376,12 @@ void godot::PlayerController::_encrease_attack_radius()
 
 void godot::PlayerController::_set_number_to_next_item(int value)
 {
-	number_to_next_item = value;
+	item_generator->_set_count_to_spawn(value);
 }
 
 int godot::PlayerController::_get_number_to_next_item()
 {
-	return number_to_next_item;
+	return item_generator->_get_count_to_spawn();
 }
 
 void godot::PlayerController::_set_speed(float value)

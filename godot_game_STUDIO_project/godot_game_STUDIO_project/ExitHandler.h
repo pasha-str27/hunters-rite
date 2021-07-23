@@ -6,6 +6,8 @@
 
 namespace godot 
 {
+	class AudioController;
+
 	class ExitHandler: public Node2D
 	{
 	private:
@@ -18,6 +20,7 @@ namespace godot
 		Timer* timer_music_out = nullptr;
 		AudioServer* audio_server = nullptr;
 		bool is_spawned = false;
+		AudioController* audio_controller = nullptr;
 	public:
 
 		static void _register_methods();

@@ -14,8 +14,8 @@ namespace godot
 		GODOT_CLASS(SpawnEnemyController, Node2D);
 		void SpawnEnemies();
 		void SpawnBoss();
-		void SpawnItems();
-		void SpawnKey();
+
+
 		ItemsContainer* i_container = nullptr;
 		Ref<PackedScene> altar = nullptr;
 		Ref<PackedScene> boss_prefab = nullptr;
@@ -39,12 +39,12 @@ namespace godot
 		
 		void _prepare_spawn();
 		void _spawn();
-		void _on_Area2D_area_entered(Node* other);
+
 		String _get_current_level_name();
 		float _calculate_room_difficulty();
-		SpawnEnemyController();
-		~SpawnEnemyController();
 		float _find_min_enemy_price();
 		void _spawn_boss(Ref<PackedScene> boss_prefab);
+		SpawnEnemyController();
+		~SpawnEnemyController();
 	};
 }
