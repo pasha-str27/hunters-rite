@@ -45,9 +45,9 @@ godot::FadeAnimation::~FadeAnimation()
 void godot::FadeAnimation::_on_timeout()
 {
 	timer->disconnect("timeout", this, "_on_timeout");
-
-	if (!get_node("/root")->has_node("Pause") && !get_node("/root")->has_node("Notice") && !get_node("/root")->has_node("Menu") 
-		&& !get_node("/root")->has_node("ChoosePlayer"))
+	auto root = get_node("/root");
+	if (!root->has_node("Pause") && !root->has_node("Notice") && !root->has_node("Menu")
+		&& !root->has_node("ChoosePlayer"))
 	{
 		auto camera = get_node("/root/Node2D/Node/Camera2D");
 		if (animation_name == "fade_in")

@@ -39,6 +39,12 @@ tracks/1/keys = {
 z_index = 9
 z_as_relative = false
 script = ExtResource( 3 )
+Name = "Chicken"
+speed = 0.0
+HP = 17.0
+damage = 0.0
+attack_speed_delta = 1.0
+number_to_next_item = 0
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -1.89171 )
