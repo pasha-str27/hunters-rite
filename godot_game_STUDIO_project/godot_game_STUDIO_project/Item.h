@@ -10,7 +10,6 @@ namespace godot
 		GODOT_CLASS(Item, Node2D);
 
 		AnimationPlayer* animator = nullptr;
-
 		String name;
 		float speed;
 		float HP;
@@ -28,6 +27,11 @@ namespace godot
 		void _ready();
 		void _init();
 		void _on_Area2D_body_entered(Node* node);
-		bool _get_is_buff();
+		void _apply_item(Node* player);
+		//	creating UI for items holders
+		Control* _create_control();
+		TextureRect* _create_item_sprite();
+		TextureRect* _create_item_background(Ref<Texture>);
+		Label* _create_text(Ref<Theme> theme);
 	};
 }

@@ -3,9 +3,6 @@
 #include "headers.h"
 #endif
 
-#include <TranslationServer.hpp>
-#include <CheckBox.hpp>
-
 int MenuButtons::current_locale_index = 0;
 bool MenuButtons::was_focused = false;
 bool MenuButtons::was_loaded = false;
@@ -38,6 +35,7 @@ MenuButtons::~MenuButtons()
 void godot::MenuButtons::_init() {
 	locales = TranslationServer::get_singleton()->get_loaded_locales();
 	String current_locale = TranslationServer::get_singleton()->get_locale();
+	//	if no current locale - set 'en' by default
 	if (!locales.has(current_locale))
 	{
 		TranslationServer::get_singleton()->set_locale("en");

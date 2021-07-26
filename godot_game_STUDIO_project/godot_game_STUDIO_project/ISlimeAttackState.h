@@ -9,10 +9,9 @@ namespace godot {
 	protected:
 		SlimeBossAI* ai = nullptr; 
 	public:
-		static int taken_damage;
 		virtual void _fight() {};
-		ISlimeAttackState(SlimeBossAI* boss) { ai = boss; };
-		~ISlimeAttackState() { ai = nullptr; };
+		ISlimeAttackState(SlimeBossAI* boss);
+		~ISlimeAttackState();
 	};
 }
 

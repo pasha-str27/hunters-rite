@@ -59,6 +59,8 @@
 #include <ResourceSaver.hpp>
 #include <Control.hpp>
 #include <MarginContainer.hpp>
+#include <TranslationServer.hpp>
+#include <CheckBox.hpp>
 
 using namespace godot;
 
@@ -91,7 +93,6 @@ using namespace godot;
 #include "StatueShootAI.h"
 #include "FadeAnimation.h"
 #include "PlayersContainer.h"
-#include "RoomStats.h"
 #include "MenuButtons.h"
 #include "AudioEffect.h"
 #include "ParticlesDestroyer.h"
