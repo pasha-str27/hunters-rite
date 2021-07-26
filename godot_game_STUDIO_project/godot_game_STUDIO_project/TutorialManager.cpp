@@ -260,32 +260,53 @@ void godot::TutorialManager::_spawn_players()
 			_hide_tutorial_sprites("Solo");
 			_hide_tutorial_sprites("GhostTutorial");
 
+			Dictionary input_map_pl2;
+
+			input_map_pl2["move_up"] = "Player2_up";
+			input_map_pl2["move_down"] = "Player2_down";
+			input_map_pl2["move_left"] = "Player2_left";
+			input_map_pl2["move_right"] = "Player2_right";
+			input_map_pl2["fight_up"] = "Player2_fight_up";
+			input_map_pl2["fight_down"] = "Player2_fight_down";
+			input_map_pl2["fight_left"] = "Player2_fight_left";
+			input_map_pl2["fight_right"] = "Player2_fight_right";
+			input_map_pl2["special"] = "Player2_special";
+
 			if (player2->has_method("_set_controll_buttons"))
-				player2->call_deferred("_set_controll_buttons", "Player2_up", "Player2_down", "Player2_left", "Player2_right", "Player2_fight_up", "Player2_fight_down", "Player2_fight_left", "Player2_fight_right", "Player2_special");
+				player2->call_deferred("_set_controll_buttons", input_map_pl2);
 			else
 			{
 				for (int i = 0; i < player2->get_child_count(); ++i)
 					if (player2->get_child(i)->has_method("_set_controll_buttons"))
 					{
-						player2->get_child(i)->call_deferred("_set_controll_buttons", "Player2_up", "Player2_down", "Player2_left", "Player2_right", "Player2_fight_up", "Player2_fight_down", "Player2_fight_left", "Player2_fight_right", "Player2_special");
+						player2->get_child(i)->call_deferred("_set_controll_buttons", input_map_pl2);
 						break;
 					}
 			}
 
+			Dictionary input_map_pl1;
+
+			input_map_pl1["move_up"] = "Player1_up";
+			input_map_pl1["move_down"] = "Player1_down";
+			input_map_pl1["move_left"] = "Player1_left";
+			input_map_pl1["move_right"] = "Player1_right";
+			input_map_pl1["fight_up"] = "Player1_fight_up";
+			input_map_pl1["fight_down"] = "Player1_fight_down";
+			input_map_pl1["fight_left"] = "Player1_fight_left";
+			input_map_pl1["fight_right"] = "Player1_fight_right";
+			input_map_pl1["special"] = "Player1_special";
+
 			if (player1->has_method("_set_controll_buttons"))
-				player1->call_deferred("_set_controll_buttons", "Player1_up", "Player1_down", "Player1_left", "Player1_right", "Player1_fight_up", "Player1_fight_down", "Player1_fight_left", "Player1_fight_right", "Player1_special");
+				player1->call_deferred("_set_controll_buttons", input_map_pl1);
 			else
 			{
 				for (int i = 0; i < player1->get_child_count(); ++i)
 					if (player1->get_child(i)->has_method("_set_controll_buttons"))
 					{
-						player1->get_child(i)->call_deferred("_set_controll_buttons", "Player1_up", "Player1_down", "Player1_left", "Player1_right", "Player1_fight_up", "Player1_fight_down", "Player1_fight_left", "Player1_fight_right", "Player1_special");
+						player1->get_child(i)->call_deferred("_set_controll_buttons", input_map_pl1);
 						break;
 					}
 			}
-
-			//PlayersContainer::_get_instance()->_set_player1(player1);
-			//PlayersContainer::_get_instance()->_set_player2(player2);
 		}
 	}
 }

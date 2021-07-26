@@ -42,8 +42,10 @@ namespace godot
 		IPlayer* _clone();
 		void _set_was_revived(bool value);
 		void _heal();
-		void _set_controll_buttons(String move_up, String move_down, String move_left, String move_right, String fight_up,
-			String fight_down, String fight_left, String fight_right, String special);
+		void _set_controll_buttons(Dictionary input_map);
 		void _set_is_attacking(bool value);
+		void _decrease_attack_radius();
+		void _encrease_attack_radius();
+		Dictionary _get_controll_buttons();
 	};
 }

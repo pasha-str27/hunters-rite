@@ -9,12 +9,16 @@ PlayersContainer::PlayersContainer()
 {
 	player1 = nullptr;
 	player2 = nullptr;
+	player1_regular = nullptr;
+	player2_regular = nullptr;
 }
 
 void godot::PlayersContainer::_clear()
 {
 	player1 = nullptr;
 	player2 = nullptr;
+	player1_regular = nullptr;
+	player2_regular = nullptr;
 }
 
 void PlayersContainer::_set_player1(Node2D* player1)

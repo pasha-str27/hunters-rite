@@ -12,11 +12,9 @@ namespace godot
 	public:
 		PlayerShootGhost(Node2D* obj, Ref<PackedScene> bullet = 0);
 		~PlayerShootGhost();
-		void _move();
 		void _process_input();
 		void _update_health_bar();
 		ProgressBar* _get_health_bar();
 		void _heal();
-		//void _stop_animations();
 	};
 }

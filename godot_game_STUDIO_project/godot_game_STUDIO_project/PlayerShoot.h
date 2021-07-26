@@ -9,7 +9,6 @@ namespace godot
 
 	class PlayerShoot : public PlayerData
 	{
-		int max_bullet_count;
 		BulletPull* bullet_pull = nullptr;
 
 		Vector2 bullet_dir;
