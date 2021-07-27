@@ -62,7 +62,6 @@ void godot::ExitHandler::_on_Area2D_area_entered(Node* other)
 
 		_spawn_fade_out();
 
-		GameManager::show_tutorial = false;
 		GameManager::current_level++;
 	}
 }

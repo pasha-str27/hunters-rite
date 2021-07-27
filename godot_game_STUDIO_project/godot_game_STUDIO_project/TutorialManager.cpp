@@ -220,31 +220,27 @@ void godot::TutorialManager::_spawn_players()
 		_hide_tutorial_sprites("Solo");
 		_hide_tutorial_sprites("GhostTutorial");
 
-		auto set_control_buttons = [&](Node2D* player, int id) {
-			String p_up = "Player" + String::num(id) + "_up",
-				p_down = "Player" + String::num(id) + "_down",
-				p_left = "Player" + String::num(id) + "_left",
-				p_right = "Player" + String::num(id) + "_right",
-				p_f_up = "Player" + String::num(id) + "_fight_up",
-				p_f_down = "Player" + String::num(id) + "_fight_down",
-				p_f_left = "Player" + String::num(id) + "_fight_left",
-				p_f_right = "Player" + String::num(id) + "_fight_right",
-				p_special = "Player" + String::num(id) + "_special";
+		auto set_control_buttons = [&](Node2D* player, int id)
+		{
+			Dictionary input_map_pl;
+			input_map_pl["move_up"] = "Player" + String::num(id) + "_up",
+				input_map_pl["move_down"] = "Player" + String::num(id) + "_down",
+				input_map_pl["move_left"] = "Player" + String::num(id) + "_left",
+				input_map_pl["move_right"] = "Player" + String::num(id) + "_right",
+				input_map_pl["fight_up"] = "Player" + String::num(id) + "_fight_up",
+				input_map_pl["fight_down"] = "Player" + String::num(id) + "_fight_down",
+				input_map_pl["fight_left"] = "Player" + String::num(id) + "_fight_left",
+				input_map_pl["fight_right"] = "Player" + String::num(id) + "_fight_right",
+				input_map_pl["special"] = "Player" + String::num(id) + "_special";
 
 			if (player->has_method("_set_controll_buttons"))
-				player->call_deferred("_set_controll_buttons", p_up,
-					p_down, p_left, p_right,
-					p_f_up, p_f_down, p_f_left,
-					p_f_right, p_special);
+				player->call_deferred("_set_controll_buttons", input_map_pl);
 			else
 			{
 				for (int i = 0; i < player->get_child_count(); ++i)
 					if (player->get_child(i)->has_method("_set_controll_buttons"))
 					{
-						player->get_child(i)->call_deferred("_set_controll_buttons",
-							p_up, p_down, p_left, p_right,
-							p_f_up, p_f_down, p_f_left,
-							p_f_right, p_special);
+						player->get_child(i)->call_deferred("_set_controll_buttons", input_map_pl);
 						break;
 					}
 			}

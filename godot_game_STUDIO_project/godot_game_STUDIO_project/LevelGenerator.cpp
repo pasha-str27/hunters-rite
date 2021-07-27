@@ -140,7 +140,9 @@ void godot::LevelGenerator::_ready()
 	_build_locks();
 	_build_fill_doors();
 	//	call set positions
-	get_node("/root/Node2D/Node/Camera2D/MiniMap")->call_deferred("_start_treking");
+	auto mini_map = get_node("/root/Node2D/Node/Camera2D/MiniMap");
+	mini_map->call_deferred("_start_treking");
+	cast_to<Label>(mini_map->get_node("Level"))->set_text("Level: " + String::num(GameManager::current_level));
 }
 
 void godot::LevelGenerator::_connect_rooms(Node2D* prev, Node2D* next, Vector2 dir)
