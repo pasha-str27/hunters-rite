@@ -19,7 +19,7 @@ void godot::TutorialManager::_register_methods()
 	register_method("_spawn_exit", &TutorialManager::_spawn_exit);
 	register_method("_set_current_room_type", &TutorialManager::_set_current_room_type);
 	register_method("_go_to_start", &TutorialManager::_go_to_start);
-	register_method("_get_type_keys", &TutorialManager::_get_type_keys);
+	register_method("_create_keys_holders", &TutorialManager::_create_keys_holders);
 	register_method("_show_game_over_screen", &TutorialManager::_show_game_over_screen);
 
 	register_property<TutorialManager, Ref<PackedScene>>("Fade In Animation", &TutorialManager::fadeIn, nullptr);
@@ -41,85 +41,56 @@ void godot::TutorialManager::_move(String dir)
 
 	auto prev_room = CurrentRoom::get_singleton()->_get_current_room();
 
-	if (dir == "top")
+	auto _get_opposite_dir_door_name = [](String dir) -> String
 	{
-		float delta = 720;
+		if (dir == "right")
+			return "LeftDoor";
 
-		set_global_position(get_global_position() - Vector2(0, delta));
+		if (dir == "left")
+			return "RightDoor";
 
-		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
-		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "DownDoor");
-		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
+		if (dir == "bottom")
+			return "UpDoor";
 
-		CurrentRoom::get_singleton()->_set_current_room(next_room);
+		if (dir == "top")
+			return "DownDoor";
+	};
 
-		if (PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
-			cast_to<Node2D>(PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1))->set_global_position(move_point->get_global_position());
-
-		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
-			PlayersContainer::_get_instance()->_get_player2_regular()->set_global_position(move_point->get_global_position());
-	}
+	if (dir == "top")
+		set_global_position(get_global_position() - Vector2(0, vertical_delta));
 
 	if (dir == "bottom")
-	{
-		float delta = 720;
-
-		set_global_position(get_global_position() + Vector2(0, delta));
-
-		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
-		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "UpDoor");
-		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
-
-		CurrentRoom::get_singleton()->_set_current_room(next_room);
-
-		if (PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
-			cast_to<Node2D>(PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1))->set_global_position(move_point->get_global_position());
-
-		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
-			PlayersContainer::_get_instance()->_get_player2_regular()->set_global_position(move_point->get_global_position());
-	}
+		set_global_position(get_global_position() + Vector2(0, vertical_delta));
 
 	if (dir == "left")
-	{
-		float delta = 1024;
-
-		set_global_position(get_global_position() - Vector2(delta, 0));
-
-		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
-		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "RightDoor");
-		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
-
-		CurrentRoom::get_singleton()->_set_current_room(next_room);
-
-		if (PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
-			cast_to<Node2D>(PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1))->set_global_position(move_point->get_global_position());
-
-		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
-			PlayersContainer::_get_instance()->_get_player2_regular()->set_global_position(move_point->get_global_position());
-	}
+		set_global_position(get_global_position() - Vector2(horizontal_delta, 0));
 
 	if (dir == "right")
+		set_global_position(get_global_position() + Vector2(horizontal_delta, 0));
+
+	Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
+	Node2D* door = CustomExtensions::GetChildByWordInName(next_room, _get_opposite_dir_door_name(dir));
+	Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
+
+	CurrentRoom::get_singleton()->_set_current_room(next_room);
+
+	auto player_1 = PlayersContainer::_get_instance()->_get_player1_regular();
+	auto player_2 = PlayersContainer::_get_instance()->_get_player2_regular();
+
+	auto _try_to_move_player = [](Node2D* player, Vector2 move_point)
 	{
-		float delta = 1024;
+		if (player != nullptr)
+			player->set_global_position(move_point);
+	};
 
-		set_global_position(get_global_position() + Vector2(delta, 0));
+	if (player_1 != nullptr)
+		_try_to_move_player((Node2D*)player_1->get_child(1), move_point->get_global_position());
 
-		Node2D* next_room = generation_node->call("_get_next_room", get_global_position());
-		Node2D* door = CustomExtensions::GetChildByWordInName(next_room, "LeftDoor");
-		Node2D* move_point = cast_to<Node2D>(door->get_node("SpawnPoint"));
+	_try_to_move_player(player_2, move_point->get_global_position());
 
-		CurrentRoom::get_singleton()->_set_current_room(next_room);
+	auto curr_room = CurrentRoom::get_singleton()->_get_current_room();
 
-		if (PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
-			cast_to<Node2D>(PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1))->set_global_position(move_point->get_global_position());
-
-		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
-			PlayersContainer::_get_instance()->_get_player2_regular()->set_global_position(move_point->get_global_position());
-	}
-
-	auto cur_room = CurrentRoom::get_singleton()->_get_current_room();
-
-	if ((String)prev_room->call("_get_room_type") == "tut_room" && (String)cur_room->call("_get_room_type") == "heal_room")
+	if ((String)prev_room->call("_get_room_type") == "tut_room" && (String)curr_room->call("_get_room_type") == "heal_room")
 	{
 		auto player = PlayersContainer::_get_instance()->_get_player1_regular();
 		if (player != nullptr)
@@ -130,7 +101,7 @@ void godot::TutorialManager::_move(String dir)
 			player->call("_set_HP", (float)player->call("_get_HP") / 2);
 	}
 
-	if ((String)prev_room->call("_get_room_type") == "heal_room" && (String)cur_room->call("_get_room_type") == "tut_room")
+	if ((String)prev_room->call("_get_room_type") == "heal_room" && (String)curr_room->call("_get_room_type") == "tut_room")
 	{
 		auto player = PlayersContainer::_get_instance()->_get_player1_regular();
 		if (player != nullptr)
@@ -141,7 +112,7 @@ void godot::TutorialManager::_move(String dir)
 			player->call("_set_HP", (float)player->call("_get_max_HP"));
 	}
 
-	if ((String)prev_room->call("_get_room_type") == "heal_room" && (String)cur_room->call("_get_room_type") == "revive_room")
+	if ((String)prev_room->call("_get_room_type") == "heal_room" && (String)curr_room->call("_get_room_type") == "revive_room")
 	{
 		CustomExtensions::ChangeVisibleInNodes(cast_to<Node>(get_node("/root/Node2D/Node/TutorialSprites")), "GhostTutorial", true);
 		auto player = PlayersContainer::_get_instance()->_get_player1_regular();
@@ -150,15 +121,15 @@ void godot::TutorialManager::_move(String dir)
 		cast_to<Node2D>(player->get_child(1))->set_global_position(prev_room->get_global_position()+Vector2(0,720));
 	}
 
-	if ((String)prev_room->call("_get_room_type") == "revive_room" && (String)cur_room->call("_get_room_type") == "heal_room")
+	if ((String)prev_room->call("_get_room_type") == "revive_room" && (String)curr_room->call("_get_room_type") == "heal_room")
 	{
 		auto player = PlayersContainer::_get_instance()->_get_player2_regular();
 		if (player != nullptr)
 			player->call_deferred("_player_to_ghost");
 	}
 
-	if ((String)cur_room->call("_get_room_type") == "heal_room")
-		cur_room->get_node("Stone")->call("_can_heal_true");
+	if ((String)curr_room->call("_get_room_type") == "heal_room")
+		curr_room->get_node("Stone")->call("_can_heal_true");
 
 	if ((String)prev_room->call("_get_room_type") == "game_room")
 	{
@@ -208,107 +179,87 @@ void  godot::TutorialManager::_hide_tutorial_sprites(String t_player_name)
 void godot::TutorialManager::_spawn_players()
 {
 	ResourceLoader* loader = ResourceLoader::get_singleton();
-	if (MenuButtons::game_mode == SHOOTER)
+	String player1_path = "res://Assets/Prefabs/Players/Player1.tscn";
+	String player2_path = "res://Assets/Prefabs/Players/Player2.tscn";
+	player1 = nullptr;
+	player2 = nullptr;
+
+	auto _spawn_player = [&](String path) -> Node2D*
 	{
-		Ref<PackedScene> pl1 = loader->load("res://Assets/Prefabs/Players/Player1.tscn");
-		Node2D* player = cast_to<Node2D>(pl1->instance());
+		Ref<PackedScene> player_prefab = ResourceLoader::get_singleton()->load(path);
+		Node2D* player = cast_to<Node2D>(player_prefab->instance());
 		get_parent()->call_deferred("add_child", player);
-		player1 = player;
-		player2 = nullptr;
-		PlayersContainer::_get_instance()->_set_player1_regular(player1);
-		PlayersContainer::_get_instance()->_set_player2_regular(player2);
+		return player;
+	};
+
+	switch (MenuButtons::game_mode)
+	{
+	case SHOOTER:
+	{
+		player1 = _spawn_player(player1_path);
 		get_node("P2HealthBarWrapper")->queue_free();
 		_hide_tutorial_sprites("P2");
 		_hide_tutorial_sprites("Coop");
 		_hide_tutorial_sprites("GhostTutorial");
-		//	hiding label
-		//get_node("P1HealthBarWrapper/Label")->queue_free();
+		break;
 	}
-	else
+	case MELEE:
 	{
-		if (MenuButtons::game_mode == MELEE)
-		{
-			Ref<PackedScene> pl2 = loader->load("res://Assets/Prefabs/Players/Player2.tscn");
-			Node2D* player = cast_to<Node2D>(pl2->instance());
-			get_parent()->call_deferred("add_child", player);
-			player2 = player;
-			player1 = nullptr;
-			PlayersContainer::_get_instance()->_set_player1_regular(player1);
-			PlayersContainer::_get_instance()->_set_player2_regular(player2);
-			get_node("P1HealthBarWrapper")->queue_free();
-			_hide_tutorial_sprites("P1");
-			_hide_tutorial_sprites("Coop");
-			_hide_tutorial_sprites("GhostTutorial");
-
-			//	hiding label
-			//get_node("P2HealthBarWrapper/Label")->queue_free();
-		}
-		else
-		{
-			Ref<PackedScene> pl1 = loader->load("res://Assets/Prefabs/Players/Player1.tscn");
-			Node2D* player_1 = cast_to<Node2D>(pl1->instance());
-			get_parent()->call_deferred("add_child", player_1);
-			player1 = player_1;
-
-			Ref<PackedScene> pl2 = loader->load("res://Assets/Prefabs/Players/Player2.tscn");
-			Node2D* player_2 = cast_to<Node2D>(pl2->instance());
-			get_parent()->call_deferred("add_child", player_2);
-			player2 = player_2;
-
-			PlayersContainer::_get_instance()->_set_player1_regular(player1);
-			PlayersContainer::_get_instance()->_set_player2_regular(player2);
-			_hide_tutorial_sprites("Solo");
-			_hide_tutorial_sprites("GhostTutorial");
-
-			Dictionary input_map_pl2;
-
-			input_map_pl2["move_up"] = "Player2_up";
-			input_map_pl2["move_down"] = "Player2_down";
-			input_map_pl2["move_left"] = "Player2_left";
-			input_map_pl2["move_right"] = "Player2_right";
-			input_map_pl2["fight_up"] = "Player2_fight_up";
-			input_map_pl2["fight_down"] = "Player2_fight_down";
-			input_map_pl2["fight_left"] = "Player2_fight_left";
-			input_map_pl2["fight_right"] = "Player2_fight_right";
-			input_map_pl2["special"] = "Player2_special";
-
-			if (player2->has_method("_set_controll_buttons"))
-				player2->call_deferred("_set_controll_buttons", input_map_pl2);
-			else
-			{
-				for (int i = 0; i < player2->get_child_count(); ++i)
-					if (player2->get_child(i)->has_method("_set_controll_buttons"))
-					{
-						player2->get_child(i)->call_deferred("_set_controll_buttons", input_map_pl2);
-						break;
-					}
-			}
-
-			Dictionary input_map_pl1;
-
-			input_map_pl1["move_up"] = "Player1_up";
-			input_map_pl1["move_down"] = "Player1_down";
-			input_map_pl1["move_left"] = "Player1_left";
-			input_map_pl1["move_right"] = "Player1_right";
-			input_map_pl1["fight_up"] = "Player1_fight_up";
-			input_map_pl1["fight_down"] = "Player1_fight_down";
-			input_map_pl1["fight_left"] = "Player1_fight_left";
-			input_map_pl1["fight_right"] = "Player1_fight_right";
-			input_map_pl1["special"] = "Player1_special";
-
-			if (player1->has_method("_set_controll_buttons"))
-				player1->call_deferred("_set_controll_buttons", input_map_pl1);
-			else
-			{
-				for (int i = 0; i < player1->get_child_count(); ++i)
-					if (player1->get_child(i)->has_method("_set_controll_buttons"))
-					{
-						player1->get_child(i)->call_deferred("_set_controll_buttons", input_map_pl1);
-						break;
-					}
-			}
-		}
+		player2 = _spawn_player(player2_path);
+		get_node("P1HealthBarWrapper")->queue_free();
+		_hide_tutorial_sprites("P1");
+		_hide_tutorial_sprites("Coop");
+		_hide_tutorial_sprites("GhostTutorial");
+		break;
 	}
+	case COOP:
+	{
+		player1 = _spawn_player(player1_path);
+		player2 = _spawn_player(player2_path);
+
+		_hide_tutorial_sprites("Solo");
+		_hide_tutorial_sprites("GhostTutorial");
+
+		auto set_control_buttons = [&](Node2D* player, int id) {
+			String p_up = "Player" + String::num(id) + "_up",
+				p_down = "Player" + String::num(id) + "_down",
+				p_left = "Player" + String::num(id) + "_left",
+				p_right = "Player" + String::num(id) + "_right",
+				p_f_up = "Player" + String::num(id) + "_fight_up",
+				p_f_down = "Player" + String::num(id) + "_fight_down",
+				p_f_left = "Player" + String::num(id) + "_fight_left",
+				p_f_right = "Player" + String::num(id) + "_fight_right",
+				p_special = "Player" + String::num(id) + "_special";
+
+			if (player->has_method("_set_controll_buttons"))
+				player->call_deferred("_set_controll_buttons", p_up,
+					p_down, p_left, p_right,
+					p_f_up, p_f_down, p_f_left,
+					p_f_right, p_special);
+			else
+			{
+				for (int i = 0; i < player->get_child_count(); ++i)
+					if (player->get_child(i)->has_method("_set_controll_buttons"))
+					{
+						player->get_child(i)->call_deferred("_set_controll_buttons",
+							p_up, p_down, p_left, p_right,
+							p_f_up, p_f_down, p_f_left,
+							p_f_right, p_special);
+						break;
+					}
+			}
+		};
+
+		set_control_buttons(player1, 1);
+		set_control_buttons(player2, 2);
+		break;
+	}
+	default:
+		break;
+	}
+
+	PlayersContainer::_get_instance()->_set_player1_regular(player1);
+	PlayersContainer::_get_instance()->_set_player2_regular(player2);
 }
 
 bool godot::TutorialManager::_is_player_have_need_keys(Color rooms_key)
@@ -388,26 +339,22 @@ void godot::TutorialManager::_door_collision(String door_dir)
 	{
 	case 0:
 	{
-		float delta = 1024;
-		new_pos = get_global_position() - Vector2(delta, 0);
+		new_pos = get_global_position() - Vector2(horizontal_delta, 0);
 		break;
 	}
 	case 1:
 	{
-		float delta = 1024;
-		new_pos = get_global_position() + Vector2(delta, 0);
+		new_pos = get_global_position() + Vector2(horizontal_delta, 0);
 		break;
 	}
 	case 2:
 	{
-		float delta = 720;
-		new_pos = get_global_position() - Vector2(0, delta);
+		new_pos = get_global_position() - Vector2(0, vertical_delta);
 		break;
 	}
 	case 3:
 	{
-		float delta = 720;
-		new_pos = get_global_position() + Vector2(0, delta);
+		new_pos = get_global_position() + Vector2(0, vertical_delta);
 		break;
 	}
 	default:
@@ -423,12 +370,19 @@ void godot::TutorialManager::_door_collision(String door_dir)
 	if (((int)dirs[index] == 2 && MenuButtons::game_mode == COOP) || ((MenuButtons::game_mode == SHOOTER || MenuButtons::game_mode == MELEE) && (int)dirs[index] == 1))
 	{
 		Enemies::get_singleton()->set_spawning(true);
+		auto _try_stop_player = [](Node2D* player)
+		{
+			if (player != nullptr)
+				player->call("_change_moving", false);
+		};
 
-		if (PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
-			PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1)->call("_change_moving", false);
+		auto player_1 = PlayersContainer::_get_instance()->_get_player1_regular();
+		auto player_2 = PlayersContainer::_get_instance()->_get_player2_regular();
 
-		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
-			PlayersContainer::_get_instance()->_get_player2_regular()->call("_change_moving", false);
+		if (player_1 != nullptr)
+			_try_stop_player((Node2D*)player_1->get_child(1));
+
+		_try_stop_player(player_2);
 
 		auto fade = cast_to<Node2D>(fadeOut->instance());
 		add_child(fade);
@@ -452,7 +406,6 @@ void godot::TutorialManager::_open_doors()
 
 void godot::TutorialManager::_close_doors()
 {
-	//current_room->call("_spawn_enemies");
 	is_open_door = false;
 }
 
@@ -487,19 +440,24 @@ void godot::TutorialManager::_start_mute_volume()
 
 void godot::TutorialManager::_input(Variant event)
 {
-	if (Input::get_singleton()->is_action_just_pressed("ui_pause"))
-	{
-		Input::get_singleton()->action_release("ui_pause");
-		if (PlayersContainer::_get_instance()->_get_player1() != nullptr)
-			PlayersContainer::_get_instance()->_get_player1()->call("_stop_animations");
+	Input* input = Input::get_singleton();
 
-		if (PlayersContainer::_get_instance()->_get_player2() != nullptr)
-			PlayersContainer::_get_instance()->_get_player2()->call("_stop_animations");
+	if (input->is_action_just_pressed("ui_pause"))
+	{
+		input->action_release("ui_pause");
+
+		auto _try_stop_animation = [](Node2D* player) {
+			if (player != nullptr)
+				player->call("_stop_animations");
+		};
+
+		_try_stop_animation(PlayersContainer::_get_instance()->_get_player1());
+		_try_stop_animation(PlayersContainer::_get_instance()->_get_player2());
 		get_tree()->set_pause(true);
 		add_child(pause_menu->instance());
 	}
 
-	if (Input::get_singleton()->is_action_just_pressed("ui_show_minimap"))
+	if (input->is_action_just_pressed("ui_show_minimap"))
 		if (minimap != nullptr)
 		{
 			Control* key_holder = cast_to<Control>(get_node("/root/Node2D/Node/Camera2D/KeyHolder"));
@@ -514,7 +472,6 @@ void godot::TutorialManager::_input(Variant event)
 			is_showing_minimap = !is_showing_minimap;
 		}
 }
-
 
 void godot::TutorialManager::_audio_fade_to_main_menu()
 {
@@ -534,9 +491,8 @@ void godot::TutorialManager::_set_current_room_type(String type)
 	current_room_type = type;
 }
 
-void godot::TutorialManager::_get_type_keys()
+void godot::TutorialManager::_create_keys_holders()
 {
-
 	generated_keys.clear();
 
 	HBoxContainer* key_box = nullptr;
@@ -596,17 +552,19 @@ void godot::TutorialManager::_go_to_start()
 	player1 = PlayersContainer::_get_instance()->_get_player1_regular();
 	player2 = PlayersContainer::_get_instance()->_get_player2_regular();
 
-	if (player1 != nullptr)
+	auto _try_move_player = [](Node2D* player, Vector2 pos)
 	{
-		player1->get_child(1)->call("_ghost_to_player");
-		cast_to<Node2D>(player1->get_child(1))->set_global_position(Vector2(0, -50));
-	}
+		if (player != nullptr)
+		{
+			player->call("_ghost_to_player");
+			player->set_global_position(pos);
+		}
+	};
 
-	if (player2 != nullptr)
-	{
-		player2->call("_ghost_to_player");
-		player2->set_global_position(Vector2(0, 50));
-	}
+	if (player1 != nullptr)
+		_try_move_player((Node2D*)player1->get_child(1), Vector2(0, -50));
+
+	_try_move_player(player2, Vector2(0, 50));
 }
 
 godot::TutorialManager::TutorialManager()
@@ -627,8 +585,7 @@ godot::TutorialManager::~TutorialManager()
 void godot::TutorialManager::_show_game_over_screen()
 {
 	cast_to<Timer>(get_node("game_over"))->disconnect("timeout", this, "_show_game_over_screen");
-	ResourceLoader* rld = ResourceLoader::get_singleton();
-	Ref<PackedScene> game_over_screen = rld->load("res://Assets/Prefabs/Scenes/GameOver.tscn");
+	Ref<PackedScene> game_over_screen = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/Scenes/GameOver.tscn");
 	add_child(game_over_screen->instance());
 	get_tree()->set_pause(true);
 }

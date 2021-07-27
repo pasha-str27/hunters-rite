@@ -8,7 +8,6 @@ void godot::SpawnEnemyController::_register_methods()
 	register_method("_ready", &SpawnEnemyController::_ready);
 	register_method("_prepare_spawn", &SpawnEnemyController::_prepare_spawn);
 	register_method("_spawn", &SpawnEnemyController::_spawn);
-	register_method("_get_current_level_name", &SpawnEnemyController::_get_current_level_name);
 
 	register_property<SpawnEnemyController, Ref<PackedScene>>("Altar prefab", &SpawnEnemyController::altar, nullptr);
 	register_property<SpawnEnemyController, Array>("enemy_list", &SpawnEnemyController::enemy_list_prefabs, {});
@@ -22,9 +21,10 @@ void godot::SpawnEnemyController::_register_methods()
 void godot::SpawnEnemyController::SpawnEnemies()
 {
 	Enemies* enemies = Enemies::get_singleton();
+	auto current_room = CurrentRoom::get_singleton()->_get_current_room();
 
-	if ((String)CurrentRoom::get_singleton()->_get_current_room()->call("_get_room_type") == "boss_room"
-		&& !(bool)CurrentRoom::get_singleton()->_get_current_room()->call("_get_were_here"))
+	if ((String)current_room->call("_get_room_type") == "boss_room"
+		&& !(bool)current_room->call("_get_were_here"))
 	{
 		enemies->set_enemy_to_spawn_count(0);
 		enemies->set_spawning(true);
@@ -33,8 +33,8 @@ void godot::SpawnEnemyController::SpawnEnemies()
 		return;
 	}
 
-	if ((String)CurrentRoom::get_singleton()->_get_current_room()->call("_get_room_type") != "game_room"
-		|| (bool)CurrentRoom::get_singleton()->_get_current_room()->call("_get_were_here"))
+	if ((String)current_room->call("_get_room_type") != "game_room"
+		|| (bool)current_room->call("_get_were_here"))
 	{
 		enemies->set_spawning(false);
 		return;
@@ -47,64 +47,28 @@ void godot::SpawnEnemyController::SpawnEnemies()
 		{
 			Node2D* enemy = cast_to<Node2D>(tutorial_enemy->instance());
 
-			CurrentRoom::get_singleton()->_get_current_room()->add_child(enemy, true);
+			current_room->add_child(enemy, true);
 			enemy->set_position(pos);
 
-			Enemies::get_singleton()->_set_enemy_count(i);
+			enemies->_set_enemy_count(i);
 
 			pos += Vector2(0, 100);
 		}
 
 		enemies->set_spawning(false);
-
 		return;
 	}
-
-	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
-	rng->randomize();
-
-
-	float current_value = _calculate_room_difficulty();
-	std::vector<Vector2> taken_positions;
 
 	enemies->set_enemy_to_spawn_count(0);
 	enemies->set_spawning(true);
 
-	Array enemy_list = enemy_list_prefabs[GameManager::current_level - 1].operator godot::Array();
-
-	float min_enemy_price = _find_min_enemy_price();
-
-	while (current_value >= min_enemy_price)
-	{
-		Ref<PackedScene> prefab = enemy_list[rng->randi_range(0, enemy_list.size() - 1)];
-		if ((float)prefab->instance()->call("_get_enemy_price") <= current_value)
-		{
-			Node2D* enemy = cast_to<Node2D>(prefab->instance());
-			current_value -= (float)prefab->instance()->call("_get_enemy_price");
-			int pos_x;
-			int pos_y;
-			do
-			{
-				pos_x = rng->randi_range(1, 26);
-				pos_y = rng->randi_range(4, 15);
-			} while (!(bool)CurrentRoom::get_singleton()->_get_current_room()->call("_is_empty_pos", pos_y, pos_x));
-
-			enemies->set_enemy_to_spawn_count(enemies->get_enemy_to_spawn_count() + 1);
-
-			taken_positions.push_back(Vector2(pos_x, pos_y));
-			CurrentRoom::get_singleton()->_get_current_room()->call("_add_new_enemy", enemy, (Vector2(pos_x, pos_y) * 32
-				+ CurrentRoom::get_singleton()->_get_current_room()->get_global_position()
-				- Vector2(896, 544) / 2 + Vector2(16, 16)));
-
-			CurrentRoom::get_singleton()->_get_current_room()->call("_set_cell_value", pos_y, pos_x, 7);
-		}
-	}
+	std::vector<Vector2> taken_positions = _fill_enemies();
 
 	if (enemies->get_enemy_to_spawn_count() == 0)
 		enemies->set_spawning(false);
 
 	for (int i = 0; i < taken_positions.size(); ++i)
-		CurrentRoom::get_singleton()->_get_current_room()->call("_set_cell_value", taken_positions[i].y, taken_positions[i].x, 0);
+		current_room->call("_set_cell_value", taken_positions[i].y, taken_positions[i].x, 0);
 }
 
 void godot::SpawnEnemyController::SpawnBoss()
@@ -179,7 +143,6 @@ void godot::SpawnEnemyController::SpawnBoss()
 
 void godot::SpawnEnemyController::_init()
 {
-	enemies_count = 5;
 }
 
 void godot::SpawnEnemyController::_ready()
@@ -189,11 +152,19 @@ void godot::SpawnEnemyController::_ready()
 
 void godot::SpawnEnemyController::_prepare_spawn()
 {
-	if (PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
-		PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1)->call("_change_moving", true);
+	auto _try_enable_moving_player = [](Node2D* player)
+	{
+		if (player != nullptr)
+			player->call("_change_moving", true);
+	};
 
-	if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
-		PlayersContainer::_get_instance()->_get_player2_regular()->call("_change_moving", true);
+	auto player1 = PlayersContainer::_get_instance()->_get_player1_regular();
+	auto player2 = PlayersContainer::_get_instance()->_get_player2_regular();
+
+	if (player1 != nullptr)
+		_try_enable_moving_player((Node2D*)player1->get_child(1));
+
+	_try_enable_moving_player(player2);
 
 	timer->connect("timeout", this, "_spawn");
 	timer->start(.3f);
@@ -204,11 +175,6 @@ void godot::SpawnEnemyController::_spawn()
 	timer->disconnect("timeout", this, "_spawn");
 
 	SpawnEnemies();
-}
-
-String godot::SpawnEnemyController::_get_current_level_name()
-{
-	return this->current_level;
 }
 
 float godot::SpawnEnemyController::_calculate_room_difficulty()
@@ -260,7 +226,6 @@ godot::SpawnEnemyController::SpawnEnemyController()
 
 godot::SpawnEnemyController::~SpawnEnemyController()
 {
-	enemies.clear();
 	timer = nullptr;
 	i_container = nullptr;
 }
@@ -297,4 +262,49 @@ void godot::SpawnEnemyController::_spawn_boss(Ref<PackedScene> boss_prefab)
 			boss->get_child(i)->call("_change_start_parameters");
 			return;
 		}
+}
+
+std::vector<Vector2> godot::SpawnEnemyController::_fill_enemies()
+{
+	std::vector<Vector2> taken_positions;
+	float current_value = _calculate_room_difficulty();
+
+	Enemies* enemies = Enemies::get_singleton();
+
+	auto current_room = CurrentRoom::get_singleton()->_get_current_room();
+
+	Array enemy_list = enemy_list_prefabs[GameManager::current_level - 1].operator godot::Array();
+
+	float min_enemy_price = _find_min_enemy_price();
+
+	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
+	rng->randomize();
+
+	while (current_value >= min_enemy_price)
+	{
+		Ref<PackedScene> prefab = enemy_list[rng->randi_range(0, enemy_list.size() - 1)];
+		if ((float)prefab->instance()->call("_get_enemy_price") <= current_value)
+		{
+			Node2D* enemy = cast_to<Node2D>(prefab->instance());
+			current_value -= (float)prefab->instance()->call("_get_enemy_price");
+			int pos_x;
+			int pos_y;
+			do
+			{
+				pos_x = rng->randi_range(1, 26);
+				pos_y = rng->randi_range(4, 15);
+			} while (!(bool)current_room->call("_is_empty_pos", pos_y, pos_x));
+
+			enemies->set_enemy_to_spawn_count(enemies->get_enemy_to_spawn_count() + 1);
+
+			taken_positions.push_back(Vector2(pos_x, pos_y));
+			current_room->call("_add_new_enemy", enemy, (Vector2(pos_x, pos_y) * 32
+				+ current_room->get_global_position()
+				- Vector2(896, 544) / 2 + Vector2(16, 16)));
+
+			current_room->call("_set_cell_value", pos_y, pos_x, 7);
+		}
+	}
+
+	return taken_positions;
 }

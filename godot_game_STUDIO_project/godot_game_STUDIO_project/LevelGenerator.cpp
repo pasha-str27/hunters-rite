@@ -111,7 +111,7 @@ void godot::LevelGenerator::_ready()
 		node->call("_fill_empty_positions", node);
 
 	//create key holders
-	get_node("/root/Node2D/Node/Camera2D")->call("_get_type_keys");
+	get_node("/root/Node2D/Node/Camera2D")->call("_create_keys_holders");
 
 	_set_keys(boss_room, generated_keys);
 

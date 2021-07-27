@@ -34,6 +34,9 @@ namespace godot
 		float time_delta = 1.0 / 50;
 		float delta_step = -80.0 / 50.0;
 
+		float horizontal_delta = 1024;
+		float vertical_delta = 720;
+
 		Array generated_keys = {};
 		AudioController* audio_controller = nullptr;
 
@@ -61,7 +64,7 @@ namespace godot
 		void _set_current_room_type(String);
 		void _go_to_start();
 		void _spawn_players();
-		void _get_type_keys();
+		void _create_keys_holders();
 		bool _is_player_have_need_keys(Color rooms_key);
 		void _show_game_over_screen();
 		GameManager();
