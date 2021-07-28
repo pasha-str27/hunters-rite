@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Camera2D",
+"base": "",
 "class": "GameManager",
 "language": "NativeScript",
 "path": "res://Assets/Scripts/GameManager.gdns"
@@ -63,10 +63,6 @@ window/size/resizable=false
 window/ios/hide_home_indicator=false
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
-
-[editor_plugins]
-
-enabled=PoolStringArray(  )
 
 [input]
 
