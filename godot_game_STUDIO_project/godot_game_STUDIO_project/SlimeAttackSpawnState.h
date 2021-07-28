@@ -8,7 +8,7 @@ namespace godot {
 	{
 	public:
 		void _fight();
-		SlimeAttackSpawnState(SlimeBossAI* boss) :ISlimeAttackState(boss){};
+		SlimeAttackSpawnState(SlimeBossAI* boss);
 	};
 }
 

@@ -27,7 +27,7 @@ scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
 
 [node name="BoomPoisonEggParticles" type="Particles2D"]
-position = Vector2( 0, -14.8325 )
+position = Vector2( 0, -15 )
 emitting = false
 amount = 100
 lifetime = 0.35

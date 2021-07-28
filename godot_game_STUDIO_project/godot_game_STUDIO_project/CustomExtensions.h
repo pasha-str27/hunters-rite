@@ -70,7 +70,7 @@ namespace godot
 			return children_instances;
 		}
 
-		//	return nullptr if no found
+		//	return nullptr if not found
 		static Node* GetChildByName(Node *parent, String child_name) 
 		{
 			Array children = parent->get_children();

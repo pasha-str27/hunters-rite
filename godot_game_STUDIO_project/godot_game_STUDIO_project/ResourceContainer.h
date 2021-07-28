@@ -30,6 +30,8 @@ namespace godot
 		String _egg_spawn;
 		String _slime_jump;
 		String _slime_action;
+		String _target_hit;
+		String _target_crack;
 
 		ResourceContainer();
 	public:
@@ -60,5 +62,8 @@ namespace godot
 		String egg_spawn();
 		String slime_jump();
 		String slime_action();
+		String target_hit();
+		String target_crack();
+		void _spawn_exit();
 	};
 }

@@ -30,5 +30,11 @@ namespace godot
 		void _heal_player(Node2D* player);
 		void _change_start_parameters();
 		void _start_hide_animation();
+		bool player_is_ghost();
+		void _change_player_moving(Node2D* player, bool value);
+		void _make_sound();
+		void _spawn_particles();
+		BigStone();
+		~BigStone();
 	};
 }

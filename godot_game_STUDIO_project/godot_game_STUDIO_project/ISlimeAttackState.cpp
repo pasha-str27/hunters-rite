@@ -3,4 +3,12 @@
 #include "headers.h"
 #endif
 
-int ISlimeAttackState::taken_damage = 0;
+godot::ISlimeAttackState::ISlimeAttackState(SlimeBossAI* boss)
+{
+	ai = boss;
+}
+
+godot::ISlimeAttackState::~ISlimeAttackState()
+{
+	ai = nullptr;
+}

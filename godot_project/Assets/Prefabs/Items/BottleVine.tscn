@@ -43,7 +43,7 @@ Name = "BottleVine"
 speed = 5.0
 HP = -8.0
 damage = 3.0
-attack_speed_delta = 0.0
+attack_speed_delta = 1.0
 number_to_next_item = 0
 "Is Buff" = false
 

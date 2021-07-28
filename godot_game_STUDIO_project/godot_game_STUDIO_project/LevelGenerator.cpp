@@ -111,20 +111,38 @@ void godot::LevelGenerator::_ready()
 		node->call("_fill_empty_positions", node);
 
 	//create key holders
-	get_node("/root/Node2D/Node/Camera2D")->call("_get_type_keys");
+	get_node("/root/Node2D/Node/Camera2D")->call("_create_keys_holders");
 
 	_set_keys(boss_room, generated_keys);
 
 	if (generated_colors_keys.size() > 0)
 		boss_room->call("_set_last_key_color", generated_colors_keys[generated_colors_keys.size() - 1]);
 
-	_buid_roofs();
-	_buid_floors();
-	_buid_top_wall();
+	auto generate_level_noise = [](std::vector<Node2D*>& rooms, String link_to_folder, int prefabs_count)
+	{
+		Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
+		ResourceLoader* loader = ResourceLoader::get_singleton();
+		Ref<PackedScene> prefab = nullptr;
+		random->randomize();
+		for (auto room : rooms)
+			if (random->randi_range(0, 5) >= 1)
+			{
+				prefab = loader->load(NodePath(link_to_folder + String::num(random->randi_range(1, prefabs_count)) + ".tscn"));
+				room->add_child(prefab->instance());
+			}
+		loader = nullptr;
+	};
+
+	generate_level_noise(rooms, "res://Assets/Prefabs/Rooms/WallTops/roof", roof_count);
+	generate_level_noise(rooms, "res://Assets/Prefabs/Rooms/Walls/wall", wall_top_count);
+	generate_level_noise(rooms, "res://Assets/Prefabs/Rooms/Floor/floor", floor_count);
+
 	_build_locks();
 	_build_fill_doors();
 	//	call set positions
-	get_node("/root/Node2D/Node/Camera2D/MiniMap")->call_deferred("_start_treking");
+	auto mini_map = get_node("/root/Node2D/Node/Camera2D/MiniMap");
+	mini_map->call_deferred("_start_treking");
+	cast_to<Label>(mini_map->get_node("Level"))->set_text("Level: " + String::num(GameManager::current_level));
 }
 
 void godot::LevelGenerator::_connect_rooms(Node2D* prev, Node2D* next, Vector2 dir)
@@ -148,17 +166,10 @@ void godot::LevelGenerator::_generate()
 
 	size++;
 
-	Vector2 new_room_position = Vector2(0, step_y);
-	if (!_has_room(positions, new_room_position))
-	{
-		_buid_room(new_room_position);
-		_connect_rooms(rooms[0], rooms[rooms.size() - 1], Vector2(0, 1));
-	}
-
-	size++;
-
 	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
 	rng->randomize();
+
+	Vector2 new_room_position;
 
 	while (size < map_size)
 	{
@@ -171,46 +182,26 @@ void godot::LevelGenerator::_generate()
 			{
 			case 0:
 			{
-				Vector2 new_room_position = i + Vector2(step_x, 0);
-				if (!_has_room(positions, new_room_position))
-				{
-					_buid_room(new_room_position);
-					_connect_rooms(rooms[index], rooms[rooms.size() - 1], Vector2(1, 0));
-				}
-
+				new_room_position = i + Vector2(step_x, 0);
+				_try_build_room(positions, new_room_position, Vector2::RIGHT, rooms[index]);
 				break;
 			}
 			case 1:
 			{
-				Vector2 new_room_position = i + Vector2(-step_x, 0);
-				if (!_has_room(positions, new_room_position))
-				{
-					_buid_room(new_room_position);
-					_connect_rooms(rooms[index], rooms[rooms.size() - 1], Vector2(-1, 0));
-				}
-
+				new_room_position = i + Vector2(-step_x, 0);
+				_try_build_room(positions, new_room_position, Vector2::LEFT, rooms[index]);
 				break;
 			}
 			case 2:
 			{
-				Vector2 new_room_position = i + Vector2(0, step_y);
-				if (!_has_room(positions, new_room_position))
-				{
-					_buid_room(new_room_position);
-					_connect_rooms(rooms[index],rooms[rooms.size() - 1], Vector2(0, 1));
-				}
-
+				new_room_position = i + Vector2(0, step_y);
+				_try_build_room(positions, new_room_position, Vector2::DOWN, rooms[index]);
 				break;
 			}
 			case 3:
 			{
-				Vector2 new_room_position = i + Vector2(0, -step_y);
-				if (!_has_room(positions, new_room_position))
-				{
-					_buid_room(new_room_position);
-					_connect_rooms(rooms[index], rooms[rooms.size() - 1], Vector2(0, -1));
-				}
-
+				new_room_position = i + Vector2(0, -step_y);
+				_try_build_room(positions, new_room_position, Vector2::UP, rooms[index]);
 				break;
 			}
 			default:
@@ -268,63 +259,18 @@ void godot::LevelGenerator::_build_doors(int start_index, int end_index)
 {
 	for (int i = start_index; i < end_index; ++i)
 	{
-		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2(0, 1)))
-			rooms[i]->add_child(down_door->instance());
+		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::DOWN))
+			rooms[i]->add_child(down_door->instance(), true);
 
-		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2(0, -1)))
-			rooms[i]->add_child(up_door->instance());
+		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::UP))
+			rooms[i]->add_child(up_door->instance(), true);
 
-		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2(1, 0)))
-			rooms[i]->add_child(right_door->instance());
+		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::RIGHT))
+			rooms[i]->add_child(right_door->instance(), true);
 
-		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2(-1, 0)))
-			rooms[i]->add_child(left_door->instance());
+		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::LEFT))
+			rooms[i]->add_child(left_door->instance(), true);
 	}
-}
-
-void godot::LevelGenerator::_buid_roofs()
-{
-	Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
-	ResourceLoader* loader = ResourceLoader::get_singleton();
-	Ref<PackedScene> prefab = nullptr;
-	random->randomize();
-	for (auto room : rooms)
-		if (random->randi_range(0, 5) >= 1)
-		{
-			prefab = loader->load(NodePath("res://Assets/Prefabs/Rooms/WallTops/roof" + String::num(random->randi_range(1, roof_count)) + ".tscn"));
-			room->add_child(prefab->instance());
-		}
-	loader = nullptr;
-}
-
-void godot::LevelGenerator::_buid_top_wall()
-{
-	Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
-	ResourceLoader* loader = ResourceLoader::get_singleton();
-	Ref<PackedScene> prefab = nullptr;
-	random->randomize();
-	for (auto room : rooms)
-		if (random->randi_range(0, 5) >= 1)
-		{
-			prefab = loader->load(NodePath("res://Assets/Prefabs/Rooms/Walls/wall" + String::num(random->randi_range(1, wall_top_count)) + ".tscn"));
-			room->add_child(prefab->instance());
-		}
-	loader = nullptr;
-}
-
-void godot::LevelGenerator::_buid_floors()
-{
-	Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
-	ResourceLoader* loader = ResourceLoader::get_singleton();
-	Ref<PackedScene> prefab = nullptr;
-	random->randomize();
-	for (int i = 1; i<rooms.size(); ++i)
-	{
-		prefab = loader->load(NodePath("res://Assets/Prefabs/Rooms/Floor/floor" + String::num(random->randi_range(1, floor_count)) + ".tscn"));
-		rooms[i]->add_child(prefab->instance());
-	}
-	loader = nullptr;
-	prefab = nullptr;
 }
 
 void godot::LevelGenerator::_buid_stones(Node2D* room)
@@ -342,33 +288,9 @@ void godot::LevelGenerator::_buid_stones(Node2D* room)
 		tile_map = cast_to<TileMap>(prefab->instance());
 		room->add_child(tile_map);
 
-		auto arr = tile_map->get_used_cells();
-
-		bool check_res = true;
-
-
-		for (int i = 0; i < arr.size(); ++i)
-		{
-			Vector2 pos = (Vector2)arr[i];
-			if ((int)room->call("_get_cell_value", pos.y + 8, pos.x + 14) != 0)		
-			{
-				check_res = false;
-				tile_map->queue_free();
-				break;
-			}
-		}
-
-		if (check_res)
-		{
-			for (int i = 0; i < arr.size(); ++i)
-			{
-				Vector2 pos = (Vector2)arr[i];
-				room->call("_set_cell_value", pos.y + 8, pos.x + 14, 2);
-			}
+		if (_analize_tilemap(tile_map, room))
 			break;
-		}
 	}
-
 
 	prefab = nullptr;
 	loader = nullptr;
@@ -390,29 +312,8 @@ void godot::LevelGenerator::_buid_spikes(Node2D* room)
 		tile_map = cast_to<TileMap>(prefab->instance());
 		room->add_child(tile_map);
 
-		auto arr = tile_map->get_used_cells();
-
-		bool check_res = true;
-		for (int i = 0; i < arr.size(); ++i)
-		{
-			Vector2 pos = (Vector2)arr[i];
-			if ((int)room->call("_get_cell_value", pos.y + 8, pos.x + 14) != 0)
-			{
-				check_res = false;
-				tile_map->queue_free();
-				break;
-			}
-		}
-
-		if (check_res)
-		{
-			for (int i = 0; i < arr.size(); ++i)
-			{
-				Vector2 pos = (Vector2)arr[i];
-				room->call("_set_cell_value", pos.y + 8, pos.x + 14, 3);
-			}
+		if (_analize_tilemap(tile_map, room))
 			break;
-		}
 	}
 
 
@@ -485,7 +386,7 @@ std::vector<Node2D*> godot::LevelGenerator::_create_keys_rooms(std::vector<Node2
 			if (!_has_room(positions, new_room_position))
 			{
 				auto builded_room = _buid_room(new_room_position);
-				_connect_rooms(room_to_build, rooms[rooms.size() - 1], Vector2(1, 0));
+				_connect_rooms(room_to_build, rooms[rooms.size() - 1], Vector2::RIGHT);
 
 				_generate_key(builded_room);
 
@@ -500,7 +401,7 @@ std::vector<Node2D*> godot::LevelGenerator::_create_keys_rooms(std::vector<Node2
 			if (!_has_room(positions, new_room_position))
 			{
 				auto builded_room = _buid_room(new_room_position);
-				_connect_rooms(room_to_build, rooms[rooms.size() - 1], Vector2(-1, 0));
+				_connect_rooms(room_to_build, rooms[rooms.size() - 1], Vector2::LEFT);
 
 				_generate_key(builded_room);
 
@@ -515,7 +416,7 @@ std::vector<Node2D*> godot::LevelGenerator::_create_keys_rooms(std::vector<Node2
 			if (!_has_room(positions, new_room_position))
 			{
 				auto builded_room = _buid_room(new_room_position);
-				_connect_rooms(room_to_build, rooms[rooms.size() - 1], Vector2(0, 1));
+				_connect_rooms(room_to_build, rooms[rooms.size() - 1], Vector2::DOWN);
 
 				_generate_key(builded_room);
 
@@ -530,7 +431,7 @@ std::vector<Node2D*> godot::LevelGenerator::_create_keys_rooms(std::vector<Node2
 			if (!_has_room(positions, new_room_position))
 			{
 				auto builded_room = _buid_room(new_room_position);
-				_connect_rooms(room_to_build, rooms[rooms.size() - 1], Vector2(0, -1));
+				_connect_rooms(room_to_build, rooms[rooms.size() - 1], Vector2::UP);
 
 				_generate_key(builded_room);
 				i++;
@@ -554,16 +455,16 @@ void godot::LevelGenerator::_rebuild_doors(std::vector<Node2D*> rooms)
 		for (auto door : old_doors)
 			door->queue_free();
 
-		if (!(bool)room->call("_adjacent_room_is_null", Vector2(0, 1)))
+		if (!(bool)room->call("_adjacent_room_is_null", Vector2::DOWN))
 			room->add_child(down_door->instance());
 
-		if (!(bool)room->call("_adjacent_room_is_null", Vector2(0, -1)))
+		if (!(bool)room->call("_adjacent_room_is_null", Vector2::UP))
 			room->add_child(up_door->instance());
 
-		if (!(bool)room->call("_adjacent_room_is_null", Vector2(1, 0)))
+		if (!(bool)room->call("_adjacent_room_is_null", Vector2::RIGHT))
 			room->add_child(right_door->instance());
 
-		if (!(bool)room->call("_adjacent_room_is_null", Vector2(-1, 0)))
+		if (!(bool)room->call("_adjacent_room_is_null", Vector2::LEFT))
 			room->add_child(left_door->instance());
 	}
 }
@@ -574,16 +475,16 @@ void godot::LevelGenerator::_rebuild_doors(Node2D* room)
 	for (auto door : old_doors)
 		door->queue_free();
 
-	if (!(bool)room->call("_adjacent_room_is_null", Vector2(0, 1)))
+	if (!(bool)room->call("_adjacent_room_is_null", Vector2::DOWN))
 		room->add_child(down_door->instance());
 
-	if (!(bool)room->call("_adjacent_room_is_null", Vector2(0, -1)))
+	if (!(bool)room->call("_adjacent_room_is_null", Vector2::UP))
 		room->add_child(up_door->instance());
 
-	if (!(bool)room->call("_adjacent_room_is_null", Vector2(1, 0)))
+	if (!(bool)room->call("_adjacent_room_is_null", Vector2::RIGHT))
 		room->add_child(right_door->instance());
 
-	if (!(bool)room->call("_adjacent_room_is_null", Vector2(-1, 0)))
+	if (!(bool)room->call("_adjacent_room_is_null", Vector2::LEFT))
 		room->add_child(left_door->instance());
 }
 
@@ -624,7 +525,6 @@ void godot::LevelGenerator::_create_item_room(std::vector<Node2D*>& cornered_roo
 
 	items_container->call("_spawn_random_item", builded_room->get_global_position() + left_item);
 	items_container->call("_spawn_random_item", builded_room->get_global_position() + right_item);
-
 }
 
 Node2D* godot::LevelGenerator::_create_boss_room(std::vector<Node2D*>& cornered_rooms)
@@ -663,6 +563,7 @@ Node2D* godot::LevelGenerator::_generate_room_to(Node2D* room_to_build)
 	rng->randomize();
 
 	bool spawned = false;
+	Vector2 new_room_position;
 
 	while (!spawned)
 	{
@@ -671,57 +572,32 @@ Node2D* godot::LevelGenerator::_generate_room_to(Node2D* room_to_build)
 		{
 		case 0:
 		{
-			Vector2 new_room_position = room_to_build->get_global_position() + Vector2(step_x, 0);
-			if (!_has_room(positions, new_room_position))
-			{
-				_buid_room(new_room_position);
-				_connect_rooms(room_to_build, rooms[rooms.size() - 1], Vector2(1, 0));
-				spawned = true;
-			}
-
+			new_room_position = room_to_build->get_global_position() + Vector2(step_x, 0);
+			spawned = _try_build_room(positions, new_room_position, Vector2::RIGHT, room_to_build);
 			break;
 		}
 		case 1:
 		{
-			Vector2 new_room_position = room_to_build->get_global_position() + Vector2(-step_x, 0);
-			if (!_has_room(positions, new_room_position))
-			{
-				_buid_room(new_room_position);
-				_connect_rooms(room_to_build, rooms[rooms.size() - 1], Vector2(-1, 0));
-				spawned = true;
-			}
-
+			new_room_position = room_to_build->get_global_position() + Vector2(-step_x, 0);
+			spawned = _try_build_room(positions, new_room_position, Vector2::LEFT, room_to_build);
 			break;
 		}
 		case 2:
 		{
-			Vector2 new_room_position = room_to_build->get_global_position() + Vector2(0, step_y);
-			if (!_has_room(positions, new_room_position))
-			{
-				_buid_room(new_room_position);
-				_connect_rooms(room_to_build, rooms[rooms.size() - 1], Vector2(0, 1));
-				spawned = true;
-			}
-
+			new_room_position = room_to_build->get_global_position() + Vector2(0, step_y);
+			spawned = _try_build_room(positions, new_room_position, Vector2::DOWN, room_to_build);
 			break;
 		}
 		case 3:
 		{
-			Vector2 new_room_position = room_to_build->get_global_position() + Vector2(0, -step_y);
-			if (!_has_room(positions, new_room_position))
-			{
-				_buid_room(new_room_position);
-				_connect_rooms(room_to_build, rooms[rooms.size() - 1], Vector2(0, -1));
-				spawned = true;
-			}
-
+			new_room_position = room_to_build->get_global_position() + Vector2(0, -step_y);
+			spawned = _try_build_room(positions, new_room_position, Vector2::UP, room_to_build);
 			break;
 		}
 		default:
 			break;
 		}
 	}
-	
 
 	return rooms[rooms.size() - 1];
 }
@@ -927,4 +803,39 @@ void godot::LevelGenerator::_build_fill_doors()
 				rooms[i]->add_child(left_door_fill->instance(), true);
 		}
 	}
+}
+
+bool godot::LevelGenerator::_try_build_room(std::vector<Vector2>& positions, Vector2 new_room_position, Vector2 direction, Node2D* room_to_build)
+{
+	if (!_has_room(positions, new_room_position))
+	{
+		_buid_room(new_room_position);
+		_connect_rooms(room_to_build, rooms[rooms.size() - 1], direction);
+		return true;
+	}
+
+	return false;
+}
+
+bool godot::LevelGenerator::_analize_tilemap(TileMap* tilemap, Node* room)
+{
+	auto arr = tilemap->get_used_cells();
+
+	for (int i = 0; i < arr.size(); ++i)
+	{
+		Vector2 pos = (Vector2)arr[i];
+		if ((int)room->call("_get_cell_value", pos.y + 8, pos.x + 14) != 0)
+		{
+			tilemap->queue_free();
+			return false;
+		}
+	}
+
+	for (int i = 0; i < arr.size(); ++i)
+	{
+		Vector2 pos = (Vector2)arr[i];
+		room->call("_set_cell_value", pos.y + 8, pos.x + 14, 3);
+	}
+
+	return true;
 }

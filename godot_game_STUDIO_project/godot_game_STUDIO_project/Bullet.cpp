@@ -26,6 +26,9 @@ void godot::Bullet::_ready()
 
 void godot::Bullet::_init()
 {
+	dir = Vector2(0, 0);
+	damage = 25;
+	speed = 250;
 }
 
 void godot::Bullet::_on_Area2D_body_entered(Node* node)
@@ -49,8 +52,6 @@ void godot::Bullet::_on_Area2D_body_entered(Node* node)
 
 	if (node->is_in_group("player") && is_in_group("web_bullet")) 
 	{
-		Godot::print("here");
-
 		node->call("_change_can_moving", false);
 		node->call("_change_moving", false);		
 		node->call("_animate_spider_web");
@@ -89,7 +90,7 @@ void godot::Bullet::_on_Area2D_area_entered(Node* node)
 void godot::Bullet::_process(float delta)
 {
 	if (is_visible())
-		move_and_slide(dir * speed);	
+		move_and_slide(dir * speed);		
 }
 
 void godot::Bullet::_set_dir(Vector2 dir)
@@ -100,15 +101,6 @@ void godot::Bullet::_set_dir(Vector2 dir)
 void godot::Bullet::_set_damage(float value)
 {
 	damage = value;
-}
-
-godot::Bullet::Bullet()
-{
-	is_active = false;
-	is_enemy_bullet = false;
-	dir = Vector2(0, 0);
-	damage = 25;
-	speed = 250;
 }
 
 godot::Bullet::~Bullet()

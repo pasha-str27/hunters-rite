@@ -33,7 +33,6 @@ namespace godot
 		~Room();
 		static void _register_methods();
 		void _init();
-		void _ready();
 		bool _adjacent_room_is_null(Vector2 pos);
 		void _set_adjacent_room(Vector2 pos, Node2D* value);
 		int _get_num_of_adjacent_rooms();
@@ -42,7 +41,6 @@ namespace godot
 		int _get_cell_value(int i, int j);
 		void _set_cell_value(int i, int j, int value);
 		void _fill_empty_positions(Node2D* room);
-		void print();
 		void _add_list(Array);
 		Array _get_list_of_keys();
 		int _get_key_count();

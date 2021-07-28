@@ -13,7 +13,6 @@ namespace godot
 		Timer* timer;
 	public:
 		static void _register_methods();
-		AudioEffect();
 		~AudioEffect();
 		void _init();
 		void _ready();

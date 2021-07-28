@@ -28,6 +28,8 @@ ResourceContainer::ResourceContainer()
 	_egg_spawn = link + "EggSpawn.tscn";
 	_slime_jump = link + "SlimeJump.tscn";
 	_slime_action = link + "SlimeAction.tscn";
+	_target_hit = link + "TargetHit.tscn";
+	_target_crack = link + "TargetCrack.tscn";
 }
 
 String godot::ResourceContainer::player1_fight()
@@ -128,5 +130,23 @@ String godot::ResourceContainer::slime_jump()
 String godot::ResourceContainer::slime_action()
 {
 	return _slime_action;
+}
+
+String godot::ResourceContainer::target_hit()
+{
+	return _target_hit;
+}
+
+String godot::ResourceContainer::target_crack()
+{
+	return _target_crack;
+}
+
+void godot::ResourceContainer::_spawn_exit()
+{
+	Ref<PackedScene> exit_prefab = nullptr;
+	exit_prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/exit.tscn");
+	Node2D* exit_node = Node::cast_to<Node2D>(exit_prefab->instance());
+	CurrentRoom::get_singleton()->_get_current_room()->add_child(exit_node);
 }
 

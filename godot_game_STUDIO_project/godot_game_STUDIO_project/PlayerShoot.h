@@ -9,12 +9,12 @@ namespace godot
 
 	class PlayerShoot : public PlayerData
 	{
-		int max_bullet_count;
 		BulletPull* bullet_pull = nullptr;
 
 		Vector2 bullet_dir;
 		AnimatedSprite* sprite = nullptr;
 		float speed_delta = 2.5;
+		float prev_speed;
 
 		Particles2D* shoot_particles = nullptr;
 

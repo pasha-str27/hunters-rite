@@ -5,78 +5,36 @@
 
 bool godot::SlimeAI::_is_player_near(Node2D* player)
 {
+	auto cur_room = CurrentRoom::get_singleton()->_get_current_room();
+
 	Vector2 player_pos_index = (player->get_global_position()
-		- CurrentRoom::get_singleton()->_get_current_room()->get_global_position()
-		+ Vector2(896, 544) / 2) / _get_distance();
-
-	bool is_player_ghost = (bool)player->call("_is_ghost_mode");
-
-	bool ghost_is_near = false;
+		- cur_room->get_global_position() + Vector2(896, 544) / 2) / _get_distance();
 
 	player_pos_index = Vector2((int)player_pos_index.y, (int)player_pos_index.x);
 
-	Vector2 new_pos = Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::LEFT).x);
+	//Vector2 new_pos = Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::LEFT).x);
 
-	if (player_pos_index == new_pos && (bool)CurrentRoom::get_singleton()->_get_current_room()->call("_is_empty_pos", new_pos.x, new_pos.y))
+	std::vector<Vector2> directions_tmp = directions;
+
+	auto player_near = [&player_pos_index, &cur_room, &directions_tmp](Vector2 direction, Vector2 cur_pos)
 	{
-		if (!is_player_ghost)
+		Vector2 new_pos = cur_pos + direction;
+		new_pos = Vector2((int)new_pos.y, (int)new_pos.x);
+
+		if (player_pos_index == new_pos && (bool)cur_room->call("_is_empty_pos", new_pos.x, new_pos.y))
 		{
-			directions.clear();
-			directions.push_back(Vector2::LEFT);
+			directions_tmp.clear();
+			directions_tmp.push_back(direction);
 			return true;
 		}
+	};
 
-		ghost_is_near = true;
-		remove_vector_element(Vector2::LEFT);
-	}
-
-	new_pos = Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::RIGHT).x);
-
-	if (player_pos_index == new_pos && (bool)CurrentRoom::get_singleton()->_get_current_room()->call("_is_empty_pos", new_pos.x, new_pos.y))
+	if (player_near(Vector2::LEFT, cur_pos) || player_near(Vector2::RIGHT, cur_pos)
+		|| player_near(Vector2::DOWN, cur_pos) || player_near(Vector2::UP, cur_pos))
 	{
-		if (!is_player_ghost)
-		{
-			directions.clear();
-			directions.push_back(Vector2::RIGHT);
-			return true;
-		}
-
-		ghost_is_near = true;
-		remove_vector_element(Vector2::RIGHT);
-	}
-
-	new_pos = Vector2((int)(cur_pos + Vector2::DOWN).y, (int)cur_pos.x);
-
-	if (player_pos_index == new_pos && (bool)CurrentRoom::get_singleton()->_get_current_room()->call("_is_empty_pos", new_pos.x, new_pos.y))
-	{
-		if (!is_player_ghost)
-		{
-			directions.clear();
-			directions.push_back(Vector2::DOWN);
-			return true;
-		}
-
-		ghost_is_near = true;
-		remove_vector_element(Vector2::DOWN);
-	}
-
-	new_pos = Vector2((int)(cur_pos + Vector2::UP).y, (int)cur_pos.x);
-
-	if (player_pos_index == new_pos && (bool)CurrentRoom::get_singleton()->_get_current_room()->call("_is_empty_pos", new_pos.x, new_pos.y))
-	{
-		if (!is_player_ghost)
-		{
-			directions.clear();
-			directions.push_back(Vector2::UP);
-			return true;
-		}
-
-		ghost_is_near = true;
-		remove_vector_element(Vector2::UP);
-	}
-
-	if (ghost_is_near)
+		directions = directions_tmp;
 		return true;
+	}
 
 	return false;
 }
@@ -136,7 +94,6 @@ godot::SlimeAI::SlimeAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(
 	dir = Vector2::ZERO;
 
 	can_move = true;
-	is_cheking = false;
 	speed = 400;
 	_change_start_parameters();
 }
@@ -155,37 +112,29 @@ void godot::SlimeAI::change_direction()
 {
 	reset_directions();
 
-	if ((int)CurrentRoom::get_singleton()->_get_current_room()->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::LEFT).x) == 0)
+	auto cur_room = CurrentRoom::get_singleton()->_get_current_room();
+
+	if ((int)cur_room->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::LEFT).x) == 0)
 		directions.push_back(Vector2::LEFT);
 
-	if ((int)CurrentRoom::get_singleton()->_get_current_room()->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::RIGHT).x) == 0)
+	if ((int)cur_room->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::RIGHT).x) == 0)
 		directions.push_back(Vector2::RIGHT);
 
-	if ((int)CurrentRoom::get_singleton()->_get_current_room()->call("_get_cell_value", (cur_pos + Vector2::DOWN).y, cur_pos.x) == 0)
+	if ((int)cur_room->call("_get_cell_value", (cur_pos + Vector2::DOWN).y, cur_pos.x) == 0)
 		directions.push_back(Vector2::DOWN);
 
-	if ((int)CurrentRoom::get_singleton()->_get_current_room()->call("_get_cell_value", (cur_pos + Vector2::UP).y, cur_pos.x) == 0)
+	if ((int)cur_room->call("_get_cell_value", (cur_pos + Vector2::UP).y, cur_pos.x) == 0)
 		directions.push_back(Vector2::UP);
 
 	_fight(_get_player1(), _get_player2());
 
 	PlayersContainer* players = PlayersContainer::_get_instance();
 
-	//���������
-	if (players->_get_player1() == nullptr && players->_get_player1_regular() != nullptr
-		&& (bool)players->_get_player1_regular()->call("_is_ghost_mode") 
-		&& _is_player_near(players->_get_player1_regular()));
-
-	if (players->_get_player2() == nullptr && players->_get_player2_regular() != nullptr
-		&& (bool)players->_get_player2_regular()->call("_is_ghost_mode")
-		&& _is_player_near(players->_get_player2_regular()));
-
 	bool is_player_near = false;
 
 	if (players->_players_count() > 0)
 	{
-		if (players->_get_player1() != nullptr
-			&& players->_get_player2() != nullptr)
+		if (players->_players_count() == 2)
 		{
 			Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
 			random->randomize();
@@ -228,8 +177,6 @@ void godot::SlimeAI::_change_dir_after_time()
 	Ref<RandomNumberGenerator> rand = RandomNumberGenerator::_new();
 	rand->randomize();
 
-	is_cheking = false;
-
 	dir = directions[rand->randi_range(0, directions.size() - 1)];
 	goal = _get_enemy()->get_global_position() + dir * _get_distance();
 
@@ -266,12 +213,8 @@ void godot::SlimeAI::_process(float delta)
 
 	_get_enemy()->set_global_position(_get_enemy()->get_global_position().move_toward(goal, delta*speed));
 
-	if (is_cheking)
-		return;
-
 	if (abs(old_pos.distance_to(_get_enemy()->get_global_position()) - _get_distance()) <= 1)
 	{
-		is_cheking = true;
 		change_direction();
 		old_pos = _get_enemy()->get_global_position();
 		return;
