@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_lock.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_shield.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_minimap.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_key.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_atack_way.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_back_key.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Sprites/UI/tutorial_dash_p1.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_dash_p1.png" type="Texture" id=13]
@@ -26,6 +27,7 @@
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_player_p2_power_up.png" type="Texture" id=25]
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_heal_fx.png" type="Texture" id=26]
 [ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_ghost.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Sprites/UI/Tutorial/tutorial_heal_way.png" type="Texture" id=28]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -398,19 +400,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="CenterRoom"]
+[node name="Center_room_ver_1" type="Control" parent="CenterRoom"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CenterRoom/Center_room_ver_1"]
 modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 173.0
-margin_top = -6.0
+margin_top = -6.00012
 margin_bottom = -241.0
 custom_fonts/font = SubResource( 3 )
 text = "How to..."
 align = 1
 valign = 1
 
-[node name="TextureRect" type="TextureRect" parent="CenterRoom"]
+[node name="TextureRect" type="TextureRect" parent="CenterRoom/Center_room_ver_1"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 114.221
@@ -423,7 +433,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="CenterRoom"]
+[node name="Label2" type="Label" parent="CenterRoom/Center_room_ver_1"]
 modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -440,7 +450,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect2" type="TextureRect" parent="CenterRoom"]
+[node name="TextureRect2" type="TextureRect" parent="CenterRoom/Center_room_ver_1"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1811.46
@@ -454,7 +464,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label3" type="Label" parent="CenterRoom"]
+[node name="Label3" type="Label" parent="CenterRoom/Center_room_ver_1"]
 modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -470,7 +480,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect3" type="TextureRect" parent="CenterRoom"]
+[node name="TextureRect3" type="TextureRect" parent="CenterRoom/Center_room_ver_1"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1268.39
@@ -485,7 +495,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label4" type="Label" parent="CenterRoom"]
+[node name="Label4" type="Label" parent="CenterRoom/Center_room_ver_1"]
 modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -497,6 +507,107 @@ custom_fonts/font = SubResource( 4 )
 text = "Heal"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Center_room_ver_2" type="Control" parent="CenterRoom"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CenterRoom/Center_room_ver_2"]
+visible = false
+modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 173.0
+margin_top = -6.00012
+margin_bottom = -241.0
+custom_fonts/font = SubResource( 3 )
+text = "How to..."
+align = 1
+valign = 1
+
+[node name="Arrow_left" type="TextureRect" parent="CenterRoom/Center_room_ver_2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 314.245
+margin_top = 401.815
+margin_right = -1615.76
+margin_bottom = -505.185
+texture = ExtResource( 4 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key" type="TextureRect" parent="CenterRoom/Center_room_ver_2"]
+margin_left = 66.0775
+margin_top = 335.69
+margin_right = 236.077
+margin_bottom = 505.69
+rect_min_size = Vector2( 170, 170 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Heal" type="TextureRect" parent="CenterRoom/Center_room_ver_2"]
+margin_left = 973.782
+margin_top = 734.618
+margin_right = 1103.78
+margin_bottom = 864.618
+rect_min_size = Vector2( 130, 130 )
+texture = ExtResource( 28 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fight" type="TextureRect" parent="CenterRoom/Center_room_ver_2"]
+margin_left = 1820.42
+margin_top = 371.216
+margin_right = 1970.42
+margin_bottom = 521.216
+rect_min_size = Vector2( 150, 150 )
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Arrow_right" type="TextureRect" parent="CenterRoom/Center_room_ver_2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1570.17
+margin_top = 413.391
+margin_right = -359.825
+margin_bottom = -493.609
+texture = ExtResource( 4 )
+stretch_mode = 6
+flip_h = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Arrow_down" type="TextureRect" parent="CenterRoom/Center_room_ver_2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1068.66
+margin_top = 570.509
+margin_right = -861.346
+margin_bottom = -336.491
+rect_rotation = 90.0
+texture = ExtResource( 4 )
+stretch_mode = 6
+flip_h = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
