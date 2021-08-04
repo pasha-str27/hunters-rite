@@ -16,6 +16,11 @@ namespace godot
 		Ref<PackedScene> down_door = nullptr;
 		Ref<PackedScene> left_door = nullptr;
 
+		Ref<PackedScene> up_door_fill = nullptr;
+		Ref<PackedScene> right_door_fill = nullptr;
+		Ref<PackedScene> down_door_fill = nullptr;
+		Ref<PackedScene> left_door_fill = nullptr;
+
 		int keys_frequency = 5;
 
 		float step_x = 1024;
@@ -30,19 +35,16 @@ namespace godot
 		int spike_count;
 		int roof_count;
 
-		//	for tests
-		Ref<PackedScene> key_room_sprite = nullptr;
-		Ref<PackedScene> item_room_sprite = nullptr;
-		Ref<PackedScene> boss_room_sprite = nullptr;
-
 		Ref<PackedScene> jertovnik = nullptr;
 		Ref<PackedScene> key_room_pedestal = nullptr;
 
 		Array keys_prefabs = {};
 		Array keys_prefabs_local = {};
 		Array generated_keys = {};
+		std::vector<Color> generated_colors_keys;
 
 		Ref<PackedScene> big_stone = nullptr;
+		Ref<PackedScene> lock_sprite = nullptr;
 
 	public:
 		LevelGenerator();
@@ -76,6 +78,8 @@ namespace godot
 		void _clear();
 		Array _get_rooms();
 		Array _get_rooms_positions();
-		void _process(float delta);
+		void _build_locks();
+		void _build_locks_in_room(Node2D* room, Vector2 door_dir, String door_name, int step);
+		void _build_fill_doors();
 	};
 }

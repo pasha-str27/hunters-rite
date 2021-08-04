@@ -9,23 +9,20 @@ godot::PlayerShoot::PlayerShoot(Node2D* object, Ref<PackedScene> bullet) : Playe
 	_change_can_fight(true);
 
 	auto node = _get_object()->get_parent()->get_child(0);
-	
+
 	sprite = cast_to<AnimatedSprite>(_get_object()->get_node("AnimatedSprite"));
 
 	shoot_particles = cast_to<Particles2D>(sprite->get_child(0));
 
 	if (node->get_child_count() == 0)
-	{
-		for (int i = 0; i < max_bullet_count; ++i)
-		{
-			auto new_obj = bullet->instance();
-			node->add_child(new_obj);
-			available_bullets.push_back(cast_to<Node2D>(new_obj));
-		}
-	}
+		bullet_pull = new BulletPull(max_bullet_count, bullet, node);
 	else
+	{
+		bullet_pull = new BulletPull;
+
 		for (int i = 0; i < node->get_child_count(); ++i)
-			available_bullets.push_back(cast_to<Node2D>(node->get_child(i)));
+			bullet_pull->_add_bullet(cast_to<Node2D>(node->get_child(i)));
+	}
 
 	sprite->play("idle");
 	_set_special_time(0.5);
@@ -35,13 +32,15 @@ godot::PlayerShoot::PlayerShoot(Node2D* object, Ref<PackedScene> bullet) : Playe
 	cast_to<KinematicBody2D>(object)->set_collision_layer_bit(15, true);
 	cast_to<Area2D>(object->get_node("Area2D"))->set_collision_mask_bit(0, true);
 	cast_to<Area2D>(object->get_node("Area2D"))->set_collision_layer_bit(0, true);
+
+	health_bar = _get_health_bar();
 }
 
 godot::PlayerShoot::~PlayerShoot()
 {
 	sprite = nullptr;
 	shoot_particles = nullptr;
-	available_bullets.clear();
+	delete bullet_pull;
 }
 
 void godot::PlayerShoot::_set_HP(float value)
@@ -67,13 +66,15 @@ void godot::PlayerShoot::_move()
 	PlayerData::_move();
 
 	String animation_name = sprite->get_animation();
-	if (sprite->get_sprite_frames()->get_animation_loop(animation_name) == false && sprite->get_frame() == sprite->get_sprite_frames()->get_frame_count(animation_name) - 1)
+	if (sprite->get_sprite_frames()->get_animation_loop(animation_name) == false 
+		&& sprite->get_frame() == sprite->get_sprite_frames()->get_frame_count(animation_name) - 1
+		)
 		sprite->play("idle");
 
 	if (PlayerData::_get_dir() == Vector2::ZERO && animation_name != "revive" && animation_name != "damaged")
 		sprite->play("idle");
 
-	if (PlayerData::_get_dir() != Vector2::ZERO && sprite->get_animation() == "idle")
+	if (PlayerData::_get_dir() != Vector2::ZERO && animation_name == "idle")
 		sprite->play("run");
 }
 
@@ -110,7 +111,12 @@ void godot::PlayerShoot::_process_input()
 	{
 		sprite->set_flip_h(true);
 		sprite->set_offset(Vector2(-35, 0));
-		shoot_particles->set_position(Vector2(-11, 0));
+		if (bullet_dir == Vector2::RIGHT)
+			shoot_particles->set_position(Vector2(-11, 0));
+		else if (bullet_dir == Vector2::UP)
+			shoot_particles->set_position(Vector2(0, -9));
+		else if (bullet_dir == Vector2::DOWN)
+			shoot_particles->set_position(Vector2(0, 9));
 		dir.x -= _get_speed();
 	}
 
@@ -119,7 +125,13 @@ void godot::PlayerShoot::_process_input()
 	{
 		sprite->set_flip_h(false);
 		sprite->set_offset(Vector2(35, 0));
-		shoot_particles->set_position(Vector2(11, 0));
+		if(bullet_dir == Vector2::RIGHT)
+			shoot_particles->set_position(Vector2(11, 0));
+		else if(bullet_dir == Vector2::UP)
+			shoot_particles->set_position(Vector2(0, -9));
+		else if (bullet_dir == Vector2::DOWN)
+			shoot_particles->set_position(Vector2(0, 9));
+
 		dir.x += _get_speed();
 	}
 
@@ -156,33 +168,24 @@ void godot::PlayerShoot::_fight(Node* node)
 		return;
 
 	Ref<PackedScene> prefab = nullptr;
-	prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/Player1Fight.tscn");
+	prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->player1_fight());
 	_get_object()->add_child(prefab->instance());
 
 	_change_can_fight(false);
 
 	Vector2 position_to_spawn = cast_to<Node2D>(_get_object()->get_node("AnimatedSprite")->get_child(0))->get_global_position();
 
-	available_bullets[available_bullets.size() - 1]->set_position(position_to_spawn);
-	available_bullets[available_bullets.size() - 1]->set_visible(true);
+	Node2D* bullet = bullet_pull->_get_bullet();
+	bullet->set_position(position_to_spawn);
+	bullet->set_visible(true);
 
 
 	if ((bullet_dir + _get_dir()).normalized() == godot::Vector2::ZERO)
-		available_bullets[available_bullets.size() - 1]->call("_set_dir", (bullet_dir).normalized());
+		bullet->call("_set_dir", (bullet_dir).normalized());
 	else
-		available_bullets[available_bullets.size() - 1]->call("_set_dir", (bullet_dir + _get_dir()).normalized());
+		bullet->call("_set_dir", (bullet_dir + _get_dir()).normalized());
 
-	if (available_bullets.size() == 1)
-	{
-		auto node = _get_object()->get_parent()->get_child(0);
-		auto new_obj = available_bullets[0]->duplicate(8);
-		node->add_child(new_obj);
-		available_bullets.push_back(cast_to<Node2D>(new_obj));
-	}
-
-	available_bullets[available_bullets.size() - 1]->call("_set_damage", _get_damage());
-
-	available_bullets.pop_back();
+	bullet->call("_set_damage", _get_damage());
 
 	shoot_particles->restart();
 
@@ -191,7 +194,7 @@ void godot::PlayerShoot::_fight(Node* node)
 
 void godot::PlayerShoot::_add_bullet(Node* node)
 {
-	available_bullets.push_back(cast_to<Node2D>(node));
+	bullet_pull->_add_bullet(cast_to<Node2D>(node));
 }
 
 void  godot::PlayerShoot::_take_damage(float damage, bool is_spike)
@@ -205,10 +208,6 @@ void  godot::PlayerShoot::_take_damage(float damage, bool is_spike)
 
 	if (_get_HP() <= 0)
 	{
-		Ref<PackedScene> prefab = nullptr;
-		prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/SoundsEffects/Effects/PlayerDied.tscn");
-		_get_object()->get_parent()->add_child(prefab->instance());
-
 		sprite->play("death");
 		PlayersContainer::_get_instance()->_set_player1(nullptr);
 		Enemies::get_singleton()->_remove_player1();
@@ -219,13 +218,14 @@ void  godot::PlayerShoot::_take_damage(float damage, bool is_spike)
 
 void godot::PlayerShoot::_update_health_bar()
 {
-	auto health_bar = _get_health_bar();
 	if (health_bar != nullptr)
 		health_bar->set_value(_get_HP());
 }
 
 ProgressBar* godot::PlayerShoot::_get_health_bar()
 {
+	if (health_bar != nullptr)
+		return health_bar;
 	return cast_to<ProgressBar>(_get_object()->get_node("/root/Node2D/Node/Camera2D/P1HealthBarWrapper/ProgressBar"));
 }
 
@@ -243,4 +243,6 @@ void godot::PlayerShoot::_stop_special()
 void godot::PlayerShoot::_start_special()
 {
 	_set_speed(_get_speed() * speed_delta);
+	Ref<PackedScene> prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->dash());
+	_get_object()->add_child(prefab->instance());
 }

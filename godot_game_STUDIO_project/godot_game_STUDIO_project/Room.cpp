@@ -23,7 +23,7 @@ void godot::Room::_register_methods()
 	register_method("_fill_empty_positions", &Room::_fill_empty_positions);
 	register_method("_add_list", &Room::_add_list);
 	register_method("_get_list_of_keys", &Room::_get_list_of_keys);
-	register_method("_get_room_difficulty", &Room::_get_room_difficulty);
+	register_method("_get_key_count", &Room::_get_key_count);
 	register_method("_get_room_type", &Room::_get_room_type);
 	register_method("_set_room_type", &Room::_set_room_type);
 	register_method("_get_were_here", &Room::_get_were_here);
@@ -31,6 +31,11 @@ void godot::Room::_register_methods()
 	register_method("_set_is_special", &Room::_set_is_special);
 	register_method("_get_is_special", &Room::_get_is_special);
 	register_method("_get_enemy_spawn_positions", &Room::_get_enemy_spawn_positions);
+	register_method("_add_new_enemy", &Room::_add_new_enemy);
+	register_method("_spawn_enemy", &Room::_spawn_enemy);
+	register_method("_clear_enemy_to_spawn", &Room::_clear_enemy_to_spawn);
+	register_method("_get_last_key_color", &Room::_get_last_key_color);
+	register_method("_set_last_key_color", &Room::_set_last_key_color);
 }
 
 godot::Room::Room()
@@ -118,10 +123,11 @@ void godot::Room::print()
 
 void godot::Room::_add_list(Array list)
 {	
-	Array lst = ((String)list[0]).split(", ");
+	Array lst = list[0].operator godot::Array();
+	Godot::print("arr size " + String::num(lst.size()));
 	for (int i = 0; i < lst.size(); ++i)
 		list_of_keys.push_back(lst[i]);
-	//list_of_keys.push_back(list);
+	list_of_keys.push_back(list);
 }
 
 Array godot::Room::_get_list_of_keys()
@@ -129,9 +135,9 @@ Array godot::Room::_get_list_of_keys()
 	return list_of_keys;
 }
 
-float godot::Room::_get_room_difficulty()
+int godot::Room::_get_key_count()
 {
-	return room_difficulty;
+	return list_of_keys.size();
 }
 
 String godot::Room::_get_room_type()
@@ -174,6 +180,55 @@ Array godot::Room::_get_enemy_spawn_positions()
 
 	arr.push_back(poses);
 	return arr;
+}
+
+void godot::Room::_add_new_enemy(Node2D* enemy, Vector2 position)
+{
+	Timer* timer = Timer::_new();
+	add_child(timer);
+	enemies_to_spawn.push_back({ enemy, position, timer });
+	Array index = {};
+	index.push_back(enemies_to_spawn.size() - 1);
+	timer->connect("timeout", this, "_spawn_enemy", index);
+	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
+	rng->randomize();
+	timer->start(rng->randf_range(0.1f, 1.0f));
+
+}
+
+void godot::Room::_spawn_enemy(int number)
+{
+	add_child(enemies_to_spawn[number].enemy);
+	enemies_to_spawn[number].enemy->set_global_position(enemies_to_spawn[number].new_pos);
+	enemies_to_spawn[number].timer->queue_free();
+
+	if (!enemies_to_spawn[number].enemy->has_method("_change_start_parameters"))
+	{
+		for (int i = 0; i < enemies_to_spawn[number].enemy->get_child_count(); ++i)
+			if (enemies_to_spawn[number].enemy->get_child(i)->has_method("_change_start_parameters"))
+			{
+				enemies_to_spawn[number].enemy->get_child(i)->call("_change_start_parameters");
+				return;
+			}
+	}
+	
+	if(MenuButtons::game_type==TUTORIAL)
+		Enemies::get_singleton()->_add_enemy(enemies_to_spawn[number].enemy);
+}
+
+void godot::Room::_clear_enemy_to_spawn()
+{
+	enemies_to_spawn.clear();
+}
+
+Color godot::Room::_get_last_key_color()
+{
+	return last_key_color;
+}
+
+void godot::Room::_set_last_key_color(Color color)
+{
+	last_key_color = color;
 }
 
 void godot::Room::_set_num_of_adjacent_rooms(int value)

@@ -41,18 +41,20 @@ tracks/1/keys = {
 [sub_resource type="CircleShape2D" id=3]
 
 [node name="BadTusk" type="Node2D"]
-z_index = 5
+z_index = 9
+z_as_relative = false
 script = SubResource( 1 )
 Name = "BadTusk"
-speed = 50.0
-HP = 10.0
-damage = 4.0
-attack_speed_delta = 10.0
+speed = 10.0
+HP = 5.0
+damage = 3.0
+attack_speed_delta = 1.1
 number_to_next_item = 0
-encrease_attack_radius = true
 "Is Buff" = false
 
 [node name="Sprite" type="Sprite" parent="."]
+z_index = 9
+z_as_relative = false
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" parent="Sprite" instance=ExtResource( 1 )]

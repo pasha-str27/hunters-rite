@@ -33,6 +33,7 @@ void godot::ExitHandler::_ready()
 	timer->start(.5);
 	cast_to<Particles2D>(get_node("SpawnExitParticles"))->set_emitting(true);
 	cast_to<AnimationPlayer>(get_node("AnimationPlayer"))->play("show");
+	Enemies::get_singleton()->set_spawning(false);
 }
 
 void godot::ExitHandler::_on_Area2D_area_entered(Node* other)
@@ -50,7 +51,7 @@ void godot::ExitHandler::_on_Area2D_area_entered(Node* other)
 		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
 			PlayersContainer::_get_instance()->_get_player2_regular()->call("_change_moving", false);
 
-		if (CameraController::current_level == 5)
+		if (GameManager::current_level == 10 || MenuButtons::game_type==TUTORIAL)
 		{
 			MenuButtons::was_loaded = false;
 			add_child(fade_out->instance());
@@ -83,8 +84,8 @@ void godot::ExitHandler::_on_Area2D_area_entered(Node* other)
 		CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->add_child(fade);
 		fade->get_child(0)->get_child(0)->call("_set_is_exit_anim", true);
 
-		CameraController::show_tutorial = false;
-		CameraController::current_level++;
+		GameManager::show_tutorial = false;
+		GameManager::current_level++;
 	}
 }
 

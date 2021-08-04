@@ -28,7 +28,6 @@ namespace godot
 		~Item();
 		void _ready();
 		void _init();
-		void _process();
 		void _on_Area2D_body_entered(Node* node);
 		bool _get_is_buff();
 		float _get_item_price();

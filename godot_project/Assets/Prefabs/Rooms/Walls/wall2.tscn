@@ -4,9 +4,11 @@
 
 [node name="wall" type="TileMap"]
 position = Vector2( 0, -16 )
-z_index = 26
+z_index = 2
+z_as_relative = false
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
-collision_layer = 3
+collision_layer = 0
+collision_mask = 0
 format = 1
 tile_data = PoolIntArray( -393223, 15, 0, -393217, 13, 0, -458747, 15, 0, -327692, 15, 0, -327688, 15, 0, -393211, 15, 0, -393207, 13, 0, -393205, 15, 0, -262155, 13, 0, -262149, 15, 0, -262145, 13, 0, -327668, 15, 0 )

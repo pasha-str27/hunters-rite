@@ -25,6 +25,7 @@ namespace godot
 		void _set_speed(float value);
 		void _delete_player1();
 		void _delete_player2();
+		void _remove_player(Node2D* player);
 		void _set_player1(Node2D* player1);
 		void _set_player2(Node2D* player2);
 		void _change_start_parameters();

@@ -52,13 +52,14 @@ void godot::FadeAnimation::_on_timeout()
 		auto camera = get_node("/root/Node2D/Node/Camera2D");
 		if (animation_name == "fade_in")
 			CustomExtensions::GetChildByName(camera, "EnemySpawner")->call("_prepare_spawn");
-		else if (animation_name == "fade_out")
-		{
-			if(!is_exit_anim)
-				camera->call("_start_move");
-			else
-				CameraController::current_room->get_node("exit")->call("_load_menu_scene");
-		}
+		else 
+			if (animation_name == "fade_out")
+			{
+				if(!is_exit_anim)
+					camera->call("_start_move");
+				else
+					CurrentRoom::get_singleton()->_get_current_room()->get_node("exit")->call("_load_menu_scene");
+			}
 	}
 	get_parent()->get_parent()->queue_free();
 }

@@ -16,7 +16,7 @@ godot::PlayerShootGhost::PlayerShootGhost(Node2D* object, Ref<PackedScene> bulle
 	auto node = _get_object()->get_parent()->get_child(0);
 	
 	sprite = cast_to<AnimatedSprite>(_get_object()->get_node("AnimatedSprite"));
-
+	health_bar = _get_health_bar();
 	//sprite->play("idle");
 	//_set_special_time(0.5);
 }
@@ -56,6 +56,7 @@ void godot::PlayerShootGhost::_process_input()
 	//move left
 	if (input_controller->is_action_pressed(move_left))
 	{
+		_get_object()->call("_flip_ghost", true);
 		sprite->set_flip_h(true);
 		sprite->set_offset(Vector2(-35, 0));
 		//shoot_particles->set_position(Vector2(-11, 0));
@@ -65,6 +66,7 @@ void godot::PlayerShootGhost::_process_input()
 	//move right	
 	if (input_controller->is_action_pressed(move_right))
 	{
+		_get_object()->call("_flip_ghost", false);
 		sprite->set_flip_h(false);
 		sprite->set_offset(Vector2(35, 0));
 		//shoot_particles->set_position(Vector2(11, 0));
@@ -76,13 +78,14 @@ void godot::PlayerShootGhost::_process_input()
 
 void godot::PlayerShootGhost::_update_health_bar()
 {
-	auto health_bar = _get_health_bar();
 	if (health_bar != nullptr)
 		health_bar->set_value(_get_HP());
 }
 
 ProgressBar* godot::PlayerShootGhost::_get_health_bar()
 {
+	if (health_bar != nullptr)
+		return health_bar;
 	return cast_to<ProgressBar>(_get_object()->get_node("/root/Node2D/Node/Camera2D/P1HealthBarWrapper/ProgressBar"));
 }
 

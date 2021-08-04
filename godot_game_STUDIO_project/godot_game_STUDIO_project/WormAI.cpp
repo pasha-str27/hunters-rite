@@ -3,7 +3,7 @@
 #include "headers.h"
 #endif
 
-godot::WormAI::WormAI(Ref<PackedScene>& bullet, Node2D* node) :EnemyData(node)
+godot::WormAI::WormAI(Ref<PackedScene>& bullet, Node2D* node) : EnemyData(node)
 {
 	can_move = true;
 	shooted = false;
@@ -11,22 +11,17 @@ godot::WormAI::WormAI(Ref<PackedScene>& bullet, Node2D* node) :EnemyData(node)
 	prepare_to_shoot = true;
 	auto bullet_container = node->get_parent()->get_node("BulletContainer");
 
-	for (int i = 0; i < max_bullet_count; ++i)
-	{
-		Node2D* bullet_node = cast_to<Node2D>(bullet->instance());
-		bullet_container->add_child(bullet_node);
-		available_bullets.push_back(bullet_node);
-	}
+	bullet_pull = new BulletPull(max_bullet_count, bullet, bullet_container);
 
-	ground_front = cast_to<AnimatedSprite>(_get_enemy()->find_node("GroundFront"));
-	ground_back = cast_to<AnimatedSprite>(_get_enemy()->find_node("GroundBack"));
-	Array arr = CameraController::current_room->call("_get_enemy_spawn_positions");
+	Array arr = CurrentRoom::get_singleton()->_get_current_room()->call("_get_enemy_spawn_positions");
 	free_cells = arr[0];
+
+	shoot_point = cast_to<Node2D>(node->get_node("ShootPoint"));
 }
 
 godot::WormAI::~WormAI()
 {
-	available_bullets.clear();
+	delete bullet_pull;
 }
 
 void godot::WormAI::change_can_fight(bool value)
@@ -40,7 +35,6 @@ void godot::WormAI::change_can_fight(bool value)
 			finished_hide_anim = false;
 			_get_enemy()->call("_start_fixed_timer", .5f);
 			_get_enemy()->set_visible(false);
-			ground_back->set_visible(true);
 			return;
 		}
 
@@ -58,13 +52,12 @@ void godot::WormAI::change_can_fight(bool value)
 			return;
 		}
 	}
-	
 }
 
 void godot::WormAI::_fight(Node2D* player1, Node2D* player2)
 {
 	change_can_fight(false);
-	_get_enemy()->call("_start_fixed_timer", 1);
+	_get_enemy()->call("_start_fixed_timer", 1.5f);
 	_set_target();
 
 	if (target == Vector2::ZERO)
@@ -76,58 +69,24 @@ void godot::WormAI::_fight(Node2D* player1, Node2D* player2)
 	prepare_to_shoot = false;
 
 	Vector2 bullet_dir = target;
-	Vector2 bullet_position = cast_to<Node2D>(_get_enemy()->get_node("Area2D")->get_child(0))->get_global_position();
+	Vector2 bullet_position = shoot_point->get_global_position();
 
-	if (available_bullets.size() > 0)
-	{
-		available_bullets[available_bullets.size() - 1]->set_global_position(bullet_position);
+	Node2D* bullet = bullet_pull->_get_bullet();
 
-		available_bullets[available_bullets.size() - 1]->set_visible(true);
-
-		available_bullets[available_bullets.size() - 1]->call("_set_dir",
-			(bullet_dir - available_bullets[available_bullets.size() - 1]->get_global_position()).normalized());
-
-		if (available_bullets.size() == 1)
-		{
-			auto node = _get_enemy()->get_parent()->get_child(0);
-			auto new_obj = available_bullets[0]->duplicate(8);
-			node->add_child(new_obj);
-			available_bullets.push_back(cast_to<Node2D>(new_obj));
-		}
-
-		available_bullets.pop_back();
-	}
-
+	bullet->set_global_position(bullet_position);
+	bullet->set_visible(true);
+	bullet->call("_set_dir", (bullet_dir - bullet->get_global_position()).normalized());
 }
 
 void godot::WormAI::_process(float delta)
 {
-	String animation_name = ground_back->get_animation();
-
-	if (ground_back->get_sprite_frames()->get_animation_loop(animation_name) == false && ground_back->get_frame() == ground_back->get_sprite_frames()->get_frame_count(animation_name) - 1)
-		ground_back->play("idle");
-	
-	animation_name = ground_front->get_animation();
-
-	if (ground_front->get_sprite_frames()->get_animation_loop(animation_name) == false && ground_front->get_frame() == ground_front->get_sprite_frames()->get_frame_count(animation_name) - 1)
-		ground_front->play("idle");
-
 	if (can_move && !is_hided && prepare_to_shoot && !shooted)
 		_fight();
 }
 
-void godot::WormAI::_set_speed(float value)
-{
-}
-
 void godot::WormAI::_add_bullet(Node* node)
 {
-	available_bullets.push_back(cast_to<Node2D>(node));
-}
-
-void godot::WormAI::_set_player(Node2D* player)
-{
-
+	bullet_pull->_add_bullet(node->cast_to<Node2D>(node));
 }
 
 void godot::WormAI::_remove_player(Node2D* player)
@@ -193,30 +152,25 @@ void godot::WormAI::_disable_collisions()
 void godot::WormAI::_on_hide()
 {
 	_disable_collisions();
+	_get_enemy()->call("_change_animation", "hide", 1.5f);
 	prepare_to_shoot = false;
 	is_hided = true;
 	shooted = false;
 	change_can_fight(false);
-	ground_front->set_visible(true);
-	ground_back->set_visible(false);
-	ground_front->play("action");
 	finished_hide_anim = true;
-	_get_enemy()->call("_start_fixed_timer", .4f);
-	_get_enemy()->call("_change_animation", "hide", 1);
+	_get_enemy()->call("_start_fixed_timer", .96f);
 }
 
 void godot::WormAI::_on_show()
 {
 	_set_next_pos();
-	_enable_collisions();
+	_get_enemy()->call("_change_animation", "show", 2.f);
 	_get_enemy()->set_visible(true);
 	prepare_to_shoot = true;
 	is_hided = false;
-	ground_front->set_visible(false);
-	ground_back->play("action");
 	change_can_fight(false);
 	_get_enemy()->call("_start_fixed_timer", 1.5f);
-	_get_enemy()->call("_change_animation", "show", 1);
+	_enable_collisions();
 }
 
 void godot::WormAI::_enable_collisions()

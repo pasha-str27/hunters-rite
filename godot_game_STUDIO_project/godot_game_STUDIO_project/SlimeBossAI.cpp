@@ -10,22 +10,21 @@ godot::SlimeBossAI::SlimeBossAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : En
 	target_player = empty_pos;
 
 	auto bullet_container = node_tmp->get_parent()->get_node("BulletContainer");
-	for (int i = 0; i < max_bullet_count; ++i)
-	{
-		Node2D* bullet_node = cast_to<Node2D>(bullet->instance());
-		bullet_container->add_child(bullet_node);
-		available_bullets.push_back(bullet_node);
-	}
+
+	bullet_pull = new BulletPull(max_bullet_count, bullet, bullet_container);
+
 	jump_zone = cast_to<Node2D>(_get_enemy()->get_parent()->get_node("jump_zone"));
 	wave_node = cast_to<Node2D>(_get_enemy()->get_parent()->get_node("DamageWave"));
-	Array arr = CameraController::current_room->call("_get_enemy_spawn_positions");
+	Array arr = CurrentRoom::get_singleton()->_get_current_room()->call("_get_enemy_spawn_positions");
 	places_to_spawn = arr[0];
 	enemies_to_spawn = _get_enemy()->get_node("EnemiesHolder")->call("_get_enemies_list");
+	camera_shake = _get_enemy()->get_node("/root/Node2D/Node/Camera2D")->get_node("CameraShake");
 }
 
 godot::SlimeBossAI::~SlimeBossAI()
 {
-	available_bullets.clear();
+	delete bullet_pull;
+	camera_shake = nullptr;
 }
 
 void godot::SlimeBossAI::_set_player(Node2D* player)
@@ -61,7 +60,7 @@ void godot::SlimeBossAI::_wait(float time)
 
 void godot::SlimeBossAI::_add_bullet(Node* node)
 {
-	available_bullets.push_back(cast_to<Node2D>(node));
+	bullet_pull->_add_bullet(cast_to<Node2D>(node));
 }
 
 void godot::SlimeBossAI::_shoot()
@@ -72,42 +71,38 @@ void godot::SlimeBossAI::_shoot()
 		return;
 
 	Vector2 bullet_dir = target_player;
-	Vector2 bullet_position = cast_to<Node2D>(_get_enemy()->get_node("Area2D")->get_child(0))->get_global_position();
+	Vector2 bullet_position = _get_enemy()->get_global_position();
 
-	if (available_bullets.size() > 0)
+	std::vector<Node2D*> bullets;
+
+	for (int i = 0; i < 3; ++i)
 	{
-		for (int i = 0; i < 3; i++)
-		{
-			available_bullets[available_bullets.size() - i - 1]->set_global_position(bullet_position);
-			
-			if (available_bullets.size() == 1)
-			{
-				auto node = _get_enemy()->get_parent()->get_child(0);
-				auto new_obj = available_bullets[0]->duplicate(8);
-				node->add_child(new_obj);
-				available_bullets.push_back(cast_to<Node2D>(new_obj));
-			}
-		}
-
-		float angle = M_PI / 18;
-		Vector2 bullet_directions[3];
-		bullet_directions[0] = (bullet_dir - available_bullets[available_bullets.size() - 1]->get_global_position()).normalized();
-		bullet_directions[1] = Vector2::ZERO;
-		bullet_directions[2] = Vector2::ZERO;
-
-		bullet_directions[1].x = bullet_directions[0].x * cos(angle) - bullet_directions[0].y * sin(angle);
-		bullet_directions[1].y = bullet_directions[0].x * sin(angle) + bullet_directions[0].y * cos(angle);
-
-		bullet_directions[2].x = bullet_directions[0].x * cos(-angle) - bullet_directions[0].y * sin(-angle);
-		bullet_directions[2].y = bullet_directions[0].x * sin(-angle) + bullet_directions[0].y * cos(-angle);
-
-		for (int i = 0; i < 3; i++)
-		{
-			available_bullets[available_bullets.size() - 1]->set_visible(true);
-			available_bullets[available_bullets.size() - 1]->call("_set_dir", bullet_directions[i]);
-			available_bullets.pop_back();
-		}		
+		bullets.push_back(bullet_pull->_get_bullet());
+		bullets[i]->set_global_position(bullet_position);
 	}
+
+	float angle = M_PI / 18;
+	Vector2 bullet_directions[3];
+	bullet_directions[0] = (bullet_dir - bullets[0]->get_global_position()).normalized();
+	bullet_directions[1] = Vector2::ZERO;
+	bullet_directions[2] = Vector2::ZERO;
+
+	bullet_directions[1].x = bullet_directions[0].x * cos(angle) - bullet_directions[0].y * sin(angle);
+	bullet_directions[1].y = bullet_directions[0].x * sin(angle) + bullet_directions[0].y * cos(angle);
+
+	bullet_directions[2].x = bullet_directions[0].x * cos(-angle) - bullet_directions[0].y * sin(-angle);
+	bullet_directions[2].y = bullet_directions[0].x * sin(-angle) + bullet_directions[0].y * cos(-angle);
+
+	for (int i = 0; i < 3; i++)
+	{
+		bullets[i]->set_visible(true);
+		bullets[i]->call("_set_dir", bullet_directions[i]);
+	}		
+
+	bullets.clear();
+
+	Ref<PackedScene> prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->slime_action());
+	_get_enemy()->get_parent()->get_parent()->add_child(prefab->instance());
 
 	_wait(1.5f);
 }
@@ -122,6 +117,10 @@ void godot::SlimeBossAI::_spawn_enemy()
 	auto enemy = cast_to<Node2D>(enemy_prefab->instance());
 	_get_enemy()->get_node("/root/Node2D/Node")->call_deferred("add_child", enemy);
 	enemy->set_global_position(pos);
+
+	Ref<PackedScene> prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->slime_action());
+	_get_enemy()->get_parent()->get_parent()->add_child(prefab->instance());
+
 	for (int i = 0; i < enemy->get_child_count(); ++i)
 		if (enemy->get_child(i)->has_method("_change_start_parameters"))
 		{
@@ -153,6 +152,10 @@ void godot::SlimeBossAI::_jumping(float delta)
 		}
 		else
 		{
+			Ref<PackedScene> prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->slime_jump());
+			_get_enemy()->get_parent()->get_parent()->add_child(prefab->instance());
+
+			camera_shake->call("_start", 10, .35f);
 			_enable_collisions();
 			jump_zone->set_visible(false);
 			_wait(1);

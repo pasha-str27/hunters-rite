@@ -8,10 +8,50 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "",
+"class": "GameManager",
+"language": "NativeScript",
+"path": "res://Assets/Scripts/GameManager.gdns"
+}, {
+"base": "Resource",
+"class": "LocalizationData",
+"language": "GDScript",
+"path": "res://addons/localization_editor/model/LocalizationData.gd"
+}, {
+"base": "Reference",
+"class": "LocalizationKeys",
+"language": "GDScript",
+"path": "res://localization/LocalizationKeys.gd"
+}, {
+"base": "Reference",
+"class": "LocalizationPlaceholders",
+"language": "GDScript",
+"path": "res://localization/LocalizationPlaceholders.gd"
+}, {
+"base": "Resource",
+"class": "LocalizationPlaceholdersData",
+"language": "GDScript",
+"path": "res://addons/localization_editor/model/LocalizationPlaceholdersData.gd"
+}, {
+"base": "Resource",
+"class": "LocalizationSave",
+"language": "GDScript",
+"path": "res://addons/localization_editor/model/LocalizationSave.gd"
+} ]
+_global_script_class_icons={
+"GameManager": "",
+"LocalizationData": "",
+"LocalizationKeys": "",
+"LocalizationPlaceholders": "",
+"LocalizationPlaceholdersData": "",
+"LocalizationSave": ""
+}
+
 [application]
 
 config/name="hunters"
-run/main_scene="res://Assets/Prefabs/Scenes/Menu.tscn"
+run/main_scene="res://Assets/Prefabs/Scenes/Preloader.tscn"
 config/icon="res://Assets/Sprites/GameIcon.png"
 config/windows_native_icon="res://Assets/Sprites/player2.ico"
 
@@ -23,6 +63,10 @@ window/size/resizable=false
 window/ios/hide_home_indicator=false
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
+
+[editor_plugins]
+
+enabled=PoolStringArray(  )
 
 [input]
 
@@ -298,3 +342,4 @@ pointing/emulate_mouse_from_touch=false
 [locale]
 
 locale_filter=[ 0, [  ] ]
+translations=PoolStringArray( "res://localization/localizations.en.translation", "res://localization/localizations.uk.translation" )
