@@ -23,9 +23,7 @@ void godot::ExitHandler::_init()
 
 void godot::ExitHandler::_ready()
 {
-	ResourceLoader* resource_loader = ResourceLoader::get_singleton();
-	menu_scene = resource_loader->load("res://Assets/Prefabs/Scenes/Menu.tscn");
-	timer_music_out = Timer::_new();
+	audio_controller = AudioController::get_singleton();
 	add_child(timer_music_out);
 	add_child(timer);
 	add_child(timer_audio);
@@ -45,38 +43,14 @@ void godot::ExitHandler::_on_Area2D_area_entered(Node* other)
 
 	if (((is_only_one_alive && players_count == 1) || players_count == 2) && is_spawned)
 	{
-		if (PlayersContainer::_get_instance()->_get_player1_regular() != nullptr)
-			PlayersContainer::_get_instance()->_get_player1_regular()->get_child(1)->call("_change_moving", false);
+		_try_to_change_player_moving(PlayersContainer::_get_instance()->_get_player1(), false);
+		_try_to_change_player_moving(PlayersContainer::_get_instance()->_get_player2(), false);
 
-		if (PlayersContainer::_get_instance()->_get_player2_regular() != nullptr)
-			PlayersContainer::_get_instance()->_get_player2_regular()->call("_change_moving", false);
-
-		if (GameManager::current_level == 10 || MenuButtons::game_type==TUTORIAL)
+		if (GameManager::current_level == 10 || MenuButtons::game_type == TUTORIAL)
 		{
 			MenuButtons::was_loaded = false;
 			add_child(fade_out->instance());
 
-			if (timer_music_out == nullptr)
-			{
-				timer_music_out = Timer::_new();
-				add_child(timer_music_out);
-			}
-
-			timer_music_out->connect("timeout", this, "_audio_fade_to_main_menu");
-			timer_music_out->start(0.01);
-
-
-			if (timer == nullptr)
-			{
-				timer = Timer::_new();
-				add_child(timer);
-			}
-			timer->connect("timeout", this, "_move_to_main_menu");
-			timer->start(1);
-			Enemies::get_singleton()->_clear();
-			return;
-		}
-
 			timer_music_out->connect("timeout", this, "_audio_fade_to_main_menu");
 			timer_music_out->start(0.01);
 
@@ -86,7 +60,8 @@ void godot::ExitHandler::_on_Area2D_area_entered(Node* other)
 			return;
 		}
 
-		GameManager::show_tutorial = false;
+		_spawn_fade_out();
+
 		GameManager::current_level++;
 	}
 }
@@ -104,12 +79,12 @@ void godot::ExitHandler::_load_menu_scene()
 
 	auto camera = get_node("/root/Node2D/Node/Camera2D");
 	auto generation = get_node("/root/Node2D/Node/Generation");
+	//	clear list of enemies
 	Enemies::get_singleton()->_clear();
+	//	clear picked up keys
 	PlayersContainer::_get_instance()->_clear_keys();
+	//	moving players to (0,0) of level
 	camera->call("_go_to_start");
-
-	if (PlayersContainer::_get_instance()->_get_player1() != nullptr)
-		PlayersContainer::_get_instance()->_get_player1()->call("_change_moving", true);
 
 	_try_to_change_player_moving(PlayersContainer::_get_instance()->_get_player1(), true);
 	_try_to_change_player_moving(PlayersContainer::_get_instance()->_get_player2(), true);
@@ -119,6 +94,7 @@ void godot::ExitHandler::_load_menu_scene()
 	for (int i = 0; i < children_item.size(); i++)
 		cast_to<Node2D>(children_item[i])->queue_free();
 
+	//	rebuild level
 	generation->call("_ready");
 	queue_free();
 }
@@ -132,24 +108,37 @@ void godot::ExitHandler::_show_exit()
 
 void godot::ExitHandler::_mute_audio()
 {
-	if (AudioController::get_singleton()->_mute_audio(timer_audio, this))
-		return;
+	if (audio_controller->_mute_audio(timer_audio, this))
+		timer_audio->disconnect("timeout", this, "_mute_audio");
 }
 
 void godot::ExitHandler::_audio_fade_to_main_menu()
 {
-	if (AudioController::get_singleton()->_audio_fade_to_main_menu(timer_music_out, this))
-		return;
+	if (audio_controller->_audio_fade_to_main_menu(timer_music_out, this))
+		timer_music_out->disconnect("timeout", this, "_audio_fade_to_main_menu");
 }
 
 void godot::ExitHandler::_move_to_main_menu()
 {
-	ResourceLoader* rld = ResourceLoader::get_singleton();
-	menu_scene = rld->load("res://Assets/Prefabs/Scenes/Menu.tscn");
+	Ref<PackedScene> menu_scene = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/Scenes/Menu.tscn");
 	get_node("/root")->add_child(menu_scene->instance());
 	get_node("/root/Node2D")->queue_free();
 	get_parent()->queue_free();
 	PlayersContainer::_get_instance()->_clear();
+}
+
+void godot::ExitHandler::_try_to_change_player_moving(Node2D* player, bool value)
+{
+	if (player != nullptr)
+		player->call("_change_moving", value);
+}
+
+void godot::ExitHandler::_spawn_fade_out()
+{
+	auto fade = cast_to<Node2D>(fade_out->instance());
+	CustomExtensions::GetChildByName(get_node("/root/Node2D/Node"), "Camera2D")->add_child(fade);
+	//	set anim mode (exit of level)
+	fade->get_child(0)->get_child(0)->call("_set_is_exit_anim", true);
 }
 
 godot::ExitHandler::ExitHandler()

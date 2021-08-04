@@ -52,8 +52,6 @@ void godot::Bullet::_on_Area2D_body_entered(Node* node)
 
 	if (node->is_in_group("player") && is_in_group("web_bullet")) 
 	{
-		Godot::print("here");
-
 		node->call("_change_can_moving", false);
 		node->call("_change_moving", false);		
 		node->call("_animate_spider_web");
@@ -92,18 +90,7 @@ void godot::Bullet::_on_Area2D_area_entered(Node* node)
 void godot::Bullet::_process(float delta)
 {
 	if (is_visible())
-	{
-		move_and_slide(dir * speed);	
-
-		if (abs(dir.distance_to(get_global_position())) <= 10)
-		{
-			cast_to<Node2D>(this)->set_visible(false);
-			if (is_in_group("statue_bullet") || is_in_group("web_bullet") || is_in_group("player_bullet")
-				|| is_in_group("flower_bullet") || is_in_group("slime_bullet"))
-				get_parent()->get_parent()->get_child(1)->call("_add_bullet", this);
-		}
-			
-	}
+		move_and_slide(dir * speed);		
 }
 
 void godot::Bullet::_set_dir(Vector2 dir)

@@ -15,6 +15,10 @@ godot::PlayerShootDied::PlayerShootDied(Node2D* object, Ref<PackedScene> bullet)
 	cast_to<KinematicBody2D>(object)->set_collision_layer_bit(15, false);
 	cast_to<Area2D>(object->get_node("Area2D"))->set_collision_mask_bit(0, false);
 	cast_to<Area2D>(object->get_node("Area2D"))->set_collision_layer_bit(0, false);
+
+	Enemies::get_singleton()->_remove_player1();
+	PlayersContainer::_get_instance()->_set_player1(nullptr);
+	PlayersContainer::_get_instance()->_set_player1_regular(cast_to<Node2D>(object->get_parent()));
 }
 
 godot::PlayerShootDied::~PlayerShootDied()

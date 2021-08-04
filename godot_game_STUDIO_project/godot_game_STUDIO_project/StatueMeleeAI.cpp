@@ -56,14 +56,16 @@ void godot::StatueMeleeAI::_set_player2(Node2D* player2)
 
 void godot::StatueMeleeAI::_change_start_parameters()
 {
-	Vector2 cur_pos = (_get_enemy()->get_global_position() - CurrentRoom::get_singleton()->_get_current_room()->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / _get_distance();
-	CurrentRoom::get_singleton()->_get_current_room()->call("_set_cell_value", cur_pos.y, cur_pos.x, 8);
+	auto cur_room = CurrentRoom::get_singleton()->_get_current_room();
+	Vector2 cur_pos = (_get_enemy()->get_global_position() - cur_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / _get_distance();
+	cur_room->call("_set_cell_value", cur_pos.y, cur_pos.x, 8);
 }
 
 void godot::StatueMeleeAI::_remove_taken_positions()
 {
-	Vector2 cur_pos = (_get_enemy()->get_global_position() - CurrentRoom::get_singleton()->_get_current_room()->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / _get_distance();
-	CurrentRoom::get_singleton()->_get_current_room()->call("_set_cell_value", cur_pos.y, cur_pos.x, 0);
+	auto cur_room = CurrentRoom::get_singleton()->_get_current_room();
+	Vector2 cur_pos = (_get_enemy()->get_global_position() - cur_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / _get_distance();
+	cur_room->call("_set_cell_value", cur_pos.y, cur_pos.x, 0);
 }
 
 void godot::StatueMeleeAI::_delete_player1()

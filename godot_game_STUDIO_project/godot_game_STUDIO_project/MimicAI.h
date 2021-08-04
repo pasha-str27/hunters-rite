@@ -3,7 +3,8 @@
 #include "headers.h"
 #endif
 
-namespace godot {
+namespace godot 
+{
 	class MimicAI: public EnemyData, public Node2D
 	{
 	private:

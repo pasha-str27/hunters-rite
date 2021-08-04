@@ -14,7 +14,7 @@ namespace godot
 		Timer* timer;
 
 		InputReviveManager* keys;
-
+		ProgressBar* progress;
 		Sprite* arrow;
 
 		bool player_is_in_area;

@@ -41,7 +41,6 @@ namespace godot
 		int _get_cell_value(int i, int j);
 		void _set_cell_value(int i, int j, int value);
 		void _fill_empty_positions(Node2D* room);
-		void print();
 		void _add_list(Array);
 		Array _get_list_of_keys();
 		int _get_key_count();

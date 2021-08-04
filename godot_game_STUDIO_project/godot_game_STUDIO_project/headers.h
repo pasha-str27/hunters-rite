@@ -59,6 +59,8 @@
 #include <ResourceSaver.hpp>
 #include <Control.hpp>
 #include <MarginContainer.hpp>
+#include <TranslationServer.hpp>
+#include <CheckBox.hpp>
 
 using namespace godot;
 
@@ -114,7 +116,6 @@ using namespace godot;
 #include "PlayerShootDied.h"
 #include "PlayerShootGhost.h"
 #include "SlimeShootAI.h"
-#include "Ball.h"
 #include "SlimeBossAI.h"
 #include "SlimeEnemiesHolder.h"
 #include "WormAI.h"

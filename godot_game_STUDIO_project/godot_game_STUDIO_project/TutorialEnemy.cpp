@@ -9,7 +9,6 @@ void godot::TutorialEnemy::_register_methods()
 	register_method("_take_damage", &TutorialEnemy::_take_damage);
 	register_method("_on_damage_animation_finished", &TutorialEnemy::_on_damage_animation_finished);
 	register_method("_on_spawn_end", &TutorialEnemy::_on_spawn_end);
-	
 
 	register_property<TutorialEnemy, float>("HP", &TutorialEnemy::_hp, 100);
 }
@@ -100,10 +99,7 @@ void godot::TutorialEnemy::_take_damage(float damage, int player_id)
 		cast_to<Area2D>(get_node("Area2D"))->set_collision_mask_bit(0, false);
 		this->set_collision_mask_bit(9, false);
 		this->set_collision_layer_bit(2, false);
-
-		//cast_to<Node2D>(CurrentRoom::get_singleton()->_get_current_room()->find_node(""))->hide();
 	}
-
 }
 
 void godot::TutorialEnemy::_on_damage_animation_finished()

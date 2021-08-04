@@ -18,6 +18,8 @@ namespace godot
 		DEFOLT
 	};
 
+	class AudioController;
+
 	class MenuButtons : public TextureRect
 	{
 		GODOT_CLASS(MenuButtons, TextureRect)

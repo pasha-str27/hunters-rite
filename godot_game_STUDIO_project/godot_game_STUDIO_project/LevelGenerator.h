@@ -57,9 +57,6 @@ namespace godot
 		bool _has_room(std::vector<Vector2> positions, Vector2 pos);
 		Node2D* _buid_room(Vector2 dir);
 		void _buid_doors();
-		void _buid_roofs();
-		void _buid_floors();
-		void _buid_top_wall();
 		void _buid_stones(Node2D* room);
 		void _buid_spikes(Node2D* room);
 		void _build_doors(int start_index, int end_index);
@@ -81,5 +78,7 @@ namespace godot
 		void _build_locks();
 		void _build_locks_in_room(Node2D* room, Vector2 door_dir, String door_name, int step);
 		void _build_fill_doors();
+		bool _try_build_room(std::vector<Vector2>& positions, Vector2 new_room_position, Vector2 direction, Node2D* room_to_build);
+		bool _analize_tilemap(TileMap *tilemap, Node *room);
 	};
 }

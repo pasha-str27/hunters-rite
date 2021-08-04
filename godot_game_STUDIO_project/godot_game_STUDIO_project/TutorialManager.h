@@ -5,6 +5,8 @@
 
 namespace godot
 {
+	class AudioController;
+
 	class TutorialManager : public Camera2D
 	{
 		GODOT_CLASS(TutorialManager, Camera2D);
@@ -32,10 +34,14 @@ namespace godot
 		float time_delta = 1.0 / 50;
 		float delta_step = -80.0 / 50.0;
 
+		float horizontal_delta = 1024;
+		float vertical_delta = 720;
+
 		Array generated_keys = {};
 		void _move(String dir);
 		String _get_dir_on_index(int i);
 		bool _is_one_player_alive();
+		AudioController* audio_controller = nullptr;
 
 	public:
 
@@ -55,7 +61,7 @@ namespace godot
 		void _set_current_room_type(String);
 		void _go_to_start();
 		void _spawn_players();
-		void _get_type_keys();
+		void _create_keys_holders();
 		void _hide_tutorial_sprites(String t_player_name);
 		bool _is_player_have_need_keys(Color rooms_keys);
 		void _show_game_over_screen();
