@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ghost_idle.png-f6a5e073da8f7707d9cdf604d92ab0e1.stex"
+path="res://.import/ghost_idle.png-f1b4e904415914187dcbe7b03b288e2d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Players/ghost/ghost_idle.png"
-dest_files=[ "res://.import/ghost_idle.png-f6a5e073da8f7707d9cdf604d92ab0e1.stex" ]
+source_file="res://Assets/Sprites/Players/Ghost/ghost_idle.png"
+dest_files=[ "res://.import/ghost_idle.png-f1b4e904415914187dcbe7b03b288e2d.stex" ]
 
 [params]
 
