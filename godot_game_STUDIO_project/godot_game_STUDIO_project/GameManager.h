@@ -45,7 +45,6 @@ namespace godot
 		bool _is_one_player_alive();
 
 	public:
-		static bool show_tutorial;
 		static int current_level;
 
 		static void _register_methods();

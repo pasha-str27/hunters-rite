@@ -80,6 +80,9 @@
     <ClCompile Include="ParticlesDestroyer.cpp">
       <Filter>Level</Filter>
     </ClCompile>
+    <ClCompile Include="RoomStats.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
     <ClCompile Include="SpawnEnemyController.cpp">
       <Filter>Level</Filter>
     </ClCompile>
@@ -183,6 +186,9 @@
     <ClCompile Include="NagaAI.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>Football</Filter>
+    </ClCompile>
     <ClCompile Include="GameManager.cpp">
       <Filter>Level</Filter>
     </ClCompile>
@@ -284,6 +290,9 @@
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="ParticlesDestroyer.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomStats.h">
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="SpawnEnemyController.h">
@@ -409,6 +418,9 @@
     </ClInclude>
     <ClInclude Include="IEnemyAI.h">
       <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>Football</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>Level</Filter>
