@@ -7,10 +7,10 @@ namespace godot
 {
 	class BulletPull
 	{
-		int max_bullet_count;
 		std::vector<Node2D*> bullets;
 		Node* parent_node = nullptr;
 		Ref<PackedScene> bullet_prefab = nullptr;
+
 	public:
 		BulletPull(int max_bullet_count, Ref<PackedScene> bullet, Node* parent_node);
 		BulletPull();

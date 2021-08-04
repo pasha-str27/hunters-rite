@@ -14,9 +14,7 @@ namespace godot
 	public:
 		static void _register_methods();
 		Spike();
-		~Spike();
 		void _init();
-		void _ready();
 		float _get_damage();
 	};
 }

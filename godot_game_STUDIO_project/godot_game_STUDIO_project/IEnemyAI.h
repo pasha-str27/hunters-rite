@@ -6,6 +6,7 @@
 namespace godot
 {
 	class ISlimeAttackState;
+
 	class IEnemyAI
 	{
 	public:

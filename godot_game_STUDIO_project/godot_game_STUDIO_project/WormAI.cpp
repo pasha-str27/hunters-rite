@@ -11,7 +11,7 @@ godot::WormAI::WormAI(Ref<PackedScene>& bullet, Node2D* node) : EnemyData(node)
 	prepare_to_shoot = true;
 	auto bullet_container = node->get_parent()->get_node("BulletContainer");
 
-	bullet_pull = new BulletPull(max_bullet_count, bullet, bullet_container);
+	bullet_pull = new BulletPull(3, bullet, bullet_container);
 
 	Array arr = CurrentRoom::get_singleton()->_get_current_room()->call("_get_enemy_spawn_positions");
 	free_cells = arr[0];
@@ -27,6 +27,7 @@ godot::WormAI::~WormAI()
 void godot::WormAI::change_can_fight(bool value)
 {
 	can_move = value;
+	
 	if (value)
 	{
 		if (finished_hide_anim)

@@ -6,7 +6,7 @@
 godot::BatAI::BatAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
 {
 	can_move = true;
-	speed = 100;
+	_set_speed(100);
 
 	_change_dir();
 }
@@ -43,15 +43,9 @@ void godot::BatAI::_delete_player2()
 	}
 }
 
-
 godot::String godot::BatAI::_get_current_player()
 {
 	return current_player;
-}
-
-void godot::BatAI::_set_speed(float value)
-{
-	speed = value;
 }
 
 void godot::BatAI::_change_dir()
@@ -75,7 +69,8 @@ void godot::BatAI::_change_dir()
 	}
 	else
 	{
-		if (PlayersContainer::_get_instance()->_get_player2() == nullptr) {
+		if (PlayersContainer::_get_instance()->_get_player2() == nullptr) 
+		{
 			current_goal = PlayersContainer::_get_instance()->_get_player1();
 			current_player = "player1";
 		}
@@ -109,5 +104,5 @@ void godot::BatAI::_process(float delta)
 		dir = (Vector2(random->randf_range(-100, 100), random->randf_range(-100, 100))).normalized();
 	}
 
-	cast_to<KinematicBody2D>(_get_enemy())->move_and_slide(dir * speed);
+	cast_to<KinematicBody2D>(_get_enemy())->move_and_slide(dir * _get_speed());
 }

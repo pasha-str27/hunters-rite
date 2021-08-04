@@ -10,7 +10,7 @@ namespace godot
 		bool can_move;
 
 		Vector2 dir;
-		bool is_cheking;
+
 		float speed;
 		float damage = 33;
 		bool is_player1_onArea = false;

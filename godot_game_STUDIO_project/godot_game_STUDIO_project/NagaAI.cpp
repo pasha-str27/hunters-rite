@@ -27,6 +27,9 @@ godot::NagaAI::NagaAI(Ref<PackedScene>& bullet, Node2D* node) : EnemyData(node)
 godot::NagaAI::~NagaAI()
 {
 	sprite = nullptr;
+	vampirism_particles = nullptr;
+	magnit_zone = nullptr;
+	target = nullptr;
 }
 
 void godot::NagaAI::_process(float delta)
@@ -43,50 +46,37 @@ void godot::NagaAI::change_can_fight(bool value)
 {
 	can_move = value;
 
+	//	after teleporting, and timing start attack
 	if (!can_attack && !is_angry && !is_disappearing && _get_enemy()->is_visible() && is_teleported)
 	{
-		_enable_collisions();
-		can_attack = true;
-		is_teleported = false;
-		magnit_zone->call("_set_active", true);
+		_after_appear_animation();
 		return;
 	}
 
+	//	on end delay between attacks
 	if (!can_attack && !is_angry && !is_disappearing && _get_enemy()->is_visible())
 	{
 		can_attack = true;
 		return;
 	}
 
-
+	//	start disappearing, play animation
 	if (is_disappearing)
 	{
-		magnit_zone->call("_set_active", false);
-		_disable_collisions();
-		_get_enemy()->call("_change_animation", "disappear", teleport_speed);
-		is_disappearing = false;
-		can_move = false;
-		_get_enemy()->call("_start_fixed_timer", .9f / teleport_speed);
+		_start_disappear();
 		return;
 	}
 
+	//	on animation disappear end, wait to teleport
 	if (is_angry && !is_disappearing && _get_enemy()->is_visible())
 	{
-		_get_enemy()->set_visible(false);
-		can_move = false;
-		_get_enemy()->call("_start_fixed_timer", hide_time);
+		_make_disappear();
 		return;
 	}
 
+	//	after hiding time teleport and shown
 	if (is_angry)
-	{
-		_teleport_to_target();
-		_get_enemy()->set_visible(true);
-		_get_enemy()->call("_change_animation", "appear", teleport_speed);
-		can_move = false;
-		is_angry = false;
-		_get_enemy()->call("_start_fixed_timer", timing_to_attack);
-	}
+		_make_appear();
 }
 
 void godot::NagaAI::_fight(Node2D* player1, Node2D* player2)
@@ -99,19 +89,18 @@ void godot::NagaAI::_fight(Node2D* player1, Node2D* player2)
 	if (is_player1_onArea && player1 != nullptr)
 	{
 		player1->call("_take_damage", damage, false);
-		_get_enemy()->call("_change_animation", "attack", 1.5f);
 		_make_vampirism();
 	}
 
 	if (is_player2_onArea && player2 != nullptr)
 	{
-		_get_enemy()->call("_change_animation", "attack", 1.5f);
 		player2->call("_take_damage", damage, false);
 		_make_vampirism();
 	}
 
 	_get_enemy()->call("_start_fixed_timer", attack_timing);
 	can_attack = false;
+	//	after attack check if target is died
 	_check_target();
 }
 
@@ -132,7 +121,6 @@ void godot::NagaAI::_remove_player(Node2D* player)
 
 void godot::NagaAI::_set_target()
 {
-
 	Node2D* player1 = PlayersContainer::_get_instance()->_get_player1();
 	Node2D* player2 = PlayersContainer::_get_instance()->_get_player2();
 
@@ -184,25 +172,13 @@ void godot::NagaAI::_set_target()
 		{
 			target = _get_player1();
 			target_id = 1;
-
 		}
 		else if (MenuButtons::game_mode == MELEE && player2 != nullptr)
 		{
 			target = _get_player2();
 			target_id = 2;
-
 		}
 	}
-}
-
-void godot::NagaAI::_set_next_pos()
-{
-	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
-	rng->randomize();
-	_set_target();
-	_get_enemy()->set_global_position(target->get_global_position() + Vector2(rng->randi_range(-32, 32), rng->randi_range(-32, 32)));
-	is_teleported = true;
-	can_attack = false;
 }
 
 void godot::NagaAI::_disable_collisions()
@@ -215,7 +191,7 @@ void godot::NagaAI::_disable_collisions()
 
 void godot::NagaAI::_follow_target(float delta)
 {
-	if(target == nullptr)
+	if (target == nullptr)
 		_set_target();
 
 	_get_enemy()->call("_change_animation", "run", 1);
@@ -244,31 +220,38 @@ void godot::NagaAI::_take_damage(float damage)
 	is_disappearing = true;
 	_get_enemy()->call("_start_fixed_timer", .3f);
 
-	if ((float)_get_enemy()->call("_get_HP_percent") <= 75)
+	if ((float)_get_enemy()->call("_get_HP_percent") <= 25)
 		_decrease_cooldowns();
 }
 
 void godot::NagaAI::_teleport_to_target()
 {
-	_set_next_pos();
+	Ref<RandomNumberGenerator> rng = RandomNumberGenerator::_new();
+	rng->randomize();
+	_set_target();
+	_get_enemy()->set_global_position(target->get_global_position() + Vector2(rng->randi_range(-32, 32), rng->randi_range(-32, 32)));
+	is_teleported = true;
+	can_attack = false;
 }
 
 bool godot::NagaAI::_is_player_near()
-{ 
+{
 	return is_player1_onArea || is_player2_onArea;
 }
 
 void godot::NagaAI::_make_vampirism()
 {
+	_get_enemy()->call("_change_animation", "attack", 1.5f);
+
 	_get_enemy()->call("_add_to_HP", damage);
 	vampirism_particles->restart();
-	if ((float)_get_enemy()->call("_get_HP_percent") > 75)
+	if ((float)_get_enemy()->call("_get_HP_percent") > 25)
 		_increase_cooldowns();
 }
 
 void godot::NagaAI::_check_target()
 {
-	if (target_id == 1 && PlayersContainer::_get_instance()->_get_player1() == nullptr 
+	if (target_id == 1 && PlayersContainer::_get_instance()->_get_player1() == nullptr
 		|| target_id == 2 && PlayersContainer::_get_instance()->_get_player2() == nullptr)
 		_set_target();
 }
@@ -296,6 +279,41 @@ void godot::NagaAI::_increase_cooldowns()
 	attack_timing = 1;
 	hide_time = 1;
 	speed = 80;
+}
+
+void godot::NagaAI::_make_disappear()
+{
+	_get_enemy()->set_visible(false);
+	can_move = false;
+	_get_enemy()->call("_start_fixed_timer", hide_time);
+}
+
+void godot::NagaAI::_make_appear()
+{
+	_teleport_to_target();
+	_get_enemy()->set_visible(true);
+	_get_enemy()->call("_change_animation", "appear", teleport_speed);
+	can_move = false;
+	is_angry = false;
+	_get_enemy()->call("_start_fixed_timer", timing_to_attack);
+}
+
+void godot::NagaAI::_start_disappear()
+{
+	magnit_zone->call("_set_active", false);
+	_disable_collisions();
+	_get_enemy()->call("_change_animation", "disappear", teleport_speed);
+	is_disappearing = false;
+	can_move = false;
+	_get_enemy()->call("_start_fixed_timer", .9f / teleport_speed);
+}
+
+void godot::NagaAI::_after_appear_animation()
+{
+	_enable_collisions();
+	can_attack = true;
+	is_teleported = false;
+	magnit_zone->call("_set_active", true);
 }
 
 void godot::NagaAI::_enable_collisions()

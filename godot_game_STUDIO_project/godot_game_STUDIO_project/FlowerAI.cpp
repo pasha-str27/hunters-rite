@@ -5,12 +5,11 @@
 
 godot::FlowerAI::FlowerAI(Ref<PackedScene>& bullet, Node2D *node_tmp) : EnemyData(node_tmp)
 {
-	max_bullet_count = 5 * 8;
 	can_fight = true;
 
 	auto node = _get_enemy()->get_parent()->get_child(0);
 
-	bullet_pull = new BulletPull(max_bullet_count, bullet, node);
+	bullet_pull = new BulletPull(32, bullet, node);
 
 	directions[0] = Vector2::UP;
 	directions[2] = Vector2::RIGHT;
@@ -38,26 +37,27 @@ void godot::FlowerAI::change_can_fight(bool value)
 	can_fight = value;
 }
 
-void godot::FlowerAI::_set_speed(float value)
-{
-}
-
 void godot::FlowerAI::_change_start_parameters()
 {
+	auto cur_room = CurrentRoom::get_singleton()->_get_current_room();
+
 	Vector2 cur_pos = (_get_enemy()->get_global_position() - 
-		CurrentRoom::get_singleton()->_get_current_room()->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+		cur_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+	
 	for (int i = cur_pos.x - 1; i <= cur_pos.x + 1; ++i)
 		for (int j = cur_pos.y - 1; j <= cur_pos.y + 1; ++j)
-			CurrentRoom::get_singleton()->_get_current_room()->call("_set_cell_value", j, i, 8);
+			cur_room->call("_set_cell_value", j, i, 8);
 }
 
 void godot::FlowerAI::_remove_taken_positions()
 {
+	auto cur_room = CurrentRoom::get_singleton()->_get_current_room();
+
 	Vector2 cur_pos = (_get_enemy()->get_global_position() - 
-		CurrentRoom::get_singleton()->_get_current_room()->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+		cur_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
 	for (int i = cur_pos.x - 1; i <= cur_pos.x + 1; ++i)
 		for (int j = cur_pos.y - 1; j <= cur_pos.y + 1; ++j)
-			CurrentRoom::get_singleton()->_get_current_room()->call("_set_cell_value", j, i, 0);
+			cur_room->call("_set_cell_value", j, i, 0);
 }
 
 void godot::FlowerAI::_process(float delta)

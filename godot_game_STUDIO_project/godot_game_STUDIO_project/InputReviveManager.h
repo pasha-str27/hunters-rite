@@ -7,14 +7,14 @@ namespace godot
 {
 	class InputReviveManager
 	{
-		std::vector<String> keys;
+		Dictionary input_map;
 		String current_key;
 
 	public:
 		~InputReviveManager();
-		void _set_player1_buttons();
-		void _set_player2_buttons();
+		void _set_player_buttons(Dictionary input_map);
 		void _generate_new_key();
 		String _get_current_key();
+		String _get_current_value();
 	};
 }

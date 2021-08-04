@@ -18,6 +18,8 @@ namespace godot
 		DEFOLT
 	};
 
+	class AudioController;
+
 	class MenuButtons : public TextureRect
 	{
 		GODOT_CLASS(MenuButtons, TextureRect)
@@ -41,7 +43,9 @@ namespace godot
 		float delta_time;
 		static AudioStreamPlayer2D* audio;
 		float delta_step;
-		AudioServer* audio_server = nullptr;
+		AudioController* audio_controller = nullptr;
+
+		bool need_to_save_game = false;
 
 	public:
 		MenuButtons();

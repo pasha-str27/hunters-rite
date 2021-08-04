@@ -35,6 +35,16 @@ void godot::ItemGenerator::_dead_enemy(Vector2 enemy_position)
 	}
 }
 
+int godot::ItemGenerator::_get_count_to_spawn()
+{
+	return count_to_spawn;
+}
+
+void godot::ItemGenerator::_set_count_to_spawn(int value)
+{
+	count_to_spawn = value > 0 ? value : 1;
+}
+
 ItemGenerator* godot::ItemGenerator::_get_instance()
 {
 	return this;

@@ -12,10 +12,6 @@ void godot::AudioEffect::_register_methods()
 	register_property<AudioEffect, float>("duration", &AudioEffect::duration, -2);
 }
 
-godot::AudioEffect::AudioEffect()
-{
-}
-
 godot::AudioEffect::~AudioEffect()
 {
 	timer = nullptr;

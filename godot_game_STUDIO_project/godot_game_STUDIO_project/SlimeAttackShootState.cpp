@@ -5,9 +5,10 @@
 
 void godot::SlimeAttackShootState::_fight()
 {
-	Godot::print("shooting...");
 	//	make stuff
 	ai->_set_target();
 	ai->_shoot();
 	ai->_change_state(new SlimeAttackJumpState(ai));
 }
+
+godot::SlimeAttackShootState::SlimeAttackShootState(SlimeBossAI* boss) :ISlimeAttackState(boss) {};

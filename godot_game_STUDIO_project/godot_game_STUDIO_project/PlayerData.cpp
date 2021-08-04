@@ -7,6 +7,16 @@ godot::Input* godot::PlayerData::input_controller = nullptr;
 
 godot::PlayerData::PlayerData(Node2D* object, Ref<PackedScene> bullet)
 {
+	input_map["move_up"] = "Player_up";
+	input_map["move_down"] = "Player_down";
+	input_map["move_left"] = "Player_left";
+	input_map["move_right"] = "Player_right";
+	input_map["fight_up"] = "Player_fight_up";
+	input_map["fight_down"] = "Player_fight_down";
+	input_map["fight_left"] = "Player_fight_left";
+	input_map["fight_right"] = "Player_fight_right";
+	input_map["special"] = "Player_special";
+
 	this->object = object;
 	dir = Vector2(0, 0);
 	HP = 0;
@@ -42,7 +52,7 @@ godot::PlayerData::~PlayerData()
 
 void godot::PlayerData::_move()
 {
-	cast_to<KinematicBody2D>(object)->move_and_slide(dir.normalized()*speed);
+	cast_to<KinematicBody2D>(object)->move_and_slide(dir.normalized() * speed);
 }
 
 void godot::PlayerData::_set_speed(float speed)
@@ -195,32 +205,23 @@ void godot::PlayerData::_start_special()
 {
 }
 
-void godot::PlayerData::_set_controll_buttons(String move_up, String move_down, String move_left, String move_right, String fight_up, String fight_down, String fight_left, String fight_right, String special)
+void godot::PlayerData::_set_controll_buttons(Dictionary input_map)
 {
-	this->move_up = move_up;
-	this->move_down = move_down;
-	this->move_left = move_left;
-	this->move_right = move_right;
-	this->fight_up = fight_up;
-	this->fight_down = fight_down;
-	this->fight_left = fight_left;
-	this->fight_right = fight_right;
-	this->special = special;
+	this->input_map = input_map;
+	//this->input_map["move_up"] = ((String)input_map["move_up"]).;
+	//this->input_map["move_down"] = (String)input_map["move_down"];
+	//this->input_map["move_left"] = (String)input_map["move_left"];
+	//this->input_map["move_right"] = (String)input_map["move_right"];
+	//this->input_map["fight_up"] = (String)input_map["fight_up"];
+	//this->input_map["fight_down"] = (String)input_map["fight_down"];
+	//this->input_map["fight_left"] = (String)input_map["fight_left"];
+	//this->input_map["fight_right"] = (String)input_map["fight_right"];
+	//this->input_map["special"] = (String)input_map["special"];
 }
 
-std::map<String, String> godot::PlayerData::_get_controll_buttons()
+Dictionary godot::PlayerData::_get_controll_buttons()
 {
-	std::map<String, String> controlls;
-	controlls.insert(std::make_pair("move_up", move_up));
-	controlls.insert(std::make_pair("move_down", move_down));
-	controlls.insert(std::make_pair("move_left", move_left));
-	controlls.insert(std::make_pair("move_right", move_right));
-	controlls.insert(std::make_pair("fight_up", fight_up));
-	controlls.insert(std::make_pair("fight_down", fight_down));
-	controlls.insert(std::make_pair("fight_left", fight_left));
-	controlls.insert(std::make_pair("fight_right", fight_right));
-	controlls.insert(std::make_pair("special", special));
-	return controlls;
+	return input_map;
 }
 
 IPlayer* godot::PlayerData::_clone()
@@ -234,5 +235,13 @@ void godot::PlayerData::_heal()
 }
 
 void godot::PlayerData::_set_is_attacking(bool value)
+{
+}
+
+void godot::PlayerData::_decrease_attack_radius()
+{
+}
+
+void godot::PlayerData::_encrease_attack_radius()
 {
 }
