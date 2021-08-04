@@ -128,8 +128,7 @@ void godot::PlayerController::_ready()
 
 	_update_max_health_bar_size();
 
-	if(has_node("ItemGenerator"))
-		item_generator = CustomExtensions::GetChildByName(this, "ItemGenerator")->call("_get_instance");
+	item_generator = CustomExtensions::GetChildByName(this, "ItemGenerator")->call("_get_instance");
 
 	buff_debuff_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "BuffDebuffParticles"));
 	hurt_particles = cast_to<Particles2D>(CustomExtensions::GetChildByName(this, "HurtParticles"));
