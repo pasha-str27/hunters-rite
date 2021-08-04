@@ -43,6 +43,7 @@ namespace godot
 		Ref<PackedScene> task_item = nullptr;
 
 	public:
+		TutotialGenerator();
 		~TutotialGenerator();
 		static void _register_methods();
 		void _init();
@@ -52,6 +53,9 @@ namespace godot
 		bool _has_room(std::vector<Vector2> positions, Vector2 pos);
 		Node2D* _buid_room(Vector2 dir);
 		void _buid_doors();
+		void _buid_roofs();
+		void _buid_top_wall();
+		void _build_doors(int start_index, int end_index);
 		Node2D* _get_next_room(Vector2 current_room_position);
 		void _create_item_room(Node2D* room);
 		void _generate_key(Node2D* room);

@@ -13,6 +13,7 @@ namespace godot
     public:
         static void _register_methods();
         void _init();
+        void _ready();
         float _get_enemy_price();
     };
 }

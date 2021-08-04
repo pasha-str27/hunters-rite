@@ -32,8 +32,6 @@ namespace godot
 		void _mute_audio();
 		void _audio_fade_to_main_menu();
 		void _move_to_main_menu();
-		void _try_to_change_player_moving(Node2D* player, bool value);
-		void _spawn_fade_out();
 		ExitHandler();
 		~ExitHandler();
 	};

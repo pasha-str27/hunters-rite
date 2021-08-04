@@ -3,6 +3,56 @@
 #include "headers.h"
 #endif
 
+bool godot::SillyBoyAI::_is_player_near(Node2D* player)
+{
+	Vector2 player_pos_index = (player->get_global_position()
+		- CurrentRoom::get_singleton()->_get_current_room()->get_global_position()
+		+ Vector2(896, 544) / 2) / _get_distance();
+
+	bool is_player_ghost = (bool)player->call("_is_ghost_mode");
+
+	bool ghost_is_near = false;
+
+	player_pos_index = Vector2((int)player_pos_index.y, (int)player_pos_index.x);
+
+	if (is_player_ghost)
+	{
+		if (player_pos_index == Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::LEFT).x))
+		{
+			ghost_is_near = true;
+			remove_vector_element(Vector2::LEFT);
+		}
+
+		if (player_pos_index == Vector2((int)cur_pos.y, (int)(cur_pos + Vector2::RIGHT).x))
+		{
+			ghost_is_near = true;
+			remove_vector_element(Vector2::RIGHT);
+		}
+
+		if (player_pos_index == Vector2((int)(cur_pos + Vector2::DOWN).y, (int)cur_pos.x))
+		{
+			ghost_is_near = true;
+			remove_vector_element(Vector2::DOWN);
+		}
+
+		if (player_pos_index == Vector2((int)(cur_pos + Vector2::UP).y, (int)cur_pos.x))
+		{
+			ghost_is_near = true;
+			remove_vector_element(Vector2::UP);
+		}
+	}
+
+	if (ghost_is_near)
+		return true;
+
+	return false;
+}
+
+void godot::SillyBoyAI::_set_speed(float value)
+{
+	speed = value;
+}
+
 void godot::SillyBoyAI::_set_is_player1_onArea(bool value)
 {
 	is_player1_onArea = value;
@@ -17,7 +67,7 @@ void godot::SillyBoyAI::_set_is_player2_onArea(bool value)
 
 void godot::SillyBoyAI::_change_start_parameters()
 {
-	cur_pos = (_get_enemy()->get_global_position() -
+	cur_pos = (_get_enemy()->get_global_position() - 
 		CurrentRoom::get_singleton()->_get_current_room()->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / _get_distance();
 
 	old_pos = _get_enemy()->get_global_position();
@@ -51,6 +101,7 @@ void godot::SillyBoyAI::_remove_player(Node2D* player)
 
 void godot::SillyBoyAI::_set_direction(Vector2 direction)
 {
+	//���������!!!!
 	if (was_setted)
 		return;
 
@@ -62,7 +113,7 @@ void godot::SillyBoyAI::_set_direction(Vector2 direction)
 	was_setted = true;
 	old_pos = _get_enemy()->get_global_position();
 	_set_distance(_find_max_distance(direction));
-	_set_speed(300);
+	speed = 300;
 
 	goal = cur_pos * 32 + CurrentRoom::get_singleton()->_get_current_room()
 		->get_global_position() - Vector2(896, 544) / 2 + Vector2(16, 16);
@@ -81,9 +132,7 @@ float godot::SillyBoyAI::_find_max_distance(Vector2 dir)
 {
 	float distance = 0;
 
-	auto cur_room = CurrentRoom::get_singleton();
-
-	while (cur_room->_get_current_room()->call("_is_empty_pos", cur_pos.y, cur_pos.x))
+	while (CurrentRoom::get_singleton()->_get_current_room()->call("_is_empty_pos", cur_pos.y, cur_pos.x))
 	{
 		cur_pos += dir;
 		distance += 32;
@@ -102,6 +151,8 @@ Vector2 godot::SillyBoyAI::_get_goal()
 
 void godot::SillyBoyAI::_set_goal(Vector2 goal)
 {
+	//_get_enemy()->set_global_position(goal);
+
 	_set_distance(goal.distance_to(_get_enemy()->get_global_position()));
 
 	this->goal = goal;
@@ -110,6 +161,9 @@ void godot::SillyBoyAI::_set_goal(Vector2 goal)
 
 	old_pos = _get_enemy()->get_global_position();
 	old_position = old_pos;
+	//change_direction();
+
+	//_change_start_parameters();
 }
 
 godot::SillyBoyAI::SillyBoyAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
@@ -117,7 +171,8 @@ godot::SillyBoyAI::SillyBoyAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : Enem
 	dir = Vector2::ZERO;
 
 	can_move = true;
-	_set_speed(200);
+	is_cheking = false;
+	speed = 200;
 	old_position = _get_enemy()->get_global_position();
 	_set_distance(32);
 	_change_start_parameters();
@@ -138,21 +193,61 @@ void godot::SillyBoyAI::change_direction()
 {
 	reset_directions();
 
-	auto cur_room = CurrentRoom::get_singleton()->_get_current_room();
-
-	if ((int)cur_room->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::LEFT).x) == 0)
+	if ((int)CurrentRoom::get_singleton()->_get_current_room()->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::LEFT).x) == 0)
 		directions.push_back(Vector2::LEFT);
 
-	if ((int)cur_room->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::RIGHT).x) == 0)
+	if ((int)CurrentRoom::get_singleton()->_get_current_room()->call("_get_cell_value", cur_pos.y, (cur_pos + Vector2::RIGHT).x) == 0)
 		directions.push_back(Vector2::RIGHT);
 
-	if ((int)cur_room->call("_get_cell_value", (cur_pos + Vector2::DOWN).y, cur_pos.x) == 0)
+	if ((int)CurrentRoom::get_singleton()->_get_current_room()->call("_get_cell_value", (cur_pos + Vector2::DOWN).y, cur_pos.x) == 0)
 		directions.push_back(Vector2::DOWN);
 
-	if ((int)cur_room->call("_get_cell_value", (cur_pos + Vector2::UP).y, cur_pos.x) == 0)
+	if ((int)CurrentRoom::get_singleton()->_get_current_room()->call("_get_cell_value", (cur_pos + Vector2::UP).y, cur_pos.x) == 0)
 		directions.push_back(Vector2::UP);
 
 	_fight(_get_player1(), _get_player2());
+
+	PlayersContainer* players = PlayersContainer::_get_instance();
+
+	if (players->_get_player1() == nullptr && players->_get_player1_regular() != nullptr
+		&& (bool)players->_get_player1_regular()->call("_is_ghost_mode")
+		&& _is_player_near(players->_get_player1_regular()));
+
+	if (players->_get_player2() == nullptr && players->_get_player2_regular() != nullptr
+		&& (bool)players->_get_player2_regular()->call("_is_ghost_mode")
+		&& _is_player_near(players->_get_player2_regular()));
+
+	bool is_player_near = false;
+
+	if (players->_players_count() > 0)
+	{
+		if (players->_get_player1() != nullptr
+			&& players->_get_player2() != nullptr)
+		{
+			Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
+			random->randomize();
+
+			if (random->randi_range(0, 1))
+			{
+				is_player_near = _is_player_near(players->_get_player2());
+				if (!is_player_near)
+					is_player_near = _is_player_near(players->_get_player1());
+			}
+			else
+			{
+				is_player_near = _is_player_near(players->_get_player1());
+				if (!is_player_near)
+					is_player_near = _is_player_near(players->_get_player2());
+			}
+		}
+		else
+		{
+			if (players->_get_player1() == nullptr)
+				is_player_near = _is_player_near(players->_get_player2());
+			else
+				is_player_near = _is_player_near(players->_get_player1());
+		}
+	}
 
 	_change_dir_after_time();
 }
@@ -182,6 +277,8 @@ void godot::SillyBoyAI::_change_dir_after_time()
 
 	Ref<RandomNumberGenerator> rand = RandomNumberGenerator::_new();
 	rand->randomize();
+
+	is_cheking = false;
 
 	dir = directions[rand->randi_range(0, directions.size() - 1)];
 	goal = _get_enemy()->get_global_position() + dir * _get_distance();
@@ -228,8 +325,10 @@ void godot::SillyBoyAI::_process(float delta)
 	}
 
 
-	_get_enemy()->set_global_position(_get_enemy()->get_global_position().move_toward(goal, delta * _get_speed()));
+	_get_enemy()->set_global_position(_get_enemy()->get_global_position().move_toward(goal, delta * speed));
 
+	if (is_cheking)
+		return;
 	if (sprite != nullptr)
 	{
 		if (!is_attacking && sprite->get_animation() != "damaged")
@@ -240,22 +339,23 @@ void godot::SillyBoyAI::_process(float delta)
 
 	if (abs(old_position.distance_to(_get_enemy()->get_global_position()) - distance) <= 8)
 	{
-		auto cur_room_pos = CurrentRoom::get_singleton()->_get_current_room()->get_global_position();
-		Vector2 cur_pos_tmp = (_get_enemy()->get_global_position() - cur_room_pos + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+		Vector2 cur_pos_tmp = (_get_enemy()->get_global_position() - CurrentRoom::get_singleton()->_get_current_room()->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
 		cur_pos_tmp = Vector2((int)cur_pos_tmp.x, (int)cur_pos_tmp.y);
-		old_position = cur_pos_tmp * 32 + cur_room_pos - Vector2(896, 544) / 2 + Vector2(16, 16);
+		old_position = cur_pos_tmp * 32	+ CurrentRoom::get_singleton()->_get_current_room()->get_global_position()
+			- Vector2(896, 544) / 2 + Vector2(16, 16);
 	}
 
 	if (abs(old_pos.distance_to(_get_enemy()->get_global_position()) - _get_distance()) <= 1)
 	{
-		auto cur_room_pos = CurrentRoom::get_singleton()->_get_current_room()->get_global_position();
+		is_cheking = true;
 		was_setted = false;
-		_set_speed(200);
+		speed = 200;
 		change_direction();
 		old_pos = _get_enemy()->get_global_position();
-		Vector2 cur_pos_tmp = (_get_enemy()->get_global_position() - cur_room_pos + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+		Vector2 cur_pos_tmp = (_get_enemy()->get_global_position() - CurrentRoom::get_singleton()->_get_current_room()->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
 		cur_pos_tmp = Vector2((int)cur_pos_tmp.x, (int)cur_pos_tmp.y);
-		old_position = cur_pos_tmp * 32 + cur_room_pos - Vector2(896, 544) / 2 + Vector2(16, 16);
+		old_position = cur_pos_tmp * 32 + CurrentRoom::get_singleton()->_get_current_room()->get_global_position()
+			- Vector2(896, 544) / 2 + Vector2(16, 16);
 		return;
 	}
 }

@@ -19,13 +19,21 @@ namespace godot
 		bool is_safe_mode = false;
 
 	public:
-		Dictionary input_map;
-		static Input* input_controller;
+		String move_up = "Player_up",
+			move_down = "Player_down",
+			move_left = "Player_left",
+			move_right = "Player_right",
+			fight_up = "Player_fight_up",
+			fight_down = "Player_fight_down",
+			fight_left = "Player_fight_left",
+			fight_right = "Player_fight_right",
+			special = "Player_special";
 
 	    ProgressBar* health_bar = nullptr;
 		PlayerData(Node2D* object, Ref<PackedScene>bullet = 0);
 		PlayerData();
 		~PlayerData();
+		
 		void _move();
 		void _set_speed(float speed);
 		void _fight(Node* node = nullptr);
@@ -37,6 +45,7 @@ namespace godot
 		void _take_damage(float damage, bool is_spike);
 		void _change_can_fight(bool value);
 		bool _can_fight();
+
 		void _process_input();
 		void _set_enemy(Node* enemy = nullptr);
 		float _get_HP();
@@ -58,12 +67,12 @@ namespace godot
 		bool _get_safe_mode();
 		void _stop_special();
 		void _start_special();
-		void _set_controll_buttons(Dictionary input_map);
-		Dictionary _get_controll_buttons();
+		void _set_controll_buttons(String move_up, String move_down, String move_left,
+			String move_right, String fight_up, String fight_down, String fight_left, String fight_right, String special);
+		std::map<String, String> _get_controll_buttons();
 		IPlayer* _clone();
 		void _heal();
 		void _set_is_attacking(bool value);
-		void _decrease_attack_radius();
-		void _encrease_attack_radius();
+		static Input* input_controller;
 	};
 }

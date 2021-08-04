@@ -3,6 +3,8 @@
 #include "headers.h"
 #endif
 
+#include <TranslationServer.hpp>
+
 void godot::Preloader::_register_methods()
 {
 	register_method("_ready", &Preloader::_ready);

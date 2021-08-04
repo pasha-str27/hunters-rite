@@ -17,6 +17,7 @@ namespace godot
 		bool prepare_to_shoot = false;
 		float damage = 33;
 
+		int max_bullet_count = 5;
 		BulletPull* bullet_pull = nullptr;
 
 		Vector2 target = Vector2::ZERO;

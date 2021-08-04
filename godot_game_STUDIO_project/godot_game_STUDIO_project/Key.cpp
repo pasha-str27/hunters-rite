@@ -13,7 +13,8 @@ void godot::Key::_register_methods()
 	
 	register_property<Key, String>("key_type", &Key::key_type, "");
 	register_property<Key, Color>("key_color", &Key::key_color, Color(0, 0, 0));
-	register_property<Key, Ref<PackedScene>>("particles", &Key::particles, nullptr);	
+	register_property<Key, Ref<PackedScene>>("particles", &Key::particles, nullptr);
+	
 }
 
 void godot::Key::_init()
@@ -23,9 +24,6 @@ void godot::Key::_init()
 void godot::Key::_ready()
 {
 	key_color = cast_to<Sprite>(get_node("key"))->get_modulate();
-
-	//key holder
-	key_box = cast_to<HBoxContainer>(get_node("/root/Node2D/Node/Camera2D/KeyHolder/Keyses/Keys"));
 }
 
 String godot::Key::_get_type()
@@ -41,16 +39,24 @@ Color godot::Key::_get_color()
 void godot::Key::_on_Area2D_body_entered(Node* node)
 {
 	if (node->is_in_group("player"))
-	{		
-		_make_sound();
+	{
+		Ref<PackedScene> prefab = nullptr;
+		prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->collect_key());
+		
+		auto spawned_particles = cast_to<Node2D>(particles->instance());
+		get_node("/root/Node2D/Node")->add_child(spawned_particles);
+		spawned_particles->set_global_position(this->get_global_position());
 
-		_spawn_particles();
+		//key holder
+		HBoxContainer* key_box = nullptr;
+		key_box = cast_to<HBoxContainer>(get_node("/root/Node2D/Node/Camera2D/KeyHolder/Keyses/Keys"));
+		key_box->add_child(prefab->instance());
 
 		//open next key/boss room
 		PlayersContainer::_get_instance()->_add_key(key_color);
 
 		//key types and key color
-		std::vector<String> name_keys{ "key_A", "key_B", "key_C", "key_D", "key_E", "key_F", "key_G"};
+		std::vector<String> name_keys{ "key_A", "key_B","key_C", "key_D", "key_E", "key_F", "key_G"};
 
 		//find key and set key color/visible
 		for (int i = 0; i < name_keys.size(); i++)
@@ -73,19 +79,6 @@ void godot::Key::_on_Area2D_body_entered(Node* node)
 	}
 }
 
-void godot::Key::_make_sound()
-{
-	Ref<PackedScene> prefab = nullptr;
-	prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->collect_key());
-	key_box->add_child(prefab->instance());
-}
-
-void godot::Key::_spawn_particles()
-{
-	auto spawned_particles = cast_to<Node2D>(particles->instance());
-	get_node("/root/Node2D/Node")->add_child(spawned_particles);
-	spawned_particles->set_global_position(this->get_global_position());
-}
 
 godot::Key::Key()
 {
@@ -94,5 +87,4 @@ godot::Key::Key()
 
 godot::Key::~Key()
 {
-	key_box = nullptr;
 }

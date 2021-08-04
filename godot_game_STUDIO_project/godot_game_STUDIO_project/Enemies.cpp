@@ -53,7 +53,12 @@ void godot::Enemies::_remove_enemy(Node2D* enemy)
 		}
 
 	if ((String)CurrentRoom::get_singleton()->_get_current_room()->call("_get_room_type") == "boss_room" && enemies.size() == 0)
-		ResourceContainer::_get_instance()->_spawn_exit();
+	{
+		Ref<PackedScene> exit_prefab = nullptr;
+		exit_prefab = ResourceLoader::get_singleton()->load("res://Assets/Prefabs/exit.tscn");
+		Node2D *exit_node = Node::cast_to<Node2D>(exit_prefab->instance());
+		CurrentRoom::get_singleton()->_get_current_room()->add_child(exit_node);
+	}
 }
 
 void godot::Enemies::_remove_player1()

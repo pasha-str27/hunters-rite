@@ -105,13 +105,14 @@ namespace godot
 		void _set_was_revived(bool value);
 		void _ghost_to_player();
 		bool _is_ghost_mode();
-		void _set_controll_buttons(Dictionary input_map);
-		Dictionary _get_controll_buttons();
+		void _set_controll_buttons(String move_up, String move_down, String move_left, String move_right,
+			String fight_up, String fight_down, String fight_left, String fight_right, String special);
 		void _stop_moving();
 		void _continue_moving();
 		void _set_is_attacking(bool value);
 		void _set_right_HP(float value);
 		void _on_ghost_hide();
+		void _flip_ghost(bool value);
 		void _take_poison();
 		void _on_poison_end();
 		void _player_to_ghost();

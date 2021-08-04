@@ -10,6 +10,7 @@ namespace godot
 		GODOT_CLASS(Item, Node2D);
 
 		AnimationPlayer* animator = nullptr;
+
 		String name;
 		float speed;
 		float HP;
@@ -20,6 +21,7 @@ namespace godot
 		int number_to_next_item;
 		float attack_speed_delta;
 		bool is_buff = true;
+		float item_price = 0;
 	public:
 		static void _register_methods();
 		Item();
@@ -27,11 +29,7 @@ namespace godot
 		void _ready();
 		void _init();
 		void _on_Area2D_body_entered(Node* node);
-		void _apply_item(Node* player);
-		//	creating UI for items holders
-		Control* _create_control();
-		TextureRect* _create_item_sprite();
-		TextureRect* _create_item_background(Ref<Texture>);
-		Label* _create_text(Ref<Theme> theme);
+		bool _get_is_buff();
+		float _get_item_price();
 	};
 }

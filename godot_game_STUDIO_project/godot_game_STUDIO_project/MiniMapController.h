@@ -56,7 +56,7 @@ namespace godot
 		void _set_positions();
 		void _update_minimap();
 		void _clear_map();
-		void _start_traking();
+		void _start_treking();
 		void _load_curr_room(Vector2 curr_room_pos);
 		void _load_undisc_rooms(Array undisc_rooms_pos);
 		void _load_special_rooms(Array rooms_pos, String type);
@@ -65,6 +65,9 @@ namespace godot
 		Vector2 _get_players_pos();
 		Vector2 _normalize_room_pos(Vector2 old_pos);
 		Array _normalize_all_rooms(Array rooms_pos_array);
+
+		void _start_timer();
+		void _on_timeout();
 
 		MiniMapController();
 		~MiniMapController();

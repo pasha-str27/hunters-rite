@@ -8,6 +8,6 @@ namespace godot {
 	{
 	public:
 		void _fight();
-		SlimeAttackShootState(SlimeBossAI* boss);
+		SlimeAttackShootState(SlimeBossAI* boss) :ISlimeAttackState(boss) {};
 	};
 }

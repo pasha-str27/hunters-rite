@@ -10,6 +10,8 @@ namespace godot
 		bool can_move;
 
 		Vector2 dir;
+		bool is_cheking;
+		float speed;
 		float damage = 33;
 		bool is_player1_onArea = false;
 		bool is_player2_onArea = false;
@@ -22,11 +24,10 @@ namespace godot
 		AnimatedSprite* sprite = nullptr;
 		Vector2 old_position = Vector2::ZERO;
 
+	public:
 		Vector2 old_pos;
 		Vector2 cur_pos;
 		Vector2 tmp_cur_pos;
-
-	public:
 
 		SillyBoyAI(Ref<PackedScene>& bullet, Node2D* node);
 		~SillyBoyAI();
@@ -35,6 +36,8 @@ namespace godot
 		virtual void change_direction();
 		void _change_dir_after_time();
 		virtual void _fight(Node2D* player1 = nullptr, Node2D* player2 = nullptr);
+		bool _is_player_near(Node2D* player);
+		void _set_speed(float value);
 		void _set_is_player1_onArea(bool value);
 		void _set_is_player2_onArea(bool value);
 		void _change_start_parameters();

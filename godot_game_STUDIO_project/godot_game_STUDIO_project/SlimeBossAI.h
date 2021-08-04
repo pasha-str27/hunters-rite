@@ -16,7 +16,6 @@ namespace godot
 		float speed = 200;
 		bool is_jumping = false;
 		bool jumping_up = false;
-		int taken_damage = 0;
 
 		int max_bullet_count = 20;
 		BulletPull* bullet_pull = nullptr;
@@ -28,6 +27,7 @@ namespace godot
 		Vector2 empty_pos = Vector2(-99999, -99999);
 
 		Node2D* jump_zone = nullptr;
+		Node2D* wave_node = nullptr;
 
 		Array enemies_to_spawn = {};
 		Array places_to_spawn = {};
@@ -56,7 +56,6 @@ namespace godot
 		void _set_target();
 		void _disable_collisions();
 		void _enable_collisions();
-		void _take_damage(float damage);
-		void _make_action_sound();
+		void _make_wave();
 	};
 }

@@ -5,22 +5,23 @@
 
 godot::PlayerShoot::PlayerShoot(Node2D* object, Ref<PackedScene> bullet) : PlayerData(object)
 {
+	max_bullet_count = 10;
 	_change_can_fight(true);
 
-	auto bullet_container = _get_object()->get_parent()->get_child(0);
+	auto node = _get_object()->get_parent()->get_child(0);
 
 	sprite = cast_to<AnimatedSprite>(_get_object()->get_node("AnimatedSprite"));
 
 	shoot_particles = cast_to<Particles2D>(sprite->get_child(0));
 
-	if (bullet_container->get_child_count() == 0)
-		bullet_pull = new BulletPull(10, bullet, bullet_container);
+	if (node->get_child_count() == 0)
+		bullet_pull = new BulletPull(max_bullet_count, bullet, node);
 	else
 	{
 		bullet_pull = new BulletPull;
 
-		for (int i = 0; i < bullet_container->get_child_count(); ++i)
-			bullet_pull->_add_bullet(cast_to<Node2D>(bullet_container->get_child(i)));
+		for (int i = 0; i < node->get_child_count(); ++i)
+			bullet_pull->_add_bullet(cast_to<Node2D>(node->get_child(i)));
 	}
 
 	sprite->play("idle");
@@ -33,9 +34,6 @@ godot::PlayerShoot::PlayerShoot(Node2D* object, Ref<PackedScene> bullet) : Playe
 	cast_to<Area2D>(object->get_node("Area2D"))->set_collision_layer_bit(0, true);
 
 	health_bar = _get_health_bar();
-
-	PlayersContainer::_get_instance()->_set_player1(object);
-	PlayersContainer::_get_instance()->_set_player1_regular(cast_to<Node2D>(object->get_parent()));
 }
 
 godot::PlayerShoot::~PlayerShoot()
@@ -69,7 +67,8 @@ void godot::PlayerShoot::_move()
 
 	String animation_name = sprite->get_animation();
 	if (sprite->get_sprite_frames()->get_animation_loop(animation_name) == false 
-		&& sprite->get_frame() == sprite->get_sprite_frames()->get_frame_count(animation_name) - 1)
+		&& sprite->get_frame() == sprite->get_sprite_frames()->get_frame_count(animation_name) - 1
+		)
 		sprite->play("idle");
 
 	if (PlayerData::_get_dir() == Vector2::ZERO && animation_name != "revive" && animation_name != "damaged")
@@ -84,7 +83,7 @@ void godot::PlayerShoot::_process_input()
 	Vector2 dir = Vector2(0, 0);
 
 	//fight	up
-	if (input_controller->is_action_pressed(input_map["fight_up"]))
+	if (input_controller->is_action_pressed(fight_up))
 	{
 		shoot_particles->set_position(Vector2(0, -9));
 		bullet_dir = Vector2::UP;
@@ -92,7 +91,7 @@ void godot::PlayerShoot::_process_input()
 	}
 
 	//fight	down
-	if (input_controller->is_action_pressed(input_map["fight_down"]))
+	if (input_controller->is_action_pressed(fight_down))
 	{
 		shoot_particles->set_position(Vector2(0, 9));
 		bullet_dir = Vector2::DOWN;
@@ -100,15 +99,15 @@ void godot::PlayerShoot::_process_input()
 	}
 
 	//move up
-	if (input_controller->is_action_pressed(input_map["move_up"]))
+	if (input_controller->is_action_pressed(move_up))
 		dir.y -= _get_speed();
 
 	//move down
-	if (input_controller->is_action_pressed(input_map["move_down"]))
+	if (input_controller->is_action_pressed(move_down))
 		dir.y += _get_speed();
 
 	//move left
-	if (input_controller->is_action_pressed(input_map["move_left"]))
+	if (input_controller->is_action_pressed(move_left))
 	{
 		sprite->set_flip_h(true);
 		sprite->set_offset(Vector2(-35, 0));
@@ -122,7 +121,7 @@ void godot::PlayerShoot::_process_input()
 	}
 
 	//move right	
-	if (input_controller->is_action_pressed(input_map["move_right"]))
+	if (input_controller->is_action_pressed(move_right))
 	{
 		sprite->set_flip_h(false);
 		sprite->set_offset(Vector2(35, 0));
@@ -137,11 +136,11 @@ void godot::PlayerShoot::_process_input()
 	}
 
 	//dash
-	if (input_controller->is_action_just_pressed(input_map["special"]))
+	if (input_controller->is_action_just_pressed(special))
 		_get_object()->call("_start_special_timer");
 
 	//fight	left
-	if (input_controller->is_action_pressed(input_map["fight_left"]))
+	if (input_controller->is_action_pressed(fight_left))
 	{
 		bullet_dir = Vector2::LEFT;
 		sprite->set_flip_h(true);
@@ -151,7 +150,7 @@ void godot::PlayerShoot::_process_input()
 	}
 
 	//fight	right
-	if (input_controller->is_action_pressed(input_map["fight_right"]))
+	if (input_controller->is_action_pressed(fight_right))
 	{
 		bullet_dir = Vector2::RIGHT;
 		sprite->set_flip_h(false);
@@ -238,19 +237,12 @@ void godot::PlayerShoot::_stop_animations()
 
 void godot::PlayerShoot::_stop_special()
 {
-	float curr_speed = _get_speed() / speed_delta;
-
-	if (curr_speed != prev_speed)
-		_set_speed(curr_speed * speed_delta);
-	else
-		_set_speed(curr_speed);
+	_set_speed(_get_speed() / speed_delta);
 }
 
 void godot::PlayerShoot::_start_special()
 {
-	prev_speed = _get_speed();
 	_set_speed(_get_speed() * speed_delta);
 	Ref<PackedScene> prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->dash());
 	_get_object()->add_child(prefab->instance());
-	cast_to<Particles2D>(CustomExtensions::GetChildByName(_get_object(), "DashParticles"))->restart();
 }

@@ -8,7 +8,7 @@ namespace godot
 	class CurrentRoom
 	{
 		static CurrentRoom* curr_room;
-		Node2D* curr_room_node = nullptr;
+		Node2D* cur_room_node = nullptr;
 
 		CurrentRoom() {};
 

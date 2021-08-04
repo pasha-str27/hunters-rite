@@ -11,6 +11,7 @@ namespace godot
 	{
 		Vector2 directions[8];
 		BulletPull* bullet_pull = nullptr;
+		int max_bullet_count;
 		bool can_fight;
 
 	public:
@@ -19,6 +20,7 @@ namespace godot
 		void _process(float delta);
 		void _add_bullet(Node* node = nullptr);
 		void change_can_fight(bool value);
+		void _set_speed(float value);
 		void _change_start_parameters();
 		void _remove_taken_positions();
 	};

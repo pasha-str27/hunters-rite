@@ -3,29 +3,14 @@
 #include "headers.h"
 #endif
 
-void godot::PlayerStrategyContext::_set_controll_buttons(Dictionary input_map)
+void godot::PlayerStrategyContext::_set_controll_buttons(String move_up, String move_down, String move_left, String move_right, String fight_up, String fight_down, String fight_left, String fight_right, String special)
 {
-	strategy->_set_controll_buttons(input_map);
+	strategy->_set_controll_buttons(move_up, move_down, move_left, move_right, fight_up, fight_down, fight_left, fight_right, special);
 }
 
 void godot::PlayerStrategyContext::_set_is_attacking(bool value)
 {
 	strategy->_set_is_attacking(value);
-}
-
-void godot::PlayerStrategyContext::_decrease_attack_radius()
-{
-	strategy->_decrease_attack_radius();
-}
-
-void godot::PlayerStrategyContext::_encrease_attack_radius()
-{
-	strategy->_encrease_attack_radius();
-}
-
-Dictionary godot::PlayerStrategyContext::_get_controll_buttons()
-{
-	return strategy->_get_controll_buttons();
 }
 
 bool godot::PlayerStrategyContext::_was_revived()

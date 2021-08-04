@@ -5,36 +5,26 @@
 
 godot::SlimeBossAI::SlimeBossAI(Ref<PackedScene>& bullet, Node2D* node_tmp) : EnemyData(node_tmp)
 {
-	damage = 33;
-	speed = 200;
-	is_jumping = false;
-	jumping_up = false;
-
-	can_move = false;
-	taken_damage = 0;
-	_attack_state = new SlimeAttackJumpState(this);
+	can_move = true;
+	_attack_state = new SlimeAttackSpawnState(this);
 	target_player = empty_pos;
 
 	auto bullet_container = node_tmp->get_parent()->get_node("BulletContainer");
 
 	bullet_pull = new BulletPull(max_bullet_count, bullet, bullet_container);
 
-	jump_zone = cast_to<Node2D>(node_tmp->get_parent()->get_node("jump_zone"));
-	enemies_to_spawn = node_tmp->get_node("EnemiesHolder")->call("_get_enemies_list");
-	camera_shake = node_tmp->get_node("/root/Node2D/Node/Camera2D")->get_node("CameraShake");
-
+	jump_zone = cast_to<Node2D>(_get_enemy()->get_parent()->get_node("jump_zone"));
+	wave_node = cast_to<Node2D>(_get_enemy()->get_parent()->get_node("DamageWave"));
 	Array arr = CurrentRoom::get_singleton()->_get_current_room()->call("_get_enemy_spawn_positions");
 	places_to_spawn = arr[0];
-
-	_wait(1.5f);
+	enemies_to_spawn = _get_enemy()->get_node("EnemiesHolder")->call("_get_enemies_list");
+	camera_shake = _get_enemy()->get_node("/root/Node2D/Node/Camera2D")->get_node("CameraShake");
 }
 
 godot::SlimeBossAI::~SlimeBossAI()
 {
 	delete bullet_pull;
 	camera_shake = nullptr;
-	jump_zone = nullptr;
-	_attack_state = nullptr;
 }
 
 void godot::SlimeBossAI::_set_player(Node2D* player)
@@ -59,7 +49,7 @@ void godot::SlimeBossAI::_change_state(ISlimeAttackState* state)
 void godot::SlimeBossAI::change_can_fight(bool value, ISlimeAttackState* state)
 {
 	can_move = value;
-
+	
 	_attack_state = state;
 }
 
@@ -81,13 +71,14 @@ void godot::SlimeBossAI::_shoot()
 		return;
 
 	Vector2 bullet_dir = target_player;
+	Vector2 bullet_position = _get_enemy()->get_global_position();
 
 	std::vector<Node2D*> bullets;
 
 	for (int i = 0; i < 3; ++i)
 	{
 		bullets.push_back(bullet_pull->_get_bullet());
-		bullets[i]->set_global_position(_get_enemy()->get_global_position());
+		bullets[i]->set_global_position(bullet_position);
 	}
 
 	float angle = M_PI / 18;
@@ -106,11 +97,12 @@ void godot::SlimeBossAI::_shoot()
 	{
 		bullets[i]->set_visible(true);
 		bullets[i]->call("_set_dir", bullet_directions[i]);
-	}
+	}		
 
 	bullets.clear();
 
-	_make_action_sound();
+	Ref<PackedScene> prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->slime_action());
+	_get_enemy()->get_parent()->get_parent()->add_child(prefab->instance());
 
 	_wait(1.5f);
 }
@@ -126,7 +118,15 @@ void godot::SlimeBossAI::_spawn_enemy()
 	_get_enemy()->get_node("/root/Node2D/Node")->call_deferred("add_child", enemy);
 	enemy->set_global_position(pos);
 
-	_make_action_sound();
+	Ref<PackedScene> prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->slime_action());
+	_get_enemy()->get_parent()->get_parent()->add_child(prefab->instance());
+
+	for (int i = 0; i < enemy->get_child_count(); ++i)
+		if (enemy->get_child(i)->has_method("_change_start_parameters"))
+		{
+			enemy->get_child(i)->call_deferred("_change_start_parameters");
+			return;
+		}
 }
 
 void godot::SlimeBossAI::_jump()
@@ -207,8 +207,9 @@ void godot::SlimeBossAI::_set_target()
 		if (MenuButtons::game_mode == SHOOTER)
 			target_player = _get_player1()->get_global_position();
 		else if (MenuButtons::game_mode == MELEE)
-			target_player = _get_player2()->get_global_position();
+				target_player = _get_player2()->get_global_position();
 	}
+
 
 	if (target_player.x > _get_enemy()->get_global_position().x)
 		cast_to<AnimatedSprite>(_get_enemy()->find_node("AnimatedSprite"))->set_flip_h(true);
@@ -232,21 +233,9 @@ void godot::SlimeBossAI::_enable_collisions()
 	cast_to<KinematicBody2D>(_get_enemy())->set_collision_layer_bit(2, true);
 }
 
-void godot::SlimeBossAI::_take_damage(float damage)
+void godot::SlimeBossAI::_make_wave()
 {
-	taken_damage += 1;
 
-	if (taken_damage >= 5)
-	{
-		change_can_fight(false, new SlimeAttackSpawnState(this));
-		taken_damage = 0;
-	}
-}
-
-void godot::SlimeBossAI::_make_action_sound()
-{
-	Ref<PackedScene> prefab = ResourceLoader::get_singleton()->load(ResourceContainer::_get_instance()->slime_action());
-	_get_enemy()->get_parent()->get_parent()->add_child(prefab->instance());
 }
 
 void godot::SlimeBossAI::change_can_fight(bool value)
@@ -261,6 +250,7 @@ void godot::SlimeBossAI::_fight(Node2D* player1, Node2D* player2)
 		can_move = false;
 		_attack_state->_fight();
 	}
+
 }
 
 void godot::SlimeBossAI::_process(float delta)

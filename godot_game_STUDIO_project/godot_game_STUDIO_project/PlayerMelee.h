@@ -29,7 +29,5 @@ namespace godot
 		void _stop_special();
 		void _start_special();
 		void _set_is_attacking(bool value);
-		void _decrease_attack_radius();
-		void _encrease_attack_radius();
 	};
 }

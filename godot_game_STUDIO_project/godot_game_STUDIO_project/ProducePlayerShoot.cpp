@@ -3,7 +3,7 @@
 #include "headers.h"
 #endif
 
-IPlayer* ProducePlayerShoot::_get_player(Node2D* object, Ref<PackedScene> bullet)
+IPlayer* ProducePlayerShoot::_get_player(Node2D* object, Ref<PackedScene>bullet)
 {
     return new PlayerShoot(object, bullet);
 }

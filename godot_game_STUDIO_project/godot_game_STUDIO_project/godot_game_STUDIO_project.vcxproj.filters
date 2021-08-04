@@ -189,6 +189,9 @@
     <ClCompile Include="Ball.cpp">
       <Filter>Football</Filter>
     </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>Football</Filter>
+    </ClCompile>
     <ClCompile Include="GameManager.cpp">
       <Filter>Level</Filter>
     </ClCompile>
@@ -422,6 +425,9 @@
     <ClInclude Include="Ball.h">
       <Filter>Football</Filter>
     </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>Football</Filter>
+    </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>Level</Filter>
     </ClInclude>
@@ -471,6 +477,9 @@
     </Filter>
     <Filter Include="Enemies\SlimeBossStates">
       <UniqueIdentifier>{389c46b8-632f-41f9-b4bb-cbfc879951d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Football">
+      <UniqueIdentifier>{9fb94395-33e5-417e-ba35-fdaecabaf46d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

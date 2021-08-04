@@ -11,7 +11,6 @@ namespace godot
 	{
 		Node2D* enemy;
 		float distance = 32;
-		float speed;
 
 	public:
 		std::vector<Vector2> directions;
@@ -20,7 +19,6 @@ namespace godot
 		~EnemyData();
 		void _process(float delta);
 		void _set_speed(float value);
-		float _get_speed();
 		void _add_bullet(Node* bullet = nullptr);
 		void _change_dir_after_time();
 		void _delete_player1();

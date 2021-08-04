@@ -6,6 +6,7 @@
 godot::BulletPull::BulletPull(int max_bullet_count, Ref<PackedScene> bullet, Node* parent_node)
 {
 	this->bullet_prefab = bullet;
+	this->max_bullet_count = max_bullet_count;
 	this->parent_node = parent_node;
 
 	for (int i = 0; i < max_bullet_count; ++i)
@@ -18,6 +19,7 @@ godot::BulletPull::BulletPull(int max_bullet_count, Ref<PackedScene> bullet, Nod
 
 godot::BulletPull::BulletPull()
 {
+	max_bullet_count = 0;
 }
 
 godot::BulletPull::~BulletPull()

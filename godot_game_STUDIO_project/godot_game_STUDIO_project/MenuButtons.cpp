@@ -3,6 +3,9 @@
 #include "headers.h"
 #endif
 
+#include <TranslationServer.hpp>
+#include <CheckBox.hpp>
+
 int MenuButtons::current_locale_index = 0;
 bool MenuButtons::was_focused = false;
 bool MenuButtons::was_loaded = false;
@@ -25,8 +28,8 @@ MenuButtons::MenuButtons()
 	tutorial_mode = false;
 }
 
-MenuButtons::~MenuButtons() 
-{
+MenuButtons::~MenuButtons() {
+	audio_server = nullptr;
 	timer = nullptr;
 	timer_music_out = nullptr;
 	timer_music = nullptr;
@@ -35,7 +38,6 @@ MenuButtons::~MenuButtons()
 void godot::MenuButtons::_init() {
 	locales = TranslationServer::get_singleton()->get_loaded_locales();
 	String current_locale = TranslationServer::get_singleton()->get_locale();
-	//	if no current locale - set 'en' by default
 	if (!locales.has(current_locale))
 	{
 		TranslationServer::get_singleton()->set_locale("en");
@@ -324,10 +326,6 @@ void godot::MenuButtons::_on_Back_pressed(Variant)
 
 		return;
 	}
-
-	if (need_to_save_game)
-		save_game();
-
 	change_scene(menu_scene);
 }
 
@@ -399,8 +397,8 @@ void godot::MenuButtons::_on_FullScreen_pressed(Variant)
 	_play_effect();
 	is_full_screen = !is_full_screen;
 	OS::get_singleton()->set_window_fullscreen(is_full_screen);
+	save_game();
 
-	need_to_save_game = true;
 }
 
 void godot::MenuButtons::_on_effects_value_changed(float value)
@@ -409,9 +407,9 @@ void godot::MenuButtons::_on_effects_value_changed(float value)
 		value = -80;
 
 	effect_audio_level = value;
-	audio_controller->_get_audio_server()->set_bus_volume_db(1, value);
+	audio_server->set_bus_volume_db(1, value);
 
-	need_to_save_game = true;
+	save_game();
 }
 
 void godot::MenuButtons::_on_music_value_changed(float value)
@@ -420,8 +418,9 @@ void godot::MenuButtons::_on_music_value_changed(float value)
 		value = -80;
 
 	music_audio_level = value;
-	audio_controller->_get_audio_server()->set_bus_volume_db(2, value);
-	need_to_save_game = true;
+	audio_server->set_bus_volume_db(2, value);
+
+	save_game();
 }
 
 // -------Pause buttons-------
@@ -545,6 +544,7 @@ void godot::MenuButtons::_on_animated_focus_exited(String button_name, String an
 // -------Work with scenes-------
 void godot::MenuButtons::_reload_scene()
 {
+	GameManager::show_tutorial = true;
 	timer->disconnect("timeout", this, "_reload_scene");
 	ResourceLoader* rld = ResourceLoader::get_singleton();
 	Ref<PackedScene> res = rld->load("res://main_scene.tscn");
@@ -577,6 +577,8 @@ void  godot::MenuButtons::change_scene(Ref<PackedScene>& scene)
 void godot::MenuButtons::_on_Locale_change(int new_index)
 {
 	_play_effect();
+	Godot::print(locales.size());
+	Godot::print(new_index);
 
 	if (new_index < 0)
 		new_index = locales.size() - 1;
@@ -591,7 +593,7 @@ void godot::MenuButtons::_on_Locale_change(int new_index)
 
 	locale_label->set_text(TranslationServer::get_singleton()->translate("KEY_NAME"));
 
-	need_to_save_game = true;
+	save_game();
 	_change_options_labels();
 
 	//	change locale in pause node
@@ -642,18 +644,19 @@ void godot::MenuButtons::_play_change_cursor_effect()
 
 void godot::MenuButtons::_change_audio_volume()
 {
-	if (audio_controller->_change_audio_volume(timer_music, this, audio, delta_time))
-		timer_music->disconnect("timeout", this, "_change_audio_volume");
+	if (AudioController::get_singleton()->_change_audio_volume(timer_music, this, audio, delta_time))
+		return;
 }
 
 void godot::MenuButtons::_audio_fade_to_main_menu()
 {
-	if (audio_controller->_audio_fade_to_main_menu(timer_music_out, this))
-		timer_music_out->disconnect("timeout", this, "_audio_fade_to_main_menu");
+	if (AudioController::get_singleton()->_audio_fade_to_main_menu(timer_music_out, this))
+		return;
 }
 
 void godot::MenuButtons::_fade_audio()
 {
-	if (audio_controller->_fade_audio(timer_music, this))
-		timer_music->disconnect("timeout", this, "_fade_audio");
+	if (AudioController::get_singleton()->_fade_audio(timer_music, this))
+		return;
 }
+

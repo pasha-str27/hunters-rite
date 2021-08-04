@@ -5,9 +5,8 @@
 
 void godot::SlimeAttackJumpState::_fight()
 {
+	Godot::print("jumping...");
 	//	make stuff
 	ai->_jump();
 	ai->_change_state(new SlimeAttackShootState(ai));
 }
-
-godot::SlimeAttackJumpState::SlimeAttackJumpState(SlimeBossAI* boss) :ISlimeAttackState(boss) {}

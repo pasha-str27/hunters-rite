@@ -3,6 +3,10 @@
 #include "headers.h"
 #endif
 
+godot::TutotialGenerator::TutotialGenerator()
+{
+}
+
 godot::TutotialGenerator::~TutotialGenerator()
 {
 	positions.clear();
@@ -68,32 +72,16 @@ void godot::TutotialGenerator::_ready()
 	for(auto node : rooms)
 		node->call("_fill_empty_positions", node);
 
-	//create key holders
-	get_node("/root/Node2D/Node/Camera2D")->call("_create_keys_holders");
+	////create key holders
+	get_node("/root/Node2D/Node/Camera2D")->call("_get_type_keys");
 
 	_set_keys(rooms[rooms.size() - 2], generated_keys);
 
 	if (generated_colors_keys.size() > 0)
 		rooms[rooms.size() - 2]->call("_set_last_key_color", generated_colors_keys[generated_colors_keys.size() - 1]);
 
-	auto generate_level_noise = [](std::vector<Node2D*>& rooms, String link_to_folder, int prefabs_count)
-	{
-		Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
-		ResourceLoader* loader = ResourceLoader::get_singleton();
-		Ref<PackedScene> prefab = nullptr;
-		random->randomize();
-		for (auto room : rooms)
-			if (random->randi_range(0, 5) >= 1)
-			{
-				prefab = loader->load(NodePath(link_to_folder + String::num(random->randi_range(1, prefabs_count)) + ".tscn"));
-				room->add_child(prefab->instance());
-			}
-		loader = nullptr;
-	};
-
-	generate_level_noise(rooms, "res://Assets/Prefabs/Rooms/WallTops/roof", roof_count);
-	generate_level_noise(rooms, "res://Assets/Prefabs/Rooms/Walls/wall", wall_top_count);
-
+	_buid_roofs();
+	_buid_top_wall();
 	_build_locks();
 	_build_fill_doors();
 	get_node("/root/Node2D/Node/Camera2D/MiniMap")->call_deferred("_start_treking");
@@ -225,6 +213,54 @@ void godot::TutotialGenerator::_buid_doors()
 	}
 }
 
+void godot::TutotialGenerator::_build_doors(int start_index, int end_index)
+{
+	for (int i = start_index; i < end_index; ++i)
+	{
+		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2(0, 1)))
+			rooms[i]->add_child(down_door->instance());
+
+		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2(0, -1)))
+			rooms[i]->add_child(up_door->instance());
+
+		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2(1, 0)))
+			rooms[i]->add_child(right_door->instance());
+
+		if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2(-1, 0)))
+			rooms[i]->add_child(left_door->instance());
+	}
+}
+
+void godot::TutotialGenerator::_buid_roofs()
+{
+	Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
+	ResourceLoader* loader = ResourceLoader::get_singleton();
+	Ref<PackedScene> prefab = nullptr;
+	random->randomize();
+	for (auto room : rooms)
+		if (random->randi_range(0, 5) >= 1)
+		{
+			prefab = loader->load(NodePath("res://Assets/Prefabs/Rooms/WallTops/roof" + String::num(random->randi_range(1, roof_count)) + ".tscn"));
+			room->add_child(prefab->instance());
+		}
+	loader = nullptr;
+}
+
+void godot::TutotialGenerator::_buid_top_wall()
+{
+	Ref<RandomNumberGenerator> random = RandomNumberGenerator::_new();
+	ResourceLoader* loader = ResourceLoader::get_singleton();
+	Ref<PackedScene> prefab = nullptr;
+	random->randomize();
+	for (auto room : rooms)
+		if (random->randi_range(0, 5) >= 1)
+		{
+			prefab = loader->load(NodePath("res://Assets/Prefabs/Rooms/Walls/wall" + String::num(random->randi_range(1, wall_top_count)) + ".tscn"));
+			room->add_child(prefab->instance());
+		}
+	loader = nullptr;
+}
+
 Node2D* godot::TutotialGenerator::_get_next_room(Vector2 current_room_position)
 {
 	int index = 0;
@@ -324,6 +360,7 @@ void godot::TutotialGenerator::_spawn_big_stone()
 	stone->set_global_position(stone->get_global_position() + Vector2(16, 2));
 	stone->call("_change_start_parameters");
 
+	room->call("_set_room_type", "heal_room");
 	room->call("_set_is_special", true);
 }
 
@@ -438,7 +475,7 @@ void godot::TutotialGenerator::_build_fill_doors()
 	for (int i = 1; i < rooms.size(); ++i)
 	{
 		String room_type = rooms[i]->call("_get_room_type");
-		if (room_type == "boos_room" || room_type == "game_room")
+		if (room_type == "boos_room" || room_type == "game_room" || room_type == "mob_room")
 		{
 			if (!(bool)rooms[i]->call("_adjacent_room_is_null", Vector2::DOWN))
 				rooms[i]->add_child(down_door_fill->instance(), true);

@@ -9,7 +9,7 @@ godot::StatueShootAI::StatueShootAI(Ref<PackedScene>& bullet, Node2D* node_tmp) 
 
 	auto node = _get_enemy()->get_parent()->get_child(0);
 
-	bullet_pull = new BulletPull(20, bullet, node);
+	bullet_pull = new BulletPull(max_bullet_count, bullet, node);
 
 	directions[0] = Vector2::UP;
 	directions[1] = Vector2::RIGHT;
@@ -34,16 +34,14 @@ void godot::StatueShootAI::change_can_fight(bool value)
 
 void godot::StatueShootAI::_change_start_parameters()
 {
-	auto cur_room = CurrentRoom::get_singleton()->_get_current_room();
-	Vector2 cur_pos = (_get_enemy()->get_global_position() - cur_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
-	cur_room->call("_set_cell_value", cur_pos.y, cur_pos.x, 8);
+	Vector2 cur_pos = (_get_enemy()->get_global_position() - CurrentRoom::get_singleton()->_get_current_room()->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+	CurrentRoom::get_singleton()->_get_current_room()->call("_set_cell_value", cur_pos.y, cur_pos.x, 8);
 }
 
 void godot::StatueShootAI::_remove_taken_positions()
 {
-	auto cur_room = CurrentRoom::get_singleton()->_get_current_room();
-	Vector2 cur_pos = (_get_enemy()->get_global_position() - cur_room->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
-	cur_room->call("_set_cell_value", cur_pos.y, cur_pos.x, 0);
+	Vector2 cur_pos = (_get_enemy()->get_global_position() - CurrentRoom::get_singleton()->_get_current_room()->get_global_position() + Vector2(896, 544) / 2 - Vector2(16, 16)) / 32;
+	CurrentRoom::get_singleton()->_get_current_room()->call("_set_cell_value", cur_pos.y, cur_pos.x, 0);
 }
 
 void godot::StatueShootAI::_process(float delta)

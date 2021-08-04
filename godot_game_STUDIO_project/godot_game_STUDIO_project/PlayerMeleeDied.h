@@ -8,6 +8,9 @@ namespace godot
 	class PlayerMeleeDied : public PlayerData
 	{
 		AnimatedSprite* sprite = nullptr;
+		AnimatedSprite* vfx_sprite = nullptr;
+
+		AnimationPlayer* animator = nullptr;
 
 	public:
 		PlayerMeleeDied(Node2D* obj, Ref<PackedScene> bullet = 0);

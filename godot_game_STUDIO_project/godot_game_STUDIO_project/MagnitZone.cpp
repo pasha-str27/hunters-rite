@@ -16,6 +16,11 @@ void godot::MagnitZone::_register_methods()
 	register_property<MagnitZone, float>("force", &MagnitZone::force, 85);
 }
 
+godot::MagnitZone::MagnitZone()
+{
+	is_active = true;
+}
+
 godot::MagnitZone::~MagnitZone()
 {
 	player1 = nullptr;

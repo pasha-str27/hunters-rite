@@ -64,6 +64,5 @@ namespace godot
 		String slime_action();
 		String target_hit();
 		String target_crack();
-		void _spawn_exit();
 	};
 }

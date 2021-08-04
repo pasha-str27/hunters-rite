@@ -205,23 +205,32 @@ void godot::PlayerData::_start_special()
 {
 }
 
-void godot::PlayerData::_set_controll_buttons(Dictionary input_map)
+void godot::PlayerData::_set_controll_buttons(String move_up, String move_down, String move_left, String move_right, String fight_up, String fight_down, String fight_left, String fight_right, String special)
 {
-	this->input_map = input_map;
-	//this->input_map["move_up"] = ((String)input_map["move_up"]).;
-	//this->input_map["move_down"] = (String)input_map["move_down"];
-	//this->input_map["move_left"] = (String)input_map["move_left"];
-	//this->input_map["move_right"] = (String)input_map["move_right"];
-	//this->input_map["fight_up"] = (String)input_map["fight_up"];
-	//this->input_map["fight_down"] = (String)input_map["fight_down"];
-	//this->input_map["fight_left"] = (String)input_map["fight_left"];
-	//this->input_map["fight_right"] = (String)input_map["fight_right"];
-	//this->input_map["special"] = (String)input_map["special"];
+	this->move_up = move_up;
+	this->move_down = move_down;
+	this->move_left = move_left;
+	this->move_right = move_right;
+	this->fight_up = fight_up;
+	this->fight_down = fight_down;
+	this->fight_left = fight_left;
+	this->fight_right = fight_right;
+	this->special = special;
 }
 
-Dictionary godot::PlayerData::_get_controll_buttons()
+std::map<String, String> godot::PlayerData::_get_controll_buttons()
 {
-	return input_map;
+	std::map<String, String> controlls;
+	controlls.insert(std::make_pair("move_up", move_up));
+	controlls.insert(std::make_pair("move_down", move_down));
+	controlls.insert(std::make_pair("move_left", move_left));
+	controlls.insert(std::make_pair("move_right", move_right));
+	controlls.insert(std::make_pair("fight_up", fight_up));
+	controlls.insert(std::make_pair("fight_down", fight_down));
+	controlls.insert(std::make_pair("fight_left", fight_left));
+	controlls.insert(std::make_pair("fight_right", fight_right));
+	controlls.insert(std::make_pair("special", special));
+	return controlls;
 }
 
 IPlayer* godot::PlayerData::_clone()
@@ -235,13 +244,5 @@ void godot::PlayerData::_heal()
 }
 
 void godot::PlayerData::_set_is_attacking(bool value)
-{
-}
-
-void godot::PlayerData::_decrease_attack_radius()
-{
-}
-
-void godot::PlayerData::_encrease_attack_radius()
 {
 }

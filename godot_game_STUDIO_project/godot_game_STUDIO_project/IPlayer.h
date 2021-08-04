@@ -37,11 +37,10 @@ namespace godot
 		virtual float _get_speed() = 0;
 		virtual void _set_was_revived(bool value) = 0;
 		virtual void _heal() = 0;
-		virtual Dictionary _get_controll_buttons() = 0;
-		virtual void _set_controll_buttons(Dictionary input_map) = 0;
+		virtual std::map<String, String> _get_controll_buttons() = 0;
+		virtual void _set_controll_buttons(String move_up, String move_down, String move_left, String move_right, String fight_up, 
+			String fight_down, String fight_left, String fight_right, String special) = 0;
 		virtual void _set_is_attacking(bool value) = 0;
 		virtual void _set_right_HP(float value) = 0;
-		virtual void _decrease_attack_radius() = 0;
-		virtual void _encrease_attack_radius() = 0;
 	};
 }

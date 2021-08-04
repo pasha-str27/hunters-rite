@@ -2,8 +2,7 @@
 #define HEADERFILE_H
 #include "headers.h"
 #endif
-namespace godot 
-{
+namespace godot {
 	class NagaAI: public EnemyData, public KinematicBody2D
 	{
 	private:
@@ -43,6 +42,7 @@ namespace godot
 		void _fight(Node2D* player1 = nullptr, Node2D* player2 = nullptr);
 		void _remove_player(Node2D* player);
 		void _set_target();
+		void _set_next_pos();
 		void _enable_collisions();
 		void _disable_collisions();
 		void _set_is_player1_onArea(bool value);
@@ -57,10 +57,6 @@ namespace godot
 		void _spawn_egg(Vector2 pos);
 		void _decrease_cooldowns();
 		void _increase_cooldowns();
-		void _make_disappear();
-		void _start_disappear();
-		void _make_appear();
-		void _after_appear_animation();
 	};
 }
 

@@ -3,8 +3,7 @@
 #include "headers.h"
 #endif
 
-namespace godot
-{
+namespace godot {
 	class TutorialEnemy: public KinematicBody2D
 	{
 	private:
