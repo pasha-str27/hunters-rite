@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{c289e4f9-d7b3-45a2-a159-aeccd0219f33}</ProjectGuid>
+    <RootNamespace>godotgameSTUDIOproject</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\..\godot_project</OutDir>
+    <IncludePath>D:\Projects\Games\wait...hunters\GodotBindings\godot-headers;D:\Projects\Games\wait...hunters\GodotBindings\include\gen;D:\Projects\Games\wait...hunters\GodotBindings\include\core;D:\Projects\Games\wait...hunters\GodotBindings\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Projects\Games\wait...hunters\GodotBindings\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>D:\Projects\Games\wait...hunters\GodotBindings\godot-headers;D:\Projects\Games\wait...hunters\GodotBindings\include\gen;D:\Projects\Games\wait...hunters\GodotBindings\include\core;D:\Projects\Games\wait...hunters\GodotBindings\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Projects\Games\wait...hunters\GodotBindings\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\Projects\Games\wait...hunters\GodotBindings\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libgodot-cpp.windows.debug.64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libgodot-cpp.windows.release.64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\pasha\Desktop\wait...hunters\GodotBindings\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AudioController.cpp" />
+    <ClCompile Include="AudioEffect.cpp" />
+    <ClCompile Include="BatAI.cpp" />
+    <ClCompile Include="BigStone.cpp" />
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BulletPull.cpp" />
+    <ClCompile Include="CameraShake.cpp" />
+    <ClCompile Include="CurrentRoom.cpp" />
+    <ClCompile Include="Enemies.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyAIContext.cpp" />
+    <ClCompile Include="EnemyData.cpp" />
+    <ClCompile Include="EnemyPrice.cpp" />
+    <ClCompile Include="ExitHandler.cpp" />
+    <ClCompile Include="FadeAnimation.cpp" />
+    <ClCompile Include="FlowerAI.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GodotLibrary.cpp" />
+    <ClCompile Include="InputReviveManager.cpp" />
+    <ClCompile Include="ISlimeAttackState.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemGenerator.cpp" />
+    <ClCompile Include="ItemsContainer.cpp" />
+    <ClCompile Include="Key.cpp" />
+    <ClCompile Include="LevelGenerator.cpp" />
+    <ClCompile Include="LocaledLabel.cpp" />
+    <ClCompile Include="MagnitZone.cpp" />
+    <ClCompile Include="MenuButtons.cpp" />
+    <ClCompile Include="MimicAI.cpp" />
+    <ClCompile Include="MiniMapController.cpp" />
+    <ClCompile Include="NagaAI.cpp" />
+    <ClCompile Include="ParticlesDestroyer.cpp" />
+    <ClCompile Include="PlayerController.cpp" />
+    <ClCompile Include="PlayerData.cpp" />
+    <ClCompile Include="PlayerMelee.cpp" />
+    <ClCompile Include="PlayerMeleeDied.cpp" />
+    <ClCompile Include="PlayerMeleeGhost.cpp" />
+    <ClCompile Include="PlayersContainer.cpp" />
+    <ClCompile Include="PlayerShoot.cpp" />
+    <ClCompile Include="PlayerShootDied.cpp" />
+    <ClCompile Include="PlayerShootGhost.cpp" />
+    <ClCompile Include="PlayerStrategyContext.cpp" />
+    <ClCompile Include="PoisonEgg.cpp" />
+    <ClCompile Include="Preloader.cpp" />
+    <ClCompile Include="ProducePlayerMelee.cpp" />
+    <ClCompile Include="ProducePlayerShoot.cpp" />
+    <ClCompile Include="ResourceContainer.cpp" />
+    <ClCompile Include="ReviveZone.cpp" />
+    <ClCompile Include="Room.cpp" />
+    <ClCompile Include="SillyBoyAI.cpp" />
+    <ClCompile Include="SillyBoyDiedAI.cpp" />
+    <ClCompile Include="SlimeAI.cpp" />
+    <ClCompile Include="SlimeAttackJumpState.cpp" />
+    <ClCompile Include="SlimeAttackShootState.cpp" />
+    <ClCompile Include="SlimeAttackSpawnState.cpp" />
+    <ClCompile Include="SlimeBossAI.cpp" />
+    <ClCompile Include="SlimeEnemiesHolder.cpp" />
+    <ClCompile Include="SlimeShootAI.cpp" />
+    <ClCompile Include="SpawnEnemyController.cpp" />
+    <ClCompile Include="SpiderAI.cpp" />
+    <ClCompile Include="Spike.cpp" />
+    <ClCompile Include="StatueMeleeAI.cpp" />
+    <ClCompile Include="StatueShootAI.cpp" />
+    <ClCompile Include="Sword.cpp" />
+    <ClCompile Include="TutorialEnemy.cpp" />
+    <ClCompile Include="TutorialGenerator.cpp" />
+    <ClCompile Include="TutorialManager.cpp" />
+    <ClCompile Include="WormAI.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AudioController.h" />
+    <ClInclude Include="AudioEffect.h" />
+    <ClInclude Include="BatAI.h" />
+    <ClInclude Include="BigStone.h" />
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BulletPull.h" />
+    <ClInclude Include="CameraShake.h" />
+    <ClInclude Include="CurrentRoom.h" />
+    <ClInclude Include="CustomExtensions.h" />
+    <ClInclude Include="Enemies.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyAIContext.h" />
+    <ClInclude Include="EnemyData.h" />
+    <ClInclude Include="EnemyPrice.h" />
+    <ClInclude Include="ExitHandler.h" />
+    <ClInclude Include="FadeAnimation.h" />
+    <ClInclude Include="FlowerAI.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="headers.h" />
+    <ClInclude Include="IEnemyAI.h" />
+    <ClInclude Include="InputReviveManager.h" />
+    <ClInclude Include="IPlayer.h" />
+    <ClInclude Include="ISlimeAttackState.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemGenerator.h" />
+    <ClInclude Include="ItemsContainer.h" />
+    <ClInclude Include="Key.h" />
+    <ClInclude Include="LevelGenerator.h" />
+    <ClInclude Include="LocaledLabel.h" />
+    <ClInclude Include="MagnitZone.h" />
+    <ClInclude Include="MenuButtons.h" />
+    <ClInclude Include="MimicAI.h" />
+    <ClInclude Include="MiniMapController.h" />
+    <ClInclude Include="NagaAI.h" />
+    <ClInclude Include="ParticlesDestroyer.h" />
+    <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="PlayerData.h" />
+    <ClInclude Include="PlayerMelee.h" />
+    <ClInclude Include="PlayerMeleeDied.h" />
+    <ClInclude Include="PlayerMeleeGhost.h" />
+    <ClInclude Include="PlayerProduce.h" />
+    <ClInclude Include="PlayersContainer.h" />
+    <ClInclude Include="PlayerShoot.h" />
+    <ClInclude Include="PlayerShootDied.h" />
+    <ClInclude Include="PlayerShootGhost.h" />
+    <ClInclude Include="PlayerStrategyContext.h" />
+    <ClInclude Include="PoisonEgg.h" />
+    <ClInclude Include="Preloader.h" />
+    <ClInclude Include="ProducePlayerMelee.h" />
+    <ClInclude Include="ProducePlayerShoot.h" />
+    <ClInclude Include="ResourceContainer.h" />
+    <ClInclude Include="ReviveZone.h" />
+    <ClInclude Include="Room.h" />
+    <ClInclude Include="SillyBoyAI.h" />
+    <ClInclude Include="SillyBoyDiedAI.h" />
+    <ClInclude Include="SlimeAI.h" />
+    <ClInclude Include="SlimeAttackJumpState.h" />
+    <ClInclude Include="SlimeAttackShootState.h" />
+    <ClInclude Include="SlimeAttackSpawnState.h" />
+    <ClInclude Include="SlimeBossAI.h" />
+    <ClInclude Include="SlimeEnemiesHolder.h" />
+    <ClInclude Include="SlimeShootAI.h" />
+    <ClInclude Include="SpawnEnemyController.h" />
+    <ClInclude Include="SpiderAI.h" />
+    <ClInclude Include="Spike.h" />
+    <ClInclude Include="StatueMeleeAI.h" />
+    <ClInclude Include="StatueShootAI.h" />
+    <ClInclude Include="Sword.h" />
+    <ClInclude Include="TutorialEnemy.h" />
+    <ClInclude Include="TutorialGenerator.h" />
+    <ClInclude Include="TutorialManager.h" />
+    <ClInclude Include="WormAI.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
