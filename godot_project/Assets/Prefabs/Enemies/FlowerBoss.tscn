@@ -1,0 +1,122 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Assets/Sprites/Monsters/flower.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/flower_bullet_prefab.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Scripts/Enemy.gdns" type="Script" id=3]
+[ext_resource path="res://Assets/Prefabs/Particles/DeathParticles/DeathFlowerParticles.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Sprites/Monsters/Flower/monster_flower_damage.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/Players/ShootPlayer/power_ball.png" type="Texture" id=6]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 41.4484
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 5 )
+region = Rect2( 448, 0, 448, 448 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 448, 448 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "idle",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 2 ), SubResource( 3 ) ],
+"loop": false,
+"name": "damaged",
+"speed": 10.0
+} ]
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0.423237, 1 )
+colors = PoolColorArray( 0.683105, 0.520334, 0.520334, 1, 0, 1, 0.15918, 0 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0, 0.578409 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0306818 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+emission_shape = 1
+emission_sphere_radius = 40.0
+flag_rotate_y = true
+flag_disable_z = true
+direction = Vector3( 500, 500, 0 )
+spread = 180.0
+flatness = 1.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 50.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 100.0
+linear_accel_random = 1.0
+radial_accel_random = 1.0
+tangential_accel_random = 1.0
+damping_random = 1.0
+scale = 5.0
+scale_random = 1.0
+scale_curve = SubResource( 8 )
+color_ramp = SubResource( 6 )
+
+[sub_resource type="CircleShape2D" id=10]
+radius = 45.5047
+
+[node name="FlowerBoss" type="Node2D"]
+z_index = 6
+z_as_relative = false
+
+[node name="BulletConteinerFlower" type="Node" parent="."]
+
+[node name="Flower" type="KinematicBody2D" parent="." groups=[
+"enemy",
+"flower",
+]]
+z_index = 6
+z_as_relative = false
+collision_layer = 4
+collision_mask = 512
+script = ExtResource( 3 )
+bullet = ExtResource( 2 )
+HP = 600.0
+"Death particles" = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flower"]
+z_index = 6
+z_as_relative = false
+shape = SubResource( 1 )
+one_way_collision = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Flower/CollisionShape2D"]
+scale = Vector2( 0.23, 0.2 )
+z_index = 6
+z_as_relative = false
+frames = SubResource( 4 )
+animation = "idle"
+
+[node name="SpawnParticles" type="Particles2D" parent="Flower"]
+z_index = 10
+z_as_relative = false
+emitting = false
+amount = 50
+lifetime = 0.4
+speed_scale = 2.0
+randomness = 0.25
+visibility_rect = Rect2( 0, 0, 0, 0 )
+local_coords = false
+process_material = SubResource( 9 )
+texture = ExtResource( 6 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 10 )
+
+[connection signal="body_entered" from="Area2D" to="Flower" method="_on_Area2D_body_entered"]

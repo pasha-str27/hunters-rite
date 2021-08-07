@@ -1,0 +1,25 @@
+#ifndef HEADERFILE_H
+#define HEADERFILE_H
+#include "headers.h"
+#endif
+
+namespace godot
+{
+	class BulletPull;
+
+	class FlowerAI : public EnemyData, public KinematicBody2D
+	{
+		Vector2 directions[8];
+		BulletPull* bullet_pull = nullptr;
+		bool can_fight;
+
+	public:
+		FlowerAI(Ref<PackedScene> &bullet, Node2D* node);
+		~FlowerAI();
+		void _process(float delta);
+		void _add_bullet(Node* node = nullptr);
+		void change_can_fight(bool value);
+		void _change_start_parameters();
+		void _remove_taken_positions();
+	};
+}

@@ -1,0 +1,284 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Assets/Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_focus_v2.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/button_background_v2.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/UI/BacksButtonsAndOther/game_over_backroungl.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Font/press_start.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Assets/Scripts/MenuButtons.gdns" type="Script" id=6]
+[ext_resource path="res://Assets/Prefabs/SoundsEffects/Effects/ButtonClick.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Prefabs/Animations/FadeOut.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Prefabs/Animations/FadeIn.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Scripts/LocaledLabel.gdns" type="Script" id=10]
+
+[sub_resource type="DynamicFont" id=1]
+size = 90
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Focus_scale"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Focus:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Focus:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Focus_scale"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Focus:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Focus:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.478431 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.478431 ) ]
+}
+
+[node name="GameOver" type="Camera2D"]
+pause_mode = 2
+zoom = Vector2( 0.75, 0.75 )
+
+[node name="GameOver" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+click_effect = ExtResource( 7 )
+fade = ExtResource( 8 )
+fade_in = ExtResource( 9 )
+
+[node name="Background" type="TextureRect" parent="GameOver"]
+modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -638.502
+margin_top = -360.0
+margin_right = 641.498
+margin_bottom = 360.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOver"]
+margin_left = -640.0
+margin_top = -360.0
+margin_right = 640.0
+margin_bottom = 360.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="CenterContainer" parent="GameOver/VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 450.0
+rect_min_size = Vector2( 0, 450 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GameOver/VBoxContainer/Title"]
+margin_left = 280.0
+margin_top = 180.0
+margin_right = 1000.0
+margin_bottom = 270.0
+rect_min_size = Vector2( 368, 46 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.870588, 0.870588, 0.870588, 1 )
+custom_colors/font_color_shadow = Color( 0.298039, 0.109804, 0.109804, 1 )
+custom_constants/shadow_offset_x = 6
+custom_constants/shadow_offset_y = 6
+text = "GameOver"
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+text_key = "KEY_GAME_OVER"
+
+[node name="Buttons" type="CenterContainer" parent="GameOver/VBoxContainer"]
+margin_top = 454.0
+margin_right = 1280.0
+margin_bottom = 524.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameOver/VBoxContainer/Buttons"]
+margin_left = 358.0
+margin_right = 922.0
+margin_bottom = 70.0
+
+[node name="RetryButton" type="CenterContainer" parent="GameOver/VBoxContainer/Buttons/HBoxContainer"]
+margin_right = 280.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 52 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Retry" type="TextureButton" parent="GameOver/VBoxContainer/Buttons/HBoxContainer/RetryButton"]
+margin_right = 280.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 280, 70 )
+focus_neighbour_top = NodePath("../../CenterContainer2/VBoxContainer/music")
+focus_neighbour_bottom = NodePath("../../CenterContainer2/VBoxContainer/FullScreen")
+mouse_filter = 2
+texture_normal = ExtResource( 3 )
+expand = true
+stretch_mode = 3
+
+[node name="Focus" type="TextureRect" parent="GameOver/VBoxContainer/Buttons/HBoxContainer/RetryButton/Retry"]
+visible = false
+modulate = Color( 1, 1, 1, 0.534122 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -0.956055
+margin_top = -0.398346
+margin_right = -0.956055
+margin_bottom = -0.398346
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 1.00534, 1.00534 )
+rect_pivot_offset = Vector2( 120, 50 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GameOver/VBoxContainer/Buttons/HBoxContainer/RetryButton/Retry"]
+modulate = Color( 0.831373, 0.831373, 0.831373, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/line_spacing = 0
+custom_constants/shadow_offset_y = 3
+custom_constants/shadow_as_outline = 0
+text = "Retry"
+align = 1
+valign = 1
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+text_key = "KEY_RETRY"
+
+[node name="RetryAnimated" type="AnimationPlayer" parent="GameOver/VBoxContainer/Buttons/HBoxContainer/RetryButton/Retry"]
+anims/Focus_scale = SubResource( 2 )
+
+[node name="MenuNutton" type="CenterContainer" parent="GameOver/VBoxContainer/Buttons/HBoxContainer"]
+margin_left = 284.0
+margin_right = 564.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 52 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="TextureButton" parent="GameOver/VBoxContainer/Buttons/HBoxContainer/MenuNutton"]
+margin_right = 280.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 280, 70 )
+focus_neighbour_top = NodePath("../../CenterContainer2/VBoxContainer/music")
+focus_neighbour_bottom = NodePath("../../CenterContainer2/VBoxContainer/FullScreen")
+mouse_filter = 2
+texture_normal = ExtResource( 3 )
+expand = true
+stretch_mode = 3
+
+[node name="Focus" type="TextureRect" parent="GameOver/VBoxContainer/Buttons/HBoxContainer/MenuNutton/Menu"]
+visible = false
+modulate = Color( 1, 1, 1, 0.85088 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -4.59925
+margin_top = -1.91635
+margin_right = -4.59924
+margin_bottom = -1.91635
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 1.0357, 1.0357 )
+rect_pivot_offset = Vector2( 120, 50 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GameOver/VBoxContainer/Buttons/HBoxContainer/MenuNutton/Menu"]
+modulate = Color( 0.831373, 0.831373, 0.831373, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/line_spacing = 0
+custom_constants/shadow_offset_y = 3
+custom_constants/shadow_as_outline = 0
+text = "Menu"
+align = 1
+valign = 1
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+text_key = "KEY_MENU"
+
+[node name="MenuAnimated" type="AnimationPlayer" parent="GameOver/VBoxContainer/Buttons/HBoxContainer/MenuNutton/Menu"]
+anims/Focus_scale = SubResource( 3 )
+
+[connection signal="focus_entered" from="GameOver/VBoxContainer/Buttons/HBoxContainer/RetryButton/Retry" to="GameOver" method="_on_animated_focus_entered" binds= [ "Retry", "RetryAnimated" ]]
+[connection signal="focus_entered" from="GameOver/VBoxContainer/Buttons/HBoxContainer/RetryButton/Retry" to="GameOver" method="_play_change_cursor_effect"]
+[connection signal="focus_exited" from="GameOver/VBoxContainer/Buttons/HBoxContainer/RetryButton/Retry" to="GameOver" method="_on_animated_focus_exited" binds= [ "Retry", "RetryAnimated" ]]
+[connection signal="pressed" from="GameOver/VBoxContainer/Buttons/HBoxContainer/RetryButton/Retry" to="GameOver" method="_on_Retry_pressed"]
+[connection signal="focus_entered" from="GameOver/VBoxContainer/Buttons/HBoxContainer/MenuNutton/Menu" to="GameOver" method="_on_animated_focus_entered" binds= [ "Menu", "MenuAnimated" ]]
+[connection signal="focus_entered" from="GameOver/VBoxContainer/Buttons/HBoxContainer/MenuNutton/Menu" to="GameOver" method="_play_change_cursor_effect"]
+[connection signal="focus_exited" from="GameOver/VBoxContainer/Buttons/HBoxContainer/MenuNutton/Menu" to="GameOver" method="_on_animated_focus_exited" binds= [ "Menu", "MenuAnimated" ]]
+[connection signal="pressed" from="GameOver/VBoxContainer/Buttons/HBoxContainer/MenuNutton/Menu" to="GameOver" method="_on_Menu_pressed"]

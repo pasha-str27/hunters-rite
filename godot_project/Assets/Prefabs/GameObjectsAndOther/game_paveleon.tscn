@@ -1,0 +1,72 @@
+[gd_scene load_steps=36 format=2]
+
+[ext_resource path="res://Assets/Scripts/LevelGenerator.gdns" type="Script" id=1]
+[ext_resource path="res://Assets/Prefabs/Doors/UpDoor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Prefabs/Doors/LeftDoor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Prefabs/Doors/RightDoor.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Prefabs/Items/BadTusk.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Prefabs/Rooms/base.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Scripts/ItemsContainer.gdns" type="Script" id=7]
+[ext_resource path="res://Assets/Prefabs/Doors/DownDoor.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/CameraPrefab.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Prefabs/Doors/right_door_fill.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Prefabs/Items/Glass.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Assets/Prefabs/Items/Tusk.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Assets/Prefabs/Items/Luck.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/Prefabs/Items/MetalSphere.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Assets/Prefabs/Items/Shield.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Assets/Prefabs/Items/BottleVine.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Assets/Prefabs/Items/Eye.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Assets/Prefabs/Items/DarkNumber.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Assets/Prefabs/Items/FireSword.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Assets/Prefabs/Items/Boot.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Assets/Prefabs/Items/Chicken.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Assets/Prefabs/Doors/left_door_fill.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Assets/Prefabs/Doors/down_door_fill.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Pedestal.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Assets/Prefabs/GameObjectsAndOther/Jertovnik.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Assets/Prefabs/Items/Keys/Key2.tscn" type="PackedScene" id=27]
+[ext_resource path="res://Assets/Prefabs/Items/Keys/Key.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Assets/Prefabs/Items/Keys/Key3.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Assets/Prefabs/Stone.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Assets/Prefabs/Lock.tscn" type="PackedScene" id=32]
+[ext_resource path="res://Assets/Prefabs/Items/Keys/Key4.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Assets/Prefabs/Items/Keys/Key5.tscn" type="PackedScene" id=34]
+[ext_resource path="res://Assets/Prefabs/Items/Keys/Key6.tscn" type="PackedScene" id=35]
+[ext_resource path="res://Assets/Prefabs/Doors/up_door_fill.tscn" type="PackedScene" id=36]
+[ext_resource path="res://Assets/Prefabs/Items/Keys/Key7.tscn" type="PackedScene" id=37]
+
+[node name="Node" type="Node"]
+
+[node name="ItemsContainer" type="Node" parent="."]
+script = ExtResource( 7 )
+Items = [ ExtResource( 5 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 22 ), ExtResource( 19 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 13 ) ]
+
+[node name="Camera2D" parent="." instance=ExtResource( 10 )]
+
+[node name="Generation" type="Node2D" parent="."]
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}
+map_size = 6
+keys_frequency = 4
+room = ExtResource( 6 )
+down_door = ExtResource( 8 )
+up_door = ExtResource( 2 )
+right_door = ExtResource( 4 )
+left_door = ExtResource( 3 )
+down_door_fill = ExtResource( 24 )
+up_door_fill = ExtResource( 36 )
+right_door_fill = ExtResource( 11 )
+left_door_fill = ExtResource( 23 )
+wall_top_count = 14
+floor_count = 15
+stone_count = 15
+spike_count = 14
+roof_count = 15
+jertovnik = ExtResource( 26 )
+key_room_pedestal = ExtResource( 25 )
+keys_prefabs = [ ExtResource( 28 ), ExtResource( 27 ), ExtResource( 29 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 37 ) ]
+big_stone = ExtResource( 30 )
+lock_sprite = ExtResource( 32 )

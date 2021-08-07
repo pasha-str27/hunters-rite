@@ -25,6 +25,18 @@ extern "C" const void *gdnlib;
 class Godot {
 public:
 	static void print(const String &message);
+	static void print(const int& message)
+	{
+		Godot::print(String::num(message));
+	}
+	static void print(const float& message)
+	{
+		Godot::print(String::num(message));
+	}
+	static void print(const double& message)
+	{
+		Godot::print(String::num(message));
+	}
 	static void print_warning(const String &description, const String &function, const String &file, int line);
 	static void print_error(const String &description, const String &function, const String &file, int line);
 

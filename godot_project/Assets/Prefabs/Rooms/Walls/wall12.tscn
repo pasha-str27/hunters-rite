@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Sprites/Tilesets/level1_tileset.tres" type="TileSet" id=1]
+
+[node name="wall" type="TileMap"]
+position = Vector2( 0, -16 )
+z_index = 2
+z_as_relative = false
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 0
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( -393228, 13, 0, -393226, 15, 0, -393222, 13, 0, -458749, 15, 0, -458742, 15, 0, -458740, 13, 0, -327689, 13, 0, -327683, 15, 0, -327682, 13, 0, -393214, 15, 0, -393211, 13, 0, -393208, 13, 0, -262156, 13, 0, -262152, 15, 0, -262147, 13, 0, -327677, 15, 0, -327671, 15, 0, -327669, 13, 0 )

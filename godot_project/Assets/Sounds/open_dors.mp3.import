@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/open_dors.mp3-de9bd1c1c2a43168fe56c648db4659e7.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/open_dors.mp3"
+dest_files=[ "res://.import/open_dors.mp3-de9bd1c1c2a43168fe56c648db4659e7.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

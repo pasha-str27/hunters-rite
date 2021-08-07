@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/soundbits_JustGore_Stab_Punch_Hack_51.mp3-6215698eda15371596181ee0d7ac65ef.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/soundbits_JustGore_Stab_Punch_Hack_51.mp3"
+dest_files=[ "res://.import/soundbits_JustGore_Stab_Punch_Hack_51.mp3-6215698eda15371596181ee0d7ac65ef.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
